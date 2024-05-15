@@ -3,16 +3,16 @@
 namespace Cod3rsGrowth.Dominio;
 class Escola
 {
-    public bool StatusAtividade { get; private set; }
-    public int IdEscola {get; private set;}
-    public string Nome { get; private set; }
-    public string CodigoMec {get; private set;}
-    public string Telefone { get; private set; }
-    public string Email { get; private set; }
-    public DateTime InicioAtividade { get; private set; }
-    public categoriaAdministrativa CategoriaAdministrativa { get; private set; }
-    public organizacaoAcademica OrganizacaoAcademica { get; private set; }
-    public int IdEndereco { get; private set; }
-    public Endereco Endereco { get; private set; }
+    public bool StatusAtividade { get;  set; }
+    public int IdEscola {get; set;}
+    public string Nome { get; set; }
+    public string CodigoMec {get; set;}
+    public string Telefone { get; set; }
+    public string Email { get; set; }
+    public DateTime InicioAtividade { get; set; }
+    public categoriaAdministrativa CategoriaAdministrativa { get; set; }
+    public organizacaoAcademica OrganizacaoAcademica { get; set; }
+    public int IdEndereco { get; set; }
+    public Endereco Endereco { get; set; }
     public List<Convenio> Convenios { get; } = new();
 }
