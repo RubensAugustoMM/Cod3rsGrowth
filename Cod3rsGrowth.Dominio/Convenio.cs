@@ -1,4 +1,4 @@
-using System.Dynamic;
+using System;
 
 class Convenio
 {
@@ -14,7 +14,5 @@ class Convenio
     public Escola Escola { get; private set; } 
     public int idEmpresa { get; private set; }
     public Empresa Empresa { get; private set; }
-
-    public List<Convenio> Convenios { get; } = new();
 
 }

@@ -16,4 +16,5 @@ class Escola
     public organizacaoAcademica organizacaoAcademica { get; private set; }
     public int idEndereco { get; private set; }
     public Endereco Endereco { get; private set; }
+    public List<Convenio> Convenios { get; } = new();
 }

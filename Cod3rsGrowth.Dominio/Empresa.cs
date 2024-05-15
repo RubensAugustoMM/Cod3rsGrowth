@@ -16,6 +16,7 @@ class Empresa
     public naturezaJuridica naturezaJuridica { get; private set; }
     public porte porte { get; private set; } 
     public matrizFilial matrizFilial { get; private set; }
+    public List<Convenio> Convenios { get; } = new();
 
 }
 
