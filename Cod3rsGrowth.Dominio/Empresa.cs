@@ -1,24 +1,19 @@
 using System;
-using Cod3rsGrowth.Dominio;
 
-
+namespace Cod3rsGrowth.Dominio;
 class Empresa
 {
-    public int idEmpresa { get; private set; }
-    public int idade { get; private set; }
+    public int IdEmpresa { get; private set; }
+    public int Idade { get; private set; }
    public string RazaoSocial { get; private set; }
     public string NomeFantasia { get; private set; }
     public string Cnpj { get; private set; }
-    public bool situcaoCadastral { get; private set; }
-    public DateTime dataSituacaoCadastral { get; private set; }
-    public DateTime dataAbertura { get; private set; }
-    public decimal capitalSocial { get; private set; }
-    public naturezaJuridica naturezaJuridica { get; private set; }
-    public porte porte { get; private set; } 
-    public matrizFilial matrizFilial { get; private set; }
+    public bool SitucaoCadastral { get; private set; }
+    public DateTime DataSituacaoCadastral { get; private set; }
+    public DateTime DataAbertura { get; private set; }
+    public decimal CapitalSocial { get; private set; }
+    public NaturezaJuridica NaturezaJuridica { get; private set; }
+    public porte Porte { get; private set; } 
+    public matrizFilial MatrizFilial { get; private set; }
     public List<Convenio> Convenios { get; } = new();
-
 }
-
-
- 

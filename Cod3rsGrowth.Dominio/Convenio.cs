@@ -1,18 +1,16 @@
 using System;
 
+namespace Cod3rsGrowth.Dominio;
 class Convenio
 {
-    public int idConvenio { get; private set; } 
-    public int numeroProcesso { get; private set; }
+    public int IdConvenio { get; private set; } 
+    public int NumeroProcesso { get; private set; }
     public string Objeto { get; private set; }
-    public double valor { get; set; } 
-
-    public DateTime dataInicio { get; private set;}
-    public DateTime? dataTermino { get; private set; }
-
-    public int idEscola { get; private set; }
+    public double Valor { get; set; } 
+    public DateTime DataInicio { get; private set;}
+    public DateTime? DataTermino { get; private set; }
+    public int IdEscola { get; private set; }
     public Escola Escola { get; private set; } 
-    public int idEmpresa { get; private set; }
+    public int IdEmpresa { get; private set; }
     public Empresa Empresa { get; private set; }
-
 }

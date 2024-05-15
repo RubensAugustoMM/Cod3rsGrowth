@@ -3,9 +3,7 @@ using System.ComponentModel;
 
 namespace Cod3rsGrowth.Dominio
 {
-
-
-    public enum naturezaJuridica
+    enum NaturezaJuridica 
     {
         [Description("Microempreendedor Individual")]
         MicroempreendedorIndividual,
