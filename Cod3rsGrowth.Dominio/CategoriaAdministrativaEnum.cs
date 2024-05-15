@@ -10,6 +10,4 @@ public enum CategoriaAdministrativaEnum
     Federal, 
     [Description("Adiministração Estadual")] 
     Estadual
-    
-
 }
