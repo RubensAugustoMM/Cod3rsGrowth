@@ -1,7 +1,7 @@
 using System;
 
 namespace Cod3rsGrowth.Dominio;
-class Estado
+public class Estado
 {
     public int IdEstado { get; set; }
     public string Nome { get; set; }

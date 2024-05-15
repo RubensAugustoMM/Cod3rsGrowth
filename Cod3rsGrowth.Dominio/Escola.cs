@@ -1,7 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Cod3rsGrowth.Dominio;
-class Escola
+public class Escola
 {
     public bool StatusAtividade { get;  set; }
     public int IdEscola {get; set;}
@@ -10,8 +11,8 @@ class Escola
     public string Telefone { get; set; }
     public string Email { get; set; }
     public DateTime InicioAtividade { get; set; }
-    public categoriaAdministrativa CategoriaAdministrativa { get; set; }
-    public organizacaoAcademica OrganizacaoAcademica { get; set; }
+    public CategoriaAdministrativaEnum CategoriaAdministrativa { get; set; }
+    public OrganizacaoAcademicaEnum OrganizacaoAcademica { get; set; }
     public int IdEndereco { get; set; }
     public Endereco Endereco { get; set; }
     public List<Convenio> Convenios { get; } = new();

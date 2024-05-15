@@ -1,7 +1,7 @@
 using System;
 
 namespace Cod3rsGrowth.Dominio;
-class Convenio
+public class Convenio
 {
     public int IdConvenio { get;  set; } 
     public int NumeroProcesso { get; set; }
