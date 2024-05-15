@@ -3,8 +3,8 @@ using System;
 namespace Cod3rsGrowth.Dominio;
 public class Estado
 {
-    public int IdEstado { get; set; }
-    public string Nome { get; set; }
-    public string Sigla { get; set; }
+    public int IdEstado { get; private set; }
+    public string Nome { get; private set; }
+    public string Sigla { get; private set; }
     public List<Endereco> Enderecos { get; } = new(); 
 }
