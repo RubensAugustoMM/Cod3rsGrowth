@@ -1,6 +1,6 @@
 using System;
 
-namespace Cod3rsGrowth.Dominio;
+namespace Cod3rsGrowth.Dominio.Modelos;
 public class Estado
 {
     public int IdEstado { get; private set; }
