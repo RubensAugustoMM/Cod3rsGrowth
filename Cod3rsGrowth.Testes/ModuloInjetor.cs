@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Testes;
 
 public static class ModuloInjetor
 {
-    static public void BuildServiceProvider(ServiceCollection Servicos)
+    static public void InjetaDependencias(ServiceCollection Servicos)
     {
         Servicos.AddScoped<IServicoConvenio, ServicoConvenio>()
                 .AddScoped<IServicoEmpresa, ServicoEmpresa>()

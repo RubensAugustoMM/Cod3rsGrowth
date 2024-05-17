@@ -9,6 +9,8 @@ public class TesteBase : IDisposable
     public TesteBase()
     {
         var ServiceCollection = new ServiceCollection();
+        ModuloInjetor.InjetaDependencias(ServiceCollection);
+        serviceProvider = ServiceCollection.BuildServiceProvider();
     }
      
     public void Dispose()
