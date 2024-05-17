@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Cod3rsGrowth.Dominio;
+namespace Cod3rsGrowth.Dominio.Enum;
 public enum CategoriaAdministrativaEnum
 { 
     [Description("Adiministração Municipal")]

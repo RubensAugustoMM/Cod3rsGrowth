@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cod3rsGrowth.Dominio.Enum;
+using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
 public class Escola

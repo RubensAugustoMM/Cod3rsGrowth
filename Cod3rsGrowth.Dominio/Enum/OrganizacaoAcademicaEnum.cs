@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System;
 
-namespace Cod3rsGrowth.Dominio.Modelos;
+namespace Cod3rsGrowth.Dominio.Enum;
 public enum OrganizacaoAcademicaEnum 
 { 
     [Description("Faculdade")] 
