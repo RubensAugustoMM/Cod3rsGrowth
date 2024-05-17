@@ -2,17 +2,10 @@
 
 namespace Cod3rsGrowth.Testes;
 
-public class ModuloInjetor
+public static class ModuloInjetor
 {
-    private ServiceCollection _Servicos;
-
-    public ModuloInjetor()
+    static public ServiceProvider BuildServiceProvider(ServiceCollection Servicos)
     {
-        _Servicos = new ServiceCollection();
-    }
-
-    public ServiceProvider ServiceProvider()
-    {
-        return _Servicos.BuildServiceProvider();
+        return Servicos.BuildServiceProvider();
     }
 }

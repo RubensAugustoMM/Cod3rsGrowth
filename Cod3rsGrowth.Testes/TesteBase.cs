@@ -8,8 +8,8 @@ public class TesteBase : IDisposable
    
     public TesteBase()
     {
-        var ModuloInjetor = new ModuloInjetor();
-        serviceProvider = ModuloInjetor.ServiceProvider();
+        var ServiceCollection = new ServiceCollection();
+        serviceProvider = ModuloInjetor.BuildServiceProvider(ServiceCollection);
     }
      
     public void Dispose()
