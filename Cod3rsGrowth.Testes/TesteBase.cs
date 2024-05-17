@@ -1,7 +1,4 @@
-﻿using Xunit.Microsoft.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel;
-using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -12,12 +9,11 @@ public class TesteBase : IDisposable
     public TesteBase()
     {
         var ModuloInjetor = new ModuloInjetor();
-        serviceProvider = ModuloInjetor.ConstroiServiceProvider();
+        serviceProvider = ModuloInjetor.ServiceProvider();
     }
      
     public void Dispose()
     {
         serviceProvider.Dispose(); 
     }
-
 }
