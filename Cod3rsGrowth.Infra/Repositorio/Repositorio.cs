@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra.Repositorio;
 
-public class Cod3rsGrowthRepositorio<T> : ICod3rsGrowthRepositorio<T>
+public class Cod3rsGrowth<T> : Repositorio<T>
 {
     public void Atualizar(T etidade)
     {

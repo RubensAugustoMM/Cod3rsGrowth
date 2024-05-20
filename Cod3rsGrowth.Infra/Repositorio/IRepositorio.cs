@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Infra.Repositorio;
 
-public interface ICod3rsGrowthRepositorio<T>
+public interface Repositorio<T>
 {
     IEnumerable<T> ObterTodos();
     T ObterPorId(int Id);

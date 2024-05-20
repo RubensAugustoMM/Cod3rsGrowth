@@ -3,7 +3,7 @@ using Cod3rsGrowth.Infra.Repositorio;
 
 namespace Cod3rsGrowth.Testes;
 
-public class RepositorioMock<T> : ICod3rsGrowthRepositorio<T> where T : ModeloBase
+public class RepositorioMock<T> : Repositorio<T> where T : ModeloBase
 {
     Dictionary<int, T> Dados;
 
