@@ -1,9 +1,8 @@
 using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Convenio
+public class Convenio : ModeloBase
 {
-    public int IdConvenio { get;  private set; } 
     public int NumeroProcesso { get; private set; }
     public string Objeto { get; private set; }
     public double Valor { get; private set; } 

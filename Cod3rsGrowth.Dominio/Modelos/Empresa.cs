@@ -1,8 +1,8 @@
-using Cod3rsGrowth.Dominio.Enum;
+using Cod3rsGrowth.Dominio.Enums;
 using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Empresa
+public class Empresa : ModeloBase
 {
     public int IdEmpresa { get; private set; }
     public int Idade { get; private set; }
@@ -13,8 +13,8 @@ public class Empresa
     public DateTime DataSituacaoCadastral { get; private set; }
     public DateTime DataAbertura { get; private set; }
     public decimal CapitalSocial { get; private set; }
-    public NaturezaJuridicaEnum NaturezaJuridica { get; private set; }
-    public PorteEnum Porte { get; private set; }
-    public MatrizFilialEnum MatrizFilial { get; private set; }
+    public NaturezaJuridicaEnums NaturezaJuridica { get; private set; }
+    public PorteEnums Porte { get; private set; }
+    public MatrizFilialEnums MatrizFilial { get; private set; }
     public List<Convenio> Convenios { get; } = new();
 }

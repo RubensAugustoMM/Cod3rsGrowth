@@ -1,12 +1,11 @@
-﻿using System.Net;
-using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Infra.Repositorio;
 
 namespace Cod3rsGrowth.Testes;
 
-public class RepositorioMock<T> : ICod3rsGrowthRepositorio<T>
+public class RepositorioMock<T> : ICod3rsGrowthRepositorio<T> where T : ModeloBase
 {
-    Dictionary<long, T> Dados;
+    Dictionary<int, T> Dados;
 
     public RepositorioMock()
     {
@@ -15,31 +14,30 @@ public class RepositorioMock<T> : ICod3rsGrowthRepositorio<T>
 
     public void Atualizar(T entidade)
     {
-        throw new NotImplementedException();
+        Dados.Remove(entidade.Id);
+        Dados.Add(entidade.Id, entidade);
     }
 
     public void Criar(T entidade)
     {
-        throw new NotImplementedException();
+        Dados.Add(entidade.Id, entidade);
     }
 
     public void Deletar(T entidade)
     {
-        throw new NotImplementedException();
+        Dados.Remove(entidade.Id);
     }
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
-
     public T ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        if (Dados.ContainsKey(Id))
+            return Dados[Id];
+        else
+            return null;
     }
 
     public IEnumerable<T> ObterTodos()
     {
-        throw new NotImplementedException();
+        List<T> retorno = Dados.Select(dado => dado.Value).ToList();
+        return retorno;
     }
 }

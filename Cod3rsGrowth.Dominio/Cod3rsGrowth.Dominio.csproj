@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Modelos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.Infra\Cod3rsGrowth.Infra.csproj" />
   </ItemGroup>
 
