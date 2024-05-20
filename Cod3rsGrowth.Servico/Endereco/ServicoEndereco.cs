@@ -1,4 +1,4 @@
-﻿namespace Cod3rsGrowth.Dominio.Servicos;
+﻿namespace Cod3rsGrowth.Servico;
 
 public class ServicoEndereco : IServicoEndereco
 {

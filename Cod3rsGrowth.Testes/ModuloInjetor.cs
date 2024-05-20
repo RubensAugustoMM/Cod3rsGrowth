@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Cod3rsGrowth.Dominio.Servicos;
+using Cod3rsGrowth.Servico;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -7,10 +7,10 @@ public static class ModuloInjetor
 {
     static public void InjetaDependencias(ServiceCollection Servicos)
     {
-        Servicos.AddScoped<IServicoConvenio, ServicoConvenio>()
-                .AddScoped<IServicoEmpresa, ServicoEmpresa>()
-                .AddScoped<IServicoEndereco, ServicoEndereco>()
-                .AddScoped<IServicoEscola, ServicoEscola>()
-                .AddScoped<IServicoEstado, ServicoEstado>();
+        Servicos.AddScoped<ServicoConvenio>()
+                .AddScoped<ServicoEmpresa>()
+                .AddScoped<ServicoEndereco>()
+                .AddScoped<ServicoEscola>()
+                .AddScoped<ServicoEstado>();
     }
 }

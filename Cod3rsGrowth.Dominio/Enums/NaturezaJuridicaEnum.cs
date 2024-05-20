@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System;
 
-namespace Cod3rsGrowth.Dominio.Enum;
-public enum NaturezaJuridicaEnum
+namespace Cod3rsGrowth.Dominio.Enums;
+public enum NaturezaJuridicaEnums
 {
     [Description("Microempreendedor Individual")]
     MicroempreendedorIndividual,
