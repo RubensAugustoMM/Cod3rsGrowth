@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using Cod3rsGrowth.Dominio.Enum;
+using System;
 
-namespace Cod3rsGrowth.Dominio;
+namespace Cod3rsGrowth.Dominio.Modelos;
 public class Escola
 {
     public bool StatusAtividade { get;  private set; }

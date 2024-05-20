@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System;
 
-namespace Cod3rsGrowth.Dominio;
-public enum PorteEnum
+namespace Cod3rsGrowth.Dominio.Enums;
+public enum PorteEnums
 {
     [Description("Microempreendedor Individual")]
     MicroeempreendedorIndividual,
