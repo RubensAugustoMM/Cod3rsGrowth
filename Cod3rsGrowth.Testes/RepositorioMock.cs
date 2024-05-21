@@ -1,9 +1,10 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Infra.Repositorio;
 
 namespace Cod3rsGrowth.Testes;
 
-public class RepositorioMock<T> : Repositorio<T> where T : ModeloBase
+public class RepositorioMock<T> : IRepositorio<T> where T : IEntidade
 {
     Dictionary<int, T> Dados;
 
@@ -32,10 +33,10 @@ public class RepositorioMock<T> : Repositorio<T> where T : ModeloBase
         if (Dados.ContainsKey(Id))
             return Dados[Id];
         else
-            return null;
+            return default(T);
     }
 
-    public IEnumerable<T> ObterTodos()
+    public List<T> ObterTodos()
     {
         List<T> retorno = Dados.Select(dado => dado.Value).ToList();
         return retorno;

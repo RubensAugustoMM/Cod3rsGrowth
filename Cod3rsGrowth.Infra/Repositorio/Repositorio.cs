@@ -1,8 +1,10 @@
 ﻿
 
+using Cod3rsGrowth.Dominio.Interfaces;
+
 namespace Cod3rsGrowth.Infra.Repositorio;
 
-public class Cod3rsGrowth<T> : Repositorio<T>
+public class Cod3rsGrowth<T> : IRepositorio<T> where T : IEntidade
 {
     public void Atualizar(T etidade)
     {
@@ -24,7 +26,7 @@ public class Cod3rsGrowth<T> : Repositorio<T>
         throw new NotImplementedException();
     }
 
-    public IEnumerable<T> ObterTodos()
+    public List<T> ObterTodos()
     {
         throw new NotImplementedException();
     }

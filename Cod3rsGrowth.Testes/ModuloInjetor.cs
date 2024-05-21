@@ -12,12 +12,6 @@ public static class ModuloInjetor
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
                 .AddScoped<ServicoEscola>()
-                .AddScoped<ServicoEstado>()
-                .AddSingleton<RepositorioMock<Convenio>>()
-                .AddSingleton<RepositorioMock<Empresa>>()
-                .AddSingleton<RepositorioMock<Endereco>>()
-                .AddSingleton<RepositorioMock<Escola>>()
-                .AddSingleton<RepositorioMock<Estado>>();
-
+                .AddScoped<ServicoEstado>();
     }
 }

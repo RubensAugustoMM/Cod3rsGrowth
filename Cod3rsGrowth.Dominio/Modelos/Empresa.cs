@@ -1,9 +1,11 @@
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Interfaces;
 using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Empresa : ModeloBase
+public class Empresa : IEntidade
 {
+    public int Id { get; set; }
     public int IdEmpresa { get; private set; }
     public int Idade { get; private set; }
     public string RazaoSocial { get; private set; }

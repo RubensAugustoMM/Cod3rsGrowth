@@ -1,11 +1,11 @@
-﻿namespace Cod3rsGrowth.Infra.Repositorio;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
 
-public interface Repositorio<T>
+namespace Cod3rsGrowth.Infra.Repositorio;
+public interface IRepositorio<T> where T : IEntidade
 {
-    IEnumerable<T> ObterTodos();
+    List<T> ObterTodos();
     T ObterPorId(int Id);
     void Criar(T entidade);
     void Atualizar(T etidade);
     void Deletar(T entidade);
-
 }

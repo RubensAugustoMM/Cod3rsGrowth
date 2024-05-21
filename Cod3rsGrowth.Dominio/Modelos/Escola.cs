@@ -1,11 +1,12 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
-
-using Cod3rsGrowth.Dominio;
 using System;
+using Cod3rsGrowth.Dominio.Interfaces;
+using System.Data.Common;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Escola : ModeloBase
+public class Escola : IEntidade 
 {
+    public int Id { get; set; }
     public bool StatusAtividade { get; private set; }
     public string Nome { get; private set; }
     public string CodigoMec { get; private set; }
