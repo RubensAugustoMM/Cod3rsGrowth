@@ -1,14 +1,15 @@
 ﻿using System.Dynamic;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes;
 
-public class TabelaSingleton <T> where T : IEntidade
+public class TabelaSingleton<T> where T : IEntidade
 {
     private static readonly TabelaSingleton<T> instance = new TabelaSingleton<T>();
-    public List<T> Tabela = new();
+    public List<object> Tabela = new();
 
-    private TabelaSingleton() 
+    private TabelaSingleton()
     {
 
     }
