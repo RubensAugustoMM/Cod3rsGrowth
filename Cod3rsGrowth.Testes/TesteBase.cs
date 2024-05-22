@@ -1,5 +1,7 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace Cod3rsGrowth.Testes;
 
