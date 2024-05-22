@@ -6,39 +6,43 @@ namespace Cod3rsGrowth.Testes;
 
 public class RepositorioMock<T> : IRepositorio<T> where T : IEntidade
 {
-    Dictionary<int, T> Dados;
-
-    public RepositorioMock()
-    {
-        Dados = new();
-    }
-
     public void Atualizar(T entidade)
     {
-        Dados.Remove(entidade.Id);
-        Dados.Add(entidade.Id, entidade);
+        var tabelaSingleton = TabelaSingleton<T>.Instance;
+        var itemRemover = tabelaSingleton.Tabela.Find(x => x.Id == entidade.Id);
+
+        if (itemRemover != null)
+        {
+            tabelaSingleton.Tabela.Remove(itemRemover);
+            tabelaSingleton.Tabela.Add(entidade);
+        }
     }
 
     public void Criar(T entidade)
     {
-        Dados.Add(entidade.Id, entidade);
+        var tabelaSingleton = TabelaSingleton<T>.Instance;
+
+        tabelaSingleton.Tabela.Add(entidade);
     }
 
     public void Deletar(T entidade)
     {
-        Dados.Remove(entidade.Id);
+        var tabelaSingleton = TabelaSingleton<T>.Instance;
+
+        tabelaSingleton.Tabela.Remove(entidade);
     }
     public T ObterPorId(int Id)
     {
-        if (Dados.ContainsKey(Id))
-            return Dados[Id];
-        else
-            return default(T);
+        var tabelaSingleton = TabelaSingleton<T>.Instance;
+        var tabela = TabelaSingleton<T>.Instance;
+
+        return tabela.Tabela.Find(x => x.Id == Id);
     }
 
     public List<T> ObterTodos()
     {
-        List<T> retorno = Dados.Select(dado => dado.Value).ToList();
-        return retorno;
+        var tabelaSingleton = TabelaSingleton<T>.Instance;
+        
+        return tabelaSingleton.Tabela;
     }
 }
