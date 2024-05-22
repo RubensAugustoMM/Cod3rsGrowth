@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Servico;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes;
 

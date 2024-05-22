@@ -1,9 +1,10 @@
 using System;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Convenio
+public class Convenio : IEntidade 
 {
-    public int IdConvenio { get;  private set; } 
+    public int Id { get; set; }
     public int NumeroProcesso { get; private set; }
     public string Objeto { get; private set; }
     public double Valor { get; private set; } 

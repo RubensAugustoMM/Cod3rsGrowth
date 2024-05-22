@@ -1,10 +1,11 @@
 using System;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Endereco 
+public class Endereco : IEntidade 
 {
-    public int IdEndereco { get; private set; }
+    public int Id { get; set; }
     public int Numero { get; private set; }
     public string Cep { get; private set; }
     public string Municipio { get; private set; }

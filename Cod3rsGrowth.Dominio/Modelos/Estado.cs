@@ -1,10 +1,10 @@
-using System;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Estado
+public class Estado : IEntidade 
 {
-    public int IdEstado { get; private set; }
+    public int Id { get; set; }
     public string Nome { get; private set; }
     public string Sigla { get; private set; }
-    public List<Endereco> Enderecos { get; } = new(); 
+    public List<Endereco> Enderecos { get; } = new();
 }
