@@ -11,11 +11,12 @@ public static class ModuloInjetor
 {
     static public void InjetaDependencias(ServiceCollection Servicos)
     {
-        Servicos.AddScoped<ServicoConvenio>()
+        Servicos.
+                .AddScoped(typeof(IRepositorio<>))
+                .AddScoped<ServicoConvenio>()
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
                 .AddScoped<ServicoEscola>()
-                .AddScoped<ServicoEstado>()
-                .AddScoped(typeof(RepositorioMock<>));
+                .AddScoped<ServicoEstado>();
     }
 }
