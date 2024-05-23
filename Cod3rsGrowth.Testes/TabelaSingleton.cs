@@ -7,12 +7,12 @@ namespace Cod3rsGrowth.Testes;
 
 public class TabelaSingleton
 {
-    private readonly static TabelaSingleton instance = new TabelaSingleton();
-    private List<IEntidade> Convenios = new();
-    private List<IEntidade> Empresas = new();
-    private List<IEntidade> Enderecos = new();
-    private List<IEntidade> Escolas = new();
-    private List<IEntidade> Estados = new();
+    private readonly static TabelaSingleton _instance = new TabelaSingleton();
+    private List<IEntidade> _convenios = new();
+    private List<IEntidade> _empresas = new();
+    private List<IEntidade> _enderecos = new();
+    private List<IEntidade> _escolas = new();
+    private List<IEntidade> _estados = new();
 
     private TabelaSingleton()
     {
@@ -22,19 +22,19 @@ public class TabelaSingleton
     public List<IEntidade> RetornaTabela<T>() where T : IEntidade
     {
         if (typeof(T) == typeof(Convenio))
-            return Convenios;
+            return _convenios;
 
         if (typeof(T) == typeof(Empresa))
-            return Empresas;
+            return _empresas;
 
         if (typeof(T) == typeof(Endereco))
-            return Enderecos;
+            return _enderecos;
 
         if (typeof(T) == typeof(Escola))
-            return Escolas;
+            return _escolas;
 
         if (typeof(T) == typeof(Estado))
-            return Estados;
+            return _estados;
 
         return null; 
     }
@@ -43,7 +43,7 @@ public class TabelaSingleton
     {
         get
         {
-            return instance;
+            return _instance;
         } 
     }
 }

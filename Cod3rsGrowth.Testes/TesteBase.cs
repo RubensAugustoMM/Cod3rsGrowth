@@ -7,17 +7,17 @@ namespace Cod3rsGrowth.Testes;
 
 public class TesteBase : IDisposable
 {
-    protected ServiceProvider ServiceProvider { get; set; }
+    protected ServiceProvider _serviceProvider { get; set; }
 
     public TesteBase()
     {
         var ServiceCollection = new ServiceCollection();
         ModuloInjetor.InjetaDependencias(ServiceCollection);
-        ServiceProvider = ServiceCollection.BuildServiceProvider();
+        _serviceProvider = ServiceCollection.BuildServiceProvider();
     }
     
     public void Dispose()
     {
-        ServiceProvider.Dispose();
+        _serviceProvider.Dispose();
     }
 }
