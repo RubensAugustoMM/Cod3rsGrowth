@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Testes;
 
 public class TabelaSingleton
 {
-    private static readonly TabelaSingleton instance;
+    private readonly static TabelaSingleton instance = new TabelaSingleton();
     private List<IEntidade> Convenios = new();
     private List<IEntidade> Empresas = new();
     private List<IEntidade> Enderecos = new();
@@ -43,10 +43,7 @@ public class TabelaSingleton
     {
         get
         {
-            if (Instance == null)
-                return new TabelaSingleton();
-            else
-                return instance; 
+            return instance;
         } 
     }
 }
