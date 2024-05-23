@@ -1,47 +1,40 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Infra.Repositorio;
+using Microsoft.VisualBasic;
 
 namespace Cod3rsGrowth.Testes;
 
 public class RepositorioMock<T> : IRepositorio<T> where T : IEntidade
 {
+    TabelaSingleton Tabelas = TabelaSingleton.Instance;
     public void Atualizar(T entidade)
     {
-        var tabelaSingleton = TabelaSingleton<T>.Instance;
-        var itemRemover = tabelaSingleton.Tabela.Find(x => x.Id == entidade.Id);
+        var ItemRemover = Tabelas.RetornaTabela<T>().Find(x => x.Id == entidade.Id);
 
-        if (itemRemover != null)
+        if (ItemRemover != null)
         {
-            tabelaSingleton.Tabela.Remove(itemRemover);
-            tabelaSingleton.Tabela.Add(entidade);
+            Tabelas.RetornaTabela<T>().Remove(ItemRemover);
+            Tabelas.RetornaTabela<T>().Add(entidade);
         }
     }
 
     public void Criar(T entidade)
     {
-        var tabelaSingleton = TabelaSingleton<T>.Instance;
-
-        tabelaSingleton.Tabela.Add(entidade);
+        Tabelas.RetornaTabela<T>().Add(entidade);
     }
 
     public void Deletar(T entidade)
     {
-        var tabelaSingleton = TabelaSingleton<T>.Instance;
-
-        tabelaSingleton.Tabela.Remove(entidade);
+        Tabelas.RetornaTabela<T>().Remove(entidade);
     }
     public T ObterPorId(int Id)
-    {
-        var tabelaSingleton = TabelaSingleton<T>.Instance;
-
-        return tabelaSingleton.Tabela.Find(x => x.Id == Id);
+    { 
+        return (T)Tabelas.RetornaTabela<T>().Find(x => x.Id == Id);
     }
 
     public List<T> ObterTodos()
     {
-        var tabelaSingleton = TabelaSingleton<T>.Instance;
-
-        return tabelaSingleton.Tabela;
+        return Tabelas.RetornaTabela<T>().Cast<T>().ToList();
     }
 }
