@@ -11,7 +11,7 @@ public static class ModuloInjetor
 {
     static public void InjetaDependencias(ServiceCollection Servicos)
     {
-        Servicos.AddScoped(typeof(IRepositorio<>))
+        Servicos.AddScoped(typeof(IRepositorio<>), typeof(RepositorioMock<>))
                 .AddScoped<ServicoConvenio>()
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()

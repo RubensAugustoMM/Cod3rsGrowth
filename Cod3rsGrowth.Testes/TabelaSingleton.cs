@@ -32,7 +32,7 @@ public class TabelaSingleton
     {
         return new List<IEntidade>();
     });
-    
+   
     public Dictionary<Type, Lazy<List<IEntidade>>> DicionarioTabelas = new();
 
     private TabelaSingleton()
