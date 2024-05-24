@@ -8,35 +8,40 @@ namespace Cod3rsGrowth.Testes;
 public class TabelaSingleton
 {
     private readonly static TabelaSingleton _instance = new TabelaSingleton();
-    private List<IEntidade> _convenios = new();
-    private List<IEntidade> _empresas = new();
-    private List<IEntidade> _enderecos = new();
-    private List<IEntidade> _escolas = new();
-    private List<IEntidade> _estados = new();
+
+    public Lazy<List<IEntidade>> _convenios = new Lazy<List<IEntidade>>(() => 
+    {
+        return new List<IEntidade>();
+    });
+
+    public Lazy<List<IEntidade>> _empresas = new Lazy<List<IEntidade>>(() => 
+    {
+        return new List<IEntidade>();
+    });
+
+    public Lazy<List<IEntidade>> _enderecos = new Lazy<List<IEntidade>>(() => 
+    {
+        return new List<IEntidade>();
+    });
+
+    public Lazy<List<IEntidade>> _escolas = new Lazy<List<IEntidade>>(() => 
+    {
+        return new List<IEntidade>();
+    });
+    public Lazy<List<IEntidade>> _estados = new Lazy<List<IEntidade>>(() => 
+    {
+        return new List<IEntidade>();
+    });
+    
+    public Dictionary<Type, Lazy<List<IEntidade>>> DicionarioTabelas = new();
 
     private TabelaSingleton()
     {
-
-    }
-
-    public List<IEntidade> RetornaTabela<T>() where T : IEntidade
-    {
-        if (typeof(T) == typeof(Convenio))
-            return _convenios;
-
-        if (typeof(T) == typeof(Empresa))
-            return _empresas;
-
-        if (typeof(T) == typeof(Endereco))
-            return _enderecos;
-
-        if (typeof(T) == typeof(Escola))
-            return _escolas;
-
-        if (typeof(T) == typeof(Estado))
-            return _estados;
-
-        return null; 
+        DicionarioTabelas.Add(typeof(Convenio), _convenios);
+        DicionarioTabelas.Add(typeof(Empresa), _empresas);
+        DicionarioTabelas.Add(typeof(Endereco), _enderecos);
+        DicionarioTabelas.Add(typeof(Escola), _escolas);
+        DicionarioTabelas.Add(typeof(Estado), _estados);
     }
 
     public static TabelaSingleton Instance

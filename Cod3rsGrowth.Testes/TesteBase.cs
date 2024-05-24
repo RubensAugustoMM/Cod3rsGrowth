@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Modelos;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -15,7 +16,7 @@ public class TesteBase : IDisposable
         ModuloInjetor.InjetaDependencias(ServiceCollection);
         _serviceProvider = ServiceCollection.BuildServiceProvider();
     }
-    
+  
     public void Dispose()
     {
         _serviceProvider.Dispose();

@@ -10,31 +10,31 @@ public class RepositorioMock<T> : IRepositorio<T> where T : IEntidade
     TabelaSingleton Tabelas = TabelaSingleton.Instance;
     public void Atualizar(T entidade)
     {
-        var ItemRemover = Tabelas.RetornaTabela<T>().Find(x => x.Id == entidade.Id);
+        var ItemRemover = Tabelas.DicionarioTabelas[typeof(T)].Value.Find(x => x.Id == entidade.Id);
 
         if (ItemRemover != null)
         {
-            Tabelas.RetornaTabela<T>().Remove(ItemRemover);
-            Tabelas.RetornaTabela<T>().Add(entidade);
+            Tabelas.DicionarioTabelas[typeof(T)].Value.Remove(ItemRemover);
+            Tabelas.DicionarioTabelas[typeof(T)].Value.Add(entidade);
         }
     }
 
     public void Criar(T entidade)
     {
-        Tabelas.RetornaTabela<T>().Add(entidade);
+        Tabelas.DicionarioTabelas[typeof(T)].Value.Add(entidade);
     }
 
     public void Deletar(T entidade)
     {
-        Tabelas.RetornaTabela<T>().Remove(entidade);
+        Tabelas.DicionarioTabelas[typeof(T)].Value.Remove(entidade);
     }
     public T ObterPorId(int Id)
     { 
-        return (T)Tabelas.RetornaTabela<T>().Find(x => x.Id == Id);
+        return (T)Tabelas.DicionarioTabelas[typeof(T)].Value.Find(x => x.Id == Id);
     }
 
     public List<T> ObterTodos()
     {
-        return Tabelas.RetornaTabela<T>().Cast<T>().ToList();
+        return Tabelas.DicionarioTabelas[typeof(T)].Value.Cast<T>().ToList();
     }
 }
