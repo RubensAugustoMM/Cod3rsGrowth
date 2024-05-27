@@ -1,7 +1,7 @@
 using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Empresa 
+public class Convenio 
 {
     public int Id { get; set; }
     public int NumeroProcesso { get; set; }
@@ -10,7 +10,5 @@ public class Empresa
     public DateTime DataInicio { get; set;}
     public DateTime? DataTermino { get; set; }
     public int IdEscola { get; set; }
-    public Escola Escola { get; set; } 
     public int IdEmpresa { get; set; }
-    public Empresa Empresa { get; set; }
 }

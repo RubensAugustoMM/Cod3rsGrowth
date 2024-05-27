@@ -4,17 +4,17 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioEstado : IRepositorioEstado
 {
-    public void Atualizar(Estado entidade)
+    public void Atualizar(Estado estadoAtualizado)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Estado entidade)
+    public void Criar(Estado estadoCriado)
     {
         throw new NotImplementedException();
     }
 
-    public void Deletar(Estado entidade)
+    public void Deletar(Estado estadoDeletado)
     {
         throw new NotImplementedException();
     }

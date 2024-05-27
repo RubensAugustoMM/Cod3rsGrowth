@@ -4,17 +4,17 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioEscola : IRepositorioEscola
 {
-    public void Atualizar(Escola entidade)
+    public void Atualizar(Escola escolaAtualizada)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Escola entidade)
+    public void Criar(Escola escolaCriada)
     {
         throw new NotImplementedException();
     }
 
-    public void Deletar(Escola entidade)
+    public void Deletar(Escola escolaDeletada)
     {
         throw new NotImplementedException();
     }

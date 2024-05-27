@@ -7,27 +7,28 @@ public class MockRepositorioEstado : IRepositorioEstado
 {
     TabelaSingleton Tabelas = TabelaSingleton.Instance;
 
-    public void Atualizar(Estado entidade)
+    public void Atualizar(Estado estadoAtualizado)
     {
-        var objeto = Tabelas._estados.Value.Find(x => x.Id == entidade.Id);
+        var estadoExistente = ObterPorId(estadoAtualizado.Id);
 
-        Tabelas._estados.Value.Remove(objeto);
-        Tabelas._estados.Value.Add(entidade);
+        estadoExistente.Nome = estadoAtualizado.Nome;
+        estadoExistente.Sigla = estadoAtualizado.Sigla;
+        estadoExistente.ListaEnderecos = estadoAtualizado.ListaEnderecos;
     }
 
-    public void Criar(Estado entidade)
+    public void Criar(Estado estadoCriado)
     {
-        Tabelas._estados.Value.Add(entidade);
+        Tabelas._estados.Value.Add(estadoCriado);
     }
 
-    public void Deletar(Estado entidade)
+    public void Deletar(Estado estadoDeletado)
     {
-        Tabelas._estados.Value.Remove(entidade);
+        Tabelas._estados.Value.Remove(estadoDeletado);
     }
 
     public Estado ObterPorId(int Id)
     {
-        return Tabelas._estados.Value.Find(x => x.Id == Id); 
+        return Tabelas._estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
     }
 
     public List<Estado> ObterTodos()

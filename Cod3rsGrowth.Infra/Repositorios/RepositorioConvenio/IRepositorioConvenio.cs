@@ -4,9 +4,9 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public interface IRepositorioConvenio
 {
-    List<Empresa> ObterTodos();
-    Empresa ObterPorId(int Id);
-    void Criar(Empresa entidade);
-    void Atualizar(Empresa entidade);
-    void Deletar(Empresa entidade);
+    List<Convenio> ObterTodos();
+    Convenio ObterPorId(int Id);
+    void Criar(Convenio convenioCriado);
+    void Atualizar(Convenio convenioAtualizado);
+    void Deletar(Convenio convenioDeletado);
 }

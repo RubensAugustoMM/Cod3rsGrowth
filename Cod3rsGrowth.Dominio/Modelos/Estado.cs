@@ -4,5 +4,5 @@ public class Estado
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Sigla { get; set; }
-    public List<Endereco> Enderecos { get; } = new();
+    public List<Endereco> ListaEnderecos { get; set; } = new();
 }

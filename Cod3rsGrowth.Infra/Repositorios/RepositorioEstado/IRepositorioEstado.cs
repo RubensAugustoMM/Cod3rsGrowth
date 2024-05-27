@@ -6,7 +6,7 @@ public interface IRepositorioEstado
 {
     List<Estado> ObterTodos();
     Estado ObterPorId(int Id);
-    void Criar(Estado entidade);
-    void Atualizar(Estado entidade);
-    void Deletar(Estado entidade);
+    void Criar(Estado estadoCriado);
+    void Atualizar(Estado estadoAtualizado);
+    void Deletar(Estado estadoDeletado);
 }

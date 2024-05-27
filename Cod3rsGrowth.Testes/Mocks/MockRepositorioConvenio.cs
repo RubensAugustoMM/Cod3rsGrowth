@@ -1,7 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Infra.Repositorios;
-using Microsoft.VisualBasic;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace Cod3rsGrowth.Testes.Mocks;
 
@@ -9,30 +7,35 @@ public class MockRepositorioConvenio : IRepositorioConvenio
 {
     TabelaSingleton Tabelas = TabelaSingleton.Instance;
 
-    public void Atualizar(Empresa entidade)
+    public void Atualizar(Convenio convenioAtulizado)
     {
-        var objeto = Tabelas._convenios.Value.Find(x => x.Id == entidade.Id);
+        var convenioExistente = ObterPorId(convenioAtulizado.Id);
 
-        Tabelas._convenios.Value.Remove(objeto);
-        Tabelas._convenios.Value.Add(entidade);
+        convenioExistente.NumeroProcesso = convenioAtulizado.NumeroProcesso;
+        convenioExistente.Objeto = convenioAtulizado.Objeto;
+        convenioExistente.Valor = convenioAtulizado.Valor;
+        convenioExistente.DataInicio = convenioAtulizado.DataInicio;
+        convenioExistente.DataTermino = convenioAtulizado.DataTermino;
+        convenioExistente.IdEscola = convenioAtulizado.IdEscola;
+        convenioExistente.IdEmpresa = convenioAtulizado.IdEmpresa;
     }
 
-    public void Criar(Empresa entidade)
+    public void Criar(Convenio convenioCriado)
     {
-        Tabelas._convenios.Value.Add(entidade);
+        Tabelas._convenios.Value.Add(convenioCriado);
     }
 
-    public void Deletar(Empresa entidade)
+    public void Deletar(Convenio convenioDeletado)
     {
-        Tabelas._convenios.Value.Remove(entidade);
+        Tabelas._convenios.Value.Remove(convenioDeletado);
     }
 
-    public Empresa ObterPorId(int Id)
+    public Convenio ObterPorId(int Id)
     {
-        return Tabelas._convenios.Value.Find(x => x.Id == Id); 
+        return Tabelas._convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Convenio> ObterTodos()
     {
         return Tabelas._convenios.Value;
     }

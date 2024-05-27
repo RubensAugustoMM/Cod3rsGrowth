@@ -4,17 +4,17 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioEndereco : IRepositorioEndereco
 {
-    public void Atualizar(Endereco entidade)
+    public void Atualizar(Endereco endrecoAtualizado)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Endereco entidade)
+    public void Criar(Endereco enderecoCriado)
     {
         throw new NotImplementedException();
     }
 
-    public void Deletar(Endereco entidade)
+    public void Deletar(Endereco enderecoDeletado)
     {
         throw new NotImplementedException();
     }

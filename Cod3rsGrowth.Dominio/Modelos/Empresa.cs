@@ -5,7 +5,6 @@ namespace Cod3rsGrowth.Dominio.Modelos;
 public class Empresa
 {
     public int Id { get; set; }
-    public int IdEmpresa { get; set; }
     public int Idade { get; set; }
     public string RazaoSocial { get; set; }
     public string NomeFantasia { get; set; }
@@ -17,5 +16,5 @@ public class Empresa
     public NaturezaJuridicaEnums NaturezaJuridica { get; set; }
     public PorteEnums Porte { get; set; }
     public MatrizFilialEnums MatrizFilial { get; set; }
-    public List<Empresa> Convenios { get; } = new();
+    public List<Convenio> ListaConvenios { get; set; } = new();
 }

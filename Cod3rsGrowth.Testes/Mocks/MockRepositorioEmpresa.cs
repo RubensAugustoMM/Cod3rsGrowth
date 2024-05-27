@@ -7,27 +7,37 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
 {
     TabelaSingleton Tabelas = TabelaSingleton.Instance;
 
-    public void Atualizar(Empresa entidade)
+    public void Atualizar(Empresa empresaAtualizada)
     {
-        var objeto = Tabelas._empresas.Value.Find(x => x.Id == entidade.Id);
+        var empresaExistente = ObterPorId(empresaAtualizada.Id);
 
-        Tabelas._empresas.Value.Remove(objeto);
-        Tabelas._empresas.Value.Add(entidade);
+        empresaExistente.Idade = empresaAtualizada.Idade;
+        empresaExistente.RazaoSocial = empresaAtualizada.RazaoSocial;
+        empresaExistente.NomeFantasia = empresaAtualizada.NomeFantasia;
+        empresaExistente.Cnpj = empresaAtualizada.Cnpj;
+        empresaExistente.SitucaoCadastral = empresaAtualizada.SitucaoCadastral;
+        empresaExistente.DataSituacaoCadastral = empresaAtualizada.DataSituacaoCadastral;
+        empresaExistente.DataAbertura = empresaAtualizada.DataAbertura;
+        empresaExistente.CapitalSocial = empresaAtualizada.CapitalSocial;
+        empresaExistente.NaturezaJuridica = empresaAtualizada.NaturezaJuridica;
+        empresaExistente.Porte = empresaAtualizada.Porte;
+        empresaExistente.MatrizFilial = empresaAtualizada.MatrizFilial;
+        empresaExistente.ListaConvenios = empresaAtualizada.ListaConvenios;
     }
 
-    public void Criar(Empresa entidade)
+    public void Criar(Empresa empresaCriada)
     {
-        Tabelas._empresas.Value.Add(entidade);
+        Tabelas._empresas.Value.Add(empresaCriada);
     }
 
-    public void Deletar(Empresa entidade)
+    public void Deletar(Empresa empresaDeletada)
     {
-        Tabelas._empresas.Value.Remove(entidade);
+        Tabelas._empresas.Value.Remove(empresaDeletada);
     }
 
     public Empresa ObterPorId(int Id)
     {
-        return Tabelas._empresas.Value.Find(x => x.Id == Id); 
+        return Tabelas._empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
     }
 
     public List<Empresa> ObterTodos()

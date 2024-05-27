@@ -15,6 +15,5 @@ public class Escola
     public CategoriaAdministrativaEnums CategoriaAdministrativa { get; set; }
     public OrganizacaoAcademicaEnums OrganizacaoAcademica { get; set; }
     public int IdEndereco { get; set; }
-    public Endereco Endereco { get; set; }
-    public List<Empresa> Convenios { get; } = new();
+    public List<Convenio> ListaConvenios { get; set; } = new();
 }

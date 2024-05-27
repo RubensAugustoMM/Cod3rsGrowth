@@ -6,7 +6,7 @@ public interface IRepositorioEmpresa
 {
     List<Empresa> ObterTodos();
     Empresa ObterPorId(int Id);
-    void Criar(Empresa entidade);
-    void Atualizar(Empresa entidade);
-    void Deletar(Empresa entidade);
+    void Criar(Empresa empresaCriada);
+    void Atualizar(Empresa empresaAtualizada);
+    void Deletar(Empresa empresaDeletada);
 }

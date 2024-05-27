@@ -4,27 +4,27 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioConvenio : IRepositorioConvenio
 {
-    public void Atualizar(Empresa Entidade)
+    public void Atualizar(Convenio convenioAtualizado)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Empresa entidade)
+    public void Criar(Convenio convenioCriado)
     {
         throw new NotImplementedException();
     }
 
-    public void Deletar(Empresa entidade)
+    public void Deletar(Convenio convenioDeletado)
     {
         throw new NotImplementedException();
     }
 
-    public Empresa ObterPorId(int Id)
+    public Convenio ObterPorId(int Id)
     {
         throw new NotImplementedException();
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Convenio> ObterTodos()
     {
         throw new NotImplementedException();
     }
