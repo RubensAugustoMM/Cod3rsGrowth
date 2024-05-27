@@ -4,5 +4,5 @@ namespace Cod3rsGrowth.Servico;
 
 public interface IServicoConvenio
 {
-    public List<Convenio> ObterTodos();
+    public List<Empresa> ObterTodos();
 }

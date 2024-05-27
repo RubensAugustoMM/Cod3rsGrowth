@@ -1,8 +1,7 @@
 using System;
-using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Convenio : IEntidade 
+public class Empresa 
 {
     public int Id { get; set; }
     public int NumeroProcesso { get; set; }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Servico;
-using Cod3rsGrowth.Dominio.Modelos;
-using System.Runtime.CompilerServices;
-using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Repositorio;
+using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Testes.Mocks;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -11,7 +9,11 @@ public static class ModuloInjetor
 {
     static public void InjetaDependencias(ServiceCollection Servicos)
     {
-        Servicos.AddScoped(typeof(IRepositorio<>), typeof(RepositorioMock<>))
+        Servicos.AddScoped<IRepositorioConvenio,MockRepositorioConvenio>()
+                .AddScoped<IRepositorioEmpresa,MockRepositorioEmpresa>()
+                .AddScoped<IRepositorioEndereco,MockRepositorioEndereco>()
+                .AddScoped<IRepositorioEscola,MockRepositorioEscola>()
+                .AddScoped<IRepositorioEstado,MockRepositorioEstado>()
                 .AddScoped<ServicoConvenio>()
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()

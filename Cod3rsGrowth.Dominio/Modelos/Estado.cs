@@ -1,7 +1,5 @@
-using Cod3rsGrowth.Dominio.Interfaces;
-
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Estado : IEntidade 
+public class Estado 
 {
     public int Id { get; set; }
     public string Nome { get; set; }

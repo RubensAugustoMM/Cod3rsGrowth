@@ -1,9 +1,8 @@
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Interfaces;
 using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
-public class Empresa : IEntidade
+public class Empresa
 {
     public int Id { get; set; }
     public int IdEmpresa { get; set; }
@@ -18,5 +17,5 @@ public class Empresa : IEntidade
     public NaturezaJuridicaEnums NaturezaJuridica { get; set; }
     public PorteEnums Porte { get; set; }
     public MatrizFilialEnums MatrizFilial { get; set; }
-    public List<Convenio> Convenios { get; } = new();
+    public List<Empresa> Convenios { get; } = new();
 }
