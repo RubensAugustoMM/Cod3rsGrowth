@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Servico;
 
 public class ServicoConvenio : IServicoConvenio
 {
-   public List<Convenio> ObterTodos()
+   public List<Empresa> ObterTodos()
    {
       return null;
    }
