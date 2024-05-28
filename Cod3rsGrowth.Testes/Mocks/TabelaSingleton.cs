@@ -18,26 +18,26 @@ public partial class TabelaSingleton
             return _instance;
         }
     }
-    public Lazy<List<Convenio>> _convenios = new Lazy<List<Convenio>>(() =>
+    public Lazy<List<Convenio>> Convenios = new Lazy<List<Convenio>>(() =>
     {
         return new List<Convenio>();
     });
 
-    public Lazy<List<Empresa>> _empresas = new Lazy<List<Empresa>>(() =>
+    public Lazy<List<Empresa>> Empresas = new Lazy<List<Empresa>>(() =>
     {
         return new List<Empresa>();
     });
 
-    public Lazy<List<Endereco>> _enderecos = new Lazy<List<Endereco>>(() =>
+    public Lazy<List<Endereco>> Enderecos = new Lazy<List<Endereco>>(() =>
     {
         return new List<Endereco>();
     });
 
-    public Lazy<List<Escola>> _escolas = new Lazy<List<Escola>>(() =>
+    public Lazy<List<Escola>> Escolas = new Lazy<List<Escola>>(() =>
     {
         return new List<Escola>();
     });
-    public Lazy<List<Estado>> _estados = new Lazy<List<Estado>>(() =>
+    public Lazy<List<Estado>> Estados = new Lazy<List<Estado>>(() =>
     {
         return new List<Estado>();
     });
