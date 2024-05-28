@@ -14,7 +14,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         throw new NotImplementedException();
     }
 
-    public void Deletar(Empresa empresaDeletada)
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }

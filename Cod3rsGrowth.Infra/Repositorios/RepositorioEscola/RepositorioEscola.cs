@@ -14,7 +14,7 @@ public class RepositorioEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public void Deletar(Escola escolaDeletada)
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }

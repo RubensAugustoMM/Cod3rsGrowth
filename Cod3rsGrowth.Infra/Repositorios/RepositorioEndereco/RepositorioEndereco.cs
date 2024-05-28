@@ -14,7 +14,7 @@ public class RepositorioEndereco : IRepositorioEndereco
         throw new NotImplementedException();
     }
 
-    public void Deletar(Endereco enderecoDeletado)
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }

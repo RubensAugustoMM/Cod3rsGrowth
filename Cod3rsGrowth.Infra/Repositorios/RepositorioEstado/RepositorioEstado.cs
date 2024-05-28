@@ -14,7 +14,7 @@ public class RepositorioEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public void Deletar(Estado estadoDeletado)
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }
