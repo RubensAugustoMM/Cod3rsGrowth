@@ -8,5 +8,5 @@ public interface IRepositorioEndereco
     Endereco ObterPorId(int Id);
     void Criar(Endereco enderecoCriado);
     void Atualizar(Endereco endrecoAtualizado);
-    void Deletar(Endereco enderecoDeletado);
+    void Deletar(int Id);
 }

@@ -18,21 +18,23 @@ public class MockRepositorioEstado : IRepositorioEstado
 
     public void Criar(Estado estadoCriado)
     {
-        Tabelas._estados.Value.Add(estadoCriado);
+        Tabelas.Estados.Value.Add(estadoCriado);
     }
 
-    public void Deletar(Estado estadoDeletado)
+    public void Deletar(int id)
     {
-        Tabelas._estados.Value.Remove(estadoDeletado);
+        var EstadoDeletado = ObterPorId(id);
+
+        Tabelas.Estados.Value.Remove(EstadoDeletado);
     }
 
     public Estado ObterPorId(int Id)
     {
-        return Tabelas._estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
+        return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum estado possui um Id correspondente ao passado\n");
     }
 
     public List<Estado> ObterTodos()
     {
-        return Tabelas._estados.Value;
+        return Tabelas.Estados.Value;
     }
 }

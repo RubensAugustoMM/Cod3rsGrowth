@@ -8,5 +8,5 @@ public interface IRepositorioEscola
     Escola ObterPorId(int Id);
     void Criar(Escola escolaCriada);
     void Atualizar(Escola escolaAtualizada);
-    void Deletar(Escola escolaDeletada);
+    void Deletar(int Id);
 }

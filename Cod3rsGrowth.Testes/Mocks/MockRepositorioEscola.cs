@@ -25,21 +25,23 @@ public class MockRepositorioEscola : IRepositorioEscola
 
     public void Criar(Escola escolaCriada)
     {
-        Tabelas._escolas.Value.Add(escolaCriada);
+        Tabelas.Escolas.Value.Add(escolaCriada);
     }
 
-    public void Deletar(Escola escolaDeletada)
+    public void Deletar(int Id)
     {
-        Tabelas._escolas.Value.Remove(escolaDeletada);
+        var EscolaDeletada = ObterPorId(Id);
+
+        Tabelas.Escolas.Value.Remove(EscolaDeletada);
     }
 
     public Escola ObterPorId(int Id)
     {
-        return Tabelas._escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
+        return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhuma Escola possui Id correspondente ao fornecido\n");
     }
 
     public List<Escola> ObterTodos()
     {
-        return Tabelas._escolas.Value;
+        return Tabelas.Escolas.Value;
     }
 }

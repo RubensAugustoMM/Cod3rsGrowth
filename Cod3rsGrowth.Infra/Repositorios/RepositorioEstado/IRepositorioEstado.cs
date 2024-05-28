@@ -8,5 +8,5 @@ public interface IRepositorioEstado
     Estado ObterPorId(int Id);
     void Criar(Estado estadoCriado);
     void Atualizar(Estado estadoAtualizado);
-    void Deletar(Estado estadoDeletado);
+    void Deletar(int Id);
 }

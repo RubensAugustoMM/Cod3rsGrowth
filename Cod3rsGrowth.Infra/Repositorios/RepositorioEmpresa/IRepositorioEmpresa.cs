@@ -8,5 +8,5 @@ public interface IRepositorioEmpresa
     Empresa ObterPorId(int Id);
     void Criar(Empresa empresaCriada);
     void Atualizar(Empresa empresaAtualizada);
-    void Deletar(Empresa empresaDeletada);
+    void Deletar(int Id);
 }

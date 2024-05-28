@@ -22,21 +22,23 @@ public class MockRepositorioConvenio : IRepositorioConvenio
 
     public void Criar(Convenio convenioCriado)
     {
-        Tabelas._convenios.Value.Add(convenioCriado);
+        Tabelas.Convenios.Value.Add(convenioCriado);
     }
 
-    public void Deletar(Convenio convenioDeletado)
+    public void Deletar(int Id)
     {
-        Tabelas._convenios.Value.Remove(convenioDeletado);
+        var ConvenioDeletado = ObterPorId(Id);
+
+        Tabelas.Convenios.Value.Remove(ConvenioDeletado);
     }
 
     public Convenio ObterPorId(int Id)
     {
-        return Tabelas._convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
+        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum convenio possui Id correspondente ao fornecido\n");
     }
 
     public List<Convenio> ObterTodos()
     {
-        return Tabelas._convenios.Value;
+        return Tabelas.Convenios.Value;
     }
 }

@@ -27,21 +27,23 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        Tabelas._empresas.Value.Add(empresaCriada);
+        Tabelas.Empresas.Value.Add(empresaCriada);
     }
 
-    public void Deletar(Empresa empresaDeletada)
+    public void Deletar(int Id)
     {
-        Tabelas._empresas.Value.Remove(empresaDeletada);
+        var EmpresaDeletada = ObterPorId(Id);
+
+        Tabelas.Empresas.Value.Remove(EmpresaDeletada);
     }
 
     public Empresa ObterPorId(int Id)
     {
-        return Tabelas._empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
+        return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhuma Empresa possui um Id correspondente ao passado\n");
     }
 
     public List<Empresa> ObterTodos()
     {
-        return Tabelas._empresas.Value;
+        return Tabelas.Empresas.Value;
     }
 }

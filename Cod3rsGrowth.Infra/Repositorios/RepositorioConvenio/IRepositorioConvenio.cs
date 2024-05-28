@@ -8,5 +8,5 @@ public interface IRepositorioConvenio
     Convenio ObterPorId(int Id);
     void Criar(Convenio convenioCriado);
     void Atualizar(Convenio convenioAtualizado);
-    void Deletar(Convenio convenioDeletado);
+    void Deletar(int Id);
 }

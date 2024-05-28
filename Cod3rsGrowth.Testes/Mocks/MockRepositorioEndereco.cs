@@ -24,21 +24,23 @@ public class MockRepositorioEndereco : IRepositorioEndereco
 
     public void Criar(Endereco enderecoCriado)
     {
-        Tabelas._enderecos.Value.Add(enderecoCriado);
+        Tabelas.Enderecos.Value.Add(enderecoCriado);
     }
 
-    public void Deletar(Endereco enderecoDeletado)
+    public void Deletar(int Id)
     {
-        Tabelas._enderecos.Value.Remove(enderecoDeletado);
+        var EnderecoDeletado = ObterPorId(Id);
+
+        Tabelas.Enderecos.Value.Remove(EnderecoDeletado);
     }
 
     public Endereco ObterPorId(int Id)
     {
-        return Tabelas._enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new NullReferenceException();
+        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum Endereco possui um Id correspondente ao passado\n");
     }
 
     public List<Endereco> ObterTodos()
     {
-        return Tabelas._enderecos.Value;
+        return Tabelas.Enderecos.Value;
     }
 }
