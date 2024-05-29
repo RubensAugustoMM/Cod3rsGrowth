@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Servico;
-using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Testes.Mocks;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Testes;
 
