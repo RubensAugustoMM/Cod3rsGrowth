@@ -1,6 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Modelos;
 
-namespace Cod3rsGrowth.Infra.Repositorios;
+namespace Cod3rsGrowth.Dominio.Interfaces;
 
 public interface IRepositorioEndereco
 {
