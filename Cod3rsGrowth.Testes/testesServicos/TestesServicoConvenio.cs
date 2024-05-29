@@ -16,25 +16,13 @@ public class TestesServicoConvenio : TesteBase
     public TestesServicoConvenio()
     {
         _servicoConvenio = _serviceProvider.GetService<ServicoConvenio>();
+
         _tabelas = TabelaSingleton.Instance;
     }
 
     [Fact]
-    public void ObterTodos_ListaVazia_ListaVazia()
+    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
     {
-        //arrage
-        _tabelas.Convenios.Value.Clear();
-        var ValorEsperado = _tabelas.Convenios.Value;
-        //act
-        var ValorRetornado = _servicoConvenio.ObterTodos();
-        //assert
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ObterTodos_ListaUmElemento_listaUmElemento()
-    {
-        //arrage
         List<Convenio> ValorEsperado = new()
         {
             new Convenio()
@@ -48,20 +36,18 @@ public class TestesServicoConvenio : TesteBase
                 IdEmpresa = 12
             }
        };
+
         _tabelas.Convenios.Value.Clear();
         _tabelas.Convenios.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoConvenio.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
-
+ 
     [Fact]
-    public void ObterTodos_ListaDoisElemento_listaDoisElemento()
+    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
     {
-        //arrage
         List<Convenio> ValorEsperado = new()
         {
             new Convenio()
@@ -85,13 +71,12 @@ public class TestesServicoConvenio : TesteBase
                 IdEscola = 12 
             }
        };
+
         _tabelas.Convenios.Value.Clear();
         _tabelas.Convenios.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoConvenio.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 }

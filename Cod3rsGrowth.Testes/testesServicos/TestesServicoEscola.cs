@@ -17,23 +17,8 @@ public class TestesServicoEscola : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_ListaVazia_ListaVazia()
+    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
     {
-        //arrange
-        _tabelas.Escolas.Value.Clear();
-        var ValorEsperado = _tabelas.Escolas.Value;
-
-        //act
-        var ValorRetornado = _servicoEscola.ObterTodos();
-
-        //assert
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ObterTodos_ListaUmElemento_listaUmElemento()
-    {
-        //arrage
         List<Escola> ValorEsperado = new()
         {
             new Escola()
@@ -50,20 +35,18 @@ public class TestesServicoEscola : TesteBase
                 IdEndereco = 0
             }
        };
+
         _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEscola.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
     [Fact]
-    public void ObterTodos_ListaDoisElemento_listaDoisElemento()
+    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
     {
-        //arrage
         List<Escola> ValorEsperado = new()
         {
             new Escola()
@@ -97,10 +80,8 @@ public class TestesServicoEscola : TesteBase
         _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEscola.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 }

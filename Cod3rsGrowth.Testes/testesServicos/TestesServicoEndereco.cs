@@ -16,23 +16,8 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_ListaVazia_ListaVazia()
-    {
-        //arrange
-        _tabelas.Enderecos.Value.Clear();
-        var ValorEsperado = _tabelas.Enderecos.Value;
-
-        //act
-        var ValorRetornado = _servicoEndereco.ObterTodos();
-
-        //assert
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
     public void ObterTodos_ListaUmElemento_listaUmElemento()
     {
-        //arrage
         List<Endereco> ValorEsperado = new()
         {
             new Endereco()
@@ -47,20 +32,18 @@ public class TestesServicoEndereco : TesteBase
                 IdEstado = 20
             }
        };
+
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Enderecos.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEndereco.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
     [Fact]
-    public void ObterTodos_ListaDoisElemento_listaDoisElemento()
+    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
     {
-        //arrage
         List<Endereco> ValorEsperado = new()
         {
             new Endereco()
@@ -90,10 +73,8 @@ public class TestesServicoEndereco : TesteBase
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Enderecos.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEndereco.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 }

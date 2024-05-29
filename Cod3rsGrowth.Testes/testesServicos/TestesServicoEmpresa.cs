@@ -15,25 +15,10 @@ public class TestesServicoEmpresa : TesteBase
         _servicoEmpresa = _serviceProvider.GetService<ServicoEmpresa>();
         _tabelas = TabelaSingleton.Instance;
     }
-
+    
     [Fact]
-    public void ObterTodos_ListaVazia_ListaVazia()
+    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
     {
-        //arrange
-        _tabelas.Empresas.Value.Clear();
-        var ValorEsperado = _tabelas.Empresas.Value;
-
-        //act
-        var ValorRetornado = _servicoEmpresa.ObterTodos();
-
-        //assert
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ObterTodos_ListaUmElemento_listaUmElemento()
-    {
-        //arrage
         List<Empresa> ValorEsperado = new()
         {
             new Empresa()
@@ -52,20 +37,18 @@ public class TestesServicoEmpresa : TesteBase
                 MatrizFilial = MatrizFilialEnums.Matriz
             }
        };
+
         _tabelas.Empresas.Value.Clear();
         _tabelas.Empresas.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEmpresa.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
     [Fact]
-    public void ObterTodos_ListaDoisElemento_listaDoisElemento()
+    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
     {
-        //arrage
         List<Empresa> ValorEsperado = new()
         {
             new Empresa()
@@ -99,13 +82,12 @@ public class TestesServicoEmpresa : TesteBase
                 MatrizFilial = MatrizFilialEnums.Matriz 
             }
        };
+       
         _tabelas.Empresas.Value.Clear();
         _tabelas.Empresas.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEmpresa.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 }

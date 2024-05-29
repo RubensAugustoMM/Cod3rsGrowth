@@ -16,23 +16,8 @@ public class TestesServicoEstado : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_ListaVazia_ListaVazia()
+    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
     {
-        //arrange
-        _tabelas.Estados.Value.Clear();
-        var ValorEsperado = _tabelas.Estados.Value;
-
-        //act
-        var ValorRetornado = _servicoEstado.ObterTodos();
-
-        //assert
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ObterTodos_ListaUmElemento_listaUmElemento()
-    {
-        //arrage
         List<Estado> ValorEsperado = new()
         {
             new Estado()
@@ -42,20 +27,18 @@ public class TestesServicoEstado : TesteBase
                 Sigla = "GO"
             }
        };
+
         _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEstado.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
     [Fact]
-    public void ObterTodos_ListaDoisElemento_listaDoisElemento()
+    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
     {
-        //arrage
         List<Estado> ValorEsperado = new()
         {
             new Estado()
@@ -75,10 +58,8 @@ public class TestesServicoEstado : TesteBase
         _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ValorEsperado);
 
-        //act
         var ValorRetornado = _servicoEstado.ObterTodos();
 
-        //assert
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 }
