@@ -1,8 +1,9 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 
-namespace Cod3rsGrowth.Infra.Repositorios;
+namespace Cod3rsGrowth.Servico;
 
-public class RepositorioConvenio : IRepositorioConvenio
+public class ServicoConvenio : IRepositorioConvenio
 {
     public void Atualizar(Convenio convenioAtualizado)
     {
@@ -14,7 +15,7 @@ public class RepositorioConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public void Deletar(int Id) 
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }
