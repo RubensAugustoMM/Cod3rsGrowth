@@ -5,6 +5,13 @@ namespace Cod3rsGrowth.Servico;
 
 public class ServicoEmpresa : IRepositorioEmpresa
 {
+    private readonly IRepositorioEmpresa _repositorioEmpresa;
+
+    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa)
+    {
+        _repositorioEmpresa = repositorioEmpresa; 
+    }
+
     public void Atualizar(Empresa empresaAtualizada)
     {
         throw new NotImplementedException();
@@ -27,6 +34,6 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
     public List<Empresa> ObterTodos()
     {
-        throw new NotImplementedException();
+        return _repositorioEmpresa.ObterTodos();
     }
 }
