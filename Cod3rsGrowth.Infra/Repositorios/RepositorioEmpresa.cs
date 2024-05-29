@@ -1,15 +1,16 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
-public class RepositorioEscola : IRepositorioEscola
+public class RepositorioEmpresa : IRepositorioEmpresa
 {
-    public void Atualizar(Escola escolaAtualizada)
+    public void Atualizar(Empresa empresaAtualizada)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Escola escolaCriada)
+    public void Criar(Empresa empresaCriada)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +20,12 @@ public class RepositorioEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public Escola ObterPorId(int Id)
+    public Empresa ObterPorId(int Id)
     {
         throw new NotImplementedException();
     }
 
-    public List<Escola> ObterTodos()
+    public List<Empresa> ObterTodos()
     {
         throw new NotImplementedException();
     }
