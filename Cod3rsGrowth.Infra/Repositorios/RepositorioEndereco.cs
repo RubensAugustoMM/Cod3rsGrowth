@@ -1,15 +1,16 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
-public class RepositorioEmpresa : IRepositorioEmpresa
+public class RepositorioEndereco : IRepositorioEndereco
 {
-    public void Atualizar(Empresa empresaAtualizada)
+    public void Atualizar(Endereco endrecoAtualizado)
     {
         throw new NotImplementedException();
     }
 
-    public void Criar(Empresa empresaCriada)
+    public void Criar(Endereco enderecoCriado)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +20,12 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         throw new NotImplementedException();
     }
 
-    public Empresa ObterPorId(int Id)
+    public Endereco ObterPorId(int Id)
     {
         throw new NotImplementedException();
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Endereco> ObterTodos()
     {
         throw new NotImplementedException();
     }
