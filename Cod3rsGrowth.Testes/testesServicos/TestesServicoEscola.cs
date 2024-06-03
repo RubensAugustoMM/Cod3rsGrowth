@@ -12,7 +12,7 @@ public class TestesServicoEscola : TesteBase
     private readonly TabelaSingleton _tabelas;
     public TestesServicoEscola()
     {
-        _servicoEscola = _serviceProvider.GetService<ServicoEscola>();
+        _servicoEscola = _serviceProvider.GetService<ServicoEscola>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEscola!");
         _tabelas = TabelaSingleton.Instance;
     }
 

@@ -11,7 +11,7 @@ public class TestesServicoEstado : TesteBase
     private readonly TabelaSingleton _tabelas;
     public TestesServicoEstado()
     {
-        _servicoEstado = _serviceProvider.GetService<ServicoEstado>();
+        _servicoEstado = _serviceProvider.GetService<ServicoEstado>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEstado!");
         _tabelas = TabelaSingleton.Instance;
     }
 

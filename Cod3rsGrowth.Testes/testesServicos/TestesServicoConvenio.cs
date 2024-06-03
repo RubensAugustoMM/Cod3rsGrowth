@@ -15,7 +15,7 @@ public class TestesServicoConvenio : TesteBase
 
     public TestesServicoConvenio()
     {
-        _servicoConvenio = _serviceProvider.GetService<ServicoConvenio>();
+        _servicoConvenio = _serviceProvider.GetService<ServicoConvenio>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoConvenio!");
 
         _tabelas = TabelaSingleton.Instance;
     }
