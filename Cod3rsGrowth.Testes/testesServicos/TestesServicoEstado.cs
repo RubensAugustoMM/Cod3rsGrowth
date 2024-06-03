@@ -49,7 +49,7 @@ public class TestesServicoEstado : TesteBase
             },
             new Estado()
             {
-                Id = 0,
+                Id = 1,
                 Nome = "Rio de Janeiro",
                 Sigla = "RJ"
             }
