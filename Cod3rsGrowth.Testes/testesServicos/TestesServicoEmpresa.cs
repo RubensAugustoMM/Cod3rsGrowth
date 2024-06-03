@@ -17,7 +17,7 @@ public class TestesServicoEmpresa : TesteBase
     }
     
     [Fact]
-    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_uma_Empresa()
     {
         List<Empresa> ValorEsperado = new()
         {
@@ -47,7 +47,7 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_duas_Empresas()
     {
         List<Empresa> ValorEsperado = new()
         {

@@ -16,7 +16,7 @@ public class TestesServicoEstado : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_DeveRetornar_Lista_Com_Um_Elemento_QuandoInformado_Lista_Com_Um_Elemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Estado()
     {
         List<Estado> ValorEsperado = new()
         {
@@ -37,7 +37,7 @@ public class TestesServicoEstado : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Estados()
     {
         List<Estado> ValorEsperado = new()
         {

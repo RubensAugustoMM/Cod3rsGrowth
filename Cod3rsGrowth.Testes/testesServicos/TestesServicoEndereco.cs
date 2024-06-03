@@ -16,7 +16,7 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_ListaUmElemento_listaUmElemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Endereco()
     {
         List<Endereco> ValorEsperado = new()
         {
@@ -42,7 +42,7 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Fact]
-    public void ObterTodos_DeveRetornar_Lista_Com_Dois_Elemento_QuandoInformado_Lista_Com_Dois_Elemento()
+    public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Enderecos()
     {
         List<Endereco> ValorEsperado = new()
         {
