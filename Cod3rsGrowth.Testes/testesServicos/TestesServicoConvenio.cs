@@ -153,4 +153,98 @@ public class TestesServicoConvenio : TesteBase
         Assert.Equal(ValorEsperado.IdEmpresa, ValorEsperado.IdEmpresa);
         Assert.Equal(ValorEsperado.IdEscola, ValorRetornado.IdEscola);
     }
+
+    [Theory]
+    [InlineData(-12)]
+    [InlineData(-1)]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_NumeroProcesso_Invalido(int numeroProcessoInformado)
+    {
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 0,
+            NumeroProcesso = 123,
+            Objeto = "convenio convenio",
+            Valor = numeroProcessoInformado,
+            DataInicio = new DateTime(1917, 01, 30),
+            IdEscola = 3,
+            IdEmpresa = 12
+        };
+        _tabelas.Convenios.Value.Clear();
+
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoConvenio.Criar(ConvenioEntrada));
+
+        Assert.Equal("Numero de processo invalido!\n", excecaoObterPorId.Message);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    //[InlineData("      ")]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_Objeto_null_ou_com_somente_espacos(string objetoInformado)
+    {
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 0,
+            NumeroProcesso = 123,
+            Objeto = objetoInformado,
+            Valor = 2.00,
+            DataInicio = new DateTime(1917, 01, 30),
+            IdEscola = 3,
+            IdEmpresa = 12
+        };
+        _tabelas.Convenios.Value.Clear();
+
+        var excecaoCriar = Assert.Throws<Exception>(() => _servicoConvenio.Criar(ConvenioEntrada));
+
+        Assert.Equal($"Objeto nulo ou somente com espacos!\n", excecaoCriar.Message);
+    }
+
+    [Fact]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_Valor_invalido()
+    {
+        // Given
+
+        // When
+
+        // Then
+    }
+
+    [Fact]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_DataInicio_invalida()
+    {
+        // Given
+
+        // When
+
+        // Then
+    }
+
+    [Fact]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_DataTermino_invalida()
+    {
+        // Given
+    
+        // When
+    
+        // Then
+    }   
+
+    [Fact]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_IdEscola_invalida_ou_inexistente()
+    {
+        // Given
+    
+        // When
+    
+        // Then
+    }   
+
+    [Fact]
+    public void Criar_deve_lancar_Exception_quando_informado_Convenio_com_IdEmpresa_invalida_ou_inexistente()
+    {
+        // Given
+    
+        // When
+    
+        // Then
+    }   
 }
