@@ -39,7 +39,11 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
 
     public Empresa ObterPorId(int Id)
     {
-        return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhuma Empresa possui um Id correspondente ao passado\n");
+        if (Id < 0)
+            throw new ArgumentOutOfRangeException("Valor negativo informado ao metodo!\n");
+
+
+        return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Empresa> ObterTodos()

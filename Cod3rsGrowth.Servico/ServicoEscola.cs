@@ -29,7 +29,7 @@ public class ServicoEscola : IRepositorioEscola
 
     public Escola ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        return _repositorioEscola.ObterPorId(Id);
     }
 
     public List<Escola> ObterTodos()

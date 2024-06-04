@@ -76,4 +76,108 @@ public class TestesServicoConvenio : TesteBase
 
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
+
+    [Fact]
+    public void ObterPorId_deve_lancar_Exception_Nenhum_Convenio_com_Id_6_existe_no_contexto_atual_quando_informado_Id_6_inexistente_no_contexto()
+    {
+        _tabelas.Convenios.Value.Clear();
+
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoConvenio.ObterPorId(6));
+        Assert.Contains("Nenhum Convenio com Id 6 existe no contexto atual!\n", excecaoObterPorId.Message);
+    }
+
+    [Fact]
+    public void ObterPorId_deve_lancar_ArgumentOutOfRangeException_valor_negativo_informado_ao_metodo_quando_informado_valor_negativo()
+    {
+        _tabelas.Convenios.Value.Clear();
+
+        var excecaoObterPorId = Assert.Throws<ArgumentOutOfRangeException>(() => _servicoConvenio.ObterPorId(-1));
+        Assert.Contains("Valor negativo informado ao metodo!\n", excecaoObterPorId.Message);
+    }
+
+    [Fact]
+    public void ObterPorId_deve_retornar_Convenio_com_id_0_quando_informado_0()
+    {
+        List<Convenio> ListaDadosTeste = new()
+        {
+            new Convenio()
+            {
+                Id = 0,
+                NumeroProcesso = 123,
+                Objeto = "convenio convenio",
+                Valor = 2.00,
+                DataInicio =  new DateTime(1917,01,30),
+                IdEscola = 3,
+                IdEmpresa = 12
+            },
+            new Convenio()
+            {
+                Id = 1,
+                NumeroProcesso = 314,
+                Objeto = "Curso Empreendedorismo - vendendo bolo de pote",
+                Valor = 500_000_000.00,
+                DataInicio = new(2024,01,01),
+                IdEmpresa = 4,
+                IdEscola = 12 
+            }
+       };
+
+        _tabelas.Convenios.Value.Clear();
+        _tabelas.Convenios.Value.AddRange(ListaDadosTeste);
+
+        var ValorEsperado = ListaDadosTeste.Find(x => x.Id == 0);
+
+        var ValorRetornado = _servicoConvenio.ObterPorId(0);
+
+        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
+        Assert.Equal(ValorEsperado.NumeroProcesso, ValorEsperado.NumeroProcesso);
+        Assert.Equal(ValorEsperado.Objeto, ValorRetornado.Objeto);
+        Assert.Equal(ValorEsperado.Valor, ValorRetornado.Valor);
+        Assert.Equal(ValorEsperado.DataInicio.Date, ValorRetornado.DataInicio.Date);
+        Assert.Equal(ValorEsperado.IdEmpresa, ValorEsperado.IdEmpresa);
+        Assert.Equal(ValorEsperado.IdEscola, ValorRetornado.IdEscola);
+    }
+
+    [Fact]
+    public void ObterPorId_deve_retornar_Convenio_com_id_1_quando_informado_1()
+    {
+        List<Convenio> ListaDadosTeste = new()
+        {
+            new Convenio()
+            {
+                Id = 0,
+                NumeroProcesso = 123,
+                Objeto = "convenio convenio",
+                Valor = 2.00,
+                DataInicio =  new DateTime(1917,01,30),
+                IdEscola = 3,
+                IdEmpresa = 12
+            },
+            new Convenio()
+            {
+                Id = 1,
+                NumeroProcesso = 314,
+                Objeto = "Curso Empreendedorismo - vendendo bolo de pote",
+                Valor = 500_000_000.00,
+                DataInicio = new(2024,01,01),
+                IdEmpresa = 4,
+                IdEscola = 12 
+            }
+       };
+
+        _tabelas.Convenios.Value.Clear();
+        _tabelas.Convenios.Value.AddRange(ListaDadosTeste);
+
+        var ValorEsperado = ListaDadosTeste.Find(x => x.Id == 1);
+
+        var ValorRetornado = _servicoConvenio.ObterPorId(1);
+
+        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
+        Assert.Equal(ValorEsperado.NumeroProcesso, ValorEsperado.NumeroProcesso);
+        Assert.Equal(ValorEsperado.Objeto, ValorRetornado.Objeto);
+        Assert.Equal(ValorEsperado.Valor, ValorRetornado.Valor);
+        Assert.Equal(ValorEsperado.DataInicio.Date, ValorRetornado.DataInicio.Date);
+        Assert.Equal(ValorEsperado.IdEmpresa, ValorEsperado.IdEmpresa);
+        Assert.Equal(ValorEsperado.IdEscola, ValorRetornado.IdEscola);
+    }
 }

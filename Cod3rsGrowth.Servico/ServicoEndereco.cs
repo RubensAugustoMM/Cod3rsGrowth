@@ -29,7 +29,7 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public Endereco ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        return _repositorioEndereco.ObterPorId(Id);
     }
 
     public List<Endereco> ObterTodos()
