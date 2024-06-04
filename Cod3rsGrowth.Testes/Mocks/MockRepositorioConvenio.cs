@@ -34,10 +34,6 @@ public class MockRepositorioConvenio : IRepositorioConvenio
 
     public Convenio ObterPorId(int Id)
     {
-        if (Id < 0)
-            throw new ArgumentOutOfRangeException("Valor negativo informado ao metodo!\n");
-
-
         return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
     }
 

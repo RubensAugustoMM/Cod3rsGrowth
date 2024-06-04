@@ -37,10 +37,6 @@ public class MockRepositorioEscola : IRepositorioEscola
 
     public Escola ObterPorId(int Id)
     {
-        if (Id < 0)
-            throw new ArgumentOutOfRangeException("Valor negativo informado ao metodo!\n");
-
-
         return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 

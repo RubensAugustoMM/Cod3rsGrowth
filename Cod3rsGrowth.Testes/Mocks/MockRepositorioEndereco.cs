@@ -36,10 +36,6 @@ public class MockRepositorioEndereco : IRepositorioEndereco
 
     public Endereco ObterPorId(int Id)
     {
-        if (Id < 0)
-            throw new ArgumentOutOfRangeException("Valor negativo informado ao metodo!\n");
-
-
         return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
     }
 
