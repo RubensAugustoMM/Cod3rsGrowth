@@ -5,6 +5,13 @@ namespace Cod3rsGrowth.Servico;
 
 public class ServicoConvenio : IRepositorioConvenio
 {
+    private readonly IRepositorioConvenio _repositorioConvenio;
+
+    public ServicoConvenio(IRepositorioConvenio repositorioConvenio)
+    {
+        _repositorioConvenio = repositorioConvenio;
+    }
+
     public void Atualizar(Convenio convenioAtualizado)
     {
         throw new NotImplementedException();
@@ -27,6 +34,6 @@ public class ServicoConvenio : IRepositorioConvenio
 
     public List<Convenio> ObterTodos()
     {
-        throw new NotImplementedException();
+        return _repositorioConvenio.ObterTodos();
     }
 }
