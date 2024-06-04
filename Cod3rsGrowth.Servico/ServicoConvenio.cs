@@ -29,7 +29,7 @@ public class ServicoConvenio : IRepositorioConvenio
 
     public Convenio ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        return _repositorioConvenio.ObterPorId(Id);
     }
 
     public List<Convenio> ObterTodos()

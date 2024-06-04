@@ -36,7 +36,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
 
     public Endereco ObterPorId(int Id)
     {
-        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum Endereco possui um Id correspondente ao passado\n");
+        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Endereco> ObterTodos()

@@ -34,7 +34,7 @@ public class MockRepositorioConvenio : IRepositorioConvenio
 
     public Convenio ObterPorId(int Id)
     {
-        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum convenio possui Id correspondente ao fornecido\n");
+        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Convenio> ObterTodos()

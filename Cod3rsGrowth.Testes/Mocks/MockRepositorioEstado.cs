@@ -30,7 +30,7 @@ public class MockRepositorioEstado : IRepositorioEstado
 
     public Estado ObterPorId(int Id)
     {
-        return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum estado possui um Id correspondente ao passado\n");
+        return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Estado com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Estado> ObterTodos()
