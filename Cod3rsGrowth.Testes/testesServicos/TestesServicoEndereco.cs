@@ -32,7 +32,6 @@ public class TestesServicoEndereco : TesteBase
                 IdEstado = 20
             }
        };
-
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Enderecos.Value.AddRange(ValorEsperado);
 
@@ -69,7 +68,6 @@ public class TestesServicoEndereco : TesteBase
                 IdEstado = 20
             }
        };
-
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Enderecos.Value.AddRange(ValorEsperado);
 
@@ -78,28 +76,12 @@ public class TestesServicoEndereco : TesteBase
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
-    [Fact]
-    public void ObterPorId_deve_lancar_Exception_Nenhum_Endereco_com_Id_6_existe_no_contexto_atual_quando_informado_Id_6_inexistente_no_contexto()
+    [Theory]
+    [InlineData(2)]
+    [InlineData(-1)]
+    public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        _tabelas.Convenios.Value.Clear();
-
-        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEndereco.ObterPorId(6));
-        Assert.Contains("Nenhum Endereco com Id 6 existe no contexto atual!\n", excecaoObterPorId.Message);
-    }
-
-    [Fact]
-    public void ObterPorId_deve_lancar_ArgumentOutOfRangeException_valor_negativo_informado_ao_metodo_quando_informado_valor_negativo()
-    {
-        _tabelas.Convenios.Value.Clear();
-
-        var excecaoObterPorId = Assert.Throws<ArgumentOutOfRangeException>(() => _servicoEndereco.ObterPorId(-1));
-        Assert.Contains("Valor negativo informado ao metodo!\n", excecaoObterPorId.Message);
-    }
-
-    [Fact]
-    public void ObterPorId_deve_retornar_Endereco_com_id_0_quando_informado_0()
-    {
-        List<Endereco> ListaArrange = new()
+        List<Endereco> ListaDadosTeste = new()
         {
             new Endereco()
             {
@@ -124,28 +106,20 @@ public class TestesServicoEndereco : TesteBase
                 IdEstado = 20
             }
        };
-
         _tabelas.Enderecos.Value.Clear();
-        _tabelas.Enderecos.Value.AddRange(ListaArrange);
+        _tabelas.Enderecos.Value.AddRange(ListaDadosTeste);
 
-        var ValorEsperado = ListaArrange.Find(x => x.Id == 0);
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEndereco.ObterPorId(idInformado));
 
-        var ValorRetornado = _servicoEndereco.ObterPorId(0);
-
-        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
-        Assert.Equal(ValorEsperado.Numero, ValorRetornado.Numero);
-        Assert.Equal(ValorEsperado.Cep, ValorRetornado.Cep);
-        Assert.Equal(ValorEsperado.Municipio, ValorRetornado.Municipio);
-        Assert.Equal(ValorEsperado.Bairro, ValorRetornado.Bairro);
-        Assert.Equal(ValorEsperado.Rua, ValorRetornado.Rua);
-        Assert.Equal(ValorEsperado.Complemento, ValorRetornado.Complemento);
-        Assert.Equal(ValorEsperado.IdEstado, ValorRetornado.IdEstado);
+        Assert.Equal($"Nenhum Endereco com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
-    [Fact]
-    public void ObterPorId_deve_retornar_Endereco_com_id_1_quando_informado_1()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    public void ObterPorId_deve_retornar_Endereco_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Endereco> ListaArrange = new()
+        List<Endereco> ListaDadosTeste = new()
         {
             new Endereco()
             {
@@ -170,13 +144,11 @@ public class TestesServicoEndereco : TesteBase
                 IdEstado = 20
             }
        };
-
         _tabelas.Enderecos.Value.Clear();
-        _tabelas.Enderecos.Value.AddRange(ListaArrange);
+        _tabelas.Enderecos.Value.AddRange(ListaDadosTeste);
 
-        var ValorEsperado = ListaArrange.Find(x => x.Id == 1);
-
-        var ValorRetornado = _servicoEndereco.ObterPorId(1);
+        var ValorEsperado = ListaDadosTeste[idInformado];
+        var ValorRetornado = _servicoEndereco.ObterPorId(idInformado);
 
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
         Assert.Equal(ValorEsperado.Numero, ValorRetornado.Numero);

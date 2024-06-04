@@ -34,7 +34,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-
         _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
@@ -73,7 +72,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-
         _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
@@ -82,28 +80,12 @@ public class TestesServicoEscola : TesteBase
         Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
     }
 
-    [Fact]
-    public void ObterPorId_deve_lancar_Exception_Nenhuma_Escola_com_Id_6_existe_no_contexto_atual_quando_informado_Id_6_inexistente_no_contexto()
+    [Theory]
+    [InlineData(2)]
+    [InlineData(-1)]
+    public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        _tabelas.Convenios.Value.Clear();
-
-        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEscola.ObterPorId(6));
-        Assert.Contains("Nenhuma Escola com Id 6 existe no contexto atual!\n", excecaoObterPorId.Message);
-    }
-
-    [Fact]
-    public void ObterPorId_deve_lancar_ArgumentOutOfRangeException_valor_negativo_informado_ao_metodo_quando_informado_valor_negativo()
-    {
-        _tabelas.Convenios.Value.Clear();
-
-        var excecaoObterPorId = Assert.Throws<ArgumentOutOfRangeException>(() => _servicoEscola.ObterPorId(-1));
-        Assert.Contains("Valor negativo informado ao metodo!\n", excecaoObterPorId.Message);
-    }
-
-    [Fact]
-    public void ObterPorId_deve_retornar_Escola_com_id_0_quando_informado_0()
-    {
-        List<Escola> ListaArrange = new()
+        List<Escola> ListaDadosTeste = new()
         {
             new Escola()
             {
@@ -130,29 +112,20 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-
-
         _tabelas.Escolas.Value.Clear();
-        _tabelas.Escolas.Value.AddRange(ListaArrange);
+        _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
 
-        var ValorEsperado = ListaArrange.Find(x => x.Id == 0);
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEscola.ObterPorId(idInformado));
 
-        var ValorRetornado = _servicoEscola.ObterPorId(0);
-
-        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);   
-        Assert.Equal(ValorEsperado.StatusAtividade, ValorRetornado.StatusAtividade);
-        Assert.Equal(ValorEsperado.CodigoMec, ValorRetornado.CodigoMec);
-        Assert.Equal(ValorEsperado.Telefone, ValorRetornado.Telefone);
-        Assert.Equal(ValorEsperado.Email, ValorRetornado.Email);
-        Assert.Equal(ValorEsperado.InicioAtividade.Date, ValorRetornado.InicioAtividade.Date);
-        Assert.Equal(ValorEsperado.CategoriaAdministrativa, ValorRetornado.CategoriaAdministrativa);
-        Assert.Equal(ValorEsperado.OrganizacaoAcademica, ValorRetornado.OrganizacaoAcademica);
+        Assert.Equal($"Nenhuma Escola com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
-    [Fact]
-    public void ObterPorId_deve_retornar_Escola_com_id_1_quando_informado_1()
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    public void ObterPorId_deve_retornar_Escola_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Escola> ListaArrange = new()
+        List<Escola> ListaDadosTeste = new()
         {
             new Escola()
             {
@@ -179,15 +152,13 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-
         _tabelas.Escolas.Value.Clear();
-        _tabelas.Escolas.Value.AddRange(ListaArrange);
+        _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
 
-        var ValorEsperado = ListaArrange.Find(x => x.Id == 1);
+        var ValorEsperado = ListaDadosTeste[idInformado];
+        var ValorRetornado = _servicoEscola.ObterPorId(idInformado);
 
-        var ValorRetornado = _servicoEscola.ObterPorId(1);
-
-        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);   
+        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
         Assert.Equal(ValorEsperado.StatusAtividade, ValorRetornado.StatusAtividade);
         Assert.Equal(ValorEsperado.CodigoMec, ValorRetornado.CodigoMec);
         Assert.Equal(ValorEsperado.Telefone, ValorRetornado.Telefone);
