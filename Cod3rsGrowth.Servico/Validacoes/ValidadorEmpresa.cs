@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Validacoes;
 
-public class ValidacaoEmpresa : AbstractValidator<Empresa>
+public class ValidadorEmpresa : AbstractValidator<Empresa>
 {
 
 }

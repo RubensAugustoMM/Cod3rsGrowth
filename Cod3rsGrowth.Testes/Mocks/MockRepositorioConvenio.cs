@@ -20,9 +20,11 @@ public class MockRepositorioConvenio : IRepositorioConvenio
         convenioExistente.IdEmpresa = convenioAtulizado.IdEmpresa;
     }
 
-    public void Criar(Convenio convenioCriado)
+    public bool Criar(Convenio convenioCriado)
     {
         Tabelas.Convenios.Value.Add(convenioCriado);
+        
+        return true;
     }
 
     public void Deletar(int Id)

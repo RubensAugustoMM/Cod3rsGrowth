@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
@@ -9,11 +11,12 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoConvenio : IRepositorioConvenio
 {
     private readonly IRepositorioConvenio _repositorioConvenio;
-    private ValidadorConvenio _validadorConvenio = new();
+    private ValidadorConvenio _validadorConvenio;
 
-    public ServicoConvenio(IRepositorioConvenio repositorioConvenio)
+    public ServicoConvenio(IRepositorioConvenio repositorioConvenio, ValidadorConvenio validadorConvenio)
     {
         _repositorioConvenio = repositorioConvenio;
+        _validadorConvenio = validadorConvenio;
     }
 
     public void Atualizar(Convenio convenioAtualizado)
@@ -21,9 +24,11 @@ public class ServicoConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public void Criar(Convenio convenioCriado)
+    public bool Criar(Convenio convenioCriado)
     {
-        _validadorConvenio.ValidateAndThrow(convenioCriado);
+        var resultadoValidacao = _validadorConvenio.Validate(convenioCriado);
+
+        return resultadoValidacao.IsValid;
     }
 
     public void Deletar(int Id)
