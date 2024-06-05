@@ -178,11 +178,11 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(-12)]
     [InlineData(-1)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_Id_invalido(int IdInformado)
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_Id_invalido(int idInformado)
     {
         Convenio ConvenioEntrada = new()
         {
-            Id = IdInformado,
+            Id = idInformado,
             NumeroProcesso = 123,
             Objeto = "convenio convenio",
             Valor = 2.0,
@@ -280,9 +280,9 @@ public class TestesServicoConvenio : TesteBase
         _tabelas.Escolas.Value.Add(EscolaEntrada);
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
 
-        var ConvenioValido =  _servicoConvenio.Criar(ConvenioEntrada);
+        var ResultadoRetornado =  _servicoConvenio.Criar(ConvenioEntrada);
 
-        Assert.False(ConvenioValido);
+        Assert.False(ResultadoRetornado);
     }
 
     [Theory]

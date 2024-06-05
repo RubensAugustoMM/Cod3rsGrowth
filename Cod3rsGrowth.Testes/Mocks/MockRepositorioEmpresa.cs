@@ -25,9 +25,11 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         empresaExistente.ListaConvenios = empresaAtualizada.ListaConvenios;
     }
 
-    public void Criar(Empresa empresaCriada)
+    public bool Criar(Empresa empresaCriada)
     {
         Tabelas.Empresas.Value.Add(empresaCriada);
+
+        return true;
     }
 
     public void Deletar(int Id)

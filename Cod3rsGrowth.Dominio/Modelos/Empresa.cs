@@ -16,5 +16,6 @@ public class Empresa
     public NaturezaJuridicaEnums NaturezaJuridica { get; set; }
     public PorteEnums Porte { get; set; }
     public MatrizFilialEnums MatrizFilial { get; set; }
+    public int IdEndereco { get; set; }
     public List<Convenio> ListaConvenios { get; set; } = new();
 }

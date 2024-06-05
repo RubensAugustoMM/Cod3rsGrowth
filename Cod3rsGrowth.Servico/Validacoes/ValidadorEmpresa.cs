@@ -5,5 +5,5 @@ namespace Cod3rsGrowth.Servico.Validacoes;
 
 public class ValidadorEmpresa : AbstractValidator<Empresa>
 {
-
+    
 }

@@ -192,4 +192,46 @@ public class TestesServicoEmpresa : TesteBase
         Assert.Equal(ValorEsperado.Porte, ValorEsperado.Porte);
         Assert.Equal(ValorEsperado.MatrizFilial, ValorRetornado.MatrizFilial);
     }
+
+    [Theory]
+    [InlineData(-12)]
+    [InlineData(-1)]
+    public void Criar_deve_retornar_False_quando_informado_Empresa_com_Id_invalido(int idInformado)
+    {
+        Empresa EmpresaEntrada = new()
+        {
+            Id = idInformado,
+            Idade = 53454353,
+            RazaoSocial = "Fast! transportes LTDA",
+            NomeFantasia = "Fast! transportes",
+            Cnpj = "44433322211",
+            SitucaoCadastral = true,
+            DataSituacaoCadastral = new DateTime(1000, 12, 03),
+            DataAbertura = new DateTime(1000, 12, 03),
+            CapitalSocial = 123124124,
+            NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
+            Porte = PorteEnums.EmpresaPequenoPorte,
+            MatrizFilial = MatrizFilialEnums.Matriz,
+            IdEndereco = 1
+        };
+        Endereco EnderecoEntrada = new()
+        {
+            Id = 1,
+            Numero = 13,
+            Cep = "113336666",
+            Municipio = "Sao Bartolomeu",
+            Bairro = "joao",
+            Rua = "143",
+            Complemento = "Perto da merceria do Galo",
+            IdEstado = 20
+        };
+        _tabelas.Empresas.Value.Clear();
+        _tabelas.Enderecos.Value.Clear();
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
+
+        var ResultadoRetornado = _servicoEmpresa.Criar(EmpresaEntrada);
+
+        Assert.False(ResultadoRetornado);
+    }
 }

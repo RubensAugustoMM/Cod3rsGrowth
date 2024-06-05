@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoConvenio : IRepositorioConvenio
 {
     private readonly IRepositorioConvenio _repositorioConvenio;
-    private ValidadorConvenio _validadorConvenio;
+    private readonly ValidadorConvenio _validadorConvenio;
 
     public ServicoConvenio(IRepositorioConvenio repositorioConvenio, ValidadorConvenio validadorConvenio)
     {
