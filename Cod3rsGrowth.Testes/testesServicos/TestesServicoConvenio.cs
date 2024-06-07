@@ -661,6 +661,60 @@ public class TestesServicoConvenio : TesteBase
         Assert.False(convenioValido);
     }      
 
+    [Fact]
+    public void Criar_deve_retornar_False_e_nao_adicionar_Convenio_no_repositorio_caso_Convenio_invalido()
+    {
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 0,
+            NumeroProcesso = -123,
+            Objeto = "   ",
+            Valor = -2.0,
+            DataInicio = new DateTime(1500,2,3),
+            IdEscola = 3,
+            IdEmpresa = 12
+        };
+        Escola EscolaEntrada = new()
+        {
+
+            Id = 3,
+            StatusAtividade = true,
+            Nome = "Escola Rodrigo",
+            CodigoMec = "3415",
+            Telefone = "12355645",
+            Email = "rodrigo@gmail.com",
+            InicioAtividade = new DateTime(1234, 12, 3),
+            CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
+
+        };
+        Empresa EmpresaEntrada = new()
+        {
+            Id = 12,
+            Idade = 3,
+            RazaoSocial = "Carlinhos Ferragens LTDA",
+            NomeFantasia = "Carlinhos Ferragens",
+            Cnpj = "11122233344",
+            SitucaoCadastral = true,
+            DataSituacaoCadastral = new DateTime(1000, 12, 03),
+            DataAbertura = new DateTime(1000, 12, 03),
+            CapitalSocial = 13,
+            NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
+            Porte = PorteEnums.EmpresaPequenoPorte,
+            MatrizFilial = MatrizFilialEnums.Matriz
+        };
+        _tabelas.Convenios.Value.Clear();
+        _tabelas.Escolas.Value.Clear();
+        _tabelas.Empresas.Value.Clear();
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+
+        var convenioValido = _servicoConvenio.Criar(ConvenioEntrada);
+
+        Assert.False(convenioValido);
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoConvenio.ObterPorId(ConvenioEntrada.Id));
+    }    
+
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -1096,5 +1150,66 @@ public class TestesServicoConvenio : TesteBase
         var convenioValido = _servicoConvenio.Criar(ConvenioEntrada);
 
         Assert.True(convenioValido);
+    }    
+
+    [Fact]
+    public void Criar_deve_retornar_True_e_nao_adicionar_Convenio_no_repositorio_caso_Convenio_invalido()
+    {
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 0,
+            NumeroProcesso = 123,
+            Objeto = "objeto",
+            Valor = 2.0,
+            DataInicio = new DateTime(1900,2,3),
+            IdEscola = 3,
+            IdEmpresa = 12
+        };
+        Escola EscolaEntrada = new()
+        {
+
+            Id = 3,
+            StatusAtividade = true,
+            Nome = "Escola Rodrigo",
+            CodigoMec = "3415",
+            Telefone = "12355645",
+            Email = "rodrigo@gmail.com",
+            InicioAtividade = new DateTime(1234, 12, 3),
+            CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
+
+        };
+        Empresa EmpresaEntrada = new()
+        {
+            Id = 12,
+            Idade = 3,
+            RazaoSocial = "Carlinhos Ferragens LTDA",
+            NomeFantasia = "Carlinhos Ferragens",
+            Cnpj = "11122233344",
+            SitucaoCadastral = true,
+            DataSituacaoCadastral = new DateTime(1000, 12, 03),
+            DataAbertura = new DateTime(1000, 12, 03),
+            CapitalSocial = 13,
+            NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
+            Porte = PorteEnums.EmpresaPequenoPorte,
+            MatrizFilial = MatrizFilialEnums.Matriz
+        };
+        _tabelas.Convenios.Value.Clear();
+        _tabelas.Escolas.Value.Clear();
+        _tabelas.Empresas.Value.Clear();
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+
+        var convenioValido = _servicoConvenio.Criar(ConvenioEntrada);
+        var convenioRetornado = _servicoConvenio.ObterPorId(ConvenioEntrada.Id);
+
+        Assert.True(convenioValido);
+        Assert.Equal(ConvenioEntrada.Id, convenioRetornado.Id);
+        Assert.Equal(ConvenioEntrada.NumeroProcesso, convenioRetornado.NumeroProcesso);
+        Assert.Equal(ConvenioEntrada.Objeto, convenioRetornado.Objeto);
+        Assert.Equal(ConvenioEntrada.Valor, convenioRetornado.Valor);
+        Assert.Equal(ConvenioEntrada.DataInicio.Date, convenioRetornado.DataInicio.Date);
+        Assert.Equal(ConvenioEntrada.IdEmpresa, convenioRetornado.IdEmpresa);
+        Assert.Equal(ConvenioEntrada.IdEscola, convenioRetornado.IdEscola);
     }    
 }

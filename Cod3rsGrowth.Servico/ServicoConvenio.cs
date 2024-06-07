@@ -28,6 +28,9 @@ public class ServicoConvenio : IRepositorioConvenio
     {
         var resultadoValidacao = _validadorConvenio.Validate(convenioCriado);
 
+        if (resultadoValidacao.IsValid)
+            _repositorioConvenio.Criar(convenioCriado);
+
         return resultadoValidacao.IsValid;
     }
 
