@@ -24,6 +24,9 @@ public class ServicoEmpresa : IRepositorioEmpresa
     {
         var resultadoValidacao = _validadorEmpresa.Validate(empresaCriada);
 
+        if (resultadoValidacao.IsValid)
+            _repositorioEmpresa.Criar(empresaCriada);
+            
         return resultadoValidacao.IsValid;
     }
 

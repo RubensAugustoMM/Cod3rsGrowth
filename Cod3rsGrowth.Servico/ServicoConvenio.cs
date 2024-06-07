@@ -1,10 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
