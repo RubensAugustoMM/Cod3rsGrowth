@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
@@ -20,14 +21,10 @@ public class ServicoConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public bool Criar(Convenio convenioCriado)
+    public void Criar(Convenio convenioCriado)
     {
-        var resultadoValidacao = _validadorConvenio.Validate(convenioCriado);
-
-        if (resultadoValidacao.IsValid)
-            _repositorioConvenio.Criar(convenioCriado);
-
-        return resultadoValidacao.IsValid;
+        _validadorConvenio.ValidateAndThrow(convenioCriado);
+        _repositorioConvenio.Criar(convenioCriado);
     }
 
     public void Deletar(int Id)

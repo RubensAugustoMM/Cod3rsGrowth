@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
@@ -21,14 +22,10 @@ public class ServicoEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public bool Criar(Escola escolaCriada)
+    public void Criar(Escola escolaCriada)
     {
-        var EscolaValida = _validadorEscola.Validate(escolaCriada);
-
-        if (EscolaValida.IsValid)
-            _repositorioEscola.Criar(escolaCriada);
-
-        return EscolaValida.IsValid;
+        _validadorEscola.ValidateAndThrow(escolaCriada);
+        _repositorioEscola.Criar(escolaCriada);
     }
 
     public void Deletar(int Id)

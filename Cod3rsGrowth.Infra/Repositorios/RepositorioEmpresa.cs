@@ -10,7 +10,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         throw new NotImplementedException();
     }
 
-    public bool Criar(Empresa empresaCriada)
+    public void Criar(Empresa empresaCriada)
     {
         throw new NotImplementedException();
     }

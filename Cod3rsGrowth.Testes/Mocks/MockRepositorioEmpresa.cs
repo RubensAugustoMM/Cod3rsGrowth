@@ -24,11 +24,9 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         empresaExistente.MatrizFilial = empresaAtualizada.MatrizFilial;
     }
 
-    public bool Criar(Empresa empresaCriada)
+    public void Criar(Empresa empresaCriada)
     {
         Tabelas.Empresas.Value.Add(empresaCriada);
-
-        return true;
     }
 
     public void Deletar(int Id)

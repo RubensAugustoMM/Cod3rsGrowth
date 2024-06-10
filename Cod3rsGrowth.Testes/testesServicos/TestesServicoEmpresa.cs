@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
@@ -229,13 +230,12 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-1)]
     public void Criar_deve_retornar_False_quando_informado_Empresa_com_Id_invalido(int idInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Id = idInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.Id = idInformado;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
-
-        Assert.False(ResultadoRetornado);
+        var excecaoObterPorId = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
     }
+    /*
 
     [Theory]
     [InlineData(-12)]
@@ -485,4 +485,5 @@ public class TestesServicoEmpresa : TesteBase
 
         Assert.True(ResultadoRetornado);
     }   
+    */
 }

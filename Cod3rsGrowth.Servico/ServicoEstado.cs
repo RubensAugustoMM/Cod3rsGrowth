@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
@@ -20,14 +21,10 @@ public class ServicoEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public bool Criar(Estado estadoCriado)
+    public void Criar(Estado estadoCriado)
     {
-        var EstadoValido = _validadorEstado.Validate(estadoCriado);
-
-        if (EstadoValido.IsValid)
-            _repositorioEstado.Criar(estadoCriado);
-
-        return EstadoValido.IsValid;
+        _validadorEstado.ValidateAndThrow(estadoCriado);
+        _repositorioEstado.Criar(estadoCriado);
     }
 
     public void Deletar(int Id)

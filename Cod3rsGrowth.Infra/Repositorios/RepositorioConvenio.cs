@@ -10,7 +10,7 @@ public class RepositorioConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public bool Criar(Convenio convenioCriado)
+    public void Criar(Convenio convenioCriado)
     {
         throw new NotImplementedException();
     }

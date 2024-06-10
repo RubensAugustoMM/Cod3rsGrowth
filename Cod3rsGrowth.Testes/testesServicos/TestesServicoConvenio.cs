@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
+﻿using FluentValidation;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
@@ -212,26 +213,25 @@ public class TestesServicoConvenio : TesteBase
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_Id_invalido(int idInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         convenioEntrada.Id = idInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(ConvenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-
     [Theory]
     [InlineData(-12)]
     [InlineData(-1)]
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_NumeroProcesso_Invalido(int numeroProcessoInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Numero Processo deve ser maior que zero!";
         convenioEntrada.NumeroProcesso = numeroProcessoInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(ConvenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -240,12 +240,12 @@ public class TestesServicoConvenio : TesteBase
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_Objeto_null_ou_com_somente_espacos(string objetoInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Objeto nao pode ter valor nulo ou formado por caracteres de espaco!";
         convenioEntrada.Objeto = objetoInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(ConvenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -254,50 +254,62 @@ public class TestesServicoConvenio : TesteBase
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_Valor_invalido(int ValorInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Valor do convenio deve ser maior que zero!";
         convenioEntrada.Valor = ValorInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(ConvenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
  
-    [Theory, MemberData(nameof(CasosDataInicioInvalidos))]
-    public void Criar_deve_retornar_False__quando_informado_Convenio_com_DataInicio_invalida(DateTime DataInicioInformada)
+    [Fact]
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataInicio_anterior_a_1889()
     {
-        var convenioEntrada = _convenioEntrada;
-        convenioEntrada.DataInicio = DataInicioInformada;
-        _tabelas.Convenios.Value.Clear();
+        var ConvenioEntrada = _convenioEntrada;
+        var ValorEsperado = "DataInicio deve ser após a proclamacao da republica!";
+        ConvenioEntrada.DataInicio = new(1888,8,15);
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(ConvenioEntrada));
 
-        Assert.False(ConvenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
-    [Theory, MemberData(nameof(CasosDataTerminoInvalidos))]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataTermino_anterior_a_DataInicio(DateTime DataTerminoInformada)
+    [Fact]
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataInicio_apos_data_atual()
+    {
+        var ConvenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Data Inicio deve ser anterior ou igual a data atual!";
+        ConvenioEntrada.DataInicio = new DateTime(5000,3,2);
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(ConvenioEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Fact]
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataTermino_anterior_a_DataInicio()
     {
         var convenioEntrada = _convenioEntrada;
-        convenioEntrada.DataTermino = DataTerminoInformada;
-        _tabelas.Convenios.Value.Clear();
+        var ValorEsperado = "DataTermino deve ser maior que a DataInicio!";
+        convenioEntrada.DataTermino = new DateTime(1500,30,2);
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(convenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }   
 
     [Theory]
     [InlineData(-1)]
     [InlineData(6)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEscola_invalido(int idEscolaInformado)
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEscola_negativo(int idEscolaInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "Id Escola deve ser maior ou igual a zero!";
         convenioEntrada.IdEscola = idEscolaInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(convenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }   
 
     [Theory]
@@ -306,26 +318,26 @@ public class TestesServicoConvenio : TesteBase
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEscola_referente_a_escola_inexistente(int idEscolaInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "IdEscola deve ser referente a uma escola existente!";
         convenioEntrada.IdEscola = idEscolaInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(convenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }      
 
     [Theory]
     [InlineData(-1)]
     [InlineData(6)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_invalido(int idEmpresaInformado)
+    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_negativo(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "IdEmpresa deve ser maior ou igual a zero!";
         convenioEntrada.IdEmpresa = idEmpresaInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(convenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }     
 
     [Theory]
@@ -334,12 +346,12 @@ public class TestesServicoConvenio : TesteBase
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_referente_a_Empresa_existente(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
+        var ValorEsperado = "IdEmpresa deve ser referente a uma escola existente!";
         convenioEntrada.IdEmpresa = idEmpresaInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
-        Assert.False(convenioValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }      
   
     [Theory]
@@ -350,9 +362,10 @@ public class TestesServicoConvenio : TesteBase
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Id = IdInformado;
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(ConvenioValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
@@ -362,11 +375,11 @@ public class TestesServicoConvenio : TesteBase
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.NumeroProcesso = numeroProcessoInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var ConvenioValido =  _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(ConvenioValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
@@ -376,11 +389,11 @@ public class TestesServicoConvenio : TesteBase
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Objeto = objetoInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
@@ -390,33 +403,33 @@ public class TestesServicoConvenio : TesteBase
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Valor = ValorInformado;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
+        Assert.NotNull(ValorRetornado);
     }
  
     [Fact]
     public void Criar_deve_retornar_True_quando_informado_Convenio_com_DataInicio_valida()
     {
         var convenioEntrada = _convenioEntrada; 
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Fact]
     public void Criar_deve_retornar_True_quando_informado_Convenio_com_DataTermino_valida()
     {
         var convenioEntrada = _convenioEntrada;
-        _tabelas.Convenios.Value.Clear();
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
+        Assert.NotNull(ValorRetornado);
     }   
 
     [Theory]
@@ -428,13 +441,12 @@ public class TestesServicoConvenio : TesteBase
         var escolaEntrada = _escolaEntrada;
         convenioEntrada.IdEscola = idEscolaInformado;
         escolaEntrada.Id = idEscolaInformado;
-        _tabelas.Convenios.Value.Clear();
-        _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.Add(escolaEntrada);
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
+        Assert.NotNull(ValorRetornado);
     }      
 
     [Theory]
@@ -448,8 +460,9 @@ public class TestesServicoConvenio : TesteBase
         empresaEntrada.Id = idEmpresaInformado;
         _tabelas.Empresas.Value.Add(empresaEntrada);
 
-        var convenioValido = _servicoConvenio.Criar(convenioEntrada);
+        _servicoConvenio.Criar(convenioEntrada);
+        var ValorRetornado = _tabelas.Convenios.Value.FirstOrDefault(convenioEntrada);
 
-        Assert.True(convenioValido);
-    }    
+        Assert.NotNull(ValorRetornado);
+    }
 }

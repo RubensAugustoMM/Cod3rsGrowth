@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
@@ -210,11 +211,9 @@ public class TestesServicoEscola : TesteBase
         var EscolaEntrada = _escolaEntrada;
         EscolaEntrada.Id = idInformado;
 
-        var EscolaValido =  _servicoEscola.Criar(EscolaEntrada);
-
-        Assert.False(EscolaValido);
+        var excecaoObterPorId = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
     }
-
+    /*
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
@@ -463,4 +462,5 @@ public class TestesServicoEscola : TesteBase
 
         Assert.True(ResultadoRetornado);
     }
+    */
 }

@@ -20,11 +20,9 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         enderecoExistente.IdEstado = enderecoAtualizado.IdEstado;
     }
 
-    public bool Criar(Endereco enderecoCriado)
+    public void Criar(Endereco enderecoCriado)
     {
         Tabelas.Enderecos.Value.Add(enderecoCriado);
-
-        return true;
     }
 
     public void Deletar(int Id)

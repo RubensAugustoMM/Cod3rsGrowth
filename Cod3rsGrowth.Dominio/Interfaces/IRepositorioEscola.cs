@@ -6,7 +6,7 @@ public interface IRepositorioEscola
 {
     List<Escola> ObterTodos();
     Escola ObterPorId(int Id);
-    bool Criar(Escola escolaCriada);
+    void Criar(Escola escolaCriada);
     void Atualizar(Escola escolaAtualizada);
     void Deletar(int Id);
 }

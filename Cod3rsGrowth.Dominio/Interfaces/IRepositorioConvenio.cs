@@ -6,7 +6,7 @@ public interface IRepositorioConvenio
 {
     List<Convenio> ObterTodos();
     Convenio ObterPorId(int Id);
-    bool Criar(Convenio convenioCriado);
+    void Criar(Convenio convenioCriado);
     void Atualizar(Convenio convenioAtualizado);
     void Deletar(int Id);
 }

@@ -10,7 +10,7 @@ public class RepositorioEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public bool Criar(Estado estadoCriado)
+    public void Criar(Estado estadoCriado)
     {
         throw new NotImplementedException();
     }

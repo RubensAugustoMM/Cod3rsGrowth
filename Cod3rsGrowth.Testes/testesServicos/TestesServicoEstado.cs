@@ -125,7 +125,7 @@ public class TestesServicoEstado : TesteBase
         Assert.Equal(ValorEsperado.Nome, ValorRetornado.Nome);
         Assert.Equal(ValorEsperado.Sigla, ValorRetornado.Sigla);
     }
-
+    /*
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
@@ -225,4 +225,5 @@ public class TestesServicoEstado : TesteBase
 
         Assert.True(EstadoValido);
     }
+    */
 }

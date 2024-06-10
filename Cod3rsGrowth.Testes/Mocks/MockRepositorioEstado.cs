@@ -16,11 +16,9 @@ public class MockRepositorioEstado : IRepositorioEstado
         estadoExistente.ListaEnderecos = estadoAtualizado.ListaEnderecos;
     }
 
-    public bool Criar(Estado estadoCriado)
+    public void Criar(Estado estadoCriado)
     {
         Tabelas.Estados.Value.Add(estadoCriado);
-
-        return true;
     }
 
     public void Deletar(int id)

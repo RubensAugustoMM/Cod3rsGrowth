@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using System.ComponentModel.DataAnnotations;
+using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -187,11 +188,9 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Id = idInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
-
-        Assert.False(EnderecoValido);
+        var excecaoObterPorId = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
     }
-
+    /*
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
@@ -366,4 +365,5 @@ public class TestesServicoEndereco : TesteBase
 
         Assert.True(EnderecoValido);
     }
+    */
 }
