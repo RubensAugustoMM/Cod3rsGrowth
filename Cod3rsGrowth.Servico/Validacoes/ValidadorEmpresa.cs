@@ -8,11 +8,9 @@ namespace Cod3rsGrowth.Servico.Validacoes;
 public class ValidadorEmpresa : AbstractValidator<Empresa>
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
-    private List<Endereco> _listaEnderecos;
     public ValidadorEmpresa(IRepositorioEndereco repositorioEndereco)
     {
         _repositorioEndereco = repositorioEndereco;
-        _listaEnderecos = _repositorioEndereco.ObterTodos();
 
         RuleFor(empresa => empresa.Id).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
         RuleFor(empresa => empresa.Idade)
@@ -35,14 +33,16 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
         RuleFor(empresa => empresa.Porte).IsInEnum().WithMessage("Valor de {PropertyName} fora do Enum!");
         RuleFor(empresa => empresa.MatrizFilial).IsInEnum().WithMessage("Valor de {PropertyName} fora do Enum!");
         RuleFor(empresa => empresa.IdEndereco).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
-                    .Must(VerificaSeExisteEndereco).WithMessage("{PropertyName} deve ser referente a uma escola existente!");
+                    .Must(VerificaSeExisteEndereco).WithMessage("{PropertyName} deve ser referente a uma endereco existente!");
+        RuleFor(empresa => empresa.ListaConvenio).NotNull().WithMessage("{PropertyName} nao pode ser nulo!");
 
 
     }
 
     private bool VerificaSeExisteEndereco(int idEndereco)
     {
-        return _listaEnderecos.Exists(endereco => endereco.Id == idEndereco);
+        var ListaEnderecos = _repositorioEndereco.ObterTodos();
+        return ListaEnderecos.Exists(endereco => endereco.Id == idEndereco);
     }
 
     private bool VerificaSeCnpjContemSomenteNumeros(string cnpj)

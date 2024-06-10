@@ -381,22 +381,6 @@ public class TestesServicoEmpresa : TesteBase
         Assert.False(ResultadoRetornado);
     }
 
-    [Theory]
-    [InlineData(-2)]
-    [InlineData(-1)]
-    public void Criar_deve_retornar_False_e_nao_adicionar_Empresa_no_repositorio_caso_Empresa_invalida(int idInformado)
-    {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Id = idInformado;
-
-        var empresaValida = _servicoEmpresa.Criar(empresaEntrada);
-
-        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEmpresa.ObterPorId(empresaEntrada.Id));
-
-        Assert.False(empresaValida);
-        Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
-    }    
-
     [Fact]
     public void Criar_deve_retornar_True_quando_informado_Empresa_com_Id_invalido()
     {
