@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using System.Reflection.Metadata;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Servico;
@@ -17,7 +18,7 @@ public class ServicoEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public void Criar(Escola escolaCriada)
+    public bool Criar(Escola escolaCriada)
     {
         throw new NotImplementedException();
     }

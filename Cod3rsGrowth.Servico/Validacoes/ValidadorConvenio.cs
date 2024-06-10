@@ -8,16 +8,11 @@ public class ValidadorConvenio: AbstractValidator<Convenio>
 {
     private readonly IRepositorioEscola _repositorioEscola;
     private readonly IRepositorioEmpresa _repositorioEmpresa;
-    private List<Escola> _listaEscolas;
-    private List<Empresa> _listaEmpresas;
 
     public ValidadorConvenio(IRepositorioEscola repositorioEscola, IRepositorioEmpresa repositorioEmpresa)
     {
         _repositorioEscola = repositorioEscola;
         _repositorioEmpresa = repositorioEmpresa;
-
-        _listaEscolas = repositorioEscola.ObterTodos();
-        _listaEmpresas = repositorioEmpresa.ObterTodos();
 
         RuleFor(convenio => convenio.Id).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
         RuleFor(convenio => convenio.NumeroProcesso).GreaterThan(0).WithMessage("{PropertyName} deve ser maior que zero!");
@@ -37,11 +32,13 @@ public class ValidadorConvenio: AbstractValidator<Convenio>
 
     private bool VerificarSeExisteEscola(int idEscola)
     {
-        return _listaEscolas.Exists(escola => escola.Id == idEscola);
+        var listaEscolas = _repositorioEscola.ObterTodos();
+        return listaEscolas.Exists(escola => escola.Id == idEscola);
     }
 
     private bool VerificaSeExisteEmpresa(int idEmpresa)
     {
-        return _listaEmpresas.Exists(empresa => empresa.Id == idEmpresa);
+        var listaEmpresas = _repositorioEmpresa.ObterTodos();
+        return listaEmpresas.Exists(empresa => empresa.Id == idEmpresa);
     }
 }

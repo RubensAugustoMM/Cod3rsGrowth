@@ -23,9 +23,11 @@ public class MockRepositorioEscola : IRepositorioEscola
         escolaExistente.ListaConvenios = escolaAtualizada.ListaConvenios;
     }
 
-    public void Criar(Escola escolaCriada)
+    public bool Criar(Escola escolaCriada)
     {
         Tabelas.Escolas.Value.Add(escolaCriada);
+
+        return true;
     }
 
     public void Deletar(int Id)

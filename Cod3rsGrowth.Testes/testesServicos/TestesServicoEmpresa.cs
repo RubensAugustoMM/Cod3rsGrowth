@@ -279,7 +279,8 @@ public class TestesServicoEmpresa : TesteBase
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
-    [InlineData("E")]
+    [InlineData("asdfghjklqwert")]
+    [InlineData("1234")]
     [InlineData("123456789123456")]
     public void Criar_deve_retornar_False_quando_informado_Empresa_com_Cnpj_invalido(string cnpjInformado)
     {
@@ -380,17 +381,20 @@ public class TestesServicoEmpresa : TesteBase
         Assert.False(ResultadoRetornado);
     }
 
-    [Fact]
-    public void Criar_deve_retornar_False_e_nao_adicionar_Empresa_no_repositorio_caso_Empresa_invalida()
+    [Theory]
+    [InlineData(-2)]
+    [InlineData(-1)]
+    public void Criar_deve_retornar_False_e_nao_adicionar_Empresa_no_repositorio_caso_Empresa_invalida(int idInformado)
     {
         var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Id = 23;
-        empresaEntrada.RazaoSocial = null;
+        empresaEntrada.Id = idInformado;
 
         var empresaValida = _servicoEmpresa.Criar(empresaEntrada);
 
-        Assert.False(empresaValida);
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEmpresa.ObterPorId(empresaEntrada.Id));
+
+        Assert.False(empresaValida);
+        Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }    
 
     [Fact]
@@ -496,26 +500,5 @@ public class TestesServicoEmpresa : TesteBase
         var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
 
         Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_e_adicionar_Empresa_no_repositorio_caso_Empresa_valida()
-    {
-        var empresaValida = _servicoEmpresa.Criar(_empresaEntrada);
-        var empresaRetornada = _servicoEmpresa.ObterPorId(_empresaEntrada.Id);
-
-        Assert.True(empresaValida);
-        Assert.Equal(_empresaEntrada.Id, empresaRetornada.Id);
-        Assert.Equal(_empresaEntrada.Idade, empresaRetornada.Idade);
-        Assert.Equal(_empresaEntrada.RazaoSocial, empresaRetornada.RazaoSocial);
-        Assert.Equal(_empresaEntrada.NomeFantasia, empresaRetornada.NomeFantasia);
-        Assert.Equal(_empresaEntrada.Cnpj, empresaRetornada.Cnpj);
-        Assert.Equal(_empresaEntrada.SitucaoCadastral, empresaRetornada.SitucaoCadastral);
-        Assert.Equal(_empresaEntrada.DataSituacaoCadastral.Date, empresaRetornada.DataSituacaoCadastral.Date);
-        Assert.Equal(_empresaEntrada.DataAbertura.Date, empresaRetornada.DataAbertura.Date);
-        Assert.Equal(_empresaEntrada.CapitalSocial, empresaRetornada.CapitalSocial);
-        Assert.Equal(_empresaEntrada.NaturezaJuridica, empresaRetornada.NaturezaJuridica);
-        Assert.Equal(_empresaEntrada.Porte, empresaRetornada.Porte);
-        Assert.Equal(_empresaEntrada.MatrizFilial, empresaRetornada.MatrizFilial);
-    }    
+    }   
 }

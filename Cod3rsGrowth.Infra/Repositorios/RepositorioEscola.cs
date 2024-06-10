@@ -10,7 +10,7 @@ public class RepositorioEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public void Criar(Escola escolaCriada)
+    public bool Criar(Escola escolaCriada)
     {
         throw new NotImplementedException();
     }

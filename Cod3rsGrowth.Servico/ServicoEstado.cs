@@ -17,7 +17,7 @@ public class ServicoEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public void Criar(Estado estadoCriado)
+    public bool Criar(Estado estadoCriado)
     {
         throw new NotImplementedException();
     }

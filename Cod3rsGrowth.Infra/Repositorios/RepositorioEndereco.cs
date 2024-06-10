@@ -10,7 +10,7 @@ public class RepositorioEndereco : IRepositorioEndereco
         throw new NotImplementedException();
     }
 
-    public void Criar(Endereco enderecoCriado)
+    public bool Criar(Endereco enderecoCriado)
     {
         throw new NotImplementedException();
     }
