@@ -413,12 +413,12 @@ public class TestesServicoEscola : TesteBase
     }
     
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Escola_com_CategoriaAdministrativa_valida(int categoriaAdministrativaInformada)
+    [InlineData(CategoriaAdministrativaEnums.Estadual)]
+    [InlineData(CategoriaAdministrativaEnums.Federal)]
+    public void Criar_deve_retornar_True_quando_informado_Escola_com_CategoriaAdministrativa_valida(CategoriaAdministrativaEnums categoriaAdministrativaInformada)
     {
         var EscolaEntrada = _escolaEntrada;
-        EscolaEntrada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)categoriaAdministrativaInformada;
+        EscolaEntrada.CategoriaAdministrativa = categoriaAdministrativaInformada;
 
         var ResultadoRetornado = _servicoEscola.Criar(EscolaEntrada);
 
@@ -426,12 +426,12 @@ public class TestesServicoEscola : TesteBase
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Escola_com_OrganizacaoAcademica_valida(int organizacaoAcademicaInformada)
+    [InlineData(OrganizacaoAcademicaEnums.CentroUniversitario)]
+    [InlineData(OrganizacaoAcademicaEnums.Faculdade)]
+    public void Criar_deve_retornar_True_quando_informado_Escola_com_OrganizacaoAcademica_valida(OrganizacaoAcademicaEnums organizacaoAcademicaInformada)
     {
         var EscolaEntrada = _escolaEntrada;
-        EscolaEntrada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)organizacaoAcademicaInformada;
+        EscolaEntrada.OrganizacaoAcademica = organizacaoAcademicaInformada;
 
         var ResultadoRetornado = _servicoEscola.Criar(EscolaEntrada);
 

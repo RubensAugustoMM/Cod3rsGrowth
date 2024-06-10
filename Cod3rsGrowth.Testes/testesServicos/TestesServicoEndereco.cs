@@ -31,6 +31,7 @@ public class TestesServicoEndereco : TesteBase
     {
         _servicoEndereco = _serviceProvider.GetService<ServicoEndereco>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEndereco!");
         _tabelas = TabelaSingleton.Instance;
+        _tabelas.Estados.Value.Add(_estadoEntrada);
     }
 
     [Fact]

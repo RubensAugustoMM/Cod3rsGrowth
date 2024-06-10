@@ -9,6 +9,12 @@ public class TestesServicoEstado : TesteBase
 {
     private readonly ServicoEstado _servicoEstado;
     private readonly TabelaSingleton _tabelas;
+    private readonly Estado _estadoEntrada = new()
+    {
+        Id = 0,
+        Nome = "Goias",
+        Sigla = "GO"
+    };
     public TestesServicoEstado()
     {
         _servicoEstado = _serviceProvider.GetService<ServicoEstado>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEstado!");
@@ -118,5 +124,105 @@ public class TestesServicoEstado : TesteBase
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
         Assert.Equal(ValorEsperado.Nome, ValorRetornado.Nome);
         Assert.Equal(ValorEsperado.Sigla, ValorRetornado.Sigla);
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(-2)]
+    public void Criar_deve_retornar_False_quando_informado_Estado_com_Id_negativo(int idInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Id = idInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.False(EstadoValido);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("    ")]
+    public void Criar_deve_retornar_False_quando_informado_Estado_com_Nome_invalido(string nomeInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Nome = nomeInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.False(EstadoValido);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("    ")]
+    [InlineData("goa")]
+    public void Criar_deve_retornar_False_quando_informado_Estado_com_Sigla_invalida(string siglaInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Sigla = siglaInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.False(EstadoValido);
+    }
+
+    [Fact]
+    public void Criar_deve_retornar_False_quando_informado_Estado_com_ListaEnderecos_null()
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.ListaEnderecos = null;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.False(EstadoValido);
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void Criar_deve_retornar_True_quando_informado_Estado_com_Id_positivo(int idInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Id = idInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.True(EstadoValido);
+    }
+
+    [Theory]
+    [InlineData("Goias")]
+    [InlineData("Mato Grosso")]
+    public void Criar_deve_retornar_True_quando_informado_Estado_com_Nome_valido(string nomeInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Nome = nomeInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.True(EstadoValido);
+    }
+
+    [Theory]
+    [InlineData("RJ")]
+    [InlineData("SP")]
+    public void Criar_deve_retornar_True_quando_informado_Estado_com_Sigla_valida(string siglaInformado)
+    {
+        var EstadoEntrada = _estadoEntrada;
+        EstadoEntrada.Sigla = siglaInformado;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.True(EstadoValido);
+    }
+
+    [Fact]
+    public void Criar_deve_retornar_True_quando_informado_Estado_com_ListaEnderecos_Existente()
+    {
+        var EstadoEntrada = _estadoEntrada;
+
+        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+
+        Assert.True(EstadoValido);
     }
 }

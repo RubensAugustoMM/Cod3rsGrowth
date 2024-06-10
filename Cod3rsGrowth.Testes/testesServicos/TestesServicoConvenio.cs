@@ -329,8 +329,8 @@ public class TestesServicoConvenio : TesteBase
     }     
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
+    [InlineData(4)]
+    [InlineData(5)]
     public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_referente_a_Empresa_existente(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
