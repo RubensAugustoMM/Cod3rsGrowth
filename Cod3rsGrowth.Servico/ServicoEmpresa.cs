@@ -23,16 +23,8 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        try
-        {
-            _validadorEmpresa.ValidateAndThrow(empresaCriada);
-            _repositorioEmpresa.Criar(empresaCriada);
-        }
-        catch(Exception excecao)
-        {
-            Console.WriteLine(excecao.GetType().FullName);
-            Console.WriteLine(excecao.Message);
-        }
+        _validadorEmpresa.ValidateAndThrow(empresaCriada);
+        _repositorioEmpresa.Criar(empresaCriada);
     }
 
     public void Deletar(int Id)

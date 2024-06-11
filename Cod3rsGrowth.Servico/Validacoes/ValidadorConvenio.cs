@@ -50,7 +50,7 @@ public class ValidadorConvenio: AbstractValidator<Convenio>
                     .GreaterThanOrEqualTo(0)
                     .WithMessage("{PropertyName} deve ser maior ou igual a zero!")
                     .Must(VerificaSeExisteEmpresa)
-                    .WithMessage("{PropertyName} deve ser referente a uma escola existente!");
+                    .WithMessage("{PropertyName} deve ser referente a uma empresa existente!");
     }
 
     private bool VerificarSeExisteEscola(int idEscola)

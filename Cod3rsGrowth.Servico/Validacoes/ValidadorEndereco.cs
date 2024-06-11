@@ -12,16 +12,44 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
     {
         _repositorioEstado = repositorioEstado;
         
-        RuleFor(endereco => endereco.Id).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
-        RuleFor(endereco => endereco.Numero).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
-        RuleFor(endereco => endereco.Cep).NotEmpty().WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
-        RuleFor(endereco => endereco.Cep).Must(VerificaSeCepContemSomenteNumeros).When(endereco => endereco.Cep != null).WithMessage("{propertyName} e formado somente por numeros!");
-        RuleFor(endereco => endereco.Cep.Length).Equal(8).When(endereco => endereco.Cep != null).WithMessage("{PropertyName} tamanho menor ou maior que 8 characteres!");
-        RuleFor(endereco => endereco.Municipio).NotEmpty().WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
-        RuleFor(endereco => endereco.Bairro).NotEmpty().WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
-        RuleFor(endereco => endereco.Rua).NotEmpty().WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
-        RuleFor(endereco => endereco.IdEstado).GreaterThanOrEqualTo(0).WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
-            .Must(VerificaSeExisteEstado).WithMessage("{PropertyName} deve ser referente a um estado existente!");
+        RuleFor(endereco => endereco.Id)
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
+        
+        RuleFor(endereco => endereco.Numero)
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
+        
+        RuleFor(endereco => endereco.Cep)
+            .NotEmpty()
+            .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
+        
+        RuleFor(endereco => endereco.Cep)
+            .Must(VerificaSeCepContemSomenteNumeros)
+            .When(endereco => endereco.Cep != null)
+            .WithMessage("{propertyName} e formado somente por numeros!");
+        
+        RuleFor(endereco => endereco.Cep.Length)
+            .Equal(8).When(endereco => endereco.Cep != null)
+            .WithMessage("{PropertyName} tamanho menor ou maior que 8 characteres!");
+        
+        RuleFor(endereco => endereco.Municipio)
+            .NotEmpty()
+            .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
+        
+        RuleFor(endereco => endereco.Bairro)
+            .NotEmpty()
+            .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
+        
+        RuleFor(endereco => endereco.Rua)
+            .NotEmpty()
+            .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
+        
+        RuleFor(endereco => endereco.IdEstado)
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
+            .Must(VerificaSeExisteEstado)
+            .WithMessage("{PropertyName} deve ser referente a um estado existente!");
     }
 
     private bool VerificaSeCepContemSomenteNumeros(string cep)

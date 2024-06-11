@@ -50,16 +50,6 @@ public class TestesServicoConvenio : TesteBase
         Porte = PorteEnums.EmpresaPequenoPorte,
         MatrizFilial = MatrizFilialEnums.Matriz
     };
-    public static TheoryData<DateTime> CasosDataInicioInvalidos = new()
-    {
-        {new DateTime(1500,2,3)},
-        {new DateTime(4000,1,1)}
-    };
-    public static TheoryData<DateTime> CasosDataTerminoInvalidos = new()
-    {
-        {new DateTime(1899,2,3)},
-        {new DateTime(1500,2,3)}
-    };
 
     public TestesServicoConvenio()
     {
@@ -210,7 +200,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(-12)]
     [InlineData(-1)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_Id_invalido(int idInformado)
+    public void Criar_deve_lancar_ValidationException_quando_informado_Convenio_com_Id_invalido(int idInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
@@ -223,7 +213,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(-12)]
     [InlineData(-1)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_NumeroProcesso_Invalido(int numeroProcessoInformado)
+    public void Criar_deve_lancar_ValidationException_quando_informado_Convenio_com_NumeroProcesso_Invalido(int numeroProcessoInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var ValorEsperado = "Numero Processo deve ser maior que zero!";
@@ -237,7 +227,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(null)]
     [InlineData("      ")]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_Objeto_null_ou_com_somente_espacos(string objetoInformado)
+    public void Criar_deve_lancar_ValidationException_quando_informado_Convenio_com_Objeto_null_ou_com_somente_espacos(string objetoInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var ValorEsperado = "Objeto nao pode ter valor nulo ou formado por caracteres de espaco!";
@@ -251,7 +241,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(0)]
     [InlineData(-10_000)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_Valor_invalido(int ValorInformado)
+    public void Criar_deve_lancar_ValidationException_quando_informado_Convenio_com_Valor_invalido(int ValorInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var ValorEsperado = "Valor do convenio deve ser maior que zero!";
@@ -263,10 +253,10 @@ public class TestesServicoConvenio : TesteBase
     }
  
     [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataInicio_anterior_a_1889()
+    public void Criar_develancar_ValidationException_quando_informado_Convenio_com_DataInicio_anterior_a_1889()
     {
         var ConvenioEntrada = _convenioEntrada;
-        var ValorEsperado = "DataInicio deve ser após a proclamacao da republica!";
+        var ValorEsperado = "Data Inicio deve ser após a proclamacao da republica!";
         ConvenioEntrada.DataInicio = new(1888,8,15);
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(ConvenioEntrada));
@@ -275,7 +265,7 @@ public class TestesServicoConvenio : TesteBase
     }
 
     [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataInicio_apos_data_atual()
+    public void Criar_deve_retornar_ValidationException_quando_quando_informado_Convenio_com_DataInicio_apos_data_atual()
     {
         var ConvenioEntrada = _convenioEntrada;
         var ValorEsperado = "Data Inicio deve ser anterior ou igual a data atual!";
@@ -287,11 +277,11 @@ public class TestesServicoConvenio : TesteBase
     }
 
     [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_DataTermino_anterior_a_DataInicio()
+    public void Criar_deve_retornar_ValidationException_quando_informado_Convenio_com_DataTermino_anterior_a_DataInicio()
     {
         var convenioEntrada = _convenioEntrada;
-        var ValorEsperado = "DataTermino deve ser maior que a DataInicio!";
-        convenioEntrada.DataTermino = new DateTime(1500,30,2);
+        var ValorEsperado = "Data Termino deve ser maior que a DataInicio!";
+        convenioEntrada.DataTermino = new DateTime(1500,12,2);
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
 
@@ -300,8 +290,8 @@ public class TestesServicoConvenio : TesteBase
 
     [Theory]
     [InlineData(-1)]
-    [InlineData(6)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEscola_negativo(int idEscolaInformado)
+    [InlineData(-2)]
+    public void Criar_deve_retornar_retornar_ValidationException_quando_informado_Convenio_com_IdEscola_negativo(int idEscolaInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var ValorEsperado = "Id Escola deve ser maior ou igual a zero!";
@@ -315,10 +305,10 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(10)]
     [InlineData(8)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEscola_referente_a_escola_inexistente(int idEscolaInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Convenio_com_IdEscola_referente_a_escola_inexistente(int idEscolaInformado)
     {
         var convenioEntrada = _convenioEntrada;
-        var ValorEsperado = "IdEscola deve ser referente a uma escola existente!";
+        var ValorEsperado = "Id Escola deve ser referente a uma escola existente!";
         convenioEntrada.IdEscola = idEscolaInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
@@ -328,11 +318,11 @@ public class TestesServicoConvenio : TesteBase
 
     [Theory]
     [InlineData(-1)]
-    [InlineData(6)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_negativo(int idEmpresaInformado)
+    [InlineData(-2)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Convenio_com_IdEmpresa_negativo(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
-        var ValorEsperado = "IdEmpresa deve ser maior ou igual a zero!";
+        var ValorEsperado = "Id Empresa deve ser maior ou igual a zero!";
         convenioEntrada.IdEmpresa = idEmpresaInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
@@ -343,10 +333,10 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(4)]
     [InlineData(5)]
-    public void Criar_deve_retornar_False_quando_informado_Convenio_com_IdEmpresa_referente_a_Empresa_existente(int idEmpresaInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Convenio_com_IdEmpresa_referente_a_Empresa_inexistente(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
-        var ValorEsperado = "IdEmpresa deve ser referente a uma escola existente!";
+        var ValorEsperado = "Id Empresa deve ser referente a uma empresa existente!";
         convenioEntrada.IdEmpresa = idEmpresaInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoConvenio.Criar(convenioEntrada));
@@ -357,7 +347,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_Id_valido(int IdInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_Id_valido(int IdInformado)
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Id = IdInformado;
@@ -371,7 +361,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(123)]
     [InlineData(98882)]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_NumeroProcesso_valido(int numeroProcessoInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_NumeroProcesso_valido(int numeroProcessoInformado)
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.NumeroProcesso = numeroProcessoInformado;
@@ -385,7 +375,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData("Objeto")]
     [InlineData("Curso bolo de pote")]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_Objeto_valido(string objetoInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_Objeto_valido(string objetoInformado)
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Objeto = objetoInformado;
@@ -399,7 +389,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(10.99)]
     [InlineData(10_000)]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_Valor_valido(int ValorInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_Valor_valido(int ValorInformado)
     {
         var convenioEntrada = _convenioEntrada;
         convenioEntrada.Valor = ValorInformado;
@@ -411,7 +401,7 @@ public class TestesServicoConvenio : TesteBase
     }
  
     [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_DataInicio_valida()
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_DataInicio_valida()
     {
         var convenioEntrada = _convenioEntrada; 
 
@@ -422,7 +412,7 @@ public class TestesServicoConvenio : TesteBase
     }
 
     [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_DataTermino_valida()
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_DataTermino_valida()
     {
         var convenioEntrada = _convenioEntrada;
 
@@ -435,7 +425,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_IdEscola_valido_e_referente_a_escola_existente(int idEscolaInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_IdEscola_valido_e_referente_a_escola_existente(int idEscolaInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var escolaEntrada = _escolaEntrada;
@@ -452,7 +442,7 @@ public class TestesServicoConvenio : TesteBase
     [Theory]
     [InlineData(1)]
     [InlineData(10)]
-    public void Criar_deve_retornar_True_quando_informado_Convenio_com_IdEmpresa_valido_e_referente_a_Empresa_existente(int idEmpresaInformado)
+    public void Criar_deve_adicionar_Convenio_no_repositorio_quando_informado_Convenio_com_IdEmpresa_valido_e_referente_a_Empresa_existente(int idEmpresaInformado)
     {
         var convenioEntrada = _convenioEntrada;
         var empresaEntrada = _empresaEntrada;

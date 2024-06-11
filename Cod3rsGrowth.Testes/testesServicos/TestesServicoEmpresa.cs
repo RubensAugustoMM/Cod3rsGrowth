@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
+﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
@@ -226,264 +225,369 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Theory]
-    [InlineData(-12)]
+    [InlineData(-2)]
     [InlineData(-1)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_Id_invalido(int idInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Id_invalido(int idInformado)
     {
         var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EmpresaEntrada.Id = idInformado;
 
-        var excecaoObterPorId = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-    /*
 
     [Theory]
-    [InlineData(-12)]
-    [InlineData(2)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_Idade_invalido(int idadeInformada)
+    [InlineData(-2)]
+    [InlineData(-1)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Idade_negativa(int idadeInformada)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Idade = idadeInformada;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Idade deve ser maior ou igual a 0!";
+        EmpresaEntrada.Idade = idadeInformada;
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+    
+    [Theory]
+    [InlineData(10)]
+    [InlineData(100)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Idade_invalida_em_relacao_a_data_inicio(int idadeInformada)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Idade diferente da diferenca da data abertura com a data atual!";
+        EmpresaEntrada.Idade = idadeInformada;
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_RazaoSocial_invalida(string razaoSocialInformada)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_RazaoSocial_invalido(string razaoSocialInformada)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.RazaoSocial = razaoSocialInformada;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Razao Social nao pode ter valor nulo ou formado por caracteres de espaco!";
+        EmpresaEntrada.RazaoSocial = razaoSocialInformada;
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
-
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_NomeFantasia_invalido(string nomeFantasiaInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_NomeFantasia_nulo_ou_vazio(string nomeFantasiaInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.NomeFantasia = nomeFantasiaInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Nome Fantasia nao pode ter valor nulo ou formado por caracteres de espaco!";
+        EmpresaEntrada.NomeFantasia = nomeFantasiaInformado;
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
-
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_nulo_ou_vazio(string cnpjInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Cnpj nao pode ter valor nulo ou formado por caracteres de espaco!";
+        EmpresaEntrada.Cnpj = cnpjInformado;
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
     [InlineData("asdfghjklqwert")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_com_caracteres_nao_numericos(string cnpjInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Cnpj deve ser formado somente por numeros!";
+        EmpresaEntrada.Cnpj = cnpjInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
     [InlineData("1234")]
     [InlineData("123456789123456")]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_Cnpj_invalido(string cnpjInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_com_tamanho_diferente_de_14(string cnpjInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Cnpj = cnpjInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Cnpj Length menor ou maior que 14 characteres!";
+        EmpresaEntrada.Cnpj = cnpjInformado;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-
+    
     [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_DataSituacaoCadastral_invalida()
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_DataSituacaoCadastral_invalida()
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.DataSituacaoCadastral = new DateTime(2000, 12, 03);
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Data Situacao Cadastral deve ser maior que a DataAbertura";
+        EmpresaEntrada.DataSituacaoCadastral = new DateTime(2000, 12, 03);
+        
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
-
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-
-    [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_DataAbertura_invalida()
-    {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.DataAbertura = new DateTime(3000,12, 3);
-        empresaEntrada.DataSituacaoCadastral = new DateTime(3001, 12, 3);
-        empresaEntrada.Idade = DateTime.Now.Date.Year - empresaEntrada.DataAbertura.Date.Year;
-
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
-
-        Assert.False(ResultadoRetornado);
-    }
-
+    
     [Theory]
     [InlineData(0)]
     [InlineData(-300)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_CapitalSocial_invalido(decimal capitalSocialInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_CapitalSocial_invalido(decimal capitalSocialInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.CapitalSocial = capitalSocialInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Capital Social nao pode ser menor ou igual a zero!";
+        EmpresaEntrada.CapitalSocial = capitalSocialInformado;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(-3)]
     [InlineData(30)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_NaturezaJuridica_invalida(int naturezaJuridiaInformada)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_NaturezaJuridica_invalida(int naturezaJuridiaInformada)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.NaturezaJuridica = (NaturezaJuridicaEnums)naturezaJuridiaInformada;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Valor de Natureza Juridica fora do Enum!";
+        EmpresaEntrada.NaturezaJuridica = (NaturezaJuridicaEnums)naturezaJuridiaInformada;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(-3)]
     [InlineData(30)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_Porte_invalido(int porteInformada)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Porte_invalido(int porteInformada)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.Porte = (PorteEnums)porteInformada;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Valor de Porte fora do Enum!";
+        EmpresaEntrada.Porte = (PorteEnums)porteInformada;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(-3)]
     [InlineData(30)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_MatrizFilial_invalida(int matrizFilialInformada)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_MatrizFilial_invalida(int matrizFilialInformada)
     {
-        var empresaEntrada = _empresaEntrada;
-        empresaEntrada.MatrizFilial = (MatrizFilialEnums)matrizFilialInformada;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Valor de Matriz Filial fora do Enum!";
+        EmpresaEntrada.MatrizFilial = (MatrizFilialEnums)matrizFilialInformada;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
-    [InlineData(-3)]
-    [InlineData(5)]
-    public void Criar_deve_retornar_False_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_inexistente(int idEnderecoInformado)
+    [InlineData(-1)]
+    [InlineData(-2)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_negativo(int idEnderecoInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        _empresaEntrada.IdEndereco = idEnderecoInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Id Endereco deve ser um valor maior ou igual a zero!";
+        EmpresaEntrada.IdEndereco = idEnderecoInformado;
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-        Assert.False(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_Id_invalido()
+    [Theory]
+    [InlineData(10)]
+    [InlineData(20)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_inexistente(int idEnderecoInformado)
     {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
+        var EmpresaEntrada = _empresaEntrada;
+        var ValorEsperado = "Id Endereco deve ser referente a uma endereco existente!";
+        EmpresaEntrada.IdEndereco = idEnderecoInformado;
 
-        Assert.True(ResultadoRetornado);
-    }
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Criar(EmpresaEntrada));
 
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_Idade_invalido()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_RazaoSocial_valida()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_NomeFantasia_invalido()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_Cnpj_valido()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_DataSituacaoCadastral_valida()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_DataAbertura_valida()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_CapitalSocial_valido()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_NaturezaJuridica_valida()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_Porte_valido()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
-    }
-
-    [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_MatrizFilial_valida()
-    {
-        var ResultadoRetornado = _servicoEmpresa.Criar(_empresaEntrada);
-
-        Assert.True(ResultadoRetornado);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_Existente(int idEnderecoInformado)
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Id_valido(int idInformado)
     {
-        var empresaEntrada = _empresaEntrada;
-        var enderecoEntrada = _enderecoEntrada;
-        empresaEntrada.IdEndereco = idEnderecoInformado;
-        enderecoEntrada.Id = idEnderecoInformado;
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.Id = idInformado; 
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Fact]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Idade_valido()
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData("Pedro Gomez")]
+    [InlineData("Pedregal")]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_RazaoSocial_valida(string razaoSocialInformada)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.RazaoSocial = razaoSocialInformada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData("Pedro Gomez")]
+    [InlineData("Pedregal")]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_NomeFantasia_valido(string nomeFantasiaInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.NomeFantasia = nomeFantasiaInformado;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData("12345678901234")]
+    [InlineData("09876543210987")]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Cnpj_valido(string cnpjInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.Cnpj = cnpjInformado;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Fact]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_DataSituacaoCadastral_valida()
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Fact]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_DataAbertura_valida()
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Fact]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_CapitalSocial_valido()
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(NaturezaJuridicaEnums.EmpresarioIndividual)]
+    [InlineData(NaturezaJuridicaEnums.MicroempreendedorIndividual)]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_NaturezaJuridica_valida(NaturezaJuridicaEnums naturezaJuridicaInformada)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.NaturezaJuridica = naturezaJuridicaInformada;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(PorteEnums.EmpresaPequenoPorte)]
+    [InlineData(PorteEnums.Microempresa)]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Porte_valido(PorteEnums porteInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.Porte = porteInformado;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(MatrizFilialEnums.Matriz)]
+    [InlineData(MatrizFilialEnums.Filial)]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_MatrizFilial_valida(MatrizFilialEnums matrizFilialInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        EmpresaEntrada.MatrizFilial = matrizFilialInformado;
+        
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
+
+        Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_Existente(int idEnderecoInformado)
+    {
+        var EmpresaEntrada = _empresaEntrada;
+        var EnderecoEntrada = _enderecoEntrada;
+        EmpresaEntrada.IdEndereco = idEnderecoInformado;
+        EnderecoEntrada.Id = idEnderecoInformado;
         _tabelas.Enderecos.Value.Clear();
-        _tabelas.Enderecos.Value.Add(enderecoEntrada);
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
 
-        var ResultadoRetornado = _servicoEmpresa.Criar(empresaEntrada);
+        _servicoEmpresa.Criar(EmpresaEntrada);
+        var ValorRetornado = _tabelas.Empresas.Value.FirstOrDefault(EmpresaEntrada);
 
-        Assert.True(ResultadoRetornado);
-    }   
-    */
+        Assert.NotNull(ValorRetornado);
+    }
 }

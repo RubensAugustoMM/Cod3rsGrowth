@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
@@ -183,25 +183,29 @@ public class TestesServicoEndereco : TesteBase
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_Id_invalido(int idInformado)
+    public void Criar_deve_retornar_ValidationException_repositorio_quando_informado_Endereco_com_Id_negativo(int idInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Id = idInformado;
 
-        var excecaoObterPorId = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-    /*
+    
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
-    public void Criar_deve_retornar_False_quando_informado_Endereco_com_Numero_negativo(int numeroInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Numero_negativo(int numeroInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Numero deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Numero = numeroInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -365,5 +369,4 @@ public class TestesServicoEndereco : TesteBase
 
         Assert.True(EnderecoValido);
     }
-    */
 }
