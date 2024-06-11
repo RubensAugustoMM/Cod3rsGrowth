@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using FluentValidation;
+using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -125,105 +126,124 @@ public class TestesServicoEstado : TesteBase
         Assert.Equal(ValorEsperado.Nome, ValorRetornado.Nome);
         Assert.Equal(ValorEsperado.Sigla, ValorRetornado.Sigla);
     }
-    /*
+
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
-    public void Criar_deve_retornar_False_quando_informado_Estado_com_Id_negativo(int idInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Id_negativo(int idInformado)
     {
         var EstadoEntrada = _estadoEntrada;
+        var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EstadoEntrada.Id = idInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.False(EstadoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("    ")]
-    public void Criar_deve_retornar_False_quando_informado_Estado_com_Nome_invalido(string nomeInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Nome_vazio(string nomeInformado)
     {
         var EstadoEntrada = _estadoEntrada;
+        var ValorEsperado = "Nome nao pode ter valor nulo ou formado por caracteres de espaco!";
         EstadoEntrada.Nome = nomeInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.False(EstadoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
     }
 
     [Theory]
     [InlineData(null)]
-    [InlineData("    ")]
-    [InlineData("goa")]
-    public void Criar_deve_retornar_False_quando_informado_Estado_com_Sigla_invalida(string siglaInformado)
+    [InlineData("  ")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Sigla_vazia(string siglaInformado)
     {
         var EstadoEntrada = _estadoEntrada;
+        var ValorEsperado = "Sigla nao pode ter valor nulo ou formado por caracteres de espaco!";
         EstadoEntrada.Sigla = siglaInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.False(EstadoValido);
+        Assert.Contains(ValorEsperado, excecao.Errors.First().ErrorMessage );
     }
 
-    [Fact]
-    public void Criar_deve_retornar_False_quando_informado_Estado_com_ListaEnderecos_null()
+    [Theory]
+    [InlineData("goa")]
+    [InlineData("SPA")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Sigla_com_tamanho_diferente_que_2(string siglaInformado)
     {
         var EstadoEntrada = _estadoEntrada;
+        var ValorEsperado = "Sigla Length menor ou maior que 2 characteres!";
+        EstadoEntrada.Sigla = siglaInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+    }
+    [Fact]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_ListaEnderecos_null()
+    {
+        var EstadoEntrada = _estadoEntrada;
+        var ValorEsperado = "Lista Enderecos nao pode ser nulo!";
         EstadoEntrada.ListaEnderecos = null;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.False(EstadoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Estado_com_Id_positivo(int idInformado)
+    public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Id_positivo(int idInformado)
     {
         var EstadoEntrada = _estadoEntrada;
         EstadoEntrada.Id = idInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        _servicoEstado.Criar(EstadoEntrada);
+        var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(EstadoEntrada);
 
-        Assert.True(EstadoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("Goias")]
     [InlineData("Mato Grosso")]
-    public void Criar_deve_retornar_True_quando_informado_Estado_com_Nome_valido(string nomeInformado)
+    public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Nome_valido(string nomeInformado)
     {
         var EstadoEntrada = _estadoEntrada;
         EstadoEntrada.Nome = nomeInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        _servicoEstado.Criar(EstadoEntrada);
+        var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(EstadoEntrada);
 
-        Assert.True(EstadoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("RJ")]
     [InlineData("SP")]
-    public void Criar_deve_retornar_True_quando_informado_Estado_com_Sigla_valida(string siglaInformado)
+    public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Sigla_valida(string siglaInformado)
     {
         var EstadoEntrada = _estadoEntrada;
         EstadoEntrada.Sigla = siglaInformado;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        _servicoEstado.Criar(EstadoEntrada);
+        var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(EstadoEntrada);
 
-        Assert.True(EstadoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Fact]
-    public void Criar_deve_retornar_True_quando_informado_Estado_com_ListaEnderecos_Existente()
+    public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_ListaEnderecos_Existente()
     {
         var EstadoEntrada = _estadoEntrada;
 
-        var EstadoValido =  _servicoEstado.Criar(EstadoEntrada);
+        _servicoEstado.Criar(EstadoEntrada);
+        var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(EstadoEntrada);
 
-        Assert.True(EstadoValido);
+        Assert.NotNull(ValorRetornado);
     }
-    */
 }

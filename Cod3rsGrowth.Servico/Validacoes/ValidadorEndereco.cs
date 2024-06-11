@@ -25,13 +25,13 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
             .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
         
         RuleFor(endereco => endereco.Cep)
-            .Must(VerificaSeCepContemSomenteNumeros)
+            .Must(VerificaSeContemSomenteNumeros)
             .When(endereco => endereco.Cep != null)
-            .WithMessage("{propertyName} e formado somente por numeros!");
+            .WithMessage("{PropertyName} e formado somente por numeros!");
         
         RuleFor(endereco => endereco.Cep.Length)
             .Equal(8).When(endereco => endereco.Cep != null)
-            .WithMessage("{PropertyName} tamanho menor ou maior que 8 characteres!");
+            .WithMessage("{PropertyName} menor ou maior que 8 characteres!");
         
         RuleFor(endereco => endereco.Municipio)
             .NotEmpty()
@@ -52,20 +52,24 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
             .WithMessage("{PropertyName} deve ser referente a um estado existente!");
     }
 
-    private bool VerificaSeCepContemSomenteNumeros(string cep)
+   private bool VerificaSeExisteEstado(int idEstado)
     {
-        foreach(var c in cep)
+        var listaEstado = _repositorioEstado.ObterTodos();
+
+        if (listaEstado.FirstOrDefault(estado => estado.Id == idEstado) == null)
+            return false;
+
+        return true;
+    }
+
+    private bool VerificaSeContemSomenteNumeros(string stringEntrada)
+    {
+        foreach(var c in stringEntrada)
         {
             if (!(c >= '0' && c <= '9'))
                 return false;
         }
 
         return true;
-    }
-
-    private bool VerificaSeExisteEstado(int idEstado)
-    {
-        var ListaEstados = _repositorioEstado.ObterTodos();
-        return ListaEstados.Exists(estado => estado.Id == idEstado); 
     }
 }

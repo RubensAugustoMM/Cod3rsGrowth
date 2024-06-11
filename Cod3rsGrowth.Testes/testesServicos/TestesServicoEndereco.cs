@@ -183,7 +183,7 @@ public class TestesServicoEndereco : TesteBase
     [Theory]
     [InlineData(-1)]
     [InlineData(-2)]
-    public void Criar_deve_retornar_ValidationException_repositorio_quando_informado_Endereco_com_Id_negativo(int idInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Id_negativo(int idInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
@@ -211,153 +211,203 @@ public class TestesServicoEndereco : TesteBase
     [Theory]
     [InlineData(null)]
     [InlineData("         ")]
-    [InlineData("4340089819")]
-    [InlineData("123")]
-    [InlineData("asdfghjk")]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_Cep_invalido(string cepInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_vazio(string cepInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Cep nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Cep = cepInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("4340089819")]
+    [InlineData("123")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_com_tamanho_diferente_que_8(string cepInformado)
+    {
+        var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Cep Length menor ou maior que 8 characteres!";
+        EnderecoEntrada.Cep = cepInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("asdfghjk")]
+    [InlineData("1234hvjo")]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_contendo_letras_ou_outros_simbolos(string cepInformado)
+    {
+        var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Cep e formado somente por numeros!";
+        EnderecoEntrada.Cep = cepInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("         ")]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_Municipio_invalido(string municipioInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Municipio_vazio(string municipioInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Municipio nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Municipio = municipioInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("         ")]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_Bairro_invalido(string bairroInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Bairro_vazio(string bairroInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Bairro nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Bairro = bairroInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("         ")]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_Rua_invalida(string ruaInformado)
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Rua_invalida(string ruaInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Rua nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Rua = ruaInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(-1)]
-    [InlineData(2)]
-    public void Criar_deve_retornar_False_repositorio_quando_informado_Endereco_com_IdEstado_invalido_ou_inexistente(int idEstadoInformado)
+    [InlineData(-2)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_negativo(int idEstadoInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Id Estado deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.IdEstado = idEstadoInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
-        Assert.False(EnderecoValido);
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
+    [InlineData(4)]
+    [InlineData(5)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_inexistente(int idEstadoInformado)
+    {
+        var EnderecoEntrada = _enderecoEntrada;
+        var ValorEsperado = "Id Estado deve ser referente a um estado existente!";
+        EnderecoEntrada.IdEstado = idEstadoInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
+
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_Id_valido(int idInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Id_positivo(int idInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Id = idInformado;
+        
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
-
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_quando_informado_Endereco_com_Numero_positivo(int numeroInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Numero_positivo(int numeroInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Numero = numeroInformado;
+        
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
-
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("87654321")]
     [InlineData("12345678")]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_Cep_valido(string cepInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Cep_valido(string cepInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Cep = cepInformado;
+        
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
-
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("Goiania")]
     [InlineData("Rodrigo ferreira")]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_Municipio_valido(string municipioInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Municipio_valido(string municipioInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Municipio = municipioInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("Itatiaia")]
     [InlineData("Asa Norte")]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_Bairro_valido(string bairroInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Bairro_valido(string bairroInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Bairro = bairroInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData("Avenida Perimetral Norte")]
     [InlineData("Rua vv8")]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_Rua_valida(string ruaInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Rua_valida(string ruaInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         EnderecoEntrada.Rua = ruaInformado;
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public void Criar_deve_retornar_True_repositorio_quando_informado_Endereco_com_IdEstado_valido_e_existente(int idEstadoInformado)
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_IdEstado_valido_e_existente(int idEstadoInformado)
     {
         var EnderecoEntrada = _enderecoEntrada;
         var EstadoEntrada = _estadoEntrada; 
@@ -365,8 +415,9 @@ public class TestesServicoEndereco : TesteBase
         EstadoEntrada.Id = idEstadoInformado;
         _tabelas.Estados.Value.Add(EstadoEntrada);
 
-        var EnderecoValido =  _servicoEndereco.Criar(EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
+        var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
-        Assert.True(EnderecoValido);
+        Assert.NotNull(ValorRetornado);
     }
 }
