@@ -1,15 +1,19 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
 public class ServicoEmpresa : IRepositorioEmpresa
 {
     private readonly IRepositorioEmpresa _repositorioEmpresa;
-
-    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa)
+    private readonly ValidadorEmpresa _validadorEmpresa;
+    
+    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa,ValidadorEmpresa validadorEmpresa)
     {
-        _repositorioEmpresa = repositorioEmpresa; 
+        _repositorioEmpresa = repositorioEmpresa;
+        _validadorEmpresa = validadorEmpresa;
     }
 
     public void Atualizar(Empresa empresaAtualizada)
@@ -19,7 +23,8 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        throw new NotImplementedException();
+        _validadorEmpresa.ValidateAndThrow(empresaCriada);
+        _repositorioEmpresa.Criar(empresaCriada);
     }
 
     public void Deletar(int Id)

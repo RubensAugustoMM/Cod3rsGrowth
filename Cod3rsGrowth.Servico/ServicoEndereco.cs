@@ -1,15 +1,19 @@
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
 public class ServicoEndereco : IRepositorioEndereco
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
+    private readonly ValidadorEndereco _validadorEndereco;
 
-    public ServicoEndereco(IRepositorioEndereco repositorioEndereco)
+    public ServicoEndereco(IRepositorioEndereco repositorioEndereco, ValidadorEndereco validadorEndereco)
     {
-        _repositorioEndereco = repositorioEndereco; 
+        _repositorioEndereco = repositorioEndereco;
+        _validadorEndereco = validadorEndereco;
     }
 
     public void Atualizar(Endereco endrecoAtualizado)
@@ -19,7 +23,8 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public void Criar(Endereco enderecoCriado)
     {
-        throw new NotImplementedException();
+        _validadorEndereco.ValidateAndThrow(enderecoCriado);
+        _repositorioEndereco.Criar(enderecoCriado);
     }
 
     public void Deletar(int Id)

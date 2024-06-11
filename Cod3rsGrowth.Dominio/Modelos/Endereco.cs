@@ -12,6 +12,4 @@ public class Endereco
     public string Rua { get; set; }
     public string? Complemento { get; set; }
     public int IdEstado { get; set; }
-    public List<Escola> ListaEscolas { get; set; } = new();
-    public List<Empresa> ListaEmpresas { get; set; } = new();
 }

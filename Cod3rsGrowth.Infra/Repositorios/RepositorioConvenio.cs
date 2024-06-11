@@ -15,7 +15,7 @@ public class RepositorioConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public void Deletar(int Id) 
+    public void Deletar(int Id)
     {
         throw new NotImplementedException();
     }

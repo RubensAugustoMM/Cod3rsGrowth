@@ -22,7 +22,6 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         empresaExistente.NaturezaJuridica = empresaAtualizada.NaturezaJuridica;
         empresaExistente.Porte = empresaAtualizada.Porte;
         empresaExistente.MatrizFilial = empresaAtualizada.MatrizFilial;
-        empresaExistente.ListaConvenios = empresaAtualizada.ListaConvenios;
     }
 
     public void Criar(Empresa empresaCriada)

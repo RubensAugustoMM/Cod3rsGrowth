@@ -1,15 +1,20 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using System.Reflection.Metadata;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Servico.Validacoes;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Servico;
 
 public class ServicoEscola : IRepositorioEscola
 {
     private readonly IRepositorioEscola _repositorioEscola;
+    private readonly ValidadorEscola _validadorEscola;
 
-    public ServicoEscola(IRepositorioEscola repositorioEscola)
+    public ServicoEscola(IRepositorioEscola repositorioEscola, ValidadorEscola validadorEscola)
     {
         _repositorioEscola = repositorioEscola;
+        _validadorEscola = validadorEscola;
     }
 
     public void Atualizar(Escola escolaAtualizada)
@@ -19,7 +24,8 @@ public class ServicoEscola : IRepositorioEscola
 
     public void Criar(Escola escolaCriada)
     {
-        throw new NotImplementedException();
+        _validadorEscola.ValidateAndThrow(escolaCriada);
+        _repositorioEscola.Criar(escolaCriada);
     }
 
     public void Deletar(int Id)
