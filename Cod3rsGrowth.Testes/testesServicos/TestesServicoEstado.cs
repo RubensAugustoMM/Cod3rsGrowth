@@ -9,22 +9,33 @@ namespace Cod3rsGrowth.Testes;
 public class TestesServicoEstado : TesteBase
 {
     private readonly ServicoEstado _servicoEstado;
-    private readonly TabelaSingleton _tabelas;
-    private readonly Estado _estadoEntrada = new()
+
+    private void ReiniciaRepositoriosDeTeste()
     {
-        Id = 0,
-        Nome = "Goias",
-        Sigla = "GO"
-    };
+        _tabelas.Estados.Value.Clear();
+    }
+
+    private Estado CriaNovoEstadoDeTeste()
+    {
+        Estado NovoEstado = new()
+        {
+            Id = 0,
+            Nome = "Goias",
+            Sigla = "GO"
+        };
+
+        return NovoEstado;
+    }
+
     public TestesServicoEstado()
     {
-        _servicoEstado = _serviceProvider.GetService<ServicoEstado>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEstado!");
-        _tabelas = TabelaSingleton.Instance;
+        _servicoEstado = _serviceProvider.GetService<ServicoEstado>() ?? throw new Exception("Nome _serviceProvider retornou null apos nao encontrar ServicoEstado!");
     }
 
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Estado()
     {
+        ReiniciaRepositoriosDeTeste();
         List<Estado> ValorEsperado = new()
         {
             new Estado()
@@ -34,7 +45,6 @@ public class TestesServicoEstado : TesteBase
                 Sigla = "GO"
             }
        };
-        _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ValorEsperado);
 
         var ValorRetornado = _servicoEstado.ObterTodos();
@@ -45,6 +55,7 @@ public class TestesServicoEstado : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Estados()
     {
+        ReiniciaRepositoriosDeTeste();
         List<Estado> ValorEsperado = new()
         {
             new Estado()
@@ -60,7 +71,6 @@ public class TestesServicoEstado : TesteBase
                 Sigla = "RJ"
             }
        };
-        _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ValorEsperado);
 
         var ValorRetornado = _servicoEstado.ObterTodos();
@@ -73,6 +83,7 @@ public class TestesServicoEstado : TesteBase
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
+        ReiniciaRepositoriosDeTeste();
         List<Estado> ListaDadosTeste = new()
         {
             new Estado()
@@ -88,7 +99,6 @@ public class TestesServicoEstado : TesteBase
                 Sigla = "RJ"
             }
        };
-        _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ListaDadosTeste);
 
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEstado.ObterPorId(idInformado));
@@ -101,25 +111,25 @@ public class TestesServicoEstado : TesteBase
     [InlineData(1)]
     public void ObterPorId_deve_retornar_Estado_existente_quando_informado_id_valido(int idInformado)
     {
+        ReiniciaRepositoriosDeTeste();
         List<Estado> ListaDadosTeste = new()
         {
             new Estado()
             {
-                Id = 0,
+                Id = idInformado,
                 Nome = "Goias",
                 Sigla = "GO"
             },
             new Estado()
             {
-                Id = 1,
+                Id = 2,
                 Nome = "Rio de Janeiro",
                 Sigla = "RJ"
             }
        };
-        _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.AddRange(ListaDadosTeste);
 
-        var ValorEsperado = ListaDadosTeste[idInformado];
+        var ValorEsperado = ListaDadosTeste.FirstOrDefault(estado => estado.Id == idInformado);
         var ValorRetornado = _servicoEstado.ObterPorId(idInformado);
 
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
@@ -132,13 +142,14 @@ public class TestesServicoEstado : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Id_negativo(int idInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EstadoEntrada.Id = idInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -146,13 +157,14 @@ public class TestesServicoEstado : TesteBase
     [InlineData("    ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Nome_vazio(string nomeInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         var ValorEsperado = "Nome nao pode ter valor nulo ou formado por caracteres de espaco!";
         EstadoEntrada.Nome = nomeInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -160,13 +172,14 @@ public class TestesServicoEstado : TesteBase
     [InlineData("  ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Sigla_vazia(string siglaInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         var ValorEsperado = "Sigla nao pode ter valor nulo ou formado por caracteres de espaco!";
         EstadoEntrada.Sigla = siglaInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.Contains(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Contains(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -174,24 +187,26 @@ public class TestesServicoEstado : TesteBase
     [InlineData("SPA")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_Sigla_com_tamanho_diferente_que_2(string siglaInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         var ValorEsperado = "Sigla Length menor ou maior que 2 characteres!";
         EstadoEntrada.Sigla = siglaInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
     [Fact]
     public void Criar_deve_retornar_ValidationException_quando_informado_Estado_com_ListaEnderecos_null()
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         var ValorEsperado = "Lista Enderecos nao pode ser nulo!";
         EstadoEntrada.ListaEnderecos = null;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Criar(EstadoEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -199,7 +214,8 @@ public class TestesServicoEstado : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Id_positivo(int idInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         EstadoEntrada.Id = idInformado;
 
         _servicoEstado.Criar(EstadoEntrada);
@@ -213,7 +229,8 @@ public class TestesServicoEstado : TesteBase
     [InlineData("Mato Grosso")]
     public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Nome_valido(string nomeInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         EstadoEntrada.Nome = nomeInformado;
 
         _servicoEstado.Criar(EstadoEntrada);
@@ -227,7 +244,8 @@ public class TestesServicoEstado : TesteBase
     [InlineData("SP")]
     public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_Sigla_valida(string siglaInformado)
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
         EstadoEntrada.Sigla = siglaInformado;
 
         _servicoEstado.Criar(EstadoEntrada);
@@ -239,11 +257,60 @@ public class TestesServicoEstado : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Estado_no_repositorio_quando_informado_Estado_com_ListaEnderecos_Existente()
     {
-        var EstadoEntrada = _estadoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
 
         _servicoEstado.Criar(EstadoEntrada);
         var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(EstadoEntrada);
 
         Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(20)]
+    [InlineData(30)]
+    public void Atualizar_deve_retornar_Exception_quando_informado_Estado_com_Id_inexistente(int idInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        EstadoEntrada.Id = idInformado;
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEstado.Atualizar(EstadoEntrada));
+
+        Assert.Equal($"Nenhum Estado com Id {idInformado} existe no contexto atual!\n", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("   ")]
+    public void Atualizar_deve_retornar_ValidationException_quando_informado_Estado_invalido(string nomeInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        _tabelas.Estados.Value.Add(CriaNovoEstadoDeTeste());
+        EstadoEntrada.Nome = nomeInformado;
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Atualizar(EstadoEntrada));
+
+        Assert.Equal("Nome nao pode ter valor nulo ou formado por caracteres de espaco!", excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("Nome1", "Go")]
+    [InlineData("Nome2", "Sp")]
+    public void Atualizar_deve_alterar_parametros_de_Estado_existente_quando_informado_Estado_valido(string nomeInformado, string siglaInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        var EstadoAtualizar = CriaNovoEstadoDeTeste();
+        EstadoEntrada.Nome = nomeInformado;
+        EstadoEntrada.Sigla = siglaInformado;
+        _tabelas.Estados.Value.Add(EstadoAtualizar);
+
+        _servicoEstado.Atualizar(EstadoEntrada);
+        var ValorRetornado = _tabelas.Estados.Value.FirstOrDefault(estado => estado.Id == EstadoEntrada.Id);
+
+        Assert.Equal(nomeInformado, ValorRetornado.Nome);
+        Assert.Equal(siglaInformado, ValorRetornado.Sigla);
     }
 }

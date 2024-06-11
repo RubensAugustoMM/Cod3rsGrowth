@@ -16,9 +16,11 @@ public class ServicoEndereco : IRepositorioEndereco
         _validadorEndereco = validadorEndereco;
     }
 
-    public void Atualizar(Endereco endrecoAtualizado)
+    public void Atualizar(Endereco enderecoAtualizado)
     {
-        throw new NotImplementedException();
+        ObterPorId(enderecoAtualizado.Id);
+        _validadorEndereco.ValidateAndThrow(enderecoAtualizado);
+        _repositorioEndereco.Atualizar(enderecoAtualizado);
     }
 
     public void Criar(Endereco enderecoCriado)

@@ -10,50 +10,65 @@ namespace Cod3rsGrowth.Testes;
 public class TestesServicoEscola : TesteBase
 {
     private readonly ServicoEscola _servicoEscola;
-    private readonly TabelaSingleton _tabelas;
-    private readonly Escola _escolaEntrada = new()
-    {
-
-        Id = 0,
-        StatusAtividade = true,
-        Nome = "Escola Rodrigo",
-        CodigoMec = "12345678",
-        Telefone = "12355645",
-        Email = "rodrigo@gmail.com",
-        InicioAtividade = new DateTime(1234, 12, 3),
-        CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-        OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
-        IdEndereco = 0,
-
-    };
-    private readonly Endereco _enderecoEntrada = new()
-    {
-        Id = 0,
-        Numero = 5,
-        Cep = "72311089",
-        Municipio = "Hidrolandia",
-        Bairro = "Pedregal",
-        Rua = "Rua das Magnolias",
-        Complemento = "Em frente ao bretas",
-        IdEstado = 0
-
-    };
     public static TheoryData<DateTime> CasosInicioAtividadeInvalidos = new()
     {
         {new DateTime(3000,2,3)},
         {new DateTime(4000,1,1)}
     };
 
+    private void ReiniciaRepositoriosDeTeste()
+    {
+        _tabelas.Escolas.Value.Clear();
+        _tabelas.Enderecos.Value.Clear();
+        _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
+    }
+
+    private Escola CriaNovaEscolaTeste()
+    {
+        Escola NovaEscola = new()
+        {
+            Id = 0,
+            StatusAtividade = true,
+            Nome = "Escola Rodrigo",
+            CodigoMec = "12345678",
+            Telefone = "12355645",
+            Email = "rodrigo@gmail.com",
+            InicioAtividade = new DateTime(1234, 12, 3),
+            CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
+            IdEndereco = 1,
+
+        };
+
+        return NovaEscola;
+    }
+
+    private Endereco CriaNovoEnderecoTeste()
+    {
+        Endereco NovoEndereco = new()
+        {
+            Id = 1,
+            Numero = 5,
+            Cep = "72311089",
+            Municipio = "Hidrolandia",
+            Bairro = "Pedregal",
+            Rua = "Rua das Magnolias",
+            Complemento = "Em frente ao bretas",
+            IdEstado = 1
+        };
+
+        return NovoEndereco;
+    }
+
     public TestesServicoEscola()
     {
         _servicoEscola = _serviceProvider.GetService<ServicoEscola>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEscola!");
-        _tabelas = TabelaSingleton.Instance;
-        _tabelas.Enderecos.Value.Add(_enderecoEntrada);
     }
 
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_uma_Escola()
     {
+        ReiniciaRepositoriosDeTeste();
         List<Escola> ValorEsperado = new()
         {
             new Escola()
@@ -69,7 +84,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-        _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
         var ValorRetornado = _servicoEscola.ObterTodos();
@@ -80,6 +94,7 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_duas_Escolas()
     {
+        ReiniciaRepositoriosDeTeste();
         List<Escola> ValorEsperado = new()
         {
             new Escola()
@@ -107,7 +122,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-        _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ValorEsperado);
 
         var ValorRetornado = _servicoEscola.ObterTodos();
@@ -120,6 +134,7 @@ public class TestesServicoEscola : TesteBase
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
+        ReiniciaRepositoriosDeTeste();
         List<Escola> ListaDadosTeste = new()
         {
             new Escola()
@@ -147,7 +162,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-        _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
 
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEscola.ObterPorId(idInformado));
@@ -160,6 +174,7 @@ public class TestesServicoEscola : TesteBase
     [InlineData(1)]
     public void ObterPorId_deve_retornar_Escola_existente_quando_informado_id_valido(int idInformado)
     {
+        ReiniciaRepositoriosDeTeste();
         List<Escola> ListaDadosTeste = new()
         {
             new Escola()
@@ -187,7 +202,6 @@ public class TestesServicoEscola : TesteBase
                 OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
             }
        };
-        _tabelas.Escolas.Value.Clear();
         _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
 
         var ValorEsperado = ListaDadosTeste[idInformado];
@@ -208,13 +222,14 @@ public class TestesServicoEscola : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Id_negativo(int idInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EscolaEntrada.Id = idInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -222,13 +237,14 @@ public class TestesServicoEscola : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Nome_vazio(string nomeInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Nome nao pode ter valor nulo ou formado por caracteres de espaco!";
         EscolaEntrada.Nome = nomeInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -236,13 +252,14 @@ public class TestesServicoEscola : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidatioException_quando_informado_Escola_com_CodigoMec_vazio(string codigoMecInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Codigo Mec nao pode ter valor nulo ou formado por caracteres de espaco!";
         EscolaEntrada.CodigoMec = codigoMecInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
 
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage );
+        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
     [Theory]
@@ -250,7 +267,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("123456789")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_CodigoMec_com_tamanho_diferente_que_8(string codigoMecInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Codigo Mec Length menor ou maior que 8 characteres!";
         EscolaEntrada.CodigoMec = codigoMecInformado;
 
@@ -264,7 +282,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("1234abcd")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_CodigoMec_com_letras_ou_outros_simbolos(string codigoMecInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Codigo Mec e formado somente por numeros!";
         EscolaEntrada.CodigoMec = codigoMecInformado;
 
@@ -272,13 +291,14 @@ public class TestesServicoEscola : TesteBase
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-    
+
     [Theory]
     [InlineData(null)]
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Telefone_vazio(string telefoneInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Telefone nao pode ter valor nulo ou formado por caracteres de espaco!";
         EscolaEntrada.Telefone = telefoneInformado;
 
@@ -292,7 +312,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("31ds45fdgjidj")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Telefone_com_letras_ou_outros_simbolos(string telefoneInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Telefone e formado somente por numeros!";
         EscolaEntrada.Telefone = telefoneInformado;
 
@@ -306,7 +327,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Email_vazio(string emailInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Email nao pode ter valor nulo ou formado por caracteres de espaco!";
         EscolaEntrada.Email = emailInformado;
 
@@ -320,7 +342,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("Helena")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_Email_invalido(string emailInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "A string inserida nao e um Email valido!";
         EscolaEntrada.Email = emailInformado;
 
@@ -333,21 +356,23 @@ public class TestesServicoEscola : TesteBase
     [Theory, MemberData(nameof(CasosInicioAtividadeInvalidos))]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_InicioAtividade_invalido(DateTime inicioAtividadeInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Inicio Atividade nao pode ser maior ou igual a data atual";
-        EscolaEntrada.InicioAtividade = inicioAtividadeInformado; 
+        EscolaEntrada.InicioAtividade = inicioAtividadeInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
-    
+
     [Theory]
     [InlineData(-1)]
     [InlineData(30)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_CategoriaAdministrativa_invalida(int categoriaAdministrativaInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Valor de Categoria Administrativa fora do Enum!";
         EscolaEntrada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)categoriaAdministrativaInformada;
 
@@ -361,7 +386,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData(30)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_OrganizacaoAcademica_invalida(int organizacaoAcademicaInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Valor de Organizacao Academica fora do Enum!";
         EscolaEntrada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)organizacaoAcademicaInformada;
 
@@ -375,7 +401,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_IdEndereco_negativo(int idEnderecoInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Id Endereco deve ser um valor maior ou igual a zero!";
         EscolaEntrada.IdEndereco = idEnderecoInformada;
 
@@ -389,7 +416,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData(20)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_IdEndereco_inexistente(int idEnderecoInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Id Endereco deve ser referente a uma endereco existente!";
         EscolaEntrada.IdEndereco = idEnderecoInformada;
 
@@ -401,12 +429,10 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_ListaConvenios_nula()
     {
-        var EscolaEntrada = _escolaEntrada;
-        var EnderecoEntrada = _enderecoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         var ValorEsperado = "Lista Convenios nao pode ser um valor nulo!";
         EscolaEntrada.ListaConvenios = null;
-        _tabelas.Enderecos.Value.Clear();
-        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
 
@@ -418,7 +444,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_Id_positivo(int idInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Id = idInformado;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -432,7 +459,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("valido")]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_Nome_valido(string nomeInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Nome = nomeInformado;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -446,7 +474,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("12345678")]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_CodigoMec_valido(string nomeInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Nome = nomeInformado;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -460,7 +489,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("1234567899")]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_Telefone_valido(string telefoneInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Telefone = telefoneInformado;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -474,7 +504,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData("Escola@Rodrigo")]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_Email_valido(string emailInformado)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Email = emailInformado;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -486,20 +517,22 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_InicioAtividade_valido()
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
 
         _servicoEscola.Criar(EscolaEntrada);
         var ValorRetornado = _tabelas.Escolas.Value.FirstOrDefault(EscolaEntrada);
 
         Assert.NotNull(ValorRetornado);
     }
-    
+
     [Theory]
     [InlineData(CategoriaAdministrativaEnums.Estadual)]
     [InlineData(CategoriaAdministrativaEnums.Federal)]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_CategoriaAdministrativa_valida(CategoriaAdministrativaEnums categoriaAdministrativaInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.CategoriaAdministrativa = categoriaAdministrativaInformada;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -513,7 +546,8 @@ public class TestesServicoEscola : TesteBase
     [InlineData(OrganizacaoAcademicaEnums.Faculdade)]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_OrganizacaoAcademica_valida(OrganizacaoAcademicaEnums organizacaoAcademicaInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.OrganizacaoAcademica = organizacaoAcademicaInformada;
 
         _servicoEscola.Criar(EscolaEntrada);
@@ -527,8 +561,9 @@ public class TestesServicoEscola : TesteBase
     [InlineData(6)]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_IdEndereco_valido_ou_existente(int idEnderecoInformada)
     {
-        var EscolaEntrada = _escolaEntrada;
-        var EnderecoEntrada = _enderecoEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
         EscolaEntrada.IdEndereco = idEnderecoInformada;
         EnderecoEntrada.Id = idEnderecoInformada;
         _tabelas.Enderecos.Value.Add(EnderecoEntrada);
@@ -542,11 +577,64 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Escola_no_repositorio_quando_informado_Escola_com_ListaConvenios_existente()
     {
-        var EscolaEntrada = _escolaEntrada;
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
 
         _servicoEscola.Criar(EscolaEntrada);
         var ValorRetornado = _tabelas.Escolas.Value.FirstOrDefault(EscolaEntrada);
 
         Assert.NotNull(ValorRetornado);
+    }
+
+    [Theory]
+    [InlineData(20)]
+    [InlineData(30)]
+    public void Atualizar_deve_retornar_Exception_quando_informado_Escola_com_Id_inexistente(int idInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Id = idInformado;
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEscola.Atualizar(EscolaEntrada));
+
+        Assert.Equal($"Nenhuma Escola com Id {idInformado} existe no contexto atual!\n", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("   ")]
+    public void Atualizar_deve_retornar_ValidationException_quando_informado_Escola_invalido(string nomeInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Nome = nomeInformado;
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Atualizar(EscolaEntrada));
+
+        Assert.Equal("Nome nao pode ter valor nulo ou formado por caracteres de espaco!", excecao.Errors.First().ErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("nome1", CategoriaAdministrativaEnums.Estadual, "email@1")]
+    [InlineData("Rodrigos", CategoriaAdministrativaEnums.Federal, "email@2")]
+    public void Atualizar_deve_alterar_parametros_de_Escola_existente_quando_informado_Escola_valida(string nomeInformado, CategoriaAdministrativaEnums categoriaAdministrativaInformado, string emailInformado)
+    {
+        ReiniciaRepositoriosDeTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        var EscolaAtualizar = CriaNovaEscolaTeste();
+        EscolaEntrada.IdEndereco = EnderecoEntrada.Id;
+        EscolaEntrada.Nome = nomeInformado;
+        EscolaEntrada.CategoriaAdministrativa = categoriaAdministrativaInformado;
+        EscolaEntrada.Email = emailInformado;
+        _tabelas.Escolas.Value.Add(EscolaAtualizar);
+
+        _servicoEscola.Atualizar(EscolaEntrada);
+        var ValorRetornado = _tabelas.Escolas.Value.FirstOrDefault(escola => escola.Id == EscolaEntrada.Id);
+
+        Assert.Equal(nomeInformado, ValorRetornado.Nome);
+        Assert.Equal(categoriaAdministrativaInformado, ValorRetornado.CategoriaAdministrativa);
+        Assert.Equal(emailInformado, ValorRetornado.Email);
     }
 }

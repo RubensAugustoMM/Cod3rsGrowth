@@ -18,7 +18,9 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
     public void Atualizar(Empresa empresaAtualizada)
     {
-        throw new NotImplementedException();
+        ObterPorId(empresaAtualizada.Id);
+        _validadorEmpresa.ValidateAndThrow(empresaAtualizada);
+        _repositorioEmpresa.Atualizar(empresaAtualizada);
     }
 
     public void Criar(Empresa empresaCriada)

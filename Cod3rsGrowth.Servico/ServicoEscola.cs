@@ -19,7 +19,9 @@ public class ServicoEscola : IRepositorioEscola
 
     public void Atualizar(Escola escolaAtualizada)
     {
-        throw new NotImplementedException();
+        ObterPorId(escolaAtualizada.Id);
+        _validadorEscola.ValidateAndThrow(escolaAtualizada);
+        _repositorioEscola.Atualizar(escolaAtualizada);
     }
 
     public void Criar(Escola escolaCriada)
