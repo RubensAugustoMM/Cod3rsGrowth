@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace Cod3rsGrowth.Testes;
 
 public class TesteBase : IDisposable

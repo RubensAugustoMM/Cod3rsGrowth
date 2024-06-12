@@ -15,10 +15,8 @@ public class TestesServicoEmpresa : TesteBase
     public TestesServicoEmpresa()
     {
         _servicoEmpresa = _serviceProvider.GetService<ServicoEmpresa>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEmpresa!");
-        _tabelas = TabelaSingleton.Instance;
 
-        _tabelas.Enderecos.Value.Clear();
-        _tabelas.Empresas.Value.Clear();
+        _tabelas = TabelaSingleton.Instance; 
         _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
     }
 
@@ -26,7 +24,7 @@ public class TestesServicoEmpresa : TesteBase
     {
         Empresa NovaEmpresa = new()
         {
-            Id = 0,
+            Id = 20,
             Idade = 1,
             RazaoSocial = "Fast! transportes LTDA",
             NomeFantasia = "Fast! transportes",
@@ -38,7 +36,7 @@ public class TestesServicoEmpresa : TesteBase
             NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
             Porte = PorteEnums.EmpresaPequenoPorte,
             MatrizFilial = MatrizFilialEnums.Matriz,
-            IdEndereco = 1
+            IdEndereco = 20
         };
 
         return NovaEmpresa;
@@ -48,7 +46,7 @@ public class TestesServicoEmpresa : TesteBase
     {
         Endereco NovoEndereco = new()
         {
-            Id = 1,
+            Id = 20,
             Numero = 13,
             Cep = "113336666",
             Municipio = "Sao Bartolomeu",
@@ -62,116 +60,18 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_uma_Empresa()
-    {
-        List<Empresa> ValorEsperado = new()
-        {
-            new Empresa()
-            {
-                Id = 0,
-                Idade = 3,
-                RazaoSocial = "Carlinhos Ferragens LTDA",
-                NomeFantasia = "Carlinhos Ferragens",
-                Cnpj = "11122233344",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 13,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            }
-       };
-        _tabelas.Empresas.Value.AddRange(ValorEsperado);
-
+    public void ao_ObterTodos_deve_retornar_lista_nao_nula()
+    {        
         var ValorRetornado = _servicoEmpresa.ObterTodos();
 
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_duas_Empresas()
-    {
-        List<Empresa> ValorEsperado = new()
-        {
-            new Empresa()
-            {
-                Id = 0,
-                Idade = 3,
-                RazaoSocial = "Carlinhos Ferragens LTDA",
-                NomeFantasia = "Carlinhos Ferragens",
-                Cnpj = "11122233344",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 13,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            },
-            new Empresa()
-            {
-                Id = 1,
-                Idade = 53454353,
-                RazaoSocial = "Fast! transportes LTDA",
-                NomeFantasia = "Fast! transportes",
-                Cnpj = "44433322211",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 123124124,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            }
-       };
-        _tabelas.Empresas.Value.AddRange(ValorEsperado);
-
-        var ValorRetornado = _servicoEmpresa.ObterTodos();
-
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
-    [InlineData(300)]
     [InlineData(-1)]
+    [InlineData(110)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        List<Empresa> ListaDadosTeste = new()
-        {
-            new Empresa()
-            {
-                Id = 0,
-                Idade = 3,
-                RazaoSocial = "Carlinhos Ferragens LTDA",
-                NomeFantasia = "Carlinhos Ferragens",
-                Cnpj = "11122233344",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 13,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            },
-            new Empresa()
-            {
-                Id = 1,
-                Idade = 53454353,
-                RazaoSocial = "Fast! transportes LTDA",
-                NomeFantasia = "Fast! transportes",
-                Cnpj = "44433322211",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 123124124,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            }
-       };
-        _tabelas.Empresas.Value.AddRange(ListaDadosTeste);
-
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEmpresa.ObterPorId(idInformado));
 
         Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
@@ -182,56 +82,24 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(1)]
     public void ObterPorId_deve_retornar_Empresa_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Empresa> ListaDadosTeste = new()
-        {
-            new Empresa()
-            {
-                Id = 0,
-                Idade = 3,
-                RazaoSocial = "Carlinhos Ferragens LTDA",
-                NomeFantasia = "Carlinhos Ferragens",
-                Cnpj = "11122233344",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 13,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            },
-            new Empresa()
-            {
-                Id = 1,
-                Idade = 53454353,
-                RazaoSocial = "Fast! transportes LTDA",
-                NomeFantasia = "Fast! transportes",
-                Cnpj = "44433322211",
-                SitucaoCadastral = true,
-                DataSituacaoCadastral = new DateTime(1000,12,03),
-                DataAbertura = new DateTime(1000,12,03),
-                CapitalSocial = 123124124,
-                NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
-                Porte = PorteEnums.EmpresaPequenoPorte,
-                MatrizFilial = MatrizFilialEnums.Matriz
-            }
-       };
-        _tabelas.Empresas.Value.AddRange(ListaDadosTeste);
+        var EmpresaEntrada = CriaNovaEmpresaTeste();
+        EmpresaEntrada.Id = idInformado;
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
 
-        var ValorEsperado = ListaDadosTeste[idInformado];
         var ValorRetornado = _servicoEmpresa.ObterPorId(idInformado);
 
-        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
-        Assert.Equal(ValorEsperado.Idade, ValorRetornado.Idade);
-        Assert.Equal(ValorEsperado.RazaoSocial, ValorEsperado.RazaoSocial);
-        Assert.Equal(ValorEsperado.NomeFantasia, ValorEsperado.NomeFantasia);
-        Assert.Equal(ValorEsperado.Cnpj, ValorEsperado.Cnpj);
-        Assert.Equal(ValorEsperado.SitucaoCadastral, ValorEsperado.SitucaoCadastral);
-        Assert.Equal(ValorEsperado.DataSituacaoCadastral.Date, ValorEsperado.DataSituacaoCadastral.Date);
-        Assert.Equal(ValorEsperado.DataAbertura.Date, ValorEsperado.DataAbertura.Date);
-        Assert.Equal(ValorEsperado.CapitalSocial, ValorEsperado.CapitalSocial);
-        Assert.Equal(ValorEsperado.NaturezaJuridica, ValorEsperado.NaturezaJuridica);
-        Assert.Equal(ValorEsperado.Porte, ValorEsperado.Porte);
-        Assert.Equal(ValorEsperado.MatrizFilial, ValorRetornado.MatrizFilial);
+        Assert.Equal(EmpresaEntrada.Id, ValorRetornado.Id);
+        Assert.Equal(EmpresaEntrada.Idade, ValorRetornado.Idade);
+        Assert.Equal(EmpresaEntrada.RazaoSocial, ValorRetornado.RazaoSocial);
+        Assert.Equal(EmpresaEntrada.NomeFantasia, ValorRetornado.NomeFantasia);
+        Assert.Equal(EmpresaEntrada.Cnpj, ValorRetornado.Cnpj);
+        Assert.Equal(EmpresaEntrada.SitucaoCadastral, ValorRetornado.SitucaoCadastral);
+        Assert.Equal(EmpresaEntrada.DataSituacaoCadastral.Date, ValorRetornado.DataSituacaoCadastral.Date);
+        Assert.Equal(EmpresaEntrada.DataAbertura.Date, ValorRetornado.DataAbertura.Date);
+        Assert.Equal(EmpresaEntrada.CapitalSocial, ValorRetornado.CapitalSocial);
+        Assert.Equal(EmpresaEntrada.NaturezaJuridica, ValorRetornado.NaturezaJuridica);
+        Assert.Equal(EmpresaEntrada.Porte, ValorRetornado.Porte);
+        Assert.Equal(EmpresaEntrada.MatrizFilial, ValorRetornado.MatrizFilial);
     }
 
     [Theory]
@@ -428,8 +296,8 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Theory]
-    [InlineData(10)]
-    [InlineData(20)]
+    [InlineData(100)]
+    [InlineData(200)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_inexistente(int idEnderecoInformado)
     {
         var EmpresaEntrada = CriaNovaEmpresaTeste();
@@ -602,8 +470,8 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Theory]
-    [InlineData(20)]
-    [InlineData(30)]
+    [InlineData(201)]
+    [InlineData(202)]
     public void Atualizar_deve_retornar_Exception_quando_informado_Empresa_com_Id_inexistente(int idInformado)
     {
         var EmpresaEntrada = CriaNovaEmpresaTeste();

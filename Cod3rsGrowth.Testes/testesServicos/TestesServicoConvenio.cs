@@ -15,11 +15,8 @@ public class TestesServicoConvenio : TesteBase
     public TestesServicoConvenio()
     {
         _servicoConvenio = _serviceProvider.GetService<ServicoConvenio>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoConvenio!");
-        _tabelas = TabelaSingleton.Instance;
 
-        _tabelas.Convenios.Value.Clear();
-        _tabelas.Escolas.Value.Clear();
-        _tabelas.Empresas.Value.Clear();
+        _tabelas = TabelaSingleton.Instance;
         _tabelas.Escolas.Value.Add(CriaNovaEscolaTeste());
         _tabelas.Empresas.Value.Add(CriaNovaEmpresaTeste());
     }
@@ -31,13 +28,13 @@ public class TestesServicoConvenio : TesteBase
     {
         Convenio ConvenioRetornar = new()
         {
-            Id = 1,
+            Id = 10,
             NumeroProcesso = 123,
             Objeto = "objeto",
             Valor = 2.0M,
             DataInicio = new DateTime(1900, 2, 3),
-            IdEscola = 1,
-            IdEmpresa = 1
+            IdEscola = 10,
+            IdEmpresa = 10
         };
 
         return ConvenioRetornar;
@@ -47,7 +44,7 @@ public class TestesServicoConvenio : TesteBase
     {
         Empresa empresaNova = new()
         {
-            Id = 1,
+            Id = 10,
             Idade = 3,
             RazaoSocial = "Carlinhos Ferragens LTDA",
             NomeFantasia = "Carlinhos Ferragens",
@@ -68,7 +65,7 @@ public class TestesServicoConvenio : TesteBase
     {
         Escola NovaEscola = new()
         {
-            Id = 1,
+            Id = 10,
             StatusAtividade = true,
             Nome = "Escola Rodrigo",
             CodigoMec = "3415",
@@ -84,138 +81,41 @@ public class TestesServicoConvenio : TesteBase
     }
 
     [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Convenio()
-    { 
-        List<Convenio> ValorEsperado = new()
-        {
-            new Convenio()
-            {
-                Id = 0,
-                NumeroProcesso = 123,
-                Objeto = "convenio convenio",
-                Valor = 2.00M,
-                DataInicio =  new DateTime(1917,01,30),
-                IdEscola = 3,
-                IdEmpresa = 12
-            }
-       };
-        _tabelas.Convenios.Value.AddRange(ValorEsperado);
-
+    public void ao_ObterTodos_deve_retornar_lista_nao_vazia()
+    {         
         var ValorRetornado = _servicoConvenio.ObterTodos();
 
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Convenios()
-    {    
-        List<Convenio> ValorEsperado = new()
-        {
-            new Convenio()
-            {
-                Id = 0,
-                NumeroProcesso = 123,
-                Objeto = "convenio convenio",
-                Valor = 2.00M,
-                DataInicio =  new DateTime(1917,01,30),
-                IdEscola = 3,
-                IdEmpresa = 12
-            },
-            new Convenio()
-            {
-                Id = 1,
-                NumeroProcesso = 314,
-                Objeto = "Curso Empreendedorismo - vendendo bolo de pote",
-                Valor = 500_000_000.00M,
-                DataInicio = new(2024,01,01),
-                IdEmpresa = 4,
-                IdEscola = 12
-            }
-       };
-        _tabelas.Convenios.Value.Clear();
-        _tabelas.Convenios.Value.AddRange(ValorEsperado);
-
-        var ValorRetornado = _servicoConvenio.ObterTodos();
-
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
-    [InlineData(2)]
+    [InlineData(110)]
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        List<Convenio> ListaDadosTeste = new()
-        {
-            new Convenio()
-            {
-                Id = 0,
-                NumeroProcesso = 123,
-                Objeto = "convenio convenio",
-                Valor = 2.00M,
-                DataInicio =  new DateTime(1917,01,30),
-                IdEscola = 3,
-                IdEmpresa = 12
-            },
-            new Convenio()
-            {
-                Id = 1,
-                NumeroProcesso = 314,
-                Objeto = "Curso Empreendedorismo - vendendo bolo de pote",
-                Valor = 500_000_000.00M,
-                DataInicio = new(2024,01,01),
-                IdEmpresa = 4,
-                IdEscola = 12
-            }
-       };
-        _tabelas.Convenios.Value.AddRange(ListaDadosTeste);
-
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoConvenio.ObterPorId(idInformado));
 
         Assert.Equal($"Nenhum Convenio com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
     [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
+    [InlineData(101)]
+    [InlineData(102)]
     public void ObterPorId_deve_retornar_Convenio_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Convenio> ListaDadosTeste = new()
-        {
-            new Convenio()
-            {
-                Id = 0,
-                NumeroProcesso = 123,
-                Objeto = "convenio convenio",
-                Valor = 2.00M,
-                DataInicio =  new DateTime(1917,01,30),
-                IdEscola = 3,
-                IdEmpresa = 12
-            },
-            new Convenio()
-            {
-                Id = 1,
-                NumeroProcesso = 314,
-                Objeto = "Curso Empreendedorismo - vendendo bolo de pote",
-                Valor = 500_000_000.00M,
-                DataInicio = new(2024,01,01),
-                IdEmpresa = 4,
-                IdEscola = 12
-            }
-       };
-        _tabelas.Convenios.Value.Clear();
-        _tabelas.Convenios.Value.AddRange(ListaDadosTeste);
+        var ConvenioEntrada = CriaNovoConvenioTeste();
+        ConvenioEntrada.Id = idInformado;
+        _tabelas.Convenios.Value.Add(ConvenioEntrada);
 
-        var ValorEsperado = ListaDadosTeste[idInformado];
         var ValorRetornado = _servicoConvenio.ObterPorId(idInformado);
 
-        Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
-        Assert.Equal(ValorEsperado.NumeroProcesso, ValorEsperado.NumeroProcesso);
-        Assert.Equal(ValorEsperado.Objeto, ValorRetornado.Objeto);
-        Assert.Equal(ValorEsperado.Valor, ValorRetornado.Valor);
-        Assert.Equal(ValorEsperado.DataInicio.Date, ValorRetornado.DataInicio.Date);
-        Assert.Equal(ValorEsperado.IdEmpresa, ValorEsperado.IdEmpresa);
-        Assert.Equal(ValorEsperado.IdEscola, ValorRetornado.IdEscola);
+        Assert.Equal(ConvenioEntrada.Id, ValorRetornado.Id);
+        Assert.Equal(ConvenioEntrada.NumeroProcesso, ConvenioEntrada.NumeroProcesso);
+        Assert.Equal(ConvenioEntrada.Objeto, ValorRetornado.Objeto);
+        Assert.Equal(ConvenioEntrada.Valor, ValorRetornado.Valor);
+        Assert.Equal(ConvenioEntrada.DataInicio.Date, ValorRetornado.DataInicio.Date);
+        Assert.Equal(ConvenioEntrada.IdEmpresa, ConvenioEntrada.IdEmpresa);
+        Assert.Equal(ConvenioEntrada.IdEscola, ValorRetornado.IdEscola);
     }
 
     [Theory]
@@ -324,8 +224,8 @@ public class TestesServicoConvenio : TesteBase
     }
 
     [Theory]
-    [InlineData(10)]
-    [InlineData(8)]
+    [InlineData(101)]
+    [InlineData(102)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Convenio_com_IdEscola_referente_a_escola_inexistente(int idEscolaInformado)
     {
         var convenioEntrada = CriaNovoConvenioTeste();

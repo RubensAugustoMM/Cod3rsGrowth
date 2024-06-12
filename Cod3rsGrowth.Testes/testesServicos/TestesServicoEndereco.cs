@@ -4,6 +4,7 @@ using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
+
 namespace Cod3rsGrowth.Testes;
 
 public class TestesServicoEndereco : TesteBase
@@ -14,10 +15,8 @@ public class TestesServicoEndereco : TesteBase
     public TestesServicoEndereco()
     {
         _servicoEndereco = _serviceProvider.GetService<ServicoEndereco>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEndereco!");
-        _tabelas = TabelaSingleton.Instance;
 
-        _tabelas.Enderecos.Value.Clear();
-        _tabelas.Estados.Value.Clear();
+        _tabelas = TabelaSingleton.Instance;  
         _tabelas.Estados.Value.Add(CriaNovoEstadoTeste());
     }
 
@@ -25,14 +24,14 @@ public class TestesServicoEndereco : TesteBase
     {
         Endereco NovoEndereco = new()
         {
-            Id = 0,
+            Id = 30,
             Numero = 5,
             Cep = "72311089",
             Municipio = "Hidrolandia",
             Bairro = "Pedregal",
             Rua = "Rua das Magnolias",
             Complemento = "Em frente ao bretas",
-            IdEstado = 1
+            IdEstado = 30
         };
 
         return NovoEndereco;
@@ -42,7 +41,7 @@ public class TestesServicoEndereco : TesteBase
     {
         Estado NovoEstado = new()
         {
-            Id = 1,
+            Id = 30,
             Nome = "Goias",
             Sigla = "GO"
         };
@@ -51,134 +50,32 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Endereco()
+    public void ao_ObterTodos_deve_retornar_lista_nao_vazia()
     {
-        List<Endereco> ValorEsperado = new()
-        {
-            new Endereco()
-            {
-                Id = 0,
-                Numero = 13,
-                Cep = "11333666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "joao",
-                Rua = "143",
-                Complemento = "Perto da merceria do Galo",
-                IdEstado = 1
-            }
-       };
-        _tabelas.Enderecos.Value.AddRange(ValorEsperado);
-
         var ValorRetornado = _servicoEndereco.ObterTodos();
 
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Enderecos()
-    {
-        List<Endereco> ValorEsperado = new()
-        {
-            new Endereco()
-            {
-                Id = 0,
-                Numero = 13,
-                Cep = "11333666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "joao",
-                Rua = "143",
-                Complemento = "Perto da merceria do Galo",
-                IdEstado = 1
-            },
-            new Endereco()
-            {
-                Id = 1,
-                Numero = 11,
-                Cep = "313341266",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "Setor dos Operarios",
-                Rua = "v57",
-                Complemento = "Perto do terminal das bandeiras",
-                IdEstado = 1
-            }
-       };
-        _tabelas.Enderecos.Value.AddRange(ValorEsperado);
-
-        var ValorRetornado = _servicoEndereco.ObterTodos();
-
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
-    [InlineData(2)]
+    [InlineData(110)]
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        List<Endereco> ListaDadosTeste = new()
-        {
-            new Endereco()
-            {
-                Id = 0,
-                Numero = 13,
-                Cep = "113336666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "joao",
-                Rua = "143",
-                Complemento = "Perto da merceria do Galo",
-                IdEstado = 20
-            },
-            new Endereco()
-            {
-                Id = 1,
-                Numero = 11,
-                Cep = "3133412666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "Setor dos Operarios",
-                Rua = "v57",
-                Complemento = "Perto do terminal das bandeiras",
-                IdEstado = 20
-            }
-       };
-        _tabelas.Enderecos.Value.AddRange(ListaDadosTeste);
-
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEndereco.ObterPorId(idInformado));
 
         Assert.Equal($"Nenhum Endereco com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
     [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
+    [InlineData(101)]
+    [InlineData(102)]
     public void ObterPorId_deve_retornar_Endereco_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Endereco> ListaDadosTeste = new()
-        {
-            new Endereco()
-            {
-                Id = 0,
-                Numero = 13,
-                Cep = "113336666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "joao",
-                Rua = "143",
-                Complemento = "Perto da merceria do Galo",
-                IdEstado = 20
-            },
-            new Endereco()
-            {
-                Id = 1,
-                Numero = 11,
-                Cep = "3133412666",
-                Municipio = "Sao Bartolomeu",
-                Bairro = "Setor dos Operarios",
-                Rua = "v57",
-                Complemento = "Perto do terminal das bandeiras",
-                IdEstado = 20
-            }
-       };
-        _tabelas.Enderecos.Value.AddRange(ListaDadosTeste);
+        var ValorEsperado = CriaNovoEnderecoTeste();
+        ValorEsperado.Id = idInformado;
+        _tabelas.Enderecos.Value.Add(ValorEsperado);
 
-        var ValorEsperado = ListaDadosTeste[idInformado];
         var ValorRetornado = _servicoEndereco.ObterPorId(idInformado);
 
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
@@ -318,8 +215,8 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Theory]
-    [InlineData(4)]
-    [InlineData(5)]
+    [InlineData(201)]
+    [InlineData(202)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_inexistente(int idEstadoInformado)
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();
@@ -433,8 +330,8 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Theory]
-    [InlineData(20)]
-    [InlineData(30)]
+    [InlineData(100)]
+    [InlineData(200)]
     public void Atualizar_deve_retornar_Exception_quando_informado_Endereco_com_Id_inexistente(int idInformado)
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();

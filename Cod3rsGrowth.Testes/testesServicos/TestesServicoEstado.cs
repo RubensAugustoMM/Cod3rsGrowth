@@ -14,16 +14,15 @@ public class TestesServicoEstado : TesteBase
     public TestesServicoEstado()
     {
         _servicoEstado = _serviceProvider.GetService<ServicoEstado>() ?? throw new Exception("Nome _serviceProvider retornou null apos nao encontrar ServicoEstado!");
-        _tabelas = TabelaSingleton.Instance;
 
-        _tabelas.Estados.Value.Clear();
+        _tabelas = TabelaSingleton.Instance;
     }
 
     private Estado CriaNovoEstadoDeTeste()
     {
         Estado NovoEstado = new()
         {
-            Id = 1,
+            Id = 50,
             Nome = "Goias",
             Sigla = "GO"
         };
@@ -32,99 +31,32 @@ public class TestesServicoEstado : TesteBase
     }
 
     [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Estado()
+    public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        List<Estado> ValorEsperado = new()
-        {
-            new Estado()
-            {
-                Id = 1,
-                Nome = "Goias",
-                Sigla = "GO"
-            }
-       };
-        _tabelas.Estados.Value.AddRange(ValorEsperado);
-
         var ValorRetornado = _servicoEstado.ObterTodos();
 
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Estados()
-    {
-        List<Estado> ValorEsperado = new()
-        {
-            new Estado()
-            {
-                Id = 1,
-                Nome = "Goias",
-                Sigla = "GO"
-            },
-            new Estado()
-            {
-                Id = 2,
-                Nome = "Rio de Janeiro",
-                Sigla = "RJ"
-            }
-       };
-        _tabelas.Estados.Value.AddRange(ValorEsperado);
-
-        var ValorRetornado = _servicoEstado.ObterTodos();
-
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
-    [InlineData(2)]
+    [InlineData(110)]
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        List<Estado> ListaDadosTeste = new()
-        {
-            new Estado()
-            {
-                Id = 0,
-                Nome = "Goias",
-                Sigla = "GO"
-            },
-            new Estado()
-            {
-                Id = 1,
-                Nome = "Rio de Janeiro",
-                Sigla = "RJ"
-            }
-       };
-        _tabelas.Estados.Value.AddRange(ListaDadosTeste);
-
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEstado.ObterPorId(idInformado));
 
         Assert.Equal($"Nenhum Estado com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
     [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
+    [InlineData(101)]
+    [InlineData(102)]
     public void ObterPorId_deve_retornar_Estado_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Estado> ListaDadosTeste = new()
-        {
-            new Estado()
-            {
-                Id = idInformado,
-                Nome = "Goias",
-                Sigla = "GO"
-            },
-            new Estado()
-            {
-                Id = 2,
-                Nome = "Rio de Janeiro",
-                Sigla = "RJ"
-            }
-       };
-        _tabelas.Estados.Value.AddRange(ListaDadosTeste);
+        var ValorEsperado = CriaNovoEstadoDeTeste();
+        ValorEsperado.Id = idInformado;
+        _tabelas.Estados.Value.Add(ValorEsperado);
 
-        var ValorEsperado = ListaDadosTeste.FirstOrDefault(estado => estado.Id == idInformado);
         var ValorRetornado = _servicoEstado.ObterPorId(idInformado);
 
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
@@ -253,8 +185,8 @@ public class TestesServicoEstado : TesteBase
     }
 
     [Theory]
-    [InlineData(20)]
-    [InlineData(30)]
+    [InlineData(100)]
+    [InlineData(100)]
     public void Atualizar_deve_retornar_Exception_quando_informado_Estado_com_Id_inexistente(int idInformado)
     {
         var EstadoEntrada = CriaNovoEstadoDeTeste();

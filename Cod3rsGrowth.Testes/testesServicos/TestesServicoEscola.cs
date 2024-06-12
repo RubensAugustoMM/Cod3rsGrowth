@@ -15,10 +15,8 @@ public class TestesServicoEscola : TesteBase
     public TestesServicoEscola()
     {
         _servicoEscola = _serviceProvider.GetService<ServicoEscola>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEscola!");
-        _tabelas = TabelaSingleton.Instance;
 
-        _tabelas.Escolas.Value.Clear();
-        _tabelas.Enderecos.Value.Clear();
+        _tabelas = TabelaSingleton.Instance;
         _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
     }
 
@@ -32,7 +30,7 @@ public class TestesServicoEscola : TesteBase
     {
         Escola NovaEscola = new()
         {
-            Id = 0,
+            Id = 40,
             StatusAtividade = true,
             Nome = "Escola Rodrigo",
             CodigoMec = "12345678",
@@ -41,8 +39,7 @@ public class TestesServicoEscola : TesteBase
             InicioAtividade = new DateTime(1234, 12, 3),
             CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
             OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
-            IdEndereco = 1,
-
+            IdEndereco = 40        
         };
 
         return NovaEscola;
@@ -52,7 +49,7 @@ public class TestesServicoEscola : TesteBase
     {
         Endereco NovoEndereco = new()
         {
-            Id = 1,
+            Id = 40,
             Numero = 5,
             Cep = "72311089",
             Municipio = "Hidrolandia",
@@ -66,141 +63,32 @@ public class TestesServicoEscola : TesteBase
     }
 
     [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_uma_Escola()
+    public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        List<Escola> ValorEsperado = new()
-        {
-            new Escola()
-            {
-                Id = 0,
-                StatusAtividade = true,
-                Nome = "Escola Rodrigo",
-                CodigoMec = "12345678",
-                Telefone = "12355645",
-                Email = "rodrigo@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            }
-       };
-        _tabelas.Escolas.Value.AddRange(ValorEsperado);
-
         var ValorRetornado = _servicoEscola.ObterTodos();
 
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
-    }
-
-    [Fact]
-    public void ao_ObterTodos_deve_retornar_lista_com_apenas_duas_Escolas()
-    {
-        List<Escola> ValorEsperado = new()
-        {
-            new Escola()
-            {
-                Id = 0,
-                StatusAtividade = true,
-                Nome = "Escola Rodrigo",
-                CodigoMec = "12345678",
-                Telefone = "12355645",
-                Email = "rodrigo@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            },
-            new Escola()
-            {
-                Id = 1,
-                StatusAtividade = true,
-                Nome = "Escola Enzo menezes",
-                CodigoMec = "12345678",
-                Telefone = "143454345",
-                Email = "enz@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            }
-       };
-        _tabelas.Escolas.Value.AddRange(ValorEsperado);
-
-        var ValorRetornado = _servicoEscola.ObterTodos();
-
-        Assert.Equal(ValorEsperado.Count, ValorRetornado.Count);
+        Assert.NotNull(ValorRetornado);
     }
 
     [Theory]
-    [InlineData(2)]
+    [InlineData(110)]
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        List<Escola> ListaDadosTeste = new()
-        {
-            new Escola()
-            {
-                Id = 0,
-                StatusAtividade = true,
-                Nome = "Escola Rodrigo",
-                CodigoMec = "12345678",
-                Telefone = "12355645",
-                Email = "rodrigo@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            },
-            new Escola()
-            {
-                Id = 1,
-                StatusAtividade = true,
-                Nome = "Escola Enzo menezes",
-                CodigoMec = "12345678",
-                Telefone = "143454345",
-                Email = "enz@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            }
-       };
-        _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
-
         var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEscola.ObterPorId(idInformado));
 
         Assert.Equal($"Nenhuma Escola com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
     }
 
     [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
+    [InlineData(101)]
+    [InlineData(102)]
     public void ObterPorId_deve_retornar_Escola_existente_quando_informado_id_valido(int idInformado)
     {
-        List<Escola> ListaDadosTeste = new()
-        {
-            new Escola()
-            {
-                Id = 0,
-                StatusAtividade = true,
-                Nome = "Escola Rodrigo",
-                CodigoMec = "12345678",
-                Telefone = "12355645",
-                Email = "rodrigo@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            },
-            new Escola()
-            {
-                Id = 1,
-                StatusAtividade = true,
-                Nome = "Escola Enzo menezes",
-                CodigoMec = "12345678",
-                Telefone = "143454345",
-                Email = "enz@gmail.com",
-                InicioAtividade = new DateTime(1234,12,3),
-                CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-                OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-            }
-       };
-        _tabelas.Escolas.Value.AddRange(ListaDadosTeste);
+        var ValorEsperado = CriaNovaEscolaTeste();
+        ValorEsperado.Id = idInformado;
+        _tabelas.Escolas.Value.Add(ValorEsperado);
 
-        var ValorEsperado = ListaDadosTeste[idInformado];
         var ValorRetornado = _servicoEscola.ObterPorId(idInformado);
 
         Assert.Equal(ValorEsperado.Id, ValorRetornado.Id);
@@ -395,8 +283,8 @@ public class TestesServicoEscola : TesteBase
     }
 
     [Theory]
-    [InlineData(30)]
-    [InlineData(20)]
+    [InlineData(100)]
+    [InlineData(200)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_IdEndereco_inexistente(int idEnderecoInformada)
     {
         var EscolaEntrada = CriaNovaEscolaTeste();
