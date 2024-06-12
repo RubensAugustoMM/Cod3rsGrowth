@@ -9,9 +9,13 @@ namespace Cod3rsGrowth.Testes;
 public class TestesServicoEndereco : TesteBase
 {
     private readonly ServicoEndereco _servicoEndereco;
+    private TabelaSingleton _tabelas;
 
-    private void ReiniciaRepositoriosDeTeste()
+    public TestesServicoEndereco()
     {
+        _servicoEndereco = _serviceProvider.GetService<ServicoEndereco>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEndereco!");
+        _tabelas = TabelaSingleton.Instance;
+
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Estados.Value.Clear();
         _tabelas.Estados.Value.Add(CriaNovoEstadoTeste());
@@ -46,15 +50,9 @@ public class TestesServicoEndereco : TesteBase
         return NovoEstado;
     }
 
-    public TestesServicoEndereco()
-    {
-        _servicoEndereco = _serviceProvider.GetService<ServicoEndereco>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEndereco!");
-    }
-
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_um_Endereco()
     {
-        ReiniciaRepositoriosDeTeste();
         List<Endereco> ValorEsperado = new()
         {
             new Endereco()
@@ -79,7 +77,6 @@ public class TestesServicoEndereco : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_dois_Enderecos()
     {
-        ReiniciaRepositoriosDeTeste();
         List<Endereco> ValorEsperado = new()
         {
             new Endereco()
@@ -117,7 +114,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         List<Endereco> ListaDadosTeste = new()
         {
             new Endereco()
@@ -155,7 +151,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(1)]
     public void ObterPorId_deve_retornar_Endereco_existente_quando_informado_id_valido(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         List<Endereco> ListaDadosTeste = new()
         {
             new Endereco()
@@ -201,7 +196,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Id_negativo(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Id = idInformado;
@@ -216,7 +210,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Numero_negativo(int numeroInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Numero deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Numero = numeroInformado;
@@ -231,7 +224,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("         ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_vazio(string cepInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Cep nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Cep = cepInformado;
@@ -246,7 +238,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("123")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_com_tamanho_diferente_que_8(string cepInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Cep Length menor ou maior que 8 characteres!";
         EnderecoEntrada.Cep = cepInformado;
@@ -261,7 +252,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("1234hvjo")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Cep_contendo_letras_ou_outros_simbolos(string cepInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Cep e formado somente por numeros!";
         EnderecoEntrada.Cep = cepInformado;
@@ -276,7 +266,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("         ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Municipio_vazio(string municipioInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Municipio nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Municipio = municipioInformado;
@@ -291,7 +280,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("         ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Bairro_vazio(string bairroInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Bairro nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Bairro = bairroInformado;
@@ -306,7 +294,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("         ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Rua_invalida(string ruaInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Rua nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Rua = ruaInformado;
@@ -321,7 +308,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_negativo(int idEstadoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Id Estado deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.IdEstado = idEstadoInformado;
@@ -336,7 +322,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(5)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_inexistente(int idEstadoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var ValorEsperado = "Id Estado deve ser referente a um estado existente!";
         EnderecoEntrada.IdEstado = idEstadoInformado;
@@ -351,7 +336,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Id_positivo(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Id = idInformado;
 
@@ -366,7 +350,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Numero_positivo(int numeroInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Numero = numeroInformado;
 
@@ -381,7 +364,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("12345678")]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Cep_valido(string cepInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Cep = cepInformado;
 
@@ -396,7 +378,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("Rodrigo ferreira")]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Municipio_valido(string municipioInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Municipio = municipioInformado;
 
@@ -411,7 +392,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("Asa Norte")]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Bairro_valido(string bairroInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Bairro = bairroInformado;
 
@@ -426,7 +406,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("Rua vv8")]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Rua_valida(string ruaInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Rua = ruaInformado;
 
@@ -441,7 +420,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_IdEstado_valido_e_existente(int idEstadoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var EstadoEntrada = CriaNovoEstadoTeste();
         EnderecoEntrada.IdEstado = idEstadoInformado;
@@ -459,7 +437,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData(30)]
     public void Atualizar_deve_retornar_Exception_quando_informado_Endereco_com_Id_inexistente(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Id = idInformado;
 
@@ -473,7 +450,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("   ")]
     public void Atualizar_deve_retornar_ValidationException_quando_informado_Endereco_invalido(string municipioInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Municipio = municipioInformado;
         _tabelas.Enderecos.Value.Add(EnderecoEntrada);
@@ -488,7 +464,6 @@ public class TestesServicoEndereco : TesteBase
     [InlineData("Rodrigos", 2, "Bairro3")]
     public void Atualizar_deve_alterar_parametros_de_Endereco_existente_quando_informado_Endereco_valido(string municipioInformado, int numeroInformado, string bairroInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         var EnderecoAtualizar = CriaNovoEnderecoTeste();
         EnderecoEntrada.Municipio = municipioInformado;

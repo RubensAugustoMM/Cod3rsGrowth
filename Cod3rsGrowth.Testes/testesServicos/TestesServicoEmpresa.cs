@@ -10,14 +10,13 @@ namespace Cod3rsGrowth.Testes;
 public class TestesServicoEmpresa : TesteBase
 {
     private readonly ServicoEmpresa _servicoEmpresa;
+    private readonly TabelaSingleton _tabelas;
 
     public TestesServicoEmpresa()
     {
         _servicoEmpresa = _serviceProvider.GetService<ServicoEmpresa>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEmpresa!");
-    }
+        _tabelas = TabelaSingleton.Instance;
 
-    private void ReiniciaRepositoriosDeTeste()
-    {
         _tabelas.Enderecos.Value.Clear();
         _tabelas.Empresas.Value.Clear();
         _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
@@ -65,7 +64,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_uma_Empresa()
     {
-        ReiniciaRepositoriosDeTeste();
         List<Empresa> ValorEsperado = new()
         {
             new Empresa()
@@ -94,7 +92,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_com_apenas_duas_Empresas()
     {
-        ReiniciaRepositoriosDeTeste();
         List<Empresa> ValorEsperado = new()
         {
             new Empresa()
@@ -140,7 +137,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-1)]
     public void ObterPorId_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         List<Empresa> ListaDadosTeste = new()
         {
             new Empresa()
@@ -186,7 +182,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(1)]
     public void ObterPorId_deve_retornar_Empresa_existente_quando_informado_id_valido(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         List<Empresa> ListaDadosTeste = new()
         {
             new Empresa()
@@ -244,7 +239,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-1)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Id_invalido(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EmpresaEntrada.Id = idInformado;
@@ -259,7 +253,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-1)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Idade_negativa(int idadeInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Idade deve ser maior ou igual a 0!";
         EmpresaEntrada.Idade = idadeInformada;
@@ -274,7 +267,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(100)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Idade_invalida_em_relacao_a_data_inicio(int idadeInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Idade diferente da diferenca da data abertura com a data atual!";
         EmpresaEntrada.Idade = idadeInformada;
@@ -289,7 +281,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_RazaoSocial_invalido(string razaoSocialInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Razao Social nao pode ter valor nulo ou formado por caracteres de espaco!";
         EmpresaEntrada.RazaoSocial = razaoSocialInformada;
@@ -304,7 +295,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_NomeFantasia_nulo_ou_vazio(string nomeFantasiaInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Nome Fantasia nao pode ter valor nulo ou formado por caracteres de espaco!";
         EmpresaEntrada.NomeFantasia = nomeFantasiaInformado;
@@ -319,7 +309,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("     ")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_nulo_ou_vazio(string cnpjInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Cnpj nao pode ter valor nulo ou formado por caracteres de espaco!";
         EmpresaEntrada.Cnpj = cnpjInformado;
@@ -333,7 +322,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("asdfghjklqwert")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_com_caracteres_nao_numericos(string cnpjInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Cnpj deve ser formado somente por numeros!";
         EmpresaEntrada.Cnpj = cnpjInformado;
@@ -348,7 +336,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("123456789123456")]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Cnpj_com_tamanho_diferente_de_14(string cnpjInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Cnpj Length menor ou maior que 14 characteres!";
         EmpresaEntrada.Cnpj = cnpjInformado;
@@ -361,7 +348,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_DataSituacaoCadastral_invalida()
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Data Situacao Cadastral deve ser maior que a DataAbertura";
         EmpresaEntrada.DataSituacaoCadastral = new DateTime(2000, 12, 03);
@@ -376,7 +362,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-300)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_CapitalSocial_invalido(decimal capitalSocialInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Capital Social nao pode ser menor ou igual a zero!";
         EmpresaEntrada.CapitalSocial = capitalSocialInformado;
@@ -391,7 +376,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(30)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_NaturezaJuridica_invalida(int naturezaJuridiaInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Valor de Natureza Juridica fora do Enum!";
         EmpresaEntrada.NaturezaJuridica = (NaturezaJuridicaEnums)naturezaJuridiaInformada;
@@ -406,7 +390,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(30)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_Porte_invalido(int porteInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Valor de Porte fora do Enum!";
         EmpresaEntrada.Porte = (PorteEnums)porteInformada;
@@ -421,7 +404,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(30)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_MatrizFilial_invalida(int matrizFilialInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Valor de Matriz Filial fora do Enum!";
         EmpresaEntrada.MatrizFilial = (MatrizFilialEnums)matrizFilialInformada;
@@ -436,7 +418,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(-2)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_negativo(int idEnderecoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Id Endereco deve ser um valor maior ou igual a zero!";
         EmpresaEntrada.IdEndereco = idEnderecoInformado;
@@ -451,7 +432,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(20)]
     public void Criar_deve_retornar_ValidationException_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_inexistente(int idEnderecoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var ValorEsperado = "Id Endereco deve ser referente a uma endereco existente!";
         EmpresaEntrada.IdEndereco = idEnderecoInformado;
@@ -466,7 +446,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Id_valido(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.Id = idInformado;
 
@@ -479,7 +458,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Idade_valido()
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
 
         _servicoEmpresa.Criar(EmpresaEntrada);
@@ -493,7 +471,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("Pedregal")]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_RazaoSocial_valida(string razaoSocialInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.RazaoSocial = razaoSocialInformada;
 
@@ -508,7 +485,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("Pedregal")]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_NomeFantasia_valido(string nomeFantasiaInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.NomeFantasia = nomeFantasiaInformado;
 
@@ -523,7 +499,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("09876543210987")]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Cnpj_valido(string cnpjInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.Cnpj = cnpjInformado;
 
@@ -536,7 +511,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_DataSituacaoCadastral_valida()
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
 
         _servicoEmpresa.Criar(EmpresaEntrada);
@@ -548,7 +522,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_DataAbertura_valida()
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
 
         _servicoEmpresa.Criar(EmpresaEntrada);
@@ -560,7 +533,6 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_CapitalSocial_valido()
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
 
         _servicoEmpresa.Criar(EmpresaEntrada);
@@ -574,7 +546,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(NaturezaJuridicaEnums.MicroempreendedorIndividual)]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_NaturezaJuridica_valida(NaturezaJuridicaEnums naturezaJuridicaInformada)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.NaturezaJuridica = naturezaJuridicaInformada;
 
@@ -589,7 +560,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(PorteEnums.Microempresa)]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_Porte_valido(PorteEnums porteInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.Porte = porteInformado;
 
@@ -604,7 +574,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(MatrizFilialEnums.Filial)]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_MatrizFilial_valida(MatrizFilialEnums matrizFilialInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.MatrizFilial = matrizFilialInformado;
 
@@ -619,7 +588,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(2)]
     public void Criar_deve_adicionar_Empresa_no_repositorio_quando_informado_Empresa_com_IdEndereco_valido_e_referente_a_Endereco_Existente(int idEnderecoInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EmpresaEntrada.IdEndereco = idEnderecoInformado;
@@ -638,7 +606,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(30)]
     public void Atualizar_deve_retornar_Exception_quando_informado_Empresa_com_Id_inexistente(int idInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.Id = idInformado;
 
@@ -652,7 +619,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("   ")]
     public void Atualizar_deve_retornar_ValidationException_quando_informado_Empresa_invalido(string razaoSocialInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
         EmpresaEntrada.RazaoSocial = razaoSocialInformado;
@@ -666,7 +632,6 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData("Rodrigos", PorteEnums.MicroeempreendedorIndividual, 320.50)]
     public void Atualizar_deve_alterar_parametros_de_Empresa_existente_quando_informado_Empresa_valido(string razaoSocialInformado, PorteEnums porteInformado, decimal capitalSocialInformado)
     {
-        ReiniciaRepositoriosDeTeste();
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         var EmpresaAtualizar = CriaNovaEmpresaTeste();
         EmpresaEntrada.RazaoSocial = razaoSocialInformado;
