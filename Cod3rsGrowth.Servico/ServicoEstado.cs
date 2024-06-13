@@ -18,7 +18,9 @@ public class ServicoEstado : IRepositorioEstado
 
     public void Atualizar(Estado estadoAtualizado)
     {
-        throw new NotImplementedException();
+        ObterPorId(estadoAtualizado.Id);
+        _validadorEstado.ValidateAndThrow(estadoAtualizado);
+        _repositorioEstado.Atualizar(estadoAtualizado);
     }
 
     public void Criar(Estado estadoCriado)

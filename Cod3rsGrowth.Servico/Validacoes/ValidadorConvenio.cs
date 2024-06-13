@@ -31,26 +31,26 @@ public class ValidadorConvenio: AbstractValidator<Convenio>
             .WithMessage("{PropertyName} do convenio deve ser maior que zero!");
 
         RuleFor(convenio => convenio.DataInicio)
-                    .GreaterThan(new DateTime(1889,9,15))
-                    .WithMessage("{PropertyName} deve ser após a proclamacao da republica!")
-                    .LessThanOrEqualTo(DateTime.Now)
-                    .WithMessage("{PropertyName} deve ser anterior ou igual a data atual!");
+            .GreaterThan(new DateTime(1889,9,15))
+            .WithMessage("{PropertyName} deve ser após a proclamacao da republica!")
+            .LessThanOrEqualTo(DateTime.Now)
+            .WithMessage("{PropertyName} deve ser anterior ou igual a data atual!");
 
         RuleFor(convenio => convenio.DataTermino)
             .GreaterThan(convenio => convenio.DataInicio)
             .WithMessage("{PropertyName} deve ser maior que a DataInicio!");
 
         RuleFor(convenio => convenio.IdEscola)
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage("{PropertyName} deve ser maior ou igual a zero!")
-                    .Must(VerificarSeExisteEscola)
-                    .WithMessage("{PropertyName} deve ser referente a uma escola existente!");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser maior ou igual a zero!")
+            .Must(VerificarSeExisteEscola)
+            .WithMessage("{PropertyName} deve ser referente a uma escola existente!");
 
         RuleFor(convenio => convenio.IdEmpresa)
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage("{PropertyName} deve ser maior ou igual a zero!")
-                    .Must(VerificaSeExisteEmpresa)
-                    .WithMessage("{PropertyName} deve ser referente a uma empresa existente!");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser maior ou igual a zero!")
+            .Must(VerificaSeExisteEmpresa)
+            .WithMessage("{PropertyName} deve ser referente a uma empresa existente!");
     }
 
     private bool VerificarSeExisteEscola(int idEscola)

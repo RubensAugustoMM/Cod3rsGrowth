@@ -18,7 +18,9 @@ public class ServicoConvenio : IRepositorioConvenio
 
     public void Atualizar(Convenio convenioAtualizado)
     {
-        throw new NotImplementedException();
+        ObterPorId(convenioAtualizado.Id);
+        _validadorConvenio.ValidateAndThrow(convenioAtualizado);
+        _repositorioConvenio.Atualizar(convenioAtualizado);
     }
 
     public void Criar(Convenio convenioCriado)
