@@ -25,11 +25,9 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         Tabelas.Enderecos.Value.Add(enderecoCriado);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EnderecoDeletado = ObterPorId(Id);
-
-        Tabelas.Enderecos.Value.Remove(EnderecoDeletado);
+        Tabelas.Enderecos.Value.Remove(ObterPorId(id));
     }
 
     public Endereco ObterPorId(int Id)

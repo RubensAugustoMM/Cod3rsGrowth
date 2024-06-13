@@ -23,9 +23,7 @@ public class MockRepositorioEstado : IRepositorioEstado
 
     public void Deletar(int id)
     {
-        var EstadoDeletado = ObterPorId(id);
-
-        Tabelas.Estados.Value.Remove(EstadoDeletado);
+        Tabelas.Estados.Value.Remove(ObterPorId(id));
     }
 
     public Estado ObterPorId(int Id)

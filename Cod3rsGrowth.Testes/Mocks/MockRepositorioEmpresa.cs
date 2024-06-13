@@ -29,11 +29,9 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         Tabelas.Empresas.Value.Add(empresaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EmpresaDeletada = ObterPorId(Id);
-
-        Tabelas.Empresas.Value.Remove(EmpresaDeletada);
+        Tabelas.Empresas.Value.Remove(ObterPorId(id));
     }
 
     public Empresa ObterPorId(int Id)

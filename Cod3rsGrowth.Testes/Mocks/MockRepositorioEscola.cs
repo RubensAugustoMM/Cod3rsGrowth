@@ -28,11 +28,9 @@ public class MockRepositorioEscola : IRepositorioEscola
         Tabelas.Escolas.Value.Add(escolaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EscolaDeletada = ObterPorId(Id);
-
-        Tabelas.Escolas.Value.Remove(EscolaDeletada);
+        Tabelas.Escolas.Value.Remove(ObterPorId(id));
     }
 
     public Escola ObterPorId(int Id)

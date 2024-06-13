@@ -9,11 +9,15 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEscola : IRepositorioEscola
 {
     private readonly IRepositorioEscola _repositorioEscola;
+    private readonly IRepositorioConvenio _repositorioConvenio;
+    private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEscola _validadorEscola;
 
-    public ServicoEscola(IRepositorioEscola repositorioEscola, ValidadorEscola validadorEscola)
+    public ServicoEscola(IRepositorioEscola repositorioEscola,IRepositorioConvenio repositorioConvenio, IRepositorioEndereco repositorioEndereco, ValidadorEscola validadorEscola)
     {
         _repositorioEscola = repositorioEscola;
+        _repositorioConvenio = repositorioConvenio;
+        _repositorioEndereco = repositorioEndereco;
         _validadorEscola = validadorEscola;
     }
 
@@ -30,9 +34,17 @@ public class ServicoEscola : IRepositorioEscola
         _repositorioEscola.Criar(escolaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var EmpresaDeletar = ObterPorId(id);
+        var ListaConvenios = _repositorioConvenio.ObterTodos();
+        var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == id);
+
+        if (Convenio != null)
+            throw new Exception("Nao e possivel excluir Escola pois possui convenio ativo!");
+
+        _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
+        _repositorioEscola.Deletar(id);
     }
 
     public Escola ObterPorId(int Id)

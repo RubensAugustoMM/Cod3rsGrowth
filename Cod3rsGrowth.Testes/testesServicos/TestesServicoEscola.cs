@@ -493,4 +493,83 @@ public class TestesServicoEscola : TesteBase
         Assert.Equal(categoriaAdministrativaInformado, ValorRetornado.CategoriaAdministrativa);
         Assert.Equal(emailInformado, ValorRetornado.Email);
     }
+
+    [Theory]
+    [InlineData(-400)]
+    [InlineData(605)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
+    {
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Id = idInformado;
+
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
+
+        Assert.Equal($"Nenhuma Escola com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
+    }
+
+    [Fact]
+    public void Deletar_deve_lancar_Exception_quando_informado_Escola_com_Convenio_Existente()
+    {
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Id = 601;
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 606,
+            NumeroProcesso = 123,
+            Objeto = "objeto",
+            Valor = 2.0M,
+            DataInicio = new DateTime(1900, 2, 3),
+            IdEscola = 10,
+            IdEmpresa = EscolaEntrada.Id
+        };
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+        _tabelas.Convenios.Value.Add(ConvenioEntrada);
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
+    
+        Assert.Equal("Nao e possivel excluir Escola pois possui convenio ativo!", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(-400)]
+    [InlineData(605)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Escola_com_IdEndreco_invalido_ou_inexistente(int idEnderecoInformado)
+    {
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Id = idEnderecoInformado;
+        EscolaEntrada.IdEndereco = idEnderecoInformado;
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
+    
+        Assert.Equal($"Nenhum Endereco com Id {idEnderecoInformado} existe no contexto atual!\n", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(602)]
+    [InlineData(603)]
+    public void Deletar_deve_remover_Endereco_do_repositorio_quando_informado_Id_de_Empresa_a_remover(int idInformado)
+    {
+        Endereco EntradaEndereco = new()
+        {
+            Id = 606,
+            Numero = 5,
+            Cep = "72311089",
+            Municipio = "Hidrolandia",
+            Bairro = "Pedregal",
+            Rua = "Rua das Magnolias",
+            Complemento = "Em frente ao bretas",
+            IdEstado = 30
+        };
+
+        var EscolaEntrada = CriaNovaEscolaTeste();
+        EscolaEntrada.Id = idInformado;
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+        _tabelas.Enderecos.Value.Add(EntradaEndereco);
+
+        _servicoEscola.Deletar(EscolaEntrada.Id);
+        var ValorRetorno = _tabelas.Convenios.Value.FirstOrDefault(c => c.Id == idInformado);
+
+        Assert.Null(ValorRetorno);
+    }
 }

@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using Cod3rsGrowth.Dominio.Enums;
 
 
 namespace Cod3rsGrowth.Testes;
@@ -374,5 +375,89 @@ public class TestesServicoEndereco : TesteBase
         Assert.Equal(municipioInformado, ValorRetornado.Municipio);
         Assert.Equal(numeroInformado, ValorRetornado.Numero);
         Assert.Equal(bairroInformado, ValorRetornado.Bairro);
+    }
+
+    [Theory]
+    [InlineData(-300)]
+    [InlineData(505)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
+    {
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        EnderecoEntrada.Id = idInformado;
+
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
+
+        Assert.Equal($"Nenhum Endereco com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
+    }
+
+    [Fact]
+    public void Deletar_deve_lancar_Exception_quando_informado_Endereco_com_Empresa_existente()
+    {
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        EnderecoEntrada.Id = 501;
+        Empresa EmpresaEntrada = new()
+        {
+            Id = 506,
+            Idade = 1,
+            RazaoSocial = "Fast! transportes LTDA",
+            NomeFantasia = "Fast! transportes",
+            Cnpj = "12345678901234",
+            SitucaoCadastral = true,
+            DataSituacaoCadastral = new DateTime(2024, 12, 03),
+            DataAbertura = new DateTime(2023, 12, 03),
+            CapitalSocial = 123124124,
+            NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
+            Porte = PorteEnums.EmpresaPequenoPorte,
+            MatrizFilial = MatrizFilialEnums.Matriz,
+            IdEndereco = EnderecoEntrada.Id
+        };
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
+    
+        Assert.Equal("Nao e possivel excluir Endereco relacionado a Empresa existente!", excecao.Message);
+    }
+
+    [Fact]
+    public void Deletar_deve_lancar_Exception_quando_informado_Endereco_com_Escola_existente()
+    {
+        Escola EscolaEntrada = new()
+        {
+            Id = 506,
+            StatusAtividade = true,
+            Nome = "Escola Rodrigo",
+            CodigoMec = "12345678",
+            Telefone = "12355645",
+            Email = "rodrigo@gmail.com",
+            InicioAtividade = new DateTime(1234, 12, 3),
+            CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
+            IdEndereco = 501   
+        };
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        EnderecoEntrada.Id = 501;
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
+    
+        Assert.Equal("Nao e possivel excluir Endereco relacionado a Escola existente!", excecao.Message);
+    }
+
+
+    [Theory]
+    [InlineData(501)]
+    [InlineData(502)]
+    public void Deletar_deve_remover_Endereco_do_repositorio_quando_informado_Id_de_Endereco_a_remover(int idInformado)
+    {
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        EnderecoEntrada.Id = idInformado;
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
+
+        _servicoEndereco.Deletar(EnderecoEntrada.Id);
+        var ValorRetorno = _tabelas.Convenios.Value.FirstOrDefault(c => c.Id == idInformado);
+
+        Assert.Null(ValorRetorno);
     }
 }
