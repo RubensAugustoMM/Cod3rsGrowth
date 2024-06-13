@@ -40,7 +40,7 @@ public class ServicoEmpresa : IRepositorioEmpresa
         var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == id);
 
         if (Convenio != null)
-            throw new Exception("Nao e possivel excluir empresa pois possui convenio ativo!");
+            throw new Exception("Nao e possivel excluir Empresa pois possui convenio ativo!");
 
         _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
         _repositorioEmpresa.Deletar(id);

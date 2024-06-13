@@ -520,12 +520,9 @@ public class TestesServicoEmpresa : TesteBase
     [InlineData(405)]
     public void Deletar_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
     {
-        var EmpresaEntrada = CriaNovaEmpresaTeste();
-        EmpresaEntrada.Id = idInformado;
+        var excecao = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(idInformado));
 
-        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
-
-        Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
+        Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecao.Message);
     }
 
     [Fact]
@@ -548,7 +545,7 @@ public class TestesServicoEmpresa : TesteBase
 
         var excecao = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
 
-        Assert.Equal("Nao e possivel excluir empresa pois possui convenio ativo!", excecao.Message);
+        Assert.Equal("Nao e possivel excluir Empresa pois possui convenio ativo!", excecao.Message);
     }
 
     [Theory]
@@ -557,7 +554,7 @@ public class TestesServicoEmpresa : TesteBase
     public void Deletar_deve_lancar_Exception_quando_informado_Empresa_com_IdEndreco_invalido_ou_inexistente(int idEnderecoInformado)
     {
         var EmpresaEntrada = CriaNovaEmpresaTeste();
-        EmpresaEntrada.Id = idEnderecoInformado;
+        EmpresaEntrada.Id = idEnderecoInformado + 3;
         EmpresaEntrada.IdEndereco = idEnderecoInformado;
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
 

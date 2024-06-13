@@ -38,7 +38,7 @@ public class ServicoEscola : IRepositorioEscola
     {
         var EmpresaDeletar = ObterPorId(id);
         var ListaConvenios = _repositorioConvenio.ObterTodos();
-        var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == id);
+        var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == EmpresaDeletar.Id);
 
         if (Convenio != null)
             throw new Exception("Nao e possivel excluir Escola pois possui convenio ativo!");

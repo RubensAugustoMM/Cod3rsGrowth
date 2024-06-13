@@ -536,7 +536,7 @@ public class TestesServicoEscola : TesteBase
     public void Deletar_deve_lancar_Exception_quando_informado_Escola_com_IdEndreco_invalido_ou_inexistente(int idEnderecoInformado)
     {
         var EscolaEntrada = CriaNovaEscolaTeste();
-        EscolaEntrada.Id = idEnderecoInformado;
+        EscolaEntrada.Id = idEnderecoInformado + 3;
         EscolaEntrada.IdEndereco = idEnderecoInformado;
         _tabelas.Escolas.Value.Add(EscolaEntrada);
 
