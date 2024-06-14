@@ -21,7 +21,7 @@ public partial class TabelaSingleton
             }
         }
     }
-
+    
     public Lazy<List<Convenio>> Convenios = new Lazy<List<Convenio>>(() =>
     {
         return new List<Convenio>();

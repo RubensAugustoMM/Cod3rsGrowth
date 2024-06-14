@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Cod3rsGrowth.Servico.Validacoes;
 
-public class ValidadorConvenio: AbstractValidator<Convenio>
+public class ValidadorConvenio : AbstractValidator<Convenio>
 {
     private readonly IRepositorioEscola _repositorioEscola;
     private readonly IRepositorioEmpresa _repositorioEmpresa;
@@ -31,7 +31,7 @@ public class ValidadorConvenio: AbstractValidator<Convenio>
             .WithMessage("{PropertyName} do convenio deve ser maior que zero!");
 
         RuleFor(convenio => convenio.DataInicio)
-            .GreaterThan(new DateTime(1889,9,15))
+            .GreaterThan(new DateTime(1889, 9, 15))
             .WithMessage("{PropertyName} deve ser após a proclamacao da republica!")
             .LessThanOrEqualTo(DateTime.Now)
             .WithMessage("{PropertyName} deve ser anterior ou igual a data atual!");

@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using FluentValidation;
 
@@ -8,18 +7,21 @@ namespace Cod3rsGrowth.Servico.Validacoes;
 public class ValidadorEmpresa : AbstractValidator<Empresa>
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
-    public ValidadorEmpresa(IRepositorioEndereco repositorioEndereco)
+    private readonly IRepositorioConvenio _repositorioConvenio;
+    public ValidadorEmpresa(IRepositorioEndereco repositorioEndereco, IRepositorioConvenio repositorioConvenio)
     {
         _repositorioEndereco = repositorioEndereco;
+        _repositorioConvenio = repositorioConvenio;
 
         RuleFor(empresa => empresa.Id)
             .GreaterThanOrEqualTo(0)
             .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!");
+
         RuleFor(empresa => empresa.Idade)
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage("{PropertyName} deve ser maior ou igual a 0!")
-                    .Must(ValidaIdadeDaEmpresa)
-                    .WithMessage("{PropertyName} diferente da diferenca da data abertura com a data atual!");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("{PropertyName} deve ser maior ou igual a 0!")
+            .Must(ValidaIdadeDaEmpresa)
+            .WithMessage("{PropertyName} diferente da diferenca da data abertura com a data atual!");
         
         RuleFor(empresa => empresa.RazaoSocial)
             .NotEmpty()
@@ -75,12 +77,31 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
         RuleFor(empresa => empresa.ListaConvenio)
             .NotNull()
             .WithMessage("{PropertyName} nao pode ser nulo!");
+
+        RuleSet("Deletar", () =>
+        {
+            RuleFor(empresa => empresa.Id)
+                .Must(VerificaSeExisteConvenio)
+                .WithMessage("Nao e possivel excluir Empresa pois possui convenio ativo!");  
+        });
     }
 
     private bool VerificaSeExisteEndereco(int idEndereco)
     {
         var ListaEnderecos = _repositorioEndereco.ObterTodos();
-        return ListaEnderecos.Exists(endereco => endereco.Id == idEndereco);
+        if (ListaEnderecos.FirstOrDefault(endereco => endereco.Id == idEndereco) == null)
+            return false;
+
+        return true;
+    }
+
+    private bool VerificaSeExisteConvenio(int idEmpresa)
+    {
+        var ListaConvenios = _repositorioConvenio.ObterTodos();
+        if (ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == idEmpresa) != null)
+            return false;
+
+        return true;
     }
 
     private bool VerificaSeCnpjContemSomenteNumeros(string cnpj)

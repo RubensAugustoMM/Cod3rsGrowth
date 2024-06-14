@@ -228,4 +228,56 @@ public class TestesServicoEstado : TesteBase
         Assert.Equal(nomeInformado, ValorRetornado.Nome);
         Assert.Equal(siglaInformado, ValorRetornado.Sigla);
     }
+
+    [Theory]
+    [InlineData(-500)]
+    [InlineData(705)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
+    {
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        EstadoEntrada.Id = idInformado;
+
+        var excecaoObterPorId = Assert.Throws<Exception>(() => _servicoEstado.Deletar(EstadoEntrada.Id));
+
+        Assert.Equal($"Nenhum Estado com Id {idInformado} existe no contexto atual!\n", excecaoObterPorId.Message);
+    }
+
+    [Fact]
+    public void Deletar_deve_lancar_ValidationException_quando_informado_Estado_com_Endereco_existente()
+    {
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        EstadoEntrada.Id = 701;
+        Endereco EnderecoEntrada = new()
+        {
+            Id = 706,
+            Numero = 5,
+            Cep = "72311089",
+            Municipio = "Hidrolandia",
+            Bairro = "Pedregal",
+            Rua = "Rua das Magnolias",
+            Complemento = "Em frente ao bretas",
+            IdEstado = 701
+        };
+        _tabelas.Estados.Value.Add(EstadoEntrada);
+        _tabelas.Enderecos.Value.Add(EnderecoEntrada);
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEstado.Deletar(EstadoEntrada.Id));
+    
+        Assert.Equal("Nao e possivel excluir Estado relacionado a Endereco existente!", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(702)]
+    [InlineData(703)]
+    public void Deletar_deve_remover_Estado_do_repositorio_quando_informado_Id_de_Estado_a_remover(int idInformado)
+    {
+        var EstadoEntrada = CriaNovoEstadoDeTeste();
+        EstadoEntrada.Id = idInformado;
+        _tabelas.Estados.Value.Add(EstadoEntrada);
+
+        _servicoEstado.Deletar(EstadoEntrada.Id);
+        var ValorRetorno = _tabelas.Convenios.Value.FirstOrDefault(c => c.Id == idInformado);
+
+        Assert.Null(ValorRetorno);
+    }
 }

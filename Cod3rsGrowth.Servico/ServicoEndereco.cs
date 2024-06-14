@@ -31,7 +31,13 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public void Deletar(int Id)
     {
-        throw new NotImplementedException();
+        var EnderecoDeletar = ObterPorId(Id);
+        var ResultadoValidacao = _validadorEndereco.Validate(EnderecoDeletar, options => options.IncludeRuleSets("Deletar")); 
+
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
+        _repositorioEndereco.Deletar(Id);
     }
 
     public Endereco ObterPorId(int Id)

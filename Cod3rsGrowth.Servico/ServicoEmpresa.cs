@@ -8,11 +8,13 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEmpresa : IRepositorioEmpresa
 {
     private readonly IRepositorioEmpresa _repositorioEmpresa;
+    private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEmpresa _validadorEmpresa;
     
-    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa,ValidadorEmpresa validadorEmpresa)
+    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa, IRepositorioEndereco repositorioEndereco,ValidadorEmpresa validadorEmpresa)
     {
         _repositorioEmpresa = repositorioEmpresa;
+        _repositorioEndereco = repositorioEndereco;
         _validadorEmpresa = validadorEmpresa;
     }
 
@@ -29,9 +31,16 @@ public class ServicoEmpresa : IRepositorioEmpresa
         _repositorioEmpresa.Criar(empresaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var EmpresaDeletar = ObterPorId(id);
+        var ResultadoValidacao = _validadorEmpresa.Validate(EmpresaDeletar, options => options.IncludeRuleSets("Deletar"));
+
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
+        _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
+        _repositorioEmpresa.Deletar(id);
     }
 
     public Empresa ObterPorId(int Id)

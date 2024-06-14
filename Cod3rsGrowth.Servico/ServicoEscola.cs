@@ -9,11 +9,13 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEscola : IRepositorioEscola
 {
     private readonly IRepositorioEscola _repositorioEscola;
+    private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEscola _validadorEscola;
 
-    public ServicoEscola(IRepositorioEscola repositorioEscola, ValidadorEscola validadorEscola)
+    public ServicoEscola(IRepositorioEscola repositorioEscola, IRepositorioEndereco repositorioEndereco, ValidadorEscola validadorEscola)
     {
         _repositorioEscola = repositorioEscola;
+        _repositorioEndereco = repositorioEndereco;
         _validadorEscola = validadorEscola;
     }
 
@@ -30,9 +32,16 @@ public class ServicoEscola : IRepositorioEscola
         _repositorioEscola.Criar(escolaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        var EscolaDeletar = ObterPorId(id);
+        var ResultadoValidacao = _validadorEscola.Validate(EscolaDeletar, options => options.IncludeRuleSets("Deletar"));
+
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
+        _repositorioEndereco.Deletar(EscolaDeletar.IdEndereco);
+        _repositorioEscola.Deletar(id);
     }
 
     public Escola ObterPorId(int Id)

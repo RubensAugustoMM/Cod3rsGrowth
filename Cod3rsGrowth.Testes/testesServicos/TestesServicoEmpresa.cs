@@ -16,7 +16,7 @@ public class TestesServicoEmpresa : TesteBase
     {
         _servicoEmpresa = _serviceProvider.GetService<ServicoEmpresa>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEmpresa!");
 
-        _tabelas = TabelaSingleton.Instance; 
+        _tabelas = TabelaSingleton.Instance;
         _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
     }
 
@@ -61,7 +61,7 @@ public class TestesServicoEmpresa : TesteBase
 
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_nula()
-    {        
+    {
         var ValorRetornado = _servicoEmpresa.ObterTodos();
 
         Assert.NotNull(ValorRetornado);
@@ -513,5 +513,81 @@ public class TestesServicoEmpresa : TesteBase
         Assert.Equal(razaoSocialInformado, ValorRetornado.RazaoSocial);
         Assert.Equal(porteInformado, ValorRetornado.Porte);
         Assert.Equal(capitalSocialInformado, ValorRetornado.CapitalSocial);
+    }
+
+    [Theory]
+    [InlineData(-200)]
+    [InlineData(405)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Id_invalido_ou_inexistente(int idInformado)
+    {
+        var excecao = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(idInformado));
+
+        Assert.Equal($"Nenhuma Empresa com Id {idInformado} existe no contexto atual!\n", excecao.Message);
+    }
+
+    [Fact]
+    public void Deletar_deve_lancar_ValidaitonException_quando_informado_Empresa_com_Convenio_Existente()
+    {
+        var EmpresaEntrada = CriaNovaEmpresaTeste();
+        EmpresaEntrada.Id = 401;
+        Convenio ConvenioEntrada = new()
+        {
+            Id = 406,
+            NumeroProcesso = 123,
+            Objeto = "objeto",
+            Valor = 2.0M,
+            DataInicio = new DateTime(1900, 2, 3),
+            IdEscola = 10,
+            IdEmpresa = EmpresaEntrada.Id
+        };
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+        _tabelas.Convenios.Value.Add(ConvenioEntrada);
+
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
+
+        Assert.Equal("Nao e possivel excluir Empresa pois possui convenio ativo!", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(-200)]
+    [InlineData(405)]
+    public void Deletar_deve_lancar_Exception_quando_informado_Empresa_com_IdEndreco_invalido_ou_inexistente(int idEnderecoInformado)
+    {
+        var EmpresaEntrada = CriaNovaEmpresaTeste();
+        EmpresaEntrada.Id = idEnderecoInformado + 3;
+        EmpresaEntrada.IdEndereco = idEnderecoInformado;
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+
+        var excecao = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
+
+        Assert.Equal($"Nenhum Endereco com Id {idEnderecoInformado} existe no contexto atual!\n", excecao.Message);
+    }
+
+    [Theory]
+    [InlineData(402)]
+    [InlineData(403)]
+    public void Deletar_deve_remover_Empresa_do_repositorio_quando_informado_Id_de_Empresa_a_remover(int idInformado)
+    {
+        Endereco EntradaEndereco = new()
+        {
+            Id = 406,
+            Numero = 5,
+            Cep = "72311089",
+            Municipio = "Hidrolandia",
+            Bairro = "Pedregal",
+            Rua = "Rua das Magnolias",
+            Complemento = "Em frente ao bretas",
+            IdEstado = 30
+        };
+
+        var EmpresaEntrada = CriaNovaEmpresaTeste();
+        EmpresaEntrada.Id = idInformado;
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
+        _tabelas.Enderecos.Value.Add(EntradaEndereco);
+
+        _servicoEmpresa.Deletar(EmpresaEntrada.Id);
+        var ValorRetorno = _tabelas.Convenios.Value.FirstOrDefault(c => c.Id == idInformado);
+
+        Assert.Null(ValorRetorno);
     }
 }

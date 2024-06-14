@@ -29,9 +29,9 @@ public class ServicoConvenio : IRepositorioConvenio
         _repositorioConvenio.Criar(convenioCriado);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        _repositorioConvenio.Deletar(id);
     }
 
     public Convenio ObterPorId(int Id)

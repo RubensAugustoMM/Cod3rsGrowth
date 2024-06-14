@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using System.Data.Common;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using FluentValidation;
 
@@ -7,10 +8,12 @@ namespace Cod3rsGrowth.Servico.Validacoes;
 public class ValidadorEscola : AbstractValidator<Escola>
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
+    private readonly IRepositorioConvenio _repositorioConvenio;
 
-    public ValidadorEscola(IRepositorioEndereco repositorioEndereco)
+    public ValidadorEscola(IRepositorioEndereco repositorioEndereco, IRepositorioConvenio repositorioConvenio)
     {
         _repositorioEndereco = repositorioEndereco;
+        _repositorioConvenio = repositorioConvenio;
 
         RuleFor(escola => escola.Id)
             .GreaterThanOrEqualTo(0)
@@ -61,7 +64,7 @@ public class ValidadorEscola : AbstractValidator<Escola>
             .IsInEnum()
             .WithMessage("Valor de {PropertyName} fora do Enum!");
 
-        RuleFor(empresa => empresa.IdEndereco)
+        RuleFor(escola => escola.IdEndereco)
             .GreaterThanOrEqualTo(0)
             .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
             .Must(VerificaSeExisteEndereco)
@@ -70,12 +73,31 @@ public class ValidadorEscola : AbstractValidator<Escola>
         RuleFor(escola => escola.ListaConvenios)
             .NotNull()
             .WithMessage("{PropertyName} nao pode ser um valor nulo!");
+
+        RuleSet("Deletar", () =>
+        {
+            RuleFor(escola => escola.Id)
+                .Must(VerificaSeExisteConvenio)
+                .WithMessage("Nao e possivel excluir Escola pois possui convenio ativo!");  
+        });
     }
 
     private bool VerificaSeExisteEndereco(int idEndereco)
     {
         var ListaEnderecos = _repositorioEndereco.ObterTodos();
-        return ListaEnderecos.Exists(endereco => endereco.Id == idEndereco);
+        if (ListaEnderecos.FirstOrDefault(endereco => endereco.Id == idEndereco) == null)
+            return false;
+
+        return true;
+    }
+
+    private bool VerificaSeExisteConvenio(int idEscola)
+    {
+        var ListaConvenios = _repositorioConvenio.ObterTodos();
+        if (ListaConvenios.FirstOrDefault(convenio => convenio.IdEscola == idEscola) != null)
+            return false;
+
+        return true;
     }
 
     private bool VerificaSeContemSomenteNumeros(string stringEntrada)

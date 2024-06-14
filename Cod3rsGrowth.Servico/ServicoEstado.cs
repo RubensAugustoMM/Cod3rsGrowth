@@ -31,7 +31,13 @@ public class ServicoEstado : IRepositorioEstado
 
     public void Deletar(int Id)
     {
-        throw new NotImplementedException();
+        var EstadoDeletar = _repositorioEstado.ObterPorId(Id);
+        var ResultadoValidacao = _validadorEstado.Validate(EstadoDeletar, options => options.IncludeRuleSets("Deletar"));
+
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
+        _repositorioEstado.Deletar(Id);
     }
 
     public Estado ObterPorId(int Id)
