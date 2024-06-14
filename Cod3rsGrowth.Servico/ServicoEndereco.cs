@@ -8,15 +8,11 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEndereco : IRepositorioEndereco
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
-    private readonly IRepositorioEmpresa _repositorioEmpresa;
-    private readonly IRepositorioEscola _repositorioEscola;
     private readonly ValidadorEndereco _validadorEndereco;
 
-    public ServicoEndereco(IRepositorioEndereco repositorioEndereco,IRepositorioEmpresa repositorioEmpresa,IRepositorioEscola repositorioEscola, ValidadorEndereco validadorEndereco)
+    public ServicoEndereco(IRepositorioEndereco repositorioEndereco, ValidadorEndereco validadorEndereco)
     {
         _repositorioEndereco = repositorioEndereco;
-        _repositorioEmpresa = repositorioEmpresa;
-        _repositorioEscola = repositorioEscola;
         _validadorEndereco = validadorEndereco;
     }
 
@@ -35,16 +31,12 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public void Deletar(int Id)
     {
-        var ListaEscolas = _repositorioEscola.ObterTodos();
-        var ListaEmpresas = _repositorioEmpresa.ObterTodos();
-        var Escola = ListaEscolas.FirstOrDefault(escola => escola.IdEndereco == Id);
-        var Empresa = ListaEmpresas.FirstOrDefault(empresa => empresa.IdEndereco == Id);
+        var EnderecoDeletar = ObterPorId(Id);
+        var ResultadoValidacao = _validadorEndereco.Validate(EnderecoDeletar, options => options.IncludeRuleSets("Deletar")); 
 
-        if (Escola != null)
-            throw new Exception("Nao e possivel excluir Endereco relacionado a Escola existente!");
-        if (Empresa != null)
-            throw new Exception("Nao e possivel excluir Endereco relacionado a Empresa existente!");
-
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
         _repositorioEndereco.Deletar(Id);
     }
 

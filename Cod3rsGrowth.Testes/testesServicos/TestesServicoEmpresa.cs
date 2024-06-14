@@ -526,7 +526,7 @@ public class TestesServicoEmpresa : TesteBase
     }
 
     [Fact]
-    public void Deletar_deve_lancar_Exception_quando_informado_Empresa_com_Convenio_Existente()
+    public void Deletar_deve_lancar_ValidaitonException_quando_informado_Empresa_com_Convenio_Existente()
     {
         var EmpresaEntrada = CriaNovaEmpresaTeste();
         EmpresaEntrada.Id = 401;
@@ -543,7 +543,7 @@ public class TestesServicoEmpresa : TesteBase
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
         _tabelas.Convenios.Value.Add(ConvenioEntrada);
 
-        var excecao = Assert.Throws<Exception>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEmpresa.Deletar(EmpresaEntrada.Id));
 
         Assert.Equal("Nao e possivel excluir Empresa pois possui convenio ativo!", excecao.Message);
     }

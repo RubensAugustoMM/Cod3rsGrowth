@@ -508,7 +508,7 @@ public class TestesServicoEscola : TesteBase
     }
 
     [Fact]
-    public void Deletar_deve_lancar_Exception_quando_informado_Escola_com_Convenio_Existente()
+    public void Deletar_deve_lancar_ValidationException_quando_informado_Escola_com_Convenio_Existente()
     {
         var EscolaEntrada = CriaNovaEscolaTeste();
         EscolaEntrada.Id = 601;
@@ -519,13 +519,13 @@ public class TestesServicoEscola : TesteBase
             Objeto = "objeto",
             Valor = 2.0M,
             DataInicio = new DateTime(1900, 2, 3),
-            IdEscola = 10,
-            IdEmpresa = EscolaEntrada.Id
+            IdEscola = EscolaEntrada.Id,
+            IdEmpresa = 10
         };
         _tabelas.Escolas.Value.Add(EscolaEntrada);
         _tabelas.Convenios.Value.Add(ConvenioEntrada);
 
-        var excecao = Assert.Throws<Exception>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
     
         Assert.Equal("Nao e possivel excluir Escola pois possui convenio ativo!", excecao.Message);
     }

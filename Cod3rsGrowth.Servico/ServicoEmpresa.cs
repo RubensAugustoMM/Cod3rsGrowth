@@ -8,14 +8,12 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEmpresa : IRepositorioEmpresa
 {
     private readonly IRepositorioEmpresa _repositorioEmpresa;
-    private readonly IRepositorioConvenio _repositorioConvenio;
     private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEmpresa _validadorEmpresa;
     
-    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa,IRepositorioConvenio repositorioConvenio, IRepositorioEndereco repositorioEndereco,ValidadorEmpresa validadorEmpresa)
+    public ServicoEmpresa(IRepositorioEmpresa repositorioEmpresa, IRepositorioEndereco repositorioEndereco,ValidadorEmpresa validadorEmpresa)
     {
         _repositorioEmpresa = repositorioEmpresa;
-        _repositorioConvenio = repositorioConvenio;
         _repositorioEndereco = repositorioEndereco;
         _validadorEmpresa = validadorEmpresa;
     }
@@ -36,12 +34,11 @@ public class ServicoEmpresa : IRepositorioEmpresa
     public void Deletar(int id)
     {
         var EmpresaDeletar = ObterPorId(id);
-        var ListaConvenios = _repositorioConvenio.ObterTodos();
-        var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == id);
+        var ResultadoValidacao = _validadorEmpresa.Validate(EmpresaDeletar, options => options.IncludeRuleSets("Deletar"));
 
-        if (Convenio != null)
-            throw new Exception("Nao e possivel excluir Empresa pois possui convenio ativo!");
-
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
         _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
         _repositorioEmpresa.Deletar(id);
     }

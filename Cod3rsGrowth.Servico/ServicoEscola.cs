@@ -9,14 +9,12 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEscola : IRepositorioEscola
 {
     private readonly IRepositorioEscola _repositorioEscola;
-    private readonly IRepositorioConvenio _repositorioConvenio;
     private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEscola _validadorEscola;
 
-    public ServicoEscola(IRepositorioEscola repositorioEscola,IRepositorioConvenio repositorioConvenio, IRepositorioEndereco repositorioEndereco, ValidadorEscola validadorEscola)
+    public ServicoEscola(IRepositorioEscola repositorioEscola, IRepositorioEndereco repositorioEndereco, ValidadorEscola validadorEscola)
     {
         _repositorioEscola = repositorioEscola;
-        _repositorioConvenio = repositorioConvenio;
         _repositorioEndereco = repositorioEndereco;
         _validadorEscola = validadorEscola;
     }
@@ -36,14 +34,13 @@ public class ServicoEscola : IRepositorioEscola
 
     public void Deletar(int id)
     {
-        var EmpresaDeletar = ObterPorId(id);
-        var ListaConvenios = _repositorioConvenio.ObterTodos();
-        var Convenio = ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == EmpresaDeletar.Id);
+        var EscolaDeletar = ObterPorId(id);
+        var ResultadoValidacao = _validadorEscola.Validate(EscolaDeletar, options => options.IncludeRuleSets("Deletar"));
 
-        if (Convenio != null)
-            throw new Exception("Nao e possivel excluir Escola pois possui convenio ativo!");
-
-        _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
+        _repositorioEndereco.Deletar(EscolaDeletar.IdEndereco);
         _repositorioEscola.Deletar(id);
     }
 

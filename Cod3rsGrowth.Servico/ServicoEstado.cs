@@ -8,13 +8,11 @@ namespace Cod3rsGrowth.Servico;
 public class ServicoEstado : IRepositorioEstado
 {
     private readonly IRepositorioEstado _repositorioEstado;
-    private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly ValidadorEstado _validadorEstado;
 
-    public ServicoEstado(IRepositorioEstado repositorioEstado,IRepositorioEndereco repositorioEndereco, ValidadorEstado validadorEstado)
+    public ServicoEstado(IRepositorioEstado repositorioEstado, ValidadorEstado validadorEstado)
     {
         _repositorioEstado = repositorioEstado;
-        _repositorioEndereco = repositorioEndereco;
         _validadorEstado = validadorEstado;
     }
 
@@ -33,12 +31,12 @@ public class ServicoEstado : IRepositorioEstado
 
     public void Deletar(int Id)
     {
-        var ListaEnderecos = _repositorioEndereco.ObterTodos();
-        var Endereco = ListaEnderecos.FirstOrDefault(endereco => endereco.IdEstado == Id);
+        var EstadoDeletar = _repositorioEstado.ObterPorId(Id);
+        var ResultadoValidacao = _validadorEstado.Validate(EstadoDeletar, options => options.IncludeRuleSets("Deletar"));
 
-        if (Endereco != null)
-            throw new Exception("Nao e possivel excluir Estado relacionado a Endereco existente!");
-
+        if (!ResultadoValidacao.IsValid)
+            throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
+        
         _repositorioEstado.Deletar(Id);
     }
 

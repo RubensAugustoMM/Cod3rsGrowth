@@ -391,7 +391,7 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Fact]
-    public void Deletar_deve_lancar_Exception_quando_informado_Endereco_com_Empresa_existente()
+    public void Deletar_deve_lancar_ValidationException_quando_informado_Endereco_com_Empresa_existente()
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Id = 501;
@@ -414,14 +414,16 @@ public class TestesServicoEndereco : TesteBase
         _tabelas.Enderecos.Value.Add(EnderecoEntrada);
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
 
-        var excecao = Assert.Throws<Exception>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
     
         Assert.Equal("Nao e possivel excluir Endereco relacionado a Empresa existente!", excecao.Message);
     }
 
     [Fact]
-    public void Deletar_deve_lancar_Exception_quando_informado_Endereco_com_Escola_existente()
+    public void Deletar_deve_lancar_ValidationException_quando_informado_Endereco_com_Escola_existente()
     {
+        var EnderecoEntrada = CriaNovoEnderecoTeste();
+        EnderecoEntrada.Id = 503;
         Escola EscolaEntrada = new()
         {
             Id = 506,
@@ -433,14 +435,12 @@ public class TestesServicoEndereco : TesteBase
             InicioAtividade = new DateTime(1234, 12, 3),
             CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
             OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
-            IdEndereco = 501   
+            IdEndereco = EnderecoEntrada.Id
         };
-        var EnderecoEntrada = CriaNovoEnderecoTeste();
-        EnderecoEntrada.Id = 501;
         _tabelas.Enderecos.Value.Add(EnderecoEntrada);
         _tabelas.Escolas.Value.Add(EscolaEntrada);
 
-        var excecao = Assert.Throws<Exception>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Deletar(EnderecoEntrada.Id));
     
         Assert.Equal("Nao e possivel excluir Endereco relacionado a Escola existente!", excecao.Message);
     }
