@@ -4,8 +4,8 @@ namespace Cod3rsGrowth.Testes;
 
 public partial class TabelaSingleton
 {
-    private readonly static TabelaSingleton _instance = new TabelaSingleton();
-
+    private static TabelaSingleton _instance = new TabelaSingleton();
+    private static object _singletonLock = new object();
     private TabelaSingleton()
     {
 
@@ -15,9 +15,13 @@ public partial class TabelaSingleton
     {
         get
         {
-            return _instance;
+            lock (_singletonLock)
+            {
+                return _instance;
+            }
         }
     }
+    
     public Lazy<List<Convenio>> Convenios = new Lazy<List<Convenio>>(() =>
     {
         return new List<Convenio>();

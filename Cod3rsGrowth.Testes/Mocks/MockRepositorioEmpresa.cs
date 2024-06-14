@@ -22,7 +22,6 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         empresaExistente.NaturezaJuridica = empresaAtualizada.NaturezaJuridica;
         empresaExistente.Porte = empresaAtualizada.Porte;
         empresaExistente.MatrizFilial = empresaAtualizada.MatrizFilial;
-        empresaExistente.ListaConvenios = empresaAtualizada.ListaConvenios;
     }
 
     public void Criar(Empresa empresaCriada)
@@ -30,16 +29,14 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         Tabelas.Empresas.Value.Add(empresaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EmpresaDeletada = ObterPorId(Id);
-
-        Tabelas.Empresas.Value.Remove(EmpresaDeletada);
+        Tabelas.Empresas.Value.Remove(ObterPorId(id));
     }
 
     public Empresa ObterPorId(int Id)
     {
-        return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhuma Empresa possui um Id correspondente ao passado\n");
+        return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Empresa> ObterTodos()

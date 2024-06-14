@@ -18,8 +18,6 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         enderecoExistente.Rua = enderecoAtualizado.Rua;
         enderecoExistente.Complemento = enderecoAtualizado.Complemento;
         enderecoExistente.IdEstado = enderecoAtualizado.IdEstado;
-        enderecoExistente.ListaEscolas = enderecoAtualizado.ListaEscolas;
-        enderecoExistente.ListaEmpresas = enderecoAtualizado.ListaEmpresas;
     }
 
     public void Criar(Endereco enderecoCriado)
@@ -27,16 +25,14 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         Tabelas.Enderecos.Value.Add(enderecoCriado);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EnderecoDeletado = ObterPorId(Id);
-
-        Tabelas.Enderecos.Value.Remove(EnderecoDeletado);
+        Tabelas.Enderecos.Value.Remove(ObterPorId(id));
     }
 
     public Endereco ObterPorId(int Id)
     {
-        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum Endereco possui um Id correspondente ao passado\n");
+        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Endereco> ObterTodos()

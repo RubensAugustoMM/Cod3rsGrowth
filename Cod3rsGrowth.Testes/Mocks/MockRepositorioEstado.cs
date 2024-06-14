@@ -23,14 +23,12 @@ public class MockRepositorioEstado : IRepositorioEstado
 
     public void Deletar(int id)
     {
-        var EstadoDeletado = ObterPorId(id);
-
-        Tabelas.Estados.Value.Remove(EstadoDeletado);
+        Tabelas.Estados.Value.Remove(ObterPorId(id));
     }
 
     public Estado ObterPorId(int Id)
     {
-        return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum estado possui um Id correspondente ao passado\n");
+        return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Estado com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Estado> ObterTodos()

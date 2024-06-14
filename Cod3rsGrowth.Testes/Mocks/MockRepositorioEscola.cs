@@ -28,16 +28,14 @@ public class MockRepositorioEscola : IRepositorioEscola
         Tabelas.Escolas.Value.Add(escolaCriada);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var EscolaDeletada = ObterPorId(Id);
-
-        Tabelas.Escolas.Value.Remove(EscolaDeletada);
+        Tabelas.Escolas.Value.Remove(ObterPorId(id));
     }
 
     public Escola ObterPorId(int Id)
     {
-        return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhuma Escola possui Id correspondente ao fornecido\n");
+        return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Escola> ObterTodos()

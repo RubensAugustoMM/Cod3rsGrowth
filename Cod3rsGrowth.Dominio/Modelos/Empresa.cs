@@ -10,11 +10,12 @@ public class Empresa
     public string NomeFantasia { get; set; }
     public string Cnpj { get; set; }
     public bool SitucaoCadastral { get; set; }
-    public DateTime DataSituacaoCadastral { get; set; }
-    public DateTime DataAbertura { get; set; }
+    public DateTime DataSituacaoCadastral { get; set; } = new();
+    public DateTime DataAbertura { get; set; } = new();
     public decimal CapitalSocial { get; set; }
     public NaturezaJuridicaEnums NaturezaJuridica { get; set; }
     public PorteEnums Porte { get; set; }
     public MatrizFilialEnums MatrizFilial { get; set; }
-    public List<Convenio> ListaConvenios { get; set; } = new();
+    public int IdEndereco { get; set; }
+    public List<Convenio> ListaConvenio { get; set; } = new();
 }

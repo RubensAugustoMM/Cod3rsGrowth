@@ -6,7 +6,7 @@ public class TesteBase : IDisposable
 {
     protected ServiceProvider _serviceProvider { get; set; }
 
-    public TesteBase()
+    public TesteBase() 
     {
         var ServiceCollection = new ServiceCollection();
         ModuloInjetor.InjetaDependencias(ServiceCollection);

@@ -25,16 +25,14 @@ public class MockRepositorioConvenio : IRepositorioConvenio
         Tabelas.Convenios.Value.Add(convenioCriado);
     }
 
-    public void Deletar(int Id)
+    public void Deletar(int id)
     {
-        var ConvenioDeletado = ObterPorId(Id);
-
-        Tabelas.Convenios.Value.Remove(ConvenioDeletado);
+        Tabelas.Convenios.Value.Remove(ObterPorId(id));
     }
 
     public Convenio ObterPorId(int Id)
     {
-        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception("Nenhum convenio possui Id correspondente ao fornecido\n");
+        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
     }
 
     public List<Convenio> ObterTodos()
