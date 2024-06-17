@@ -5,9 +5,9 @@ using LinqToDB.Data;
 
 namespace Cod3rsGrowth.Infra
 {
-    public class ContextoAplicacao : DataConnection
+    public class ContextoBancoCod3rsGrowth : DataConnection
     {
-        public ContextoAplicacao() : base("DESKTOP-DAA9S87\SQLEXPRESS")
+        public ContextoBancoCod3rsGrowth() : base("DESKTOP-DAA9S87\SQLEXPRESS")
         {
        
         }
