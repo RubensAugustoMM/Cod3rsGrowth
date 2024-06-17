@@ -25,8 +25,15 @@ public class RepositorioEndereco : IRepositorioEndereco
         throw new NotImplementedException();
     }
 
-    public List<Endereco> ObterTodos()
+    public List<Endereco> ObterTodos(string filtro)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            var query = from e in contexto.TabelaEnderecos
+                        where e.Cep == filtro
+                        select e;
+
+            return query.ToList();
+        }
     }
 }

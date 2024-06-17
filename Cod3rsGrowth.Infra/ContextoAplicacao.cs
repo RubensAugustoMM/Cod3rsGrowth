@@ -16,6 +16,6 @@ namespace Cod3rsGrowth.Infra
         public ITable<Empresa> TabelaEmpresas => this.GetTable<Empresa>();
         public ITable<Endereco> TabelaEnderecos => this.GetTable<Endereco>();
         public ITable<Escola> TabelaEscolas => this.GetTable<Escola>();
-        public ITable<Estado> TabelaEstado => this.GetTable<Estado>();
+        public ITable<Estado> TabelaEstados => this.GetTable<Estado>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -25,8 +26,15 @@ public class RepositorioConvenio : IRepositorioConvenio
         throw new NotImplementedException();
     }
 
-    public List<Convenio> ObterTodos()
+    public List<Convenio> ObterTodos(string filtro)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            var query = from c in contexto.TabelaConvenios
+                        where c.Objeto == filtro
+                        select c;
+
+            return query.ToList();
+        }
     }
 }

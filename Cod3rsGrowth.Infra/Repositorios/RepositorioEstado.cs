@@ -25,8 +25,15 @@ public class RepositorioEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public List<Estado> ObterTodos()
+    public List<Estado> ObterTodos(string filtro)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            var query = from e in contexto.TabelaEstados
+                        where e.Nome == filtro || e.Sigla == filtro
+                        select e;
+
+            return query.ToList();
+        }
     }
 }

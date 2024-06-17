@@ -25,8 +25,15 @@ public class RepositorioEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public List<Escola> ObterTodos()
+    public List<Escola> ObterTodos(string filtro)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            var query = from e in contexto.TabelaEscolas
+                        where e.Nome == filtro
+                        select e;
+
+            return query.ToList();
+        }
     }
 }

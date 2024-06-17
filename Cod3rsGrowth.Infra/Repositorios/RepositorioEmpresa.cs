@@ -25,8 +25,15 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         throw new NotImplementedException();
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Empresa> ObterTodos(string filtro)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            var query = from e in contexto.TabelaEmpresas
+                        where e.NomeFantasia == filtro || e.RazaoSocial == filtro
+                        select e;
+
+            return query.ToList();
+        }
     }
 }
