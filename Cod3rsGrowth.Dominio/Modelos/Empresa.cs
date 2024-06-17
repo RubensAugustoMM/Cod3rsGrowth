@@ -1,7 +1,7 @@
 using Cod3rsGrowth.Dominio.Enums;
-using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
+
 public class Empresa
 {
     public int Id { get; set; }

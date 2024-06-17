@@ -1,7 +1,5 @@
-using System;
-
-
 namespace Cod3rsGrowth.Dominio.Modelos;
+
 public class Endereco
 {
     public int Id { get; set; }
