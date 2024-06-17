@@ -29,6 +29,9 @@ public class RepositorioEscola : IRepositorioEscola
     {
         using (var contexto = new ContextoAplicacao())
         {
+            if (string.IsNullOrWhiteSpace(filtro))
+                return contexto.TabelaEscolas.ToList();
+
             var query = from e in contexto.TabelaEscolas
                         where e.Nome == filtro
                         select e;

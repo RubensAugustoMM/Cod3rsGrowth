@@ -29,6 +29,9 @@ public class RepositorioEndereco : IRepositorioEndereco
     {
         using (var contexto = new ContextoAplicacao())
         {
+            if (string.IsNullOrWhiteSpace(filtro))
+                return contexto.TabelaEnderecos.ToList();
+
             var query = from e in contexto.TabelaEnderecos
                         where e.Cep == filtro
                         select e;

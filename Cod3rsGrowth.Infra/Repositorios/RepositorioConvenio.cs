@@ -30,6 +30,9 @@ public class RepositorioConvenio : IRepositorioConvenio
     {
         using (var contexto = new ContextoAplicacao())
         {
+            if (string.IsNullOrWhiteSpace(filtro))
+                return contexto.TabelaConvenios.ToList();
+
             var query = from c in contexto.TabelaConvenios
                         where c.Objeto == filtro
                         select c;

@@ -29,6 +29,9 @@ public class RepositorioEstado : IRepositorioEstado
     {
         using (var contexto = new ContextoAplicacao())
         {
+            if (string.IsNullOrWhiteSpace(filtro))
+                return contexto.TabelaEstados.ToList();
+
             var query = from e in contexto.TabelaEstados
                         where e.Nome == filtro || e.Sigla == filtro
                         select e;

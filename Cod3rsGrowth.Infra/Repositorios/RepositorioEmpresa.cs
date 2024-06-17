@@ -29,6 +29,9 @@ public class RepositorioEmpresa : IRepositorioEmpresa
     {
         using (var contexto = new ContextoAplicacao())
         {
+            if (string.IsNullOrWhiteSpace(filtro))
+                return contexto.TabelaEmpresas.ToList();
+
             var query = from e in contexto.TabelaEmpresas
                         where e.NomeFantasia == filtro || e.RazaoSocial == filtro
                         select e;
