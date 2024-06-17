@@ -1,9 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
-using LinqToDB.Mapping;
+﻿using Cod3rsGrowth.Dominio.Enums;namespace Cod3rsGrowth.Dominio.Modelos;
 
-namespace Cod3rsGrowth.Dominio.Modelos;
-
-[Table("TabelaEscolas")]
 public class Escola
 {
     public int Id { get; set; }

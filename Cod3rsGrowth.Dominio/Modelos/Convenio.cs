@@ -1,6 +1,3 @@
-using System;
-using LinqToDB.Mapping;
-
 namespace Cod3rsGrowth.Dominio.Modelos;
 
 public class Convenio

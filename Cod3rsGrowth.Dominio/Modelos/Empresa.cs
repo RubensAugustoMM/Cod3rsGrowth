@@ -1,6 +1,4 @@
 using Cod3rsGrowth.Dominio.Enums;
-using LinqToDB.Mapping;
-using System;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
 
