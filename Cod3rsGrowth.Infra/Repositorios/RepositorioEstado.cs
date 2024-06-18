@@ -33,19 +33,19 @@ public class RepositorioEstado : IRepositorioEstado
             IQueryable<Estado> query = from c in contexto.TabelaEstados
                                        select c;
 
-            if (filtroEstado == null)
-                return query.ToList();
+            if (filtroEstado != null)
+            {
+                if (filtroEstado.NomeFiltro != null)
+                    query = from c in query
+                            where c.Nome.Contains(filtroEstado.NomeFiltro)
+                            select c;
 
-            if (filtroEstado.NomeFiltro != null)
-                query = from c in query
-                        where c.Nome.Contains(filtroEstado.NomeFiltro)
-                        select c;
-  
-            if (filtroEstado.SiglaFiltro != null)
-                query = from c in contexto.TabelaEstados
-                        where c.Sigla.Contains(filtroEstado.SiglaFiltro)
-                        select c;
-                                                
+                if (filtroEstado.SiglaFiltro != null)
+                    query = from c in contexto.TabelaEstados
+                            where c.Sigla.Contains(filtroEstado.SiglaFiltro)
+                            select c;
+            }
+
             return query.ToList();
         }
     }
