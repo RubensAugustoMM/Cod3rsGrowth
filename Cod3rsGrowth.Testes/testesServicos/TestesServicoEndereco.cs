@@ -53,7 +53,7 @@ public class TestesServicoEndereco : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_vazia()
     {
-        var ValorRetornado = _servicoEndereco.ObterTodos();
+        var ValorRetornado = _servicoEndereco.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }

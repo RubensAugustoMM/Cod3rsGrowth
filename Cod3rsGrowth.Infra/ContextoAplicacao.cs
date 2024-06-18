@@ -1,5 +1,4 @@
-﻿using System;
-using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB;
 using LinqToDB.Data;
 

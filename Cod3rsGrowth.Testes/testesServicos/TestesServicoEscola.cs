@@ -65,7 +65,7 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        var ValorRetornado = _servicoEscola.ObterTodos();
+        var ValorRetornado = _servicoEscola.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }

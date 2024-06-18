@@ -30,30 +30,23 @@ public class RepositorioEstado : IRepositorioEstado
     {
         using (var contexto = new ContextoAplicacao())
         {
-            List<Estado> query = new();
+            IQueryable<Estado> query = from c in contexto.TabelaEstados
+                                       select c;
 
             if (filtroEstado == null)
-            {
-                query = (from c in contexto.TabelaEstados
-                         select c)
-                        .ToList();
-
-                return query;
-            }
+                return query.ToList();
 
             if (filtroEstado.NomeFiltro != null)
-                query = (from c in contexto.TabelaEstados
-                         where c.Nome.Contains(filtroEstado.NomeFiltro)
-                         select c)
-                        .ToList();
+                query = from c in query
+                        where c.Nome.Contains(filtroEstado.NomeFiltro)
+                        select c;
   
             if (filtroEstado.SiglaFiltro != null)
-                query = (from c in contexto.TabelaEstados
-                         where c.Sigla.Contains(filtroEstado.SiglaFiltro)
-                         select c)
-                        .ToList();
+                query = from c in contexto.TabelaEstados
+                        where c.Sigla.Contains(filtroEstado.SiglaFiltro)
+                        select c;
                                                 
-            return query;
+            return query.ToList();
         }
     }
 }

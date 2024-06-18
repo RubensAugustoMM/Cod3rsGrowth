@@ -24,49 +24,46 @@ public class RepositorioEndereco : IRepositorioEndereco
     public Endereco ObterPorId(int Id)
     {
         throw new NotImplementedException();
-    } 
+    }
 
     public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
         using (var contexto = new ContextoAplicacao())
         {
-            List<Endereco> query = new();
+
+
+            IQueryable<Endereco> query = from e in contexto.TabelaEnderecos
+                                         select e;
 
             if (filtroEndereco == null)
-            {
-                query = (from e in contexto.TabelaEnderecos
-                         select e)
-                        .ToList();
-
-                return query;
-            }
+                return query.ToList();
 
             if (filtroEndereco.IdEstadoFiltro != null)
-                query = (from e in contexto.TabelaEnderecos
+                query = from e in contexto.TabelaEnderecos
                         where e.IdEstado == filtroEndereco.IdEstadoFiltro
-                        select e).ToList();
+                        select e;
 
             if (filtroEndereco.MunicipioFiltro != null)
-                query = (from e in contexto.TabelaEnderecos
+                query = from e in contexto.TabelaEnderecos
                         where e.Municipio.Contains(filtroEndereco.MunicipioFiltro)
-                        select e).ToList();
+                        select e;
 
             if (filtroEndereco.BairroFiltro != null)
-                query = (from e in contexto.TabelaEnderecos
+                query = from e in contexto.TabelaEnderecos
                         where e.Bairro.Contains(filtroEndereco.BairroFiltro)
-                        select e).ToList();
+                        select e;
 
             if (filtroEndereco.RuaFiltro != null)
-                query = (from e in contexto.TabelaEnderecos
+                query = from e in contexto.TabelaEnderecos
                         where e.Rua.Contains(filtroEndereco.RuaFiltro)
-                        select e).ToList();
+                        select e;
 
             if (filtroEndereco.CepFiltro != null)
-                query = (from e in contexto.TabelaEnderecos
+                query = from e in contexto.TabelaEnderecos
                         where e.Cep.Contains(filtroEndereco.CepFiltro)
-                        select e).ToList();
+                        select e;
 
-            return query;
+            return query.ToList();
         }
     }
 }

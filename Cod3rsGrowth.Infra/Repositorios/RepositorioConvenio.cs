@@ -26,86 +26,74 @@ public class RepositorioConvenio : IRepositorioConvenio
     {
         throw new NotImplementedException();
     }
-    
+
     public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
     {
         using (var contexto = new ContextoAplicacao())
         {
-            List<Convenio> query = new();
+            IQueryable<Convenio> query;
+
+            query = from c in contexto.TabelaConvenios
+                    select c;
 
             if (filtroConvenio == null)
-            {
-                query = (from c in contexto.TabelaConvenios
-                         select c)
-                        .ToList();
-
-                return query;
-            }
+                return query.ToList();
 
             if (filtroConvenio.IdEscolaFiltro != null)
-                query = (from c in contexto.TabelaConvenios
-                             where c.IdEscola == filtroConvenio.IdEscolaFiltro
-                             select c)
-                             .ToList();
+                query = from c in query
+                        where c.IdEscola == filtroConvenio.IdEscolaFiltro
+                        select c;
 
-            if(filtroConvenio.IdEscolaFiltro != null)
-                query = (from c in contexto.TabelaConvenios
-                             where c.IdEmpresa == filtroConvenio.IdEmpresaFiltro
-                             select c)
-                             .ToList();
- 
+            if (filtroConvenio.IdEscolaFiltro != null)
+                query = from c in query
+                        where c.IdEmpresa == filtroConvenio.IdEmpresaFiltro
+                        select c;
+
             if (filtroConvenio.DataInicioFiltro != null)
             {
                 if (filtroConvenio.MaiorOuIgualDataInicio == null)
-                    query = (from c in contexto.TabelaConvenios
-                             where c.DataInicio == filtroConvenio.DataInicioFiltro
-                             select c)
-                             .ToList();
+                    query = from c in query
+                            where c.DataInicio == filtroConvenio.DataInicioFiltro
+                            select c;
                 else
-                    query = (from c in contexto.TabelaConvenios
-                             where c.DataInicio >= filtroConvenio.DataInicioFiltro && filtroConvenio.MaiorOuIgualDataInicio.Value ||
+                    query = from c in query
+                            where c.DataInicio >= filtroConvenio.DataInicioFiltro && filtroConvenio.MaiorOuIgualDataInicio.Value ||
                                    c.DataInicio <= filtroConvenio.DataInicioFiltro && !filtroConvenio.MaiorOuIgualDataInicio.Value
-                             select c)
-                             .ToList();
+                            select c;
             }
 
             if (filtroConvenio.ValorFiltro != null)
             {
                 if (filtroConvenio.MaiorOuIgualValor != null)
-                    query = (from c in contexto.TabelaConvenios
-                             where c.Valor == filtroConvenio.ValorFiltro
-                             select c)
-                             .ToList();
+                    query = from c in query
+                            where c.Valor == filtroConvenio.ValorFiltro
+                            select c;
                 else
-                    query = (from c in contexto.TabelaConvenios
-                             where c.Valor >= filtroConvenio.ValorFiltro && filtroConvenio.MaiorOuIgualValor.Value ||
+                    query = from c in query
+                            where c.Valor >= filtroConvenio.ValorFiltro && filtroConvenio.MaiorOuIgualValor.Value ||
                                    c.Valor <= filtroConvenio.ValorFiltro && !filtroConvenio.MaiorOuIgualValor.Value
-                             select c)
-                             .ToList();
+                            select c;
             }
 
             if (filtroConvenio.DataTerminoFiltro != null)
             {
                 if (filtroConvenio.MaiorOuIgualDataTermino == null)
-                    query = (from c in contexto.TabelaConvenios
-                             where c.DataTermino == filtroConvenio.DataTerminoFiltro
-                             select c)
-                             .ToList();
+                    query = from c in query
+                            where c.DataTermino == filtroConvenio.DataTerminoFiltro
+                            select c;
                 else
-                    query = (from c in contexto.TabelaConvenios
-                             where c.DataTermino >= filtroConvenio.DataTerminoFiltro && filtroConvenio.MaiorOuIgualDataTermino.Value ||
+                    query = from c in query
+                            where c.DataTermino >= filtroConvenio.DataTerminoFiltro && filtroConvenio.MaiorOuIgualDataTermino.Value ||
                                    c.DataTermino <= filtroConvenio.DataTerminoFiltro && !filtroConvenio.MaiorOuIgualDataTermino.Value
-                             select c)
-                             .ToList();
+                            select c;
             }
- 
+
             if (filtroConvenio.ObjetoFiltro != null)
-                query = (from c in contexto.TabelaConvenios
-                         where c.Objeto.Contains(filtroConvenio.ObjetoFiltro)
-                         select c)
-                        .ToList();
-                         
-            return query;
+                query = from c in query
+                        where c.Objeto.Contains(filtroConvenio.ObjetoFiltro)
+                        select c;
+
+            return query.ToList();
         }
     }
 }

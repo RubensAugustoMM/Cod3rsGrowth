@@ -1,4 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Enums;namespace Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Enums;
+
+namespace Cod3rsGrowth.Dominio.Modelos;
 
 public class Escola
 {

@@ -30,71 +30,56 @@ public class RepositorioEscola : IRepositorioEscola
     {
         using (var contexto = new ContextoAplicacao())
         {
-            List<Escola> query = new();
+            IQueryable<Escola> query = from e in contexto.TabelaEscolas
+                                 select e;
 
             if (filtroEscola == null)
-            {
-                query = (from e in contexto.TabelaEscolas
-                         select e)
-                        .ToList();
-
-                return query;
-            }
+                return query.ToList();
 
             if (filtroEscola.StatusAtividadeFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.StatusAtividade == filtroEscola.StatusAtividadeFiltro
-                         select e)
-                        .ToList();
+                query = from e in query
+                        where e.StatusAtividade == filtroEscola.StatusAtividadeFiltro
+                        select e;
 
             if (filtroEscola.CategoriaAdministrativaFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
-                         select e)
-                        .ToList();
+                query = from e in query
+                        where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
+                        select e;
  
             if (filtroEscola.CategoriaAdministrativaFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
-                         select e)
-                        .ToList();                           
+                query = from e in query
+                        where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
+                        select e;                           
 
             if (filtroEscola.InicioAtividadeFiltro != null)
             {
                 if (filtroEscola.InicioAtividadeFiltro == null)
-                    query = (from e in contexto.TabelaEscolas
-                             where e.InicioAtividade == filtroEscola.InicioAtividadeFiltro
-                             select e)
-                             .ToList();
+                    query = from e in query
+                            where e.InicioAtividade == filtroEscola.InicioAtividadeFiltro
+                            select e;
                 else
-                    query = (from e in contexto.TabelaEscolas
-                             where e.InicioAtividade >= filtroEscola.InicioAtividadeFiltro && filtroEscola.MaiorOuIgualInicioAtividade.Value ||
-                                   e.InicioAtividade <= filtroEscola.InicioAtividadeFiltro && !filtroEscola.MaiorOuIgualInicioAtividade.Value
-                             select e)
-                             .ToList();
+                    query = from e in query
+                            where e.InicioAtividade >= filtroEscola.InicioAtividadeFiltro && filtroEscola.MaiorOuIgualInicioAtividade.Value ||
+                                  e.InicioAtividade <= filtroEscola.InicioAtividadeFiltro && !filtroEscola.MaiorOuIgualInicioAtividade.Value
+                            select e;
             }
 
             if (filtroEscola.NomeFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.Nome.Contains(filtroEscola.NomeFiltro)
-                         select e)
-                        .ToList();
+                query = from e in query
+                        where e.Nome.Contains(filtroEscola.NomeFiltro)
+                        select e;
 
              if (filtroEscola.IdEnderecoFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.IdEndereco == filtroEscola.IdEnderecoFiltro
-                         select e)
-                        .ToList();         
+                query = from e in query
+                        where e.IdEndereco == filtroEscola.IdEnderecoFiltro
+                        select e;         
 
             if (filtroEscola.CodigoMecFiltro != null)
-                query = (from e in contexto.TabelaEscolas
-                         where e.CodigoMec.Contains(filtroEscola.CodigoMecFiltro)
-                         select e)
-                        .ToList();                  
+                query = from e in query
+                        where e.CodigoMec.Contains(filtroEscola.CodigoMecFiltro)
+                        select e;                  
 
-            return query;
+            return query.ToList();
         }
     }
-
-
 }

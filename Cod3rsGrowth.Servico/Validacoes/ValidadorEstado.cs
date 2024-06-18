@@ -41,7 +41,7 @@ public class ValidadorEstado : AbstractValidator<Estado>
 
     private bool VerificaSeExisteEndereco(int idEstado)
     {
-        var ListaEndereco = _repositorioEndereco.ObterTodos();
+        var ListaEndereco = _repositorioEndereco.ObterTodos(null);
         if (ListaEndereco.FirstOrDefault(endereco => endereco.IdEstado == idEstado) != null)
             return false;
 

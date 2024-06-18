@@ -62,7 +62,7 @@ public class TestesServicoEmpresa : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        var ValorRetornado = _servicoEmpresa.ObterTodos();
+        var ValorRetornado = _servicoEmpresa.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }
