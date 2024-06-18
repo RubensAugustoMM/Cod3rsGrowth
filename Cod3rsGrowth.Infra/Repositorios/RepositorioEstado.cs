@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.Filtros;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -25,18 +26,39 @@ public class RepositorioEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public List<Estado> ObterTodos(string filtro)
+    public List<Estado> ObterTodos()
     {
         using (var contexto = new ContextoAplicacao())
         {
-            if (string.IsNullOrWhiteSpace(filtro))
-                return contexto.TabelaEstados.ToList();
-
-            var query = from e in contexto.TabelaEstados
-                        where e.Nome == filtro || e.Sigla == filtro
-                        select e;
+            var query = from c in contexto.TabelaEstados
+                        select c;
 
             return query.ToList();
+        }
+    }
+
+    public List<Estado> ObterTodos(FiltroEstado? filtroEstado)
+    {
+        using (var contexto = new ContextoAplicacao())
+        {
+            List<Estado> query = new();
+
+            if (filtroEstado == null)
+                return ObterTodos();
+ 
+            if (filtroEstado.NomeFiltro != null)
+                query = (from c in contexto.TabelaEstados
+                         where c.Nome.Contains(filtroEstado.NomeFiltro)
+                         select c)
+                        .ToList();
+  
+            if (filtroEstado.SiglaFiltro != null)
+                query = (from c in contexto.TabelaEstados
+                         where c.Sigla.Contains(filtroEstado.SiglaFiltro)
+                         select c)
+                        .ToList();
+                                                
+            return query;
         }
     }
 }
