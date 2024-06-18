@@ -26,17 +26,6 @@ public class RepositorioEstado : IRepositorioEstado
         throw new NotImplementedException();
     }
 
-    public List<Estado> ObterTodos()
-    {
-        using (var contexto = new ContextoAplicacao())
-        {
-            var query = from c in contexto.TabelaEstados
-                        select c;
-
-            return query.ToList();
-        }
-    }
-
     public List<Estado> ObterTodos(FiltroEstado? filtroEstado)
     {
         using (var contexto = new ContextoAplicacao())
@@ -44,8 +33,14 @@ public class RepositorioEstado : IRepositorioEstado
             List<Estado> query = new();
 
             if (filtroEstado == null)
-                return ObterTodos();
- 
+            {
+                query = (from c in contexto.TabelaEstados
+                         select c)
+                        .ToList();
+
+                return query;
+            }
+
             if (filtroEstado.NomeFiltro != null)
                 query = (from c in contexto.TabelaEstados
                          where c.Nome.Contains(filtroEstado.NomeFiltro)

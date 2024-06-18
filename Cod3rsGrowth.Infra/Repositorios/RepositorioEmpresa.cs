@@ -26,17 +26,6 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         throw new NotImplementedException();
     }
 
-    public List<Empresa> ObterTodos()
-    {
-        using (var contexto = new ContextoAplicacao())
-        {
-            var query = from e in contexto.TabelaEmpresas
-                        select e;
-
-            return query.ToList();
-        }
-    }
-
     public List<Empresa> ObterTodos(FiltroEmpresa? filtroEmpresa)
     {
         using (var contexto = new ContextoAplicacao())
@@ -44,7 +33,13 @@ public class RepositorioEmpresa : IRepositorioEmpresa
             List<Empresa> query = new();
 
             if (filtroEmpresa == null)
-                return ObterTodos();
+            {
+                query = (from e in contexto.TabelaEmpresas
+                         select e)
+                        .ToList();
+
+                return query;
+            }
 
             if (filtroEmpresa.NaturezaJuridicaFiltro != null)
                 query = (from e in contexto.TabelaEmpresas

@@ -5,7 +5,6 @@ namespace Cod3rsGrowth.Dominio.Interfaces;
 
 public interface IRepositorioEmpresa
 {
-    List<Empresa> ObterTodos();
     List<Empresa> ObterTodos(FiltroEmpresa? FiltroEmpresa);
     Empresa ObterPorId(int Id);
     void Criar(Empresa empresaCriada);

@@ -1,3 +1,4 @@
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
@@ -45,8 +46,8 @@ public class ServicoEndereco : IRepositorioEndereco
         return _repositorioEndereco.ObterPorId(Id);
     }
 
-    public List<Endereco> ObterTodos()
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
-        return _repositorioEndereco.ObterTodos();
+        return _repositorioEndereco.ObterTodos(filtroEndereco);
     }
 }

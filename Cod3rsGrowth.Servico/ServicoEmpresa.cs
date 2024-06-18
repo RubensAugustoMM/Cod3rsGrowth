@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
@@ -48,8 +49,8 @@ public class ServicoEmpresa : IRepositorioEmpresa
         return _repositorioEmpresa.ObterPorId(Id);
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Empresa> ObterTodos(FiltroEmpresa? filtroEmpresa)
     {
-        return _repositorioEmpresa.ObterTodos();
+        return _repositorioEmpresa.ObterTodos(filtroEmpresa);
     }
 }

@@ -5,7 +5,6 @@ namespace Cod3rsGrowth.Dominio.Interfaces;
 
 public interface IRepositorioConvenio
 {
-    List<Convenio> ObterTodos();
     List<Convenio> ObterTodos(FiltroConvenio filtroConvenio);
     Convenio ObterPorId(int Id);
     void Criar(Convenio convenioCriado);

@@ -26,17 +26,6 @@ public class RepositorioEscola : IRepositorioEscola
         throw new NotImplementedException();
     }
 
-    public List<Escola> ObterTodos()
-    {
-        using (var contexto = new ContextoAplicacao())
-        {
-            var query = from e in contexto.TabelaEscolas
-                        select e;
-
-            return query.ToList();
-        }
-    }
-
     public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
     {
         using (var contexto = new ContextoAplicacao())
@@ -44,7 +33,13 @@ public class RepositorioEscola : IRepositorioEscola
             List<Escola> query = new();
 
             if (filtroEscola == null)
-                return ObterTodos();
+            {
+                query = (from e in contexto.TabelaEscolas
+                         select e)
+                        .ToList();
+
+                return query;
+            }
 
             if (filtroEscola.StatusAtividadeFiltro != null)
                 query = (from e in contexto.TabelaEscolas

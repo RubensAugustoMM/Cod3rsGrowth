@@ -24,18 +24,7 @@ public class RepositorioEndereco : IRepositorioEndereco
     public Endereco ObterPorId(int Id)
     {
         throw new NotImplementedException();
-    }
-
-    public List<Endereco> ObterTodos()
-    {
-        using (var contexto = new ContextoAplicacao())
-        {
-            var query = from e in contexto.TabelaEnderecos
-                        select e;
-
-            return query.ToList();
-        }
-    }
+    } 
 
     public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
@@ -44,7 +33,13 @@ public class RepositorioEndereco : IRepositorioEndereco
             List<Endereco> query = new();
 
             if (filtroEndereco == null)
-                return ObterTodos();
+            {
+                query = (from e in contexto.TabelaEnderecos
+                         select e)
+                        .ToList();
+
+                return query;
+            }
 
             if (filtroEndereco.IdEstadoFiltro != null)
                 query = (from e in contexto.TabelaEnderecos

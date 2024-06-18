@@ -26,18 +26,7 @@ public class RepositorioConvenio : IRepositorioConvenio
     {
         throw new NotImplementedException();
     }
-
-    public List<Convenio> ObterTodos()
-    {
-        using (var contexto = new ContextoAplicacao())
-        {
-            var query = from c in contexto.TabelaConvenios
-                        select c;
-
-            return query.ToList();
-        }
-    }
-
+    
     public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
     {
         using (var contexto = new ContextoAplicacao())
@@ -45,9 +34,15 @@ public class RepositorioConvenio : IRepositorioConvenio
             List<Convenio> query = new();
 
             if (filtroConvenio == null)
-                return ObterTodos();
+            {
+                query = (from c in contexto.TabelaConvenios
+                         select c)
+                        .ToList();
 
-            if(filtroConvenio.IdEscolaFiltro != null)
+                return query;
+            }
+
+            if (filtroConvenio.IdEscolaFiltro != null)
                 query = (from c in contexto.TabelaConvenios
                              where c.IdEscola == filtroConvenio.IdEscolaFiltro
                              select c)
