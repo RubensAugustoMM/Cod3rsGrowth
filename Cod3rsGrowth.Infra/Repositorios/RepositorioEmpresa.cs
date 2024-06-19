@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.Filtros;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -13,7 +14,10 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Insert(empresaCriada);
+        }
     }
 
     public void Deletar(int id)
