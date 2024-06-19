@@ -9,7 +9,10 @@ public class RepositorioEstado : IRepositorioEstado
 {
     public void Atualizar(Estado estadoAtualizado)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Update(estadoAtualizado);
+        }
     }
 
     public void Criar(Estado estadoCriado)

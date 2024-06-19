@@ -9,7 +9,10 @@ public class RepositorioEndereco : IRepositorioEndereco
 {
     public void Atualizar(Endereco endrecoAtualizado)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Update(endrecoAtualizado);
+        }
     }
 
     public void Criar(Endereco enderecoCriado)

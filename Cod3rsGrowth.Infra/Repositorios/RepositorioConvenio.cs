@@ -9,7 +9,10 @@ public class RepositorioConvenio : IRepositorioConvenio
 {
     public void Atualizar(Convenio convenioAtualizado)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao()) 
+        {
+            contexto.Update(convenioAtualizado);
+        }
     }
 
     public void Criar(Convenio convenioCriado)
