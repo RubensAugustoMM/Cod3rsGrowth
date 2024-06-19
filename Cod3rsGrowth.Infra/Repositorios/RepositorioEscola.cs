@@ -31,7 +31,7 @@ public class RepositorioEscola : IRepositorioEscola
         using (var contexto = new ContextoAplicacao())
         {
             IQueryable<Escola> query = from e in contexto.TabelaEscolas
-                                 select e;
+                                       select e;
 
             if (filtroEscola != null)
             {
@@ -52,7 +52,7 @@ public class RepositorioEscola : IRepositorioEscola
 
                 if (filtroEscola.InicioAtividadeFiltro != null)
                 {
-                    if (filtroEscola.InicioAtividadeFiltro == null)
+                    if (filtroEscola.MaiorOuIgualInicioAtividade == null)
                         query = from e in query
                                 where e.InicioAtividade == filtroEscola.InicioAtividadeFiltro
                                 select e;
