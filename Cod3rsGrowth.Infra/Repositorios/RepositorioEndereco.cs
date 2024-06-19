@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -13,7 +14,10 @@ public class RepositorioEndereco : IRepositorioEndereco
 
     public void Criar(Endereco enderecoCriado)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Insert(enderecoCriado);
+        }
     }
 
     public void Deletar(int id)

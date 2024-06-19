@@ -14,7 +14,10 @@ public class RepositorioConvenio : IRepositorioConvenio
 
     public void Criar(Convenio convenioCriado)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao()) 
+        {
+            contexto.Insert(convenioCriado);
+        }
     }
 
     public void Deletar(int id)
