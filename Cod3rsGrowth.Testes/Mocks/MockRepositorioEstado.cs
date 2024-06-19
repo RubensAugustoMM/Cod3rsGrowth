@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes.Mocks;
@@ -31,7 +32,7 @@ public class MockRepositorioEstado : IRepositorioEstado
         return Tabelas.Estados.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Estado com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Estado> ObterTodos()
+    public List<Estado> ObterTodos(FiltroEstado? filtroEstado)
     {
         return Tabelas.Estados.Value;
     }

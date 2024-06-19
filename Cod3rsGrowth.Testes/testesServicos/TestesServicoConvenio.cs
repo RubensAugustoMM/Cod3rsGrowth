@@ -21,9 +21,6 @@ public class TestesServicoConvenio : TesteBase
         _tabelas.Empresas.Value.Add(CriaNovaEmpresaTeste());
     }
 
-    
-    
-
     private Convenio CriaNovoConvenioDeTeste()
     {
         Convenio ConvenioRetornar = new()
@@ -83,7 +80,7 @@ public class TestesServicoConvenio : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_vazia()
     {         
-        var ValorRetornado = _servicoConvenio.ObterTodos();
+        var ValorRetornado = _servicoConvenio.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }

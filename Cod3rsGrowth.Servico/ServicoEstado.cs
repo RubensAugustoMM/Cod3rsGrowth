@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
@@ -45,8 +46,8 @@ public class ServicoEstado : IRepositorioEstado
         return _repositorioEstado.ObterPorId(Id);
     }
 
-    public List<Estado> ObterTodos()
+    public List<Estado> ObterTodos(FiltroEstado filtroEstado)
     {
-        return _repositorioEstado.ObterTodos();
+        return _repositorioEstado.ObterTodos(filtroEstado);
     }
 }
