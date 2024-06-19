@@ -25,7 +25,10 @@ public class RepositorioEndereco : IRepositorioEndereco
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Delete(id);
+        }
     }
 
     public Endereco ObterPorId(int Id)

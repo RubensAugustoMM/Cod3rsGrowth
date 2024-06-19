@@ -25,7 +25,10 @@ public class RepositorioEscola : IRepositorioEscola
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Delete(id);
+        }
     }
 
     public Escola ObterPorId(int Id)

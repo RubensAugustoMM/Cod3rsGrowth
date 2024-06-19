@@ -25,7 +25,10 @@ public class RepositorioEstado : IRepositorioEstado
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Delete(id);
+        }
     }
 
     public Estado ObterPorId(int Id)
