@@ -9,7 +9,10 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 {
     public void Atualizar(Empresa empresaAtualizada)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao()) 
+        {
+            contexto.Update(empresaAtualizada);
+        }
     }
 
     public void Criar(Empresa empresaCriada)

@@ -9,7 +9,10 @@ public class RepositorioEscola : IRepositorioEscola
 {
     public void Atualizar(Escola escolaAtualizada)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Update(escolaAtualizada);
+        }
     }
 
     public void Criar(Escola escolaCriada)
