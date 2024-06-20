@@ -33,7 +33,10 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public Empresa ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            return contexto.TabelaEmpresas.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n");
+        }
     }
 
     public List<Empresa> ObterTodos(FiltroEmpresa? filtroEmpresa)

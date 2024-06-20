@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using System.Data.Common;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB;
@@ -33,7 +34,10 @@ public class RepositorioConvenio : IRepositorioConvenio
 
     public Convenio ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            return contexto.TabelaConvenios.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
+        }
     }
 
     public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)

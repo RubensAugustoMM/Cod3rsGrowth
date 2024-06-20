@@ -33,7 +33,10 @@ public class RepositorioEstado : IRepositorioEstado
 
     public Estado ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            return contexto.TabelaEstados.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Estado com Id {Id} existe no contexto atual!\n");
+        }
     }
 
     public List<Estado> ObterTodos(FiltroEstado? filtroEstado)

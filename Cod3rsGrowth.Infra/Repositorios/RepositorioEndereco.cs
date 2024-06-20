@@ -33,7 +33,10 @@ public class RepositorioEndereco : IRepositorioEndereco
 
     public Endereco ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            return contexto.TabelaEnderecos.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
+        }
     }
 
     public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
