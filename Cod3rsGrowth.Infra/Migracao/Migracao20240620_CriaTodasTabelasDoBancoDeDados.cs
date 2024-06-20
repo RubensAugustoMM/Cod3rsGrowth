@@ -7,11 +7,11 @@ public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
 {
     public override void Up()
     {
-        CriaTabelaConvenios();
-        CriaTabelaEmpresas();
+        CriaTabelaEstados();
         CriaTabelaEnderecos();
         CriaTabelaEscolas();
-        CriaTabelaEstados();
+        CriaTabelaEmpresas();
+        CriaTabelaConvenios();
     }
 
     public override void Down()

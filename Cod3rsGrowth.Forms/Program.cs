@@ -3,6 +3,9 @@ using FluentMigrator.Runner;
 using FluentMigrator.Runner.Initialization;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Infra.Migracao;
+using Microsoft.VisualBasic.ApplicationServices;
+using static LinqToDB.Common.Configuration;
+using System.Drawing;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -22,23 +25,23 @@ namespace Cod3rsGrowth.Forms
             using (var serviceProvider = CriaServicos())
             using (var scope = serviceProvider.CreateScope())
             {
-                UpdateDatabase(scope.ServiceProvider);
+                AtualizaBancoDeDados(scope.ServiceProvider);
             }
         }
 
         private static ServiceProvider CriaServicos()
         {
             return new ServiceCollection()
-                .AddFluentMigratorCore()
-                .ConfigureRunner(rb => rb
-                    .AddSqlServer()
-                    .WithGlobalConnectionString("Data Source=ConvenioEscolaEmpresaBD")
+            .AddFluentMigratorCore()
+            .ConfigureRunner(rb => rb
+            .AddSqlServer()
+                    .WithGlobalConnectionString("Data Source = DESKTOP-DAA9S87\\SQLEXPRESS; Initial Catalog=Cod3rsGrowth; User ID=sa; Password=sap@123; Encrypt=False; TrustServerCertificate=True")
                     .ScanIn(typeof(Migracao20240620_CriaTodasTabelasDoBancoDeDados).Assembly).For.Migrations())
-                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                .AddLogging(Ib => Ib.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        private static void AtualizaBancoDeDados(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
