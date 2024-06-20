@@ -33,7 +33,10 @@ public class RepositorioEscola : IRepositorioEscola
 
     public Escola ObterPorId(int Id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            return contexto.TabelaEscolas.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
+        }
     }
 
     public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
