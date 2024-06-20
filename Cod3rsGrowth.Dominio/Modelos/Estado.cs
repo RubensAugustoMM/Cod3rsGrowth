@@ -4,7 +4,7 @@ namespace Cod3rsGrowth.Dominio.Modelos;
 
 public class Estado 
 {
-    [Column("Id"), NotNull]
+    [PrimaryKey, Identity]
     public int Id { get; set; }
     [Column("Nome"), NotNull]
     public string Nome { get; set; }

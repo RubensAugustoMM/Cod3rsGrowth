@@ -2,8 +2,8 @@
 
 namespace Cod3rsGrowth.Infra.Migracao;
 
-[Migration(20240620)]
-public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
+[Migration(202406201609)]
+public class Migracao202406201751_CriaTodasTabelasDoBancoDeDados : Migration
 {
     public override void Up()
     {
@@ -34,8 +34,7 @@ public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
     
     private void CriaTabelaConvenios() 
     {
-        Create.Table("Convenios")
-            .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+        Create.Table("Convenios").WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("NumeroProcesso").AsInt32().NotNullable()
             .WithColumn("Objeto").AsString().NotNullable()
             .WithColumn("Valor").AsDecimal().NotNullable()
@@ -44,41 +43,36 @@ public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
             .WithColumn("IdEscola").AsInt32().NotNullable()
             .WithColumn("IdEmpresa").AsInt32().NotNullable();
 
-        Create.ForeignKey("fk_Convenios_Escolas")
-            .FromTable("Convenios").ForeignColumn("IdEscola")
+        Create.ForeignKey("fk_Convenios_Escolas").FromTable("Convenios").ForeignColumn("IdEscola")
             .ToTable("Escolas").PrimaryColumn("Id");
 
-        Create.ForeignKey("fk_Convenios_Empresas")
-            .FromTable("Convenios").ForeignColumn("IdEmpresa")
+        Create.ForeignKey("fk_Convenios_Empresas").FromTable("Convenios").ForeignColumn("IdEmpresa")
             .ToTable("Empresas").PrimaryColumn("Id");
     }
 
     private void CriaTabelaEmpresas()
     {
-        Create.Table("Empresas")
-            .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+        Create.Table("Empresas").WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("Idade").AsInt32().NotNullable()
             .WithColumn("RazaoSocial").AsString().NotNullable()
             .WithColumn("NomeFantasia").AsString().NotNullable()
             .WithColumn("Cnpj").AsString().NotNullable()
             .WithColumn("SituacaoCadastral").AsBoolean().NotNullable()
             .WithColumn("DataSituacaoCadastral").AsDate().NotNullable()
-            .WithColumn("DataAbertura").AsDate().NotNullable()
+            .WithColumn("DataAbertura").AsDateTime().NotNullable()
             .WithColumn("CapitalSocial").AsDecimal().NotNullable()
             .WithColumn("NaturezaJuridica").AsInt32().NotNullable()
             .WithColumn("Porte").AsInt32().NotNullable()
             .WithColumn("MatrizFilial").AsInt32().NotNullable()
             .WithColumn("IdEndereco").AsInt32().NotNullable();
 
-        Create.ForeignKey("fk_Empresas_Enderecos")
-            .FromTable("Empresas").ForeignColumn("IdEndereco")
+        Create.ForeignKey("fk_Empresas_Enderecos").FromTable("Empresas").ForeignColumn("IdEndereco")
             .ToTable("Enderecos").PrimaryColumn("Id");
     }
 
     private void CriaTabelaEnderecos()
     {
-        Create.Table("Enderecos")
-            .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+        Create.Table("Enderecos").WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("Numero").AsInt32().NotNullable()
             .WithColumn("Cep").AsString().NotNullable()
             .WithColumn("Municipio").AsString().NotNullable()
@@ -87,15 +81,13 @@ public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
             .WithColumn("Complemento").AsString()
             .WithColumn("IdEstado").AsInt32().NotNullable();
 
-        Create.ForeignKey("fk_Endereco_Estado")
-            .FromTable("Enderecos").ForeignColumn("IdEstado")
+        Create.ForeignKey("fk_Endereco_Estado").FromTable("Enderecos").ForeignColumn("IdEstado")
             .ToTable("Estados").PrimaryColumn("Id");
     }
 
     private void CriaTabelaEscolas()
     {
-        Create.Table("Escolas")
-            .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+        Create.Table("Escolas").WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("StatusAtividade").AsBoolean().NotNullable()
             .WithColumn("Nome").AsString().NotNullable()
             .WithColumn("CodigoMec").AsString().NotNullable()
@@ -106,17 +98,14 @@ public class Migracao20240620_CriaTodasTabelasDoBancoDeDados : Migration
             .WithColumn("OrganizacaoAcademica").AsInt32().NotNullable()
             .WithColumn("IdEndereco").AsInt32().NotNullable();
 
-        Create.ForeignKey("fk_Escolas_Enderecos")
-            .FromTable("Escolas").ForeignColumn("IdEndereco")
+        Create.ForeignKey("fk_Escolas_Enderecos").FromTable("Escolas").ForeignColumn("IdEndereco")
             .ToTable("Enderecos").PrimaryColumn("Id");
     }
 
     private void CriaTabelaEstados()
     {
-        Create.Table("Estados")
-            .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+        Create.Table("Estados").WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("Nome").AsString().NotNullable()
             .WithColumn("Sigla").AsString().NotNullable();
-
     }
 }

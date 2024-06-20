@@ -6,7 +6,7 @@ namespace Cod3rsGrowth.Dominio.Modelos;
 [Table("Escolas")]
 public class Escola
 {
-    [Column("Id"), NotNull]
+    [PrimaryKey, Identity]
     public int Id { get; set; }
     [Column("StatusAtividade"), NotNull]
     public bool StatusAtividade { get; set; }
@@ -26,6 +26,8 @@ public class Escola
     public OrganizacaoAcademicaEnums OrganizacaoAcademica { get; set; }
     [Column("IdEndereco"), NotNull]
     public int IdEndereco { get; set; }
+    [Association(ThisKey =nameof(IdEndereco), OtherKey =nameof(Endereco.Id))]
+    public Endereco EndrecoReferente { get; set; }
     [NotColumn]
     public List<Convenio> ListaConvenios { get; set; } = new();
 }

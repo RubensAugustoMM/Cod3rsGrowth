@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Dominio.Modelos;
 [Table("Enderecos")]
 public class Endereco
 {
-    [Column("Id"), NotNull]
+    [PrimaryKey, Identity]
     public int Id { get; set; }
     [Column("Numero"), NotNull]
     public int Numero { get; set; }
@@ -21,4 +21,6 @@ public class Endereco
     public string? Complemento { get; set; }
     [Column("IdEstado"), NotNull]
     public int IdEstado { get; set; }
+    [Association(ThisKey =nameof(IdEstado),OtherKey =nameof(Estado.Id))]
+    public Estado EstadoReferente;
 }
