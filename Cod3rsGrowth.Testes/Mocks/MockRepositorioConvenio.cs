@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes.Mocks;
@@ -35,7 +36,7 @@ public class MockRepositorioConvenio : IRepositorioConvenio
         return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Convenio> ObterTodos()
+    public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
     {
         return Tabelas.Convenios.Value;
     }

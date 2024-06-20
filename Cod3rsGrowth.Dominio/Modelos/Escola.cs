@@ -1,8 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
-using System;
-using System.Data.Common;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
+
 public class Escola
 {
     public int Id { get; set; }

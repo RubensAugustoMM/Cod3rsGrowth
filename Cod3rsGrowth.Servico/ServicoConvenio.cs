@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
@@ -39,8 +40,8 @@ public class ServicoConvenio : IRepositorioConvenio
         return _repositorioConvenio.ObterPorId(Id);
     }
 
-    public List<Convenio> ObterTodos()
+    public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
     {
-        return _repositorioConvenio.ObterTodos();
+        return _repositorioConvenio.ObterTodos(filtroConvenio);
     }
 }

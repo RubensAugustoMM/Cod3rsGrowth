@@ -55,7 +55,7 @@ public class ValidadorConvenio : AbstractValidator<Convenio>
 
     private bool VerificarSeExisteEscola(int idEscola)
     {
-        var listaEscolas = _repositorioEscola.ObterTodos();
+        var listaEscolas = _repositorioEscola.ObterTodos(null);
 
         if (listaEscolas.FirstOrDefault(escola => escola.Id == idEscola) == null)
             return false;
@@ -65,7 +65,7 @@ public class ValidadorConvenio : AbstractValidator<Convenio>
 
     private bool VerificaSeExisteEmpresa(int idEmpresa)
     {
-        var listaEmpresas = _repositorioEmpresa.ObterTodos();
+        var listaEmpresas = _repositorioEmpresa.ObterTodos(null);
 
         if (listaEmpresas.FirstOrDefault(empresa => empresa.Id == idEmpresa) == null)
             return false;

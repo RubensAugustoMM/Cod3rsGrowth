@@ -33,7 +33,7 @@ public class TestesServicoEstado : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        var ValorRetornado = _servicoEstado.ObterTodos();
+        var ValorRetornado = _servicoEstado.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }

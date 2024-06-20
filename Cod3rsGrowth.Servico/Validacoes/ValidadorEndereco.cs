@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using FluentValidation;
-using FluentValidation.Internal;
 
 namespace Cod3rsGrowth.Servico.Validacoes;
 
@@ -70,7 +69,7 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
 
    private bool VerificaSeExisteEstado(int idEstado)
     {
-        var listaEstado = _repositorioEstado.ObterTodos();
+        var listaEstado = _repositorioEstado.ObterTodos(null);
 
         if (listaEstado.FirstOrDefault(estado => estado.Id == idEstado) == null)
             return false;
@@ -80,7 +79,7 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
 
     private bool VerificaSeExisteEmpresa(int idendereco)
     {
-        var ListaEmpresa = _repositorioEmpresa.ObterTodos();
+        var ListaEmpresa = _repositorioEmpresa.ObterTodos(null);
         if (ListaEmpresa.FirstOrDefault(empresa => empresa.IdEndereco == idendereco) != null)
             return false;
 
@@ -89,7 +88,7 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
 
     private bool VerificaSeExisteEscola(int idendereco)
     {
-        var ListaEscola = _repositorioEscola.ObterTodos();
+        var ListaEscola = _repositorioEscola.ObterTodos(null);
         if (ListaEscola.FirstOrDefault(escola => escola.IdEndereco == idendereco) != null)
             return false;
 
