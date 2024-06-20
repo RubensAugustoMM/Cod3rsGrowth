@@ -1,3 +1,8 @@
+using System;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.Initialization;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Cod3rsGrowth.Forms
 {
     internal static class Program
@@ -10,8 +15,10 @@ namespace Cod3rsGrowth.Forms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            //ApplicationConfiguration.Initialize();
+            //Application.Run(new Form1());
+
+
         }
     }
 }
