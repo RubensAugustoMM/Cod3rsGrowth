@@ -25,7 +25,10 @@ public class RepositorioConvenio : IRepositorioConvenio
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Delete(id);
+        }
     }
 
     public Convenio ObterPorId(int Id)

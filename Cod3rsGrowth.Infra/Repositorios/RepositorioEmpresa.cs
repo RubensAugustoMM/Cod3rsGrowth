@@ -25,7 +25,10 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public void Deletar(int id)
     {
-        throw new NotImplementedException();
+        using (var contexto = new ContextoAplicacao())
+        {
+            contexto.Delete(id);
+        }
     }
 
     public Empresa ObterPorId(int Id)
