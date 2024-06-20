@@ -6,6 +6,7 @@ using Cod3rsGrowth.Infra.Migracao;
 using Microsoft.VisualBasic.ApplicationServices;
 using static LinqToDB.Common.Configuration;
 using System.Drawing;
+using Cod3rsGrowth.Infra;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -36,7 +37,7 @@ namespace Cod3rsGrowth.Forms
             .ConfigureRunner(rb => rb
             .AddSqlServer()
                     .WithGlobalConnectionString("Data Source = DESKTOP-DAA9S87\\SQLEXPRESS; Initial Catalog=Cod3rsGrowth; User ID=sa; Password=sap@123; Encrypt=False; TrustServerCertificate=True")
-                    .ScanIn(typeof(Migracao20240620_CriaTodasTabelasDoBancoDeDados).Assembly).For.Migrations())
+                    .ScanIn(typeof(Migracao202406201841_CriaTabelaEstados).Assembly).For.Migrations())
                 .AddLogging(Ib => Ib.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
@@ -45,7 +46,7 @@ namespace Cod3rsGrowth.Forms
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-            runner.MigrateUp();
+            runner.Down(new Migracao202406201841_CriaTabelaEstados());
         }
     }
 }
