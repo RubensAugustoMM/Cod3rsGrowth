@@ -75,9 +75,6 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
             .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
             .Must(VerificaSeExisteEndereco)
             .WithMessage("{PropertyName} deve ser referente a uma endereco existente!");
-        RuleFor(empresa => empresa.ListaConvenio)
-            .NotNull()
-            .WithMessage("{PropertyName} nao pode ser nulo!");
 
         RuleSet("Deletar", () =>
         {

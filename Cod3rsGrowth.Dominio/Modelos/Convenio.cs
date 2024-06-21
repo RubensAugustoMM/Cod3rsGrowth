@@ -19,10 +19,6 @@ public class Convenio
     public DateTime? DataTermino { get; set; }
     [Column("IdEscola"), NotNull]
     public int IdEscola { get; set; }
-    [Association(ThisKey =nameof(IdEscola),OtherKey =nameof(Escola.Id))]
-    public Escola EscolaReferente { get; set; }
     [Column("IdEscola"), NotNull]
     public int IdEmpresa { get; set; }
-    [Association(ThisKey =nameof(IdEmpresa),OtherKey =nameof(Empresa.Id))]
-    public Empresa EmpresaReferente { get; set; }
 }

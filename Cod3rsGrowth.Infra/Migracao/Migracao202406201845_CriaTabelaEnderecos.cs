@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra;
+namespace Cod3rsGrowth.Infra.Migracao;
 
 [Migration(202406201845)]
 public class Migracao202406201845_CriaTabelaEnderecos : Migration
@@ -14,10 +14,7 @@ public class Migracao202406201845_CriaTabelaEnderecos : Migration
             .WithColumn("Bairro").AsString().NotNullable()
             .WithColumn("Rua").AsString().NotNullable()
             .WithColumn("Complemento").AsString()
-            .WithColumn("IdEstado").AsInt32().NotNullable();
-
-        Create.ForeignKey("fk_Endereco_Estados").FromTable("Enderecos").ForeignColumn("IdEstado")
-            .ToTable("Estados").PrimaryColumn("Id");
+            .WithColumn("Estado").AsInt32().NotNullable();
     }
 
     public override void Down()

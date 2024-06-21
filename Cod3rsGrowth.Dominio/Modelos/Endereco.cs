@@ -1,3 +1,4 @@
+using Cod3rsGrowth.Dominio.Enums;
 using LinqToDB.Mapping;
 
 namespace Cod3rsGrowth.Dominio.Modelos;
@@ -19,8 +20,5 @@ public class Endereco
     public string Rua { get; set; }
     [Column("Complemento")]
     public string? Complemento { get; set; }
-    [Column("IdEstado"), NotNull]
-    public int IdEstado { get; set; }
-    [Association(ThisKey =nameof(IdEstado),OtherKey =nameof(Estado.Id))]
-    public Estado EstadoReferente;
+    public EstadoEnums Estado { get; set; }
 }

@@ -26,8 +26,4 @@ public class Escola
     public OrganizacaoAcademicaEnums OrganizacaoAcademica { get; set; }
     [Column("IdEndereco"), NotNull]
     public int IdEndereco { get; set; }
-    [Association(ThisKey =nameof(IdEndereco), OtherKey =nameof(Endereco.Id))]
-    public Endereco EndrecoReferente { get; set; }
-    [Column]
-    public List<Convenio> ListaConvenios { get; set; } = new();
 }

@@ -32,8 +32,4 @@ public class Empresa
     public MatrizFilialEnums MatrizFilial { get; set; }
     [Column("IdEndereco"), NotNull]
     public int IdEndereco { get; set; }
-    [Association(ThisKey =nameof(IdEndereco), OtherKey =nameof(Endereco.Id))]
-    public Endereco EndrecoReferente { get; set; }
-    [Column]
-    public List<Convenio> ListaConvenio { get; set; } = new();
 }

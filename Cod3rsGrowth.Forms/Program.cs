@@ -35,9 +35,12 @@ namespace Cod3rsGrowth.Forms
             return new ServiceCollection()
             .AddFluentMigratorCore()
             .ConfigureRunner(rb => rb
-            .AddSqlServer()
+                    .AddSqlServer()
                     .WithGlobalConnectionString("Data Source = DESKTOP-DAA9S87\\SQLEXPRESS; Initial Catalog=Cod3rsGrowth; User ID=sa; Password=sap@123; Encrypt=False; TrustServerCertificate=True")
-                    .ScanIn(typeof(Migracao202406201841_CriaTabelaEstados).Assembly).For.Migrations())
+                    .ScanIn(typeof(Migracao202406201845_CriaTabelaEnderecos).Assembly).For.Migrations()
+                    .ScanIn(typeof(Migracao202406201848_CriaTabelaEscolas).Assembly).For.Migrations()
+                    .ScanIn(typeof(Migracao202406201850_CriaTabelaEmpresas).Assembly).For.Migrations()
+                    .ScanIn(typeof(Migracao202406201854_CriaTabelaConvenios).Assembly).For.Migrations())
                 .AddLogging(Ib => Ib.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
@@ -46,7 +49,7 @@ namespace Cod3rsGrowth.Forms
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-            runner.Down(new Migracao202406201841_CriaTabelaEstados());
+            runner.MigrateUp(202406201854);
         }
     }
 }

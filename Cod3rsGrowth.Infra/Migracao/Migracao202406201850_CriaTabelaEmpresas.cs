@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra;
+namespace Cod3rsGrowth.Infra.Migracao;
 
 [Migration(202406201850)]
 public class Migracao202406201850_CriaTabelaEmpresas : Migration

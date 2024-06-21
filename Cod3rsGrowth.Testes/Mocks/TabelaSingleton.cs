@@ -41,8 +41,4 @@ public partial class TabelaSingleton
     {
         return new List<Escola>();
     });
-    public Lazy<List<Estado>> Estados = new Lazy<List<Estado>>(() =>
-    {
-        return new List<Estado>();
-    });
 }
