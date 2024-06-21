@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Infra;
 
-[Migration(202406201845)]
+[Migration(202406201848)]
 public class Migracao202406201848_CriaTabelaEscolas : Migration
 {
     public override void Up()
@@ -17,10 +17,14 @@ public class Migracao202406201848_CriaTabelaEscolas : Migration
             .WithColumn("CategoriaAdministrativa").AsInt32().NotNullable()
             .WithColumn("OrganizacaoAcademica").AsInt32().NotNullable()
             .WithColumn("IdEndereco").AsInt32().NotNullable();
+
+        Create.ForeignKey("fk_Escolas_Enderecos").FromTable("Escolas").ForeignColumn("IdEndereco")
+            .ToTable("Enderecos").PrimaryColumn("Id");
     }
 
     public override void Down()
     {
+        Delete.ForeignKey("fk_Escolas_Enderecos");
         Delete.Table("Escolas");
     }
 }

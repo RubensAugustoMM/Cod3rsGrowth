@@ -10,6 +10,6 @@ public class Estado
     public string Nome { get; set; }
     [Column("Sigla"), NotNull]
     public string Sigla { get; set; }
-    [NotColumn]
+    [Column]
     public List<Endereco> ListaEnderecos { get; set; } = new();
 }

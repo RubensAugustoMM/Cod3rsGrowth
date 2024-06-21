@@ -34,6 +34,6 @@ public class Empresa
     public int IdEndereco { get; set; }
     [Association(ThisKey =nameof(IdEndereco), OtherKey =nameof(Endereco.Id))]
     public Endereco EndrecoReferente { get; set; }
-    [NotColumn]
+    [Column]
     public List<Convenio> ListaConvenio { get; set; } = new();
 }

@@ -15,6 +15,9 @@ public class Migracao202406201845_CriaTabelaEnderecos : Migration
             .WithColumn("Rua").AsString().NotNullable()
             .WithColumn("Complemento").AsString()
             .WithColumn("IdEstado").AsInt32().NotNullable();
+
+        Create.ForeignKey("fk_Endereco_Estados").FromTable("Enderecos").ForeignColumn("IdEstado")
+            .ToTable("Estados").PrimaryColumn("Id");
     }
 
     public override void Down()

@@ -20,10 +20,14 @@ public class Migracao202406201850_CriaTabelaEmpresas : Migration
             .WithColumn("Porte").AsInt32().NotNullable()
             .WithColumn("MatrizFilial").AsInt32().NotNullable()
             .WithColumn("IdEndereco").AsInt32().NotNullable();
+
+        Create.ForeignKey("fk_Empresas_Enderecos").FromTable("Empresas").ForeignColumn("IdEndereco")
+            .ToTable("Enderecos").PrimaryColumn("Id");
     }
 
     public override void Down()
     {
-        Delete.Table("Empresas");
+        Delete.ForeignKey("fk_Empresas_Enderecos");
+        Delete.Table("Empresas"); 
     }
 }

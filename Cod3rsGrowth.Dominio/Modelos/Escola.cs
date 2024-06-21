@@ -28,6 +28,6 @@ public class Escola
     public int IdEndereco { get; set; }
     [Association(ThisKey =nameof(IdEndereco), OtherKey =nameof(Endereco.Id))]
     public Endereco EndrecoReferente { get; set; }
-    [NotColumn]
+    [Column]
     public List<Convenio> ListaConvenios { get; set; } = new();
 }

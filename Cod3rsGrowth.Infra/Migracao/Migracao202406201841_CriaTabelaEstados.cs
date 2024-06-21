@@ -14,6 +14,7 @@ public class Migracao202406201841_CriaTabelaEstados : Migration
 
     public override void Down()
     {
+        Delete.ForeignKey("fk_Empresas_Enderecos");
         Delete.Table("Estados");
     }
 }
