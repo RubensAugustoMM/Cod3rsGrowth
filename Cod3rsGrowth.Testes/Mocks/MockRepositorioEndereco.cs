@@ -18,7 +18,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         enderecoExistente.Bairro = enderecoAtualizado.Bairro;
         enderecoExistente.Rua = enderecoAtualizado.Rua;
         enderecoExistente.Complemento = enderecoAtualizado.Complemento;
-        enderecoExistente.IdEstado = enderecoAtualizado.IdEstado;
+        enderecoExistente.Estado = enderecoAtualizado.Estado;
     }
 
     public void Criar(Endereco enderecoCriado)

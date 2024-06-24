@@ -53,7 +53,7 @@ public class TestesServicoEmpresa : TesteBase
             Bairro = "joao",
             Rua = "143",
             Complemento = "Perto da merceria do Galo",
-            IdEstado = 20
+            Estado = EstadoEnums.DistritoFederal
         };
 
         return NovoEndereco;
@@ -577,7 +577,7 @@ public class TestesServicoEmpresa : TesteBase
             Bairro = "Pedregal",
             Rua = "Rua das Magnolias",
             Complemento = "Em frente ao bretas",
-            IdEstado = 30
+            Estado = EstadoEnums.Bahia
         };
 
         var EmpresaEntrada = CriaNovaEmpresaTeste();

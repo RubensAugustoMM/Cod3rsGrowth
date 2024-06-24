@@ -69,10 +69,6 @@ public class ValidadorEscola : AbstractValidator<Escola>
             .Must(VerificaSeExisteEndereco)
             .WithMessage("{PropertyName} deve ser referente a uma endereco existente!");
 
-        RuleFor(escola => escola.ListaConvenios)
-            .NotNull()
-            .WithMessage("{PropertyName} nao pode ser um valor nulo!");
-
         RuleSet("Deletar", () =>
         {
             RuleFor(escola => escola.Id)

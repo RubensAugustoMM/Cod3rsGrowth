@@ -21,7 +21,6 @@ public class MockRepositorioEscola : IRepositorioEscola
         escolaExistente.CategoriaAdministrativa = escolaAtualizada.CategoriaAdministrativa;
         escolaExistente.OrganizacaoAcademica = escolaAtualizada.OrganizacaoAcademica;
         escolaExistente.IdEndereco = escolaAtualizada.IdEndereco;
-        escolaExistente.ListaConvenios = escolaAtualizada.ListaConvenios;
     }
 
     public void Criar(Escola escolaCriada)

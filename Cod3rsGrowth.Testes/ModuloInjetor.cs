@@ -14,16 +14,13 @@ public static class ModuloInjetor
                 .AddScoped<IRepositorioEmpresa,MockRepositorioEmpresa>()
                 .AddScoped<IRepositorioEndereco,MockRepositorioEndereco>()
                 .AddScoped<IRepositorioEscola,MockRepositorioEscola>()
-                .AddScoped<IRepositorioEstado,MockRepositorioEstado>()
                 .AddScoped<ValidadorConvenio>()
                 .AddScoped<ValidadorEmpresa>()
                 .AddScoped<ValidadorEndereco>()
                 .AddScoped<ValidadorEscola>()
-                .AddScoped<ValidadorEstado>()
                 .AddScoped<ServicoConvenio>()
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
-                .AddScoped<ServicoEscola>()
-                .AddScoped<ServicoEstado>();
+                .AddScoped<ServicoEscola>();
     }
 }
