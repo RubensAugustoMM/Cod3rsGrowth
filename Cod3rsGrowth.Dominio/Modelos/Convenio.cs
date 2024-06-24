@@ -19,6 +19,6 @@ public class Convenio
     public DateTime? DataTermino { get; set; }
     [Column("IdEscola"), NotNull]
     public int IdEscola { get; set; }
-    [Column("IdEscola"), NotNull]
+    [Column("IdEmpresa"), NotNull]
     public int IdEmpresa { get; set; }
 }

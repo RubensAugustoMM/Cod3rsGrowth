@@ -20,5 +20,6 @@ public class Endereco
     public string Rua { get; set; }
     [Column("Complemento")]
     public string? Complemento { get; set; }
+    [Column("Estado"), NotNull]
     public EstadoEnums Estado { get; set; }
 }
