@@ -13,7 +13,7 @@ public class Migracao202406201850_CriaTabelaEmpresas : Migration
             .WithColumn("NomeFantasia").AsString().NotNullable()
             .WithColumn("Cnpj").AsString().NotNullable()
             .WithColumn("SituacaoCadastral").AsBoolean().NotNullable()
-            .WithColumn("DataSituacaoCadastral").AsDate().NotNullable()
+            .WithColumn("DataSituacaoCadastral").AsDateTime().NotNullable()
             .WithColumn("DataAbertura").AsDateTime().NotNullable()
             .WithColumn("CapitalSocial").AsDecimal().NotNullable()
             .WithColumn("NaturezaJuridica").AsInt32().NotNullable()

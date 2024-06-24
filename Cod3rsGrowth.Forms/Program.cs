@@ -6,6 +6,7 @@ using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servico.Validacoes;
 using Cod3rsGrowth.Servico;
 using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Forms.Forms;
 
 namespace Cod3rsGrowth.Forms;
 
@@ -21,7 +22,7 @@ internal static class Program
         var host = CriaHostBuilder().Build();
         var ServiceProvider = host.Services;
 
-        Application.Run(ServiceProvider.GetRequiredService<Form1>());
+        Application.Run(ServiceProvider.GetRequiredService<TelaPrincipalForm>());
     }
 
     static IHostBuilder CriaHostBuilder()
@@ -41,7 +42,7 @@ internal static class Program
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
                 .AddScoped<ServicoEscola>()
-                .AddScoped<Form1>();
+                .AddScoped<TelaPrincipalForm>();
             });
     }
 
