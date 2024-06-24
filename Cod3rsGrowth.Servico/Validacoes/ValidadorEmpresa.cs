@@ -8,6 +8,7 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
 {
     private readonly IRepositorioEndereco _repositorioEndereco;
     private readonly IRepositorioConvenio _repositorioConvenio;
+
     public ValidadorEmpresa(IRepositorioEndereco repositorioEndereco, IRepositorioConvenio repositorioConvenio)
     {
         _repositorioEndereco = repositorioEndereco;
@@ -74,9 +75,6 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
             .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
             .Must(VerificaSeExisteEndereco)
             .WithMessage("{PropertyName} deve ser referente a uma endereco existente!");
-        RuleFor(empresa => empresa.ListaConvenio)
-            .NotNull()
-            .WithMessage("{PropertyName} nao pode ser nulo!");
 
         RuleSet("Deletar", () =>
         {
@@ -88,7 +86,7 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
 
     private bool VerificaSeExisteEndereco(int idEndereco)
     {
-        var ListaEnderecos = _repositorioEndereco.ObterTodos();
+        var ListaEnderecos = _repositorioEndereco.ObterTodos(null);
         if (ListaEnderecos.FirstOrDefault(endereco => endereco.Id == idEndereco) == null)
             return false;
 
@@ -97,7 +95,7 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
 
     private bool VerificaSeExisteConvenio(int idEmpresa)
     {
-        var ListaConvenios = _repositorioConvenio.ObterTodos();
+        var ListaConvenios = _repositorioConvenio.ObterTodos(null);
         if (ListaConvenios.FirstOrDefault(convenio => convenio.IdEmpresa == idEmpresa) != null)
             return false;
 

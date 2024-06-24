@@ -56,7 +56,7 @@ public class TestesServicoEscola : TesteBase
             Bairro = "Pedregal",
             Rua = "Rua das Magnolias",
             Complemento = "Em frente ao bretas",
-            IdEstado = 1
+            Estado = EstadoEnums.Goias
         };
 
         return NovoEndereco;
@@ -65,7 +65,7 @@ public class TestesServicoEscola : TesteBase
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_nula()
     {
-        var ValorRetornado = _servicoEscola.ObterTodos();
+        var ValorRetornado = _servicoEscola.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }
@@ -296,17 +296,6 @@ public class TestesServicoEscola : TesteBase
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
 
-    [Fact]
-    public void Criar_deve_retornar_ValidationException_quando_informado_Escola_com_ListaConvenios_nula()
-    {
-        var EscolaEntrada = CriaNovaEscolaTeste();
-        var ValorEsperado = "Lista Convenios nao pode ser um valor nulo!";
-        EscolaEntrada.ListaConvenios = null;
-
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Criar(EscolaEntrada));
-
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
-    }
 
     [Theory]
     [InlineData(1)]
@@ -559,7 +548,7 @@ public class TestesServicoEscola : TesteBase
             Bairro = "Pedregal",
             Rua = "Rua das Magnolias",
             Complemento = "Em frente ao bretas",
-            IdEstado = 30
+            Estado = EstadoEnums.Acre
         };
 
         var EscolaEntrada = CriaNovaEscolaTeste();

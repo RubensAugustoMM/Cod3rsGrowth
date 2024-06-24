@@ -1,19 +1,16 @@
 ﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using FluentValidation;
-using FluentValidation.Internal;
 
 namespace Cod3rsGrowth.Servico.Validacoes;
 
 public class ValidadorEndereco : AbstractValidator<Endereco>
 {
-    private readonly IRepositorioEstado _repositorioEstado;
     private readonly IRepositorioEmpresa _repositorioEmpresa;
     private readonly IRepositorioEscola _repositorioEscola;
 
-    public ValidadorEndereco(IRepositorioEstado repositorioEstado, IRepositorioEmpresa repositorioEmpresa, IRepositorioEscola repositorioEscola)
+    public ValidadorEndereco(IRepositorioEmpresa repositorioEmpresa, IRepositorioEscola repositorioEscola)
     {
-        _repositorioEstado = repositorioEstado;
         _repositorioEmpresa = repositorioEmpresa;
         _repositorioEscola = repositorioEscola;
         
@@ -49,12 +46,10 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
         RuleFor(endereco => endereco.Rua)
             .NotEmpty()
             .WithMessage("{PropertyName} nao pode ter valor nulo ou formado por caracteres de espaco!");
-        
-        RuleFor(endereco => endereco.IdEstado)
-            .GreaterThanOrEqualTo(0)
-            .WithMessage("{PropertyName} deve ser um valor maior ou igual a zero!")
-            .Must(VerificaSeExisteEstado)
-            .WithMessage("{PropertyName} deve ser referente a um estado existente!");
+
+        RuleFor(endereco => endereco.Estado)
+            .IsInEnum()
+            .WithMessage("Valor de {PropertyName} fora do Enum!");
 
         RuleSet("Deletar", () => 
         {
@@ -68,19 +63,9 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
         });
     }
 
-   private bool VerificaSeExisteEstado(int idEstado)
-    {
-        var listaEstado = _repositorioEstado.ObterTodos();
-
-        if (listaEstado.FirstOrDefault(estado => estado.Id == idEstado) == null)
-            return false;
-
-        return true;
-    }
-
     private bool VerificaSeExisteEmpresa(int idendereco)
     {
-        var ListaEmpresa = _repositorioEmpresa.ObterTodos();
+        var ListaEmpresa = _repositorioEmpresa.ObterTodos(null);
         if (ListaEmpresa.FirstOrDefault(empresa => empresa.IdEndereco == idendereco) != null)
             return false;
 
@@ -89,7 +74,7 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
 
     private bool VerificaSeExisteEscola(int idendereco)
     {
-        var ListaEscola = _repositorioEscola.ObterTodos();
+        var ListaEscola = _repositorioEscola.ObterTodos(null);
         if (ListaEscola.FirstOrDefault(escola => escola.IdEndereco == idendereco) != null)
             return false;
 

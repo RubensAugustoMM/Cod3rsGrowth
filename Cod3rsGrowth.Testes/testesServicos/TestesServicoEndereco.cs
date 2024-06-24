@@ -18,7 +18,6 @@ public class TestesServicoEndereco : TesteBase
         _servicoEndereco = _serviceProvider.GetService<ServicoEndereco>() ?? throw new Exception("Objeto _serviceProvider retornou null apos nao encontrar ServicoEndereco!");
 
         _tabelas = TabelaSingleton.Instance;  
-        _tabelas.Estados.Value.Add(CriaNovoEstadoTeste());
     }
 
     private Endereco CriaNovoEnderecoTeste()
@@ -32,28 +31,16 @@ public class TestesServicoEndereco : TesteBase
             Bairro = "Pedregal",
             Rua = "Rua das Magnolias",
             Complemento = "Em frente ao bretas",
-            IdEstado = 30
+            Estado = EstadoEnums.Goias
         };
 
         return NovoEndereco;
     }
 
-    private Estado CriaNovoEstadoTeste()
-    {
-        Estado NovoEstado = new()
-        {
-            Id = 30,
-            Nome = "Goias",
-            Sigla = "GO"
-        };
-
-        return NovoEstado;
-    }
-
     [Fact]
     public void ao_ObterTodos_deve_retornar_lista_nao_vazia()
     {
-        var ValorRetornado = _servicoEndereco.ObterTodos();
+        var ValorRetornado = _servicoEndereco.ObterTodos(null);
 
         Assert.NotNull(ValorRetornado);
     }
@@ -86,7 +73,7 @@ public class TestesServicoEndereco : TesteBase
         Assert.Equal(ValorEsperado.Bairro, ValorRetornado.Bairro);
         Assert.Equal(ValorEsperado.Rua, ValorRetornado.Rua);
         Assert.Equal(ValorEsperado.Complemento, ValorRetornado.Complemento);
-        Assert.Equal(ValorEsperado.IdEstado, ValorRetornado.IdEstado);
+        Assert.Equal(ValorEsperado.Estado, ValorRetornado.Estado);
     }
 
     [Theory]
@@ -203,26 +190,12 @@ public class TestesServicoEndereco : TesteBase
 
     [Theory]
     [InlineData(-1)]
-    [InlineData(-2)]
-    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_negativo(int idEstadoInformado)
+    [InlineData(1022)]
+    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Valor_Estadio_Invalido(int estadoInformado)
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();
-        var ValorEsperado = "Id Estado deve ser um valor maior ou igual a zero!";
-        EnderecoEntrada.IdEstado = idEstadoInformado;
-
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
-
-        Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
-    }
-
-    [Theory]
-    [InlineData(201)]
-    [InlineData(202)]
-    public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_IdEstado_inexistente(int idEstadoInformado)
-    {
-        var EnderecoEntrada = CriaNovoEnderecoTeste();
-        var ValorEsperado = "Id Estado deve ser referente a um estado existente!";
-        EnderecoEntrada.IdEstado = idEstadoInformado;
+        var ValorEsperado = "Valor de {PropertyName} fora do Enum!";
+        EnderecoEntrada.Estado = (EstadoEnums)estadoInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
@@ -314,15 +287,12 @@ public class TestesServicoEndereco : TesteBase
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_IdEstado_valido_e_existente(int idEstadoInformado)
+    [InlineData(EstadoEnums.Goias)]
+    [InlineData(EstadoEnums.MatoGrosso)]
+    public void Criar_deve_adicionar_Endereco_no_repositorio_quando_informado_Endereco_com_Estado_Valido(EstadoEnums estadoInformado)
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();
-        var EstadoEntrada = CriaNovoEstadoTeste();
-        EnderecoEntrada.IdEstado = idEstadoInformado;
-        EstadoEntrada.Id = idEstadoInformado;
-        _tabelas.Estados.Value.Add(EstadoEntrada);
+        EnderecoEntrada.Estado = estadoInformado;
 
         _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);

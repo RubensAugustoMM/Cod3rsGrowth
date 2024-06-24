@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes.Mocks;
@@ -17,7 +18,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         enderecoExistente.Bairro = enderecoAtualizado.Bairro;
         enderecoExistente.Rua = enderecoAtualizado.Rua;
         enderecoExistente.Complemento = enderecoAtualizado.Complemento;
-        enderecoExistente.IdEstado = enderecoAtualizado.IdEstado;
+        enderecoExistente.Estado = enderecoAtualizado.Estado;
     }
 
     public void Criar(Endereco enderecoCriado)
@@ -35,7 +36,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Endereco> ObterTodos()
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
         return Tabelas.Enderecos.Value;
     }

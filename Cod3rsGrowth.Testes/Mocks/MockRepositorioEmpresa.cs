@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes.Mocks;
@@ -39,7 +40,7 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         return Tabelas.Empresas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Empresa> ObterTodos()
+    public List<Empresa> ObterTodos(FiltroEmpresa filtroEmpresa)
     {
         return Tabelas.Empresas.Value;
     }

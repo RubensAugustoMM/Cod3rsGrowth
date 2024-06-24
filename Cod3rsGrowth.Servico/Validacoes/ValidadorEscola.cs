@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using FluentValidation;
 
@@ -70,10 +69,6 @@ public class ValidadorEscola : AbstractValidator<Escola>
             .Must(VerificaSeExisteEndereco)
             .WithMessage("{PropertyName} deve ser referente a uma endereco existente!");
 
-        RuleFor(escola => escola.ListaConvenios)
-            .NotNull()
-            .WithMessage("{PropertyName} nao pode ser um valor nulo!");
-
         RuleSet("Deletar", () =>
         {
             RuleFor(escola => escola.Id)
@@ -84,7 +79,7 @@ public class ValidadorEscola : AbstractValidator<Escola>
 
     private bool VerificaSeExisteEndereco(int idEndereco)
     {
-        var ListaEnderecos = _repositorioEndereco.ObterTodos();
+        var ListaEnderecos = _repositorioEndereco.ObterTodos(null);
         if (ListaEnderecos.FirstOrDefault(endereco => endereco.Id == idEndereco) == null)
             return false;
 
@@ -93,7 +88,7 @@ public class ValidadorEscola : AbstractValidator<Escola>
 
     private bool VerificaSeExisteConvenio(int idEscola)
     {
-        var ListaConvenios = _repositorioConvenio.ObterTodos();
+        var ListaConvenios = _repositorioConvenio.ObterTodos(null);
         if (ListaConvenios.FirstOrDefault(convenio => convenio.IdEscola == idEscola) != null)
             return false;
 

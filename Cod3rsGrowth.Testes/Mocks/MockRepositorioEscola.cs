@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Testes.Mocks;
@@ -20,7 +21,6 @@ public class MockRepositorioEscola : IRepositorioEscola
         escolaExistente.CategoriaAdministrativa = escolaAtualizada.CategoriaAdministrativa;
         escolaExistente.OrganizacaoAcademica = escolaAtualizada.OrganizacaoAcademica;
         escolaExistente.IdEndereco = escolaAtualizada.IdEndereco;
-        escolaExistente.ListaConvenios = escolaAtualizada.ListaConvenios;
     }
 
     public void Criar(Escola escolaCriada)
@@ -38,7 +38,7 @@ public class MockRepositorioEscola : IRepositorioEscola
         return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Escola> ObterTodos()
+    public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
     {
         return Tabelas.Escolas.Value;
     }
