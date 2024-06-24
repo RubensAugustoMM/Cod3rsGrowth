@@ -49,7 +49,7 @@ namespace Cod3rsGrowth.Forms
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-            runner.MigrateUp(202406201854);
+            runner.MigrateUp();
         }
     }
 }

@@ -25,8 +25,8 @@ public class Migracao202406201854_CriaTabelaConvenios : Migration
 
     public override void Down()
     {
-        Delete.ForeignKey("fk_Convenios_Escolas");
-        Delete.ForeignKey("fk_Convenios_Empresas");
+        Delete.ForeignKey("fk_Convenios_Escolas").OnTable("Convenios");
+        Delete.ForeignKey("fk_Convenios_Empresas").OnTable("Convenios");
         Delete.Table("Convenios");
     }
 }

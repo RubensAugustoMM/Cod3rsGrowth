@@ -27,7 +27,7 @@ public class Migracao202406201850_CriaTabelaEmpresas : Migration
 
     public override void Down()
     {
-        Delete.ForeignKey("fk_Empresas_Enderecos");
-        Delete.Table("Empresas"); 
+        Delete.ForeignKey("fk_Empresas_Enderecos").OnTable("Empresas");
+        Delete.Table("Empresas");
     }
 }
