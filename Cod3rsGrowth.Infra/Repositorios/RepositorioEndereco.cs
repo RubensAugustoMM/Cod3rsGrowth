@@ -50,10 +50,10 @@ public class RepositorioEndereco : IRepositorioEndereco
 
             if (filtroEndereco != null)
             {
-                if (filtroEndereco.IdEstadoFiltro != null)
+                if (filtroEndereco.EstadoFiltro != null)
                 {
                     query = from e in contexto.TabelaEnderecos
-                            where e.IdEstado == filtroEndereco.IdEstadoFiltro
+                            where e.Estado == filtroEndereco.EstadoFiltro
                             select e;
                 }
 
