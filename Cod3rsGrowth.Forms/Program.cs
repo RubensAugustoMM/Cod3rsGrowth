@@ -7,6 +7,11 @@ using Cod3rsGrowth.Servico.Validacoes;
 using Cod3rsGrowth.Servico;
 using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Forms.Forms;
+using Cod3rsGrowth.Infra;
+using LinqToDB.AspNet;
+using LinqToDB;
+using LinqToDB.AspNet.Logging;
+using System.Configuration;
 
 namespace Cod3rsGrowth.Forms;
 
@@ -27,10 +32,19 @@ internal static class Program
 
     static IHostBuilder CriaHostBuilder()
     {
+        String StringConexao = ConfigurationManager
+                            .ConnectionStrings["ConvenioEscolaEmpresaBD"]
+                            .ConnectionString;
+
         return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
-                services.AddScoped<IRepositorioConvenio, RepositorioConvenio>()
+                services
+                .AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
+                options
+                    .UseSqlServer(StringConexao)
+                    .UseDefaultLogging(provider))
+                .AddScoped<IRepositorioConvenio, RepositorioConvenio>()
                 .AddScoped<IRepositorioEmpresa, RepositorioEmpresa>()
                 .AddScoped<IRepositorioEndereco, RepositorioEndereco>()
                 .AddScoped<IRepositorioEscola, RepositorioEscola>()
@@ -48,11 +62,15 @@ internal static class Program
 
     private static ServiceProvider CriaServicos()
     {
+        String StringConexao = ConfigurationManager
+                            .ConnectionStrings["ConvenioEscolaEmpresaBD"]
+                            .ConnectionString;
+
         return new ServiceCollection()
         .AddFluentMigratorCore()
         .ConfigureRunner(rb => rb
                 .AddSqlServer()
-                .WithGlobalConnectionString("Data Source = DESKTOP-DAA9S87\\SQLEXPRESS; Initial Catalog=Cod3rsGrowth; User ID=sa; Password=sap@123; Encrypt=False; TrustServerCertificate=True")
+                .WithGlobalConnectionString(StringConexao)
                 .ScanIn(typeof(Migracao202406201845_CriaTabelaEnderecos).Assembly).For.Migrations()
                 .ScanIn(typeof(Migracao202406201848_CriaTabelaEscolas).Assembly).For.Migrations()
                 .ScanIn(typeof(Migracao202406201850_CriaTabelaEmpresas).Assembly).For.Migrations()
