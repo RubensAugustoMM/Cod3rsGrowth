@@ -18,6 +18,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controladores\FiltroEscolaUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controladores\FiltroEnderecoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controladores\FiltroEmpresaUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEscolaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEnderecoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEmpresaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

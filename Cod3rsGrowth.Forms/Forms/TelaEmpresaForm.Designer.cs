@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaConvenioForm
+    partial class TelaEmpresaForm
     {
         /// <summary>
         /// Required designer variable.

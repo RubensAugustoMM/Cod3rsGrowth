@@ -72,7 +72,7 @@
             botaoEnderecos.TabIndex = 3;
             botaoEnderecos.Text = "Enderecos";
             botaoEnderecos.UseVisualStyleBackColor = true;
-            botaoEnderecos.Paint += botaoEnderecos_Paint;
+            botaoEnderecos.Click += botaoEnderecos_Click;
             // 
             // botaoEscolas
             // 
@@ -88,7 +88,7 @@
             botaoEscolas.TabIndex = 2;
             botaoEscolas.Text = "Escolas";
             botaoEscolas.UseVisualStyleBackColor = true;
-            botaoEscolas.Paint += botaoEscolas_Paint;
+            botaoEscolas.Click += botaoEscolas_Click;
             // 
             // button2
             // 
@@ -105,7 +105,6 @@
             button2.Text = "Empresas";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
-            button2.Paint += button2_Paint;
             // 
             // button1
             // 
@@ -122,7 +121,6 @@
             button1.Text = "Convenios";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            button1.Paint += button1_Paint;
             // 
             // painelInferior
             // 
@@ -151,7 +149,6 @@
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = true;
             botaoFechar.Click += botaoFechar_Click;
-            botaoFechar.Paint += botaoFechar_Paint;
             // 
             // data
             // 
@@ -172,8 +169,6 @@
             tempo.Size = new Size(43, 15);
             tempo.TabIndex = 0;
             tempo.Text = "Tempo";
-            tempo.Click += Tempo_Click;
-            tempo.Paint += button1_Paint;
             // 
             // timer1
             // 

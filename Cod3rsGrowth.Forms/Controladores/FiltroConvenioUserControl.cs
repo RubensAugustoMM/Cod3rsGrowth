@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroConvenioUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public FiltroConvenio Filtro;
+        public FiltroConvenio Filtro = null;
 
         public FiltroConvenioUserControl()
         {
@@ -49,16 +49,12 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
         {
-            _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
-            Filtro = new FiltroConvenio();
+            InicializaFontePixeBoy();
 
             foreach (Control c in this.Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             }
-
-
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)
@@ -68,10 +64,78 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
         {
-            Filtro.ObjetoFiltro = textBoxObjeto.Text;
-            Filtro.ValorFiltro = decimal.Parse(textBoxValor.Text);
+            if(Filtro == null)
+            {
+                Filtro = new FiltroConvenio();
+            }
+
+            if (!string.IsNullOrEmpty(textBoxObjeto.Text))
+            {
+                Filtro.ObjetoFiltro = textBoxObjeto.Text;
+            }
+
+            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            {
+                Filtro.ValorFiltro = decimal.Parse(textBoxValor.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            {
+                Filtro.IdEscolaFiltro = int.Parse(textBoxValor.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            {
+                Filtro.IdEmpresaFiltro = int.Parse(textBoxValor.Text);
+            }
+
             Filtro.DataInicioFiltro = dateTimePickerDataInicio.Value;
             Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
+
+            if (checkBoxMenorValor.Checked)
+            {
+                Filtro.MaiorOuIgualValor = new();
+                Filtro.MaiorOuIgualValor = false;
+            }
+            else if (checkBoxMaiorValor.Checked)
+            {
+                Filtro.MaiorOuIgualValor = new();
+                Filtro.MaiorOuIgualValor = true;
+            }
+            else
+            {
+                Filtro.MaiorOuIgualValor = null;
+            }
+
+            if (checkBoxMenorDataInicio.Checked)
+            {
+                Filtro.MaiorOuIgualDataInicio = new();
+                Filtro.MaiorOuIgualDataInicio = false;
+            }
+            else if (checkBoxMaiorDataInicio.Checked)
+            {
+                Filtro.MaiorOuIgualDataInicio = new();
+                Filtro.MaiorOuIgualDataInicio = true;
+            }
+            else
+            {
+                Filtro.MaiorOuIgualDataInicio = null;
+            }
+
+            if (checkBoxMenorDataTermino.Checked)
+            {
+                Filtro.MaiorOuIgualDataTermino = new();
+                Filtro.MaiorOuIgualDataTermino = false;
+            }
+            else if (checkBoxMaiorDataTermino.Checked)
+            {
+                Filtro.MaiorOuIgualDataTermino = new();
+                Filtro.MaiorOuIgualDataTermino = true;
+            }
+            else
+            {
+                Filtro.MaiorOuIgualDataTermino = null;
+            }
         }
 
         private void checkBoxMaiorValor_CheckedChanged(object sender, EventArgs e)
@@ -89,7 +153,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void checkBoxMaiorDataInicio_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxMenorDataInicio.Checked == true)
-                checkBoxMenorDataInicio.Checked = !checkBoxMenorDataInicio.Checked;     
+                checkBoxMenorDataInicio.Checked = !checkBoxMenorDataInicio.Checked;
         }
 
         private void checkBoxMenorDataInicio_CheckedChanged(object sender, EventArgs e)
@@ -108,6 +172,38 @@ namespace Cod3rsGrowth.Forms.Controladores
         {
             if (checkBoxMaiorDataTermino.Checked == true)
                 checkBoxMaiorDataTermino.Checked = !checkBoxMaiorDataTermino.Checked;
+        }
+
+        private void somenteValoresReais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(".") == -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void somenteValoresNaturais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void botaoLimpar_Click(object sender, EventArgs e)
+        {
+            Filtro = null;
+        }
+
+        private void InicializaFontePixeBoy()
+        {
+            _pixeboy = new PrivateFontCollection();
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
     }
 }

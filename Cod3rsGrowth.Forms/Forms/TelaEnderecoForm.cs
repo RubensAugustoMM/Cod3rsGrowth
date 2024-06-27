@@ -7,16 +7,16 @@ using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaConvenioForm : Form
+    public partial class TelaEnderecoForm : Form
     {
-        private readonly ServicoConvenio _servicoConvenio;
-        private FiltroConvenioUserControl _controladorFiltro;
-        BindingList<Convenio> ListaConvenios;
+        private readonly ServicoEndereco _servicoEndereco;
+        private FiltroEnderecoUserControl _controladorFiltro;
+        BindingList<Endereco> ListaEnderecos;
         private PrivateFontCollection _pixeboy;
 
-        public TelaConvenioForm(ServicoConvenio servicoConvenio)
+        public TelaEnderecoForm(ServicoEndereco servicoEndereco)
         {
-            _servicoConvenio = servicoConvenio;
+            _servicoEndereco = servicoEndereco;
             InitializeComponent();
         }
 
@@ -51,7 +51,7 @@ namespace Cod3rsGrowth.Forms.Forms
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
 
-            dataGridView1.DataSource = ListaConvenios;
+            dataGridView1.DataSource = ListaEnderecos;
 
             foreach (Control c in this.Controls)
             {
@@ -127,7 +127,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void IniciaLizaControladorFiltro()
         {
-            _controladorFiltro = new FiltroConvenioUserControl();
+            _controladorFiltro = new FiltroEnderecoUserControl();
             dataGridView1.Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
             _controladorFiltro.Visible = false;
@@ -135,10 +135,10 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaBidingList()
         {
-            ListaConvenios = new BindingList<Convenio>();
-            ListaConvenios.AllowNew = false;
-            ListaConvenios.AllowRemove = false;
-            ListaConvenios.AllowEdit = false;
+            ListaEnderecos = new BindingList<Endereco>();
+            ListaEnderecos.AllowNew = false;
+            ListaEnderecos.AllowRemove = false;
+            ListaEnderecos.AllowEdit = false;
         }
 
         private void InicializaFontePixeBoy()
@@ -149,12 +149,12 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoPesquisar_Click(object sender, EventArgs e)
         {
-            var ListaConvenioRetornada = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
+            var ListaEnderecoRetornada = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
 
-            ListaConvenios.Clear();
-            foreach(var convenio in ListaConvenioRetornada)
+            ListaEnderecos.Clear();
+            foreach(var endereco in ListaEnderecoRetornada)
             {
-                ListaConvenios.Add(convenio);
+                ListaEnderecos.Add(endereco);
             }
         }
     }

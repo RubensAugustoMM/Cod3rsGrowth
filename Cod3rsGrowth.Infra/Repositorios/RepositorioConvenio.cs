@@ -9,7 +9,7 @@ public class RepositorioConvenio : IRepositorioConvenio
 {
     private readonly ContextoAplicacao _contexto;
 
-    RepositorioConvenio(ContextoAplicacao contexto)
+    public RepositorioConvenio(ContextoAplicacao contexto)
     {
         _contexto = contexto;
     }

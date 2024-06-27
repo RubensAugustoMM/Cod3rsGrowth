@@ -1,25 +1,29 @@
-﻿using Cod3rsGrowth.Forms.Properties;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaPrincipalForm : Form
     {
         private PrivateFontCollection _pixeboy;
+        private readonly TelaConvenioForm _telaConvenioForm;
+        private readonly TelaEmpresaForm _telaEmpresaForm;
+        private readonly TelaEnderecoForm _telaEnderecoForm;
+        private readonly TelaEscolaForm _telaEscolaForm;
 
-        public TelaPrincipalForm()
+        private bool _telaConvenioAtiva;
+        private bool _telaEmpresaAtiva;
+        private bool _telaEnderecoAtiva;
+        private bool _telaEscolaAtiva;
+
+        public TelaPrincipalForm(TelaConvenioForm telaConvenioForm, TelaEmpresaForm telaEmpresaForm
+                , TelaEnderecoForm telaEnderecoForm, TelaEscolaForm telaEscolaForm)
         {
             InitializeComponent();
+            _telaConvenioForm = telaConvenioForm;
+            _telaEmpresaForm = telaEmpresaForm;
+            _telaEnderecoForm = telaEnderecoForm;
+            _telaEscolaForm = telaEscolaForm;
         }
 
         private void panelTopo1_Paint(object sender, PaintEventArgs e)
@@ -49,25 +53,15 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void TelaPrincipalForm_Load(object sender, EventArgs e)
         {
-            _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+            InicializaFontePixeBoy();
+            InicializaPainelExibicao();
+            timer1.Start();
 
             foreach (Control c in this.Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                ConfiguraFonte(c);
             }
-
-            timer1.Start();
-        }
-
-        private void button1_Paint(object sender, PaintEventArgs e)
-        {
-            button1.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-        }
-
-        private void Tempo_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -78,45 +72,136 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TelaConvenioForm TelaConvenio = new TelaConvenioForm()
+            if(_telaConvenioAtiva)
             {
-                TopLevel = false,
-                TopMost = true
-            };
+                _telaConvenioAtiva = !_telaConvenioAtiva;
+                _telaConvenioForm.Hide();
 
-            TelaConvenio.FormBorderStyle = FormBorderStyle.None;
-            painelExibicao.Controls.Add(TelaConvenio);
-            TelaConvenio.Show();
+                return;
+            }
+
+            _telaEmpresaForm.Hide();
+            _telaEnderecoForm.Hide();
+            _telaEscolaForm.Hide();
+
+            _telaEmpresaAtiva = false;
+            _telaEnderecoAtiva = false;
+            _telaEscolaAtiva = false;
+
+            _telaConvenioForm.TopMost = true;
+
+            _telaConvenioAtiva = true;
+            _telaConvenioForm.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if(_telaEmpresaAtiva)
+            {
+                _telaEmpresaAtiva = !_telaEmpresaAtiva;
+                _telaEmpresaForm.Hide();
 
+                return;
+            }
+
+            _telaConvenioForm.Hide();
+            _telaEnderecoForm.Hide();
+            _telaEscolaForm.Hide();
+
+            _telaConvenioAtiva = false;
+            _telaEnderecoAtiva = false;
+            _telaEscolaAtiva = false;
+
+            _telaEmpresaForm.TopMost = true;
+
+            _telaEmpresaAtiva = true;
+            _telaEmpresaForm.Show();
         }
 
-        private void button2_Paint(object sender, PaintEventArgs e)
+        private void botaoEnderecos_Click(object sender, EventArgs e)
         {
-            button2.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-        }
+            if(_telaEnderecoAtiva)
+            {
+                _telaEnderecoAtiva = !_telaEnderecoAtiva;
+                _telaEnderecoForm.Hide();
 
-        private void botaoEscolas_Paint(object sender, PaintEventArgs e)
-        {
-            botaoEscolas.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-        }
+                return;
+            }
 
-        private void botaoEnderecos_Paint(object sender, PaintEventArgs e)
-        {
-            botaoEnderecos.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-        }
+            _telaConvenioForm.Hide();
+            _telaEmpresaForm.Hide();
+            _telaEscolaForm.Hide();            
+            _telaEscolaAtiva = false;
+            _telaConvenioAtiva = false;
+            _telaEmpresaAtiva = false;
 
-        private void botaoFechar_Paint(object sender, PaintEventArgs e)
+            _telaEnderecoForm.TopMost = true;
+
+            _telaEnderecoAtiva = true;
+            _telaEnderecoForm.Show();
+        }
+        private void botaoEscolas_Click(object sender, EventArgs e)
         {
-            botaoEscolas.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
+            if(_telaEscolaAtiva)
+            {
+                _telaEscolaAtiva = !_telaEscolaAtiva;
+                _telaEscolaForm.Hide();
+
+                return;
+            }
+
+            _telaConvenioForm.Hide();
+            _telaEmpresaForm.Hide();
+            _telaEnderecoForm.Hide();
+
+            _telaConvenioAtiva = false;
+            _telaEmpresaAtiva = false;
+            _telaEnderecoAtiva = false;
+            
+            _telaEscolaForm.TopMost = true;
+
+            _telaEscolaAtiva = true;
+            _telaEscolaForm.Show();
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void InicializaFontePixeBoy()
+        {
+            _pixeboy = new PrivateFontCollection();
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+        }
+
+        private void ConfiguraFonte(Control controle)
+        {
+            foreach (Control c in controle.Controls)
+            {
+                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+
+                if (!c.Controls.IsNullOrEmpty())
+                    ConfiguraFonte(c);
+            }
+        }
+
+        private void InicializaPainelExibicao()
+        {
+            _telaEscolaForm.TopLevel = false;
+            _telaConvenioForm.TopLevel = false;
+            _telaEmpresaForm.TopLevel = false;
+            _telaEnderecoForm.TopLevel = false;
+
+            _telaEscolaAtiva = false;
+            _telaConvenioAtiva = false;
+            _telaEmpresaAtiva = false;
+            _telaEnderecoAtiva = false;
+
+            painelExibicao.Controls.Add(_telaEscolaForm);
+            painelExibicao.Controls.Add(_telaConvenioForm);
+            painelExibicao.Controls.Add(_telaEmpresaForm);
+            painelExibicao.Controls.Add(_telaEnderecoForm);
         }
     }
 }

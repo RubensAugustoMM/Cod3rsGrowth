@@ -56,6 +56,10 @@ internal static class Program
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
                 .AddScoped<ServicoEscola>()
+                .AddScoped<TelaEmpresaForm>()
+                .AddScoped<TelaEscolaForm>()
+                .AddScoped<TelaConvenioForm>()
+                .AddScoped<TelaEnderecoForm>()
                 .AddScoped<TelaPrincipalForm>();
             });
     }

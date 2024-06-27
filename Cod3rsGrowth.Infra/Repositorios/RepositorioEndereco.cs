@@ -62,12 +62,6 @@ public class RepositorioEndereco : IRepositorioEndereco
                         select e;
             }
 
-            if (filtroEndereco.RuaFiltro != null)
-            {
-                query = from e in query
-                        where e.Rua.Contains(filtroEndereco.RuaFiltro)
-                        select e;
-            }
 
             if (filtroEndereco.CepFiltro != null)
             {

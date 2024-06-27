@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaConvenioForm
+    partial class TelaEnderecoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.GridColor = Color.White;
+            dataGridView1.GridColor = Color.FromArgb(0, 0, 192);
             dataGridView1.Location = new Point(165, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
@@ -110,7 +110,7 @@
             botaoFiltros.Click += botaoFiltros_Click;
             botaoFiltros.Paint += botaoFiltros_Paint;
             // 
-            // TelaConvenioForm
+            // TelaEnderecoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -120,7 +120,7 @@
             Controls.Add(painelPrincipal);
             Controls.Add(painelLateral);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "TelaConvenioForm";
+            Name = "TelaEnderecoForm";
             Text = "TelaConvenioForm";
             Load += TelaConvenioForm_Load;
             Paint += TelaConvenioForm_Paint;
