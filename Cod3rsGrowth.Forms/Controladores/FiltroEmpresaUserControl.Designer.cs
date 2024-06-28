@@ -64,6 +64,11 @@
             checkBoxMaiorDataAbertura = new CheckBox();
             checkBoxSituacaoCadastral = new CheckBox();
             checkBoxHabilitadoSituacaoCadastral = new CheckBox();
+            checkBoxHabilitadoDataAbertura = new CheckBox();
+            checkBoxHabilitadoDataSituacaoCadastral = new CheckBox();
+            checkBoxHabilitadoMatrizFilial = new CheckBox();
+            checkBoxHabilitadoPorte = new CheckBox();
+            checkBoxHabilitadoNaturezaJuridica = new CheckBox();
             SuspendLayout();
             // 
             // botaoFechar
@@ -116,7 +121,7 @@
             labelRazaoSocial.AutoSize = true;
             labelRazaoSocial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelRazaoSocial.ForeColor = Color.White;
-            labelRazaoSocial.Location = new Point(22, 25);
+            labelRazaoSocial.Location = new Point(37, 25);
             labelRazaoSocial.Name = "labelRazaoSocial";
             labelRazaoSocial.Size = new Size(181, 21);
             labelRazaoSocial.TabIndex = 23;
@@ -127,7 +132,7 @@
             labelNomeFantasia.AutoSize = true;
             labelNomeFantasia.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelNomeFantasia.ForeColor = Color.White;
-            labelNomeFantasia.Location = new Point(22, 46);
+            labelNomeFantasia.Location = new Point(37, 46);
             labelNomeFantasia.Name = "labelNomeFantasia";
             labelNomeFantasia.Size = new Size(190, 21);
             labelNomeFantasia.TabIndex = 24;
@@ -138,7 +143,7 @@
             labelCnpj.AutoSize = true;
             labelCnpj.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCnpj.ForeColor = Color.White;
-            labelCnpj.Location = new Point(22, 67);
+            labelCnpj.Location = new Point(37, 67);
             labelCnpj.Name = "labelCnpj";
             labelCnpj.Size = new Size(186, 21);
             labelCnpj.TabIndex = 25;
@@ -149,7 +154,7 @@
             labelSituacaoCadastral.AutoSize = true;
             labelSituacaoCadastral.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelSituacaoCadastral.ForeColor = Color.White;
-            labelSituacaoCadastral.Location = new Point(22, 195);
+            labelSituacaoCadastral.Location = new Point(37, 195);
             labelSituacaoCadastral.Name = "labelSituacaoCadastral";
             labelSituacaoCadastral.Size = new Size(176, 21);
             labelSituacaoCadastral.TabIndex = 26;
@@ -160,7 +165,7 @@
             labelDataSituacaoCadastral.AutoSize = true;
             labelDataSituacaoCadastral.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelDataSituacaoCadastral.ForeColor = Color.White;
-            labelDataSituacaoCadastral.Location = new Point(22, 231);
+            labelDataSituacaoCadastral.Location = new Point(37, 231);
             labelDataSituacaoCadastral.Name = "labelDataSituacaoCadastral";
             labelDataSituacaoCadastral.Size = new Size(177, 21);
             labelDataSituacaoCadastral.TabIndex = 27;
@@ -171,7 +176,7 @@
             labelDataAbertura.AutoSize = true;
             labelDataAbertura.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelDataAbertura.ForeColor = Color.White;
-            labelDataAbertura.Location = new Point(22, 252);
+            labelDataAbertura.Location = new Point(37, 252);
             labelDataAbertura.Name = "labelDataAbertura";
             labelDataAbertura.Size = new Size(184, 21);
             labelDataAbertura.TabIndex = 28;
@@ -182,7 +187,7 @@
             labelCapitalSocial.AutoSize = true;
             labelCapitalSocial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCapitalSocial.ForeColor = Color.White;
-            labelCapitalSocial.Location = new Point(22, 109);
+            labelCapitalSocial.Location = new Point(37, 109);
             labelCapitalSocial.Name = "labelCapitalSocial";
             labelCapitalSocial.Size = new Size(164, 21);
             labelCapitalSocial.TabIndex = 29;
@@ -193,7 +198,7 @@
             labelPorte.AutoSize = true;
             labelPorte.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelPorte.ForeColor = Color.White;
-            labelPorte.Location = new Point(22, 151);
+            labelPorte.Location = new Point(37, 151);
             labelPorte.Name = "labelPorte";
             labelPorte.Size = new Size(179, 21);
             labelPorte.TabIndex = 30;
@@ -204,7 +209,7 @@
             labelNaturezaJuridica.AutoSize = true;
             labelNaturezaJuridica.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelNaturezaJuridica.ForeColor = Color.White;
-            labelNaturezaJuridica.Location = new Point(22, 130);
+            labelNaturezaJuridica.Location = new Point(37, 130);
             labelNaturezaJuridica.Name = "labelNaturezaJuridica";
             labelNaturezaJuridica.Size = new Size(172, 21);
             labelNaturezaJuridica.TabIndex = 31;
@@ -215,7 +220,7 @@
             labelMatrizFilial.AutoSize = true;
             labelMatrizFilial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMatrizFilial.ForeColor = Color.White;
-            labelMatrizFilial.Location = new Point(22, 172);
+            labelMatrizFilial.Location = new Point(37, 172);
             labelMatrizFilial.Name = "labelMatrizFilial";
             labelMatrizFilial.Size = new Size(168, 21);
             labelMatrizFilial.TabIndex = 32;
@@ -226,7 +231,7 @@
             textBoxRazaoSocial.BackColor = Color.Black;
             textBoxRazaoSocial.BorderStyle = BorderStyle.None;
             textBoxRazaoSocial.ForeColor = Color.Yellow;
-            textBoxRazaoSocial.Location = new Point(189, 30);
+            textBoxRazaoSocial.Location = new Point(204, 30);
             textBoxRazaoSocial.Name = "textBoxRazaoSocial";
             textBoxRazaoSocial.Size = new Size(149, 16);
             textBoxRazaoSocial.TabIndex = 33;
@@ -236,7 +241,7 @@
             textBoxNomeFantasia.BackColor = Color.Black;
             textBoxNomeFantasia.BorderStyle = BorderStyle.None;
             textBoxNomeFantasia.ForeColor = Color.Yellow;
-            textBoxNomeFantasia.Location = new Point(189, 51);
+            textBoxNomeFantasia.Location = new Point(204, 51);
             textBoxNomeFantasia.Name = "textBoxNomeFantasia";
             textBoxNomeFantasia.Size = new Size(149, 16);
             textBoxNomeFantasia.TabIndex = 34;
@@ -246,7 +251,7 @@
             textBoxCnpj.BackColor = Color.Black;
             textBoxCnpj.BorderStyle = BorderStyle.None;
             textBoxCnpj.ForeColor = Color.Yellow;
-            textBoxCnpj.Location = new Point(189, 73);
+            textBoxCnpj.Location = new Point(204, 73);
             textBoxCnpj.Name = "textBoxCnpj";
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 35;
@@ -256,7 +261,7 @@
             textBoxCapitalSocial.BackColor = Color.Black;
             textBoxCapitalSocial.BorderStyle = BorderStyle.None;
             textBoxCapitalSocial.ForeColor = Color.Yellow;
-            textBoxCapitalSocial.Location = new Point(189, 115);
+            textBoxCapitalSocial.Location = new Point(204, 115);
             textBoxCapitalSocial.Name = "textBoxCapitalSocial";
             textBoxCapitalSocial.Size = new Size(149, 16);
             textBoxCapitalSocial.TabIndex = 37;
@@ -267,7 +272,7 @@
             labelIdade.AutoSize = true;
             labelIdade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelIdade.ForeColor = Color.White;
-            labelIdade.Location = new Point(20, 88);
+            labelIdade.Location = new Point(35, 88);
             labelIdade.Name = "labelIdade";
             labelIdade.Size = new Size(181, 21);
             labelIdade.TabIndex = 38;
@@ -278,7 +283,7 @@
             textBoxIdade.BackColor = Color.Black;
             textBoxIdade.BorderStyle = BorderStyle.None;
             textBoxIdade.ForeColor = Color.Yellow;
-            textBoxIdade.Location = new Point(189, 95);
+            textBoxIdade.Location = new Point(204, 95);
             textBoxIdade.Name = "textBoxIdade";
             textBoxIdade.Size = new Size(149, 16);
             textBoxIdade.TabIndex = 39;
@@ -289,7 +294,7 @@
             comboBoxNaturezaJuridica.BackColor = Color.Yellow;
             comboBoxNaturezaJuridica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxNaturezaJuridica.FormattingEnabled = true;
-            comboBoxNaturezaJuridica.Location = new Point(189, 133);
+            comboBoxNaturezaJuridica.Location = new Point(204, 133);
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 40;
@@ -299,7 +304,7 @@
             comboBoxPorte.BackColor = Color.Yellow;
             comboBoxPorte.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxPorte.FormattingEnabled = true;
-            comboBoxPorte.Location = new Point(189, 152);
+            comboBoxPorte.Location = new Point(204, 152);
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 41;
@@ -309,7 +314,7 @@
             comboBoxMatrizFilial.BackColor = Color.Yellow;
             comboBoxMatrizFilial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMatrizFilial.FormattingEnabled = true;
-            comboBoxMatrizFilial.Location = new Point(189, 175);
+            comboBoxMatrizFilial.Location = new Point(204, 175);
             comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
             comboBoxMatrizFilial.Size = new Size(149, 23);
             comboBoxMatrizFilial.TabIndex = 42;
@@ -323,7 +328,7 @@
             dateTimePickerDataSituacaoCadastral.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataSituacaoCadastral.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataSituacaoCadastral.Location = new Point(189, 230);
+            dateTimePickerDataSituacaoCadastral.Location = new Point(204, 230);
             dateTimePickerDataSituacaoCadastral.Name = "dateTimePickerDataSituacaoCadastral";
             dateTimePickerDataSituacaoCadastral.Size = new Size(149, 23);
             dateTimePickerDataSituacaoCadastral.TabIndex = 43;
@@ -337,7 +342,7 @@
             dateTimePickerDataAbertura.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataAbertura.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataAbertura.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataAbertura.Location = new Point(189, 253);
+            dateTimePickerDataAbertura.Location = new Point(204, 253);
             dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
@@ -347,7 +352,7 @@
             labelMenor.AutoSize = true;
             labelMenor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMenor.ForeColor = Color.White;
-            labelMenor.Location = new Point(392, 15);
+            labelMenor.Location = new Point(407, 15);
             labelMenor.Name = "labelMenor";
             labelMenor.Size = new Size(56, 21);
             labelMenor.TabIndex = 53;
@@ -358,7 +363,7 @@
             labelMaior.AutoSize = true;
             labelMaior.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMaior.ForeColor = Color.White;
-            labelMaior.Location = new Point(344, 15);
+            labelMaior.Location = new Point(359, 15);
             labelMaior.Name = "labelMaior";
             labelMaior.Size = new Size(51, 21);
             labelMaior.TabIndex = 52;
@@ -369,7 +374,7 @@
             checkBoxMenorDataSituacaoCadastral.AutoSize = true;
             checkBoxMenorDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxMenorDataSituacaoCadastral.ForeColor = Color.White;
-            checkBoxMenorDataSituacaoCadastral.Location = new Point(404, 232);
+            checkBoxMenorDataSituacaoCadastral.Location = new Point(419, 232);
             checkBoxMenorDataSituacaoCadastral.Name = "checkBoxMenorDataSituacaoCadastral";
             checkBoxMenorDataSituacaoCadastral.Size = new Size(15, 14);
             checkBoxMenorDataSituacaoCadastral.TabIndex = 51;
@@ -381,7 +386,7 @@
             checkBoxMaiorDataSituacaoCadastral.AutoSize = true;
             checkBoxMaiorDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxMaiorDataSituacaoCadastral.ForeColor = Color.White;
-            checkBoxMaiorDataSituacaoCadastral.Location = new Point(344, 232);
+            checkBoxMaiorDataSituacaoCadastral.Location = new Point(359, 232);
             checkBoxMaiorDataSituacaoCadastral.Name = "checkBoxMaiorDataSituacaoCadastral";
             checkBoxMaiorDataSituacaoCadastral.Size = new Size(15, 14);
             checkBoxMaiorDataSituacaoCadastral.TabIndex = 50;
@@ -393,7 +398,7 @@
             checkBoxMenorCapitalSocial.AutoSize = true;
             checkBoxMenorCapitalSocial.FlatAppearance.BorderSize = 0;
             checkBoxMenorCapitalSocial.ForeColor = Color.White;
-            checkBoxMenorCapitalSocial.Location = new Point(404, 117);
+            checkBoxMenorCapitalSocial.Location = new Point(419, 117);
             checkBoxMenorCapitalSocial.Name = "checkBoxMenorCapitalSocial";
             checkBoxMenorCapitalSocial.Size = new Size(15, 14);
             checkBoxMenorCapitalSocial.TabIndex = 49;
@@ -405,7 +410,7 @@
             checkBoxMaiorCapitalSocial.AutoSize = true;
             checkBoxMaiorCapitalSocial.FlatAppearance.BorderSize = 0;
             checkBoxMaiorCapitalSocial.ForeColor = Color.White;
-            checkBoxMaiorCapitalSocial.Location = new Point(344, 117);
+            checkBoxMaiorCapitalSocial.Location = new Point(359, 117);
             checkBoxMaiorCapitalSocial.Name = "checkBoxMaiorCapitalSocial";
             checkBoxMaiorCapitalSocial.Size = new Size(15, 14);
             checkBoxMaiorCapitalSocial.TabIndex = 48;
@@ -417,7 +422,7 @@
             checkBoxMenorIdade.AutoSize = true;
             checkBoxMenorIdade.FlatAppearance.BorderSize = 0;
             checkBoxMenorIdade.ForeColor = SystemColors.Window;
-            checkBoxMenorIdade.Location = new Point(404, 96);
+            checkBoxMenorIdade.Location = new Point(419, 96);
             checkBoxMenorIdade.Name = "checkBoxMenorIdade";
             checkBoxMenorIdade.Size = new Size(15, 14);
             checkBoxMenorIdade.TabIndex = 47;
@@ -429,7 +434,7 @@
             checkBoxMaiorIdade.AutoSize = true;
             checkBoxMaiorIdade.FlatAppearance.BorderSize = 0;
             checkBoxMaiorIdade.ForeColor = Color.White;
-            checkBoxMaiorIdade.Location = new Point(344, 96);
+            checkBoxMaiorIdade.Location = new Point(359, 96);
             checkBoxMaiorIdade.Name = "checkBoxMaiorIdade";
             checkBoxMaiorIdade.Size = new Size(15, 14);
             checkBoxMaiorIdade.TabIndex = 46;
@@ -441,7 +446,7 @@
             checkBoxMenorDataAbertura.AutoSize = true;
             checkBoxMenorDataAbertura.FlatAppearance.BorderSize = 0;
             checkBoxMenorDataAbertura.ForeColor = Color.White;
-            checkBoxMenorDataAbertura.Location = new Point(404, 259);
+            checkBoxMenorDataAbertura.Location = new Point(419, 259);
             checkBoxMenorDataAbertura.Name = "checkBoxMenorDataAbertura";
             checkBoxMenorDataAbertura.Size = new Size(15, 14);
             checkBoxMenorDataAbertura.TabIndex = 55;
@@ -453,7 +458,7 @@
             checkBoxMaiorDataAbertura.AutoSize = true;
             checkBoxMaiorDataAbertura.FlatAppearance.BorderSize = 0;
             checkBoxMaiorDataAbertura.ForeColor = Color.White;
-            checkBoxMaiorDataAbertura.Location = new Point(344, 259);
+            checkBoxMaiorDataAbertura.Location = new Point(359, 259);
             checkBoxMaiorDataAbertura.Name = "checkBoxMaiorDataAbertura";
             checkBoxMaiorDataAbertura.Size = new Size(15, 14);
             checkBoxMaiorDataAbertura.TabIndex = 54;
@@ -465,7 +470,7 @@
             checkBoxSituacaoCadastral.AutoSize = true;
             checkBoxSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxSituacaoCadastral.ForeColor = Color.White;
-            checkBoxSituacaoCadastral.Location = new Point(189, 204);
+            checkBoxSituacaoCadastral.Location = new Point(204, 204);
             checkBoxSituacaoCadastral.Name = "checkBoxSituacaoCadastral";
             checkBoxSituacaoCadastral.Size = new Size(15, 14);
             checkBoxSituacaoCadastral.TabIndex = 56;
@@ -476,18 +481,78 @@
             checkBoxHabilitadoSituacaoCadastral.AutoSize = true;
             checkBoxHabilitadoSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxHabilitadoSituacaoCadastral.ForeColor = Color.White;
-            checkBoxHabilitadoSituacaoCadastral.Location = new Point(210, 202);
+            checkBoxHabilitadoSituacaoCadastral.Location = new Point(225, 202);
             checkBoxHabilitadoSituacaoCadastral.Name = "checkBoxHabilitadoSituacaoCadastral";
             checkBoxHabilitadoSituacaoCadastral.Size = new Size(86, 19);
             checkBoxHabilitadoSituacaoCadastral.TabIndex = 57;
             checkBoxHabilitadoSituacaoCadastral.Text = "Habilitado?";
             checkBoxHabilitadoSituacaoCadastral.UseVisualStyleBackColor = true;
             // 
+            // checkBoxHabilitadoDataAbertura
+            // 
+            checkBoxHabilitadoDataAbertura.AutoSize = true;
+            checkBoxHabilitadoDataAbertura.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoDataAbertura.ForeColor = Color.White;
+            checkBoxHabilitadoDataAbertura.Location = new Point(16, 253);
+            checkBoxHabilitadoDataAbertura.Name = "checkBoxHabilitadoDataAbertura";
+            checkBoxHabilitadoDataAbertura.Size = new Size(15, 14);
+            checkBoxHabilitadoDataAbertura.TabIndex = 59;
+            checkBoxHabilitadoDataAbertura.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoDataSituacaoCadastral
+            // 
+            checkBoxHabilitadoDataSituacaoCadastral.AutoSize = true;
+            checkBoxHabilitadoDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoDataSituacaoCadastral.ForeColor = Color.White;
+            checkBoxHabilitadoDataSituacaoCadastral.Location = new Point(16, 232);
+            checkBoxHabilitadoDataSituacaoCadastral.Name = "checkBoxHabilitadoDataSituacaoCadastral";
+            checkBoxHabilitadoDataSituacaoCadastral.Size = new Size(15, 14);
+            checkBoxHabilitadoDataSituacaoCadastral.TabIndex = 58;
+            checkBoxHabilitadoDataSituacaoCadastral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoMatrizFilial
+            // 
+            checkBoxHabilitadoMatrizFilial.AutoSize = true;
+            checkBoxHabilitadoMatrizFilial.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoMatrizFilial.ForeColor = Color.White;
+            checkBoxHabilitadoMatrizFilial.Location = new Point(16, 172);
+            checkBoxHabilitadoMatrizFilial.Name = "checkBoxHabilitadoMatrizFilial";
+            checkBoxHabilitadoMatrizFilial.Size = new Size(15, 14);
+            checkBoxHabilitadoMatrizFilial.TabIndex = 60;
+            checkBoxHabilitadoMatrizFilial.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoPorte
+            // 
+            checkBoxHabilitadoPorte.AutoSize = true;
+            checkBoxHabilitadoPorte.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoPorte.ForeColor = Color.White;
+            checkBoxHabilitadoPorte.Location = new Point(16, 153);
+            checkBoxHabilitadoPorte.Name = "checkBoxHabilitadoPorte";
+            checkBoxHabilitadoPorte.Size = new Size(15, 14);
+            checkBoxHabilitadoPorte.TabIndex = 61;
+            checkBoxHabilitadoPorte.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoNaturezaJuridica
+            // 
+            checkBoxHabilitadoNaturezaJuridica.AutoSize = true;
+            checkBoxHabilitadoNaturezaJuridica.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoNaturezaJuridica.ForeColor = Color.White;
+            checkBoxHabilitadoNaturezaJuridica.Location = new Point(16, 133);
+            checkBoxHabilitadoNaturezaJuridica.Name = "checkBoxHabilitadoNaturezaJuridica";
+            checkBoxHabilitadoNaturezaJuridica.Size = new Size(15, 14);
+            checkBoxHabilitadoNaturezaJuridica.TabIndex = 62;
+            checkBoxHabilitadoNaturezaJuridica.UseVisualStyleBackColor = true;
+            // 
             // FiltroEmpresaUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
+            Controls.Add(checkBoxHabilitadoNaturezaJuridica);
+            Controls.Add(checkBoxHabilitadoPorte);
+            Controls.Add(checkBoxHabilitadoMatrizFilial);
+            Controls.Add(checkBoxHabilitadoDataAbertura);
+            Controls.Add(checkBoxHabilitadoDataSituacaoCadastral);
             Controls.Add(checkBoxHabilitadoSituacaoCadastral);
             Controls.Add(checkBoxSituacaoCadastral);
             Controls.Add(checkBoxMenorDataAbertura);
@@ -525,7 +590,7 @@
             Controls.Add(botaoFiltrar);
             Controls.Add(botaoFechar);
             Name = "FiltroEmpresaUserControl";
-            Size = new Size(456, 347);
+            Size = new Size(497, 347);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
             ResumeLayout(false);
@@ -569,5 +634,10 @@
         private CheckBox checkBoxMaiorDataAbertura;
         private CheckBox checkBoxSituacaoCadastral;
         private CheckBox checkBoxHabilitadoSituacaoCadastral;
+        private CheckBox checkBoxHabilitadoDataAbertura;
+        private CheckBox checkBoxHabilitadoDataSituacaoCadastral;
+        private CheckBox checkBoxHabilitadoMatrizFilial;
+        private CheckBox checkBoxHabilitadoPorte;
+        private CheckBox checkBoxHabilitadoNaturezaJuridica;
     }
 }

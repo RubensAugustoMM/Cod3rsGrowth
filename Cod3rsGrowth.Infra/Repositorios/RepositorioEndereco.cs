@@ -62,7 +62,6 @@ public class RepositorioEndereco : IRepositorioEndereco
                         select e;
             }
 
-
             if (filtroEndereco.CepFiltro != null)
             {
                 query = from e in query

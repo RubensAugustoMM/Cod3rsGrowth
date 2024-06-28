@@ -39,6 +39,7 @@
             textBoxMunicipio = new TextBox();
             textBoxBairro = new TextBox();
             textBoxCep = new TextBox();
+            checkBoxHabilitadoEstado = new CheckBox();
             SuspendLayout();
             // 
             // LabelEstado
@@ -46,7 +47,7 @@
             LabelEstado.AutoSize = true;
             LabelEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             LabelEstado.ForeColor = Color.White;
-            LabelEstado.Location = new Point(19, 30);
+            LabelEstado.Location = new Point(31, 30);
             LabelEstado.Name = "LabelEstado";
             LabelEstado.Size = new Size(76, 21);
             LabelEstado.TabIndex = 5;
@@ -102,7 +103,7 @@
             comboBoxEstado.BackColor = Color.Yellow;
             comboBoxEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEstado.FormattingEnabled = true;
-            comboBoxEstado.Location = new Point(89, 28);
+            comboBoxEstado.Location = new Point(101, 28);
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 41;
@@ -112,7 +113,7 @@
             labelMunicipio.AutoSize = true;
             labelMunicipio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMunicipio.ForeColor = Color.White;
-            labelMunicipio.Location = new Point(19, 51);
+            labelMunicipio.Location = new Point(31, 51);
             labelMunicipio.Name = "labelMunicipio";
             labelMunicipio.Size = new Size(82, 21);
             labelMunicipio.TabIndex = 42;
@@ -123,7 +124,7 @@
             labelBairro.AutoSize = true;
             labelBairro.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelBairro.ForeColor = Color.White;
-            labelBairro.Location = new Point(19, 72);
+            labelBairro.Location = new Point(31, 72);
             labelBairro.Name = "labelBairro";
             labelBairro.Size = new Size(72, 21);
             labelBairro.TabIndex = 43;
@@ -134,7 +135,7 @@
             labelCep.AutoSize = true;
             labelCep.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCep.ForeColor = Color.White;
-            labelCep.Location = new Point(23, 93);
+            labelCep.Location = new Point(35, 93);
             labelCep.Name = "labelCep";
             labelCep.Size = new Size(75, 21);
             labelCep.TabIndex = 44;
@@ -145,7 +146,7 @@
             textBoxMunicipio.BackColor = Color.Black;
             textBoxMunicipio.BorderStyle = BorderStyle.None;
             textBoxMunicipio.ForeColor = Color.Yellow;
-            textBoxMunicipio.Location = new Point(89, 56);
+            textBoxMunicipio.Location = new Point(101, 56);
             textBoxMunicipio.Name = "textBoxMunicipio";
             textBoxMunicipio.Size = new Size(149, 16);
             textBoxMunicipio.TabIndex = 45;
@@ -155,7 +156,7 @@
             textBoxBairro.BackColor = Color.Black;
             textBoxBairro.BorderStyle = BorderStyle.None;
             textBoxBairro.ForeColor = Color.Yellow;
-            textBoxBairro.Location = new Point(89, 77);
+            textBoxBairro.Location = new Point(101, 77);
             textBoxBairro.Name = "textBoxBairro";
             textBoxBairro.Size = new Size(149, 16);
             textBoxBairro.TabIndex = 46;
@@ -165,16 +166,28 @@
             textBoxCep.BackColor = Color.Black;
             textBoxCep.BorderStyle = BorderStyle.None;
             textBoxCep.ForeColor = Color.Yellow;
-            textBoxCep.Location = new Point(89, 99);
+            textBoxCep.Location = new Point(101, 99);
             textBoxCep.Name = "textBoxCep";
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 47;
+            // 
+            // checkBoxHabilitadoEstado
+            // 
+            checkBoxHabilitadoEstado.AutoSize = true;
+            checkBoxHabilitadoEstado.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoEstado.ForeColor = Color.White;
+            checkBoxHabilitadoEstado.Location = new Point(10, 30);
+            checkBoxHabilitadoEstado.Name = "checkBoxHabilitadoEstado";
+            checkBoxHabilitadoEstado.Size = new Size(15, 14);
+            checkBoxHabilitadoEstado.TabIndex = 61;
+            checkBoxHabilitadoEstado.UseVisualStyleBackColor = true;
             // 
             // FiltroEnderecoUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
+            Controls.Add(checkBoxHabilitadoEstado);
             Controls.Add(textBoxCep);
             Controls.Add(textBoxBairro);
             Controls.Add(textBoxMunicipio);
@@ -187,7 +200,7 @@
             Controls.Add(botaoFechar);
             Controls.Add(LabelEstado);
             Name = "FiltroEnderecoUserControl";
-            Size = new Size(263, 209);
+            Size = new Size(280, 209);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
             ResumeLayout(false);
@@ -221,5 +234,6 @@
         private TextBox textBoxCep;
         private Label labelMaior;
         private Label labelMenor;
+        private CheckBox checkBoxHabilitadoEstado;
     }
 }

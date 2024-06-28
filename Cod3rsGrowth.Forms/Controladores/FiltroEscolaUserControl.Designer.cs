@@ -50,6 +50,9 @@
             labelMaior = new Label();
             checkBoxMenorInicioAtividade = new CheckBox();
             checkBoxMaiorInicioAtividade = new CheckBox();
+            checkBoxHabilitadoInicioAtividade = new CheckBox();
+            checkBoxHabilitadoOrganizacaoAcademica = new CheckBox();
+            checkBoxHabilitadoCategoriaAdministrativa = new CheckBox();
             SuspendLayout();
             // 
             // idEmpresaLabel
@@ -57,7 +60,7 @@
             idEmpresaLabel.AutoSize = true;
             idEmpresaLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             idEmpresaLabel.ForeColor = Color.White;
-            idEmpresaLabel.Location = new Point(15, 30);
+            idEmpresaLabel.Location = new Point(30, 28);
             idEmpresaLabel.Name = "idEmpresaLabel";
             idEmpresaLabel.Size = new Size(207, 21);
             idEmpresaLabel.TabIndex = 5;
@@ -70,7 +73,7 @@
             botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFechar.FlatStyle = FlatStyle.Flat;
             botaoFechar.ForeColor = Color.White;
-            botaoFechar.Location = new Point(243, 250);
+            botaoFechar.Location = new Point(258, 248);
             botaoFechar.Name = "botaoFechar";
             botaoFechar.Size = new Size(67, 40);
             botaoFechar.TabIndex = 14;
@@ -85,7 +88,7 @@
             botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFiltrar.FlatStyle = FlatStyle.Flat;
             botaoFiltrar.ForeColor = Color.White;
-            botaoFiltrar.Location = new Point(388, 250);
+            botaoFiltrar.Location = new Point(403, 248);
             botaoFiltrar.Name = "botaoFiltrar";
             botaoFiltrar.Size = new Size(67, 40);
             botaoFiltrar.TabIndex = 15;
@@ -100,7 +103,7 @@
             botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoLimpar.FlatStyle = FlatStyle.Flat;
             botaoLimpar.ForeColor = Color.White;
-            botaoLimpar.Location = new Point(316, 250);
+            botaoLimpar.Location = new Point(331, 248);
             botaoLimpar.Name = "botaoLimpar";
             botaoLimpar.Size = new Size(67, 40);
             botaoLimpar.TabIndex = 22;
@@ -113,7 +116,7 @@
             comboBoxCategoriaAdministrativa.BackColor = Color.Yellow;
             comboBoxCategoriaAdministrativa.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCategoriaAdministrativa.FormattingEnabled = true;
-            comboBoxCategoriaAdministrativa.Location = new Point(192, 92);
+            comboBoxCategoriaAdministrativa.Location = new Point(207, 90);
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
             comboBoxCategoriaAdministrativa.TabIndex = 41;
@@ -123,7 +126,7 @@
             textBoxNome.BackColor = Color.Black;
             textBoxNome.BorderStyle = BorderStyle.None;
             textBoxNome.ForeColor = Color.Yellow;
-            textBoxNome.Location = new Point(192, 30);
+            textBoxNome.Location = new Point(207, 28);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(149, 16);
             textBoxNome.TabIndex = 45;
@@ -133,7 +136,7 @@
             labelCodigoMec.AutoSize = true;
             labelCodigoMec.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCodigoMec.ForeColor = Color.White;
-            labelCodigoMec.Location = new Point(15, 51);
+            labelCodigoMec.Location = new Point(30, 49);
             labelCodigoMec.Name = "labelCodigoMec";
             labelCodigoMec.Size = new Size(201, 21);
             labelCodigoMec.TabIndex = 46;
@@ -144,7 +147,7 @@
             labelCategoriaAdministrativa.AutoSize = true;
             labelCategoriaAdministrativa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCategoriaAdministrativa.ForeColor = Color.White;
-            labelCategoriaAdministrativa.Location = new Point(15, 94);
+            labelCategoriaAdministrativa.Location = new Point(30, 92);
             labelCategoriaAdministrativa.Name = "labelCategoriaAdministrativa";
             labelCategoriaAdministrativa.Size = new Size(185, 21);
             labelCategoriaAdministrativa.TabIndex = 47;
@@ -155,7 +158,7 @@
             labelOrganizacaoAcademica.AutoSize = true;
             labelOrganizacaoAcademica.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelOrganizacaoAcademica.ForeColor = Color.White;
-            labelOrganizacaoAcademica.Location = new Point(15, 135);
+            labelOrganizacaoAcademica.Location = new Point(30, 133);
             labelOrganizacaoAcademica.Name = "labelOrganizacaoAcademica";
             labelOrganizacaoAcademica.Size = new Size(200, 21);
             labelOrganizacaoAcademica.TabIndex = 48;
@@ -166,7 +169,7 @@
             labelIdEndereco.AutoSize = true;
             labelIdEndereco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelIdEndereco.ForeColor = Color.White;
-            labelIdEndereco.Location = new Point(17, 71);
+            labelIdEndereco.Location = new Point(32, 69);
             labelIdEndereco.Name = "labelIdEndereco";
             labelIdEndereco.Size = new Size(192, 21);
             labelIdEndereco.TabIndex = 49;
@@ -177,7 +180,7 @@
             labelStatusAtividade.AutoSize = true;
             labelStatusAtividade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelStatusAtividade.ForeColor = Color.White;
-            labelStatusAtividade.Location = new Point(15, 169);
+            labelStatusAtividade.Location = new Point(30, 167);
             labelStatusAtividade.Name = "labelStatusAtividade";
             labelStatusAtividade.Size = new Size(183, 21);
             labelStatusAtividade.TabIndex = 50;
@@ -188,7 +191,7 @@
             labelInicioAtividade.AutoSize = true;
             labelInicioAtividade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelInicioAtividade.ForeColor = Color.White;
-            labelInicioAtividade.Location = new Point(15, 210);
+            labelInicioAtividade.Location = new Point(30, 208);
             labelInicioAtividade.Name = "labelInicioAtividade";
             labelInicioAtividade.Size = new Size(178, 21);
             labelInicioAtividade.TabIndex = 51;
@@ -199,7 +202,7 @@
             textBoxCodigoMec.BackColor = Color.Black;
             textBoxCodigoMec.BorderStyle = BorderStyle.None;
             textBoxCodigoMec.ForeColor = Color.Yellow;
-            textBoxCodigoMec.Location = new Point(192, 51);
+            textBoxCodigoMec.Location = new Point(207, 49);
             textBoxCodigoMec.Name = "textBoxCodigoMec";
             textBoxCodigoMec.Size = new Size(149, 16);
             textBoxCodigoMec.TabIndex = 52;
@@ -209,7 +212,7 @@
             comboBoxOrganizacaoAcademica.BackColor = Color.Yellow;
             comboBoxOrganizacaoAcademica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxOrganizacaoAcademica.FormattingEnabled = true;
-            comboBoxOrganizacaoAcademica.Location = new Point(192, 133);
+            comboBoxOrganizacaoAcademica.Location = new Point(207, 131);
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 23);
             comboBoxOrganizacaoAcademica.TabIndex = 53;
@@ -219,7 +222,7 @@
             textBoxIdEndereco.BackColor = Color.Black;
             textBoxIdEndereco.BorderStyle = BorderStyle.None;
             textBoxIdEndereco.ForeColor = Color.Yellow;
-            textBoxIdEndereco.Location = new Point(192, 71);
+            textBoxIdEndereco.Location = new Point(207, 69);
             textBoxIdEndereco.Name = "textBoxIdEndereco";
             textBoxIdEndereco.Size = new Size(149, 16);
             textBoxIdEndereco.TabIndex = 54;
@@ -230,7 +233,7 @@
             checkBoxHabilitadoStatusAtividade.AutoSize = true;
             checkBoxHabilitadoStatusAtividade.FlatAppearance.BorderSize = 0;
             checkBoxHabilitadoStatusAtividade.ForeColor = Color.White;
-            checkBoxHabilitadoStatusAtividade.Location = new Point(211, 173);
+            checkBoxHabilitadoStatusAtividade.Location = new Point(226, 171);
             checkBoxHabilitadoStatusAtividade.Name = "checkBoxHabilitadoStatusAtividade";
             checkBoxHabilitadoStatusAtividade.Size = new Size(86, 19);
             checkBoxHabilitadoStatusAtividade.TabIndex = 59;
@@ -242,7 +245,7 @@
             checkBoxStatusAtividade.AutoSize = true;
             checkBoxStatusAtividade.FlatAppearance.BorderSize = 0;
             checkBoxStatusAtividade.ForeColor = Color.White;
-            checkBoxStatusAtividade.Location = new Point(190, 175);
+            checkBoxStatusAtividade.Location = new Point(205, 173);
             checkBoxStatusAtividade.Name = "checkBoxStatusAtividade";
             checkBoxStatusAtividade.Size = new Size(15, 14);
             checkBoxStatusAtividade.TabIndex = 58;
@@ -257,7 +260,7 @@
             dateTimePickerDataInicioAtividade.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataInicioAtividade.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicioAtividade.Location = new Point(190, 208);
+            dateTimePickerDataInicioAtividade.Location = new Point(205, 206);
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
             dateTimePickerDataInicioAtividade.Size = new Size(149, 23);
             dateTimePickerDataInicioAtividade.TabIndex = 60;
@@ -267,7 +270,7 @@
             labelMenor.AutoSize = true;
             labelMenor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMenor.ForeColor = Color.White;
-            labelMenor.Location = new Point(391, 16);
+            labelMenor.Location = new Point(406, 14);
             labelMenor.Name = "labelMenor";
             labelMenor.Size = new Size(56, 21);
             labelMenor.TabIndex = 64;
@@ -278,7 +281,7 @@
             labelMaior.AutoSize = true;
             labelMaior.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMaior.ForeColor = Color.White;
-            labelMaior.Location = new Point(343, 16);
+            labelMaior.Location = new Point(358, 14);
             labelMaior.Name = "labelMaior";
             labelMaior.Size = new Size(51, 21);
             labelMaior.TabIndex = 63;
@@ -289,7 +292,7 @@
             checkBoxMenorInicioAtividade.AutoSize = true;
             checkBoxMenorInicioAtividade.FlatAppearance.BorderSize = 0;
             checkBoxMenorInicioAtividade.ForeColor = SystemColors.Window;
-            checkBoxMenorInicioAtividade.Location = new Point(405, 215);
+            checkBoxMenorInicioAtividade.Location = new Point(420, 213);
             checkBoxMenorInicioAtividade.Name = "checkBoxMenorInicioAtividade";
             checkBoxMenorInicioAtividade.Size = new Size(15, 14);
             checkBoxMenorInicioAtividade.TabIndex = 62;
@@ -301,18 +304,54 @@
             checkBoxMaiorInicioAtividade.AutoSize = true;
             checkBoxMaiorInicioAtividade.FlatAppearance.BorderSize = 0;
             checkBoxMaiorInicioAtividade.ForeColor = Color.White;
-            checkBoxMaiorInicioAtividade.Location = new Point(345, 215);
+            checkBoxMaiorInicioAtividade.Location = new Point(360, 213);
             checkBoxMaiorInicioAtividade.Name = "checkBoxMaiorInicioAtividade";
             checkBoxMaiorInicioAtividade.Size = new Size(15, 14);
             checkBoxMaiorInicioAtividade.TabIndex = 61;
             checkBoxMaiorInicioAtividade.UseVisualStyleBackColor = true;
             checkBoxMaiorInicioAtividade.CheckedChanged += checkBoxMaiorInicioAtividade_CheckedChanged;
             // 
+            // checkBoxHabilitadoInicioAtividade
+            // 
+            checkBoxHabilitadoInicioAtividade.AutoSize = true;
+            checkBoxHabilitadoInicioAtividade.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoInicioAtividade.ForeColor = Color.White;
+            checkBoxHabilitadoInicioAtividade.Location = new Point(9, 206);
+            checkBoxHabilitadoInicioAtividade.Name = "checkBoxHabilitadoInicioAtividade";
+            checkBoxHabilitadoInicioAtividade.Size = new Size(15, 14);
+            checkBoxHabilitadoInicioAtividade.TabIndex = 65;
+            checkBoxHabilitadoInicioAtividade.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoOrganizacaoAcademica
+            // 
+            checkBoxHabilitadoOrganizacaoAcademica.AutoSize = true;
+            checkBoxHabilitadoOrganizacaoAcademica.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoOrganizacaoAcademica.ForeColor = Color.White;
+            checkBoxHabilitadoOrganizacaoAcademica.Location = new Point(9, 133);
+            checkBoxHabilitadoOrganizacaoAcademica.Name = "checkBoxHabilitadoOrganizacaoAcademica";
+            checkBoxHabilitadoOrganizacaoAcademica.Size = new Size(15, 14);
+            checkBoxHabilitadoOrganizacaoAcademica.TabIndex = 66;
+            checkBoxHabilitadoOrganizacaoAcademica.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHabilitadoCategoriaAdministrativa
+            // 
+            checkBoxHabilitadoCategoriaAdministrativa.AutoSize = true;
+            checkBoxHabilitadoCategoriaAdministrativa.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoCategoriaAdministrativa.ForeColor = Color.White;
+            checkBoxHabilitadoCategoriaAdministrativa.Location = new Point(9, 90);
+            checkBoxHabilitadoCategoriaAdministrativa.Name = "checkBoxHabilitadoCategoriaAdministrativa";
+            checkBoxHabilitadoCategoriaAdministrativa.Size = new Size(15, 14);
+            checkBoxHabilitadoCategoriaAdministrativa.TabIndex = 67;
+            checkBoxHabilitadoCategoriaAdministrativa.UseVisualStyleBackColor = true;
+            // 
             // FiltroEscolaUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
+            Controls.Add(checkBoxHabilitadoCategoriaAdministrativa);
+            Controls.Add(checkBoxHabilitadoOrganizacaoAcademica);
+            Controls.Add(checkBoxHabilitadoInicioAtividade);
             Controls.Add(labelMenor);
             Controls.Add(labelMaior);
             Controls.Add(checkBoxMenorInicioAtividade);
@@ -336,7 +375,7 @@
             Controls.Add(botaoFechar);
             Controls.Add(idEmpresaLabel);
             Name = "FiltroEscolaUserControl";
-            Size = new Size(456, 293);
+            Size = new Size(476, 293);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
             ResumeLayout(false);
@@ -379,5 +418,8 @@
         private DateTimePicker dateTimePickerDataInicioAtividade;
         private CheckBox checkBoxMenorInicioAtividade;
         private CheckBox checkBoxMaiorInicioAtividade;
+        private CheckBox checkBoxHabilitadoInicioAtividade;
+        private CheckBox checkBoxHabilitadoOrganizacaoAcademica;
+        private CheckBox checkBoxHabilitadoCategoriaAdministrativa;
     }
 }

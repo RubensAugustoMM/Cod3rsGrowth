@@ -101,12 +101,30 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.SitucaoCadastralFiltro = checkBoxSituacaoCadastral.Checked;
             }
 
+            if(checkBoxHabilitadoNaturezaJuridica.Checked)
+            {
             Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
-            Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
-            Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+            }
 
-            Filtro.DataSituacaoCadastralFiltro = dateTimePickerDataSituacaoCadastral.Value;
-            Filtro.DataAberturaFiltro = dateTimePickerDataAbertura.Value;
+            if(checkBoxHabilitadoPorte.Checked)
+            {
+            Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
+            }
+
+            if(checkBoxHabilitadoMatrizFilial.Checked)
+            {
+            Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+            }
+
+            if(checkBoxHabilitadoDataAbertura.Checked)
+            {
+                Filtro.DataAberturaFiltro = dateTimePickerDataAbertura.Value;
+            }
+
+            if(checkBoxHabilitadoDataSituacaoCadastral.Checked)
+            {
+                Filtro.DataSituacaoCadastralFiltro = dateTimePickerDataSituacaoCadastral.Value;
+            }
 
             if (checkBoxMenorIdade.Checked)
             {

@@ -16,13 +16,13 @@ public class Empresa
     public string NomeFantasia { get; set; }
     [Column("Cnpj"), NotNull]
     public string Cnpj { get; set; }
-    [Column("SitaucaoCadastral"), NotNull]
+    [Column("SituacaoCadastral"), NotNull]
     public bool SitucaoCadastral { get; set; }
     [Column("DataSituacaoCadastral"), NotNull]
     public DateTime DataSituacaoCadastral { get; set; } = new();
     [Column("DataAbertura"), NotNull]
     public DateTime DataAbertura { get; set; } = new();
-    [Column("CaptalSocial"), NotNull]
+    [Column("CapitalSocial"), NotNull]
     public decimal CapitalSocial { get; set; }
     [Column("NaturezaJuridica"), NotNull]
     public NaturezaJuridicaEnums NaturezaJuridica { get; set; }

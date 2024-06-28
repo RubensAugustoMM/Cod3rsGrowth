@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
         {
-            if(Filtro == null)
+            if (Filtro == null)
             {
                 Filtro = new FiltroConvenio();
             }
@@ -88,9 +88,16 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.IdEmpresaFiltro = int.Parse(textBoxValor.Text);
             }
+            
+            if(checkBoxHabilitadoDataInicio.Checked)
+            {
+                Filtro.DataInicioFiltro = dateTimePickerDataInicio.Value;
+            }
 
-            Filtro.DataInicioFiltro = dateTimePickerDataInicio.Value;
-            Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
+            if(checkBoxHabilitadoDataTermino.Checked)
+            {
+                Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
+            }
 
             if (checkBoxMenorValor.Checked)
             {

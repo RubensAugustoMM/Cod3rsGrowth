@@ -82,10 +82,20 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.StatusAtividadeFiltro = checkBoxStatusAtividade.Checked;
             }
 
-            Filtro.CategoriaAdministrativaFiltro = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
-            Filtro.OrganizacaoAcademicaFiltro = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
+            if(checkBoxHabilitadoCategoriaAdministrativa.Checked)
+            {
+                Filtro.CategoriaAdministrativaFiltro = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
+            }
 
-            Filtro.InicioAtividadeFiltro = dateTimePickerDataInicio.Value;
+            if(checkBoxHabilitadoOrganizacaoAcademica.Checked)
+            {
+                Filtro.OrganizacaoAcademicaFiltro = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
+            }
+
+            if(checkBoxHabilitadoInicioAtividade.Checked)
+            {
+                Filtro.InicioAtividadeFiltro = dateTimePickerDataInicio.Value;
+            }
 
             if (checkBoxMenorInicioAtividade.Checked)
             {

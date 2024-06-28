@@ -86,7 +86,10 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CepFiltro = textBoxCep.Text;
             }
 
-            Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
+            if(checkBoxHabilitadoEstado.Checked)
+            {
+                Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
+            }
         }
 
         private void botaoLimpar_Click(object sender, EventArgs e)

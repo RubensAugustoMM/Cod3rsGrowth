@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            painelPrincipal = new Panel();
             dataGridView1 = new DataGridView();
             painelLateral = new Panel();
             botaoPesquisar = new Button();
@@ -38,19 +37,11 @@
             painelLateral.SuspendLayout();
             SuspendLayout();
             // 
-            // painelPrincipal
-            // 
-            painelPrincipal.Location = new Point(670, 253);
-            painelPrincipal.Name = "painelPrincipal";
-            painelPrincipal.Size = new Size(776, 305);
-            painelPrincipal.TabIndex = 0;
-            painelPrincipal.Paint += painelPrincipal_Paint;
-            // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.Navy;
+            dataGridView1.BackgroundColor = Color.Blue;
             dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Blue;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -60,9 +51,13 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.White;
             dataGridView1.Location = new Point(165, 12);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(599, 276);
             dataGridView1.TabIndex = 2;
@@ -92,7 +87,6 @@
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = true;
             botaoPesquisar.Click += botaoPesquisar_Click;
-            botaoPesquisar.Paint += botaoPesquisar_Paint;
             // 
             // botaoFiltros
             // 
@@ -108,7 +102,6 @@
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = true;
             botaoFiltros.Click += botaoFiltros_Click;
-            botaoFiltros.Paint += botaoFiltros_Paint;
             // 
             // TelaConvenioForm
             // 
@@ -117,7 +110,6 @@
             BackColor = Color.Blue;
             ClientSize = new Size(776, 305);
             Controls.Add(dataGridView1);
-            Controls.Add(painelPrincipal);
             Controls.Add(painelLateral);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaConvenioForm";
@@ -130,8 +122,6 @@
         }
 
         #endregion
-
-        private Panel painelPrincipal;
         private Panel painelLateral;
         private Button botaoFiltros;
         private Button botaoPesquisar;

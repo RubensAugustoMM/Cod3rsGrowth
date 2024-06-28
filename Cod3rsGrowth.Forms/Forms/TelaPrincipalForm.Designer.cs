@@ -70,7 +70,7 @@
             botaoEnderecos.Name = "botaoEnderecos";
             botaoEnderecos.Size = new Size(113, 44);
             botaoEnderecos.TabIndex = 3;
-            botaoEnderecos.Text = "Enderecos";
+            botaoEnderecos.Text = "Endereços";
             botaoEnderecos.UseVisualStyleBackColor = true;
             botaoEnderecos.Click += botaoEnderecos_Click;
             // 
@@ -118,7 +118,7 @@
             button1.Name = "button1";
             button1.Size = new Size(113, 44);
             button1.TabIndex = 0;
-            button1.Text = "Convenios";
+            button1.Text = "Convênios";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
