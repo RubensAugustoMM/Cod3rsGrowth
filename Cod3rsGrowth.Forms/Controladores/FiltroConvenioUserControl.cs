@@ -14,38 +14,17 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void FiltroConvenioUserControl_Paint(object sender, PaintEventArgs e)
-        {
-            if (BorderStyle == BorderStyle.None)
-            {
-                const int Tamanho = 2;
-                const int xInicioRetanguloExterior = 4;
-                const int yInicioRetanguloExterior = 6;
-                const int xInicioRetanguloInterior = 8;
-                const int yInicioRetanguloInterior = 10;
-
-                using (Pen caneta = new Pen(Color.White, Tamanho))
-                {
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
-                                                                   yInicioRetanguloExterior,
-                                                                   Width - (xInicioRetanguloExterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloExterior + Tamanho) * 2));
-
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
-                                                                   yInicioRetanguloInterior,
-                                                                   Width - (xInicioRetanguloInterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloInterior + Tamanho) * 2));
-                }
-            }
-        }
-
         private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
+            botaoFiltrar.BringToFront();
 
             foreach (Control c in this.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                if(nameof(c) != "labelTitulo")
+                {
+                    c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
+                }
             }
         }
 
@@ -92,6 +71,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
             }
 
+            /*
             if (checkBoxMenorValor.Checked)
             {
                 Filtro.MaiorOuIgualValor = new();
@@ -136,45 +116,10 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataTermino = null;
             }
+            */
 
             _botaoFiltrarPressionado = true;
             Visible = false;
-        }
-
-        private void checkBoxMaiorValor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorValor.Checked == true)
-                checkBoxMenorValor.Checked = !checkBoxMenorValor.Checked;
-        }
-
-        private void checkBoxMenorValor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorValor.Checked == true)
-                checkBoxMaiorValor.Checked = !checkBoxMaiorValor.Checked;
-        }
-
-        private void checkBoxMaiorDataInicio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorDataInicio.Checked == true)
-                checkBoxMenorDataInicio.Checked = !checkBoxMenorDataInicio.Checked;
-        }
-
-        private void checkBoxMenorDataInicio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorDataInicio.Checked == true)
-                checkBoxMaiorDataInicio.Checked = !checkBoxMaiorDataInicio.Checked;
-        }
-
-        private void checkBoxMaiorDataTermino_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorDataTermino.Checked == true)
-                checkBoxMenorDataTermino.Checked = !checkBoxMenorDataTermino.Checked;
-        }
-
-        private void checkBoxMenorDataTermino_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorDataTermino.Checked == true)
-                checkBoxMaiorDataTermino.Checked = !checkBoxMaiorDataTermino.Checked;
         }
 
         private void somenteValoresReais_KeyPress(object sender, KeyPressEventArgs e)
@@ -208,18 +153,11 @@ namespace Cod3rsGrowth.Forms.Controladores
             textBoxIdEmpresa.Text = TextoVazio;
             textBoxValor.Text = TextoVazio;
 
-            checkBoxMaiorValor.Checked = false;
-            checkBoxMenorValor.Checked = false;
-
             dateTimePickerDataInicio.Value = DateTime.Now;
             dateTimePickerDataTermino.Value = DateTime.Now;
 
             checkBoxHabilitadoDataInicio.Checked = false;
-            checkBoxMaiorDataInicio.Checked = false;
-            checkBoxMenorDataInicio.Checked = false;
             checkBoxHabilitadoDataTermino.Checked = false;
-            checkBoxMaiorDataTermino.Checked = false;
-            checkBoxMenorDataTermino.Checked = false;
         }
 
 
@@ -232,6 +170,44 @@ namespace Cod3rsGrowth.Forms.Controladores
         public void AlteraValor_botaoFiltrarPressionadoParaFalso()
         {
             _botaoFiltrarPressionado = false;
+        }
+
+        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 11;
+            const int PosicaoY = 13;
+            const int altura = 85;
+            const int largura = 27;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+            }
+        }
+
+        private void FiltroConvenioUserControl_Paint(object sender, PaintEventArgs e)
+        { 
+            if (BorderStyle == BorderStyle.None)
+            {
+                const int Tamanho = 2;
+                const int xInicioRetanguloExterior = 4;
+                const int yInicioRetanguloExterior = 6;
+                const int xInicioRetanguloInterior = 8;
+                const int yInicioRetanguloInterior = 10;
+
+                using (Pen caneta = new Pen(Color.White, Tamanho))
+                {
+                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
+                                                                   yInicioRetanguloExterior,
+                                                                   Width - (xInicioRetanguloExterior + Tamanho) * 2,
+                                                                   Height - (yInicioRetanguloExterior + Tamanho) * 2));
+
+                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
+                                                                   yInicioRetanguloInterior,
+                                                                   Width - (xInicioRetanguloInterior + Tamanho) * 2,
+                                                                   Height - (yInicioRetanguloInterior + Tamanho) * 2));
+                }
+            }
         }
     }
 }

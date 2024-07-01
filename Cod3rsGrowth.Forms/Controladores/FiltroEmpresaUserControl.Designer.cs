@@ -73,6 +73,7 @@
             // 
             // botaoFechar
             // 
+            botaoFechar.BackColor = Color.Green;
             botaoFechar.FlatAppearance.BorderSize = 0;
             botaoFechar.FlatAppearance.MouseDownBackColor = Color.White;
             botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
@@ -83,26 +84,29 @@
             botaoFechar.Size = new Size(67, 40);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
-            botaoFechar.UseVisualStyleBackColor = true;
+            botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 
             // botaoFiltrar
             // 
+            botaoFiltrar.BackColor = Color.Green;
             botaoFiltrar.FlatAppearance.BorderSize = 0;
             botaoFiltrar.FlatAppearance.MouseDownBackColor = Color.White;
             botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFiltrar.FlatStyle = FlatStyle.Flat;
+            botaoFiltrar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             botaoFiltrar.ForeColor = Color.White;
             botaoFiltrar.Location = new Point(471, 304);
             botaoFiltrar.Name = "botaoFiltrar";
             botaoFiltrar.Size = new Size(67, 40);
             botaoFiltrar.TabIndex = 15;
             botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.UseVisualStyleBackColor = true;
+            botaoFiltrar.UseVisualStyleBackColor = false;
             botaoFiltrar.Click += botaoFiltrar_Click;
             // 
             // botaoLimpar
             // 
+            botaoLimpar.BackColor = Color.ForestGreen;
             botaoLimpar.FlatAppearance.BorderSize = 0;
             botaoLimpar.FlatAppearance.MouseDownBackColor = Color.White;
             botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
@@ -113,14 +117,14 @@
             botaoLimpar.Size = new Size(67, 40);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
-            botaoLimpar.UseVisualStyleBackColor = true;
+            botaoLimpar.UseVisualStyleBackColor = false;
             botaoLimpar.Click += botaoLimpar_Click;
             // 
             // labelRazaoSocial
             // 
             labelRazaoSocial.AutoSize = true;
             labelRazaoSocial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelRazaoSocial.ForeColor = Color.White;
+            labelRazaoSocial.ForeColor = Color.Black;
             labelRazaoSocial.Location = new Point(37, 25);
             labelRazaoSocial.Name = "labelRazaoSocial";
             labelRazaoSocial.Size = new Size(181, 21);
@@ -131,7 +135,7 @@
             // 
             labelNomeFantasia.AutoSize = true;
             labelNomeFantasia.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelNomeFantasia.ForeColor = Color.White;
+            labelNomeFantasia.ForeColor = Color.Black;
             labelNomeFantasia.Location = new Point(37, 46);
             labelNomeFantasia.Name = "labelNomeFantasia";
             labelNomeFantasia.Size = new Size(190, 21);
@@ -142,7 +146,7 @@
             // 
             labelCnpj.AutoSize = true;
             labelCnpj.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCnpj.ForeColor = Color.White;
+            labelCnpj.ForeColor = Color.Black;
             labelCnpj.Location = new Point(37, 67);
             labelCnpj.Name = "labelCnpj";
             labelCnpj.Size = new Size(186, 21);
@@ -153,7 +157,7 @@
             // 
             labelSituacaoCadastral.AutoSize = true;
             labelSituacaoCadastral.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelSituacaoCadastral.ForeColor = Color.White;
+            labelSituacaoCadastral.ForeColor = Color.Black;
             labelSituacaoCadastral.Location = new Point(37, 195);
             labelSituacaoCadastral.Name = "labelSituacaoCadastral";
             labelSituacaoCadastral.Size = new Size(176, 21);
@@ -164,7 +168,7 @@
             // 
             labelDataSituacaoCadastral.AutoSize = true;
             labelDataSituacaoCadastral.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelDataSituacaoCadastral.ForeColor = Color.White;
+            labelDataSituacaoCadastral.ForeColor = Color.Black;
             labelDataSituacaoCadastral.Location = new Point(37, 231);
             labelDataSituacaoCadastral.Name = "labelDataSituacaoCadastral";
             labelDataSituacaoCadastral.Size = new Size(177, 21);
@@ -175,7 +179,7 @@
             // 
             labelDataAbertura.AutoSize = true;
             labelDataAbertura.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelDataAbertura.ForeColor = Color.White;
+            labelDataAbertura.ForeColor = Color.Black;
             labelDataAbertura.Location = new Point(37, 252);
             labelDataAbertura.Name = "labelDataAbertura";
             labelDataAbertura.Size = new Size(184, 21);
@@ -186,7 +190,7 @@
             // 
             labelCapitalSocial.AutoSize = true;
             labelCapitalSocial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCapitalSocial.ForeColor = Color.White;
+            labelCapitalSocial.ForeColor = Color.Black;
             labelCapitalSocial.Location = new Point(37, 109);
             labelCapitalSocial.Name = "labelCapitalSocial";
             labelCapitalSocial.Size = new Size(164, 21);
@@ -197,7 +201,7 @@
             // 
             labelPorte.AutoSize = true;
             labelPorte.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelPorte.ForeColor = Color.White;
+            labelPorte.ForeColor = Color.Black;
             labelPorte.Location = new Point(37, 151);
             labelPorte.Name = "labelPorte";
             labelPorte.Size = new Size(179, 21);
@@ -208,7 +212,7 @@
             // 
             labelNaturezaJuridica.AutoSize = true;
             labelNaturezaJuridica.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelNaturezaJuridica.ForeColor = Color.White;
+            labelNaturezaJuridica.ForeColor = Color.Black;
             labelNaturezaJuridica.Location = new Point(37, 130);
             labelNaturezaJuridica.Name = "labelNaturezaJuridica";
             labelNaturezaJuridica.Size = new Size(172, 21);
@@ -219,7 +223,7 @@
             // 
             labelMatrizFilial.AutoSize = true;
             labelMatrizFilial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelMatrizFilial.ForeColor = Color.White;
+            labelMatrizFilial.ForeColor = Color.Black;
             labelMatrizFilial.Location = new Point(37, 172);
             labelMatrizFilial.Name = "labelMatrizFilial";
             labelMatrizFilial.Size = new Size(168, 21);
@@ -271,7 +275,7 @@
             // 
             labelIdade.AutoSize = true;
             labelIdade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelIdade.ForeColor = Color.White;
+            labelIdade.ForeColor = Color.Black;
             labelIdade.Location = new Point(35, 88);
             labelIdade.Name = "labelIdade";
             labelIdade.Size = new Size(181, 21);
@@ -547,7 +551,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
+            BackColor = Color.DarkGray;
             Controls.Add(checkBoxHabilitadoNaturezaJuridica);
             Controls.Add(checkBoxHabilitadoPorte);
             Controls.Add(checkBoxHabilitadoMatrizFilial);
