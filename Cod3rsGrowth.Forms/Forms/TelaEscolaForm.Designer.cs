@@ -80,7 +80,7 @@
             botaoPesquisar.ForeColor = Color.White;
             botaoPesquisar.Location = new Point(30, 98);
             botaoPesquisar.Name = "botaoPesquisar";
-            botaoPesquisar.Size = new Size(94, 54);
+            botaoPesquisar.Size = new Size(86, 54);
             botaoPesquisar.TabIndex = 3;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             botaoFiltros.ForeColor = Color.White;
             botaoFiltros.Location = new Point(30, 38);
             botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(94, 54);
+            botaoFiltros.Size = new Size(86, 54);
             botaoFiltros.TabIndex = 0;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = true;

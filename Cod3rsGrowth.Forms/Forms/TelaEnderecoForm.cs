@@ -12,6 +12,7 @@ namespace Cod3rsGrowth.Forms.Forms
     {
         private readonly ServicoEndereco _servicoEndereco;
         private FiltroEnderecoUserControl _controladorFiltro;
+        BindingList<Endereco> ListaEnderecos;
         private PrivateFontCollection _pixeboy;
 
         public TelaEnderecoForm(ServicoEndereco servicoEndereco)
@@ -47,6 +48,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void TelaConvenioForm_Load(object sender, EventArgs e)
         {
+            InicializaBidingList();
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
@@ -96,6 +98,16 @@ namespace Cod3rsGrowth.Forms.Forms
             _controladorFiltro.Visible = false;
         }
 
+        private void InicializaBidingList()
+        {
+            ListaEnderecos = new BindingList<Endereco>();
+            ListaEnderecos.AllowNew = false;
+            ListaEnderecos.AllowRemove = false;
+            ListaEnderecos.AllowEdit = false;
+
+            dataGridView1.DataSource = ListaEnderecos;
+        }
+
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
@@ -104,8 +116,13 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoPesquisar_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
+            var ListaEnderecoRetornada = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
 
+            ListaEnderecos.Clear();
+            foreach(var endereco in ListaEnderecoRetornada)
+            {
+                ListaEnderecos.Add(endereco);
+            }
         }
 
         private void ConfiguraFonte(Control controle)

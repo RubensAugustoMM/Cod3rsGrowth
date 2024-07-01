@@ -12,6 +12,7 @@ namespace Cod3rsGrowth.Forms.Forms
     {
         private readonly ServicoConvenio _servicoConvenio;
         private FiltroConvenioUserControl _controladorFiltro;
+        BindingList<Convenio> ListaConvenios;
         private PrivateFontCollection _pixeboy;
 
         public TelaConvenioForm(ServicoConvenio servicoConvenio)
@@ -47,6 +48,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void TelaConvenioForm_Load(object sender, EventArgs e)
         {
+            InicializaBidingList();
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
@@ -97,6 +99,16 @@ namespace Cod3rsGrowth.Forms.Forms
             _controladorFiltro.Visible = false;
         }
 
+        private void InicializaBidingList()
+        {
+            ListaConvenios = new BindingList<Convenio>();
+            ListaConvenios.AllowNew = false;
+            ListaConvenios.AllowRemove = false;
+            ListaConvenios.AllowEdit = false;
+
+            dataGridView1.DataSource = ListaConvenios;
+        }
+
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
@@ -105,7 +117,13 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoPesquisar_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
+            var ListaConvenioRetornada = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
+
+            ListaConvenios.Clear();
+            foreach (var convenio in ListaConvenioRetornada)
+            {
+                ListaConvenios.Add(convenio);
+            }
         }
 
         private void InicializaCabecalhoDaGrade()
