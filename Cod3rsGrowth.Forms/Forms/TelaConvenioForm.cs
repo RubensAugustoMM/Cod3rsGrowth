@@ -131,9 +131,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridView1.Columns[0].HeaderCell.Value = "Código Convênio";
             dataGridView1.Columns[1].HeaderCell.Value = "Número do Processo";
             dataGridView1.Columns[2].HeaderCell.Value = "Objeto";
-            dataGridView1.Columns[3].HeaderCell.Value = "Valor";
-            dataGridView1.Columns[4].HeaderCell.Value = "Início";
-            dataGridView1.Columns[5].HeaderCell.Value = "Termino"; 
+            dataGridView1.Columns[3].HeaderCell.Value = "Início";
+            dataGridView1.Columns[4].HeaderCell.Value = "Termino"; 
 
             dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridView1.DefaultCellStyle.ForeColor = Color.White;
