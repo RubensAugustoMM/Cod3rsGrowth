@@ -150,6 +150,7 @@
             dateTimePickerDataInicio.CalendarTitleBackColor = Color.Yellow;
             dateTimePickerDataInicio.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataInicio.CalendarTrailingForeColor = Color.Silver;
+            dateTimePickerDataInicio.Enabled = false;
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Short;
             dateTimePickerDataInicio.Location = new Point(144, 138);
             dateTimePickerDataInicio.Name = "dateTimePickerDataInicio";

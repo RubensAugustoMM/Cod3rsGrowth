@@ -12,7 +12,6 @@ namespace Cod3rsGrowth.Forms.Forms
     {
         private readonly ServicoEscola _servicoEscola;
         private FiltroEscolaUserControl _controladorFiltro;
-        BindingList<Escola> ListaEscolas;
         private PrivateFontCollection _pixeboy;
 
         public TelaEscolaForm(ServicoEscola servicoEscola)
@@ -48,7 +47,8 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void TelaConvenioForm_Load(object sender, EventArgs e)
         {
-            InicializaBidingList();
+            dataGridView1.DataSource = _servicoEscola.ObterTodos(null);
+
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
@@ -99,16 +99,6 @@ namespace Cod3rsGrowth.Forms.Forms
             _controladorFiltro.Visible = false;
         }
 
-        private void InicializaBidingList()
-        {
-            ListaEscolas = new BindingList<Escola>();
-            ListaEscolas.AllowNew = false;
-            ListaEscolas.AllowRemove = false;
-            ListaEscolas.AllowEdit = false;
-
-            dataGridView1.DataSource = ListaEscolas;
-        }
-
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
@@ -117,13 +107,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoPesquisar_Click(object sender, EventArgs e)
         {
-            var ListaEscolaRetornada = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
-
-            ListaEscolas.Clear();
-            foreach(var Escola in ListaEscolaRetornada)
-            {
-                ListaEscolas.Add(Escola);
-            }
+            dataGridView1.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
         }
 
         private void ConfiguraFonte(Control controle)
