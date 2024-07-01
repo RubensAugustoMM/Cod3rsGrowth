@@ -1,8 +1,6 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using System.ComponentModel;
-using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB.Common;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -122,17 +120,17 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaCabecalhoDaGrade()
         {
             dataGridView1.Columns[0].HeaderCell.Value = "Código Empresa";
-            dataGridView1.Columns[1].HeaderCell.Value = "Idade";
-            dataGridView1.Columns[2].HeaderCell.Value = "Razão Social";
-            dataGridView1.Columns[3].HeaderCell.Value = "Nome Fantasia";
-            dataGridView1.Columns[4].HeaderCell.Value = "CNPJ"; 
-            dataGridView1.Columns[5].HeaderCell.Value = "Situação Cadastral"; 
-            dataGridView1.Columns[6].HeaderCell.Value = "Data da Alteração Situação Cadastral";
+            dataGridView1.Columns[1].HeaderCell.Value = "Razao Social";
+            dataGridView1.Columns[2].HeaderCell.Value = "Nome Fantasia";
+            dataGridView1.Columns[3].HeaderCell.Value = "CNPJ";
+            dataGridView1.Columns[4].HeaderCell.Value = "Situação Cadastral"; 
+            dataGridView1.Columns[5].HeaderCell.Value = "Data da Alteração Situação Cadastral"; 
+            dataGridView1.Columns[6].HeaderCell.Value = "Idade";
             dataGridView1.Columns[7].HeaderCell.Value = "Data de Abertura";
-            dataGridView1.Columns[8].HeaderCell.Value = "Capital Social";
-            dataGridView1.Columns[9].HeaderCell.Value = "Natureza Jurídica";
-            dataGridView1.Columns[10].HeaderCell.Value = "Porte";
-            dataGridView1.Columns[11].HeaderCell.Value = "Matriz ou Filial";
+            dataGridView1.Columns[8].HeaderCell.Value = "Natureza Juridica";
+            dataGridView1.Columns[9].HeaderCell.Value = "Porte";
+            dataGridView1.Columns[10].HeaderCell.Value = "Matriz ou Filial";
+            dataGridView1.Columns[11].HeaderCell.Value = "Capital Social";
             dataGridView1.Columns[12].HeaderCell.Value = "Código Endereço";
 
             dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);

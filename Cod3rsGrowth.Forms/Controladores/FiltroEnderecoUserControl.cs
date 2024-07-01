@@ -1,15 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
@@ -94,7 +85,15 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
+            const string TextoVazio = "";
+
             Filtro = null;
+
+            textBoxMunicipio.Text = TextoVazio;
+            textBoxBairro.Text = TextoVazio;
+            textBoxCep.Text = TextoVazio;
+
+            checkBoxHabilitadoEstado.Checked = false;
         }
 
         private void InicializaFontePixeBoy()

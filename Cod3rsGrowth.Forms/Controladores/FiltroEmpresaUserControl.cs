@@ -1,15 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
@@ -195,7 +186,34 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
+            const string TextoVazio = "";
             Filtro = null;
+
+            textBoxRazaoSocial.Text = TextoVazio;
+            textBoxNomeFantasia.Text = TextoVazio;
+            textBoxCnpj.Text = TextoVazio;
+            textBoxIdade.Text = TextoVazio;
+            textBoxCapitalSocial.Text = TextoVazio;
+
+            dateTimePickerDataAbertura.Value = DateTime.Now;
+            dateTimePickerDataSituacaoCadastral.Value = DateTime.Now;
+            
+
+            checkBoxMenorIdade.Checked = false;
+            checkBoxMaiorIdade.Checked = false;
+            checkBoxMenorCapitalSocial.Checked = false;
+            checkBoxMaiorCapitalSocial.Checked = false;
+            checkBoxMenorDataSituacaoCadastral.Checked = false;
+            checkBoxMaiorDataSituacaoCadastral.Checked = false;
+            checkBoxMenorDataAbertura.Checked = false;
+            checkBoxMaiorDataAbertura.Checked = false;
+            checkBoxHabilitadoNaturezaJuridica.Checked = false;
+            checkBoxHabilitadoPorte.Checked = false;
+            checkBoxHabilitadoMatrizFilial.Checked = false;
+            checkBoxHabilitadoDataAbertura.Checked = false;
+            checkBoxHabilitadoDataSituacaoCadastral.Checked = false;
+            checkBoxSituacaoCadastral.Checked = false;
+            checkBoxHabilitadoSituacaoCadastral.Checked = false;
         }
 
         private void InicializaFontePixeBoy()

@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             if(checkBoxHabilitadoInicioAtividade.Checked)
             {
-                Filtro.InicioAtividadeFiltro = dateTimePickerDataInicio.Value;
+                Filtro.InicioAtividadeFiltro = dateTimePickerDataInicioAtividade.Value;
             }
 
             if (checkBoxMenorInicioAtividade.Checked)
@@ -115,7 +115,23 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
+            const string TextoVazio = "";
+
             Filtro = null;
+
+            textBoxNome.Text = TextoVazio;
+            textBoxCodigoMec.Text = TextoVazio;
+            textBoxIdEndereco.Text = TextoVazio;
+
+            dateTimePickerDataInicioAtividade.Value = DateTime.Now;
+
+            checkBoxMenorDataInicio.Checked = false;
+            checkBoxMaiorDataInicio.Checked = false;
+            checkBoxHabilitadoCategoriaAdministrativa.Checked = false;
+            checkBoxHabilitadoOrganizacaoAcademica.Checked = false;
+            checkBoxHabilitadoStatusAtividade.Checked = false;  
+            checkBoxHabilitadoInicioAtividade.Checked = false;
+            checkBoxStatusAtividade.Checked = false;
         }
 
         private void InicializaFontePixeBoy()

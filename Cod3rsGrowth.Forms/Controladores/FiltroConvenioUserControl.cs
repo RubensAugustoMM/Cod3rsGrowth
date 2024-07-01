@@ -1,20 +1,12 @@
 ﻿using Cod3rsGrowth.Dominio.Filtros;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroConvenioUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
+        public bool _botaoFiltrarPressionado { get; private set; }
         public FiltroConvenio Filtro = null;
 
         public FiltroConvenioUserControl()
@@ -60,6 +52,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Visible = false;
+            _botaoFiltrarPressionado = false;
         }
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
@@ -88,13 +81,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.IdEmpresaFiltro = int.Parse(textBoxValor.Text);
             }
-            
-            if(checkBoxHabilitadoDataInicio.Checked)
+
+            if (checkBoxHabilitadoDataInicio.Checked)
             {
                 Filtro.DataInicioFiltro = dateTimePickerDataInicio.Value;
             }
 
-            if(checkBoxHabilitadoDataTermino.Checked)
+            if (checkBoxHabilitadoDataTermino.Checked)
             {
                 Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
             }
@@ -143,6 +136,9 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataTermino = null;
             }
+
+            _botaoFiltrarPressionado = true;
+            Visible = false;
         }
 
         private void checkBoxMaiorValor_CheckedChanged(object sender, EventArgs e)
@@ -204,13 +200,38 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
+            const string TextoVazio = "";
+
             Filtro = null;
+            textBoxObjeto.Text = TextoVazio;
+            textBoxIdEscola.Text = TextoVazio;
+            textBoxIdEmpresa.Text = TextoVazio;
+            textBoxValor.Text = TextoVazio;
+
+            checkBoxMaiorValor.Checked = false;
+            checkBoxMenorValor.Checked = false;
+
+            dateTimePickerDataInicio.Value = DateTime.Now;
+            dateTimePickerDataTermino.Value = DateTime.Now;
+
+            checkBoxHabilitadoDataInicio.Checked = false;
+            checkBoxMaiorDataInicio.Checked = false;
+            checkBoxMenorDataInicio.Checked = false;
+            checkBoxHabilitadoDataTermino.Checked = false;
+            checkBoxMaiorDataTermino.Checked = false;
+            checkBoxMenorDataTermino.Checked = false;
         }
+
 
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
             _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+        }
+
+        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        {
+            _botaoFiltrarPressionado = false;
         }
     }
 }
