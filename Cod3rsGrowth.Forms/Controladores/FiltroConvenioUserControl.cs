@@ -6,8 +6,8 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroConvenioUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public bool _botaoFiltrarPressionado { get; private set; }
         public FiltroConvenio Filtro = null;
+        public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroConvenioUserControl()
         {

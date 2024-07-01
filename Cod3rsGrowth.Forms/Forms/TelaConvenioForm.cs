@@ -72,7 +72,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
                 ConfiguraFonte(c);
@@ -124,7 +124,8 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            dataGridView1.Controls.Add(_controladorFiltro);
+            _controladorFiltro.Location = dataGridView1.Location;
+            Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
 
@@ -206,6 +207,16 @@ namespace Cod3rsGrowth.Forms.Forms
             }
 
             return ListaConveniosExibidos;
+        }
+
+        private void dataGridView1_VisibleChanged(object sender, EventArgs e)
+        {
+            if(Visible)
+            {
+                dataGridView1.DataSource = _servicoConvenio.ObterTodos(null);
+                _controladorFiltro.Visible = false;
+                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+            }
         }
     }
 }

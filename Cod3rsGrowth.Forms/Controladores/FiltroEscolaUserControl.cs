@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEscola Filtro = null;
+        public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEscolaUserControl()
         {
@@ -53,6 +54,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Visible = false;
+            _botaoFiltrarPressionado = false;
         }
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
@@ -111,6 +113,9 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualInicioAtividade = null;
             }
+
+            _botaoFiltrarPressionado = true;
+            Visible = false;
         }
 
         private void botaoLimpar_Click(object sender, EventArgs e)
@@ -125,8 +130,8 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             dateTimePickerDataInicioAtividade.Value = DateTime.Now;
 
-            checkBoxMenorDataInicio.Checked = false;
-            checkBoxMaiorDataInicio.Checked = false;
+            checkBoxMenorInicioAtividade.Checked = false;
+            checkBoxMaiorInicioAtividade.Checked = false;
             checkBoxHabilitadoCategoriaAdministrativa.Checked = false;
             checkBoxHabilitadoOrganizacaoAcademica.Checked = false;
             checkBoxHabilitadoStatusAtividade.Checked = false;  
@@ -164,6 +169,11 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 e.Handled = true;
             }
+        }
+
+        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        {
+            _botaoFiltrarPressionado = false;
         }
     }
 }

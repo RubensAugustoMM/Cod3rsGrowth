@@ -126,7 +126,7 @@
             textBoxObjeto.BackColor = Color.Black;
             textBoxObjeto.BorderStyle = BorderStyle.None;
             textBoxObjeto.ForeColor = Color.Yellow;
-            textBoxObjeto.Location = new Point(144, 29);
+            textBoxObjeto.Location = new Point(159, 31);
             textBoxObjeto.Name = "textBoxObjeto";
             textBoxObjeto.Size = new Size(149, 16);
             textBoxObjeto.TabIndex = 6;
@@ -136,7 +136,7 @@
             textBoxValor.BackColor = Color.Black;
             textBoxValor.BorderStyle = BorderStyle.None;
             textBoxValor.ForeColor = Color.Yellow;
-            textBoxValor.Location = new Point(144, 51);
+            textBoxValor.Location = new Point(159, 53);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 7;
@@ -152,7 +152,7 @@
             dateTimePickerDataInicio.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataInicio.Enabled = false;
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicio.Location = new Point(144, 138);
+            dateTimePickerDataInicio.Location = new Point(159, 138);
             dateTimePickerDataInicio.Name = "dateTimePickerDataInicio";
             dateTimePickerDataInicio.Size = new Size(149, 23);
             dateTimePickerDataInicio.TabIndex = 8;
@@ -162,7 +162,7 @@
             textBoxIdEmpresa.BackColor = Color.Black;
             textBoxIdEmpresa.BorderStyle = BorderStyle.None;
             textBoxIdEmpresa.ForeColor = Color.Yellow;
-            textBoxIdEmpresa.Location = new Point(144, 98);
+            textBoxIdEmpresa.Location = new Point(159, 100);
             textBoxIdEmpresa.Name = "textBoxIdEmpresa";
             textBoxIdEmpresa.Size = new Size(149, 16);
             textBoxIdEmpresa.TabIndex = 10;
@@ -173,7 +173,7 @@
             textBoxIdEscola.BackColor = Color.Black;
             textBoxIdEscola.BorderStyle = BorderStyle.None;
             textBoxIdEscola.ForeColor = Color.Yellow;
-            textBoxIdEscola.Location = new Point(144, 76);
+            textBoxIdEscola.Location = new Point(159, 78);
             textBoxIdEscola.Name = "textBoxIdEscola";
             textBoxIdEscola.Size = new Size(149, 16);
             textBoxIdEscola.TabIndex = 9;
@@ -188,7 +188,7 @@
             dateTimePickerDataTermino.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataTermino.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataTermino.Location = new Point(144, 178);
+            dateTimePickerDataTermino.Location = new Point(159, 180);
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 23);
             dateTimePickerDataTermino.TabIndex = 11;
@@ -200,9 +200,9 @@
             botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFechar.FlatStyle = FlatStyle.Flat;
             botaoFechar.ForeColor = Color.White;
-            botaoFechar.Location = new Point(206, 221);
+            botaoFechar.Location = new Point(203, 221);
             botaoFechar.Name = "botaoFechar";
-            botaoFechar.Size = new Size(67, 40);
+            botaoFechar.Size = new Size(82, 40);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = true;
@@ -215,9 +215,9 @@
             botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFiltrar.FlatStyle = FlatStyle.Flat;
             botaoFiltrar.ForeColor = Color.White;
-            botaoFiltrar.Location = new Point(351, 221);
+            botaoFiltrar.Location = new Point(379, 221);
             botaoFiltrar.Name = "botaoFiltrar";
-            botaoFiltrar.Size = new Size(67, 40);
+            botaoFiltrar.Size = new Size(82, 40);
             botaoFiltrar.TabIndex = 15;
             botaoFiltrar.Text = "Filtrar";
             botaoFiltrar.UseVisualStyleBackColor = true;
@@ -228,7 +228,7 @@
             checkBoxMaiorValor.AutoSize = true;
             checkBoxMaiorValor.FlatAppearance.BorderSize = 0;
             checkBoxMaiorValor.ForeColor = Color.White;
-            checkBoxMaiorValor.Location = new Point(299, 49);
+            checkBoxMaiorValor.Location = new Point(314, 51);
             checkBoxMaiorValor.Name = "checkBoxMaiorValor";
             checkBoxMaiorValor.Size = new Size(15, 14);
             checkBoxMaiorValor.TabIndex = 16;
@@ -240,7 +240,7 @@
             checkBoxMenorValor.AutoSize = true;
             checkBoxMenorValor.FlatAppearance.BorderSize = 0;
             checkBoxMenorValor.ForeColor = SystemColors.Window;
-            checkBoxMenorValor.Location = new Point(359, 49);
+            checkBoxMenorValor.Location = new Point(374, 51);
             checkBoxMenorValor.Name = "checkBoxMenorValor";
             checkBoxMenorValor.Size = new Size(15, 14);
             checkBoxMenorValor.TabIndex = 17;
@@ -252,7 +252,7 @@
             checkBoxMaiorDataInicio.AutoSize = true;
             checkBoxMaiorDataInicio.FlatAppearance.BorderSize = 0;
             checkBoxMaiorDataInicio.ForeColor = Color.White;
-            checkBoxMaiorDataInicio.Location = new Point(299, 142);
+            checkBoxMaiorDataInicio.Location = new Point(314, 144);
             checkBoxMaiorDataInicio.Name = "checkBoxMaiorDataInicio";
             checkBoxMaiorDataInicio.Size = new Size(15, 14);
             checkBoxMaiorDataInicio.TabIndex = 18;
@@ -264,7 +264,7 @@
             checkBoxMenorDataInicio.AutoSize = true;
             checkBoxMenorDataInicio.FlatAppearance.BorderSize = 0;
             checkBoxMenorDataInicio.ForeColor = Color.White;
-            checkBoxMenorDataInicio.Location = new Point(359, 142);
+            checkBoxMenorDataInicio.Location = new Point(374, 144);
             checkBoxMenorDataInicio.Name = "checkBoxMenorDataInicio";
             checkBoxMenorDataInicio.Size = new Size(15, 14);
             checkBoxMenorDataInicio.TabIndex = 19;
@@ -276,7 +276,7 @@
             checkBoxMaiorDataTermino.AutoSize = true;
             checkBoxMaiorDataTermino.FlatAppearance.BorderSize = 0;
             checkBoxMaiorDataTermino.ForeColor = Color.White;
-            checkBoxMaiorDataTermino.Location = new Point(299, 185);
+            checkBoxMaiorDataTermino.Location = new Point(314, 187);
             checkBoxMaiorDataTermino.Name = "checkBoxMaiorDataTermino";
             checkBoxMaiorDataTermino.Size = new Size(15, 14);
             checkBoxMaiorDataTermino.TabIndex = 20;
@@ -288,7 +288,7 @@
             checkBoxMenorDataTermino.AutoSize = true;
             checkBoxMenorDataTermino.FlatAppearance.BorderSize = 0;
             checkBoxMenorDataTermino.ForeColor = Color.White;
-            checkBoxMenorDataTermino.Location = new Point(359, 185);
+            checkBoxMenorDataTermino.Location = new Point(374, 187);
             checkBoxMenorDataTermino.Name = "checkBoxMenorDataTermino";
             checkBoxMenorDataTermino.Size = new Size(15, 14);
             checkBoxMenorDataTermino.TabIndex = 21;
@@ -302,9 +302,9 @@
             botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoLimpar.FlatStyle = FlatStyle.Flat;
             botaoLimpar.ForeColor = Color.White;
-            botaoLimpar.Location = new Point(279, 221);
+            botaoLimpar.Location = new Point(291, 221);
             botaoLimpar.Name = "botaoLimpar";
-            botaoLimpar.Size = new Size(67, 40);
+            botaoLimpar.Size = new Size(82, 40);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
             botaoLimpar.UseVisualStyleBackColor = true;
@@ -315,7 +315,7 @@
             labelMaior.AutoSize = true;
             labelMaior.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMaior.ForeColor = Color.White;
-            labelMaior.Location = new Point(294, 5);
+            labelMaior.Location = new Point(309, 7);
             labelMaior.Name = "labelMaior";
             labelMaior.Size = new Size(51, 21);
             labelMaior.TabIndex = 23;
@@ -326,7 +326,7 @@
             labelMenor.AutoSize = true;
             labelMenor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMenor.ForeColor = Color.White;
-            labelMenor.Location = new Point(351, 5);
+            labelMenor.Location = new Point(366, 7);
             labelMenor.Name = "labelMenor";
             labelMenor.Size = new Size(56, 21);
             labelMenor.TabIndex = 24;
@@ -381,7 +381,7 @@
             Controls.Add(valorLabel);
             Controls.Add(objetoLabel);
             Name = "FiltroConvenioUserControl";
-            Size = new Size(420, 264);
+            Size = new Size(464, 264);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
             ResumeLayout(false);

@@ -113,6 +113,7 @@
             Name = "TelaEmpresaForm";
             Text = "TelaConvenioForm";
             Load += TelaConvenioForm_Load;
+            VisibleChanged += TelaEmpresaForm_VisibleChanged;
             Paint += TelaConvenioForm_Paint;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             painelLateral.ResumeLayout(false);

@@ -1,9 +1,6 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using Cod3rsGrowth.Dominio.Filtros;
-using System.ComponentModel;
-using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB.Common;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -94,9 +91,20 @@ namespace Cod3rsGrowth.Forms.Forms
         private void IniciaLizaControladorFiltro()
         {
             _controladorFiltro = new FiltroEscolaUserControl();
-            dataGridView1.Controls.Add(_controladorFiltro);
-            _controladorFiltro.BringToFront();
+
             _controladorFiltro.Visible = false;
+            _controladorFiltro.VisibleChanged += (object sender, EventArgs e) =>
+            {
+                if (_controladorFiltro._botaoFiltrarPressionado)
+                {
+                    dataGridView1.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
+                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                }
+            };
+
+            _controladorFiltro.Location = dataGridView1.Location;
+            Controls.Add(_controladorFiltro);
+            _controladorFiltro.BringToFront();
         }
 
         private void InicializaFontePixeBoy()
@@ -127,8 +135,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridView1.Columns[1].HeaderCell.Value = "Status Atividade";
             dataGridView1.Columns[2].HeaderCell.Value = "Nome";
             dataGridView1.Columns[3].HeaderCell.Value = "Código Mec";
-            dataGridView1.Columns[4].HeaderCell.Value = "Telefone"; 
-            dataGridView1.Columns[5].HeaderCell.Value = "E-Mail"; 
+            dataGridView1.Columns[4].HeaderCell.Value = "Telefone";
+            dataGridView1.Columns[5].HeaderCell.Value = "E-Mail";
             dataGridView1.Columns[6].HeaderCell.Value = "Data Início da Atividade";
             dataGridView1.Columns[7].HeaderCell.Value = "CategoriaAdministrativa";
             dataGridView1.Columns[8].HeaderCell.Value = "Organização Acadêmica";
@@ -149,6 +157,16 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
             dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+        }
+
+        private void TelaEscolaForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if(Visible)
+            {
+                dataGridView1.DataSource = _servicoEscola.ObterTodos(null);
+                _controladorFiltro.Visible = false;
+                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+            }
         }
     }
 }

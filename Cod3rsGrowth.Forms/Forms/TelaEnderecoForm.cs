@@ -92,9 +92,20 @@ namespace Cod3rsGrowth.Forms.Forms
         private void IniciaLizaControladorFiltro()
         {
             _controladorFiltro = new FiltroEnderecoUserControl();
-            dataGridView1.Controls.Add(_controladorFiltro);
-            _controladorFiltro.BringToFront();
+
             _controladorFiltro.Visible = false;
+            _controladorFiltro.VisibleChanged += (object sender, EventArgs e) =>
+            {
+                if (_controladorFiltro._botaoFiltrarPressionado)
+                {
+                    dataGridView1.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
+                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                }
+            };
+
+            _controladorFiltro.Location = dataGridView1.Location;
+            Controls.Add(_controladorFiltro);
+            _controladorFiltro.BringToFront();
         }
 
         private void InicializaFontePixeBoy()
@@ -125,8 +136,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridView1.Columns[1].HeaderCell.Value = "Numero";
             dataGridView1.Columns[2].HeaderCell.Value = "CEP";
             dataGridView1.Columns[3].HeaderCell.Value = "Município";
-            dataGridView1.Columns[4].HeaderCell.Value = "Bairro"; 
-            dataGridView1.Columns[5].HeaderCell.Value = "Rua"; 
+            dataGridView1.Columns[4].HeaderCell.Value = "Bairro";
+            dataGridView1.Columns[5].HeaderCell.Value = "Rua";
             dataGridView1.Columns[6].HeaderCell.Value = "Complemento";
             dataGridView1.Columns[7].HeaderCell.Value = "Estado";
 
@@ -145,6 +156,16 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
             dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+        }
+
+        private void TelaEnderecoForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if(Visible)
+            {
+                dataGridView1.DataSource = _servicoEndereco.ObterTodos(null);
+                _controladorFiltro.Visible = false;
+                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+            }
         }
     }
 }

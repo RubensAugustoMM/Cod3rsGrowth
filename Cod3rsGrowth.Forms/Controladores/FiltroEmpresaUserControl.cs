@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEmpresa Filtro = null;
+        public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEmpresaUserControl()
         {
@@ -46,13 +47,14 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in this.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
             }
         }
 
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Visible = false;
+            _botaoFiltrarPressionado = false;
         }
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
@@ -161,6 +163,9 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = null;
             }
+
+            _botaoFiltrarPressionado = true;
+            Visible = false;
         }
 
         private void somenteValoresReais_KeyPress(object sender, KeyPressEventArgs e)
@@ -276,6 +281,11 @@ namespace Cod3rsGrowth.Forms.Controladores
         {
             if (checkBoxMaiorDataAbertura.Checked == true)
                 checkBoxMaiorDataAbertura.Checked = !checkBoxMaiorDataAbertura.Checked;
+        }
+
+        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        {
+            _botaoFiltrarPressionado = false;
         }
     }
 }

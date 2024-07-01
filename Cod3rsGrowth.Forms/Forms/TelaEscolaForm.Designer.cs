@@ -113,6 +113,7 @@
             Name = "TelaEscolaForm";
             Text = "TelaConvenioForm";
             Load += TelaConvenioForm_Load;
+            VisibleChanged += TelaEscolaForm_VisibleChanged;
             Paint += TelaConvenioForm_Paint;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             painelLateral.ResumeLayout(false);

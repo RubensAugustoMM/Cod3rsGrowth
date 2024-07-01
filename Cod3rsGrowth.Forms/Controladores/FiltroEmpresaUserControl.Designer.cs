@@ -78,7 +78,7 @@
             botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFechar.FlatStyle = FlatStyle.Flat;
             botaoFechar.ForeColor = Color.White;
-            botaoFechar.Location = new Point(235, 304);
+            botaoFechar.Location = new Point(326, 304);
             botaoFechar.Name = "botaoFechar";
             botaoFechar.Size = new Size(67, 40);
             botaoFechar.TabIndex = 14;
@@ -93,7 +93,7 @@
             botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFiltrar.FlatStyle = FlatStyle.Flat;
             botaoFiltrar.ForeColor = Color.White;
-            botaoFiltrar.Location = new Point(380, 304);
+            botaoFiltrar.Location = new Point(471, 304);
             botaoFiltrar.Name = "botaoFiltrar";
             botaoFiltrar.Size = new Size(67, 40);
             botaoFiltrar.TabIndex = 15;
@@ -108,7 +108,7 @@
             botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoLimpar.FlatStyle = FlatStyle.Flat;
             botaoLimpar.ForeColor = Color.White;
-            botaoLimpar.Location = new Point(308, 304);
+            botaoLimpar.Location = new Point(399, 304);
             botaoLimpar.Name = "botaoLimpar";
             botaoLimpar.Size = new Size(67, 40);
             botaoLimpar.TabIndex = 22;
@@ -590,7 +590,7 @@
             Controls.Add(botaoFiltrar);
             Controls.Add(botaoFechar);
             Name = "FiltroEmpresaUserControl";
-            Size = new Size(497, 347);
+            Size = new Size(541, 347);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
             ResumeLayout(false);

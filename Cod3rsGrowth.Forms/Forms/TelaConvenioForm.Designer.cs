@@ -61,6 +61,7 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(599, 276);
             dataGridView1.TabIndex = 2;
+            dataGridView1.VisibleChanged += dataGridView1_VisibleChanged;
             // 
             // painelLateral
             // 

@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEndereco Filtro = null;
+        public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEnderecoUserControl()
         {
@@ -53,6 +54,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void botaoFechar_Click(object sender, EventArgs e)
         {
             Visible = false;
+            _botaoFiltrarPressionado = false;
         }
 
         private void botaoFiltrar_Click(object sender, EventArgs e)
@@ -81,6 +83,9 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
+
+            _botaoFiltrarPressionado = true;
+            Visible = false;
         }
 
         private void botaoLimpar_Click(object sender, EventArgs e)
@@ -105,6 +110,11 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void InicializaComboBox()
         {
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
+        }
+
+        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        {
+            _botaoFiltrarPressionado = false;
         }
     }
 }
