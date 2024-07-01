@@ -8,7 +8,5 @@ public class FiltroEndereco
     public string? CepFiltro { get; set; }
     public string? MunicipioFiltro { get; set; }
     public string? BairroFiltro { get; set; }
-    public string? RuaFiltro { get; set; }
-    public string? ComplementoFiltro { get; set; }
     public EstadoEnums? EstadoFiltro { get; set; }
 }

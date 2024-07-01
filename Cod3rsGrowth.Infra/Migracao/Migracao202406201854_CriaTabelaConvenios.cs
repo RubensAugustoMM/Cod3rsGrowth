@@ -13,20 +13,12 @@ public class Migracao202406201854_CriaTabelaConvenios : Migration
             .WithColumn("Valor").AsDecimal().NotNullable()
             .WithColumn("DataInicio").AsDateTime().NotNullable()
             .WithColumn("DataTermino").AsDateTime()
-            .WithColumn("IdEscola").AsInt32().NotNullable()
-            .WithColumn("IdEmpresa").AsInt32().NotNullable();
-
-        Create.ForeignKey("fk_Convenios_Escolas").FromTable("Convenios").ForeignColumn("IdEscola")
-            .ToTable("Escolas").PrimaryColumn("Id");
-
-        Create.ForeignKey("fk_Convenios_Empresas").FromTable("Convenios").ForeignColumn("IdEmpresa")
-            .ToTable("Empresas").PrimaryColumn("Id");
+            .WithColumn("IdEscola").AsInt32().ForeignKey("Escolas", "Id").NotNullable()
+            .WithColumn("IdEmpresa").AsInt32().ForeignKey("Empresas", "Id").NotNullable();
     }
 
     public override void Down()
     {
-        Delete.ForeignKey("fk_Convenios_Escolas").OnTable("Convenios");
-        Delete.ForeignKey("fk_Convenios_Empresas").OnTable("Convenios");
         Delete.Table("Convenios");
     }
 }

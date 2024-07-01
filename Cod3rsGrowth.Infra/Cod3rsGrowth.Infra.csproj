@@ -14,5 +14,6 @@
     <PackageReference Include="FluentMigrator" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Console" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
+    <PackageReference Include="linq2db.AspNet" Version="5.4.1" />
   </ItemGroup>
 </Project>

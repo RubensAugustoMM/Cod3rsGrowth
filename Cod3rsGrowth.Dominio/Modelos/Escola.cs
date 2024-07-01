@@ -22,7 +22,7 @@ public class Escola
     public DateTime InicioAtividade { get; set; } = new();
     [Column("CategoriaAdministrativa"), NotNull]
     public CategoriaAdministrativaEnums CategoriaAdministrativa { get; set; }
-    [Column("OrganizacaAcademica"), NotNull]
+    [Column("OrganizacaoAcademica"), NotNull]
     public OrganizacaoAcademicaEnums OrganizacaoAcademica { get; set; }
     [Column("IdEndereco"), NotNull]
     public int IdEndereco { get; set; }

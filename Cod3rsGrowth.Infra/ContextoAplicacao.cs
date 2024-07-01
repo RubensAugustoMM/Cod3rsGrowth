@@ -6,10 +6,7 @@ namespace Cod3rsGrowth.Infra
 {
     public class ContextoAplicacao : DataConnection
     {
-        public ContextoAplicacao() : base("ConvenioEscolaEmpresaBD")
-        {
-       
-        }
+        public ContextoAplicacao(DataOptions<ContextoAplicacao> opcoes) : base(opcoes.Options) { }
 
         public ITable<Convenio> TabelaConvenios => this.GetTable<Convenio>();
         public ITable<Empresa> TabelaEmpresas => this.GetTable<Empresa>();
