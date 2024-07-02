@@ -8,6 +8,11 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEmpresa Filtro = null;
+        private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
+        private const string _textoVazio = "";
+        private const string _dataVazia = " ";
+        private bool _filtroDataAbertura;
+        private bool _filtroDataSituacaoCadastral;
         public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEmpresaUserControl()
@@ -45,6 +50,14 @@ namespace Cod3rsGrowth.Forms.Controladores
             InicializaFontePixeBoy();
             InicializaComboBox();
 
+            dateTimePickerDataAbertura.CustomFormat = _dataVazia;
+            dateTimePickerDataAbertura.Format = DateTimePickerFormat.Custom;
+            _filtroDataAbertura = false;
+
+            dateTimePickerDataSituacaoCadastral.CustomFormat = _dataVazia;
+            dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Custom;
+            _filtroDataAbertura = false;
+
             foreach (Control c in this.Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
@@ -63,7 +76,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro = new FiltroEmpresa();
             }
-            /*
+            
             if (!string.IsNullOrEmpty(textBoxRazaoSocial.Text))
             {
                 Filtro.RazaoSocialFiltro = textBoxRazaoSocial.Text;
@@ -94,37 +107,39 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.SitucaoCadastralFiltro = checkBoxSituacaoCadastral.Checked;
             }
 
-            if(checkBoxHabilitadoNaturezaJuridica.Checked)
+            if(comboBoxNaturezaJuridica.DataSource != null)
             {
-            Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
+                Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
             }
 
-            if(checkBoxHabilitadoPorte.Checked)
+            if(comboBoxPorte.DataSource != null)
             {
-            Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
+                Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
             }
 
-            if(checkBoxHabilitadoMatrizFilial.Checked)
+            if(comboBoxMatrizFilial.DataSource != null)
             {
-            Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+                Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
             }
 
-            if(checkBoxHabilitadoDataAbertura.Checked)
+            if(_filtroDataAbertura)
             {
                 Filtro.DataAberturaFiltro = dateTimePickerDataAbertura.Value;
             }
 
-            if(checkBoxHabilitadoDataSituacaoCadastral.Checked)
+            if(_filtroDataSituacaoCadastral)
             {
                 Filtro.DataSituacaoCadastralFiltro = dateTimePickerDataSituacaoCadastral.Value;
             }
 
-            if (checkBoxMenorIdade.Checked)
+            if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualIdade.SelectedItem)
             {
                 Filtro.MaiorOuIgualIdade = new();
                 Filtro.MaiorOuIgualIdade = false;
             }
-            else if (checkBoxMaiorIdade.Checked)
+            else if (FiltrosMaiorMenorIgualEnums.Maior ==
+                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualIdade.SelectedItem)
             {
                 Filtro.MaiorOuIgualIdade = new();
                 Filtro.MaiorOuIgualIdade = true;
@@ -134,12 +149,14 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.MaiorOuIgualIdade = null;
             }
 
-            if (checkBoxMenorCapitalSocial.Checked)
+            if (FiltrosMaiorMenorIgualEnums.Maior ==
+                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualCapitalSocial.SelectedItem)
             {
                 Filtro.MaiorOuIgualCapitalSocial = new();
                 Filtro.MaiorOuIgualCapitalSocial = false;
             }
-            else if (checkBoxMaiorCapitalSocial.Checked)
+            else if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualCapitalSocial.SelectedItem)
             {
                 Filtro.MaiorOuIgualCapitalSocial = new();
                 Filtro.MaiorOuIgualCapitalSocial = true;
@@ -149,12 +166,14 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.MaiorOuIgualCapitalSocial = null;
             }
 
-            if (checkBoxMenorDataSituacaoCadastral.Checked)
+            if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem)
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = new();
                 Filtro.MaiorOuIgualDataSituacaoCadastral = false;
             }
-            else if (checkBoxMaiorDataSituacaoCadastral.Checked)
+            else if (FiltrosMaiorMenorIgualEnums.Maior ==
+                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem)
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = new();
                 Filtro.MaiorOuIgualDataSituacaoCadastral = true;
@@ -163,7 +182,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = null;
             }
-            */
+            
 
             _botaoFiltrarPressionado = true;
             Visible = false;
@@ -201,12 +220,25 @@ namespace Cod3rsGrowth.Forms.Controladores
             textBoxIdade.Text = TextoVazio;
             textBoxCapitalSocial.Text = TextoVazio;
 
-            dateTimePickerDataAbertura.Value = DateTime.Now;
-            dateTimePickerDataSituacaoCadastral.Value = DateTime.Now;
-            
+            dateTimePickerDataAbertura.CustomFormat = _dataVazia;
+            dateTimePickerDataAbertura.Format = DateTimePickerFormat.Custom;
+            _filtroDataAbertura = false;
+
+            dateTimePickerDataSituacaoCadastral.CustomFormat = _dataVazia;
+            dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Custom;
+            _filtroDataAbertura = false;
+
+            comboBoxMatrizFilial.DataSource = null;
+            comboBoxNaturezaJuridica.DataSource = null;
+            comboBoxPorte.DataSource = null;
 
             checkBoxSituacaoCadastral.Checked = false;
             checkBoxHabilitadoSituacaoCadastral.Checked = false;
+
+            comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            comboBoxMaiorMenorIgualDataAbertura.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            comboBoxMaiorMenorIgualCapitalSocial.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            comboMaiorMenorIgualIdade.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
         }
 
         private void InicializaFontePixeBoy()
@@ -217,14 +249,104 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
-            comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
-            comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
+            comboBoxNaturezaJuridica.DataSource = null;
+            comboBoxMatrizFilial.DataSource = null;
+            comboBoxPorte.DataSource = null;
+
+            comboBoxMaiorMenorIgualCapitalSocial.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
+            comboBoxMaiorMenorIgualDataAbertura.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
+            comboBoxMaiorMenorIgualDataSituacaoCadastral.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
+            comboMaiorMenorIgualIdade.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
         }
 
         public void AlteraValor_botaoFiltrarPressionadoParaFalso()
         {
             _botaoFiltrarPressionado = false;
+        }
+
+        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 11;
+            const int PosicaoY = 13;
+            const int altura = 85;
+            const int largura = 27;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+            }
+        }
+
+        private void FiltroEmpresaUserControl_Paint_1(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 14;
+            const int PosicaoY = 16;
+            int Altura = panelFiltro.Height + 19;
+            int Largura = panelFiltro.Width + 10;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, Largura, Altura);
+            }
+        }
+
+        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        {
+            const int Tamanho = 2;
+            const int xInicioRetanguloExterior = 4;
+            const int yInicioRetanguloExterior = 6;
+            const int xInicioRetanguloInterior = 8;
+            const int yInicioRetanguloInterior = 10;
+
+            using (Pen caneta = new Pen(Color.White, Tamanho))
+            {
+                e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
+                                                               yInicioRetanguloExterior,
+                                                               panelFiltro.Width - (xInicioRetanguloExterior + Tamanho) * 2,
+                                                               panelFiltro.Height - (yInicioRetanguloExterior + Tamanho) * 2));
+
+                e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
+                                                               yInicioRetanguloInterior,
+                                                               panelFiltro.Width - (xInicioRetanguloInterior + Tamanho) * 2,
+                                                               panelFiltro.Height - (yInicioRetanguloInterior + Tamanho) * 2));
+            }
+        }
+
+
+        private void comboBoxNaturezaJuridica_Click(object sender, EventArgs e)
+        {
+            if (comboBoxNaturezaJuridica.DataSource == null)
+            {
+                comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
+            }
+        }
+
+        private void comboBoxPorte_Click(object sender, EventArgs e)
+        {
+            if (comboBoxPorte.DataSource == null)
+            {
+                comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
+            }
+        }
+
+        private void comboBoxMatrizFilial_Click(object sender, EventArgs e)
+        {
+            if (comboBoxMatrizFilial.DataSource == null)
+            {
+                comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
+            }
+        }
+
+        private void dateTimePickerDataSituacaoCadastral_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerDataSituacaoCadastral.CustomFormat = _formatoDaData;
+            _filtroDataSituacaoCadastral = true;
+        }
+
+        private void dateTimePickerDataAbertura_ValueChanged(object sender, EventArgs e)
+        { 
+            dateTimePickerDataAbertura.CustomFormat = _formatoDaData;
+            _filtroDataAbertura = true;
         }
     }
 }

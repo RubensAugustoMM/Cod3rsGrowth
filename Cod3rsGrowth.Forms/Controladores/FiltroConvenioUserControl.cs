@@ -14,8 +14,8 @@ namespace Cod3rsGrowth.Forms.Controladores
         private const string _dataVazia = " ";
         private bool _filtroDataInicioHabilitado;
         private bool _filtroDataTerminoHabilitado;
-
         public bool _botaoFiltrarPressionado { get; private set; }
+
 
         public FiltroConvenioUserControl()
         {
@@ -38,7 +38,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -76,12 +76,12 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.IdEmpresaFiltro = int.Parse(textBoxValor.Text);
             }
 
-            if (!string.IsNullOrEmpty(dateTimePickerDataInicio.Value.ToString()))
+            if (_filtroDataInicioHabilitado)
             {
                 Filtro.DataInicioFiltro = dateTimePickerDataInicio.Value;
             }
 
-            if (!string.IsNullOrEmpty(dateTimePickerDataTermino.Value.ToString()))
+            if (_filtroDataTerminoHabilitado)
             {
                 Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
             }
@@ -169,7 +169,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             textBoxIdEscola.Text = _textoVazio;
             textBoxIdEmpresa.Text = _textoVazio;
             textBoxValor.Text = _textoVazio;
-
+            
             dateTimePickerDataInicio.CustomFormat = _dataVazia;
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Custom;
             _filtroDataInicioHabilitado = false;
@@ -177,7 +177,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataTermino.CustomFormat = _dataVazia;
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Custom;
             _filtroDataTerminoHabilitado = false;
-
+            
             comboMaiorMenorIgualValor.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboMaiorMenorIgualDataInicio.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboMaiorMenorIgualDataTermino.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
@@ -264,12 +264,12 @@ namespace Cod3rsGrowth.Forms.Controladores
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
-            const int altura = 447;
-            const int largura = 251;
+            int Altura = panelFiltro.Height + 19; 
+            int Largura = panelFiltro.Width + 10;
 
             using (Brush pincel = new SolidBrush(Color.Black))
             {
-                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, Largura, Altura);
             }
         }
 

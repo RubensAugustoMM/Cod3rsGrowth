@@ -101,7 +101,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = dataGridView1.Location;
+            _controladorFiltro.Location = new Point(painelLateral.Width,0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
