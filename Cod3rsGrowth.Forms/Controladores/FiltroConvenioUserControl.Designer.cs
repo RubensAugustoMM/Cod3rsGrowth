@@ -286,11 +286,11 @@
             // labelTitulo
             // 
             labelTitulo.AutoSize = true;
-            labelTitulo.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTitulo.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelTitulo.ForeColor = Color.White;
             labelTitulo.Location = new Point(178, 0);
             labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(122, 20);
+            labelTitulo.Size = new Size(109, 17);
             labelTitulo.TabIndex = 34;
             labelTitulo.Text = "Filtros Convênio";
             // 

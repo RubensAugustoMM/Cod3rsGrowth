@@ -62,6 +62,7 @@
             // 
             // painelLateral
             // 
+            painelLateral.BackColor = Color.DarkGray;
             painelLateral.Controls.Add(botaoPesquisar);
             painelLateral.Controls.Add(botaoFiltros);
             painelLateral.Dock = DockStyle.Left;

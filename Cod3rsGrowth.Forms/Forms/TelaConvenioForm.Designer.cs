@@ -31,10 +31,14 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridView1 = new DataGridView();
             painelLateral = new Panel();
+            panel1 = new Panel();
             botaoPesquisar = new Button();
+            panelBotaoFiltrar = new Panel();
             botaoFiltros = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             painelLateral.SuspendLayout();
+            panel1.SuspendLayout();
+            panelBotaoFiltrar.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -65,9 +69,9 @@
             // 
             // painelLateral
             // 
-            painelLateral.BackColor = Color.Silver;
-            painelLateral.Controls.Add(botaoPesquisar);
-            painelLateral.Controls.Add(botaoFiltros);
+            painelLateral.BackColor = Color.DarkGray;
+            painelLateral.Controls.Add(panel1);
+            painelLateral.Controls.Add(panelBotaoFiltrar);
             painelLateral.Dock = DockStyle.Left;
             painelLateral.Location = new Point(0, 0);
             painelLateral.Name = "painelLateral";
@@ -75,34 +79,56 @@
             painelLateral.TabIndex = 1;
             painelLateral.Paint += painelLateral_Paint;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(botaoPesquisar);
+            panel1.Location = new Point(30, 233);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(107, 67);
+            panel1.TabIndex = 33;
+            panel1.Click += botaoPesquisar_Click;
+            panel1.Paint += panelBotaoFiltrar_Paint;
+            // 
             // botaoPesquisar
             // 
+            botaoPesquisar.BackColor = Color.Green;
             botaoPesquisar.FlatAppearance.BorderSize = 0;
             botaoPesquisar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoPesquisar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
+            botaoPesquisar.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoPesquisar.FlatStyle = FlatStyle.Flat;
+            botaoPesquisar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoPesquisar.ForeColor = Color.White;
-            botaoPesquisar.Location = new Point(30, 98);
+            botaoPesquisar.Location = new Point(3, 3);
             botaoPesquisar.Name = "botaoPesquisar";
             botaoPesquisar.Size = new Size(86, 54);
-            botaoPesquisar.TabIndex = 3;
+            botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
-            botaoPesquisar.UseVisualStyleBackColor = true;
-            botaoPesquisar.Click += botaoPesquisar_Click;
+            botaoPesquisar.UseVisualStyleBackColor = false;
+            // 
+            // panelBotaoFiltrar
+            // 
+            panelBotaoFiltrar.Controls.Add(botaoFiltros);
+            panelBotaoFiltrar.Location = new Point(30, 25);
+            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
+            panelBotaoFiltrar.Size = new Size(107, 67);
+            panelBotaoFiltrar.TabIndex = 32;
+            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
             // 
             // botaoFiltros
             // 
+            botaoFiltros.BackColor = Color.Green;
             botaoFiltros.FlatAppearance.BorderSize = 0;
             botaoFiltros.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoFiltros.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
+            botaoFiltros.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoFiltros.FlatStyle = FlatStyle.Flat;
+            botaoFiltros.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoFiltros.ForeColor = Color.White;
-            botaoFiltros.Location = new Point(30, 38);
+            botaoFiltros.Location = new Point(3, 3);
             botaoFiltros.Name = "botaoFiltros";
             botaoFiltros.Size = new Size(86, 54);
-            botaoFiltros.TabIndex = 0;
+            botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
-            botaoFiltros.UseVisualStyleBackColor = true;
+            botaoFiltros.UseVisualStyleBackColor = false;
             botaoFiltros.Click += botaoFiltros_Click;
             // 
             // TelaConvenioForm
@@ -120,13 +146,17 @@
             Paint += TelaConvenioForm_Paint;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             painelLateral.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panelBotaoFiltrar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
         private Panel painelLateral;
         private Button botaoFiltros;
-        private Button botaoPesquisar;
         private DataGridView dataGridView1;
+        private Panel panelBotaoFiltrar;
+        private Panel panel1;
+        private Button botaoPesquisar;
     }
 }

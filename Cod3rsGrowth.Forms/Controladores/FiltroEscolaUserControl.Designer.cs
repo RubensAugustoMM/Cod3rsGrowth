@@ -51,6 +51,7 @@
             panel2 = new Panel();
             botaoFechar = new Button();
             panelFiltro = new Panel();
+            labelTitulo = new Label();
             panelBotaoFiltrar.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -62,7 +63,7 @@
             idEmpresaLabel.AutoSize = true;
             idEmpresaLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             idEmpresaLabel.ForeColor = Color.White;
-            idEmpresaLabel.Location = new Point(15, 13);
+            idEmpresaLabel.Location = new Point(15, 19);
             idEmpresaLabel.Name = "idEmpresaLabel";
             idEmpresaLabel.Size = new Size(176, 16);
             idEmpresaLabel.TabIndex = 5;
@@ -75,7 +76,7 @@
             comboBoxCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCategoriaAdministrativa.ForeColor = Color.White;
             comboBoxCategoriaAdministrativa.FormattingEnabled = true;
-            comboBoxCategoriaAdministrativa.Location = new Point(241, 75);
+            comboBoxCategoriaAdministrativa.Location = new Point(241, 81);
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 24);
             comboBoxCategoriaAdministrativa.TabIndex = 41;
@@ -87,7 +88,7 @@
             textBoxNome.BorderStyle = BorderStyle.None;
             textBoxNome.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxNome.ForeColor = Color.Yellow;
-            textBoxNome.Location = new Point(241, 13);
+            textBoxNome.Location = new Point(241, 19);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(149, 15);
             textBoxNome.TabIndex = 45;
@@ -97,7 +98,7 @@
             labelCodigoMec.AutoSize = true;
             labelCodigoMec.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelCodigoMec.ForeColor = Color.White;
-            labelCodigoMec.Location = new Point(15, 34);
+            labelCodigoMec.Location = new Point(15, 40);
             labelCodigoMec.Name = "labelCodigoMec";
             labelCodigoMec.Size = new Size(173, 16);
             labelCodigoMec.TabIndex = 46;
@@ -108,7 +109,7 @@
             labelCategoriaAdministrativa.AutoSize = true;
             labelCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelCategoriaAdministrativa.ForeColor = Color.White;
-            labelCategoriaAdministrativa.Location = new Point(15, 77);
+            labelCategoriaAdministrativa.Location = new Point(15, 83);
             labelCategoriaAdministrativa.Name = "labelCategoriaAdministrativa";
             labelCategoriaAdministrativa.Size = new Size(156, 16);
             labelCategoriaAdministrativa.TabIndex = 47;
@@ -119,7 +120,7 @@
             labelOrganizacaoAcademica.AutoSize = true;
             labelOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelOrganizacaoAcademica.ForeColor = Color.White;
-            labelOrganizacaoAcademica.Location = new Point(15, 104);
+            labelOrganizacaoAcademica.Location = new Point(15, 110);
             labelOrganizacaoAcademica.Name = "labelOrganizacaoAcademica";
             labelOrganizacaoAcademica.Size = new Size(177, 16);
             labelOrganizacaoAcademica.TabIndex = 48;
@@ -130,7 +131,7 @@
             labelIdEndereco.AutoSize = true;
             labelIdEndereco.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelIdEndereco.ForeColor = Color.White;
-            labelIdEndereco.Location = new Point(15, 55);
+            labelIdEndereco.Location = new Point(15, 61);
             labelIdEndereco.Name = "labelIdEndereco";
             labelIdEndereco.Size = new Size(167, 16);
             labelIdEndereco.TabIndex = 49;
@@ -141,7 +142,7 @@
             labelStatusAtividade.AutoSize = true;
             labelStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelStatusAtividade.ForeColor = Color.White;
-            labelStatusAtividade.Location = new Point(15, 130);
+            labelStatusAtividade.Location = new Point(15, 136);
             labelStatusAtividade.Name = "labelStatusAtividade";
             labelStatusAtividade.Size = new Size(158, 16);
             labelStatusAtividade.TabIndex = 50;
@@ -152,7 +153,7 @@
             labelInicioAtividade.AutoSize = true;
             labelInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelInicioAtividade.ForeColor = Color.White;
-            labelInicioAtividade.Location = new Point(15, 156);
+            labelInicioAtividade.Location = new Point(15, 162);
             labelInicioAtividade.Name = "labelInicioAtividade";
             labelInicioAtividade.Size = new Size(152, 16);
             labelInicioAtividade.TabIndex = 51;
@@ -164,7 +165,7 @@
             textBoxCodigoMec.BorderStyle = BorderStyle.None;
             textBoxCodigoMec.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxCodigoMec.ForeColor = Color.Yellow;
-            textBoxCodigoMec.Location = new Point(241, 34);
+            textBoxCodigoMec.Location = new Point(241, 40);
             textBoxCodigoMec.Name = "textBoxCodigoMec";
             textBoxCodigoMec.Size = new Size(149, 15);
             textBoxCodigoMec.TabIndex = 52;
@@ -176,7 +177,7 @@
             comboBoxOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxOrganizacaoAcademica.ForeColor = Color.White;
             comboBoxOrganizacaoAcademica.FormattingEnabled = true;
-            comboBoxOrganizacaoAcademica.Location = new Point(241, 102);
+            comboBoxOrganizacaoAcademica.Location = new Point(241, 108);
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 24);
             comboBoxOrganizacaoAcademica.TabIndex = 53;
@@ -188,7 +189,7 @@
             textBoxIdEndereco.BorderStyle = BorderStyle.None;
             textBoxIdEndereco.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxIdEndereco.ForeColor = Color.Yellow;
-            textBoxIdEndereco.Location = new Point(241, 54);
+            textBoxIdEndereco.Location = new Point(241, 60);
             textBoxIdEndereco.Name = "textBoxIdEndereco";
             textBoxIdEndereco.Size = new Size(149, 15);
             textBoxIdEndereco.TabIndex = 54;
@@ -200,7 +201,7 @@
             checkBoxHabilitadoStatusAtividade.FlatAppearance.BorderSize = 0;
             checkBoxHabilitadoStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxHabilitadoStatusAtividade.ForeColor = Color.White;
-            checkBoxHabilitadoStatusAtividade.Location = new Point(262, 129);
+            checkBoxHabilitadoStatusAtividade.Location = new Point(262, 135);
             checkBoxHabilitadoStatusAtividade.Name = "checkBoxHabilitadoStatusAtividade";
             checkBoxHabilitadoStatusAtividade.Size = new Size(95, 20);
             checkBoxHabilitadoStatusAtividade.TabIndex = 59;
@@ -213,7 +214,7 @@
             checkBoxStatusAtividade.FlatAppearance.BorderSize = 0;
             checkBoxStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxStatusAtividade.ForeColor = Color.White;
-            checkBoxStatusAtividade.Location = new Point(241, 132);
+            checkBoxStatusAtividade.Location = new Point(241, 138);
             checkBoxStatusAtividade.Name = "checkBoxStatusAtividade";
             checkBoxStatusAtividade.Size = new Size(15, 14);
             checkBoxStatusAtividade.TabIndex = 58;
@@ -229,7 +230,7 @@
             dateTimePickerDataInicioAtividade.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicioAtividade.Location = new Point(239, 154);
+            dateTimePickerDataInicioAtividade.Location = new Point(239, 160);
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
             dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
             dateTimePickerDataInicioAtividade.TabIndex = 60;
@@ -242,7 +243,7 @@
             comboBoxMaiorMenorIgualInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualInicioAtividade.ForeColor = Color.White;
             comboBoxMaiorMenorIgualInicioAtividade.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualInicioAtividade.Location = new Point(394, 154);
+            comboBoxMaiorMenorIgualInicioAtividade.Location = new Point(394, 160);
             comboBoxMaiorMenorIgualInicioAtividade.Name = "comboBoxMaiorMenorIgualInicioAtividade";
             comboBoxMaiorMenorIgualInicioAtividade.Size = new Size(125, 24);
             comboBoxMaiorMenorIgualInicioAtividade.TabIndex = 68;
@@ -331,6 +332,7 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(labelTitulo);
             panelFiltro.Controls.Add(idEmpresaLabel);
             panelFiltro.Controls.Add(panel2);
             panelFiltro.Controls.Add(comboBoxCategoriaAdministrativa);
@@ -355,6 +357,17 @@
             panelFiltro.Size = new Size(533, 223);
             panelFiltro.TabIndex = 70;
             panelFiltro.Paint += panelFiltro_Paint;
+            // 
+            // labelTitulo
+            // 
+            labelTitulo.AutoSize = true;
+            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTitulo.ForeColor = Color.White;
+            labelTitulo.Location = new Point(220, 0);
+            labelTitulo.Name = "labelTitulo";
+            labelTitulo.Size = new Size(81, 19);
+            labelTitulo.TabIndex = 70;
+            labelTitulo.Text = "Filtro Escola";
             // 
             // FiltroEscolaUserControl
             // 
@@ -411,5 +424,6 @@
         private Panel panel2;
         private Button botaoFechar;
         private Panel panelFiltro;
+        private Label labelTitulo;
     }
 }

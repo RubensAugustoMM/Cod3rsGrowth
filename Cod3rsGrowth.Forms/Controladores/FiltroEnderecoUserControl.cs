@@ -8,42 +8,12 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEndereco Filtro = null;
+        private const string _textoVazio = "";
         public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEnderecoUserControl()
         {
             InitializeComponent();
-        }
-
-        private void FiltroConvenioUserControl_Paint(object sender, PaintEventArgs e)
-        {
-            if (BorderStyle == BorderStyle.None)
-            {
-                const int Tamanho = 2;
-                const int xInicioRetanguloExterior = 4;
-                const int yInicioRetanguloExterior = 6;
-                const int xInicioRetanguloInterior = 8;
-                const int yInicioRetanguloInterior = 10;
-
-                using (Brush pincel = new SolidBrush(Color.Black))
-                {
-                    e.Graphics.FillRectangle(pincel, new Rectangle(0,0,this.Width,this.Height));
-                }
-                /*
-                using (Pen caneta = new Pen(Color.White, Tamanho))
-                {
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
-                                                                   yInicioRetanguloExterior,
-                                                                   Width - (xInicioRetanguloExterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloExterior + Tamanho) * 2));
-
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
-                                                                   yInicioRetanguloInterior,
-                                                                   Width - (xInicioRetanguloInterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloInterior + Tamanho) * 2));
-                }
-                */
-            }
         }
 
         private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
@@ -54,6 +24,19 @@ namespace Cod3rsGrowth.Forms.Controladores
             foreach (Control c in this.Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            }
+        }
+
+        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 11;
+            const int PosicaoY = 13;
+            const int altura = 85;
+            const int largura = 27;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
             }
         }
 
@@ -85,7 +68,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CepFiltro = textBoxCep.Text;
             }
 
-            if(checkBoxHabilitadoEstado.Checked)
+            if(comboBoxEstado.DataSource != null)
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
@@ -96,15 +79,13 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
-            const string TextoVazio = "";
-
             Filtro = null;
 
-            textBoxMunicipio.Text = TextoVazio;
-            textBoxBairro.Text = TextoVazio;
-            textBoxCep.Text = TextoVazio;
+            textBoxMunicipio.Text = _textoVazio;
+            textBoxBairro.Text = _textoVazio;
+            textBoxCep.Text = _textoVazio;
 
-            checkBoxHabilitadoEstado.Checked = false;
+            comboBoxEstado.DataSource = null;
         }
 
         private void InicializaFontePixeBoy()
@@ -115,12 +96,53 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
+            comboBoxEstado.DataSource = null;
         }
 
         public void AlteraValor_botaoFiltrarPressionadoParaFalso()
         {
             _botaoFiltrarPressionado = false;
+        }
+
+        private void FiltroEnderecoUserControl_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 14;
+            const int PosicaoY = 16;
+            int Altura = panelFiltro.Height + 19;
+            int Largura = panelFiltro.Width + 10;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, Largura, Altura);
+            }
+        }
+
+        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        {
+            const int Tamanho = 2;
+            const int xInicioRetanguloExterior = 4;
+            const int yInicioRetanguloExterior = 6;
+            const int xInicioRetanguloInterior = 8;
+            const int yInicioRetanguloInterior = 10;
+
+            using (Pen caneta = new Pen(Color.White, Tamanho))
+            {
+                e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
+                                                               yInicioRetanguloExterior,
+                                                               panelFiltro.Width - (xInicioRetanguloExterior + Tamanho) * 2,
+                                                               panelFiltro.Height - (yInicioRetanguloExterior + Tamanho) * 2));
+
+                e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
+                                                               yInicioRetanguloInterior,
+                                                               panelFiltro.Width - (xInicioRetanguloInterior + Tamanho) * 2,
+                                                               panelFiltro.Height - (yInicioRetanguloInterior + Tamanho) * 2));
+            }
+
+        }
+
+        private void comboBoxEstado_Click(object sender, EventArgs e)
+        {
+            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
         }
     }
 }

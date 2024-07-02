@@ -46,7 +46,7 @@
             // 
             // panelTopo1
             // 
-            panelTopo1.BackColor = Color.Silver;
+            panelTopo1.BackColor = Color.DarkGray;
             panelTopo1.Controls.Add(botaoEnderecos);
             panelTopo1.Controls.Add(botaoEscolas);
             panelTopo1.Controls.Add(button2);
@@ -155,7 +155,7 @@
             // data
             // 
             data.AutoSize = true;
-            data.ForeColor = Color.White;
+            data.ForeColor = Color.Black;
             data.Location = new Point(12, 9);
             data.Name = "data";
             data.Size = new Size(31, 15);
@@ -165,7 +165,7 @@
             // tempo
             // 
             tempo.AutoSize = true;
-            tempo.ForeColor = Color.White;
+            tempo.ForeColor = Color.Black;
             tempo.Location = new Point(363, 9);
             tempo.Name = "tempo";
             tempo.Size = new Size(43, 15);

@@ -62,6 +62,7 @@
             comboBoxMaiorMenorIgualDataSituacaoCadastral = new ComboBox();
             comboBoxMaiorMenorIgualDataAbertura = new ComboBox();
             panelFiltro = new Panel();
+            labelTitulo = new Label();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panelBotaoFiltrar.SuspendLayout();
@@ -465,6 +466,7 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(labelTitulo);
             panelFiltro.Controls.Add(labelRazaoSocial);
             panelFiltro.Controls.Add(comboBoxMaiorMenorIgualDataAbertura);
             panelFiltro.Controls.Add(labelNomeFantasia);
@@ -500,6 +502,17 @@
             panelFiltro.Size = new Size(516, 307);
             panelFiltro.TabIndex = 65;
             panelFiltro.Paint += panelFiltro_Paint;
+            // 
+            // labelTitulo
+            // 
+            labelTitulo.AutoSize = true;
+            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTitulo.ForeColor = Color.White;
+            labelTitulo.Location = new Point(192, 0);
+            labelTitulo.Name = "labelTitulo";
+            labelTitulo.Size = new Size(96, 19);
+            labelTitulo.TabIndex = 71;
+            labelTitulo.Text = "Filtro Empresa";
             // 
             // FiltroEmpresaUserControl
             // 
@@ -554,5 +567,6 @@
         private ComboBox comboBoxMaiorMenorIgualDataSituacaoCadastral;
         private ComboBox comboBoxMaiorMenorIgualDataAbertura;
         private Panel panelFiltro;
+        private Label labelTitulo;
     }
 }
