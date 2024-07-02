@@ -186,7 +186,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.DarkGray;
             panel1.Controls.Add(LabelEstado);
             panel1.Controls.Add(botaoFiltrar);
             panel1.Controls.Add(checkBoxHabilitadoEstado);

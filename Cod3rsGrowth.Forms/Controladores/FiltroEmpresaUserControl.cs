@@ -58,7 +58,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Custom;
             _filtroDataAbertura = false;
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
             }
@@ -211,14 +211,13 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void botaoLimpar_Click(object sender, EventArgs e)
         {
-            const string TextoVazio = "";
             Filtro = null;
 
-            textBoxRazaoSocial.Text = TextoVazio;
-            textBoxNomeFantasia.Text = TextoVazio;
-            textBoxCnpj.Text = TextoVazio;
-            textBoxIdade.Text = TextoVazio;
-            textBoxCapitalSocial.Text = TextoVazio;
+            textBoxRazaoSocial.Text = _textoVazio;
+            textBoxNomeFantasia.Text = _textoVazio;
+            textBoxCnpj.Text = _textoVazio;
+            textBoxIdade.Text = _textoVazio;
+            textBoxCapitalSocial.Text = _textoVazio;
 
             dateTimePickerDataAbertura.CustomFormat = _dataVazia;
             dateTimePickerDataAbertura.Format = DateTimePickerFormat.Custom;

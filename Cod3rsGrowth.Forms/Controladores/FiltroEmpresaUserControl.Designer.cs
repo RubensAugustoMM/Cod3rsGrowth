@@ -464,7 +464,7 @@
             // 
             // panelFiltro
             // 
-            panelFiltro.BackColor = Color.Silver;
+            panelFiltro.BackColor = Color.DarkGray;
             panelFiltro.Controls.Add(labelRazaoSocial);
             panelFiltro.Controls.Add(comboBoxMaiorMenorIgualDataAbertura);
             panelFiltro.Controls.Add(labelNomeFantasia);

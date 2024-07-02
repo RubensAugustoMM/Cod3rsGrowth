@@ -43,26 +43,28 @@
             checkBoxHabilitadoStatusAtividade = new CheckBox();
             checkBoxStatusAtividade = new CheckBox();
             dateTimePickerDataInicioAtividade = new DateTimePicker();
-            comboBoxMaiorMenorIgualCapitalSocial = new ComboBox();
+            comboBoxMaiorMenorIgualInicioAtividade = new ComboBox();
             panelBotaoFiltrar = new Panel();
             botaoFiltrar = new Button();
             panel1 = new Panel();
             botaoLimpar = new Button();
             panel2 = new Panel();
             botaoFechar = new Button();
+            panelFiltro = new Panel();
             panelBotaoFiltrar.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panelFiltro.SuspendLayout();
             SuspendLayout();
             // 
             // idEmpresaLabel
             // 
             idEmpresaLabel.AutoSize = true;
-            idEmpresaLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            idEmpresaLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             idEmpresaLabel.ForeColor = Color.White;
-            idEmpresaLabel.Location = new Point(16, 18);
+            idEmpresaLabel.Location = new Point(15, 13);
             idEmpresaLabel.Name = "idEmpresaLabel";
-            idEmpresaLabel.Size = new Size(207, 21);
+            idEmpresaLabel.Size = new Size(176, 16);
             idEmpresaLabel.TabIndex = 5;
             idEmpresaLabel.Text = "Nome . . . . . . . . . . . . . . . . . . . . . :";
             // 
@@ -70,87 +72,89 @@
             // 
             comboBoxCategoriaAdministrativa.BackColor = Color.Black;
             comboBoxCategoriaAdministrativa.FlatStyle = FlatStyle.Flat;
-            comboBoxCategoriaAdministrativa.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCategoriaAdministrativa.ForeColor = Color.White;
             comboBoxCategoriaAdministrativa.FormattingEnabled = true;
-            comboBoxCategoriaAdministrativa.Location = new Point(193, 80);
+            comboBoxCategoriaAdministrativa.Location = new Point(241, 75);
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
-            comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
+            comboBoxCategoriaAdministrativa.Size = new Size(149, 24);
             comboBoxCategoriaAdministrativa.TabIndex = 41;
+            comboBoxCategoriaAdministrativa.Click += comboBoxCategoriaAdministrativa_Click;
             // 
             // textBoxNome
             // 
             textBoxNome.BackColor = Color.Black;
             textBoxNome.BorderStyle = BorderStyle.None;
+            textBoxNome.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxNome.ForeColor = Color.Yellow;
-            textBoxNome.Location = new Point(193, 18);
+            textBoxNome.Location = new Point(241, 13);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(149, 16);
+            textBoxNome.Size = new Size(149, 15);
             textBoxNome.TabIndex = 45;
             // 
             // labelCodigoMec
             // 
             labelCodigoMec.AutoSize = true;
-            labelCodigoMec.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCodigoMec.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelCodigoMec.ForeColor = Color.White;
-            labelCodigoMec.Location = new Point(16, 39);
+            labelCodigoMec.Location = new Point(15, 34);
             labelCodigoMec.Name = "labelCodigoMec";
-            labelCodigoMec.Size = new Size(201, 21);
+            labelCodigoMec.Size = new Size(173, 16);
             labelCodigoMec.TabIndex = 46;
             labelCodigoMec.Text = "Codigo Mec. . . . . . . . . . . . . . . :";
             // 
             // labelCategoriaAdministrativa
             // 
             labelCategoriaAdministrativa.AutoSize = true;
-            labelCategoriaAdministrativa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelCategoriaAdministrativa.ForeColor = Color.White;
-            labelCategoriaAdministrativa.Location = new Point(16, 82);
+            labelCategoriaAdministrativa.Location = new Point(15, 77);
             labelCategoriaAdministrativa.Name = "labelCategoriaAdministrativa";
-            labelCategoriaAdministrativa.Size = new Size(185, 21);
+            labelCategoriaAdministrativa.Size = new Size(156, 16);
             labelCategoriaAdministrativa.TabIndex = 47;
             labelCategoriaAdministrativa.Text = "Categoria Administrativa:";
             // 
             // labelOrganizacaoAcademica
             // 
             labelOrganizacaoAcademica.AutoSize = true;
-            labelOrganizacaoAcademica.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelOrganizacaoAcademica.ForeColor = Color.White;
-            labelOrganizacaoAcademica.Location = new Point(16, 123);
+            labelOrganizacaoAcademica.Location = new Point(15, 104);
             labelOrganizacaoAcademica.Name = "labelOrganizacaoAcademica";
-            labelOrganizacaoAcademica.Size = new Size(200, 21);
+            labelOrganizacaoAcademica.Size = new Size(177, 16);
             labelOrganizacaoAcademica.TabIndex = 48;
             labelOrganizacaoAcademica.Text = "Organizacao Academica . . .:";
             // 
             // labelIdEndereco
             // 
             labelIdEndereco.AutoSize = true;
-            labelIdEndereco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelIdEndereco.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelIdEndereco.ForeColor = Color.White;
-            labelIdEndereco.Location = new Point(16, 60);
+            labelIdEndereco.Location = new Point(15, 55);
             labelIdEndereco.Name = "labelIdEndereco";
-            labelIdEndereco.Size = new Size(192, 21);
+            labelIdEndereco.Size = new Size(167, 16);
             labelIdEndereco.TabIndex = 49;
             labelIdEndereco.Text = "Id Endereco. . . . . . . . . . . . . . :";
             // 
             // labelStatusAtividade
             // 
             labelStatusAtividade.AutoSize = true;
-            labelStatusAtividade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelStatusAtividade.ForeColor = Color.White;
-            labelStatusAtividade.Location = new Point(16, 157);
+            labelStatusAtividade.Location = new Point(15, 130);
             labelStatusAtividade.Name = "labelStatusAtividade";
-            labelStatusAtividade.Size = new Size(183, 21);
+            labelStatusAtividade.Size = new Size(158, 16);
             labelStatusAtividade.TabIndex = 50;
             labelStatusAtividade.Text = "Status Atividade. . . . . . . . .:";
             // 
             // labelInicioAtividade
             // 
             labelInicioAtividade.AutoSize = true;
-            labelInicioAtividade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             labelInicioAtividade.ForeColor = Color.White;
-            labelInicioAtividade.Location = new Point(16, 198);
+            labelInicioAtividade.Location = new Point(15, 156);
             labelInicioAtividade.Name = "labelInicioAtividade";
-            labelInicioAtividade.Size = new Size(178, 21);
+            labelInicioAtividade.Size = new Size(152, 16);
             labelInicioAtividade.TabIndex = 51;
             labelInicioAtividade.Text = "Inicio Atividade. . . . . . . . .:";
             // 
@@ -158,32 +162,35 @@
             // 
             textBoxCodigoMec.BackColor = Color.Black;
             textBoxCodigoMec.BorderStyle = BorderStyle.None;
+            textBoxCodigoMec.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxCodigoMec.ForeColor = Color.Yellow;
-            textBoxCodigoMec.Location = new Point(193, 39);
+            textBoxCodigoMec.Location = new Point(241, 34);
             textBoxCodigoMec.Name = "textBoxCodigoMec";
-            textBoxCodigoMec.Size = new Size(149, 16);
+            textBoxCodigoMec.Size = new Size(149, 15);
             textBoxCodigoMec.TabIndex = 52;
             // 
             // comboBoxOrganizacaoAcademica
             // 
             comboBoxOrganizacaoAcademica.BackColor = Color.Black;
             comboBoxOrganizacaoAcademica.FlatStyle = FlatStyle.Flat;
-            comboBoxOrganizacaoAcademica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxOrganizacaoAcademica.ForeColor = Color.White;
             comboBoxOrganizacaoAcademica.FormattingEnabled = true;
-            comboBoxOrganizacaoAcademica.Location = new Point(193, 121);
+            comboBoxOrganizacaoAcademica.Location = new Point(241, 102);
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
-            comboBoxOrganizacaoAcademica.Size = new Size(149, 23);
+            comboBoxOrganizacaoAcademica.Size = new Size(149, 24);
             comboBoxOrganizacaoAcademica.TabIndex = 53;
+            comboBoxOrganizacaoAcademica.Click += comboBoxOrganizacaoAcademica_Click;
             // 
             // textBoxIdEndereco
             // 
             textBoxIdEndereco.BackColor = Color.Black;
             textBoxIdEndereco.BorderStyle = BorderStyle.None;
+            textBoxIdEndereco.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxIdEndereco.ForeColor = Color.Yellow;
-            textBoxIdEndereco.Location = new Point(193, 59);
+            textBoxIdEndereco.Location = new Point(241, 54);
             textBoxIdEndereco.Name = "textBoxIdEndereco";
-            textBoxIdEndereco.Size = new Size(149, 16);
+            textBoxIdEndereco.Size = new Size(149, 15);
             textBoxIdEndereco.TabIndex = 54;
             textBoxIdEndereco.KeyPress += somenteValoresNaturais_KeyPress;
             // 
@@ -191,10 +198,11 @@
             // 
             checkBoxHabilitadoStatusAtividade.AutoSize = true;
             checkBoxHabilitadoStatusAtividade.FlatAppearance.BorderSize = 0;
+            checkBoxHabilitadoStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxHabilitadoStatusAtividade.ForeColor = Color.White;
-            checkBoxHabilitadoStatusAtividade.Location = new Point(212, 161);
+            checkBoxHabilitadoStatusAtividade.Location = new Point(262, 129);
             checkBoxHabilitadoStatusAtividade.Name = "checkBoxHabilitadoStatusAtividade";
-            checkBoxHabilitadoStatusAtividade.Size = new Size(86, 19);
+            checkBoxHabilitadoStatusAtividade.Size = new Size(95, 20);
             checkBoxHabilitadoStatusAtividade.TabIndex = 59;
             checkBoxHabilitadoStatusAtividade.Text = "Habilitado?";
             checkBoxHabilitadoStatusAtividade.UseVisualStyleBackColor = true;
@@ -203,8 +211,9 @@
             // 
             checkBoxStatusAtividade.AutoSize = true;
             checkBoxStatusAtividade.FlatAppearance.BorderSize = 0;
+            checkBoxStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxStatusAtividade.ForeColor = Color.White;
-            checkBoxStatusAtividade.Location = new Point(191, 163);
+            checkBoxStatusAtividade.Location = new Point(241, 132);
             checkBoxStatusAtividade.Name = "checkBoxStatusAtividade";
             checkBoxStatusAtividade.Size = new Size(15, 14);
             checkBoxStatusAtividade.TabIndex = 58;
@@ -218,31 +227,34 @@
             dateTimePickerDataInicioAtividade.CalendarTitleBackColor = Color.Yellow;
             dateTimePickerDataInicioAtividade.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataInicioAtividade.CalendarTrailingForeColor = Color.Silver;
+            dateTimePickerDataInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicioAtividade.Location = new Point(191, 196);
+            dateTimePickerDataInicioAtividade.Location = new Point(239, 154);
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
-            dateTimePickerDataInicioAtividade.Size = new Size(149, 23);
+            dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
             dateTimePickerDataInicioAtividade.TabIndex = 60;
+            dateTimePickerDataInicioAtividade.ValueChanged += dateTimePickerDataInicioAtividade_ValueChanged;
             // 
-            // comboBoxMaiorMenorIgualCapitalSocial
+            // comboBoxMaiorMenorIgualInicioAtividade
             // 
-            comboBoxMaiorMenorIgualCapitalSocial.BackColor = Color.Black;
-            comboBoxMaiorMenorIgualCapitalSocial.FlatStyle = FlatStyle.Flat;
-            comboBoxMaiorMenorIgualCapitalSocial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxMaiorMenorIgualCapitalSocial.ForeColor = Color.White;
-            comboBoxMaiorMenorIgualCapitalSocial.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualCapitalSocial.Location = new Point(346, 196);
-            comboBoxMaiorMenorIgualCapitalSocial.Name = "comboBoxMaiorMenorIgualCapitalSocial";
-            comboBoxMaiorMenorIgualCapitalSocial.Size = new Size(125, 23);
-            comboBoxMaiorMenorIgualCapitalSocial.TabIndex = 68;
+            comboBoxMaiorMenorIgualInicioAtividade.BackColor = Color.Black;
+            comboBoxMaiorMenorIgualInicioAtividade.FlatStyle = FlatStyle.Flat;
+            comboBoxMaiorMenorIgualInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxMaiorMenorIgualInicioAtividade.ForeColor = Color.White;
+            comboBoxMaiorMenorIgualInicioAtividade.FormattingEnabled = true;
+            comboBoxMaiorMenorIgualInicioAtividade.Location = new Point(394, 154);
+            comboBoxMaiorMenorIgualInicioAtividade.Name = "comboBoxMaiorMenorIgualInicioAtividade";
+            comboBoxMaiorMenorIgualInicioAtividade.Size = new Size(125, 24);
+            comboBoxMaiorMenorIgualInicioAtividade.TabIndex = 68;
             // 
             // panelBotaoFiltrar
             // 
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
-            panelBotaoFiltrar.Location = new Point(365, 253);
+            panelBotaoFiltrar.Location = new Point(413, 184);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 69;
+            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
             // 
             // botaoFiltrar
             // 
@@ -265,10 +277,11 @@
             // panel1
             // 
             panel1.Controls.Add(botaoLimpar);
-            panel1.Location = new Point(253, 253);
+            panel1.Location = new Point(304, 184);
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 33;
+            panel1.Paint += panelBotaoFiltrar_Paint;
             // 
             // botaoLimpar
             // 
@@ -291,10 +304,11 @@
             // panel2
             // 
             panel2.Controls.Add(botaoFechar);
-            panel2.Location = new Point(141, 253);
+            panel2.Location = new Point(195, 184);
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 34;
+            panel2.Paint += panelBotaoFiltrar_Paint;
             // 
             // botaoFechar
             // 
@@ -314,39 +328,50 @@
             botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 
+            // panelFiltro
+            // 
+            panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(idEmpresaLabel);
+            panelFiltro.Controls.Add(panel2);
+            panelFiltro.Controls.Add(comboBoxCategoriaAdministrativa);
+            panelFiltro.Controls.Add(panel1);
+            panelFiltro.Controls.Add(textBoxNome);
+            panelFiltro.Controls.Add(panelBotaoFiltrar);
+            panelFiltro.Controls.Add(labelCodigoMec);
+            panelFiltro.Controls.Add(comboBoxMaiorMenorIgualInicioAtividade);
+            panelFiltro.Controls.Add(labelCategoriaAdministrativa);
+            panelFiltro.Controls.Add(dateTimePickerDataInicioAtividade);
+            panelFiltro.Controls.Add(labelOrganizacaoAcademica);
+            panelFiltro.Controls.Add(checkBoxHabilitadoStatusAtividade);
+            panelFiltro.Controls.Add(labelIdEndereco);
+            panelFiltro.Controls.Add(checkBoxStatusAtividade);
+            panelFiltro.Controls.Add(labelStatusAtividade);
+            panelFiltro.Controls.Add(textBoxIdEndereco);
+            panelFiltro.Controls.Add(labelInicioAtividade);
+            panelFiltro.Controls.Add(comboBoxOrganizacaoAcademica);
+            panelFiltro.Controls.Add(textBoxCodigoMec);
+            panelFiltro.Location = new Point(0, 0);
+            panelFiltro.Name = "panelFiltro";
+            panelFiltro.Size = new Size(533, 223);
+            panelFiltro.TabIndex = 70;
+            panelFiltro.Paint += panelFiltro_Paint;
+            // 
             // FiltroEscolaUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
-            Controls.Add(panel2);
-            Controls.Add(panel1);
-            Controls.Add(panelBotaoFiltrar);
-            Controls.Add(comboBoxMaiorMenorIgualCapitalSocial);
-            Controls.Add(dateTimePickerDataInicioAtividade);
-            Controls.Add(checkBoxHabilitadoStatusAtividade);
-            Controls.Add(checkBoxStatusAtividade);
-            Controls.Add(textBoxIdEndereco);
-            Controls.Add(comboBoxOrganizacaoAcademica);
-            Controls.Add(textBoxCodigoMec);
-            Controls.Add(labelInicioAtividade);
-            Controls.Add(labelStatusAtividade);
-            Controls.Add(labelIdEndereco);
-            Controls.Add(labelOrganizacaoAcademica);
-            Controls.Add(labelCategoriaAdministrativa);
-            Controls.Add(labelCodigoMec);
-            Controls.Add(textBoxNome);
-            Controls.Add(comboBoxCategoriaAdministrativa);
-            Controls.Add(idEmpresaLabel);
+            BackColor = Color.Transparent;
+            Controls.Add(panelFiltro);
             Name = "FiltroEscolaUserControl";
-            Size = new Size(496, 293);
+            Size = new Size(543, 242);
             Load += FiltroConvenioUserControl_Load;
-            Paint += FiltroConvenioUserControl_Paint;
+            Paint += FiltroEmpresaUserControl_Paint_1;
             panelBotaoFiltrar.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panelFiltro.ResumeLayout(false);
+            panelFiltro.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -378,12 +403,13 @@
         private CheckBox checkBoxHabilitadoStatusAtividade;
         private CheckBox checkBoxStatusAtividade;
         private DateTimePicker dateTimePickerDataInicioAtividade;
-        private ComboBox comboBoxMaiorMenorIgualCapitalSocial;
+        private ComboBox comboBoxMaiorMenorIgualInicioAtividade;
         private Panel panelBotaoFiltrar;
         private Button botaoFiltrar;
         private Panel panel1;
         private Button botaoLimpar;
         private Panel panel2;
         private Button botaoFechar;
+        private Panel panelFiltro;
     }
 }
