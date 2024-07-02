@@ -63,7 +63,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro = new FiltroEmpresa();
             }
-
+            /*
             if (!string.IsNullOrEmpty(textBoxRazaoSocial.Text))
             {
                 Filtro.RazaoSocialFiltro = textBoxRazaoSocial.Text;
@@ -163,6 +163,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = null;
             }
+            */
 
             _botaoFiltrarPressionado = true;
             Visible = false;
@@ -204,19 +205,6 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataSituacaoCadastral.Value = DateTime.Now;
             
 
-            checkBoxMenorIdade.Checked = false;
-            checkBoxMaiorIdade.Checked = false;
-            checkBoxMenorCapitalSocial.Checked = false;
-            checkBoxMaiorCapitalSocial.Checked = false;
-            checkBoxMenorDataSituacaoCadastral.Checked = false;
-            checkBoxMaiorDataSituacaoCadastral.Checked = false;
-            checkBoxMenorDataAbertura.Checked = false;
-            checkBoxMaiorDataAbertura.Checked = false;
-            checkBoxHabilitadoNaturezaJuridica.Checked = false;
-            checkBoxHabilitadoPorte.Checked = false;
-            checkBoxHabilitadoMatrizFilial.Checked = false;
-            checkBoxHabilitadoDataAbertura.Checked = false;
-            checkBoxHabilitadoDataSituacaoCadastral.Checked = false;
             checkBoxSituacaoCadastral.Checked = false;
             checkBoxHabilitadoSituacaoCadastral.Checked = false;
         }
@@ -232,55 +220,6 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
             comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
             comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
-        }
-
-        private void checkBoxMaiorIdade_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBoxMenorIdade.Checked == true)
-                checkBoxMenorIdade.Checked = !checkBoxMenorIdade.Checked;
-        }
-
-        private void checkBoxMenorIdade_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorIdade.Checked == true)
-                checkBoxMaiorIdade.Checked = !checkBoxMaiorIdade.Checked;
-        }
-
-        private void checkBoxMaiorCapitalSocial_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorCapitalSocial.Checked == true)
-                checkBoxMenorCapitalSocial.Checked = !checkBoxMenorCapitalSocial.Checked;
-        }
-
-        private void checkBoxMenorCapitalSocial_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorCapitalSocial.Checked == true)
-                checkBoxMaiorCapitalSocial.Checked = !checkBoxMaiorCapitalSocial.Checked;
-        }
-
-        private void checkBoxMaiorDataSituacaoCadastral_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorDataSituacaoCadastral.Checked == true)
-                checkBoxMenorDataSituacaoCadastral.Checked = !checkBoxMenorDataSituacaoCadastral.Checked;
-        }
-
-        private void checkBoxMenorDataSituacaoCadastral_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorDataSituacaoCadastral.Checked == true)
-                checkBoxMaiorDataSituacaoCadastral.Checked = !checkBoxMaiorDataSituacaoCadastral.Checked;
-        }
-
-        private void checkBoxMaiorDataAbertura_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMenorDataAbertura.Checked == true)
-                checkBoxMenorDataAbertura.Checked = !checkBoxMenorDataAbertura.Checked;
-        }
-
-        private void checkBoxMenorDataAbertura_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxMaiorDataAbertura.Checked == true)
-                checkBoxMaiorDataAbertura.Checked = !checkBoxMaiorDataAbertura.Checked;
         }
 
         public void AlteraValor_botaoFiltrarPressionadoParaFalso()

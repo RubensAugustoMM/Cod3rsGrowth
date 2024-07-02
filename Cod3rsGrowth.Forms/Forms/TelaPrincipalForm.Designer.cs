@@ -46,13 +46,14 @@
             // 
             // panelTopo1
             // 
-            panelTopo1.BackColor = Color.Blue;
+            panelTopo1.BackColor = Color.Silver;
             panelTopo1.Controls.Add(botaoEnderecos);
             panelTopo1.Controls.Add(botaoEscolas);
             panelTopo1.Controls.Add(button2);
             panelTopo1.Controls.Add(button1);
             panelTopo1.Dock = DockStyle.Top;
             panelTopo1.Location = new Point(0, 0);
+            panelTopo1.Margin = new Padding(0);
             panelTopo1.Name = "panelTopo1";
             panelTopo1.Size = new Size(800, 94);
             panelTopo1.TabIndex = 0;
@@ -124,12 +125,13 @@
             // 
             // painelInferior
             // 
-            painelInferior.BackColor = Color.Blue;
+            painelInferior.BackColor = Color.DarkGray;
             painelInferior.Controls.Add(botaoFechar);
             painelInferior.Controls.Add(data);
             painelInferior.Controls.Add(tempo);
             painelInferior.Dock = DockStyle.Bottom;
             painelInferior.Location = new Point(0, 417);
+            painelInferior.Margin = new Padding(0);
             painelInferior.Name = "painelInferior";
             painelInferior.Size = new Size(800, 33);
             painelInferior.TabIndex = 1;
@@ -177,9 +179,11 @@
             // painelExibicao
             // 
             painelExibicao.BackColor = Color.Blue;
-            painelExibicao.Location = new Point(12, 106);
+            painelExibicao.Dock = DockStyle.Fill;
+            painelExibicao.Location = new Point(0, 94);
+            painelExibicao.Margin = new Padding(0);
             painelExibicao.Name = "painelExibicao";
-            painelExibicao.Size = new Size(776, 305);
+            painelExibicao.Size = new Size(800, 323);
             painelExibicao.TabIndex = 2;
             // 
             // TelaPrincipalForm

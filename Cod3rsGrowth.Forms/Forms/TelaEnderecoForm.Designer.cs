@@ -57,7 +57,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(599, 276);
+            dataGridView1.Size = new Size(623, 299);
             dataGridView1.TabIndex = 2;
             // 
             // painelLateral
@@ -67,7 +67,7 @@
             painelLateral.Dock = DockStyle.Left;
             painelLateral.Location = new Point(0, 0);
             painelLateral.Name = "painelLateral";
-            painelLateral.Size = new Size(164, 305);
+            painelLateral.Size = new Size(164, 323);
             painelLateral.TabIndex = 1;
             painelLateral.Paint += painelLateral_Paint;
             // 
@@ -106,7 +106,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
-            ClientSize = new Size(776, 305);
+            ClientSize = new Size(800, 323);
             Controls.Add(dataGridView1);
             Controls.Add(painelLateral);
             FormBorderStyle = FormBorderStyle.None;

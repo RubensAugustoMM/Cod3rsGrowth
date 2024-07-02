@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            botaoFechar = new Button();
-            botaoFiltrar = new Button();
-            botaoLimpar = new Button();
             labelRazaoSocial = new Label();
             labelNomeFantasia = new Label();
             labelCnpj = new Label();
@@ -52,73 +49,18 @@
             comboBoxMatrizFilial = new ComboBox();
             dateTimePickerDataSituacaoCadastral = new DateTimePicker();
             dateTimePickerDataAbertura = new DateTimePicker();
-            labelMenor = new Label();
-            labelMaior = new Label();
-            checkBoxMenorDataSituacaoCadastral = new CheckBox();
-            checkBoxMaiorDataSituacaoCadastral = new CheckBox();
-            checkBoxMenorCapitalSocial = new CheckBox();
-            checkBoxMaiorCapitalSocial = new CheckBox();
-            checkBoxMenorIdade = new CheckBox();
-            checkBoxMaiorIdade = new CheckBox();
-            checkBoxMenorDataAbertura = new CheckBox();
-            checkBoxMaiorDataAbertura = new CheckBox();
             checkBoxSituacaoCadastral = new CheckBox();
             checkBoxHabilitadoSituacaoCadastral = new CheckBox();
-            checkBoxHabilitadoDataAbertura = new CheckBox();
-            checkBoxHabilitadoDataSituacaoCadastral = new CheckBox();
-            checkBoxHabilitadoMatrizFilial = new CheckBox();
-            checkBoxHabilitadoPorte = new CheckBox();
-            checkBoxHabilitadoNaturezaJuridica = new CheckBox();
+            panel2 = new Panel();
+            botaoFechar = new Button();
+            panel1 = new Panel();
+            botaoLimpar = new Button();
+            panelBotaoFiltrar = new Panel();
+            botaoFiltrar = new Button();
+            panel2.SuspendLayout();
+            panel1.SuspendLayout();
+            panelBotaoFiltrar.SuspendLayout();
             SuspendLayout();
-            // 
-            // botaoFechar
-            // 
-            botaoFechar.BackColor = Color.Green;
-            botaoFechar.FlatAppearance.BorderSize = 0;
-            botaoFechar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
-            botaoFechar.FlatStyle = FlatStyle.Flat;
-            botaoFechar.ForeColor = Color.White;
-            botaoFechar.Location = new Point(326, 304);
-            botaoFechar.Name = "botaoFechar";
-            botaoFechar.Size = new Size(67, 40);
-            botaoFechar.TabIndex = 14;
-            botaoFechar.Text = "Fechar";
-            botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += botaoFechar_Click;
-            // 
-            // botaoFiltrar
-            // 
-            botaoFiltrar.BackColor = Color.Green;
-            botaoFiltrar.FlatAppearance.BorderSize = 0;
-            botaoFiltrar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
-            botaoFiltrar.FlatStyle = FlatStyle.Flat;
-            botaoFiltrar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoFiltrar.ForeColor = Color.White;
-            botaoFiltrar.Location = new Point(471, 304);
-            botaoFiltrar.Name = "botaoFiltrar";
-            botaoFiltrar.Size = new Size(67, 40);
-            botaoFiltrar.TabIndex = 15;
-            botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.UseVisualStyleBackColor = false;
-            botaoFiltrar.Click += botaoFiltrar_Click;
-            // 
-            // botaoLimpar
-            // 
-            botaoLimpar.BackColor = Color.ForestGreen;
-            botaoLimpar.FlatAppearance.BorderSize = 0;
-            botaoLimpar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
-            botaoLimpar.FlatStyle = FlatStyle.Flat;
-            botaoLimpar.ForeColor = Color.White;
-            botaoLimpar.Location = new Point(399, 304);
-            botaoLimpar.Name = "botaoLimpar";
-            botaoLimpar.Size = new Size(67, 40);
-            botaoLimpar.TabIndex = 22;
-            botaoLimpar.Text = "Limpar";
-            botaoLimpar.UseVisualStyleBackColor = false;
-            botaoLimpar.Click += botaoLimpar_Click;
             // 
             // labelRazaoSocial
             // 
@@ -351,124 +293,6 @@
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
             // 
-            // labelMenor
-            // 
-            labelMenor.AutoSize = true;
-            labelMenor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelMenor.ForeColor = Color.White;
-            labelMenor.Location = new Point(407, 15);
-            labelMenor.Name = "labelMenor";
-            labelMenor.Size = new Size(56, 21);
-            labelMenor.TabIndex = 53;
-            labelMenor.Text = "Menor";
-            // 
-            // labelMaior
-            // 
-            labelMaior.AutoSize = true;
-            labelMaior.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelMaior.ForeColor = Color.White;
-            labelMaior.Location = new Point(359, 15);
-            labelMaior.Name = "labelMaior";
-            labelMaior.Size = new Size(51, 21);
-            labelMaior.TabIndex = 52;
-            labelMaior.Text = "Maior";
-            // 
-            // checkBoxMenorDataSituacaoCadastral
-            // 
-            checkBoxMenorDataSituacaoCadastral.AutoSize = true;
-            checkBoxMenorDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
-            checkBoxMenorDataSituacaoCadastral.ForeColor = Color.White;
-            checkBoxMenorDataSituacaoCadastral.Location = new Point(419, 232);
-            checkBoxMenorDataSituacaoCadastral.Name = "checkBoxMenorDataSituacaoCadastral";
-            checkBoxMenorDataSituacaoCadastral.Size = new Size(15, 14);
-            checkBoxMenorDataSituacaoCadastral.TabIndex = 51;
-            checkBoxMenorDataSituacaoCadastral.UseVisualStyleBackColor = true;
-            checkBoxMenorDataSituacaoCadastral.CheckedChanged += checkBoxMenorDataSituacaoCadastral_CheckedChanged;
-            // 
-            // checkBoxMaiorDataSituacaoCadastral
-            // 
-            checkBoxMaiorDataSituacaoCadastral.AutoSize = true;
-            checkBoxMaiorDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
-            checkBoxMaiorDataSituacaoCadastral.ForeColor = Color.White;
-            checkBoxMaiorDataSituacaoCadastral.Location = new Point(359, 232);
-            checkBoxMaiorDataSituacaoCadastral.Name = "checkBoxMaiorDataSituacaoCadastral";
-            checkBoxMaiorDataSituacaoCadastral.Size = new Size(15, 14);
-            checkBoxMaiorDataSituacaoCadastral.TabIndex = 50;
-            checkBoxMaiorDataSituacaoCadastral.UseVisualStyleBackColor = true;
-            checkBoxMaiorDataSituacaoCadastral.CheckedChanged += checkBoxMaiorDataSituacaoCadastral_CheckedChanged;
-            // 
-            // checkBoxMenorCapitalSocial
-            // 
-            checkBoxMenorCapitalSocial.AutoSize = true;
-            checkBoxMenorCapitalSocial.FlatAppearance.BorderSize = 0;
-            checkBoxMenorCapitalSocial.ForeColor = Color.White;
-            checkBoxMenorCapitalSocial.Location = new Point(419, 117);
-            checkBoxMenorCapitalSocial.Name = "checkBoxMenorCapitalSocial";
-            checkBoxMenorCapitalSocial.Size = new Size(15, 14);
-            checkBoxMenorCapitalSocial.TabIndex = 49;
-            checkBoxMenorCapitalSocial.UseVisualStyleBackColor = true;
-            checkBoxMenorCapitalSocial.CheckedChanged += checkBoxMenorCapitalSocial_CheckedChanged;
-            // 
-            // checkBoxMaiorCapitalSocial
-            // 
-            checkBoxMaiorCapitalSocial.AutoSize = true;
-            checkBoxMaiorCapitalSocial.FlatAppearance.BorderSize = 0;
-            checkBoxMaiorCapitalSocial.ForeColor = Color.White;
-            checkBoxMaiorCapitalSocial.Location = new Point(359, 117);
-            checkBoxMaiorCapitalSocial.Name = "checkBoxMaiorCapitalSocial";
-            checkBoxMaiorCapitalSocial.Size = new Size(15, 14);
-            checkBoxMaiorCapitalSocial.TabIndex = 48;
-            checkBoxMaiorCapitalSocial.UseVisualStyleBackColor = true;
-            checkBoxMaiorCapitalSocial.CheckedChanged += checkBoxMaiorCapitalSocial_CheckedChanged;
-            // 
-            // checkBoxMenorIdade
-            // 
-            checkBoxMenorIdade.AutoSize = true;
-            checkBoxMenorIdade.FlatAppearance.BorderSize = 0;
-            checkBoxMenorIdade.ForeColor = SystemColors.Window;
-            checkBoxMenorIdade.Location = new Point(419, 96);
-            checkBoxMenorIdade.Name = "checkBoxMenorIdade";
-            checkBoxMenorIdade.Size = new Size(15, 14);
-            checkBoxMenorIdade.TabIndex = 47;
-            checkBoxMenorIdade.UseVisualStyleBackColor = true;
-            checkBoxMenorIdade.CheckedChanged += checkBoxMenorIdade_CheckedChanged;
-            // 
-            // checkBoxMaiorIdade
-            // 
-            checkBoxMaiorIdade.AutoSize = true;
-            checkBoxMaiorIdade.FlatAppearance.BorderSize = 0;
-            checkBoxMaiorIdade.ForeColor = Color.White;
-            checkBoxMaiorIdade.Location = new Point(359, 96);
-            checkBoxMaiorIdade.Name = "checkBoxMaiorIdade";
-            checkBoxMaiorIdade.Size = new Size(15, 14);
-            checkBoxMaiorIdade.TabIndex = 46;
-            checkBoxMaiorIdade.UseVisualStyleBackColor = true;
-            checkBoxMaiorIdade.CheckedChanged += checkBoxMaiorIdade_CheckedChanged;
-            // 
-            // checkBoxMenorDataAbertura
-            // 
-            checkBoxMenorDataAbertura.AutoSize = true;
-            checkBoxMenorDataAbertura.FlatAppearance.BorderSize = 0;
-            checkBoxMenorDataAbertura.ForeColor = Color.White;
-            checkBoxMenorDataAbertura.Location = new Point(419, 259);
-            checkBoxMenorDataAbertura.Name = "checkBoxMenorDataAbertura";
-            checkBoxMenorDataAbertura.Size = new Size(15, 14);
-            checkBoxMenorDataAbertura.TabIndex = 55;
-            checkBoxMenorDataAbertura.UseVisualStyleBackColor = true;
-            checkBoxMenorDataAbertura.CheckedChanged += checkBoxMenorDataAbertura_CheckedChanged;
-            // 
-            // checkBoxMaiorDataAbertura
-            // 
-            checkBoxMaiorDataAbertura.AutoSize = true;
-            checkBoxMaiorDataAbertura.FlatAppearance.BorderSize = 0;
-            checkBoxMaiorDataAbertura.ForeColor = Color.White;
-            checkBoxMaiorDataAbertura.Location = new Point(359, 259);
-            checkBoxMaiorDataAbertura.Name = "checkBoxMaiorDataAbertura";
-            checkBoxMaiorDataAbertura.Size = new Size(15, 14);
-            checkBoxMaiorDataAbertura.TabIndex = 54;
-            checkBoxMaiorDataAbertura.UseVisualStyleBackColor = true;
-            checkBoxMaiorDataAbertura.CheckedChanged += checkBoxMaiorDataAbertura_CheckedChanged;
-            // 
             // checkBoxSituacaoCadastral
             // 
             checkBoxSituacaoCadastral.AutoSize = true;
@@ -492,83 +316,94 @@
             checkBoxHabilitadoSituacaoCadastral.Text = "Habilitado?";
             checkBoxHabilitadoSituacaoCadastral.UseVisualStyleBackColor = true;
             // 
-            // checkBoxHabilitadoDataAbertura
+            // panel2
             // 
-            checkBoxHabilitadoDataAbertura.AutoSize = true;
-            checkBoxHabilitadoDataAbertura.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoDataAbertura.ForeColor = Color.White;
-            checkBoxHabilitadoDataAbertura.Location = new Point(16, 253);
-            checkBoxHabilitadoDataAbertura.Name = "checkBoxHabilitadoDataAbertura";
-            checkBoxHabilitadoDataAbertura.Size = new Size(15, 14);
-            checkBoxHabilitadoDataAbertura.TabIndex = 59;
-            checkBoxHabilitadoDataAbertura.UseVisualStyleBackColor = true;
+            panel2.Controls.Add(botaoFechar);
+            panel2.Location = new Point(191, 282);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(106, 40);
+            panel2.TabIndex = 60;
             // 
-            // checkBoxHabilitadoDataSituacaoCadastral
+            // botaoFechar
             // 
-            checkBoxHabilitadoDataSituacaoCadastral.AutoSize = true;
-            checkBoxHabilitadoDataSituacaoCadastral.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoDataSituacaoCadastral.ForeColor = Color.White;
-            checkBoxHabilitadoDataSituacaoCadastral.Location = new Point(16, 232);
-            checkBoxHabilitadoDataSituacaoCadastral.Name = "checkBoxHabilitadoDataSituacaoCadastral";
-            checkBoxHabilitadoDataSituacaoCadastral.Size = new Size(15, 14);
-            checkBoxHabilitadoDataSituacaoCadastral.TabIndex = 58;
-            checkBoxHabilitadoDataSituacaoCadastral.UseVisualStyleBackColor = true;
+            botaoFechar.BackColor = Color.Green;
+            botaoFechar.FlatAppearance.BorderSize = 0;
+            botaoFechar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoFechar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoFechar.FlatStyle = FlatStyle.Flat;
+            botaoFechar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoFechar.ForeColor = Color.White;
+            botaoFechar.Location = new Point(3, 3);
+            botaoFechar.Name = "botaoFechar";
+            botaoFechar.Size = new Size(85, 27);
+            botaoFechar.TabIndex = 14;
+            botaoFechar.Text = "Fechar";
+            botaoFechar.TextAlign = ContentAlignment.BottomCenter;
+            botaoFechar.UseVisualStyleBackColor = false;
+            botaoFechar.Click += botaoFechar_Click;
             // 
-            // checkBoxHabilitadoMatrizFilial
+            // panel1
             // 
-            checkBoxHabilitadoMatrizFilial.AutoSize = true;
-            checkBoxHabilitadoMatrizFilial.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoMatrizFilial.ForeColor = Color.White;
-            checkBoxHabilitadoMatrizFilial.Location = new Point(16, 172);
-            checkBoxHabilitadoMatrizFilial.Name = "checkBoxHabilitadoMatrizFilial";
-            checkBoxHabilitadoMatrizFilial.Size = new Size(15, 14);
-            checkBoxHabilitadoMatrizFilial.TabIndex = 60;
-            checkBoxHabilitadoMatrizFilial.UseVisualStyleBackColor = true;
+            panel1.Controls.Add(botaoLimpar);
+            panel1.Location = new Point(303, 282);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(106, 40);
+            panel1.TabIndex = 59;
             // 
-            // checkBoxHabilitadoPorte
+            // botaoLimpar
             // 
-            checkBoxHabilitadoPorte.AutoSize = true;
-            checkBoxHabilitadoPorte.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoPorte.ForeColor = Color.White;
-            checkBoxHabilitadoPorte.Location = new Point(16, 153);
-            checkBoxHabilitadoPorte.Name = "checkBoxHabilitadoPorte";
-            checkBoxHabilitadoPorte.Size = new Size(15, 14);
-            checkBoxHabilitadoPorte.TabIndex = 61;
-            checkBoxHabilitadoPorte.UseVisualStyleBackColor = true;
+            botaoLimpar.BackColor = Color.Green;
+            botaoLimpar.FlatAppearance.BorderSize = 0;
+            botaoLimpar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoLimpar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoLimpar.FlatStyle = FlatStyle.Flat;
+            botaoLimpar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoLimpar.ForeColor = Color.White;
+            botaoLimpar.Location = new Point(3, 3);
+            botaoLimpar.Name = "botaoLimpar";
+            botaoLimpar.Size = new Size(85, 27);
+            botaoLimpar.TabIndex = 22;
+            botaoLimpar.Text = "Limpar";
+            botaoLimpar.TextAlign = ContentAlignment.BottomCenter;
+            botaoLimpar.UseVisualStyleBackColor = false;
+            botaoLimpar.Click += botaoLimpar_Click;
             // 
-            // checkBoxHabilitadoNaturezaJuridica
+            // panelBotaoFiltrar
             // 
-            checkBoxHabilitadoNaturezaJuridica.AutoSize = true;
-            checkBoxHabilitadoNaturezaJuridica.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoNaturezaJuridica.ForeColor = Color.White;
-            checkBoxHabilitadoNaturezaJuridica.Location = new Point(16, 133);
-            checkBoxHabilitadoNaturezaJuridica.Name = "checkBoxHabilitadoNaturezaJuridica";
-            checkBoxHabilitadoNaturezaJuridica.Size = new Size(15, 14);
-            checkBoxHabilitadoNaturezaJuridica.TabIndex = 62;
-            checkBoxHabilitadoNaturezaJuridica.UseVisualStyleBackColor = true;
+            panelBotaoFiltrar.Controls.Add(botaoFiltrar);
+            panelBotaoFiltrar.Location = new Point(415, 282);
+            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
+            panelBotaoFiltrar.Size = new Size(106, 40);
+            panelBotaoFiltrar.TabIndex = 58;
+            // 
+            // botaoFiltrar
+            // 
+            botaoFiltrar.BackColor = Color.Green;
+            botaoFiltrar.FlatAppearance.BorderSize = 0;
+            botaoFiltrar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoFiltrar.FlatStyle = FlatStyle.Flat;
+            botaoFiltrar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoFiltrar.ForeColor = Color.White;
+            botaoFiltrar.Location = new Point(3, 3);
+            botaoFiltrar.Name = "botaoFiltrar";
+            botaoFiltrar.Size = new Size(85, 27);
+            botaoFiltrar.TabIndex = 31;
+            botaoFiltrar.Text = "Filtrar";
+            botaoFiltrar.TextAlign = ContentAlignment.BottomCenter;
+            botaoFiltrar.UseVisualStyleBackColor = false;
+            botaoFiltrar.Click += botaoFiltrar_Click;
             // 
             // FiltroEmpresaUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGray;
-            Controls.Add(checkBoxHabilitadoNaturezaJuridica);
-            Controls.Add(checkBoxHabilitadoPorte);
-            Controls.Add(checkBoxHabilitadoMatrizFilial);
-            Controls.Add(checkBoxHabilitadoDataAbertura);
-            Controls.Add(checkBoxHabilitadoDataSituacaoCadastral);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Controls.Add(panelBotaoFiltrar);
             Controls.Add(checkBoxHabilitadoSituacaoCadastral);
             Controls.Add(checkBoxSituacaoCadastral);
-            Controls.Add(checkBoxMenorDataAbertura);
-            Controls.Add(checkBoxMaiorDataAbertura);
-            Controls.Add(labelMenor);
-            Controls.Add(labelMaior);
-            Controls.Add(checkBoxMenorDataSituacaoCadastral);
-            Controls.Add(checkBoxMaiorDataSituacaoCadastral);
-            Controls.Add(checkBoxMenorCapitalSocial);
-            Controls.Add(checkBoxMaiorCapitalSocial);
-            Controls.Add(checkBoxMenorIdade);
-            Controls.Add(checkBoxMaiorIdade);
             Controls.Add(dateTimePickerDataAbertura);
             Controls.Add(dateTimePickerDataSituacaoCadastral);
             Controls.Add(comboBoxMatrizFilial);
@@ -590,21 +425,18 @@
             Controls.Add(labelCnpj);
             Controls.Add(labelNomeFantasia);
             Controls.Add(labelRazaoSocial);
-            Controls.Add(botaoLimpar);
-            Controls.Add(botaoFiltrar);
-            Controls.Add(botaoFechar);
             Name = "FiltroEmpresaUserControl";
-            Size = new Size(541, 347);
+            Size = new Size(708, 347);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
+            panel2.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panelBotaoFiltrar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Button botaoFechar;
-        private Button botaoFiltrar;
-        private Button botaoLimpar;
         private Label labelRazaoSocial;
         private Label labelNomeFantasia;
         private Label labelCnpj;
@@ -626,22 +458,13 @@
         private ComboBox comboBoxMatrizFilial;
         private DateTimePicker dateTimePickerDataSituacaoCadastral;
         private DateTimePicker dateTimePickerDataAbertura;
-        private Label labelMenor;
-        private Label labelMaior;
-        private CheckBox checkBoxMenorDataSituacaoCadastral;
-        private CheckBox checkBoxMaiorDataSituacaoCadastral;
-        private CheckBox checkBoxMenorCapitalSocial;
-        private CheckBox checkBoxMaiorCapitalSocial;
-        private CheckBox checkBoxMenorIdade;
-        private CheckBox checkBoxMaiorIdade;
-        private CheckBox checkBoxMenorDataAbertura;
-        private CheckBox checkBoxMaiorDataAbertura;
         private CheckBox checkBoxSituacaoCadastral;
         private CheckBox checkBoxHabilitadoSituacaoCadastral;
-        private CheckBox checkBoxHabilitadoDataAbertura;
-        private CheckBox checkBoxHabilitadoDataSituacaoCadastral;
-        private CheckBox checkBoxHabilitadoMatrizFilial;
-        private CheckBox checkBoxHabilitadoPorte;
-        private CheckBox checkBoxHabilitadoNaturezaJuridica;
+        private Panel panel2;
+        private Button botaoFechar;
+        private Panel panel1;
+        private Button botaoLimpar;
+        private Panel panelBotaoFiltrar;
+        private Button botaoFiltrar;
     }
 }

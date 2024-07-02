@@ -25,6 +25,11 @@ namespace Cod3rsGrowth.Forms.Controladores
                 const int xInicioRetanguloInterior = 8;
                 const int yInicioRetanguloInterior = 10;
 
+                using (Brush pincel = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.FillRectangle(pincel, new Rectangle(0,0,this.Width,this.Height));
+                }
+                /*
                 using (Pen caneta = new Pen(Color.White, Tamanho))
                 {
                     e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
@@ -37,6 +42,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                                                                    Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
+                */
             }
         }
 

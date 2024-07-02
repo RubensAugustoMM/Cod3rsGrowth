@@ -40,6 +40,8 @@
             textBoxBairro = new TextBox();
             textBoxCep = new TextBox();
             checkBoxHabilitadoEstado = new CheckBox();
+            panel1 = new Panel();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // LabelEstado
@@ -47,7 +49,7 @@
             LabelEstado.AutoSize = true;
             LabelEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             LabelEstado.ForeColor = Color.White;
-            LabelEstado.Location = new Point(31, 30);
+            LabelEstado.Location = new Point(34, 20);
             LabelEstado.Name = "LabelEstado";
             LabelEstado.Size = new Size(76, 21);
             LabelEstado.TabIndex = 5;
@@ -60,7 +62,7 @@
             botaoFechar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFechar.FlatStyle = FlatStyle.Flat;
             botaoFechar.ForeColor = Color.White;
-            botaoFechar.Location = new Point(40, 166);
+            botaoFechar.Location = new Point(43, 156);
             botaoFechar.Name = "botaoFechar";
             botaoFechar.Size = new Size(67, 40);
             botaoFechar.TabIndex = 14;
@@ -75,7 +77,7 @@
             botaoFiltrar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoFiltrar.FlatStyle = FlatStyle.Flat;
             botaoFiltrar.ForeColor = Color.White;
-            botaoFiltrar.Location = new Point(185, 166);
+            botaoFiltrar.Location = new Point(189, 156);
             botaoFiltrar.Name = "botaoFiltrar";
             botaoFiltrar.Size = new Size(67, 40);
             botaoFiltrar.TabIndex = 15;
@@ -90,7 +92,7 @@
             botaoLimpar.FlatAppearance.MouseOverBackColor = Color.MediumBlue;
             botaoLimpar.FlatStyle = FlatStyle.Flat;
             botaoLimpar.ForeColor = Color.White;
-            botaoLimpar.Location = new Point(113, 166);
+            botaoLimpar.Location = new Point(116, 156);
             botaoLimpar.Name = "botaoLimpar";
             botaoLimpar.Size = new Size(67, 40);
             botaoLimpar.TabIndex = 22;
@@ -103,7 +105,7 @@
             comboBoxEstado.BackColor = Color.Yellow;
             comboBoxEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEstado.FormattingEnabled = true;
-            comboBoxEstado.Location = new Point(101, 28);
+            comboBoxEstado.Location = new Point(104, 18);
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 41;
@@ -113,7 +115,7 @@
             labelMunicipio.AutoSize = true;
             labelMunicipio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMunicipio.ForeColor = Color.White;
-            labelMunicipio.Location = new Point(31, 51);
+            labelMunicipio.Location = new Point(34, 41);
             labelMunicipio.Name = "labelMunicipio";
             labelMunicipio.Size = new Size(82, 21);
             labelMunicipio.TabIndex = 42;
@@ -124,7 +126,7 @@
             labelBairro.AutoSize = true;
             labelBairro.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelBairro.ForeColor = Color.White;
-            labelBairro.Location = new Point(31, 72);
+            labelBairro.Location = new Point(34, 62);
             labelBairro.Name = "labelBairro";
             labelBairro.Size = new Size(72, 21);
             labelBairro.TabIndex = 43;
@@ -135,7 +137,7 @@
             labelCep.AutoSize = true;
             labelCep.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCep.ForeColor = Color.White;
-            labelCep.Location = new Point(35, 93);
+            labelCep.Location = new Point(38, 83);
             labelCep.Name = "labelCep";
             labelCep.Size = new Size(75, 21);
             labelCep.TabIndex = 44;
@@ -146,7 +148,7 @@
             textBoxMunicipio.BackColor = Color.Black;
             textBoxMunicipio.BorderStyle = BorderStyle.None;
             textBoxMunicipio.ForeColor = Color.Yellow;
-            textBoxMunicipio.Location = new Point(101, 56);
+            textBoxMunicipio.Location = new Point(104, 46);
             textBoxMunicipio.Name = "textBoxMunicipio";
             textBoxMunicipio.Size = new Size(149, 16);
             textBoxMunicipio.TabIndex = 45;
@@ -156,7 +158,7 @@
             textBoxBairro.BackColor = Color.Black;
             textBoxBairro.BorderStyle = BorderStyle.None;
             textBoxBairro.ForeColor = Color.Yellow;
-            textBoxBairro.Location = new Point(101, 77);
+            textBoxBairro.Location = new Point(104, 67);
             textBoxBairro.Name = "textBoxBairro";
             textBoxBairro.Size = new Size(149, 16);
             textBoxBairro.TabIndex = 46;
@@ -166,7 +168,7 @@
             textBoxCep.BackColor = Color.Black;
             textBoxCep.BorderStyle = BorderStyle.None;
             textBoxCep.ForeColor = Color.Yellow;
-            textBoxCep.Location = new Point(101, 99);
+            textBoxCep.Location = new Point(104, 89);
             textBoxCep.Name = "textBoxCep";
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 47;
@@ -176,35 +178,46 @@
             checkBoxHabilitadoEstado.AutoSize = true;
             checkBoxHabilitadoEstado.FlatAppearance.BorderSize = 0;
             checkBoxHabilitadoEstado.ForeColor = Color.White;
-            checkBoxHabilitadoEstado.Location = new Point(10, 30);
+            checkBoxHabilitadoEstado.Location = new Point(13, 20);
             checkBoxHabilitadoEstado.Name = "checkBoxHabilitadoEstado";
             checkBoxHabilitadoEstado.Size = new Size(15, 14);
             checkBoxHabilitadoEstado.TabIndex = 61;
             checkBoxHabilitadoEstado.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Silver;
+            panel1.Controls.Add(LabelEstado);
+            panel1.Controls.Add(botaoFiltrar);
+            panel1.Controls.Add(checkBoxHabilitadoEstado);
+            panel1.Controls.Add(botaoFechar);
+            panel1.Controls.Add(textBoxCep);
+            panel1.Controls.Add(botaoLimpar);
+            panel1.Controls.Add(textBoxBairro);
+            panel1.Controls.Add(comboBoxEstado);
+            panel1.Controls.Add(textBoxMunicipio);
+            panel1.Controls.Add(labelMunicipio);
+            panel1.Controls.Add(labelCep);
+            panel1.Controls.Add(labelBairro);
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(290, 216);
+            panel1.TabIndex = 62;
+            // 
             // FiltroEnderecoUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Blue;
-            Controls.Add(checkBoxHabilitadoEstado);
-            Controls.Add(textBoxCep);
-            Controls.Add(textBoxBairro);
-            Controls.Add(textBoxMunicipio);
-            Controls.Add(labelCep);
-            Controls.Add(labelBairro);
-            Controls.Add(labelMunicipio);
-            Controls.Add(comboBoxEstado);
-            Controls.Add(botaoLimpar);
-            Controls.Add(botaoFiltrar);
-            Controls.Add(botaoFechar);
-            Controls.Add(LabelEstado);
+            BackColor = Color.Transparent;
+            Controls.Add(panel1);
             Name = "FiltroEnderecoUserControl";
-            Size = new Size(280, 209);
+            Size = new Size(296, 222);
             Load += FiltroConvenioUserControl_Load;
             Paint += FiltroConvenioUserControl_Paint;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -235,5 +248,6 @@
         private Label labelMaior;
         private Label labelMenor;
         private CheckBox checkBoxHabilitadoEstado;
+        private Panel panel1;
     }
 }
