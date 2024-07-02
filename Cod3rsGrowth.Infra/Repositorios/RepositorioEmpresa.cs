@@ -70,11 +70,16 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                             where e.DataSituacaoCadastral == filtroEmpresa.DataSituacaoCadastralFiltro
                             select e;
                 }
+                else if(filtroEmpresa.MaiorOuIgualDataSituacaoCadastral.Value)
+                {
+                    query = from e in query
+                            where e.DataSituacaoCadastral >= filtroEmpresa.DataSituacaoCadastralFiltro
+                            select e;
+                }
                 else
                 {
                     query = from e in query
-                            where e.DataSituacaoCadastral >= filtroEmpresa.DataSituacaoCadastralFiltro && filtroEmpresa.MaiorOuIgualDataSituacaoCadastral.Value ||
-                                  e.DataSituacaoCadastral <= filtroEmpresa.DataSituacaoCadastralFiltro && !filtroEmpresa.MaiorOuIgualDataSituacaoCadastral.Value
+                            where e.DataSituacaoCadastral <= filtroEmpresa.DataSituacaoCadastralFiltro
                             select e;
                 }
             }
@@ -87,11 +92,16 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                             where e.DataAbertura == filtroEmpresa.DataAberturaFiltro
                             select e;
                 }
+                else if(filtroEmpresa.MaiorOuIgualDataAbertura.Value)
+                {
+                    query = from e in query
+                            where e.DataAbertura >= filtroEmpresa.DataAberturaFiltro && filtroEmpresa.MaiorOuIgualDataAbertura.Value
+                            select e;
+                }
                 else
                 {
                     query = from e in query
-                            where e.DataAbertura >= filtroEmpresa.DataAberturaFiltro && filtroEmpresa.MaiorOuIgualDataAbertura.Value ||
-                                  e.DataAbertura <= filtroEmpresa.DataAberturaFiltro && !filtroEmpresa.MaiorOuIgualDataAbertura.Value
+                            where e.DataAbertura <= filtroEmpresa.DataAberturaFiltro
                             select e;
                 }
             }
@@ -104,11 +114,16 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                             where e.CapitalSocial == filtroEmpresa.CapitalSocialFiltro
                             select e;
                 }
+                else if(filtroEmpresa.MaiorOuIgualCapitalSocial.Value)
+                {
+                    query = from e in query
+                            where e.CapitalSocial >= filtroEmpresa.CapitalSocialFiltro
+                            select e;
+                }
                 else
                 {
                     query = from e in query
-                            where e.CapitalSocial >= filtroEmpresa.CapitalSocialFiltro && filtroEmpresa.MaiorOuIgualCapitalSocial.Value ||
-                                  e.CapitalSocial <= filtroEmpresa.CapitalSocialFiltro && !filtroEmpresa.MaiorOuIgualCapitalSocial.Value
+                            where e.CapitalSocial <= filtroEmpresa.CapitalSocialFiltro
                             select e;
                 }
             }
@@ -121,11 +136,16 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                             where e.Idade == filtroEmpresa.IdadeFiltro
                             select e;
                 }
+                else if(filtroEmpresa.MaiorOuIgualIdade.Value)
+                {
+                    query = from e in query
+                            where e.Idade >= filtroEmpresa.IdadeFiltro
+                            select e;
+                }
                 else
                 {
                     query = from e in query
-                            where e.Idade >= filtroEmpresa.IdadeFiltro && filtroEmpresa.MaiorOuIgualIdade.Value ||
-                                  e.Idade <= filtroEmpresa.IdadeFiltro && !filtroEmpresa.MaiorOuIgualIdade.Value
+                            where e.Idade <= filtroEmpresa.IdadeFiltro
                             select e;
                 }
             }

@@ -63,11 +63,16 @@ public class RepositorioConvenio : IRepositorioConvenio
                             where c.DataInicio == filtroConvenio.DataInicioFiltro
                             select c;
                 }
+                else if(filtroConvenio.MaiorOuIgualDataInicio.Value)
+                {
+                    query = from c in query
+                            where c.DataInicio >= filtroConvenio.DataInicioFiltro
+                            select c;
+                }
                 else
                 {
                     query = from c in query
-                            where c.DataInicio >= filtroConvenio.DataInicioFiltro && filtroConvenio.MaiorOuIgualDataInicio.Value ||
-                                  c.DataInicio <= filtroConvenio.DataInicioFiltro && !filtroConvenio.MaiorOuIgualDataInicio.Value
+                            where c.DataInicio <= filtroConvenio.DataInicioFiltro
                             select c;
                 }
             }
@@ -80,11 +85,16 @@ public class RepositorioConvenio : IRepositorioConvenio
                             where c.Valor == filtroConvenio.ValorFiltro
                             select c;
                 }
+                else if(filtroConvenio.MaiorOuIgualValor.Value)
+                {
+                    query = from c in query
+                            where c.Valor >= filtroConvenio.ValorFiltro
+                            select c;
+                }
                 else
                 {
                     query = from c in query
-                            where c.Valor >= filtroConvenio.ValorFiltro && filtroConvenio.MaiorOuIgualValor.Value ||
-                                  c.Valor <= filtroConvenio.ValorFiltro && !filtroConvenio.MaiorOuIgualValor.Value
+                            where c.Valor <= filtroConvenio.ValorFiltro
                             select c;
                 }
             }
@@ -97,16 +107,16 @@ public class RepositorioConvenio : IRepositorioConvenio
                             where c.DataTermino == filtroConvenio.DataTerminoFiltro
                             select c;
                 }
+                else if(filtroConvenio.MaiorOuIgualDataTermino.Value)
+                {
+                    query = from c in query
+                            where c.DataTermino >= filtroConvenio.DataTerminoFiltro
+                            select c;
+                }
                 else
                 {
                     query = from c in query
-                            where c.DataTermino >= filtroConvenio.DataTerminoFiltro && filtroConvenio.MaiorOuIgualDataTermino.Value ||
-                                   c.DataTermino <= filtroConvenio.DataTerminoFiltro && !filtroConvenio.MaiorOuIgualDataTermino.Value
-                            select c;
-
-                    query = from c in query
-                            where c.DataTermino >= filtroConvenio.DataTerminoFiltro && filtroConvenio.MaiorOuIgualDataTermino.Value ||
-                                   c.DataTermino <= filtroConvenio.DataTerminoFiltro && !filtroConvenio.MaiorOuIgualDataTermino.Value
+                            where c.DataTermino <= filtroConvenio.DataTerminoFiltro
                             select c;
                 }
             }

@@ -203,5 +203,18 @@ namespace Cod3rsGrowth.Forms.Forms
             painelExibicao.Controls.Add(_telaEmpresaForm);
             painelExibicao.Controls.Add(_telaEnderecoForm);
         }
+
+        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 11;
+            const int PosicaoY = 13;
+            const int Altura = 44;
+            const int Largura = 113;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, Largura, Altura);
+            }
+        }
     }
 }

@@ -167,5 +167,18 @@ namespace Cod3rsGrowth.Forms.Forms
                 _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
             }
         }
+
+        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        {
+            const int PosicaoX = 11;
+            const int PosicaoY = 13;
+            const int altura = 86;
+            const int largura = 54;
+
+            using (Brush pincel = new SolidBrush(Color.Black))
+            {
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+            }
+        }
     }
 }

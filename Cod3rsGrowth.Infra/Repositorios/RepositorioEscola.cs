@@ -59,14 +59,23 @@ public class RepositorioEscola : IRepositorioEscola
             if (filtroEscola.InicioAtividadeFiltro != null)
             {
                 if (filtroEscola.MaiorOuIgualInicioAtividade == null)
+                {
                     query = from e in query
                             where e.InicioAtividade == filtroEscola.InicioAtividadeFiltro
                             select e;
-                else
+                }
+                else if(filtroEscola.MaiorOuIgualInicioAtividade.Value)
+                {
                     query = from e in query
-                            where e.InicioAtividade >= filtroEscola.InicioAtividadeFiltro && filtroEscola.MaiorOuIgualInicioAtividade.Value ||
-                                  e.InicioAtividade <= filtroEscola.InicioAtividadeFiltro && !filtroEscola.MaiorOuIgualInicioAtividade.Value
+                            where e.InicioAtividade >= filtroEscola.InicioAtividadeFiltro
                             select e;
+                }
+                else
+                {
+                    query = from e in query
+                            where e.InicioAtividade <= filtroEscola.InicioAtividadeFiltro
+                            select e;
+                }
             }
 
             if (filtroEscola.NomeFiltro != null)
