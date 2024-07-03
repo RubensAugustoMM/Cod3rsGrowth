@@ -51,10 +51,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            if (Filtro == null)
-            {
-                Filtro = new FiltroConvenio();
-            }
+            Filtro = new FiltroConvenio();
 
             if (!string.IsNullOrEmpty(textBoxObjeto.Text))
             {
@@ -66,14 +63,14 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.ValorFiltro = decimal.Parse(textBoxValor.Text);
             }
 
-            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            if (!string.IsNullOrEmpty(textBoxIdEscola.Text))
             {
-                Filtro.IdEscolaFiltro = int.Parse(textBoxValor.Text);
+                Filtro.IdEscolaFiltro = int.Parse(textBoxIdEscola.Text);
             }
 
-            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            if (!string.IsNullOrEmpty(textBoxIdEmpresa.Text))
             {
-                Filtro.IdEmpresaFiltro = int.Parse(textBoxValor.Text);
+                Filtro.IdEmpresaFiltro = int.Parse(textBoxIdEmpresa.Text);
             }
 
             if (_filtroDataInicioHabilitado)
@@ -183,6 +180,26 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboMaiorMenorIgualDataTermino.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
         }
 
+        public void LimpaFiltro()
+        {
+            Filtro = null;
+            textBoxObjeto.Text = _textoVazio;
+            textBoxIdEscola.Text = _textoVazio;
+            textBoxIdEmpresa.Text = _textoVazio;
+            textBoxValor.Text = _textoVazio;
+
+            dateTimePickerDataInicio.CustomFormat = _dataVazia;
+            dateTimePickerDataInicio.Format = DateTimePickerFormat.Custom;
+            _filtroDataInicioHabilitado = false;
+
+            dateTimePickerDataTermino.CustomFormat = _dataVazia;
+            dateTimePickerDataTermino.Format = DateTimePickerFormat.Custom;
+            _filtroDataTerminoHabilitado = false;
+
+            comboMaiorMenorIgualValor.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            comboMaiorMenorIgualDataInicio.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            comboMaiorMenorIgualDataTermino.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+        }
 
         private void InicializaFontePixeBoy()
         {

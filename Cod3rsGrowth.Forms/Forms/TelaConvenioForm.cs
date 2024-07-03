@@ -68,7 +68,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.DataSource = new BindingList<DadosExibirConvenio>();
             dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(null);
 
-            IniciaLizaControladorFiltro();
+            InicializaControladorFiltro();
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
 
@@ -110,7 +110,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _controladorFiltro.Visible = true;
         }
 
-        private void IniciaLizaControladorFiltro()
+        private void InicializaControladorFiltro()
         {
             _controladorFiltro = new FiltroConvenioUserControl();
 
@@ -121,6 +121,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.LimpaFiltro();
                 }
             };
 
@@ -137,7 +138,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
-            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(_controladorFiltro.Filtro);
+            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(null);
         }
 
         private void InicializaCabecalhoDaGrade()
@@ -147,7 +148,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.Columns[2].HeaderCell.Value = "Objeto";
             dataGridViewConvenios.Columns[3].HeaderCell.Value = "Valor";
             dataGridViewConvenios.Columns[4].HeaderCell.Value = "Início";
-            dataGridViewConvenios.Columns[5].HeaderCell.Value = "Termino";
+            dataGridViewConvenios.Columns[5].HeaderCell.Value = "Término";
             dataGridViewConvenios.Columns[6].HeaderCell.Value = "Código Escola";
             dataGridViewConvenios.Columns[7].HeaderCell.Value = "Escola";
             dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
