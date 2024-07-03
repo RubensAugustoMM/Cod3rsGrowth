@@ -184,7 +184,7 @@
             textBoxRazaoSocial.BackColor = Color.Black;
             textBoxRazaoSocial.BorderStyle = BorderStyle.None;
             textBoxRazaoSocial.ForeColor = Color.White;
-            textBoxRazaoSocial.Location = new Point(217, 17);
+            textBoxRazaoSocial.Location = new Point(217, 15);
             textBoxRazaoSocial.Name = "textBoxRazaoSocial";
             textBoxRazaoSocial.Size = new Size(149, 16);
             textBoxRazaoSocial.TabIndex = 33;
@@ -194,7 +194,7 @@
             textBoxNomeFantasia.BackColor = Color.Black;
             textBoxNomeFantasia.BorderStyle = BorderStyle.None;
             textBoxNomeFantasia.ForeColor = Color.White;
-            textBoxNomeFantasia.Location = new Point(217, 38);
+            textBoxNomeFantasia.Location = new Point(217, 36);
             textBoxNomeFantasia.Name = "textBoxNomeFantasia";
             textBoxNomeFantasia.Size = new Size(149, 16);
             textBoxNomeFantasia.TabIndex = 34;
@@ -204,7 +204,7 @@
             textBoxCnpj.BackColor = Color.Black;
             textBoxCnpj.BorderStyle = BorderStyle.None;
             textBoxCnpj.ForeColor = Color.White;
-            textBoxCnpj.Location = new Point(217, 60);
+            textBoxCnpj.Location = new Point(217, 58);
             textBoxCnpj.Name = "textBoxCnpj";
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 35;
@@ -215,7 +215,7 @@
             textBoxCapitalSocial.BackColor = Color.Black;
             textBoxCapitalSocial.BorderStyle = BorderStyle.None;
             textBoxCapitalSocial.ForeColor = Color.White;
-            textBoxCapitalSocial.Location = new Point(217, 102);
+            textBoxCapitalSocial.Location = new Point(217, 100);
             textBoxCapitalSocial.Name = "textBoxCapitalSocial";
             textBoxCapitalSocial.Size = new Size(149, 16);
             textBoxCapitalSocial.TabIndex = 37;
@@ -237,7 +237,7 @@
             textBoxIdade.BackColor = Color.Black;
             textBoxIdade.BorderStyle = BorderStyle.None;
             textBoxIdade.ForeColor = Color.White;
-            textBoxIdade.Location = new Point(217, 82);
+            textBoxIdade.Location = new Point(217, 80);
             textBoxIdade.Name = "textBoxIdade";
             textBoxIdade.Size = new Size(149, 16);
             textBoxIdade.TabIndex = 39;
@@ -250,7 +250,7 @@
             comboBoxNaturezaJuridica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxNaturezaJuridica.ForeColor = Color.White;
             comboBoxNaturezaJuridica.FormattingEnabled = true;
-            comboBoxNaturezaJuridica.Location = new Point(217, 120);
+            comboBoxNaturezaJuridica.Location = new Point(217, 118);
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 40;
@@ -263,7 +263,7 @@
             comboBoxPorte.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxPorte.ForeColor = Color.White;
             comboBoxPorte.FormattingEnabled = true;
-            comboBoxPorte.Location = new Point(217, 139);
+            comboBoxPorte.Location = new Point(217, 137);
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 41;
@@ -276,7 +276,7 @@
             comboBoxMatrizFilial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMatrizFilial.ForeColor = Color.White;
             comboBoxMatrizFilial.FormattingEnabled = true;
-            comboBoxMatrizFilial.Location = new Point(217, 162);
+            comboBoxMatrizFilial.Location = new Point(217, 160);
             comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
             comboBoxMatrizFilial.Size = new Size(149, 23);
             comboBoxMatrizFilial.TabIndex = 42;
@@ -291,7 +291,7 @@
             dateTimePickerDataSituacaoCadastral.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataSituacaoCadastral.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataSituacaoCadastral.Location = new Point(217, 217);
+            dateTimePickerDataSituacaoCadastral.Location = new Point(217, 211);
             dateTimePickerDataSituacaoCadastral.Name = "dateTimePickerDataSituacaoCadastral";
             dateTimePickerDataSituacaoCadastral.Size = new Size(149, 23);
             dateTimePickerDataSituacaoCadastral.TabIndex = 43;
@@ -306,7 +306,7 @@
             dateTimePickerDataAbertura.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataAbertura.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataAbertura.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataAbertura.Location = new Point(217, 240);
+            dateTimePickerDataAbertura.Location = new Point(217, 234);
             dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
@@ -420,7 +420,7 @@
             comboMaiorMenorIgualIdade.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboMaiorMenorIgualIdade.ForeColor = Color.White;
             comboMaiorMenorIgualIdade.FormattingEnabled = true;
-            comboMaiorMenorIgualIdade.Location = new Point(372, 80);
+            comboMaiorMenorIgualIdade.Location = new Point(372, 78);
             comboMaiorMenorIgualIdade.Name = "comboMaiorMenorIgualIdade";
             comboMaiorMenorIgualIdade.Size = new Size(125, 23);
             comboMaiorMenorIgualIdade.TabIndex = 61;
@@ -432,7 +432,7 @@
             comboBoxMaiorMenorIgualCapitalSocial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualCapitalSocial.ForeColor = Color.White;
             comboBoxMaiorMenorIgualCapitalSocial.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualCapitalSocial.Location = new Point(372, 102);
+            comboBoxMaiorMenorIgualCapitalSocial.Location = new Point(372, 100);
             comboBoxMaiorMenorIgualCapitalSocial.Name = "comboBoxMaiorMenorIgualCapitalSocial";
             comboBoxMaiorMenorIgualCapitalSocial.Size = new Size(125, 23);
             comboBoxMaiorMenorIgualCapitalSocial.TabIndex = 62;
@@ -444,7 +444,7 @@
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.ForeColor = Color.White;
             comboBoxMaiorMenorIgualDataSituacaoCadastral.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualDataSituacaoCadastral.Location = new Point(372, 217);
+            comboBoxMaiorMenorIgualDataSituacaoCadastral.Location = new Point(372, 211);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Name = "comboBoxMaiorMenorIgualDataSituacaoCadastral";
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Size = new Size(125, 23);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.TabIndex = 63;
@@ -456,7 +456,7 @@
             comboBoxMaiorMenorIgualDataAbertura.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualDataAbertura.ForeColor = Color.White;
             comboBoxMaiorMenorIgualDataAbertura.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualDataAbertura.Location = new Point(372, 239);
+            comboBoxMaiorMenorIgualDataAbertura.Location = new Point(372, 233);
             comboBoxMaiorMenorIgualDataAbertura.Name = "comboBoxMaiorMenorIgualDataAbertura";
             comboBoxMaiorMenorIgualDataAbertura.Size = new Size(125, 23);
             comboBoxMaiorMenorIgualDataAbertura.TabIndex = 64;

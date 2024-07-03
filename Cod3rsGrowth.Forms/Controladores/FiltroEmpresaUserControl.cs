@@ -48,10 +48,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            if (Filtro == null)
-            {
-                Filtro = new FiltroEmpresa();
-            }
+            Filtro = new FiltroEmpresa();
 
             if (!string.IsNullOrEmpty(textBoxRazaoSocial.Text))
             {
@@ -70,7 +67,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             if (!string.IsNullOrEmpty(textBoxIdade.Text))
             {
-                Filtro.CapitalSocialFiltro = int.Parse(textBoxIdade.Text);
+                Filtro.IdadeFiltro = int.Parse(textBoxIdade.Text);
             }
 
             if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
@@ -108,56 +105,9 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.DataSituacaoCadastralFiltro = dateTimePickerDataSituacaoCadastral.Value;
             }
 
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualIdade.SelectedItem)
-            {
-                Filtro.MaiorOuIgualIdade = new();
-                Filtro.MaiorOuIgualIdade = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualIdade.SelectedItem)
-            {
-                Filtro.MaiorOuIgualIdade = new();
-                Filtro.MaiorOuIgualIdade = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualIdade = null;
-            }
-
-            if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualCapitalSocial.SelectedItem)
-            {
-                Filtro.MaiorOuIgualCapitalSocial = new();
-                Filtro.MaiorOuIgualCapitalSocial = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualCapitalSocial.SelectedItem)
-            {
-                Filtro.MaiorOuIgualCapitalSocial = new();
-                Filtro.MaiorOuIgualCapitalSocial = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualCapitalSocial = null;
-            }
-
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataSituacaoCadastral = new();
-                Filtro.MaiorOuIgualDataSituacaoCadastral = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataSituacaoCadastral = new();
-                Filtro.MaiorOuIgualDataSituacaoCadastral = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualDataSituacaoCadastral = null;
-            }
+            Filtro.MaiorOuIgualIdade = ValidadorComboBoxMaiorMenorIgual(comboMaiorMenorIgualIdade);
+            Filtro.MaiorOuIgualCapitalSocial = ValidadorComboBoxMaiorMenorIgual(comboBoxMaiorMenorIgualCapitalSocial);
+            Filtro.MaiorOuIgualDataSituacaoCadastral = ValidadorComboBoxMaiorMenorIgual(comboBoxMaiorMenorIgualDataSituacaoCadastral);
 
 
             _botaoFiltrarPressionado = true;
@@ -186,6 +136,11 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void AoClicar_botaoLimpar(object sender, EventArgs e)
+        {
+            LimpaFiltro();
+        }
+
+        public void LimpaFiltro()
         {
             Filtro = null;
 
@@ -335,6 +290,27 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 e.Handled = true;
             }
+        }
+
+        private bool? ValidadorComboBoxMaiorMenorIgual(ComboBox comboBox)
+        {
+            bool? ResultadoRetornado = null;
+
+            if (FiltrosMaiorMenorIgualEnums.Maior ==
+                    (FiltrosMaiorMenorIgualEnums)comboBox.SelectedItem)
+            {
+                ResultadoRetornado = true;
+                return ResultadoRetornado;
+            }
+
+            if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboBox.SelectedItem)
+            {
+                ResultadoRetornado = false;
+                return ResultadoRetornado;
+            }
+
+            return ResultadoRetornado; 
         }
     }
 }

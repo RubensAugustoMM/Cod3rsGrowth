@@ -83,56 +83,9 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.DataTerminoFiltro = dateTimePickerDataInicio.Value;
             }
 
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualValor.SelectedItem)
-            {
-                Filtro.MaiorOuIgualValor = new();
-                Filtro.MaiorOuIgualValor = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualValor.SelectedItem)
-            {
-                Filtro.MaiorOuIgualValor = new();
-                Filtro.MaiorOuIgualValor = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualValor = null;
-            }
-
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualDataInicio.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataInicio = new();
-                Filtro.MaiorOuIgualDataInicio = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualDataInicio.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataInicio = new();
-                Filtro.MaiorOuIgualDataInicio = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualDataInicio = null;
-            }
-
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualDataTermino.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataTermino = new();
-                Filtro.MaiorOuIgualDataTermino = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
-                    (FiltrosMaiorMenorIgualEnums)comboMaiorMenorIgualDataTermino.SelectedItem)
-            {
-                Filtro.MaiorOuIgualDataTermino = new();
-                Filtro.MaiorOuIgualDataTermino = true;
-            }
-            else
-            {
-                Filtro.MaiorOuIgualDataTermino = null;
-            }
+            Filtro.MaiorOuIgualValor = ValidadorComboBoxMaiorMenorIgual(comboMaiorMenorIgualValor);
+            Filtro.MaiorOuIgualDataInicio = ValidadorComboBoxMaiorMenorIgual(comboMaiorMenorIgualDataInicio);
+            Filtro.MaiorOuIgualDataTermino = ValidadorComboBoxMaiorMenorIgual(comboMaiorMenorIgualDataTermino);
 
             _botaoFiltrarPressionado = true;
             Visible = false;
@@ -145,7 +98,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                 e.Handled = true;
             }
 
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(".") == -1))
+            if ((e.KeyChar == '.') && !((sender as TextBox).Text.IndexOf('.') == -1))
             {
                 e.Handled = true;
             }
@@ -161,23 +114,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoLimpar(object sender, EventArgs e)
         {
-            Filtro = null;
-            textBoxObjeto.Text = _textoVazio;
-            textBoxIdEscola.Text = _textoVazio;
-            textBoxIdEmpresa.Text = _textoVazio;
-            textBoxValor.Text = _textoVazio;
-
-            dateTimePickerDataInicio.CustomFormat = _dataVazia;
-            dateTimePickerDataInicio.Format = DateTimePickerFormat.Custom;
-            _filtroDataInicioHabilitado = false;
-
-            dateTimePickerDataTermino.CustomFormat = _dataVazia;
-            dateTimePickerDataTermino.Format = DateTimePickerFormat.Custom;
-            _filtroDataTerminoHabilitado = false;
-
-            comboMaiorMenorIgualValor.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
-            comboMaiorMenorIgualDataInicio.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
-            comboMaiorMenorIgualDataTermino.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
+            LimpaFiltro();
         }
 
         public void LimpaFiltro()
@@ -288,6 +225,27 @@ namespace Cod3rsGrowth.Forms.Controladores
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
             }
+        }
+
+        private bool? ValidadorComboBoxMaiorMenorIgual(ComboBox comboBox)
+        {
+            bool? ResultadoRetornado = null;
+
+            if (FiltrosMaiorMenorIgualEnums.Maior ==
+                    (FiltrosMaiorMenorIgualEnums)comboBox.SelectedItem)
+            {
+                ResultadoRetornado = true;
+                return ResultadoRetornado;
+            }
+
+            if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboBox.SelectedItem)
+            {
+                ResultadoRetornado = false;
+                return ResultadoRetornado;
+            }
+
+            return ResultadoRetornado; 
         }
     }
 }

@@ -98,6 +98,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.LimpaFiltro();
                 }
             };
 
