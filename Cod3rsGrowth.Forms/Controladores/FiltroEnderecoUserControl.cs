@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
+        private void AoCarregar_FiltroEnderecoUserControl(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -41,13 +41,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoFechar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void botaoFiltrar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
             if (Filtro == null)
             {
@@ -78,7 +78,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void botaoLimpar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoLimpar(object sender, EventArgs e)
         {
             Filtro = null;
 
@@ -105,7 +105,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             _botaoFiltrarPressionado = false;
         }
 
-        private void FiltroEnderecoUserControl_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_FiltroEnderecoUserControl(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
@@ -118,7 +118,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -141,12 +141,12 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         }
 
-        private void comboBoxEstado_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxEstado(object sender, EventArgs e)
         {
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
         }
 
-        private void textBoxCep_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
         {
             if (textBoxCep.Text.Length > _tamanhoMaximoCep)
             {

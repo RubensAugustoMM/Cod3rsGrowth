@@ -28,41 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            dataGridView1 = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            dataGridViewEnderecos = new DataGridView();
             painelLateral = new Panel();
             panel1 = new Panel();
             botaoPesquisar = new Button();
             panelBotaoFiltrar = new Panel();
             botaoFiltros = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewEnderecos).BeginInit();
             painelLateral.SuspendLayout();
             panel1.SuspendLayout();
             panelBotaoFiltrar.SuspendLayout();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewEnderecos
             // 
-            dataGridView1.BackgroundColor = Color.Blue;
-            dataGridView1.BorderStyle = BorderStyle.None;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Blue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Yellow;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.White;
-            dataGridView1.Location = new Point(165, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(623, 299);
-            dataGridView1.TabIndex = 2;
+            dataGridViewEnderecos.BackgroundColor = Color.Blue;
+            dataGridViewEnderecos.BorderStyle = BorderStyle.None;
+            dataGridViewEnderecos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Blue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Yellow;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewEnderecos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEnderecos.EnableHeadersVisualStyles = false;
+            dataGridViewEnderecos.GridColor = Color.White;
+            dataGridViewEnderecos.Location = new Point(165, 12);
+            dataGridViewEnderecos.Name = "dataGridViewEnderecos";
+            dataGridViewEnderecos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewEnderecos.RowTemplate.Height = 25;
+            dataGridViewEnderecos.Size = new Size(623, 299);
+            dataGridViewEnderecos.TabIndex = 2;
             // 
             // painelLateral
             // 
@@ -74,7 +74,7 @@
             painelLateral.Name = "painelLateral";
             painelLateral.Size = new Size(164, 323);
             painelLateral.TabIndex = 1;
-            painelLateral.Paint += painelLateral_Paint;
+            painelLateral.Paint += AoRequererPintura_painelLateral;
             // 
             // panel1
             // 
@@ -83,7 +83,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(107, 67);
             panel1.TabIndex = 35;
-            panel1.Paint += panelBotaoFiltrar_Paint;
+            panel1.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoPesquisar
             // 
@@ -100,7 +100,7 @@
             botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = false;
-            botaoPesquisar.Click += botaoPesquisar_Click;
+            botaoPesquisar.Click += AoClicar_botaoPesquisar;
             // 
             // panelBotaoFiltrar
             // 
@@ -109,7 +109,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(107, 67);
             panelBotaoFiltrar.TabIndex = 34;
-            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoFiltros
             // 
@@ -126,7 +126,7 @@
             botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = false;
-            botaoFiltros.Click += botaoFiltros_Click;
+            botaoFiltros.Click += AoClicar_botaoFiltros;
             // 
             // TelaEnderecoForm
             // 
@@ -134,15 +134,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Blue;
             ClientSize = new Size(800, 323);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridViewEnderecos);
             Controls.Add(painelLateral);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaEnderecoForm";
             Text = "TelaConvenioForm";
-            Load += TelaConvenioForm_Load;
-            VisibleChanged += TelaEnderecoForm_VisibleChanged;
-            Paint += TelaConvenioForm_Paint;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += AoCarregar_TelaConvenioForm;
+            VisibleChanged += AoMudarVisibilidade_TelaEnderecoForm;
+            Paint += AoRequererPintura_TelaEnderecoForm;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewEnderecos).EndInit();
             painelLateral.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panelBotaoFiltrar.ResumeLayout(false);
@@ -151,7 +151,7 @@
 
         #endregion
         private Panel painelLateral;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewEnderecos;
         private Panel panelBotaoFiltrar;
         private Button botaoFiltros;
         private Panel panel1;

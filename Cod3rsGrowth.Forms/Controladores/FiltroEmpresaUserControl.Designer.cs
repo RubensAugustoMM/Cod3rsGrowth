@@ -208,7 +208,7 @@
             textBoxCnpj.Name = "textBoxCnpj";
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 35;
-            textBoxCnpj.KeyPress += textBoxCnpj_KeyPress;
+            textBoxCnpj.KeyPress += AoPressionarTecla_textBoxCnpj;
             // 
             // textBoxCapitalSocial
             // 
@@ -219,7 +219,7 @@
             textBoxCapitalSocial.Name = "textBoxCapitalSocial";
             textBoxCapitalSocial.Size = new Size(149, 16);
             textBoxCapitalSocial.TabIndex = 37;
-            textBoxCapitalSocial.KeyPress += somenteValoresReais_KeyPress;
+            textBoxCapitalSocial.KeyPress += AoPressionarTecla_TextBox_somenteValoresReais;
             // 
             // labelIdade
             // 
@@ -241,7 +241,7 @@
             textBoxIdade.Name = "textBoxIdade";
             textBoxIdade.Size = new Size(149, 16);
             textBoxIdade.TabIndex = 39;
-            textBoxIdade.KeyPress += somenteValoresNaturais_KeyPress;
+            textBoxIdade.KeyPress += AoPressionarTecla_TextBox_somenteValoresNaturais;
             // 
             // comboBoxNaturezaJuridica
             // 
@@ -254,7 +254,7 @@
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 40;
-            comboBoxNaturezaJuridica.Click += comboBoxNaturezaJuridica_Click;
+            comboBoxNaturezaJuridica.Click += AoClicar_comboBoxNaturezaJuridica;
             // 
             // comboBoxPorte
             // 
@@ -267,7 +267,7 @@
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 41;
-            comboBoxPorte.Click += comboBoxPorte_Click;
+            comboBoxPorte.Click += AoClicar_comboBoxPorte;
             // 
             // comboBoxMatrizFilial
             // 
@@ -280,7 +280,7 @@
             comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
             comboBoxMatrizFilial.Size = new Size(149, 23);
             comboBoxMatrizFilial.TabIndex = 42;
-            comboBoxMatrizFilial.Click += comboBoxMatrizFilial_Click;
+            comboBoxMatrizFilial.Click += AoClicar_comboBoxMatrizFilial;
             // 
             // dateTimePickerDataSituacaoCadastral
             // 
@@ -295,7 +295,7 @@
             dateTimePickerDataSituacaoCadastral.Name = "dateTimePickerDataSituacaoCadastral";
             dateTimePickerDataSituacaoCadastral.Size = new Size(149, 23);
             dateTimePickerDataSituacaoCadastral.TabIndex = 43;
-            dateTimePickerDataSituacaoCadastral.ValueChanged += dateTimePickerDataSituacaoCadastral_ValueChanged;
+            dateTimePickerDataSituacaoCadastral.ValueChanged += AoAlterarValor_dateTimePickerDataSituacaoCadastral;
             // 
             // dateTimePickerDataAbertura
             // 
@@ -310,7 +310,7 @@
             dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
-            dateTimePickerDataAbertura.ValueChanged += dateTimePickerDataAbertura_ValueChanged;
+            dateTimePickerDataAbertura.ValueChanged += AoAlterarValor_dateTimePickerDataAbertura;
             // 
             // checkBoxSituacaoCadastral
             // 
@@ -342,7 +342,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 60;
-            panel2.Paint += panelBotaoFiltrar_Paint;
+            panel2.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFechar
             // 
@@ -359,7 +359,7 @@
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += botaoFechar_Click;
+            botaoFechar.Click += AoClicar_botaoFechar;
             // 
             // panel1
             // 
@@ -368,7 +368,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 59;
-            panel1.Paint += panelBotaoFiltrar_Paint;
+            panel1.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoLimpar
             // 
@@ -385,7 +385,7 @@
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
             botaoLimpar.UseVisualStyleBackColor = false;
-            botaoLimpar.Click += botaoLimpar_Click;
+            botaoLimpar.Click += AoClicar_botaoLimpar;
             // 
             // panelBotaoFiltrar
             // 
@@ -394,7 +394,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 58;
-            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFiltrar
             // 
@@ -411,7 +411,7 @@
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
             botaoFiltrar.UseVisualStyleBackColor = false;
-            botaoFiltrar.Click += botaoFiltrar_Click;
+            botaoFiltrar.Click += AoClicar_botaoFiltrar;
             // 
             // comboMaiorMenorIgualIdade
             // 
@@ -499,7 +499,7 @@
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Size = new Size(516, 307);
             panelFiltro.TabIndex = 65;
-            panelFiltro.Paint += panelFiltro_Paint;
+            panelFiltro.Paint += AoRequererPintura_panelFiltro;
             // 
             // labelTitulo
             // 
@@ -520,8 +520,8 @@
             Controls.Add(panelFiltro);
             Name = "FiltroEmpresaUserControl";
             Size = new Size(526, 326);
-            Load += FiltroConvenioUserControl_Load;
-            Paint += FiltroEmpresaUserControl_Paint_1;
+            Load += AoCarregar_FiltroEmpresaUserControl;
+            Paint += AoRequererPintura_FiltroEmpresaUserControl;
             panel2.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panelBotaoFiltrar.ResumeLayout(false);

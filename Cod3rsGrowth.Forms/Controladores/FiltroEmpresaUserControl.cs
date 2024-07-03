@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEmpresa Filtro = null;
-        private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
+        private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
         private const int _tamanhoMaximoCnpj = 14;
@@ -21,32 +21,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void FiltroConvenioUserControl_Paint(object sender, PaintEventArgs e)
-        {
-            if (BorderStyle == BorderStyle.None)
-            {
-                const int Tamanho = 2;
-                const int xInicioRetanguloExterior = 4;
-                const int yInicioRetanguloExterior = 6;
-                const int xInicioRetanguloInterior = 8;
-                const int yInicioRetanguloInterior = 10;
-
-                using (Pen caneta = new Pen(Color.White, Tamanho))
-                {
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
-                                                                   yInicioRetanguloExterior,
-                                                                   Width - (xInicioRetanguloExterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloExterior + Tamanho) * 2));
-
-                    e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
-                                                                   yInicioRetanguloInterior,
-                                                                   Width - (xInicioRetanguloInterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloInterior + Tamanho) * 2));
-                }
-            }
-        }
-
-        private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
+        private void AoCarregar_FiltroEmpresaUserControl(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -65,13 +40,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoFechar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void botaoFiltrar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
             if (Filtro == null)
             {
@@ -189,7 +164,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void somenteValoresReais_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_TextBox_somenteValoresReais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -202,7 +177,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void somenteValoresNaturais_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_TextBox_somenteValoresNaturais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -210,7 +185,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoLimpar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoLimpar(object sender, EventArgs e)
         {
             Filtro = null;
 
@@ -264,7 +239,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             _botaoFiltrarPressionado = false;
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -277,7 +252,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void FiltroEmpresaUserControl_Paint_1(object sender, PaintEventArgs e)
+        private void AoRequererPintura_FiltroEmpresaUserControl(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
@@ -290,7 +265,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -313,7 +288,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
 
-        private void comboBoxNaturezaJuridica_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxNaturezaJuridica(object sender, EventArgs e)
         {
             if (comboBoxNaturezaJuridica.DataSource == null)
             {
@@ -321,7 +296,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void comboBoxPorte_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxPorte(object sender, EventArgs e)
         {
             if (comboBoxPorte.DataSource == null)
             {
@@ -329,7 +304,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void comboBoxMatrizFilial_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxMatrizFilial(object sender, EventArgs e)
         {
             if (comboBoxMatrizFilial.DataSource == null)
             {
@@ -337,19 +312,19 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void dateTimePickerDataSituacaoCadastral_ValueChanged(object sender, EventArgs e)
+        private void AoAlterarValor_dateTimePickerDataSituacaoCadastral(object sender, EventArgs e)
         {
             dateTimePickerDataSituacaoCadastral.CustomFormat = _formatoDaData;
             _filtroDataSituacaoCadastral = true;
         }
 
-        private void dateTimePickerDataAbertura_ValueChanged(object sender, EventArgs e)
+        private void AoAlterarValor_dateTimePickerDataAbertura(object sender, EventArgs e)
         {
             dateTimePickerDataAbertura.CustomFormat = _formatoDaData;
             _filtroDataAbertura = true;
         }
 
-        private void textBoxCnpj_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_textBoxCnpj(object sender, KeyPressEventArgs e)
         {
             if (textBoxCnpj.Text.Length > _tamanhoMaximoCnpj)
             {

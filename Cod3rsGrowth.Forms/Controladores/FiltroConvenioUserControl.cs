@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroConvenio Filtro = null;
-        private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
+        private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
         private bool _filtroDataInicioHabilitado;
@@ -43,13 +43,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoFechar_Click(object sender, EventArgs e)
+        private void AoCLicar_botaoFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void botaoFiltrar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
             if (Filtro == null)
             {
@@ -141,7 +141,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void somenteValoresReais_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_TextBox_somenteValoresReais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -154,7 +154,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void somenteValoresNaturais_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_TextBox_somenteValoresNaturais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -162,7 +162,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoLimpar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoLimpar(object sender, EventArgs e)
         {
             Filtro = null;
             textBoxObjeto.Text = _textoVazio;
@@ -195,7 +195,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             _botaoFiltrarPressionado = false;
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -208,18 +208,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void FiltroConvenioUserControl_Paint(object sender, PaintEventArgs e)
-        {
-            if (BorderStyle == BorderStyle.None)
-            {
-                using (Brush pincel = new SolidBrush(Color.Black))
-                {
-                    e.Graphics.FillRectangle(pincel, new Rectangle(0, 0, this.Width, this.Height));
-                }
-            }
-        }
-
-        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -248,19 +237,19 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboMaiorMenorIgualDataTermino.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
         }
 
-        private void dateTimePickerDataInicio_ValueChanged(object sender, EventArgs e)
+        private void AoAlterarValor_dateTimePickerDataInicio(object sender, EventArgs e)
         {
             dateTimePickerDataInicio.CustomFormat = _formatoDaData;
             _filtroDataInicioHabilitado = true;
         }
 
-        private void dateTimePickerDataTermino_ValueChanged(object sender, EventArgs e)
+        private void AoAlterarValor_dateTimePickerDataTermino(object sender, EventArgs e)
         {
             dateTimePickerDataTermino.CustomFormat = _formatoDaData;
             _filtroDataTerminoHabilitado = true;
         }
 
-        private void FiltroConvenioUserControl_Paint_1(object sender, PaintEventArgs e)
+        private void AoRequererPintura_FiltroConvenioUserControl1(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;

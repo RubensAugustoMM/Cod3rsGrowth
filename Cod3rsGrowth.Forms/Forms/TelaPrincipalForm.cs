@@ -26,9 +26,9 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEscolaForm = telaEscolaForm;
         }
 
-        private void panelTopo1_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelTopo(object sender, PaintEventArgs e)
         {
-            if (panelTopo1.BorderStyle == BorderStyle.None)
+            if (panelTopo.BorderStyle == BorderStyle.None)
             {
                 const int Tamanho = 2;
                 const int xInicioRetanguloExterior = 4;
@@ -40,18 +40,18 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
                                                                    yInicioRetanguloExterior,
-                                                                   panelTopo1.ClientSize.Width - (xInicioRetanguloExterior * 2 + Tamanho),
-                                                                   panelTopo1.ClientSize.Height - (yInicioRetanguloExterior * 2 + Tamanho)));
+                                                                   panelTopo.ClientSize.Width - (xInicioRetanguloExterior * 2 + Tamanho),
+                                                                   panelTopo.ClientSize.Height - (yInicioRetanguloExterior * 2 + Tamanho)));
 
                     e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
                                                                    yInicioRetanguloInterior,
-                                                                   panelTopo1.ClientSize.Width - (xInicioRetanguloInterior * 2 + Tamanho),
-                                                                   panelTopo1.ClientSize.Height - (yInicioRetanguloInterior * 2 + Tamanho)));
+                                                                   panelTopo.ClientSize.Width - (xInicioRetanguloInterior * 2 + Tamanho),
+                                                                   panelTopo.ClientSize.Height - (yInicioRetanguloInterior * 2 + Tamanho)));
                 }
             }
         }
 
-        private void TelaPrincipalForm_Load(object sender, EventArgs e)
+        private void AoCarregar_TelaPrincipalForm(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaPainelExibicao();
@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void AoPassarTempo_temporizador(object sender, EventArgs e)
         {
             data.Text = DateTime.Now.ToLongDateString();
             tempo.Text = DateTime.Now.ToLongTimeString();
@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaConvenioForm.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void AoClicar_botaoEmpresa(object sender, EventArgs e)
         {
             if(_telaEmpresaAtiva)
             {
@@ -118,7 +118,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEmpresaForm.Show();
         }
 
-        private void botaoEnderecos_Click(object sender, EventArgs e)
+        private void AoClicar_botaoEnderecos(object sender, EventArgs e)
         {
             if(_telaEnderecoAtiva)
             {
@@ -140,7 +140,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEnderecoAtiva = true;
             _telaEnderecoForm.Show();
         }
-        private void botaoEscolas_Click(object sender, EventArgs e)
+        private void AoClicar_botaoEscolas(object sender, EventArgs e)
         {
             if(_telaEscolaAtiva)
             {
@@ -164,7 +164,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEscolaForm.Show();
         }
 
-        private void botaoFechar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFechar(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -204,7 +204,7 @@ namespace Cod3rsGrowth.Forms.Forms
             painelExibicao.Controls.Add(_telaEnderecoForm);
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;

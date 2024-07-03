@@ -29,147 +29,147 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            panelTopo1 = new Panel();
-            panel3 = new Panel();
-            button3 = new Button();
-            panel2 = new Panel();
-            button2 = new Button();
-            panel1 = new Panel();
-            button1 = new Button();
-            panelBotaoFiltrar = new Panel();
-            botaoFiltros = new Button();
+            panelTopo = new Panel();
+            panelBotaoEnderecos = new Panel();
+            botaoEnderecos = new Button();
+            panelBotaoEscolas = new Panel();
+            botaoEscolas = new Button();
+            panelBotaoEmpresas = new Panel();
+            botaoEmpresas = new Button();
+            panelBotaoConvenios = new Panel();
+            botaoConvenios = new Button();
             painelInferior = new Panel();
             botaoFechar = new Button();
             data = new Label();
             tempo = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             painelExibicao = new Panel();
-            panelTopo1.SuspendLayout();
-            panel3.SuspendLayout();
-            panel2.SuspendLayout();
-            panel1.SuspendLayout();
-            panelBotaoFiltrar.SuspendLayout();
+            panelTopo.SuspendLayout();
+            panelBotaoEnderecos.SuspendLayout();
+            panelBotaoEscolas.SuspendLayout();
+            panelBotaoEmpresas.SuspendLayout();
+            panelBotaoConvenios.SuspendLayout();
             painelInferior.SuspendLayout();
             SuspendLayout();
             // 
-            // panelTopo1
+            // panelTopo
             // 
-            panelTopo1.BackColor = Color.DarkGray;
-            panelTopo1.Controls.Add(panel3);
-            panelTopo1.Controls.Add(panel2);
-            panelTopo1.Controls.Add(panel1);
-            panelTopo1.Controls.Add(panelBotaoFiltrar);
-            panelTopo1.Dock = DockStyle.Top;
-            panelTopo1.Location = new Point(0, 0);
-            panelTopo1.Margin = new Padding(0);
-            panelTopo1.Name = "panelTopo1";
-            panelTopo1.Size = new Size(800, 94);
-            panelTopo1.TabIndex = 0;
-            panelTopo1.Paint += panelTopo1_Paint;
+            panelTopo.BackColor = Color.DarkGray;
+            panelTopo.Controls.Add(panelBotaoEnderecos);
+            panelTopo.Controls.Add(panelBotaoEscolas);
+            panelTopo.Controls.Add(panelBotaoEmpresas);
+            panelTopo.Controls.Add(panelBotaoConvenios);
+            panelTopo.Dock = DockStyle.Top;
+            panelTopo.Location = new Point(0, 0);
+            panelTopo.Margin = new Padding(0);
+            panelTopo.Name = "panelTopo";
+            panelTopo.Size = new Size(800, 94);
+            panelTopo.TabIndex = 0;
+            panelTopo.Paint += AoRequererPintura_panelTopo;
             // 
-            // panel3
+            // panelBotaoEnderecos
             // 
-            panel3.Controls.Add(button3);
-            panel3.Location = new Point(444, 16);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(134, 57);
-            panel3.TabIndex = 39;
-            panel3.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoEnderecos.Controls.Add(botaoEnderecos);
+            panelBotaoEnderecos.Location = new Point(444, 16);
+            panelBotaoEnderecos.Name = "panelBotaoEnderecos";
+            panelBotaoEnderecos.Size = new Size(134, 57);
+            panelBotaoEnderecos.TabIndex = 39;
+            panelBotaoEnderecos.Paint += AoRequererPintura_panelSombraBotoes;
             // 
-            // button3
+            // botaoEnderecos
             // 
-            button3.BackColor = Color.Green;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.MouseDownBackColor = Color.White;
-            button3.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(3, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(113, 44);
-            button3.TabIndex = 31;
-            button3.Text = "Endereços";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += botaoEnderecos_Click;
+            botaoEnderecos.BackColor = Color.Green;
+            botaoEnderecos.FlatAppearance.BorderSize = 0;
+            botaoEnderecos.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoEnderecos.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoEnderecos.FlatStyle = FlatStyle.Flat;
+            botaoEnderecos.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoEnderecos.ForeColor = Color.White;
+            botaoEnderecos.Location = new Point(3, 3);
+            botaoEnderecos.Name = "botaoEnderecos";
+            botaoEnderecos.Size = new Size(113, 44);
+            botaoEnderecos.TabIndex = 31;
+            botaoEnderecos.Text = "Endereços";
+            botaoEnderecos.UseVisualStyleBackColor = false;
+            botaoEnderecos.Click += AoClicar_botaoEnderecos;
             // 
-            // panel2
+            // panelBotaoEscolas
             // 
-            panel2.Controls.Add(button2);
-            panel2.Location = new Point(304, 16);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(134, 57);
-            panel2.TabIndex = 38;
-            panel2.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoEscolas.Controls.Add(botaoEscolas);
+            panelBotaoEscolas.Location = new Point(304, 16);
+            panelBotaoEscolas.Name = "panelBotaoEscolas";
+            panelBotaoEscolas.Size = new Size(134, 57);
+            panelBotaoEscolas.TabIndex = 38;
+            panelBotaoEscolas.Paint += AoRequererPintura_panelSombraBotoes;
             // 
-            // button2
+            // botaoEscolas
             // 
-            button2.BackColor = Color.Green;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseDownBackColor = Color.White;
-            button2.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(3, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(113, 44);
-            button2.TabIndex = 31;
-            button2.Text = "Escolas";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += botaoEscolas_Click;
+            botaoEscolas.BackColor = Color.Green;
+            botaoEscolas.FlatAppearance.BorderSize = 0;
+            botaoEscolas.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoEscolas.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoEscolas.FlatStyle = FlatStyle.Flat;
+            botaoEscolas.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoEscolas.ForeColor = Color.White;
+            botaoEscolas.Location = new Point(3, 3);
+            botaoEscolas.Name = "botaoEscolas";
+            botaoEscolas.Size = new Size(113, 44);
+            botaoEscolas.TabIndex = 31;
+            botaoEscolas.Text = "Escolas";
+            botaoEscolas.UseVisualStyleBackColor = false;
+            botaoEscolas.Click += AoClicar_botaoEscolas;
             // 
-            // panel1
+            // panelBotaoEmpresas
             // 
-            panel1.Controls.Add(button1);
-            panel1.Location = new Point(164, 16);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(134, 57);
-            panel1.TabIndex = 37;
-            panel1.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoEmpresas.Controls.Add(botaoEmpresas);
+            panelBotaoEmpresas.Location = new Point(164, 16);
+            panelBotaoEmpresas.Name = "panelBotaoEmpresas";
+            panelBotaoEmpresas.Size = new Size(134, 57);
+            panelBotaoEmpresas.TabIndex = 37;
+            panelBotaoEmpresas.Paint += AoRequererPintura_panelSombraBotoes;
             // 
-            // button1
+            // botaoEmpresas
             // 
-            button1.BackColor = Color.Green;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseDownBackColor = Color.White;
-            button1.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(3, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(113, 44);
-            button1.TabIndex = 31;
-            button1.Text = "Empresas";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button2_Click;
+            botaoEmpresas.BackColor = Color.Green;
+            botaoEmpresas.FlatAppearance.BorderSize = 0;
+            botaoEmpresas.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoEmpresas.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoEmpresas.FlatStyle = FlatStyle.Flat;
+            botaoEmpresas.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoEmpresas.ForeColor = Color.White;
+            botaoEmpresas.Location = new Point(3, 3);
+            botaoEmpresas.Name = "botaoEmpresas";
+            botaoEmpresas.Size = new Size(113, 44);
+            botaoEmpresas.TabIndex = 31;
+            botaoEmpresas.Text = "Empresas";
+            botaoEmpresas.UseVisualStyleBackColor = false;
+            botaoEmpresas.Click += AoClicar_botaoEmpresa;
             // 
-            // panelBotaoFiltrar
+            // panelBotaoConvenios
             // 
-            panelBotaoFiltrar.Controls.Add(botaoFiltros);
-            panelBotaoFiltrar.Location = new Point(24, 16);
-            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
-            panelBotaoFiltrar.Size = new Size(134, 57);
-            panelBotaoFiltrar.TabIndex = 36;
-            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoConvenios.Controls.Add(botaoConvenios);
+            panelBotaoConvenios.Location = new Point(24, 16);
+            panelBotaoConvenios.Name = "panelBotaoConvenios";
+            panelBotaoConvenios.Size = new Size(134, 57);
+            panelBotaoConvenios.TabIndex = 36;
+            panelBotaoConvenios.Paint += AoRequererPintura_panelSombraBotoes;
             // 
-            // botaoFiltros
+            // botaoConvenios
             // 
-            botaoFiltros.BackColor = Color.Green;
-            botaoFiltros.FlatAppearance.BorderSize = 0;
-            botaoFiltros.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoFiltros.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoFiltros.FlatStyle = FlatStyle.Flat;
-            botaoFiltros.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoFiltros.ForeColor = Color.White;
-            botaoFiltros.Location = new Point(3, 3);
-            botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(113, 44);
-            botaoFiltros.TabIndex = 31;
-            botaoFiltros.Text = "Convênios";
-            botaoFiltros.UseVisualStyleBackColor = false;
-            botaoFiltros.Click += button1_Click;
+            botaoConvenios.BackColor = Color.Green;
+            botaoConvenios.FlatAppearance.BorderSize = 0;
+            botaoConvenios.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoConvenios.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoConvenios.FlatStyle = FlatStyle.Flat;
+            botaoConvenios.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoConvenios.ForeColor = Color.White;
+            botaoConvenios.Location = new Point(3, 3);
+            botaoConvenios.Name = "botaoConvenios";
+            botaoConvenios.Size = new Size(113, 44);
+            botaoConvenios.TabIndex = 31;
+            botaoConvenios.Text = "Convênios";
+            botaoConvenios.UseVisualStyleBackColor = false;
+            botaoConvenios.Click += button1_Click;
             // 
             // painelInferior
             // 
@@ -199,7 +199,7 @@
             botaoFechar.TabIndex = 4;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += botaoFechar_Click;
+            botaoFechar.Click += AoClicar_botaoFechar;
             // 
             // data
             // 
@@ -223,7 +223,7 @@
             // 
             // timer1
             // 
-            timer1.Tick += timer1_Tick;
+            timer1.Tick += AoPassarTempo_temporizador;
             // 
             // painelExibicao
             // 
@@ -243,17 +243,17 @@
             ClientSize = new Size(800, 450);
             Controls.Add(painelExibicao);
             Controls.Add(painelInferior);
-            Controls.Add(panelTopo1);
+            Controls.Add(panelTopo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaPrincipalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TelaPrincipalForm";
-            Load += TelaPrincipalForm_Load;
-            panelTopo1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panelBotaoFiltrar.ResumeLayout(false);
+            Load += AoCarregar_TelaPrincipalForm;
+            panelTopo.ResumeLayout(false);
+            panelBotaoEnderecos.ResumeLayout(false);
+            panelBotaoEscolas.ResumeLayout(false);
+            panelBotaoEmpresas.ResumeLayout(false);
+            panelBotaoConvenios.ResumeLayout(false);
             painelInferior.ResumeLayout(false);
             painelInferior.PerformLayout();
             ResumeLayout(false);
@@ -261,20 +261,20 @@
 
         #endregion
 
-        private Panel panelTopo1;
+        private Panel panelTopo;
         private Panel painelInferior;
         private Label data;
         private Label tempo;
         private System.Windows.Forms.Timer timer1;
         private Panel painelExibicao;
-        private Panel panelBotaoFiltrar;
-        private Button botaoFiltros;
-        private Panel panel2;
-        private Button button2;
-        private Panel panel1;
-        private Button button1;
-        private Panel panel3;
-        private Button button3;
+        private Panel panelBotaoConvenios;
+        private Button botaoConvenios;
+        private Panel panelBotaoEscolas;
+        private Button botaoEscolas;
+        private Panel panelBotaoEmpresas;
+        private Button botaoEmpresas;
+        private Panel panelBotaoEnderecos;
+        private Button botaoEnderecos;
         private Button botaoFechar;
     }
 }

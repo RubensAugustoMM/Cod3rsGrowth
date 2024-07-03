@@ -38,7 +38,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void TelaConvenioForm_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -63,10 +63,10 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void TelaConvenioForm_Load(object sender, EventArgs e)
+        private void AoCarregarForm_TelaConvenioForm(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = new BindingList<DadosExibirConvenio>();
-            dataGridView1.DataSource = RetornaValoresParaSeremExibidos(null);
+            dataGridViewConvenios.DataSource = new BindingList<DadosExibirConvenio>();
+            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(null);
 
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
@@ -79,7 +79,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void painelLateral_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -105,7 +105,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         }
 
-        private void botaoFiltros_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -119,7 +119,7 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
-                    dataGridView1.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
+                    dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
                 }
             };
@@ -135,39 +135,39 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
-        private void botaoPesquisar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = RetornaValoresParaSeremExibidos(_controladorFiltro.Filtro);
+            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(_controladorFiltro.Filtro);
         }
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridView1.Columns[0].HeaderCell.Value = "Código Convênio";
-            dataGridView1.Columns[1].HeaderCell.Value = "Número do Processo";
-            dataGridView1.Columns[2].HeaderCell.Value = "Objeto";
-            dataGridView1.Columns[3].HeaderCell.Value = "Valor";
-            dataGridView1.Columns[4].HeaderCell.Value = "Início";
-            dataGridView1.Columns[5].HeaderCell.Value = "Termino";
-            dataGridView1.Columns[6].HeaderCell.Value = "Código Escola";
-            dataGridView1.Columns[7].HeaderCell.Value = "Escola";
-            dataGridView1.Columns[8].HeaderCell.Value = "Código Empresa";
-            dataGridView1.Columns[9].HeaderCell.Value = "Empresa";
+            dataGridViewConvenios.Columns[0].HeaderCell.Value = "Código Convênio";
+            dataGridViewConvenios.Columns[1].HeaderCell.Value = "Número do Processo";
+            dataGridViewConvenios.Columns[2].HeaderCell.Value = "Objeto";
+            dataGridViewConvenios.Columns[3].HeaderCell.Value = "Valor";
+            dataGridViewConvenios.Columns[4].HeaderCell.Value = "Início";
+            dataGridViewConvenios.Columns[5].HeaderCell.Value = "Termino";
+            dataGridViewConvenios.Columns[6].HeaderCell.Value = "Código Escola";
+            dataGridViewConvenios.Columns[7].HeaderCell.Value = "Escola";
+            dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
+            dataGridViewConvenios.Columns[9].HeaderCell.Value = "Empresa";
 
-            dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewConvenios.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewConvenios.DefaultCellStyle.ForeColor = Color.White;
+            dataGridViewConvenios.DefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewConvenios.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewConvenios.DefaultCellStyle.SelectionBackColor = Color.Cyan;
 
-            dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewConvenios.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewConvenios.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewConvenios.EnableHeadersVisualStyles = false;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
         }
 
         private void ConfiguraFonte(Control controle)
@@ -209,17 +209,17 @@ namespace Cod3rsGrowth.Forms.Forms
             return ListaConveniosExibidos;
         }
 
-        private void dataGridView1_VisibleChanged(object sender, EventArgs e)
+        private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
         {
             if(Visible)
             {
-                dataGridView1.DataSource = _servicoConvenio.ObterTodos(null);
+                dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
                 _controladorFiltro.Visible = false;
                 _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;

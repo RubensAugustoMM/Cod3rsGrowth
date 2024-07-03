@@ -72,7 +72,7 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 41;
-            comboBoxEstado.Click += comboBoxEstado_Click;
+            comboBoxEstado.Click += AoClicar_comboBoxEstado;
             // 
             // labelMunicipio
             // 
@@ -136,7 +136,7 @@
             textBoxCep.Name = "textBoxCep";
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 47;
-            textBoxCep.KeyPress += textBoxCep_KeyPress;
+            textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
             // 
             // panelFiltro
             // 
@@ -158,7 +158,7 @@
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Size = new Size(367, 153);
             panelFiltro.TabIndex = 62;
-            panelFiltro.Paint += panelFiltro_Paint;
+            panelFiltro.Paint += AoRequererPintura_panelFiltro;
             // 
             // labelTitulo
             // 
@@ -178,7 +178,7 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(106, 40);
             panel3.TabIndex = 64;
-            panel3.Paint += panelBotaoFiltrar_Paint;
+            panel3.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFechar
             // 
@@ -195,7 +195,7 @@
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += botaoFechar_Click;
+            botaoFechar.Click += AoClicar_botaoFechar;
             // 
             // panel2
             // 
@@ -204,7 +204,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
-            panel2.Paint += panelBotaoFiltrar_Paint;
+            panel2.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoLimpar
             // 
@@ -221,7 +221,7 @@
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
             botaoLimpar.UseVisualStyleBackColor = false;
-            botaoLimpar.Click += botaoLimpar_Click;
+            botaoLimpar.Click += AoClicar_botaoLimpar;
             // 
             // panelBotaoFiltrar
             // 
@@ -230,7 +230,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 63;
-            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFiltrar
             // 
@@ -247,7 +247,7 @@
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
             botaoFiltrar.UseVisualStyleBackColor = false;
-            botaoFiltrar.Click += botaoFiltrar_Click;
+            botaoFiltrar.Click += AoClicar_botaoFiltrar;
             // 
             // FiltroEnderecoUserControl
             // 
@@ -257,8 +257,8 @@
             Controls.Add(panelFiltro);
             Name = "FiltroEnderecoUserControl";
             Size = new Size(377, 172);
-            Load += FiltroConvenioUserControl_Load;
-            Paint += FiltroEnderecoUserControl_Paint;
+            Load += AoCarregar_FiltroEnderecoUserControl;
+            Paint += AoRequererPintura_FiltroEnderecoUserControl;
             panelFiltro.ResumeLayout(false);
             panelFiltro.PerformLayout();
             panel3.ResumeLayout(false);

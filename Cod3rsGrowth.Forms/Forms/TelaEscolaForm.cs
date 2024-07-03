@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void TelaConvenioForm_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -42,9 +42,9 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void TelaConvenioForm_Load(object sender, EventArgs e)
+        private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEscola.ObterTodos(null);
+            dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
 
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
@@ -57,7 +57,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void painelLateral_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -83,7 +83,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         }
 
-        private void botaoFiltros_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -97,7 +97,7 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
-                    dataGridView1.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
+                    dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
                 }
             };
@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoPesquisar_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
+            dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
         }
 
         private void ConfiguraFonte(Control controle)
@@ -131,45 +131,45 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridView1.Columns[0].HeaderCell.Value = "Código Escola";
-            dataGridView1.Columns[1].HeaderCell.Value = "Status Atividade";
-            dataGridView1.Columns[2].HeaderCell.Value = "Nome";
-            dataGridView1.Columns[3].HeaderCell.Value = "Código Mec";
-            dataGridView1.Columns[4].HeaderCell.Value = "Telefone";
-            dataGridView1.Columns[5].HeaderCell.Value = "E-Mail";
-            dataGridView1.Columns[6].HeaderCell.Value = "Data Início da Atividade";
-            dataGridView1.Columns[7].HeaderCell.Value = "CategoriaAdministrativa";
-            dataGridView1.Columns[8].HeaderCell.Value = "Organização Acadêmica";
-            dataGridView1.Columns[9].HeaderCell.Value = "Código Endereço";
+            dataGridViewEscolas.Columns[0].HeaderCell.Value = "Código Escola";
+            dataGridViewEscolas.Columns[1].HeaderCell.Value = "Status Atividade";
+            dataGridViewEscolas.Columns[2].HeaderCell.Value = "Nome";
+            dataGridViewEscolas.Columns[3].HeaderCell.Value = "Código Mec";
+            dataGridViewEscolas.Columns[4].HeaderCell.Value = "Telefone";
+            dataGridViewEscolas.Columns[5].HeaderCell.Value = "E-Mail";
+            dataGridViewEscolas.Columns[6].HeaderCell.Value = "Data Início da Atividade";
+            dataGridViewEscolas.Columns[7].HeaderCell.Value = "CategoriaAdministrativa";
+            dataGridViewEscolas.Columns[8].HeaderCell.Value = "Organização Acadêmica";
+            dataGridViewEscolas.Columns[9].HeaderCell.Value = "Código Endereço";
 
-            dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEscolas.DefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEscolas.DefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEscolas.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEscolas.DefaultCellStyle.SelectionBackColor = Color.Cyan;
 
-            dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEscolas.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEscolas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEscolas.EnableHeadersVisualStyles = false;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
         }
 
-        private void TelaEscolaForm_VisibleChanged(object sender, EventArgs e)
+        private void AoMudarVisibilidade_TelaEscolaForm(object sender, EventArgs e)
         {
             if(Visible)
             {
-                dataGridView1.DataSource = _servicoEscola.ObterTodos(null);
+                dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
                 _controladorFiltro.Visible = false;
                 _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;

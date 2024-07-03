@@ -80,7 +80,7 @@
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 24);
             comboBoxCategoriaAdministrativa.TabIndex = 41;
-            comboBoxCategoriaAdministrativa.Click += comboBoxCategoriaAdministrativa_Click;
+            comboBoxCategoriaAdministrativa.Click += AoClicar_comboBoxCategoriaAdministrativa;
             // 
             // textBoxNome
             // 
@@ -169,7 +169,7 @@
             textBoxCodigoMec.Name = "textBoxCodigoMec";
             textBoxCodigoMec.Size = new Size(149, 15);
             textBoxCodigoMec.TabIndex = 52;
-            textBoxCodigoMec.KeyPress += textBoxCodigoMec_KeyPress;
+            textBoxCodigoMec.KeyPress += AoPressionarTecla_textBoxCodigoMec;
             // 
             // comboBoxOrganizacaoAcademica
             // 
@@ -182,7 +182,7 @@
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 24);
             comboBoxOrganizacaoAcademica.TabIndex = 53;
-            comboBoxOrganizacaoAcademica.Click += comboBoxOrganizacaoAcademica_Click;
+            comboBoxOrganizacaoAcademica.Click += AoClicar_comboBoxOrganizacaoAcademica;
             // 
             // textBoxIdEndereco
             // 
@@ -194,7 +194,7 @@
             textBoxIdEndereco.Name = "textBoxIdEndereco";
             textBoxIdEndereco.Size = new Size(149, 15);
             textBoxIdEndereco.TabIndex = 54;
-            textBoxIdEndereco.KeyPress += somenteValoresNaturais_KeyPress;
+            textBoxIdEndereco.KeyPress += AoPressionarTecla_TextBox_somenteValoresNaturais;
             // 
             // checkBoxHabilitadoStatusAtividade
             // 
@@ -235,7 +235,7 @@
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
             dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
             dateTimePickerDataInicioAtividade.TabIndex = 60;
-            dateTimePickerDataInicioAtividade.ValueChanged += dateTimePickerDataInicioAtividade_ValueChanged;
+            dateTimePickerDataInicioAtividade.ValueChanged += AoAlterarValor_dateTimePickerDataInicioAtividade;
             // 
             // comboBoxMaiorMenorIgualInicioAtividade
             // 
@@ -256,7 +256,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 69;
-            panelBotaoFiltrar.Paint += panelBotaoFiltrar_Paint;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFiltrar
             // 
@@ -273,7 +273,7 @@
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
             botaoFiltrar.UseVisualStyleBackColor = false;
-            botaoFiltrar.Click += botaoFiltrar_Click;
+            botaoFiltrar.Click += AoClicar_botaoFiltrar;
             // 
             // panel1
             // 
@@ -282,7 +282,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 33;
-            panel1.Paint += panelBotaoFiltrar_Paint;
+            panel1.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoLimpar
             // 
@@ -299,7 +299,7 @@
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
             botaoLimpar.UseVisualStyleBackColor = false;
-            botaoLimpar.Click += botaoLimpar_Click;
+            botaoLimpar.Click += AoClicar_botaoLimpar;
             // 
             // panel2
             // 
@@ -308,7 +308,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 34;
-            panel2.Paint += panelBotaoFiltrar_Paint;
+            panel2.Paint += AoRequererPintura_panelBotaoFiltrar;
             // 
             // botaoFechar
             // 
@@ -325,7 +325,7 @@
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += botaoFechar_Click;
+            botaoFechar.Click += AoClicar_botaoFechar;
             // 
             // panelFiltro
             // 
@@ -354,7 +354,7 @@
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Size = new Size(533, 223);
             panelFiltro.TabIndex = 70;
-            panelFiltro.Paint += panelFiltro_Paint;
+            panelFiltro.Paint += AoRequererPintura_panelFiltro;
             // 
             // labelTitulo
             // 
@@ -375,8 +375,8 @@
             Controls.Add(panelFiltro);
             Name = "FiltroEscolaUserControl";
             Size = new Size(543, 242);
-            Load += FiltroConvenioUserControl_Load;
-            Paint += FiltroEmpresaUserControl_Paint_1;
+            Load += AoCarregar_FiltroEscolaUserControl;
+            Paint += AoRequererPintura_FiltroEmpresaUserControl;
             panelBotaoFiltrar.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);

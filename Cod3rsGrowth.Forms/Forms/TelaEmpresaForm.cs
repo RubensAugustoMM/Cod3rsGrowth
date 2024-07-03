@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void TelaConvenioForm_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_TelaEmpresaForm(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -42,9 +42,9 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void TelaConvenioForm_Load(object sender, EventArgs e)
+        private void AoCarregar_TelaEmpresaForm(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEmpresa.ObterTodos(null);
+            dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
 
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
@@ -57,7 +57,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void painelLateral_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -82,7 +82,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void botaoFiltros_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -96,7 +96,7 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
-                    dataGridView1.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
+                    dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
                 }
             };
@@ -112,7 +112,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
-        private void botaoPesquisar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
             var ListaEmpresaRetornada = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
         }
@@ -130,48 +130,48 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridView1.Columns[0].HeaderCell.Value = "Código Empresa";
-            dataGridView1.Columns[1].HeaderCell.Value = "Razao Social";
-            dataGridView1.Columns[2].HeaderCell.Value = "Nome Fantasia";
-            dataGridView1.Columns[3].HeaderCell.Value = "CNPJ";
-            dataGridView1.Columns[4].HeaderCell.Value = "Situação Cadastral";
-            dataGridView1.Columns[5].HeaderCell.Value = "Data da Alteração Situação Cadastral";
-            dataGridView1.Columns[6].HeaderCell.Value = "Idade";
-            dataGridView1.Columns[7].HeaderCell.Value = "Data de Abertura";
-            dataGridView1.Columns[8].HeaderCell.Value = "Natureza Juridica";
-            dataGridView1.Columns[9].HeaderCell.Value = "Porte";
-            dataGridView1.Columns[10].HeaderCell.Value = "Matriz ou Filial";
-            dataGridView1.Columns[11].HeaderCell.Value = "Capital Social";
-            dataGridView1.Columns[12].HeaderCell.Value = "Código Endereço";
+            dataGridViewEmpresas.Columns[0].HeaderCell.Value = "Código Empresa";
+            dataGridViewEmpresas.Columns[1].HeaderCell.Value = "Razao Social";
+            dataGridViewEmpresas.Columns[2].HeaderCell.Value = "Nome Fantasia";
+            dataGridViewEmpresas.Columns[3].HeaderCell.Value = "CNPJ";
+            dataGridViewEmpresas.Columns[4].HeaderCell.Value = "Situação Cadastral";
+            dataGridViewEmpresas.Columns[5].HeaderCell.Value = "Data da Alteração Situação Cadastral";
+            dataGridViewEmpresas.Columns[6].HeaderCell.Value = "Idade";
+            dataGridViewEmpresas.Columns[7].HeaderCell.Value = "Data de Abertura";
+            dataGridViewEmpresas.Columns[8].HeaderCell.Value = "Natureza Juridica";
+            dataGridViewEmpresas.Columns[9].HeaderCell.Value = "Porte";
+            dataGridViewEmpresas.Columns[10].HeaderCell.Value = "Matriz ou Filial";
+            dataGridViewEmpresas.Columns[11].HeaderCell.Value = "Capital Social";
+            dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
 
-            dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEmpresas.DefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEmpresas.DefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEmpresas.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEmpresas.DefaultCellStyle.SelectionBackColor = Color.Cyan;
 
-            dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEmpresas.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEmpresas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEmpresas.EnableHeadersVisualStyles = false;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
         }
 
-        private void TelaEmpresaForm_VisibleChanged(object sender, EventArgs e)
+        private void AoMudarVisibilidade_TelaEmpresaForm(object sender, EventArgs e)
         {
             if(Visible)
             {
-                dataGridView1.DataSource = _servicoEmpresa.ObterTodos(null);
+                dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
                 _controladorFiltro.Visible = false;
                 _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;

@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEscola Filtro = null;
-        private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
+        private const string _formatoDaData =  "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
         private const int _tamanhoMaximoCodigoMec = 8;
@@ -20,7 +20,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
+        private void AoCarregar_FiltroEscolaUserControl(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -35,13 +35,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void botaoFechar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void botaoFiltrar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
             if (Filtro == null)
             {
@@ -105,7 +105,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void botaoLimpar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoLimpar(object sender, EventArgs e)
         {
             Filtro = null;
 
@@ -140,7 +140,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
 
-        private void somenteValoresNaturais_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_TextBox_somenteValoresNaturais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -153,7 +153,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             _botaoFiltrarPressionado = false;
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -166,7 +166,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void FiltroEmpresaUserControl_Paint_1(object sender, PaintEventArgs e)
+        private void AoRequererPintura_FiltroEmpresaUserControl(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
@@ -179,7 +179,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void panelFiltro_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -201,13 +201,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void dateTimePickerDataInicioAtividade_ValueChanged(object sender, EventArgs e)
+        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
             dateTimePickerDataInicioAtividade.CustomFormat = _formatoDaData;
             _filtroDataInicioAtividade = true;
         }
 
-        private void comboBoxCategoriaAdministrativa_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxCategoriaAdministrativa(object sender, EventArgs e)
         {
             if (comboBoxCategoriaAdministrativa.DataSource == null)
             {
@@ -215,7 +215,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void comboBoxOrganizacaoAcademica_Click(object sender, EventArgs e)
+        private void AoClicar_comboBoxOrganizacaoAcademica(object sender, EventArgs e)
         {
             if (comboBoxOrganizacaoAcademica.DataSource == null)
             {
@@ -223,7 +223,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void textBoxCodigoMec_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
         { 
             if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec)
             {

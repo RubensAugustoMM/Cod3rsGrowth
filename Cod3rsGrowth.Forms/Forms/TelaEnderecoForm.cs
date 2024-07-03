@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void TelaConvenioForm_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_TelaEnderecoForm(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -44,9 +44,9 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void TelaConvenioForm_Load(object sender, EventArgs e)
+        private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEndereco.ObterTodos(null);
+            dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
 
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
@@ -59,7 +59,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void painelLateral_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -84,7 +84,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void botaoFiltros_Click(object sender, EventArgs e)
+        private void AoClicar_botaoFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -98,7 +98,7 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
-                    dataGridView1.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
+                    dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
                 }
             };
@@ -114,9 +114,9 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
-        private void botaoPesquisar_Click(object sender, EventArgs e)
+        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
+            dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
         }
 
         private void ConfiguraFonte(Control controle)
@@ -132,43 +132,43 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridView1.Columns[0].HeaderCell.Value = "Código Endereço";
-            dataGridView1.Columns[1].HeaderCell.Value = "Numero";
-            dataGridView1.Columns[2].HeaderCell.Value = "CEP";
-            dataGridView1.Columns[3].HeaderCell.Value = "Município";
-            dataGridView1.Columns[4].HeaderCell.Value = "Bairro";
-            dataGridView1.Columns[5].HeaderCell.Value = "Rua";
-            dataGridView1.Columns[6].HeaderCell.Value = "Complemento";
-            dataGridView1.Columns[7].HeaderCell.Value = "Estado";
+            dataGridViewEnderecos.Columns[0].HeaderCell.Value = "Código Endereço";
+            dataGridViewEnderecos.Columns[1].HeaderCell.Value = "Numero";
+            dataGridViewEnderecos.Columns[2].HeaderCell.Value = "CEP";
+            dataGridViewEnderecos.Columns[3].HeaderCell.Value = "Município";
+            dataGridViewEnderecos.Columns[4].HeaderCell.Value = "Bairro";
+            dataGridViewEnderecos.Columns[5].HeaderCell.Value = "Rua";
+            dataGridViewEnderecos.Columns[6].HeaderCell.Value = "Complemento";
+            dataGridViewEnderecos.Columns[7].HeaderCell.Value = "Estado";
 
-            dataGridView1.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEnderecos.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEnderecos.DefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEnderecos.DefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEnderecos.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEnderecos.DefaultCellStyle.SelectionBackColor = Color.Cyan;
 
-            dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewEnderecos.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEnderecos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEnderecos.EnableHeadersVisualStyles = false;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
         }
 
-        private void TelaEnderecoForm_VisibleChanged(object sender, EventArgs e)
+        private void AoMudarVisibilidade_TelaEnderecoForm(object sender, EventArgs e)
         {
             if(Visible)
             {
-                dataGridView1.DataSource = _servicoEndereco.ObterTodos(null);
+                dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
                 _controladorFiltro.Visible = false;
                 _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void panelBotaoFiltrar_Paint(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
