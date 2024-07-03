@@ -99,6 +99,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.LimpaFiltro();
                 }
             };
 

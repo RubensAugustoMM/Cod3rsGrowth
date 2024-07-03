@@ -43,10 +43,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            if (Filtro == null)
-            {
-                Filtro = new FiltroEscola();
-            }
+            Filtro = new FiltroEscola();
 
             if (!string.IsNullOrEmpty(textBoxNome.Text))
             {
@@ -83,17 +80,17 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.InicioAtividadeFiltro = dateTimePickerDataInicioAtividade.Value;
             }
 
-            if (FiltrosMaiorMenorIgualEnums.Menor ==
-                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
-            {
-                Filtro.MaiorOuIgualInicioAtividade = new();
-                Filtro.MaiorOuIgualInicioAtividade = false;
-            }
-            else if (FiltrosMaiorMenorIgualEnums.Maior ==
+            if (FiltrosMaiorMenorIgualEnums.Maior ==
                     (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
             {
                 Filtro.MaiorOuIgualInicioAtividade = new();
                 Filtro.MaiorOuIgualInicioAtividade = true;
+            }
+            else if (FiltrosMaiorMenorIgualEnums.Menor ==
+                    (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
+            {
+                Filtro.MaiorOuIgualInicioAtividade = new();
+                Filtro.MaiorOuIgualInicioAtividade = false;
             }
             else
             {
@@ -106,6 +103,11 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void AoClicar_botaoLimpar(object sender, EventArgs e)
+        {
+            LimpaFiltro();
+        }
+
+        public void LimpaFiltro()
         {
             Filtro = null;
 
