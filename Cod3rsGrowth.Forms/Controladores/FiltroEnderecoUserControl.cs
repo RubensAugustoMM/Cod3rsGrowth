@@ -49,10 +49,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            if (Filtro == null)
-            {
                 Filtro = new FiltroEndereco();
-            }
 
             if (!string.IsNullOrEmpty(textBoxMunicipio.Text))
             {
@@ -79,6 +76,11 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void AoClicar_botaoLimpar(object sender, EventArgs e)
+        {
+            LimpaFiltro();
+        }
+
+        public void LimpaFiltro()
         {
             Filtro = null;
 

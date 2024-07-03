@@ -100,6 +100,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
                     _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.LimpaFiltro();
                 }
             };
 
