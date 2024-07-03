@@ -216,7 +216,6 @@
             botaoFechar.Size = new Size(85, 27);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
-            botaoFechar.TextAlign = ContentAlignment.BottomCenter;
             botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 
@@ -234,7 +233,6 @@
             botaoFiltrar.Size = new Size(85, 27);
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.TextAlign = ContentAlignment.BottomCenter;
             botaoFiltrar.UseVisualStyleBackColor = false;
             botaoFiltrar.Click += botaoFiltrar_Click;
             // 
@@ -252,7 +250,6 @@
             botaoLimpar.Size = new Size(85, 27);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
-            botaoLimpar.TextAlign = ContentAlignment.BottomCenter;
             botaoLimpar.UseVisualStyleBackColor = false;
             botaoLimpar.Click += botaoLimpar_Click;
             // 

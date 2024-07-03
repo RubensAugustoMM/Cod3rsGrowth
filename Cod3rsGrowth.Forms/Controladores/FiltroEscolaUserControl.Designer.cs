@@ -169,6 +169,7 @@
             textBoxCodigoMec.Name = "textBoxCodigoMec";
             textBoxCodigoMec.Size = new Size(149, 15);
             textBoxCodigoMec.TabIndex = 52;
+            textBoxCodigoMec.KeyPress += textBoxCodigoMec_KeyPress;
             // 
             // comboBoxOrganizacaoAcademica
             // 
@@ -214,7 +215,7 @@
             checkBoxStatusAtividade.FlatAppearance.BorderSize = 0;
             checkBoxStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxStatusAtividade.ForeColor = Color.White;
-            checkBoxStatusAtividade.Location = new Point(241, 138);
+            checkBoxStatusAtividade.Location = new Point(241, 135);
             checkBoxStatusAtividade.Name = "checkBoxStatusAtividade";
             checkBoxStatusAtividade.Size = new Size(15, 14);
             checkBoxStatusAtividade.TabIndex = 58;
@@ -271,7 +272,6 @@
             botaoFiltrar.Size = new Size(85, 27);
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.TextAlign = ContentAlignment.BottomCenter;
             botaoFiltrar.UseVisualStyleBackColor = false;
             botaoFiltrar.Click += botaoFiltrar_Click;
             // 
@@ -298,7 +298,6 @@
             botaoLimpar.Size = new Size(85, 27);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
-            botaoLimpar.TextAlign = ContentAlignment.BottomCenter;
             botaoLimpar.UseVisualStyleBackColor = false;
             botaoLimpar.Click += botaoLimpar_Click;
             // 
@@ -325,7 +324,6 @@
             botaoFechar.Size = new Size(85, 27);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
-            botaoFechar.TextAlign = ContentAlignment.BottomCenter;
             botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 

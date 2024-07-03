@@ -11,6 +11,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
+        private const int _tamanhoMaximoCnpj = 14;
         private bool _filtroDataAbertura;
         private bool _filtroDataSituacaoCadastral;
         public bool _botaoFiltrarPressionado { get; private set; }
@@ -76,7 +77,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro = new FiltroEmpresa();
             }
-            
+
             if (!string.IsNullOrEmpty(textBoxRazaoSocial.Text))
             {
                 Filtro.RazaoSocialFiltro = textBoxRazaoSocial.Text;
@@ -107,27 +108,27 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.SitucaoCadastralFiltro = checkBoxSituacaoCadastral.Checked;
             }
 
-            if(comboBoxNaturezaJuridica.DataSource != null)
+            if (comboBoxNaturezaJuridica.DataSource != null)
             {
                 Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
             }
 
-            if(comboBoxPorte.DataSource != null)
+            if (comboBoxPorte.DataSource != null)
             {
                 Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
             }
 
-            if(comboBoxMatrizFilial.DataSource != null)
+            if (comboBoxMatrizFilial.DataSource != null)
             {
                 Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
             }
 
-            if(_filtroDataAbertura)
+            if (_filtroDataAbertura)
             {
                 Filtro.DataAberturaFiltro = dateTimePickerDataAbertura.Value;
             }
 
-            if(_filtroDataSituacaoCadastral)
+            if (_filtroDataSituacaoCadastral)
             {
                 Filtro.DataSituacaoCadastralFiltro = dateTimePickerDataSituacaoCadastral.Value;
             }
@@ -182,7 +183,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualDataSituacaoCadastral = null;
             }
-            
+
 
             _botaoFiltrarPressionado = true;
             Visible = false;
@@ -343,9 +344,22 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void dateTimePickerDataAbertura_ValueChanged(object sender, EventArgs e)
-        { 
+        {
             dateTimePickerDataAbertura.CustomFormat = _formatoDaData;
             _filtroDataAbertura = true;
+        }
+
+        private void textBoxCnpj_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (textBoxCnpj.Text.Length > _tamanhoMaximoCnpj)
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

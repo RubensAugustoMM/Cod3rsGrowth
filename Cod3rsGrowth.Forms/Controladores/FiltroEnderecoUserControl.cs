@@ -9,6 +9,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private PrivateFontCollection _pixeboy;
         public FiltroEndereco Filtro = null;
         private const string _textoVazio = "";
+        private const int _tamanhoMaximoCep = 8;
         public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEnderecoUserControl()
@@ -68,7 +69,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CepFiltro = textBoxCep.Text;
             }
 
-            if(comboBoxEstado.DataSource != null)
+            if (comboBoxEstado.DataSource != null)
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
@@ -143,6 +144,19 @@ namespace Cod3rsGrowth.Forms.Controladores
         private void comboBoxEstado_Click(object sender, EventArgs e)
         {
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
+        }
+
+        private void textBoxCep_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (textBoxCep.Text.Length > _tamanhoMaximoCep)
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

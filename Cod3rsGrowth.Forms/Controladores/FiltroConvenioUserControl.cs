@@ -169,7 +169,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             textBoxIdEscola.Text = _textoVazio;
             textBoxIdEmpresa.Text = _textoVazio;
             textBoxValor.Text = _textoVazio;
-            
+
             dateTimePickerDataInicio.CustomFormat = _dataVazia;
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Custom;
             _filtroDataInicioHabilitado = false;
@@ -177,7 +177,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataTermino.CustomFormat = _dataVazia;
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Custom;
             _filtroDataTerminoHabilitado = false;
-            
+
             comboMaiorMenorIgualValor.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboMaiorMenorIgualDataInicio.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboMaiorMenorIgualDataTermino.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
@@ -264,7 +264,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
-            int Altura = panelFiltro.Height + 19; 
+            int Altura = panelFiltro.Height + 19;
             int Largura = panelFiltro.Width + 10;
 
             using (Brush pincel = new SolidBrush(Color.Black))

@@ -11,6 +11,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         private const string _formatoDaData = "yyyy/MM/dd hh:mm:ss";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
+        private const int _tamanhoMaximoCodigoMec = 8;
         private bool _filtroDataInicioAtividade;
         public bool _botaoFiltrarPressionado { get; private set; }
 
@@ -67,21 +68,21 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.StatusAtividadeFiltro = checkBoxStatusAtividade.Checked;
             }
 
-            if(comboBoxCategoriaAdministrativa.DataSource != null)
+            if (comboBoxCategoriaAdministrativa.DataSource != null)
             {
                 Filtro.CategoriaAdministrativaFiltro = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
             }
 
-            if(comboBoxOrganizacaoAcademica.DataSource != null)
+            if (comboBoxOrganizacaoAcademica.DataSource != null)
             {
                 Filtro.OrganizacaoAcademicaFiltro = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
             }
 
-            if(_filtroDataInicioAtividade)
+            if (_filtroDataInicioAtividade)
             {
                 Filtro.InicioAtividadeFiltro = dateTimePickerDataInicioAtividade.Value;
             }
-            
+
             if (FiltrosMaiorMenorIgualEnums.Menor ==
                     (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
             {
@@ -98,7 +99,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.MaiorOuIgualInicioAtividade = null;
             }
-            
+
 
             _botaoFiltrarPressionado = true;
             Visible = false;
@@ -216,9 +217,22 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void comboBoxOrganizacaoAcademica_Click(object sender, EventArgs e)
         {
-            if(comboBoxOrganizacaoAcademica.DataSource == null) 
+            if (comboBoxOrganizacaoAcademica.DataSource == null)
             {
                 comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
+            }
+        }
+
+        private void textBoxCodigoMec_KeyPress(object sender, KeyPressEventArgs e)
+        { 
+            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec)
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

@@ -208,6 +208,7 @@
             textBoxCnpj.Name = "textBoxCnpj";
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 35;
+            textBoxCnpj.KeyPress += textBoxCnpj_KeyPress;
             // 
             // textBoxCapitalSocial
             // 
@@ -316,7 +317,7 @@
             checkBoxSituacaoCadastral.AutoSize = true;
             checkBoxSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxSituacaoCadastral.ForeColor = Color.White;
-            checkBoxSituacaoCadastral.Location = new Point(217, 196);
+            checkBoxSituacaoCadastral.Location = new Point(217, 191);
             checkBoxSituacaoCadastral.Name = "checkBoxSituacaoCadastral";
             checkBoxSituacaoCadastral.Size = new Size(15, 14);
             checkBoxSituacaoCadastral.TabIndex = 56;
@@ -327,7 +328,7 @@
             checkBoxHabilitadoSituacaoCadastral.AutoSize = true;
             checkBoxHabilitadoSituacaoCadastral.FlatAppearance.BorderSize = 0;
             checkBoxHabilitadoSituacaoCadastral.ForeColor = Color.White;
-            checkBoxHabilitadoSituacaoCadastral.Location = new Point(238, 194);
+            checkBoxHabilitadoSituacaoCadastral.Location = new Point(238, 192);
             checkBoxHabilitadoSituacaoCadastral.Name = "checkBoxHabilitadoSituacaoCadastral";
             checkBoxHabilitadoSituacaoCadastral.Size = new Size(86, 19);
             checkBoxHabilitadoSituacaoCadastral.TabIndex = 57;
@@ -357,7 +358,6 @@
             botaoFechar.Size = new Size(85, 27);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
-            botaoFechar.TextAlign = ContentAlignment.BottomCenter;
             botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 
@@ -384,7 +384,6 @@
             botaoLimpar.Size = new Size(85, 27);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
-            botaoLimpar.TextAlign = ContentAlignment.BottomCenter;
             botaoLimpar.UseVisualStyleBackColor = false;
             botaoLimpar.Click += botaoLimpar_Click;
             // 
@@ -411,7 +410,6 @@
             botaoFiltrar.Size = new Size(85, 27);
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.TextAlign = ContentAlignment.BottomCenter;
             botaoFiltrar.UseVisualStyleBackColor = false;
             botaoFiltrar.Click += botaoFiltrar_Click;
             // 

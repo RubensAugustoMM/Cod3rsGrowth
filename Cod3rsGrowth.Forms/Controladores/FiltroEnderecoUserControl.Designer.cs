@@ -37,13 +37,13 @@
             textBoxBairro = new TextBox();
             textBoxCep = new TextBox();
             panelFiltro = new Panel();
+            labelTitulo = new Label();
             panel3 = new Panel();
             botaoFechar = new Button();
             panel2 = new Panel();
             botaoLimpar = new Button();
             panelBotaoFiltrar = new Panel();
             botaoFiltrar = new Button();
-            labelTitulo = new Label();
             panelFiltro.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -103,16 +103,16 @@
             labelCep.ForeColor = Color.White;
             labelCep.Location = new Point(38, 83);
             labelCep.Name = "labelCep";
-            labelCep.Size = new Size(75, 21);
+            labelCep.Size = new Size(78, 21);
             labelCep.TabIndex = 44;
-            labelCep.Text = "CEP. . . . . :";
+            labelCep.Text = "CEP. . . . . .:";
             // 
             // textBoxMunicipio
             // 
             textBoxMunicipio.BackColor = Color.Black;
             textBoxMunicipio.BorderStyle = BorderStyle.None;
-            textBoxMunicipio.ForeColor = Color.Yellow;
-            textBoxMunicipio.Location = new Point(147, 46);
+            textBoxMunicipio.ForeColor = Color.White;
+            textBoxMunicipio.Location = new Point(147, 45);
             textBoxMunicipio.Name = "textBoxMunicipio";
             textBoxMunicipio.Size = new Size(149, 16);
             textBoxMunicipio.TabIndex = 45;
@@ -121,7 +121,7 @@
             // 
             textBoxBairro.BackColor = Color.Black;
             textBoxBairro.BorderStyle = BorderStyle.None;
-            textBoxBairro.ForeColor = Color.Yellow;
+            textBoxBairro.ForeColor = Color.White;
             textBoxBairro.Location = new Point(147, 67);
             textBoxBairro.Name = "textBoxBairro";
             textBoxBairro.Size = new Size(149, 16);
@@ -131,11 +131,12 @@
             // 
             textBoxCep.BackColor = Color.Black;
             textBoxCep.BorderStyle = BorderStyle.None;
-            textBoxCep.ForeColor = Color.Yellow;
+            textBoxCep.ForeColor = Color.White;
             textBoxCep.Location = new Point(147, 89);
             textBoxCep.Name = "textBoxCep";
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 47;
+            textBoxCep.KeyPress += textBoxCep_KeyPress;
             // 
             // panelFiltro
             // 
@@ -158,6 +159,17 @@
             panelFiltro.Size = new Size(367, 153);
             panelFiltro.TabIndex = 62;
             panelFiltro.Paint += panelFiltro_Paint;
+            // 
+            // labelTitulo
+            // 
+            labelTitulo.AutoSize = true;
+            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTitulo.ForeColor = Color.White;
+            labelTitulo.Location = new Point(132, 0);
+            labelTitulo.Name = "labelTitulo";
+            labelTitulo.Size = new Size(100, 19);
+            labelTitulo.TabIndex = 65;
+            labelTitulo.Text = "Filtro Endereço";
             // 
             // panel3
             // 
@@ -182,7 +194,6 @@
             botaoFechar.Size = new Size(85, 27);
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
-            botaoFechar.TextAlign = ContentAlignment.BottomCenter;
             botaoFechar.UseVisualStyleBackColor = false;
             botaoFechar.Click += botaoFechar_Click;
             // 
@@ -209,7 +220,6 @@
             botaoLimpar.Size = new Size(85, 27);
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
-            botaoLimpar.TextAlign = ContentAlignment.BottomCenter;
             botaoLimpar.UseVisualStyleBackColor = false;
             botaoLimpar.Click += botaoLimpar_Click;
             // 
@@ -236,20 +246,8 @@
             botaoFiltrar.Size = new Size(85, 27);
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
-            botaoFiltrar.TextAlign = ContentAlignment.BottomCenter;
             botaoFiltrar.UseVisualStyleBackColor = false;
             botaoFiltrar.Click += botaoFiltrar_Click;
-            // 
-            // labelTitulo
-            // 
-            labelTitulo.AutoSize = true;
-            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTitulo.ForeColor = Color.White;
-            labelTitulo.Location = new Point(132, 0);
-            labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(100, 19);
-            labelTitulo.TabIndex = 65;
-            labelTitulo.Text = "Filtro Endereço";
             // 
             // FiltroEnderecoUserControl
             // 
