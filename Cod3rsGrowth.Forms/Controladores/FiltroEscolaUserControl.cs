@@ -60,19 +60,27 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.IdEnderecoFiltro = int.Parse(textBoxIdEndereco.Text);
             }
 
-            if (checkBoxHabilitadoStatusAtividade.Checked)
-            {
-                Filtro.StatusAtividadeFiltro = checkBoxStatusAtividade.Checked;
-            }
-
-            if (comboBoxCategoriaAdministrativa.DataSource != null)
+            if (comboBoxCategoriaAdministrativa.SelectedItem != null)
             {
                 Filtro.CategoriaAdministrativaFiltro = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
             }
 
-            if (comboBoxOrganizacaoAcademica.DataSource != null)
+            if (comboBoxOrganizacaoAcademica.SelectedItem != null)
             {
                 Filtro.OrganizacaoAcademicaFiltro = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
+            }
+
+            if(comboBoxHabilitadoStatusAtividade.SelectedItem != null)
+            {
+                if(HabilitadoEnums.Habilitado ==
+                    (HabilitadoEnums)comboBoxHabilitadoStatusAtividade.SelectedItem)
+                {
+                    Filtro.StatusAtividadeFiltro = true;
+                }
+                else
+                {
+                    Filtro.StatusAtividadeFiltro = false;
+                }
             }
 
             if (_filtroDataInicioAtividade)
@@ -83,13 +91,11 @@ namespace Cod3rsGrowth.Forms.Controladores
             if (FiltrosMaiorMenorIgualEnums.Maior ==
                     (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
             {
-                Filtro.MaiorOuIgualInicioAtividade = new();
                 Filtro.MaiorOuIgualInicioAtividade = true;
             }
             else if (FiltrosMaiorMenorIgualEnums.Menor ==
                     (FiltrosMaiorMenorIgualEnums)comboBoxMaiorMenorIgualInicioAtividade.SelectedItem)
             {
-                Filtro.MaiorOuIgualInicioAtividade = new();
                 Filtro.MaiorOuIgualInicioAtividade = false;
             }
             else
@@ -119,11 +125,9 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Custom;
             _filtroDataInicioAtividade = false;
 
-            comboBoxCategoriaAdministrativa.DataSource = null;
-            comboBoxOrganizacaoAcademica.DataSource = null;
-
-            checkBoxHabilitadoStatusAtividade.Checked = false;
-            checkBoxStatusAtividade.Checked = false;
+            comboBoxCategoriaAdministrativa.SelectedItem = null;
+            comboBoxOrganizacaoAcademica.SelectedItem = null;
+            comboBoxHabilitadoStatusAtividade.SelectedItem = null;
 
             comboBoxMaiorMenorIgualInicioAtividade.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
         }
@@ -136,8 +140,14 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxCategoriaAdministrativa.DataSource = null;
-            comboBoxOrganizacaoAcademica.DataSource = null;
+            comboBoxCategoriaAdministrativa.DataSource = Enum.GetValues(typeof(CategoriaAdministrativaEnums));
+            comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
+            comboBoxHabilitadoStatusAtividade.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+
+            comboBoxCategoriaAdministrativa.SelectedItem = null;
+            comboBoxOrganizacaoAcademica.SelectedItem = null;
+            comboBoxHabilitadoStatusAtividade.SelectedItem = null;
+
             comboBoxMaiorMenorIgualInicioAtividade.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
         }
 

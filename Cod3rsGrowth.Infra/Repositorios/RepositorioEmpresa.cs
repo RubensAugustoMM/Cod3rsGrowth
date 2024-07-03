@@ -41,6 +41,13 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
         if (filtroEmpresa != null)
         {
+            if(filtroEmpresa.SitucaoCadastralFiltro != null)
+            {
+                query = from e in query
+                        where e.SitucaoCadastral == filtroEmpresa.SitucaoCadastralFiltro
+                        select e;
+            }
+
             if (filtroEmpresa.NaturezaJuridicaFiltro != null)
             {
                 query = from e in query

@@ -75,24 +75,33 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CapitalSocialFiltro = decimal.Parse(textBoxCapitalSocial.Text);
             }
 
-            if (checkBoxHabilitadoSituacaoCadastral.Checked)
-            {
-                Filtro.SitucaoCadastralFiltro = checkBoxSituacaoCadastral.Checked;
-            }
 
-            if (comboBoxNaturezaJuridica.DataSource != null)
+            if (comboBoxNaturezaJuridica.SelectedItem != null)
             {
                 Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
             }
 
-            if (comboBoxPorte.DataSource != null)
+            if (comboBoxPorte.SelectedItem != null)
             {
                 Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
             }
 
-            if (comboBoxMatrizFilial.DataSource != null)
+            if (comboBoxMatrizFilial.SelectedItem != null)
             {
                 Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+            }
+
+            if(comboBoxHabilitadoSituacaoCadastral.SelectedItem != null)
+            {
+                if (HabilitadoEnums.Habilitado ==
+                      (HabilitadoEnums)comboBoxHabilitadoSituacaoCadastral.SelectedItem)
+                {
+                    Filtro.SitucaoCadastralFiltro = true;
+                }
+                else
+                {
+                    Filtro.SitucaoCadastralFiltro = false;
+                }
             }
 
             if (_filtroDataAbertura)
@@ -158,12 +167,10 @@ namespace Cod3rsGrowth.Forms.Controladores
             dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Custom;
             _filtroDataAbertura = false;
 
-            comboBoxMatrizFilial.DataSource = null;
-            comboBoxNaturezaJuridica.DataSource = null;
-            comboBoxPorte.DataSource = null;
-
-            checkBoxSituacaoCadastral.Checked = false;
-            checkBoxHabilitadoSituacaoCadastral.Checked = false;
+            comboBoxNaturezaJuridica.SelectedItem = null;
+            comboBoxMatrizFilial.SelectedItem = null;
+            comboBoxPorte.SelectedItem = null;
+            comboBoxHabilitadoSituacaoCadastral.SelectedItem = null;
 
             comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboBoxMaiorMenorIgualDataAbertura.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
@@ -179,9 +186,15 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxNaturezaJuridica.DataSource = null;
-            comboBoxMatrizFilial.DataSource = null;
-            comboBoxPorte.DataSource = null;
+            comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
+            comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
+            comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
+            comboBoxHabilitadoSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+
+            comboBoxNaturezaJuridica.SelectedItem = null;
+            comboBoxMatrizFilial.SelectedItem = null;
+            comboBoxPorte.SelectedItem = null;
+            comboBoxHabilitadoSituacaoCadastral.SelectedItem = null;
 
             comboBoxMaiorMenorIgualCapitalSocial.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
             comboBoxMaiorMenorIgualDataAbertura.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
@@ -239,31 +252,6 @@ namespace Cod3rsGrowth.Forms.Controladores
                                                                yInicioRetanguloInterior,
                                                                panelFiltro.Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                panelFiltro.Height - (yInicioRetanguloInterior + Tamanho) * 2));
-            }
-        }
-
-
-        private void AoClicar_comboBoxNaturezaJuridica(object sender, EventArgs e)
-        {
-            if (comboBoxNaturezaJuridica.DataSource == null)
-            {
-                comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
-            }
-        }
-
-        private void AoClicar_comboBoxPorte(object sender, EventArgs e)
-        {
-            if (comboBoxPorte.DataSource == null)
-            {
-                comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
-            }
-        }
-
-        private void AoClicar_comboBoxMatrizFilial(object sender, EventArgs e)
-        {
-            if (comboBoxMatrizFilial.DataSource == null)
-            {
-                comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
             }
         }
 

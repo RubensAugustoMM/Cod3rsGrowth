@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
-            var ListaEmpresaRetornada = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
+            dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
         }
 
         private void ConfiguraFonte(Control controle)

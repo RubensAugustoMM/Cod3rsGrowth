@@ -40,8 +40,6 @@
             textBoxCodigoMec = new TextBox();
             comboBoxOrganizacaoAcademica = new ComboBox();
             textBoxIdEndereco = new TextBox();
-            checkBoxHabilitadoStatusAtividade = new CheckBox();
-            checkBoxStatusAtividade = new CheckBox();
             dateTimePickerDataInicioAtividade = new DateTimePicker();
             comboBoxMaiorMenorIgualInicioAtividade = new ComboBox();
             panelBotaoFiltrar = new Panel();
@@ -52,6 +50,7 @@
             botaoFechar = new Button();
             panelFiltro = new Panel();
             labelTitulo = new Label();
+            comboBoxHabilitadoStatusAtividade = new ComboBox();
             panelBotaoFiltrar.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -196,31 +195,6 @@
             textBoxIdEndereco.TabIndex = 54;
             textBoxIdEndereco.KeyPress += AoPressionarTecla_TextBox_somenteValoresNaturais;
             // 
-            // checkBoxHabilitadoStatusAtividade
-            // 
-            checkBoxHabilitadoStatusAtividade.AutoSize = true;
-            checkBoxHabilitadoStatusAtividade.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBoxHabilitadoStatusAtividade.ForeColor = Color.White;
-            checkBoxHabilitadoStatusAtividade.Location = new Point(262, 135);
-            checkBoxHabilitadoStatusAtividade.Name = "checkBoxHabilitadoStatusAtividade";
-            checkBoxHabilitadoStatusAtividade.Size = new Size(95, 20);
-            checkBoxHabilitadoStatusAtividade.TabIndex = 59;
-            checkBoxHabilitadoStatusAtividade.Text = "Habilitado?";
-            checkBoxHabilitadoStatusAtividade.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxStatusAtividade
-            // 
-            checkBoxStatusAtividade.AutoSize = true;
-            checkBoxStatusAtividade.FlatAppearance.BorderSize = 0;
-            checkBoxStatusAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBoxStatusAtividade.ForeColor = Color.White;
-            checkBoxStatusAtividade.Location = new Point(241, 135);
-            checkBoxStatusAtividade.Name = "checkBoxStatusAtividade";
-            checkBoxStatusAtividade.Size = new Size(15, 14);
-            checkBoxStatusAtividade.TabIndex = 58;
-            checkBoxStatusAtividade.UseVisualStyleBackColor = true;
-            // 
             // dateTimePickerDataInicioAtividade
             // 
             dateTimePickerDataInicioAtividade.CalendarFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -330,6 +304,7 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(comboBoxHabilitadoStatusAtividade);
             panelFiltro.Controls.Add(labelTitulo);
             panelFiltro.Controls.Add(idEmpresaLabel);
             panelFiltro.Controls.Add(panel2);
@@ -342,9 +317,7 @@
             panelFiltro.Controls.Add(labelCategoriaAdministrativa);
             panelFiltro.Controls.Add(dateTimePickerDataInicioAtividade);
             panelFiltro.Controls.Add(labelOrganizacaoAcademica);
-            panelFiltro.Controls.Add(checkBoxHabilitadoStatusAtividade);
             panelFiltro.Controls.Add(labelIdEndereco);
-            panelFiltro.Controls.Add(checkBoxStatusAtividade);
             panelFiltro.Controls.Add(labelStatusAtividade);
             panelFiltro.Controls.Add(textBoxIdEndereco);
             panelFiltro.Controls.Add(labelInicioAtividade);
@@ -366,6 +339,18 @@
             labelTitulo.Size = new Size(81, 19);
             labelTitulo.TabIndex = 70;
             labelTitulo.Text = "Filtro Escola";
+            // 
+            // comboBoxHabilitadoStatusAtividade
+            // 
+            comboBoxHabilitadoStatusAtividade.BackColor = Color.Black;
+            comboBoxHabilitadoStatusAtividade.FlatStyle = FlatStyle.Flat;
+            comboBoxHabilitadoStatusAtividade.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHabilitadoStatusAtividade.ForeColor = Color.White;
+            comboBoxHabilitadoStatusAtividade.FormattingEnabled = true;
+            comboBoxHabilitadoStatusAtividade.Location = new Point(241, 134);
+            comboBoxHabilitadoStatusAtividade.Name = "comboBoxHabilitadoStatusAtividade";
+            comboBoxHabilitadoStatusAtividade.Size = new Size(149, 23);
+            comboBoxHabilitadoStatusAtividade.TabIndex = 73;
             // 
             // FiltroEscolaUserControl
             // 
@@ -411,8 +396,6 @@
         private TextBox textBoxCodigoMec;
         private ComboBox comboBoxOrganizacaoAcademica;
         private TextBox textBoxIdEndereco;
-        private CheckBox checkBoxHabilitadoStatusAtividade;
-        private CheckBox checkBoxStatusAtividade;
         private DateTimePicker dateTimePickerDataInicioAtividade;
         private ComboBox comboBoxMaiorMenorIgualInicioAtividade;
         private Panel panelBotaoFiltrar;
@@ -423,5 +406,6 @@
         private Button botaoFechar;
         private Panel panelFiltro;
         private Label labelTitulo;
+        private ComboBox comboBoxHabilitadoStatusAtividade;
     }
 }

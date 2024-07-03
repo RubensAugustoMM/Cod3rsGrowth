@@ -49,8 +49,6 @@
             comboBoxMatrizFilial = new ComboBox();
             dateTimePickerDataSituacaoCadastral = new DateTimePicker();
             dateTimePickerDataAbertura = new DateTimePicker();
-            checkBoxSituacaoCadastral = new CheckBox();
-            checkBoxHabilitadoSituacaoCadastral = new CheckBox();
             panel2 = new Panel();
             botaoFechar = new Button();
             panel1 = new Panel();
@@ -62,6 +60,7 @@
             comboBoxMaiorMenorIgualDataSituacaoCadastral = new ComboBox();
             comboBoxMaiorMenorIgualDataAbertura = new ComboBox();
             panelFiltro = new Panel();
+            comboBoxHabilitadoSituacaoCadastral = new ComboBox();
             labelTitulo = new Label();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -254,7 +253,6 @@
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 40;
-            comboBoxNaturezaJuridica.Click += AoClicar_comboBoxNaturezaJuridica;
             // 
             // comboBoxPorte
             // 
@@ -267,7 +265,6 @@
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 41;
-            comboBoxPorte.Click += AoClicar_comboBoxPorte;
             // 
             // comboBoxMatrizFilial
             // 
@@ -280,7 +277,6 @@
             comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
             comboBoxMatrizFilial.Size = new Size(149, 23);
             comboBoxMatrizFilial.TabIndex = 42;
-            comboBoxMatrizFilial.Click += AoClicar_comboBoxMatrizFilial;
             // 
             // dateTimePickerDataSituacaoCadastral
             // 
@@ -311,29 +307,6 @@
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
             dateTimePickerDataAbertura.ValueChanged += AoAlterarValor_dateTimePickerDataAbertura;
-            // 
-            // checkBoxSituacaoCadastral
-            // 
-            checkBoxSituacaoCadastral.AutoSize = true;
-            checkBoxSituacaoCadastral.FlatAppearance.BorderSize = 0;
-            checkBoxSituacaoCadastral.ForeColor = Color.White;
-            checkBoxSituacaoCadastral.Location = new Point(217, 191);
-            checkBoxSituacaoCadastral.Name = "checkBoxSituacaoCadastral";
-            checkBoxSituacaoCadastral.Size = new Size(15, 14);
-            checkBoxSituacaoCadastral.TabIndex = 56;
-            checkBoxSituacaoCadastral.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxHabilitadoSituacaoCadastral
-            // 
-            checkBoxHabilitadoSituacaoCadastral.AutoSize = true;
-            checkBoxHabilitadoSituacaoCadastral.FlatAppearance.BorderSize = 0;
-            checkBoxHabilitadoSituacaoCadastral.ForeColor = Color.White;
-            checkBoxHabilitadoSituacaoCadastral.Location = new Point(238, 192);
-            checkBoxHabilitadoSituacaoCadastral.Name = "checkBoxHabilitadoSituacaoCadastral";
-            checkBoxHabilitadoSituacaoCadastral.Size = new Size(86, 19);
-            checkBoxHabilitadoSituacaoCadastral.TabIndex = 57;
-            checkBoxHabilitadoSituacaoCadastral.Text = "Habilitado?";
-            checkBoxHabilitadoSituacaoCadastral.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -464,6 +437,7 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(comboBoxHabilitadoSituacaoCadastral);
             panelFiltro.Controls.Add(labelTitulo);
             panelFiltro.Controls.Add(labelRazaoSocial);
             panelFiltro.Controls.Add(comboBoxMaiorMenorIgualDataAbertura);
@@ -480,9 +454,7 @@
             panelFiltro.Controls.Add(labelCapitalSocial);
             panelFiltro.Controls.Add(panelBotaoFiltrar);
             panelFiltro.Controls.Add(labelPorte);
-            panelFiltro.Controls.Add(checkBoxHabilitadoSituacaoCadastral);
             panelFiltro.Controls.Add(labelNaturezaJuridica);
-            panelFiltro.Controls.Add(checkBoxSituacaoCadastral);
             panelFiltro.Controls.Add(labelMatrizFilial);
             panelFiltro.Controls.Add(dateTimePickerDataAbertura);
             panelFiltro.Controls.Add(textBoxRazaoSocial);
@@ -500,6 +472,18 @@
             panelFiltro.Size = new Size(516, 307);
             panelFiltro.TabIndex = 65;
             panelFiltro.Paint += AoRequererPintura_panelFiltro;
+            // 
+            // comboBoxHabilitadoSituacaoCadastral
+            // 
+            comboBoxHabilitadoSituacaoCadastral.BackColor = Color.Black;
+            comboBoxHabilitadoSituacaoCadastral.FlatStyle = FlatStyle.Flat;
+            comboBoxHabilitadoSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHabilitadoSituacaoCadastral.ForeColor = Color.White;
+            comboBoxHabilitadoSituacaoCadastral.FormattingEnabled = true;
+            comboBoxHabilitadoSituacaoCadastral.Location = new Point(217, 189);
+            comboBoxHabilitadoSituacaoCadastral.Name = "comboBoxHabilitadoSituacaoCadastral";
+            comboBoxHabilitadoSituacaoCadastral.Size = new Size(149, 23);
+            comboBoxHabilitadoSituacaoCadastral.TabIndex = 72;
             // 
             // labelTitulo
             // 
@@ -552,8 +536,6 @@
         private ComboBox comboBoxMatrizFilial;
         private DateTimePicker dateTimePickerDataSituacaoCadastral;
         private DateTimePicker dateTimePickerDataAbertura;
-        private CheckBox checkBoxSituacaoCadastral;
-        private CheckBox checkBoxHabilitadoSituacaoCadastral;
         private Panel panel2;
         private Button botaoFechar;
         private Panel panel1;
@@ -566,5 +548,6 @@
         private ComboBox comboBoxMaiorMenorIgualDataAbertura;
         private Panel panelFiltro;
         private Label labelTitulo;
+        private ComboBox comboBoxHabilitadoSituacaoCadastral;
     }
 }
