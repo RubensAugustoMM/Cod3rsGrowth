@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaConvenioForm : Form
     {
         private struct DadosExibirConvenio
-        {
+        {//AoClicarBotaoFiltros
             public int Id { get; set; }
             public int NumeroProcesso { get; set; }
             public string Objeto { get; set; }
