@@ -48,6 +48,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                                         DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                                         Idade = empresa.Idade,
                                         DataAbertura = empresa.DataAbertura,
+                                        CapitalSocial = empresa.CapitalSocial,
                                         NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
                                         Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
                                         MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
@@ -72,6 +73,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                                         DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                                         Idade = empresa.Idade,
                                         DataAbertura = empresa.DataAbertura,
+                                        CapitalSocial = empresa.CapitalSocial,
                                         NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
                                         Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
                                         MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
@@ -91,32 +93,32 @@ public class RepositorioEmpresa : IRepositorioEmpresa
             if (filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro != null)
             {
                 query = from empresa in query
-                        where empresa.NaturezaJuridica == EnumExtencoes
-                            .RetornaDescricao(filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro)
+                        where (empresa.NaturezaJuridica == 
+                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro))
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.PorteFiltro != null)
             {
                 query = from empresa in query
-                        where empresa.Porte == EnumExtencoes
-                            .RetornaDescricao(filtroEmpresaEnderecoOtd.PorteFiltro)
+                        where (empresa.Porte == 
+                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.PorteFiltro))
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.MatrizFilialFiltro != null)
             {
                 query = from empresa in query
-                        where empresa.MatrizFilial == EnumExtencoes
-                            .RetornaDescricao(filtroEmpresaEnderecoOtd.MatrizFilialFiltro)
+                        where (empresa.MatrizFilial == 
+                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.MatrizFilialFiltro))
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.EstadoFiltro != null)
             {
                 query = from empresa in query
-                        where empresa.MatrizFilial == EnumExtencoes
-                            .RetornaDescricao(filtroEmpresaEnderecoOtd.EstadoFiltro)
+                        where (empresa.MatrizFilial == 
+                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.EstadoFiltro))
                         select empresa;
             }
 

@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -25,6 +26,28 @@ public class TestesServicoEscola : TesteBase
         {new DateTime(3000,2,3)},
         {new DateTime(4000,1,1)}
     };
+
+    private Empresa CriaNovaEmpresaTeste()
+    {
+        Empresa NovaEmpresa = new()
+        {
+            Id = 1001,
+            Idade = 1,
+            RazaoSocial = "Fast! transportes LTDA",
+            NomeFantasia = "Fast! transportes",
+            Cnpj = "12345678901234",
+            SitucaoCadastral = true,
+            DataSituacaoCadastral = new DateTime(2024, 12, 03),
+            DataAbertura = new DateTime(2023, 12, 03),
+            CapitalSocial = 123124124,
+            NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
+            Porte = PorteEnums.EmpresaPequenoPorte,
+            MatrizFilial = MatrizFilialEnums.Matriz,
+            IdEndereco = 20
+        };
+
+        return NovaEmpresa;
+    }
 
     private Escola CriaNovaEscolaTeste()
     {
@@ -97,8 +120,8 @@ public class TestesServicoEscola : TesteBase
         Assert.Equal(ValorEsperado.Telefone, ValorRetornado.Telefone);
         Assert.Equal(ValorEsperado.Email, ValorRetornado.Email);
         Assert.Equal(ValorEsperado.InicioAtividade.Date, ValorRetornado.InicioAtividade.Date);
-        Assert.Equal(ValorEsperado.CategoriaAdministrativa, ValorRetornado.CategoriaAdministrativa);
-        Assert.Equal(ValorEsperado.OrganizacaoAcademica, ValorRetornado.OrganizacaoAcademica);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.CategoriaAdministrativa), ValorRetornado.CategoriaAdministrativa);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.OrganizacaoAcademica), ValorRetornado.OrganizacaoAcademica);
     }
 
     [Theory]
@@ -500,6 +523,7 @@ public class TestesServicoEscola : TesteBase
     public void Deletar_deve_lancar_ValidationException_quando_informado_Escola_com_Convenio_Existente()
     {
         var EscolaEntrada = CriaNovaEscolaTeste();
+        var EmpresaEntrada = CriaNovaEmpresaTeste();
         EscolaEntrada.Id = 601;
         Convenio ConvenioEntrada = new()
         {
@@ -509,29 +533,15 @@ public class TestesServicoEscola : TesteBase
             Valor = 2.0M,
             DataInicio = new DateTime(1900, 2, 3),
             IdEscola = EscolaEntrada.Id,
-            IdEmpresa = 10
+            IdEmpresa = EmpresaEntrada.Id
         };
         _tabelas.Escolas.Value.Add(EscolaEntrada);
+        _tabelas.Empresas.Value.Add(EmpresaEntrada);
         _tabelas.Convenios.Value.Add(ConvenioEntrada);
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
     
         Assert.Equal("Nao e possivel excluir Escola pois possui convenio ativo!", excecao.Message);
-    }
-
-    [Theory]
-    [InlineData(-400)]
-    [InlineData(605)]
-    public void Deletar_deve_lancar_Exception_quando_informado_Escola_com_IdEndreco_invalido_ou_inexistente(int idEnderecoInformado)
-    {
-        var EscolaEntrada = CriaNovaEscolaTeste();
-        EscolaEntrada.Id = idEnderecoInformado + 3;
-        EscolaEntrada.IdEndereco = idEnderecoInformado;
-        _tabelas.Escolas.Value.Add(EscolaEntrada);
-
-        var excecao = Assert.Throws<Exception>(() => _servicoEscola.Deletar(EscolaEntrada.Id));
-    
-        Assert.Equal($"Nenhum Endereco com Id {idEnderecoInformado} existe no contexto atual!\n", excecao.Message);
     }
 
     [Theory]

@@ -69,7 +69,8 @@ public class RepositorioEndereco : IRepositorioEndereco
             if (filtroEnderecoOtd.EstadoFiltro != null)
             {
                 query = from estado in query
-                        where estado.Estado == EnumExtencoes.RetornaDescricao(filtroEnderecoOtd.EstadoFiltro)
+                        where (estado.Estado == 
+                            EnumExtencoes.RetornaDescricao(filtroEnderecoOtd.EstadoFiltro))
                         select estado;
             }
 

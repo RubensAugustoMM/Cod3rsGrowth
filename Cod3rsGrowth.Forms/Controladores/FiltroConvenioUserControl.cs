@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroConvenioUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public FiltroConvenio Filtro = null;
+        public FiltroConvenioEscolaEmpresaOtd Filtro = null;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
@@ -51,7 +51,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            Filtro = new FiltroConvenio();
+            Filtro = new FiltroConvenioEscolaEmpresaOtd();
 
             if (!string.IsNullOrEmpty(textBoxObjeto.Text))
             {

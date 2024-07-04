@@ -4,6 +4,7 @@ using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio;
 
 
 namespace Cod3rsGrowth.Testes;
@@ -73,7 +74,7 @@ public class TestesServicoEndereco : TesteBase
         Assert.Equal(ValorEsperado.Bairro, ValorRetornado.Bairro);
         Assert.Equal(ValorEsperado.Rua, ValorRetornado.Rua);
         Assert.Equal(ValorEsperado.Complemento, ValorRetornado.Complemento);
-        Assert.Equal(ValorEsperado.Estado, ValorRetornado.Estado);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.Estado), ValorRetornado.Estado);
     }
 
     [Theory]
@@ -194,7 +195,7 @@ public class TestesServicoEndereco : TesteBase
     public void Criar_deve_retornar_ValidationException_quando_informado_Endereco_com_Valor_Estadio_Invalido(int estadoInformado)
     {
         var EnderecoEntrada = CriaNovoEnderecoTeste();
-        var ValorEsperado = "Valor de {PropertyName} fora do Enum!";
+        var ValorEsperado = "Valor de Estado fora do Enum!";
         EnderecoEntrada.Estado = (EstadoEnums)estadoInformado;
 
         var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));

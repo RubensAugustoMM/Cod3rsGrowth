@@ -182,7 +182,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private List<DadosExibirConvenio> RetornaValoresParaSeremExibidos(FiltroConvenio filtro)
+        private List<DadosExibirConvenio> RetornaValoresParaSeremExibidos(FiltroConvenioEscolaEmpresaOtd filtro)
         {
             List<DadosExibirConvenio> ListaConveniosExibidos = new();
             var ListaConvenios = _servicoConvenio.ObterTodos(filtro);

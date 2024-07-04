@@ -1,6 +1,9 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
 
@@ -34,7 +37,21 @@ public class ServicoEscola : IRepositorioEscola
 
     public void Deletar(int id)
     {
-        var EscolaDeletar = ObterPorId(id);
+        var EscolaEnderecoOtdDeletar = ObterPorId(id);
+        Escola EscolaDeletar = new()
+        {
+            Id = EscolaEnderecoOtdDeletar.Id,
+            StatusAtividade = EscolaEnderecoOtdDeletar.StatusAtividade,
+            Nome = EscolaEnderecoOtdDeletar.Nome,
+            CodigoMec = EscolaEnderecoOtdDeletar.CodigoMec,
+            Telefone = EscolaEnderecoOtdDeletar.Telefone,
+            Email = EscolaEnderecoOtdDeletar.Email,
+            InicioAtividade = EscolaEnderecoOtdDeletar.InicioAtividade,
+            CategoriaAdministrativa = EnumExtencoes.RetornaEnum<CategoriaAdministrativaEnums>(EscolaEnderecoOtdDeletar.CategoriaAdministrativa),
+            OrganizacaoAcademica = EnumExtencoes.RetornaEnum<OrganizacaoAcademicaEnums>(EscolaEnderecoOtdDeletar.OrganizacaoAcademica),
+            IdEndereco = EscolaEnderecoOtdDeletar.IdEndereco
+        };
+
         var ResultadoValidacao = _validadorEscola.Validate(EscolaDeletar, options => options.IncludeRuleSets("Deletar"));
 
         if (!ResultadoValidacao.IsValid)
@@ -44,13 +61,13 @@ public class ServicoEscola : IRepositorioEscola
         _repositorioEscola.Deletar(id);
     }
 
-    public Escola ObterPorId(int Id)
+    public EscolaEnderecoOtd ObterPorId(int Id)
     {
         return _repositorioEscola.ObterPorId(Id);
     }
 
-    public List<Escola> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscola)
+    public List<EscolaEnderecoOtd> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscolaEnderecoOtd)
     {
-        return _repositorioEscola.ObterTodos(filtroEscola);
+        return _repositorioEscola.ObterTodos(filtroEscolaEnderecoOtd);
     }
 }

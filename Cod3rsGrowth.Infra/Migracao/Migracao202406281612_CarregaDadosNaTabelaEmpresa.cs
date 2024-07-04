@@ -21,7 +21,7 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
             NaturezaJuridica = 1,
             Porte = 2,
             MatrizFilial = 0,
-            IdEndereco = 1
+            IdEndereco = 6
         });
 
         Insert.IntoTable("Empresas").Row(new
@@ -37,7 +37,7 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
             NaturezaJuridica = 7,
             Porte = 4,
             MatrizFilial = 1,
-            IdEndereco = 2
+            IdEndereco = 7
         });
 
         Insert.IntoTable("Empresas").Row(new
@@ -53,7 +53,7 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
             NaturezaJuridica = 7,
             Porte = 4,
             MatrizFilial = 0,
-            IdEndereco = 3
+            IdEndereco = 8
         });
 
         Insert.IntoTable("Empresas").Row(new
@@ -69,7 +69,7 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
             NaturezaJuridica = 1,
             Porte = 3,
             MatrizFilial = 0,
-            IdEndereco = 4
+            IdEndereco = 9
         });
 
         Insert.IntoTable("Empresas").Row(new
@@ -85,7 +85,7 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
             NaturezaJuridica = 6,
             Porte = 4,
             MatrizFilial = 1,
-            IdEndereco = 5
+            IdEndereco = 10
         });
     }
 

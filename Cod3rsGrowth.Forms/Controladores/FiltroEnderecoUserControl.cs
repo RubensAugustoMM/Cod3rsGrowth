@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroEnderecoUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public FiltroEndereco Filtro = null;
+        public FiltroEnderecoOtd Filtro = null;
         private const string _textoVazio = "";
         private const int _tamanhoMaximoCep = 8;
         public bool _botaoFiltrarPressionado { get; private set; }
@@ -49,7 +49,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-                Filtro = new FiltroEndereco();
+                Filtro = new FiltroEnderecoOtd();
 
             if (!string.IsNullOrEmpty(textBoxMunicipio.Text))
             {

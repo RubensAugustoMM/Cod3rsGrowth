@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.Drawing.Text;
 
@@ -7,7 +8,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroEmpresaUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public FiltroEmpresa Filtro = null;
+        public FiltroEmpresaEnderecoOtd Filtro = null;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
@@ -48,7 +49,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            Filtro = new FiltroEmpresa();
+            Filtro = new FiltroEmpresaEnderecoOtd();
 
             if (!string.IsNullOrEmpty(textBoxRazaoSocial.Text))
             {
@@ -83,7 +84,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             if (comboBoxPorte.SelectedItem != null)
             {
-                Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
+                Filtro.PorteFiltro = EnumExtencoes.RetornaEnum<PorteEnums>((string)comboBoxPorte.SelectedItem);
             }
 
             if (comboBoxMatrizFilial.SelectedItem != null)
@@ -186,10 +187,10 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
-            comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
-            comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
-            comboBoxHabilitadoSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+            comboBoxNaturezaJuridica.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<NaturezaJuridicaEnums>();
+            comboBoxMatrizFilial.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<MatrizFilialEnums>();
+            comboBoxPorte.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<PorteEnums>();
+            comboBoxHabilitadoSituacaoCadastral.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<HabilitadoEnums>();
 
             comboBoxNaturezaJuridica.SelectedItem = null;
             comboBoxMatrizFilial.SelectedItem = null;

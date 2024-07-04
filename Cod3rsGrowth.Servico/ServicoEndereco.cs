@@ -1,3 +1,5 @@
+using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
@@ -32,7 +34,19 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public void Deletar(int Id)
     {
-        var EnderecoDeletar = ObterPorId(Id);
+        var EnderecoOtdDeletar = ObterPorId(Id);
+        Endereco EnderecoDeletar = new()
+        {
+            Id = EnderecoOtdDeletar.Id,
+            Numero = EnderecoOtdDeletar.Numero,
+            Cep = EnderecoOtdDeletar.Cep,
+            Municipio = EnderecoOtdDeletar.Municipio,
+            Bairro = EnderecoOtdDeletar.Bairro,
+            Rua = EnderecoOtdDeletar.Rua,
+            Complemento = EnderecoOtdDeletar.Complemento,
+            Estado = EnumExtencoes.RetornaEnum<EstadoEnums>(EnderecoOtdDeletar.Estado)
+        };
+
         var ResultadoValidacao = _validadorEndereco.Validate(EnderecoDeletar, options => options.IncludeRuleSets("Deletar")); 
 
         if (!ResultadoValidacao.IsValid)
@@ -41,13 +55,13 @@ public class ServicoEndereco : IRepositorioEndereco
         _repositorioEndereco.Deletar(Id);
     }
 
-    public Endereco ObterPorId(int Id)
+    public EnderecoOtd ObterPorId(int Id)
     {
         return _repositorioEndereco.ObterPorId(Id);
     }
 
-    public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
+    public List<EnderecoOtd> ObterTodos(FiltroEnderecoOtd? filtroEnderecoOtd)
     {
-        return _repositorioEndereco.ObterTodos(filtroEndereco);
+        return _repositorioEndereco.ObterTodos(filtroEnderecoOtd);
     }
 }

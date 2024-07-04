@@ -45,6 +45,7 @@ public class RepositorioEscola : IRepositorioEscola
                                         Telefone = escola.Telefone,
                                         Email = escola.Email,
                                         InicioAtividade =escola.InicioAtividade,
+                                        IdEndereco = escola.IdEndereco,
                                         CategoriaAdministrativa = EnumExtencoes.RetornaDescricao(escola.CategoriaAdministrativa),
                                         OrganizacaoAcademica = EnumExtencoes.RetornaDescricao(escola.OrganizacaoAcademica),
                                         Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
@@ -66,6 +67,7 @@ public class RepositorioEscola : IRepositorioEscola
                                         Telefone = escola.Telefone,
                                         Email = escola.Email,
                                         InicioAtividade =escola.InicioAtividade,
+                                        IdEndereco = escola.IdEndereco, 
                                         CategoriaAdministrativa = EnumExtencoes.RetornaDescricao(escola.CategoriaAdministrativa),
                                         OrganizacaoAcademica = EnumExtencoes.RetornaDescricao(escola.OrganizacaoAcademica),
                                         Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
@@ -80,17 +82,20 @@ public class RepositorioEscola : IRepositorioEscola
 
             if (filtroEscolaEnderecoOtd.CategoriaAdministrativaFiltro != null)
                 query = from escola in query
-                        where escola.CategoriaAdministrativa == EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.CategoriaAdministrativaFiltro)
+                        where (escola.CategoriaAdministrativa == 
+                            EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.CategoriaAdministrativaFiltro))
                         select escola;
 
             if (filtroEscolaEnderecoOtd.OrganizacaoAcademicaFiltro != null)
                 query = from escola in query
-                        where escola.OrganizacaoAcademica == EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.OrganizacaoAcademicaFiltro)
+                        where (escola.OrganizacaoAcademica == 
+                            EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.OrganizacaoAcademicaFiltro))
                         select escola;
 
             if (filtroEscolaEnderecoOtd.EstadoFiltro != null)
                 query = from escola in query
-                        where escola.Estado == EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.EstadoFiltro)
+                        where (escola.Estado == 
+                            EnumExtencoes.RetornaDescricao(filtroEscolaEnderecoOtd.EstadoFiltro))
                         select escola;
 
             if (filtroEscolaEnderecoOtd.InicioAtividadeFiltro != null)

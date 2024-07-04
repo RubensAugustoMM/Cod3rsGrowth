@@ -27,6 +27,14 @@ internal static class Program
         var host = CriaHostBuilder().Build();
         var ServiceProvider = host.Services;
 
+        /*
+        using (var serviceProvider = CriaServicos()) 
+            using (var escopo = serviceProvider.CreateScope())
+        {
+            AtualizaBancoDeDados(escopo.ServiceProvider);
+        }
+        */
+
         Application.Run(ServiceProvider.GetRequiredService<TelaPrincipalForm>());
     }
 
@@ -87,6 +95,6 @@ internal static class Program
     {
         var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-        runner.MigrateUp();
+        runner.MigrateUp(202406281624);
     }
 }

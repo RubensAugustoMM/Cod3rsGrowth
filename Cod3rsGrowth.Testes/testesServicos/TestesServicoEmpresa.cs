@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Testes;
 
@@ -18,6 +19,25 @@ public class TestesServicoEmpresa : TesteBase
 
         _tabelas = TabelaSingleton.Instance;
         _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
+    }
+
+    private Escola CriaNovaEscolaTeste()
+    {
+        Escola NovaEscola = new()
+        {
+            Id = 1002,
+            StatusAtividade = true,
+            Nome = "Escola Rodrigo",
+            CodigoMec = "12345678",
+            Telefone = "12355645",
+            Email = "rodrigo@gmail.com",
+            InicioAtividade = new DateTime(1234, 12, 3),
+            CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
+            IdEndereco = 40        
+        };
+
+        return NovaEscola;
     }
 
     private Empresa CriaNovaEmpresaTeste()
@@ -97,9 +117,9 @@ public class TestesServicoEmpresa : TesteBase
         Assert.Equal(EmpresaEntrada.DataSituacaoCadastral.Date, ValorRetornado.DataSituacaoCadastral.Date);
         Assert.Equal(EmpresaEntrada.DataAbertura.Date, ValorRetornado.DataAbertura.Date);
         Assert.Equal(EmpresaEntrada.CapitalSocial, ValorRetornado.CapitalSocial);
-        Assert.Equal(EmpresaEntrada.NaturezaJuridica, ValorRetornado.NaturezaJuridica);
-        Assert.Equal(EmpresaEntrada.Porte, ValorRetornado.Porte);
-        Assert.Equal(EmpresaEntrada.MatrizFilial, ValorRetornado.MatrizFilial);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.NaturezaJuridica), ValorRetornado.NaturezaJuridica);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.Porte), ValorRetornado.Porte);
+        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.MatrizFilial), ValorRetornado.MatrizFilial);
     }
 
     [Theory]
@@ -529,17 +549,19 @@ public class TestesServicoEmpresa : TesteBase
     public void Deletar_deve_lancar_ValidaitonException_quando_informado_Empresa_com_Convenio_Existente()
     {
         var EmpresaEntrada = CriaNovaEmpresaTeste();
+        var EscolaEntrada = CriaNovaEscolaTeste();
         EmpresaEntrada.Id = 401;
         Convenio ConvenioEntrada = new()
         {
-            Id = 406,
+            Id = 1003,
             NumeroProcesso = 123,
             Objeto = "objeto",
             Valor = 2.0M,
             DataInicio = new DateTime(1900, 2, 3),
-            IdEscola = 10,
+            IdEscola = EscolaEntrada.Id,
             IdEmpresa = EmpresaEntrada.Id
         };
+        _tabelas.Escolas.Value.Add(EscolaEntrada);
         _tabelas.Empresas.Value.Add(EmpresaEntrada);
         _tabelas.Convenios.Value.Add(ConvenioEntrada);
 

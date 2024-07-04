@@ -47,7 +47,7 @@ public class RepositorioConvenio : IRepositorioConvenio
                                         DataTermino = convenio.DataTermino,
                                         IdEscola = convenio.IdEscola,
                                         NomeEscola = escola.Nome,
-                                        IdEmpresa = convenio.IdEscola,
+                                        IdEmpresa = convenio.IdEmpresa,
                                         RazaoSocialEmpresa = empresa.RazaoSocial 
                                      };
 
@@ -69,7 +69,7 @@ public class RepositorioConvenio : IRepositorioConvenio
                                         DataTermino = convenio.DataTermino,
                                         IdEscola = convenio.IdEscola,
                                         NomeEscola = escola.Nome,
-                                        IdEmpresa = convenio.IdEscola,
+                                        IdEmpresa = convenio.IdEmpresa,
                                         RazaoSocialEmpresa = empresa.RazaoSocial  
                                      };
 

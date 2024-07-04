@@ -1,6 +1,9 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
 
@@ -34,7 +37,23 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
     public void Deletar(int id)
     {
-        var EmpresaDeletar = ObterPorId(id);
+        var EmpresaEnderecoOtdDeletar = ObterPorId(id);
+        Empresa EmpresaDeletar = new Empresa()
+        {
+            Id = EmpresaEnderecoOtdDeletar.Id,
+            RazaoSocial = EmpresaEnderecoOtdDeletar.RazaoSocial,
+            NomeFantasia = EmpresaEnderecoOtdDeletar.NomeFantasia,
+            Cnpj = EmpresaEnderecoOtdDeletar.Cnpj,
+            SitucaoCadastral = EmpresaEnderecoOtdDeletar.SitucaoCadastral,
+            DataSituacaoCadastral = EmpresaEnderecoOtdDeletar.DataSituacaoCadastral,
+            Idade = EmpresaEnderecoOtdDeletar.Idade,
+            DataAbertura = EmpresaEnderecoOtdDeletar.DataAbertura,
+            NaturezaJuridica = EnumExtencoes.RetornaEnum<NaturezaJuridicaEnums>(EmpresaEnderecoOtdDeletar.NaturezaJuridica),
+            Porte = EnumExtencoes.RetornaEnum<PorteEnums>(EmpresaEnderecoOtdDeletar.Porte),
+            MatrizFilial = EnumExtencoes.RetornaEnum<MatrizFilialEnums>(EmpresaEnderecoOtdDeletar.MatrizFilial),
+            IdEndereco = EmpresaEnderecoOtdDeletar.IdEndereco
+        };
+
         var ResultadoValidacao = _validadorEmpresa.Validate(EmpresaDeletar, options => options.IncludeRuleSets("Deletar"));
 
         if (!ResultadoValidacao.IsValid)
@@ -44,13 +63,13 @@ public class ServicoEmpresa : IRepositorioEmpresa
         _repositorioEmpresa.Deletar(id);
     }
 
-    public Empresa ObterPorId(int Id)
+    public EmpresaEnderecoOtd ObterPorId(int Id)
     {
         return _repositorioEmpresa.ObterPorId(Id);
     }
 
-    public List<Empresa> ObterTodos(FiltroEmpresa? filtroEmpresa)
+    public List<EmpresaEnderecoOtd> ObterTodos(FiltroEmpresaEnderecoOtd? filtroEmpresaEnderecoOtd)
     {
-        return _repositorioEmpresa.ObterTodos(filtroEmpresa);
+        return _repositorioEmpresa.ObterTodos(filtroEmpresaEnderecoOtd);
     }
 }
