@@ -2,6 +2,10 @@
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.Filtros;
 using LinqToDB;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
+using Cod3rsGrowth.Dominio.Enums;
+using System.ComponentModel;
+using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -29,160 +33,207 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         _contexto.Delete(id);
     }
 
-    public Empresa ObterPorId(int Id)
+    public EmpresaEnderecoOtd ObterPorId(int Id)
     {
-        return _contexto.TabelaEmpresas.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n");
+        IQueryable<EmpresaEnderecoOtd> query = from empresa in _contexto.TabelaEmpresas
+                                     where empresa.Id == Id
+                                     join endereco in _contexto.TabelaEnderecos on empresa.IdEndereco equals endereco.Id
+                                     select new EmpresaEnderecoOtd
+                                     {
+                                        Id = empresa.Id,
+                                        RazaoSocial = empresa.RazaoSocial,
+                                        NomeFantasia = empresa.NomeFantasia,
+                                        Cnpj = empresa.Cnpj,
+                                        SitucaoCadastral = empresa.SitucaoCadastral,
+                                        DataSituacaoCadastral = empresa.DataSituacaoCadastral,
+                                        Idade = empresa.Idade,
+                                        DataAbertura = empresa.DataAbertura,
+                                        NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
+                                        Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
+                                        MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
+                                        IdEndereco = empresa.IdEndereco,
+                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
+                                     };
+
+        return query.FirstOrDefault() ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n"); 
     }
 
-    public List<Empresa> ObterTodos(FiltroEmpresa? filtroEmpresa)
+    public List<EmpresaEnderecoOtd> ObterTodos(FiltroEmpresaEnderecoOtd? filtroEmpresaEnderecoOtd)
     {
-        IQueryable<Empresa> query = from e in _contexto.TabelaEmpresas
-                                    select e;
+        IQueryable<EmpresaEnderecoOtd> query = from empresa in _contexto.TabelaEmpresas
+                                     join endereco in _contexto.TabelaEnderecos on empresa.IdEndereco equals endereco.Id
+                                     select new EmpresaEnderecoOtd
+                                     {
+                                        Id = empresa.Id,
+                                        RazaoSocial = empresa.RazaoSocial,
+                                        NomeFantasia = empresa.NomeFantasia,
+                                        Cnpj = empresa.Cnpj,
+                                        SitucaoCadastral = empresa.SitucaoCadastral,
+                                        DataSituacaoCadastral = empresa.DataSituacaoCadastral,
+                                        Idade = empresa.Idade,
+                                        DataAbertura = empresa.DataAbertura,
+                                        NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
+                                        Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
+                                        MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
+                                        IdEndereco = empresa.IdEndereco,
+                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
+                                     };
 
-        if (filtroEmpresa != null)
+        if (filtroEmpresaEnderecoOtd != null)
         {
-            if(filtroEmpresa.SitucaoCadastralFiltro != null)
+            if(filtroEmpresaEnderecoOtd.SitucaoCadastralFiltro != null)
             {
-                query = from e in query
-                        where e.SitucaoCadastral == filtroEmpresa.SitucaoCadastralFiltro
-                        select e;
+                query = from empresa in query
+                        where empresa.SitucaoCadastral == filtroEmpresaEnderecoOtd.SitucaoCadastralFiltro
+                        select empresa;
             }
 
-            if (filtroEmpresa.NaturezaJuridicaFiltro != null)
+            if (filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro != null)
             {
-                query = from e in query
-                        where e.NaturezaJuridica == filtroEmpresa.NaturezaJuridicaFiltro
-                        select e;
+                query = from empresa in query
+                        where empresa.NaturezaJuridica == EnumExtencoes
+                            .RetornaDescricao(filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro)
+                        select empresa;
             }
 
-            if (filtroEmpresa.PorteFiltro != null)
+            if (filtroEmpresaEnderecoOtd.PorteFiltro != null)
             {
-                query = from e in query
-                        where e.Porte == filtroEmpresa.PorteFiltro
-                        select e;
+                query = from empresa in query
+                        where empresa.Porte == EnumExtencoes
+                            .RetornaDescricao(filtroEmpresaEnderecoOtd.PorteFiltro)
+                        select empresa;
             }
 
-            if (filtroEmpresa.MatrizFilialFiltro != null)
+            if (filtroEmpresaEnderecoOtd.MatrizFilialFiltro != null)
             {
-                query = from e in query
-                        where e.MatrizFilial == filtroEmpresa.MatrizFilialFiltro
-                        select e;
+                query = from empresa in query
+                        where empresa.MatrizFilial == EnumExtencoes
+                            .RetornaDescricao(filtroEmpresaEnderecoOtd.MatrizFilialFiltro)
+                        select empresa;
             }
 
-            if (filtroEmpresa.DataSituacaoCadastralFiltro != null)
+            if (filtroEmpresaEnderecoOtd.EstadoFiltro != null)
             {
-                if (filtroEmpresa.MaiorOuIgualDataSituacaoCadastral == null)
+                query = from empresa in query
+                        where empresa.MatrizFilial == EnumExtencoes
+                            .RetornaDescricao(filtroEmpresaEnderecoOtd.EstadoFiltro)
+                        select empresa;
+            }
+
+            if (filtroEmpresaEnderecoOtd.DataSituacaoCadastralFiltro != null)
+            {
+                if (filtroEmpresaEnderecoOtd.MaiorOuIgualDataSituacaoCadastral == null)
                 {
-                    query = from e in query
-                            where e.DataSituacaoCadastral == filtroEmpresa.DataSituacaoCadastralFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataSituacaoCadastral == filtroEmpresaEnderecoOtd.DataSituacaoCadastralFiltro
+                            select empresa;
                 }
-                else if(filtroEmpresa.MaiorOuIgualDataSituacaoCadastral.Value)
+                else if(filtroEmpresaEnderecoOtd.MaiorOuIgualDataSituacaoCadastral.Value)
                 {
-                    query = from e in query
-                            where e.DataSituacaoCadastral >= filtroEmpresa.DataSituacaoCadastralFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataSituacaoCadastral >= filtroEmpresaEnderecoOtd.DataSituacaoCadastralFiltro
+                            select empresa;
                 }
                 else
                 {
-                    query = from e in query
-                            where e.DataSituacaoCadastral <= filtroEmpresa.DataSituacaoCadastralFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataSituacaoCadastral <= filtroEmpresaEnderecoOtd.DataSituacaoCadastralFiltro
+                            select empresa;
                 }
             }
 
-            if (filtroEmpresa.DataAberturaFiltro != null)
+            if (filtroEmpresaEnderecoOtd.DataAberturaFiltro != null)
             {
-                if (filtroEmpresa.MaiorOuIgualDataAbertura == null)
+                if (filtroEmpresaEnderecoOtd.MaiorOuIgualDataAbertura == null)
                 {
-                    query = from e in query
-                            where e.DataAbertura == filtroEmpresa.DataAberturaFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataAbertura == filtroEmpresaEnderecoOtd.DataAberturaFiltro
+                            select empresa;
                 }
-                else if(filtroEmpresa.MaiorOuIgualDataAbertura.Value)
+                else if(filtroEmpresaEnderecoOtd.MaiorOuIgualDataAbertura.Value)
                 {
-                    query = from e in query
-                            where e.DataAbertura >= filtroEmpresa.DataAberturaFiltro && filtroEmpresa.MaiorOuIgualDataAbertura.Value
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataAbertura >= filtroEmpresaEnderecoOtd.DataAberturaFiltro && filtroEmpresaEnderecoOtd.MaiorOuIgualDataAbertura.Value
+                            select empresa;
                 }
                 else
                 {
-                    query = from e in query
-                            where e.DataAbertura <= filtroEmpresa.DataAberturaFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.DataAbertura <= filtroEmpresaEnderecoOtd.DataAberturaFiltro
+                            select empresa;
                 }
             }
 
-            if (filtroEmpresa.CapitalSocialFiltro != null)
+            if (filtroEmpresaEnderecoOtd.CapitalSocialFiltro != null)
             {
-                if (filtroEmpresa.MaiorOuIgualCapitalSocial == null)
+                if (filtroEmpresaEnderecoOtd.MaiorOuIgualCapitalSocial == null)
                 {
-                    query = from e in query
-                            where e.CapitalSocial == filtroEmpresa.CapitalSocialFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.CapitalSocial == filtroEmpresaEnderecoOtd.CapitalSocialFiltro
+                            select empresa;
                 }
-                else if(filtroEmpresa.MaiorOuIgualCapitalSocial.Value)
+                else if(filtroEmpresaEnderecoOtd.MaiorOuIgualCapitalSocial.Value)
                 {
-                    query = from e in query
-                            where e.CapitalSocial >= filtroEmpresa.CapitalSocialFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.CapitalSocial >= filtroEmpresaEnderecoOtd.CapitalSocialFiltro
+                            select empresa;
                 }
                 else
                 {
-                    query = from e in query
-                            where e.CapitalSocial <= filtroEmpresa.CapitalSocialFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.CapitalSocial <= filtroEmpresaEnderecoOtd.CapitalSocialFiltro
+                            select empresa;
                 }
             }
 
-            if (filtroEmpresa.IdadeFiltro != null)
+            if (filtroEmpresaEnderecoOtd.IdadeFiltro != null)
             {
-                if (filtroEmpresa.MaiorOuIgualIdade == null)
+                if (filtroEmpresaEnderecoOtd.MaiorOuIgualIdade == null)
                 {
-                    query = from e in query
-                            where e.Idade == filtroEmpresa.IdadeFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.Idade == filtroEmpresaEnderecoOtd.IdadeFiltro
+                            select empresa;
                 }
-                else if(filtroEmpresa.MaiorOuIgualIdade.Value)
+                else if(filtroEmpresaEnderecoOtd.MaiorOuIgualIdade.Value)
                 {
-                    query = from e in query
-                            where e.Idade >= filtroEmpresa.IdadeFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.Idade >= filtroEmpresaEnderecoOtd.IdadeFiltro
+                            select empresa;
                 }
                 else
                 {
-                    query = from e in query
-                            where e.Idade <= filtroEmpresa.IdadeFiltro
-                            select e;
+                    query = from empresa in query
+                            where empresa.Idade <= filtroEmpresaEnderecoOtd.IdadeFiltro
+                            select empresa;
                 }
             }
 
-            if (filtroEmpresa.RazaoSocialFiltro != null)
+            if (filtroEmpresaEnderecoOtd.RazaoSocialFiltro != null)
             {
-                query = from e in query
-                        where e.RazaoSocial.Contains(filtroEmpresa.RazaoSocialFiltro)
-                        select e;
+                query = from empresa in query
+                        where empresa.RazaoSocial.Contains(filtroEmpresaEnderecoOtd.RazaoSocialFiltro)
+                        select empresa;
             }
 
-            if (filtroEmpresa.NomeFantasiaFiltro != null)
+            if (filtroEmpresaEnderecoOtd.NomeFantasiaFiltro != null)
             {
-                query = from e in query
-                        where e.NomeFantasia.Contains(filtroEmpresa.NomeFantasiaFiltro)
-                        select e;
+                query = from empresa in query
+                        where empresa.NomeFantasia.Contains(filtroEmpresaEnderecoOtd.NomeFantasiaFiltro)
+                        select empresa;
             }
 
-            if (filtroEmpresa.IdEnderecoFiltro != null)
+            if (filtroEmpresaEnderecoOtd.IdEnderecoFiltro != null)
             {
-                query = from e in query
-                        where e.IdEndereco == filtroEmpresa.IdEnderecoFiltro
-                        select e;
+                query = from empresa in query
+                        where empresa.IdEndereco == filtroEmpresaEnderecoOtd.IdEnderecoFiltro
+                        select empresa;
             }
 
-            if (filtroEmpresa.CnpjFiltro != null)
+            if (filtroEmpresaEnderecoOtd.CnpjFiltro != null)
             {
-                query = from e in query
-                        where e.Cnpj.Contains(filtroEmpresa.CnpjFiltro)
-                        select e;
+                query = from empresa in query
+                        where empresa.Cnpj.Contains(filtroEmpresaEnderecoOtd.CnpjFiltro)
+                        select empresa;
             }
         }
 

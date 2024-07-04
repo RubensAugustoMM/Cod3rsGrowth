@@ -1,7 +1,9 @@
 ﻿using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using LinqToDB;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -29,102 +31,148 @@ public class RepositorioConvenio : IRepositorioConvenio
         _contexto.Delete(id);
     }
 
-    public Convenio ObterPorId(int Id)
+    public ConvenioEscolaEmpresaOtd ObterPorId(int Id)
     {
-        return _contexto.TabelaConvenios.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
+        IQueryable<ConvenioEscolaEmpresaOtd> query = from convenio in _contexto.TabelaConvenios
+                                     where convenio.Id == Id
+                                     join escola in _contexto.TabelaEscolas on convenio.IdEscola equals escola.Id
+                                     join empresa in _contexto.TabelaEmpresas on convenio.IdEmpresa equals empresa.Id
+                                     select new ConvenioEscolaEmpresaOtd
+                                     {
+                                        Id = convenio.Id,
+                                        NumeroProcesso = convenio.NumeroProcesso,
+                                        Objeto = convenio.Objeto,
+                                        Valor = convenio.Valor,
+                                        DataInicio = convenio.DataInicio,
+                                        DataTermino = convenio.DataTermino,
+                                        IdEscola = convenio.IdEscola,
+                                        NomeEscola = escola.Nome,
+                                        IdEmpresa = convenio.IdEscola,
+                                        RazaoSocialEmpresa = empresa.RazaoSocial 
+                                     };
+
+        return query.FirstOrDefault() ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n"); 
     }
 
-    public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
+    public List<ConvenioEscolaEmpresaOtd> ObterTodos(FiltroConvenioEscolaEmpresaOtd? filtroConvenioEscolaEmpresaOtd)
     {
-        IQueryable<Convenio> query = from c in _contexto.TabelaConvenios
-                                     select c;
+        IQueryable<ConvenioEscolaEmpresaOtd> query = from convenio in _contexto.TabelaConvenios
+                                     join escola in _contexto.TabelaEscolas on convenio.IdEscola equals escola.Id
+                                     join empresa in _contexto.TabelaEmpresas on convenio.IdEmpresa equals empresa.Id
+                                     select new ConvenioEscolaEmpresaOtd
+                                     {
+                                        Id = convenio.Id,
+                                        NumeroProcesso = convenio.NumeroProcesso,
+                                        Objeto = convenio.Objeto,
+                                        Valor = convenio.Valor,
+                                        DataInicio = convenio.DataInicio,
+                                        DataTermino = convenio.DataTermino,
+                                        IdEscola = convenio.IdEscola,
+                                        NomeEscola = escola.Nome,
+                                        IdEmpresa = convenio.IdEscola,
+                                        RazaoSocialEmpresa = empresa.RazaoSocial  
+                                     };
 
-        if (filtroConvenio != null)
+        if (filtroConvenioEscolaEmpresaOtd != null)
         {
-            if (filtroConvenio.IdEscolaFiltro != null)
+            if (filtroConvenioEscolaEmpresaOtd.IdEscolaFiltro != null)
+            {
+                query = from convenio in query
+                        where convenio.IdEscola == filtroConvenioEscolaEmpresaOtd.IdEscolaFiltro
+                        select convenio;
+            }
+
+            if(filtroConvenioEscolaEmpresaOtd.NomeEscolaFiltro != null)
+            {
+                query = from convenio in query
+                        where convenio.NomeEscola.StartsWith(filtroConvenioEscolaEmpresaOtd.NomeEscolaFiltro)
+                        select convenio;
+            }
+
+            if (filtroConvenioEscolaEmpresaOtd.IdEmpresaFiltro != null)
             {
                 query = from c in query
-                        where c.IdEscola == filtroConvenio.IdEscolaFiltro
+                        where c.IdEmpresa == filtroConvenioEscolaEmpresaOtd.IdEmpresaFiltro
                         select c;
             }
 
-            if (filtroConvenio.IdEmpresaFiltro != null)
+            if(filtroConvenioEscolaEmpresaOtd.RazaoSocialEmpresaFiltro != null)
+            {
+                query = from convenio in query
+                        where convenio.RazaoSocialEmpresa.StartsWith(filtroConvenioEscolaEmpresaOtd.RazaoSocialEmpresaFiltro)
+                        select convenio;
+            }
+
+            if (filtroConvenioEscolaEmpresaOtd.DataInicioFiltro != null)
+            {
+                if (filtroConvenioEscolaEmpresaOtd.MaiorOuIgualDataInicio == null)
+                {
+                    query = from c in query
+                            where c.DataInicio == filtroConvenioEscolaEmpresaOtd.DataInicioFiltro
+                            select c;
+                }
+                else if(filtroConvenioEscolaEmpresaOtd.MaiorOuIgualDataInicio.Value)
+                {
+                    query = from c in query
+                            where c.DataInicio >= filtroConvenioEscolaEmpresaOtd.DataInicioFiltro
+                            select c;
+                }
+                else
+                {
+                    query = from c in query
+                            where c.DataInicio <= filtroConvenioEscolaEmpresaOtd.DataInicioFiltro
+                            select c;
+                }
+            }
+
+            if (filtroConvenioEscolaEmpresaOtd.ValorFiltro != null)
+            {
+                if (filtroConvenioEscolaEmpresaOtd.MaiorOuIgualValor == null)
+                {
+                    query = from c in query
+                            where c.Valor == filtroConvenioEscolaEmpresaOtd.ValorFiltro
+                            select c;
+                }
+                else if(filtroConvenioEscolaEmpresaOtd.MaiorOuIgualValor.Value)
+                {
+                    query = from c in query
+                            where c.Valor >= filtroConvenioEscolaEmpresaOtd.ValorFiltro
+                            select c;
+                }
+                else
+                {
+                    query = from c in query
+                            where c.Valor <= filtroConvenioEscolaEmpresaOtd.ValorFiltro
+                            select c;
+                }
+            }
+
+            if (filtroConvenioEscolaEmpresaOtd.DataTerminoFiltro != null)
+            {
+                if (filtroConvenioEscolaEmpresaOtd.MaiorOuIgualDataTermino == null)
+                {
+                    query = from c in query
+                            where c.DataTermino == filtroConvenioEscolaEmpresaOtd.DataTerminoFiltro
+                            select c;
+                }
+                else if(filtroConvenioEscolaEmpresaOtd.MaiorOuIgualDataTermino.Value)
+                {
+                    query = from c in query
+                            where c.DataTermino >= filtroConvenioEscolaEmpresaOtd.DataTerminoFiltro
+                            select c;
+                }
+                else
+                {
+                    query = from c in query
+                            where c.DataTermino <= filtroConvenioEscolaEmpresaOtd.DataTerminoFiltro
+                            select c;
+                }
+            }
+
+            if (filtroConvenioEscolaEmpresaOtd.ObjetoFiltro != null)
             {
                 query = from c in query
-                        where c.IdEmpresa == filtroConvenio.IdEmpresaFiltro
-                        select c;
-            }
-
-            if (filtroConvenio.DataInicioFiltro != null)
-            {
-                if (filtroConvenio.MaiorOuIgualDataInicio == null)
-                {
-                    query = from c in query
-                            where c.DataInicio == filtroConvenio.DataInicioFiltro
-                            select c;
-                }
-                else if(filtroConvenio.MaiorOuIgualDataInicio.Value)
-                {
-                    query = from c in query
-                            where c.DataInicio >= filtroConvenio.DataInicioFiltro
-                            select c;
-                }
-                else
-                {
-                    query = from c in query
-                            where c.DataInicio <= filtroConvenio.DataInicioFiltro
-                            select c;
-                }
-            }
-
-            if (filtroConvenio.ValorFiltro != null)
-            {
-                if (filtroConvenio.MaiorOuIgualValor == null)
-                {
-                    query = from c in query
-                            where c.Valor == filtroConvenio.ValorFiltro
-                            select c;
-                }
-                else if(filtroConvenio.MaiorOuIgualValor.Value)
-                {
-                    query = from c in query
-                            where c.Valor >= filtroConvenio.ValorFiltro
-                            select c;
-                }
-                else
-                {
-                    query = from c in query
-                            where c.Valor <= filtroConvenio.ValorFiltro
-                            select c;
-                }
-            }
-
-            if (filtroConvenio.DataTerminoFiltro != null)
-            {
-                if (filtroConvenio.MaiorOuIgualDataTermino == null)
-                {
-                    query = from c in query
-                            where c.DataTermino == filtroConvenio.DataTerminoFiltro
-                            select c;
-                }
-                else if(filtroConvenio.MaiorOuIgualDataTermino.Value)
-                {
-                    query = from c in query
-                            where c.DataTermino >= filtroConvenio.DataTerminoFiltro
-                            select c;
-                }
-                else
-                {
-                    query = from c in query
-                            where c.DataTermino <= filtroConvenio.DataTerminoFiltro
-                            select c;
-                }
-            }
-
-            if (filtroConvenio.ObjetoFiltro != null)
-            {
-                query = from c in query
-                        where c.Objeto.Contains(filtroConvenio.ObjetoFiltro)
+                        where c.Objeto.StartsWith(filtroConvenioEscolaEmpresaOtd.ObjetoFiltro)
                         select c;
             }
         }

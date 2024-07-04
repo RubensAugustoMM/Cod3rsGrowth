@@ -12,5 +12,5 @@ public class FiltroEscolaEnderecoOtd
     public CategoriaAdministrativaEnums? CategoriaAdministrativaFiltro { get; set; }
     public OrganizacaoAcademicaEnums? OrganizacaoAcademicaFiltro { get; set; }
     public int? IdEnderecoFiltro { get; set; }
-    public EstadoEnums? Estado { get; set; }
+    public EstadoEnums? EstadoFiltro { get; set; }
 }

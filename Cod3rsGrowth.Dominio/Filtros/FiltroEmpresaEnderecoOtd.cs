@@ -20,5 +20,5 @@ public class FiltroEmpresaEnderecoOtd
     public PorteEnums? PorteFiltro { get; set; }
     public MatrizFilialEnums? MatrizFilialFiltro { get; set; }
     public int? IdEnderecoFiltro { get; set; }
-    public string? Estado { get; set; }
+    public EstadoEnums? EstadoFiltro { get; set; }
 }
