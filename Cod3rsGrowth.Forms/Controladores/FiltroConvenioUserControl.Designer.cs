@@ -95,7 +95,7 @@
             dataTerminoLabel.AutoSize = true;
             dataTerminoLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dataTerminoLabel.ForeColor = Color.White;
-            dataTerminoLabel.Location = new Point(16, 178);
+            dataTerminoLabel.Location = new Point(16, 167);
             dataTerminoLabel.Name = "dataTerminoLabel";
             dataTerminoLabel.Size = new Size(110, 17);
             dataTerminoLabel.TabIndex = 3;
@@ -180,7 +180,7 @@
             textBoxIdEmpresa.BorderStyle = BorderStyle.None;
             textBoxIdEmpresa.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxIdEmpresa.ForeColor = Color.White;
-            textBoxIdEmpresa.Location = new Point(151, 99);
+            textBoxIdEmpresa.Location = new Point(151, 96);
             textBoxIdEmpresa.Name = "textBoxIdEmpresa";
             textBoxIdEmpresa.Size = new Size(149, 16);
             textBoxIdEmpresa.TabIndex = 10;
@@ -196,7 +196,7 @@
             dateTimePickerDataTermino.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataTermino.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataTermino.Location = new Point(151, 173);
+            dateTimePickerDataTermino.Location = new Point(151, 162);
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 22);
             dateTimePickerDataTermino.TabIndex = 11;
@@ -255,8 +255,9 @@
             // 
             // panelBotaoFiltrar
             // 
+            panelBotaoFiltrar.BackColor = Color.Transparent;
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
-            panelBotaoFiltrar.Location = new Point(324, 207);
+            panelBotaoFiltrar.Location = new Point(324, 208);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 31;
@@ -264,8 +265,9 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(botaoLimpar);
-            panel1.Location = new Point(212, 207);
+            panel1.Location = new Point(212, 208);
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 32;
@@ -273,8 +275,9 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(botaoFechar);
-            panel2.Location = new Point(100, 207);
+            panel2.Location = new Point(100, 208);
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
@@ -326,7 +329,7 @@
             comboMaiorMenorIgualDataTermino.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboMaiorMenorIgualDataTermino.ForeColor = Color.White;
             comboMaiorMenorIgualDataTermino.FormattingEnabled = true;
-            comboMaiorMenorIgualDataTermino.Location = new Point(303, 173);
+            comboMaiorMenorIgualDataTermino.Location = new Point(303, 162);
             comboMaiorMenorIgualDataTermino.Name = "comboMaiorMenorIgualDataTermino";
             comboMaiorMenorIgualDataTermino.Size = new Size(125, 23);
             comboMaiorMenorIgualDataTermino.TabIndex = 44;

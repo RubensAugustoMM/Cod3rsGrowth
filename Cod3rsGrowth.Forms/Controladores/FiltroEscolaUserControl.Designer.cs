@@ -49,8 +49,8 @@
             panel2 = new Panel();
             botaoFechar = new Button();
             panelFiltro = new Panel();
-            labelTitulo = new Label();
             comboBoxHabilitadoStatusAtividade = new ComboBox();
+            labelTitulo = new Label();
             panelBotaoFiltrar.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -225,6 +225,7 @@
             // 
             // panelBotaoFiltrar
             // 
+            panelBotaoFiltrar.BackColor = Color.Transparent;
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
             panelBotaoFiltrar.Location = new Point(413, 184);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
@@ -251,6 +252,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(botaoLimpar);
             panel1.Location = new Point(304, 184);
             panel1.Name = "panel1";
@@ -277,6 +279,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(botaoFechar);
             panel2.Location = new Point(195, 184);
             panel2.Name = "panel2";
@@ -329,17 +332,6 @@
             panelFiltro.TabIndex = 70;
             panelFiltro.Paint += AoRequererPintura_panelFiltro;
             // 
-            // labelTitulo
-            // 
-            labelTitulo.AutoSize = true;
-            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTitulo.ForeColor = Color.White;
-            labelTitulo.Location = new Point(220, 0);
-            labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(81, 19);
-            labelTitulo.TabIndex = 70;
-            labelTitulo.Text = "Filtro Escola";
-            // 
             // comboBoxHabilitadoStatusAtividade
             // 
             comboBoxHabilitadoStatusAtividade.BackColor = Color.Black;
@@ -351,6 +343,17 @@
             comboBoxHabilitadoStatusAtividade.Name = "comboBoxHabilitadoStatusAtividade";
             comboBoxHabilitadoStatusAtividade.Size = new Size(149, 23);
             comboBoxHabilitadoStatusAtividade.TabIndex = 73;
+            // 
+            // labelTitulo
+            // 
+            labelTitulo.AutoSize = true;
+            labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTitulo.ForeColor = Color.White;
+            labelTitulo.Location = new Point(220, 0);
+            labelTitulo.Name = "labelTitulo";
+            labelTitulo.Size = new Size(81, 19);
+            labelTitulo.TabIndex = 70;
+            labelTitulo.Text = "Filtro Escola";
             // 
             // FiltroEscolaUserControl
             // 

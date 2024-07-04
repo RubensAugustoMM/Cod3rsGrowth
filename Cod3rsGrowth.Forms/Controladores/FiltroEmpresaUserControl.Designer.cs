@@ -106,7 +106,7 @@
             labelSituacaoCadastral.AutoSize = true;
             labelSituacaoCadastral.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             labelSituacaoCadastral.ForeColor = Color.White;
-            labelSituacaoCadastral.Location = new Point(12, 193);
+            labelSituacaoCadastral.Location = new Point(12, 186);
             labelSituacaoCadastral.Name = "labelSituacaoCadastral";
             labelSituacaoCadastral.Size = new Size(177, 19);
             labelSituacaoCadastral.TabIndex = 26;
@@ -310,6 +310,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(botaoFechar);
             panel2.Location = new Point(167, 268);
             panel2.Name = "panel2";
@@ -336,6 +337,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(botaoLimpar);
             panel1.Location = new Point(279, 268);
             panel1.Name = "panel1";
@@ -362,6 +364,7 @@
             // 
             // panelBotaoFiltrar
             // 
+            panelBotaoFiltrar.BackColor = Color.Transparent;
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
             panelBotaoFiltrar.Location = new Point(391, 268);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
@@ -480,7 +483,7 @@
             comboBoxHabilitadoSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxHabilitadoSituacaoCadastral.ForeColor = Color.White;
             comboBoxHabilitadoSituacaoCadastral.FormattingEnabled = true;
-            comboBoxHabilitadoSituacaoCadastral.Location = new Point(217, 189);
+            comboBoxHabilitadoSituacaoCadastral.Location = new Point(217, 182);
             comboBoxHabilitadoSituacaoCadastral.Name = "comboBoxHabilitadoSituacaoCadastral";
             comboBoxHabilitadoSituacaoCadastral.Size = new Size(149, 23);
             comboBoxHabilitadoSituacaoCadastral.TabIndex = 72;

@@ -173,6 +173,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.Transparent;
             panel3.Controls.Add(botaoFechar);
             panel3.Location = new Point(20, 113);
             panel3.Name = "panel3";
@@ -199,6 +200,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(botaoLimpar);
             panel2.Location = new Point(132, 114);
             panel2.Name = "panel2";
@@ -225,6 +227,7 @@
             // 
             // panelBotaoFiltrar
             // 
+            panelBotaoFiltrar.BackColor = Color.Transparent;
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
             panelBotaoFiltrar.Location = new Point(244, 114);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";

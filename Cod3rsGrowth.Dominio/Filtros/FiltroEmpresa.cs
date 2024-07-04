@@ -9,7 +9,7 @@ public class FiltroEmpresa
     public string? RazaoSocialFiltro { get; set; }
     public string? NomeFantasiaFiltro { get; set; }
     public string? CnpjFiltro { get; set; }
-    public bool SitucaoCadastralFiltro { get; set; }
+    public bool? SitucaoCadastralFiltro { get; set; }
     public bool? MaiorOuIgualDataSituacaoCadastral { get; set; }
     public DateTime? DataSituacaoCadastralFiltro { get; set; }
     public bool? MaiorOuIgualDataAbertura { get; set; }
