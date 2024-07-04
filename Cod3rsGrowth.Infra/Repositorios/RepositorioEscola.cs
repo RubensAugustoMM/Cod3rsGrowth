@@ -34,7 +34,7 @@ public class RepositorioEscola : IRepositorioEscola
         return _contexto.TabelaEscolas.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
+    public List<Escola> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscola)
     {
         IQueryable<Escola> query = from e in _contexto.TabelaEscolas
                                    select e;

@@ -49,7 +49,7 @@ public class ServicoEscola : IRepositorioEscola
         return _repositorioEscola.ObterPorId(Id);
     }
 
-    public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
+    public List<Escola> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscola)
     {
         return _repositorioEscola.ObterTodos(filtroEscola);
     }

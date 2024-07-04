@@ -38,7 +38,7 @@ public class MockRepositorioEscola : IRepositorioEscola
         return Tabelas.Escolas.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
+    public List<Escola> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscola)
     {
         return Tabelas.Escolas.Value;
     }

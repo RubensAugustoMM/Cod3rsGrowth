@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Filtros;
 
-public class FiltroEndereco
+public class FiltroEnderecoOtd
 {
     public int? NumeroFiltro { get; set; }
     public string? CepFiltro { get; set; }

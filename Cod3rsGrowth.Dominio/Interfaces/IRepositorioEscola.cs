@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Dominio.Interfaces;
 
 public interface IRepositorioEscola
 {
-    List<Escola> ObterTodos(FiltroEscola filtroEscola);
+    List<Escola> ObterTodos(FiltroEscolaEnderecoOtd filtroEscola);
     Escola ObterPorId(int Id);
     void Criar(Escola escolaCriada);
     void Atualizar(Escola escolaAtualizada);

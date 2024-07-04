@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     public partial class FiltroEscolaUserControl : UserControl
     {
         private PrivateFontCollection _pixeboy;
-        public FiltroEscola Filtro = null;
+        public FiltroEscolaEnderecoOtd Filtro = null;
         private const string _formatoDaData =  "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoClicar_botaoFiltrar(object sender, EventArgs e)
         {
-            Filtro = new FiltroEscola();
+            Filtro = new FiltroEscolaEnderecoOtd();
 
             if (!string.IsNullOrEmpty(textBoxNome.Text))
             {

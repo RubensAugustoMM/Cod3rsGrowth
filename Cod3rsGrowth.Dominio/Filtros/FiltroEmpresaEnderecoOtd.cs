@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Filtros;
 
-public class FiltroEmpresa
+public class FiltroEmpresaEnderecoOtd
 {
     public bool? MaiorOuIgualIdade { get; set; }
     public int? IdadeFiltro { get; set; }
@@ -20,4 +20,5 @@ public class FiltroEmpresa
     public PorteEnums? PorteFiltro { get; set; }
     public MatrizFilialEnums? MatrizFilialFiltro { get; set; }
     public int? IdEnderecoFiltro { get; set; }
+    public string? Estado { get; set; }
 }

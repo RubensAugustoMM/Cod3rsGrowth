@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Filtros;
 
-public class FiltroEscola
+public class FiltroEscolaEnderecoOtd
 {
     public bool? StatusAtividadeFiltro { get; set; }
     public string? NomeFiltro { get; set; }
@@ -12,4 +12,5 @@ public class FiltroEscola
     public CategoriaAdministrativaEnums? CategoriaAdministrativaFiltro { get; set; }
     public OrganizacaoAcademicaEnums? OrganizacaoAcademicaFiltro { get; set; }
     public int? IdEnderecoFiltro { get; set; }
+    public EstadoEnums? Estado { get; set; }
 }
