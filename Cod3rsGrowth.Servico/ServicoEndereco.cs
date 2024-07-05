@@ -44,7 +44,7 @@ public class ServicoEndereco : IRepositorioEndereco
             Bairro = EnderecoOtdDeletar.Bairro,
             Rua = EnderecoOtdDeletar.Rua,
             Complemento = EnderecoOtdDeletar.Complemento,
-            Estado = EnumExtencoes.RetornaEnum<EstadoEnums>(EnderecoOtdDeletar.Estado)
+            Estado = EnderecoOtdDeletar.Estado
         };
 
         var ResultadoValidacao = _validadorEndereco.Validate(EnderecoDeletar, options => options.IncludeRuleSets("Deletar")); 
@@ -55,12 +55,12 @@ public class ServicoEndereco : IRepositorioEndereco
         _repositorioEndereco.Deletar(Id);
     }
 
-    public EnderecoOtd ObterPorId(int Id)
+    public Endereco ObterPorId(int Id)
     {
         return _repositorioEndereco.ObterPorId(Id);
     }
 
-    public List<EnderecoOtd> ObterTodos(FiltroEnderecoOtd? filtroEnderecoOtd)
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEnderecoOtd)
     {
         return _repositorioEndereco.ObterTodos(filtroEnderecoOtd);
     }

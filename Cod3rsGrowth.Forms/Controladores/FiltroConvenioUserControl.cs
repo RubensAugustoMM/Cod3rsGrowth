@@ -68,9 +68,19 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.IdEscolaFiltro = int.Parse(textBoxIdEscola.Text);
             }
 
+            if (!string.IsNullOrEmpty(textBoxNomeEscola.Text))
+            {
+                Filtro.NomeEscolaFiltro = textBoxNomeEscola.Text;
+            }
+
             if (!string.IsNullOrEmpty(textBoxIdEmpresa.Text))
             {
                 Filtro.IdEmpresaFiltro = int.Parse(textBoxIdEmpresa.Text);
+            }
+
+            if (!string.IsNullOrEmpty(textBoxRazaoSocialEmpresa.Text))
+            {
+                Filtro.RazaoSocialEmpresaFiltro = textBoxRazaoSocialEmpresa.Text;
             }
 
             if (_filtroDataInicioHabilitado)
@@ -124,6 +134,8 @@ namespace Cod3rsGrowth.Forms.Controladores
             textBoxIdEscola.Text = _textoVazio;
             textBoxIdEmpresa.Text = _textoVazio;
             textBoxValor.Text = _textoVazio;
+            textBoxNomeEscola.Text = _textoVazio;
+            textBoxRazaoSocialEmpresa.Text = _textoVazio;
 
             dateTimePickerDataInicio.CustomFormat = _dataVazia;
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Custom;

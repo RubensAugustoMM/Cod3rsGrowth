@@ -2,6 +2,8 @@
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
 using LinqToDB.Common;
+using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -48,7 +50,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             IniciaLizaControladorFiltro();
             InicializaFontePixeBoy();
-            InicializaCabecalhoDaGrade();
+            InicializaGrade();
 
             foreach (Control c in this.Controls)
             {
@@ -102,7 +104,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width,0);
+            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -129,7 +131,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void InicializaCabecalhoDaGrade()
+        private void InicializaGrade()
         {
             dataGridViewEmpresas.Columns[0].HeaderCell.Value = "Código Empresa";
             dataGridViewEmpresas.Columns[1].HeaderCell.Value = "Razao Social";
@@ -144,6 +146,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.Columns[10].HeaderCell.Value = "Matriz ou Filial";
             dataGridViewEmpresas.Columns[11].HeaderCell.Value = "Capital Social";
             dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
+            dataGridViewEmpresas.Columns[13].HeaderCell.Value = "Estado";
 
             dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEmpresas.DefaultCellStyle.ForeColor = Color.White;
@@ -164,7 +167,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoMudarVisibilidade_TelaEmpresaForm(object sender, EventArgs e)
         {
-            if(Visible)
+            if (Visible)
             {
                 dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
                 _controladorFiltro.Visible = false;
@@ -182,6 +185,16 @@ namespace Cod3rsGrowth.Forms.Forms
             using (Brush pincel = new SolidBrush(Color.Black))
             {
                 e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+            }
+        }
+
+        private void AoFormatarCelula_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Estado")
+            {
+                dataGridViewEmpresas.Rows[e.RowIndex]
+                    .Cells[e.ColumnIndex]
+                    .ParseFormattedValue(EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value),e.CellStyle,null,null);
             }
         }
     }

@@ -55,11 +55,6 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CodigoMecFiltro = textBoxCodigoMec.Text;
             }
 
-            if (!string.IsNullOrEmpty(textBoxIdEndereco.Text))
-            {
-                Filtro.IdEnderecoFiltro = int.Parse(textBoxIdEndereco.Text);
-            }
-
             if (comboBoxCategoriaAdministrativa.SelectedItem != null)
             {
                 Filtro.CategoriaAdministrativaFiltro = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
@@ -119,7 +114,6 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             textBoxNome.Text = _textoVazio;
             textBoxCodigoMec.Text = _textoVazio;
-            textBoxIdEndereco.Text = _textoVazio;
 
             dateTimePickerDataInicioAtividade.CustomFormat = _dataVazia;
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Custom;

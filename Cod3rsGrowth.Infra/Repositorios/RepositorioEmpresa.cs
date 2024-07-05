@@ -49,11 +49,11 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                                         Idade = empresa.Idade,
                                         DataAbertura = empresa.DataAbertura,
                                         CapitalSocial = empresa.CapitalSocial,
-                                        NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
-                                        Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
-                                        MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
+                                        NaturezaJuridica = empresa.NaturezaJuridica,
+                                        Porte = empresa.Porte,
+                                        MatrizFilial = empresa.MatrizFilial,
                                         IdEndereco = empresa.IdEndereco,
-                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
+                                        Estado = endereco.Estado
                                      };
 
         return query.FirstOrDefault() ?? throw new Exception($"Nenhuma Empresa com Id {Id} existe no contexto atual!\n"); 
@@ -62,24 +62,24 @@ public class RepositorioEmpresa : IRepositorioEmpresa
     public List<EmpresaEnderecoOtd> ObterTodos(FiltroEmpresaEnderecoOtd? filtroEmpresaEnderecoOtd)
     {
         IQueryable<EmpresaEnderecoOtd> query = from empresa in _contexto.TabelaEmpresas
-                                     join endereco in _contexto.TabelaEnderecos on empresa.IdEndereco equals endereco.Id
-                                     select new EmpresaEnderecoOtd
-                                     {
-                                        Id = empresa.Id,
-                                        RazaoSocial = empresa.RazaoSocial,
-                                        NomeFantasia = empresa.NomeFantasia,
-                                        Cnpj = empresa.Cnpj,
-                                        SitucaoCadastral = empresa.SitucaoCadastral,
-                                        DataSituacaoCadastral = empresa.DataSituacaoCadastral,
-                                        Idade = empresa.Idade,
-                                        DataAbertura = empresa.DataAbertura,
-                                        CapitalSocial = empresa.CapitalSocial,
-                                        NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
-                                        Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
-                                        MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
-                                        IdEndereco = empresa.IdEndereco,
-                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
-                                     };
+                                               join endereco in _contexto.TabelaEnderecos on empresa.IdEndereco equals endereco.Id
+                                               select new EmpresaEnderecoOtd
+                                               {
+                                                   Id = empresa.Id,
+                                                   RazaoSocial = empresa.RazaoSocial,
+                                                   NomeFantasia = empresa.NomeFantasia,
+                                                   Cnpj = empresa.Cnpj,
+                                                   SitucaoCadastral = empresa.SitucaoCadastral,
+                                                   DataSituacaoCadastral = empresa.DataSituacaoCadastral,
+                                                   Idade = empresa.Idade,
+                                                   DataAbertura = empresa.DataAbertura,
+                                                   CapitalSocial = empresa.CapitalSocial,
+                                                   NaturezaJuridica = empresa.NaturezaJuridica,
+                                                   Porte = empresa.Porte,
+                                                   MatrizFilial = empresa.MatrizFilial,
+                                                   IdEndereco = empresa.IdEndereco,
+                                                   Estado = endereco.Estado
+                                               };
 
         if (filtroEmpresaEnderecoOtd != null)
         {
@@ -87,38 +87,54 @@ public class RepositorioEmpresa : IRepositorioEmpresa
             {
                 query = from empresa in query
                         where empresa.SitucaoCadastral == filtroEmpresaEnderecoOtd.SitucaoCadastralFiltro
-                        select empresa;
+                        let naturezaJuridica = empresa.NaturezaJuridica
+                        let porte = empresa.Porte
+                        let matrizFilial = empresa.MatrizFilial
+                        let estado = empresa.Estado
+                        select new EmpresaEnderecoOtd
+                        {
+                            Id = empresa.Id,
+                            RazaoSocial = empresa.RazaoSocial,
+                            NomeFantasia = empresa.NomeFantasia,
+                            Cnpj = empresa.Cnpj,
+                            SitucaoCadastral = empresa.SitucaoCadastral,
+                            DataSituacaoCadastral = empresa.DataSituacaoCadastral,
+                            Idade = empresa.Idade,
+                            DataAbertura = empresa.DataAbertura,
+                            CapitalSocial = empresa.CapitalSocial,
+                            NaturezaJuridica = naturezaJuridica,
+                            Porte = porte,
+                            MatrizFilial = matrizFilial,
+                            IdEndereco = empresa.IdEndereco,
+                            Estado = estado
+                        };
             }
 
             if (filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro != null)
             {
                 query = from empresa in query
-                        where (empresa.NaturezaJuridica == 
-                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro))
+                        where empresa.NaturezaJuridica == filtroEmpresaEnderecoOtd.NaturezaJuridicaFiltro
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.PorteFiltro != null)
             {
                 query = from empresa in query
-                        where (empresa.Porte == 
-                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.PorteFiltro))
+                        where empresa.Porte == filtroEmpresaEnderecoOtd.PorteFiltro
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.MatrizFilialFiltro != null)
             {
                 query = from empresa in query
-                        where (empresa.MatrizFilial == 
-                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.MatrizFilialFiltro))
+                        where empresa.MatrizFilial == filtroEmpresaEnderecoOtd.MatrizFilialFiltro
                         select empresa;
             }
 
             if (filtroEmpresaEnderecoOtd.EstadoFiltro != null)
             {
                 query = from empresa in query
-                        where (empresa.MatrizFilial == 
-                            EnumExtencoes.RetornaDescricao(filtroEmpresaEnderecoOtd.EstadoFiltro))
+                        where empresa.Estado == filtroEmpresaEnderecoOtd.EstadoFiltro
                         select empresa;
             }
 

@@ -48,9 +48,9 @@ public class ServicoEmpresa : IRepositorioEmpresa
             DataSituacaoCadastral = EmpresaEnderecoOtdDeletar.DataSituacaoCadastral,
             Idade = EmpresaEnderecoOtdDeletar.Idade,
             DataAbertura = EmpresaEnderecoOtdDeletar.DataAbertura,
-            NaturezaJuridica = EnumExtencoes.RetornaEnum<NaturezaJuridicaEnums>(EmpresaEnderecoOtdDeletar.NaturezaJuridica),
-            Porte = EnumExtencoes.RetornaEnum<PorteEnums>(EmpresaEnderecoOtdDeletar.Porte),
-            MatrizFilial = EnumExtencoes.RetornaEnum<MatrizFilialEnums>(EmpresaEnderecoOtdDeletar.MatrizFilial),
+            NaturezaJuridica = EmpresaEnderecoOtdDeletar.NaturezaJuridica,
+            Porte = EmpresaEnderecoOtdDeletar.Porte,
+            MatrizFilial = EmpresaEnderecoOtdDeletar.MatrizFilial,
             IdEndereco = EmpresaEnderecoOtdDeletar.IdEndereco
         };
 

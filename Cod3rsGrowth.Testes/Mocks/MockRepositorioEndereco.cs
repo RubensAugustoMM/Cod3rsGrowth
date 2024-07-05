@@ -51,7 +51,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         return EnderecoOtdRetornado;
     }
 
-    public List<EnderecoOtd> ObterTodos(FiltroEnderecoOtd? filtroEnderecoOtd)
+    public List<EnderecoOtd> ObterTodos(FiltroEndereco? filtroEnderecoOtd)
     {
         var ListaEnderecos = Tabelas.Enderecos.Value;
         List<EnderecoOtd> ListaEnderecoOtd = new();

@@ -30,68 +30,47 @@ public class RepositorioEndereco : IRepositorioEndereco
         _contexto.Delete(id);
     }
 
-    public EnderecoOtd ObterPorId(int Id)
+    public Endereco ObterPorId(int Id)
     {
-        IQueryable<EnderecoOtd> query = from endereco in _contexto.TabelaEnderecos
+        IQueryable<Endereco> query = from endereco in _contexto.TabelaEnderecos
                                      where endereco.Id == Id
-                                     select new EnderecoOtd
-                                     {
-                                        Id = endereco.Id,
-                                        Numero = endereco.Numero, 
-                                        Cep = endereco.Cep,
-                                        Municipio = endereco.Municipio,
-                                        Bairro = endereco.Bairro,
-                                        Rua = endereco.Rua,
-                                        Complemento = endereco.Complemento,
-                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
-                                     };
+                                     select endereco;
 
         return query.FirstOrDefault() ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n"); 
     }
 
-    public List<EnderecoOtd> ObterTodos(FiltroEnderecoOtd? filtroEnderecoOtd)
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
-        IQueryable<EnderecoOtd> query = from endereco in _contexto.TabelaEnderecos
-                                     select new EnderecoOtd
-                                     {
-                                        Id = endereco.Id,
-                                        Numero = endereco.Numero, 
-                                        Cep = endereco.Cep,
-                                        Municipio = endereco.Municipio,
-                                        Bairro = endereco.Bairro,
-                                        Rua = endereco.Rua,
-                                        Complemento = endereco.Complemento,
-                                        Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
-                                     };
+        IQueryable<Endereco> query = from endereco in _contexto.TabelaEnderecos
+                                     select endereco;
 
-        if (filtroEnderecoOtd != null)
+        if (filtroEndereco != null)
         {
-            if (filtroEnderecoOtd.EstadoFiltro != null)
+            if (filtroEndereco.EstadoFiltro != null)
             {
                 query = from estado in query
-                        where (estado.Estado == 
-                            EnumExtencoes.RetornaDescricao(filtroEnderecoOtd.EstadoFiltro))
+                        where estado.Estado == filtroEndereco.EstadoFiltro
                         select estado;
             }
 
-            if (filtroEnderecoOtd.MunicipioFiltro != null)
+            if (filtroEndereco.MunicipioFiltro != null)
             {
                 query = from estado in query
-                        where estado.Municipio.StartsWith(filtroEnderecoOtd.MunicipioFiltro)
+                        where estado.Municipio.StartsWith(filtroEndereco.MunicipioFiltro)
                         select estado;
             }
 
-            if (filtroEnderecoOtd.BairroFiltro != null)
+            if (filtroEndereco.BairroFiltro != null)
             {
                 query = from estado in query
-                        where estado.Bairro.StartsWith(filtroEnderecoOtd.BairroFiltro)
+                        where estado.Bairro.StartsWith(filtroEndereco.BairroFiltro)
                         select estado;
             }
 
-            if (filtroEnderecoOtd.CepFiltro != null)
+            if (filtroEndereco.CepFiltro != null)
             {
                 query = from estado in query
-                        where estado.Cep.StartsWith(filtroEnderecoOtd.CepFiltro)
+                        where estado.Cep.StartsWith(filtroEndereco.CepFiltro)
                         select estado;
             }
         }

@@ -1,4 +1,6 @@
-﻿namespace Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
+﻿using Cod3rsGrowth.Dominio.Enums;
+
+namespace Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 public class EscolaEnderecoOtd
 {
@@ -9,8 +11,8 @@ public class EscolaEnderecoOtd
     public string Telefone { get; set; }
     public string Email { get; set; }
     public DateTime InicioAtividade { get; set; } = new();
-    public string CategoriaAdministrativa { get; set; }
-    public string OrganizacaoAcademica { get; set; }
+    public CategoriaAdministrativaEnums CategoriaAdministrativa { get; set; }
+    public OrganizacaoAcademicaEnums OrganizacaoAcademica { get; set; }
     public int IdEndereco { get; set; }
-    public string Estado { get; set; }
+    public EstadoEnums Estado { get; set; }
 }

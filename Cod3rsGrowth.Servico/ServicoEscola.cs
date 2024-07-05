@@ -47,8 +47,8 @@ public class ServicoEscola : IRepositorioEscola
             Telefone = EscolaEnderecoOtdDeletar.Telefone,
             Email = EscolaEnderecoOtdDeletar.Email,
             InicioAtividade = EscolaEnderecoOtdDeletar.InicioAtividade,
-            CategoriaAdministrativa = EnumExtencoes.RetornaEnum<CategoriaAdministrativaEnums>(EscolaEnderecoOtdDeletar.CategoriaAdministrativa),
-            OrganizacaoAcademica = EnumExtencoes.RetornaEnum<OrganizacaoAcademicaEnums>(EscolaEnderecoOtdDeletar.OrganizacaoAcademica),
+            CategoriaAdministrativa = EscolaEnderecoOtdDeletar.CategoriaAdministrativa,
+            OrganizacaoAcademica = EscolaEnderecoOtdDeletar.OrganizacaoAcademica,
             IdEndereco = EscolaEnderecoOtdDeletar.IdEndereco
         };
 

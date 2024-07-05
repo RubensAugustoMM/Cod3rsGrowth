@@ -117,9 +117,9 @@ public class TestesServicoEmpresa : TesteBase
         Assert.Equal(EmpresaEntrada.DataSituacaoCadastral.Date, ValorRetornado.DataSituacaoCadastral.Date);
         Assert.Equal(EmpresaEntrada.DataAbertura.Date, ValorRetornado.DataAbertura.Date);
         Assert.Equal(EmpresaEntrada.CapitalSocial, ValorRetornado.CapitalSocial);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.NaturezaJuridica), ValorRetornado.NaturezaJuridica);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.Porte), ValorRetornado.Porte);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(EmpresaEntrada.MatrizFilial), ValorRetornado.MatrizFilial);
+        Assert.Equal(EmpresaEntrada.NaturezaJuridica, ValorRetornado.NaturezaJuridica);
+        Assert.Equal(EmpresaEntrada.Porte, ValorRetornado.Porte);
+        Assert.Equal(EmpresaEntrada.MatrizFilial, ValorRetornado.MatrizFilial);
     }
 
     [Theory]

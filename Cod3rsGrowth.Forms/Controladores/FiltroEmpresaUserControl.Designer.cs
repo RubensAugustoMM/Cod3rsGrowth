@@ -60,6 +60,8 @@
             comboBoxMaiorMenorIgualDataSituacaoCadastral = new ComboBox();
             comboBoxMaiorMenorIgualDataAbertura = new ComboBox();
             panelFiltro = new Panel();
+            comboBoxEstado = new ComboBox();
+            labelEstado = new Label();
             comboBoxHabilitadoSituacaoCadastral = new ComboBox();
             labelTitulo = new Label();
             panel2.SuspendLayout();
@@ -117,7 +119,7 @@
             labelDataSituacaoCadastral.AutoSize = true;
             labelDataSituacaoCadastral.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             labelDataSituacaoCadastral.ForeColor = Color.White;
-            labelDataSituacaoCadastral.Location = new Point(12, 217);
+            labelDataSituacaoCadastral.Location = new Point(12, 226);
             labelDataSituacaoCadastral.Name = "labelDataSituacaoCadastral";
             labelDataSituacaoCadastral.Size = new Size(172, 19);
             labelDataSituacaoCadastral.TabIndex = 27;
@@ -128,7 +130,7 @@
             labelDataAbertura.AutoSize = true;
             labelDataAbertura.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             labelDataAbertura.ForeColor = Color.White;
-            labelDataAbertura.Location = new Point(12, 238);
+            labelDataAbertura.Location = new Point(12, 247);
             labelDataAbertura.Name = "labelDataAbertura";
             labelDataAbertura.Size = new Size(192, 19);
             labelDataAbertura.TabIndex = 28;
@@ -287,7 +289,7 @@
             dateTimePickerDataSituacaoCadastral.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataSituacaoCadastral.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataSituacaoCadastral.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataSituacaoCadastral.Location = new Point(217, 211);
+            dateTimePickerDataSituacaoCadastral.Location = new Point(217, 220);
             dateTimePickerDataSituacaoCadastral.Name = "dateTimePickerDataSituacaoCadastral";
             dateTimePickerDataSituacaoCadastral.Size = new Size(149, 23);
             dateTimePickerDataSituacaoCadastral.TabIndex = 43;
@@ -302,7 +304,7 @@
             dateTimePickerDataAbertura.CalendarTitleForeColor = Color.Gray;
             dateTimePickerDataAbertura.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataAbertura.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataAbertura.Location = new Point(217, 234);
+            dateTimePickerDataAbertura.Location = new Point(217, 243);
             dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
             dateTimePickerDataAbertura.Size = new Size(149, 23);
             dateTimePickerDataAbertura.TabIndex = 44;
@@ -420,7 +422,7 @@
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.ForeColor = Color.White;
             comboBoxMaiorMenorIgualDataSituacaoCadastral.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualDataSituacaoCadastral.Location = new Point(372, 211);
+            comboBoxMaiorMenorIgualDataSituacaoCadastral.Location = new Point(372, 220);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Name = "comboBoxMaiorMenorIgualDataSituacaoCadastral";
             comboBoxMaiorMenorIgualDataSituacaoCadastral.Size = new Size(125, 23);
             comboBoxMaiorMenorIgualDataSituacaoCadastral.TabIndex = 63;
@@ -432,7 +434,7 @@
             comboBoxMaiorMenorIgualDataAbertura.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMaiorMenorIgualDataAbertura.ForeColor = Color.White;
             comboBoxMaiorMenorIgualDataAbertura.FormattingEnabled = true;
-            comboBoxMaiorMenorIgualDataAbertura.Location = new Point(372, 233);
+            comboBoxMaiorMenorIgualDataAbertura.Location = new Point(372, 242);
             comboBoxMaiorMenorIgualDataAbertura.Name = "comboBoxMaiorMenorIgualDataAbertura";
             comboBoxMaiorMenorIgualDataAbertura.Size = new Size(125, 23);
             comboBoxMaiorMenorIgualDataAbertura.TabIndex = 64;
@@ -440,6 +442,8 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(comboBoxEstado);
+            panelFiltro.Controls.Add(labelEstado);
             panelFiltro.Controls.Add(comboBoxHabilitadoSituacaoCadastral);
             panelFiltro.Controls.Add(labelTitulo);
             panelFiltro.Controls.Add(labelRazaoSocial);
@@ -475,6 +479,29 @@
             panelFiltro.Size = new Size(516, 307);
             panelFiltro.TabIndex = 65;
             panelFiltro.Paint += AoRequererPintura_panelFiltro;
+            // 
+            // comboBoxEstado
+            // 
+            comboBoxEstado.BackColor = Color.Black;
+            comboBoxEstado.FlatStyle = FlatStyle.Flat;
+            comboBoxEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstado.ForeColor = Color.White;
+            comboBoxEstado.FormattingEnabled = true;
+            comboBoxEstado.Location = new Point(217, 201);
+            comboBoxEstado.Name = "comboBoxEstado";
+            comboBoxEstado.Size = new Size(149, 23);
+            comboBoxEstado.TabIndex = 74;
+            // 
+            // labelEstado
+            // 
+            labelEstado.AutoSize = true;
+            labelEstado.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            labelEstado.ForeColor = Color.White;
+            labelEstado.Location = new Point(12, 205);
+            labelEstado.Name = "labelEstado";
+            labelEstado.Size = new Size(197, 19);
+            labelEstado.TabIndex = 73;
+            labelEstado.Text = "Estado . . . . . . . . . . . . . . . . . :";
             // 
             // comboBoxHabilitadoSituacaoCadastral
             // 
@@ -552,5 +579,7 @@
         private Panel panelFiltro;
         private Label labelTitulo;
         private ComboBox comboBoxHabilitadoSituacaoCadastral;
+        private ComboBox comboBoxEstado;
+        private Label labelEstado;
     }
 }

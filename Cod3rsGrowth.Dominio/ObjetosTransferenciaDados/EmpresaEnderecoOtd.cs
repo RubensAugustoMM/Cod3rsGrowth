@@ -1,4 +1,6 @@
-﻿namespace Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
+﻿using Cod3rsGrowth.Dominio.Enums;
+
+namespace Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 public class EmpresaEnderecoOtd
 { 
@@ -10,10 +12,10 @@ public class EmpresaEnderecoOtd
     public DateTime DataSituacaoCadastral { get; set; } = new();
     public int Idade { get; set; }
     public DateTime DataAbertura { get; set; } = new();
-    public string NaturezaJuridica { get; set; }
-    public string Porte { get; set; }
-    public string MatrizFilial { get; set; }
+    public NaturezaJuridicaEnums NaturezaJuridica { get; set; }
+    public PorteEnums Porte { get; set; }
+    public MatrizFilialEnums MatrizFilial { get; set; }
     public decimal CapitalSocial { get; set; }
     public int IdEndereco { get; set; }
-    public string Estado { get; set; }
+    public EstadoEnums Estado { get; set; }
 }

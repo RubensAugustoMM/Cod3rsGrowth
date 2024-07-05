@@ -76,7 +76,6 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.CapitalSocialFiltro = decimal.Parse(textBoxCapitalSocial.Text);
             }
 
-
             if (comboBoxNaturezaJuridica.SelectedItem != null)
             {
                 Filtro.NaturezaJuridicaFiltro = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
@@ -84,12 +83,17 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             if (comboBoxPorte.SelectedItem != null)
             {
-                Filtro.PorteFiltro = EnumExtencoes.RetornaEnum<PorteEnums>((string)comboBoxPorte.SelectedItem);
+                Filtro.PorteFiltro = (PorteEnums)comboBoxPorte.SelectedItem;
             }
 
             if (comboBoxMatrizFilial.SelectedItem != null)
             {
                 Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+            }
+
+            if(comboBoxEstado.SelectedItem != null)
+            {
+                Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
 
             if(comboBoxHabilitadoSituacaoCadastral.SelectedItem != null)
@@ -172,6 +176,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboBoxMatrizFilial.SelectedItem = null;
             comboBoxPorte.SelectedItem = null;
             comboBoxHabilitadoSituacaoCadastral.SelectedItem = null;
+            comboBoxEstado.SelectedItem = null;
 
             comboBoxMaiorMenorIgualDataSituacaoCadastral.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
             comboBoxMaiorMenorIgualDataAbertura.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
@@ -187,15 +192,17 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void InicializaComboBox()
         {
-            comboBoxNaturezaJuridica.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<NaturezaJuridicaEnums>();
-            comboBoxMatrizFilial.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<MatrizFilialEnums>();
-            comboBoxPorte.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<PorteEnums>();
-            comboBoxHabilitadoSituacaoCadastral.DataSource = EnumExtencoes.RetornaListaDescricoesEnums<HabilitadoEnums>();
+            comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
+            comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
+            comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
+            comboBoxHabilitadoSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
 
             comboBoxNaturezaJuridica.SelectedItem = null;
             comboBoxMatrizFilial.SelectedItem = null;
             comboBoxPorte.SelectedItem = null;
             comboBoxHabilitadoSituacaoCadastral.SelectedItem = null;
+            comboBoxEstado.SelectedItem = null;
 
             comboBoxMaiorMenorIgualCapitalSocial.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
             comboBoxMaiorMenorIgualDataAbertura.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));

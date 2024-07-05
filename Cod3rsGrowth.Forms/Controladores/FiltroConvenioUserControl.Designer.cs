@@ -48,6 +48,10 @@
             panel2 = new Panel();
             labelTitulo = new Label();
             panelFiltro = new Panel();
+            labelRazaoSocialEmpresa = new Label();
+            textBoxRazaoSocialEmpresa = new TextBox();
+            labelNomeEscola = new Label();
+            textBoxNomeEscola = new TextBox();
             comboMaiorMenorIgualDataTermino = new ComboBox();
             comboMaiorMenorIgualDataInicio = new ComboBox();
             comboMaiorMenorIgualValor = new ComboBox();
@@ -62,29 +66,29 @@
             objetoLabel.AutoSize = true;
             objetoLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             objetoLabel.ForeColor = Color.White;
-            objetoLabel.Location = new Point(16, 29);
+            objetoLabel.Location = new Point(18, 29);
             objetoLabel.Name = "objetoLabel";
-            objetoLabel.Size = new Size(114, 17);
+            objetoLabel.Size = new Size(170, 17);
             objetoLabel.TabIndex = 0;
-            objetoLabel.Text = "Objeto . . . . . . . :";
+            objetoLabel.Text = "Objeto . . . . . . . . . . . . . . :";
             // 
             // valorLabel
             // 
             valorLabel.AutoSize = true;
             valorLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             valorLabel.ForeColor = Color.White;
-            valorLabel.Location = new Point(16, 51);
+            valorLabel.Location = new Point(18, 51);
             valorLabel.Name = "valorLabel";
-            valorLabel.Size = new Size(113, 17);
+            valorLabel.Size = new Size(169, 17);
             valorLabel.TabIndex = 1;
-            valorLabel.Text = "Valor . . . . . . . . :";
+            valorLabel.Text = "Valor . . . . . . . . . . . . . . . :";
             // 
             // dataInicioLabel
             // 
             dataInicioLabel.AutoSize = true;
             dataInicioLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dataInicioLabel.ForeColor = Color.White;
-            dataInicioLabel.Location = new Point(16, 136);
+            dataInicioLabel.Location = new Point(18, 188);
             dataInicioLabel.Name = "dataInicioLabel";
             dataInicioLabel.Size = new Size(98, 17);
             dataInicioLabel.TabIndex = 2;
@@ -95,7 +99,7 @@
             dataTerminoLabel.AutoSize = true;
             dataTerminoLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dataTerminoLabel.ForeColor = Color.White;
-            dataTerminoLabel.Location = new Point(16, 167);
+            dataTerminoLabel.Location = new Point(18, 219);
             dataTerminoLabel.Name = "dataTerminoLabel";
             dataTerminoLabel.Size = new Size(110, 17);
             dataTerminoLabel.TabIndex = 3;
@@ -106,22 +110,22 @@
             idEscolaLabel.AutoSize = true;
             idEscolaLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             idEscolaLabel.ForeColor = Color.White;
-            idEscolaLabel.Location = new Point(16, 73);
+            idEscolaLabel.Location = new Point(18, 73);
             idEscolaLabel.Name = "idEscolaLabel";
-            idEscolaLabel.Size = new Size(105, 17);
+            idEscolaLabel.Size = new Size(161, 17);
             idEscolaLabel.TabIndex = 4;
-            idEscolaLabel.Text = "Id  Escola . . . .:";
+            idEscolaLabel.Text = "Id  Escola . . . . . . . . . . .:";
             // 
             // idEmpresaLabel
             // 
             idEmpresaLabel.AutoSize = true;
             idEmpresaLabel.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             idEmpresaLabel.ForeColor = Color.White;
-            idEmpresaLabel.Location = new Point(16, 98);
+            idEmpresaLabel.Location = new Point(18, 120);
             idEmpresaLabel.Name = "idEmpresaLabel";
-            idEmpresaLabel.Size = new Size(111, 17);
+            idEmpresaLabel.Size = new Size(167, 17);
             idEmpresaLabel.TabIndex = 5;
-            idEmpresaLabel.Text = "Id Empresa . . . :";
+            idEmpresaLabel.Text = "Id Empresa . . . . . . . . . . :";
             // 
             // textBoxObjeto
             // 
@@ -129,7 +133,7 @@
             textBoxObjeto.BorderStyle = BorderStyle.None;
             textBoxObjeto.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxObjeto.ForeColor = Color.White;
-            textBoxObjeto.Location = new Point(151, 30);
+            textBoxObjeto.Location = new Point(204, 32);
             textBoxObjeto.Name = "textBoxObjeto";
             textBoxObjeto.Size = new Size(149, 16);
             textBoxObjeto.TabIndex = 6;
@@ -140,7 +144,7 @@
             textBoxValor.BorderStyle = BorderStyle.None;
             textBoxValor.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxValor.ForeColor = Color.White;
-            textBoxValor.Location = new Point(151, 52);
+            textBoxValor.Location = new Point(204, 54);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 7;
@@ -156,7 +160,7 @@
             dateTimePickerDataInicio.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataInicio.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicio.Location = new Point(151, 134);
+            dateTimePickerDataInicio.Location = new Point(151, 186);
             dateTimePickerDataInicio.Name = "dateTimePickerDataInicio";
             dateTimePickerDataInicio.Size = new Size(149, 22);
             dateTimePickerDataInicio.TabIndex = 8;
@@ -168,7 +172,7 @@
             textBoxIdEscola.BorderStyle = BorderStyle.None;
             textBoxIdEscola.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxIdEscola.ForeColor = Color.White;
-            textBoxIdEscola.Location = new Point(151, 74);
+            textBoxIdEscola.Location = new Point(204, 76);
             textBoxIdEscola.Name = "textBoxIdEscola";
             textBoxIdEscola.Size = new Size(149, 16);
             textBoxIdEscola.TabIndex = 9;
@@ -180,7 +184,7 @@
             textBoxIdEmpresa.BorderStyle = BorderStyle.None;
             textBoxIdEmpresa.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxIdEmpresa.ForeColor = Color.White;
-            textBoxIdEmpresa.Location = new Point(151, 96);
+            textBoxIdEmpresa.Location = new Point(204, 120);
             textBoxIdEmpresa.Name = "textBoxIdEmpresa";
             textBoxIdEmpresa.Size = new Size(149, 16);
             textBoxIdEmpresa.TabIndex = 10;
@@ -196,7 +200,7 @@
             dateTimePickerDataTermino.CalendarTrailingForeColor = Color.Silver;
             dateTimePickerDataTermino.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataTermino.Location = new Point(151, 162);
+            dateTimePickerDataTermino.Location = new Point(151, 214);
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 22);
             dateTimePickerDataTermino.TabIndex = 11;
@@ -257,7 +261,7 @@
             // 
             panelBotaoFiltrar.BackColor = Color.Transparent;
             panelBotaoFiltrar.Controls.Add(botaoFiltrar);
-            panelBotaoFiltrar.Location = new Point(324, 208);
+            panelBotaoFiltrar.Location = new Point(377, 251);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 31;
@@ -267,7 +271,7 @@
             // 
             panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(botaoLimpar);
-            panel1.Location = new Point(212, 208);
+            panel1.Location = new Point(265, 251);
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 32;
@@ -277,7 +281,7 @@
             // 
             panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(botaoFechar);
-            panel2.Location = new Point(100, 208);
+            panel2.Location = new Point(151, 251);
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
@@ -297,6 +301,10 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
+            panelFiltro.Controls.Add(labelRazaoSocialEmpresa);
+            panelFiltro.Controls.Add(textBoxRazaoSocialEmpresa);
+            panelFiltro.Controls.Add(labelNomeEscola);
+            panelFiltro.Controls.Add(textBoxNomeEscola);
             panelFiltro.Controls.Add(comboMaiorMenorIgualDataTermino);
             panelFiltro.Controls.Add(comboMaiorMenorIgualDataInicio);
             panelFiltro.Controls.Add(comboMaiorMenorIgualValor);
@@ -318,9 +326,53 @@
             panelFiltro.Controls.Add(textBoxIdEscola);
             panelFiltro.Location = new Point(0, 0);
             panelFiltro.Name = "panelFiltro";
-            panelFiltro.Size = new Size(451, 248);
+            panelFiltro.Size = new Size(502, 291);
             panelFiltro.TabIndex = 35;
             panelFiltro.Paint += AoRequererPintura_panelFiltro;
+            // 
+            // labelRazaoSocialEmpresa
+            // 
+            labelRazaoSocialEmpresa.AutoSize = true;
+            labelRazaoSocialEmpresa.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelRazaoSocialEmpresa.ForeColor = Color.White;
+            labelRazaoSocialEmpresa.Location = new Point(18, 142);
+            labelRazaoSocialEmpresa.Name = "labelRazaoSocialEmpresa";
+            labelRazaoSocialEmpresa.Size = new Size(155, 17);
+            labelRazaoSocialEmpresa.TabIndex = 47;
+            labelRazaoSocialEmpresa.Text = "Razão Social Empresa:";
+            // 
+            // textBoxRazaoSocialEmpresa
+            // 
+            textBoxRazaoSocialEmpresa.BackColor = Color.Black;
+            textBoxRazaoSocialEmpresa.BorderStyle = BorderStyle.None;
+            textBoxRazaoSocialEmpresa.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxRazaoSocialEmpresa.ForeColor = Color.White;
+            textBoxRazaoSocialEmpresa.Location = new Point(204, 142);
+            textBoxRazaoSocialEmpresa.Name = "textBoxRazaoSocialEmpresa";
+            textBoxRazaoSocialEmpresa.Size = new Size(149, 16);
+            textBoxRazaoSocialEmpresa.TabIndex = 48;
+            // 
+            // labelNomeEscola
+            // 
+            labelNomeEscola.AutoSize = true;
+            labelNomeEscola.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNomeEscola.ForeColor = Color.White;
+            labelNomeEscola.Location = new Point(18, 96);
+            labelNomeEscola.Name = "labelNomeEscola";
+            labelNomeEscola.Size = new Size(171, 17);
+            labelNomeEscola.TabIndex = 45;
+            labelNomeEscola.Text = "Nome Escola . . . . . . . . . :";
+            // 
+            // textBoxNomeEscola
+            // 
+            textBoxNomeEscola.BackColor = Color.Black;
+            textBoxNomeEscola.BorderStyle = BorderStyle.None;
+            textBoxNomeEscola.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxNomeEscola.ForeColor = Color.White;
+            textBoxNomeEscola.Location = new Point(204, 98);
+            textBoxNomeEscola.Name = "textBoxNomeEscola";
+            textBoxNomeEscola.Size = new Size(149, 16);
+            textBoxNomeEscola.TabIndex = 46;
             // 
             // comboMaiorMenorIgualDataTermino
             // 
@@ -329,7 +381,7 @@
             comboMaiorMenorIgualDataTermino.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboMaiorMenorIgualDataTermino.ForeColor = Color.White;
             comboMaiorMenorIgualDataTermino.FormattingEnabled = true;
-            comboMaiorMenorIgualDataTermino.Location = new Point(303, 162);
+            comboMaiorMenorIgualDataTermino.Location = new Point(303, 214);
             comboMaiorMenorIgualDataTermino.Name = "comboMaiorMenorIgualDataTermino";
             comboMaiorMenorIgualDataTermino.Size = new Size(125, 23);
             comboMaiorMenorIgualDataTermino.TabIndex = 44;
@@ -341,7 +393,7 @@
             comboMaiorMenorIgualDataInicio.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboMaiorMenorIgualDataInicio.ForeColor = Color.White;
             comboMaiorMenorIgualDataInicio.FormattingEnabled = true;
-            comboMaiorMenorIgualDataInicio.Location = new Point(303, 133);
+            comboMaiorMenorIgualDataInicio.Location = new Point(303, 185);
             comboMaiorMenorIgualDataInicio.Name = "comboMaiorMenorIgualDataInicio";
             comboMaiorMenorIgualDataInicio.Size = new Size(125, 23);
             comboMaiorMenorIgualDataInicio.TabIndex = 43;
@@ -353,7 +405,7 @@
             comboMaiorMenorIgualValor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboMaiorMenorIgualValor.ForeColor = Color.White;
             comboMaiorMenorIgualValor.FormattingEnabled = true;
-            comboMaiorMenorIgualValor.Location = new Point(303, 49);
+            comboMaiorMenorIgualValor.Location = new Point(356, 51);
             comboMaiorMenorIgualValor.Name = "comboMaiorMenorIgualValor";
             comboMaiorMenorIgualValor.Size = new Size(125, 23);
             comboMaiorMenorIgualValor.TabIndex = 42;
@@ -365,7 +417,7 @@
             BackColor = Color.Transparent;
             Controls.Add(panelFiltro);
             Name = "FiltroConvenioUserControl";
-            Size = new Size(461, 267);
+            Size = new Size(512, 310);
             Load += FiltroConvenioUserControl_Load;
             Paint += AoRequererPintura_FiltroConvenioUserControl1;
             panelBotaoFiltrar.ResumeLayout(false);
@@ -400,5 +452,9 @@
         private ComboBox comboMaiorMenorIgualValor;
         private ComboBox comboMaiorMenorIgualDataTermino;
         private ComboBox comboMaiorMenorIgualDataInicio;
+        private Label labelNomeEscola;
+        private TextBox textBoxNomeEscola;
+        private Label labelRazaoSocialEmpresa;
+        private TextBox textBoxRazaoSocialEmpresa;
     }
 }
