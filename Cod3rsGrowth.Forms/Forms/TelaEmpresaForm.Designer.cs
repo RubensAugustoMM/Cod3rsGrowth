@@ -63,7 +63,6 @@
             dataGridViewEmpresas.RowTemplate.Height = 25;
             dataGridViewEmpresas.Size = new Size(623, 299);
             dataGridViewEmpresas.TabIndex = 2;
-            dataGridViewEmpresas.CellFormatting += AoFormatarCelula_dataGridViewEmpresas;
             // 
             // painelLateral
             // 

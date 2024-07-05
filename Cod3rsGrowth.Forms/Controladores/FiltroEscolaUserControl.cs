@@ -50,6 +50,11 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.NomeFiltro = textBoxNome.Text;
             }
 
+            if(comboBoxEstado.SelectedItem != null)
+            {
+                Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
+            }
+
             if (!string.IsNullOrEmpty(textBoxCodigoMec.Text))
             {
                 Filtro.CodigoMecFiltro = textBoxCodigoMec.Text;
@@ -122,6 +127,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboBoxCategoriaAdministrativa.SelectedItem = null;
             comboBoxOrganizacaoAcademica.SelectedItem = null;
             comboBoxHabilitadoStatusAtividade.SelectedItem = null;
+            comboBoxEstado.SelectedItem = null;
 
             comboBoxMaiorMenorIgualInicioAtividade.SelectedItem = FiltrosMaiorMenorIgualEnums.Igual;
         }
@@ -137,10 +143,12 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboBoxCategoriaAdministrativa.DataSource = Enum.GetValues(typeof(CategoriaAdministrativaEnums));
             comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
             comboBoxHabilitadoStatusAtividade.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
 
             comboBoxCategoriaAdministrativa.SelectedItem = null;
             comboBoxOrganizacaoAcademica.SelectedItem = null;
             comboBoxHabilitadoStatusAtividade.SelectedItem = null;
+            comboBoxEstado.SelectedItem = null;
 
             comboBoxMaiorMenorIgualInicioAtividade.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
         }

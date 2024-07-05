@@ -192,9 +192,15 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Estado")
             {
-                dataGridViewEmpresas.Rows[e.RowIndex]
-                    .Cells[e.ColumnIndex]
-                    .ParseFormattedValue(EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value),e.CellStyle,null,null);
+                if (dataGridViewEmpresas.Columns[e.ColumnIndex].ValueType == typeof(string))
+                {
+                    dataGridViewEmpresas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value);
+                }
+                else
+                {
+                    dataGridViewEmpresas.Columns[e.ColumnIndex].ValueType = typeof(string);
+                    dataGridViewEmpresas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value);
+                }
             }
         }
     }

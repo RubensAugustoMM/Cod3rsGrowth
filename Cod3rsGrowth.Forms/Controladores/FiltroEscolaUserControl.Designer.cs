@@ -47,7 +47,7 @@
             panel2 = new Panel();
             botaoFechar = new Button();
             panelFiltro = new Panel();
-            comboBox1 = new ComboBox();
+            comboBoxEstado = new ComboBox();
             labelEstado = new Label();
             comboBoxHabilitadoStatusAtividade = new ComboBox();
             labelTitulo = new Label();
@@ -284,7 +284,7 @@
             // panelFiltro
             // 
             panelFiltro.BackColor = Color.DarkGray;
-            panelFiltro.Controls.Add(comboBox1);
+            panelFiltro.Controls.Add(comboBoxEstado);
             panelFiltro.Controls.Add(labelEstado);
             panelFiltro.Controls.Add(comboBoxHabilitadoStatusAtividade);
             panelFiltro.Controls.Add(labelTitulo);
@@ -309,17 +309,17 @@
             panelFiltro.TabIndex = 70;
             panelFiltro.Paint += AoRequererPintura_panelFiltro;
             // 
-            // comboBox1
+            // comboBoxEstado
             // 
-            comboBox1.BackColor = Color.Black;
-            comboBox1.FlatStyle = FlatStyle.Flat;
-            comboBox1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.ForeColor = Color.White;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(241, 61);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(149, 24);
-            comboBox1.TabIndex = 74;
+            comboBoxEstado.BackColor = Color.Black;
+            comboBoxEstado.FlatStyle = FlatStyle.Flat;
+            comboBoxEstado.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstado.ForeColor = Color.White;
+            comboBoxEstado.FormattingEnabled = true;
+            comboBoxEstado.Location = new Point(241, 61);
+            comboBoxEstado.Name = "comboBoxEstado";
+            comboBoxEstado.Size = new Size(149, 24);
+            comboBoxEstado.TabIndex = 74;
             // 
             // labelEstado
             // 
@@ -408,7 +408,7 @@
         private Panel panelFiltro;
         private Label labelTitulo;
         private ComboBox comboBoxHabilitadoStatusAtividade;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxEstado;
         private Label labelEstado;
     }
 }
