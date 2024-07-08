@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico.Validacoes;
 using FluentValidation;
 
@@ -35,13 +36,13 @@ public class ServicoConvenio : IRepositorioConvenio
         _repositorioConvenio.Deletar(id);
     }
 
-    public Convenio ObterPorId(int Id)
+    public ConvenioEscolaEmpresaOtd ObterPorId(int Id)
     {
         return _repositorioConvenio.ObterPorId(Id);
     }
 
-    public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
+    public List<ConvenioEscolaEmpresaOtd> ObterTodos(FiltroConvenioEscolaEmpresaOtd? filtroConvenioEscolaEmpresaOtd)
     {
-        return _repositorioConvenio.ObterTodos(filtroConvenio);
+        return _repositorioConvenio.ObterTodos(filtroConvenioEscolaEmpresaOtd);
     }
 }

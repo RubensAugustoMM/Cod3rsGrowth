@@ -2,97 +2,140 @@
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.Filtros;
 using LinqToDB;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
+using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioEscola : IRepositorioEscola
 {
+    private readonly ContextoAplicacao _contexto;
+
+    public RepositorioEscola(ContextoAplicacao contexto)
+    {
+        _contexto = contexto;
+    }
+
     public void Atualizar(Escola escolaAtualizada)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Update(escolaAtualizada);
-        }
+        _contexto.Update(escolaAtualizada);
     }
 
     public void Criar(Escola escolaCriada)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Insert(escolaCriada);
-        }
+        _contexto.Insert(escolaCriada);
     }
 
     public void Deletar(int id)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Delete(id);
-        }
+        _contexto.Delete(id);
     }
 
-    public Escola ObterPorId(int Id)
+    public EscolaEnderecoOtd ObterPorId(int Id)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            return contexto.TabelaEscolas.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
-        }
+        IQueryable<EscolaEnderecoOtd> query = from escola in _contexto.TabelaEscolas
+                                     where escola.Id == Id
+                                     join endereco in _contexto.TabelaEnderecos on escola.IdEndereco equals endereco.Id
+                                     select new EscolaEnderecoOtd
+                                     {
+                                        Id = escola.Id,
+                                        StatusAtividade = escola.StatusAtividade, 
+                                        Nome = escola.Nome,
+                                        CodigoMec= escola.CodigoMec,
+                                        Telefone = escola.Telefone,
+                                        Email = escola.Email,
+                                        InicioAtividade =escola.InicioAtividade,
+                                        IdEndereco = escola.IdEndereco,
+                                        CategoriaAdministrativa = escola.CategoriaAdministrativa,
+                                        OrganizacaoAcademica = escola.OrganizacaoAcademica,
+                                        Estado = endereco.Estado
+                                     };
+
+        return query.FirstOrDefault() ?? throw new Exception($"Nenhuma Escola com Id {Id} existe no contexto atual!\n");
     }
 
-    public List<Escola> ObterTodos(FiltroEscola? filtroEscola)
+    public List<EscolaEnderecoOtd> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscolaEnderecoOtd)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            IQueryable<Escola> query = from e in contexto.TabelaEscolas
-                                       select e;
+        IQueryable<EscolaEnderecoOtd> query = from escola in _contexto.TabelaEscolas
+                                     join endereco in _contexto.TabelaEnderecos on escola.IdEndereco equals endereco.Id
+                                     select new EscolaEnderecoOtd
+                                     {
+                                        Id = escola.Id,
+                                        StatusAtividade = escola.StatusAtividade, 
+                                        Nome = escola.Nome,
+                                        CodigoMec= escola.CodigoMec,
+                                        Telefone = escola.Telefone,
+                                        Email = escola.Email,
+                                        InicioAtividade =escola.InicioAtividade,
+                                        IdEndereco = escola.IdEndereco, 
+                                        CategoriaAdministrativa = escola.CategoriaAdministrativa,
+                                        OrganizacaoAcademica = escola.OrganizacaoAcademica,
+                                        Estado = endereco.Estado
+                                     };
 
-            if (filtroEscola != null)
+        if (filtroEscolaEnderecoOtd != null)
+        {
+            if (filtroEscolaEnderecoOtd.StatusAtividadeFiltro != null)
+                query = from escola in query
+                        where escola.StatusAtividade == filtroEscolaEnderecoOtd.StatusAtividadeFiltro
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.CategoriaAdministrativaFiltro != null)
+                query = from escola in query
+                        where (escola.CategoriaAdministrativa == 
+                            filtroEscolaEnderecoOtd.CategoriaAdministrativaFiltro)
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.OrganizacaoAcademicaFiltro != null)
+                query = from escola in query
+                        where (escola.OrganizacaoAcademica == 
+                            filtroEscolaEnderecoOtd.OrganizacaoAcademicaFiltro)
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.EstadoFiltro != null)
+                query = from escola in query
+                        where (escola.Estado == 
+                            filtroEscolaEnderecoOtd.EstadoFiltro)
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.InicioAtividadeFiltro != null)
             {
-                if (filtroEscola.StatusAtividadeFiltro != null)
-                    query = from e in query
-                            where e.StatusAtividade == filtroEscola.StatusAtividadeFiltro
-                            select e;
-
-                if (filtroEscola.CategoriaAdministrativaFiltro != null)
-                    query = from e in query
-                            where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
-                            select e;
-
-                if (filtroEscola.CategoriaAdministrativaFiltro != null)
-                    query = from e in query
-                            where e.CategoriaAdministrativa == filtroEscola.CategoriaAdministrativaFiltro
-                            select e;
-
-                if (filtroEscola.InicioAtividadeFiltro != null)
+                if (filtroEscolaEnderecoOtd.MaiorOuIgualInicioAtividade == null)
                 {
-                    if (filtroEscola.MaiorOuIgualInicioAtividade == null)
-                        query = from e in query
-                                where e.InicioAtividade == filtroEscola.InicioAtividadeFiltro
-                                select e;
-                    else
-                        query = from e in query
-                                where e.InicioAtividade >= filtroEscola.InicioAtividadeFiltro && filtroEscola.MaiorOuIgualInicioAtividade.Value ||
-                                      e.InicioAtividade <= filtroEscola.InicioAtividadeFiltro && !filtroEscola.MaiorOuIgualInicioAtividade.Value
-                                select e;
+                    query = from escola in query
+                            where escola.InicioAtividade == filtroEscolaEnderecoOtd.InicioAtividadeFiltro
+                            select escola;
                 }
-
-                if (filtroEscola.NomeFiltro != null)
-                    query = from e in query
-                            where e.Nome.Contains(filtroEscola.NomeFiltro)
-                            select e;
-
-                if (filtroEscola.IdEnderecoFiltro != null)
-                    query = from e in query
-                            where e.IdEndereco == filtroEscola.IdEnderecoFiltro
-                            select e;
-
-                if (filtroEscola.CodigoMecFiltro != null)
-                    query = from e in query
-                            where e.CodigoMec.Contains(filtroEscola.CodigoMecFiltro)
-                            select e;
+                else if(filtroEscolaEnderecoOtd.MaiorOuIgualInicioAtividade.Value)
+                {
+                    query = from escola in query
+                            where escola.InicioAtividade >= filtroEscolaEnderecoOtd.InicioAtividadeFiltro
+                            select escola;
+                }
+                else
+                {
+                    query = from escola in query
+                            where escola.InicioAtividade <= filtroEscolaEnderecoOtd.InicioAtividadeFiltro
+                            select escola;
+                }
             }
-            
-            return query.ToList();
+
+            if (filtroEscolaEnderecoOtd.NomeFiltro != null)
+                query = from escola in query
+                        where escola.Nome.Contains(filtroEscolaEnderecoOtd.NomeFiltro)
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.IdEnderecoFiltro != null)
+                query = from escola in query
+                        where escola.IdEndereco == filtroEscolaEnderecoOtd.IdEnderecoFiltro
+                        select escola;
+
+            if (filtroEscolaEnderecoOtd.CodigoMecFiltro != null)
+                query = from escola in query
+                        where escola.CodigoMec.Contains(filtroEscolaEnderecoOtd.CodigoMecFiltro)
+                        select escola;
         }
+
+        return query.ToList();
     }
 }

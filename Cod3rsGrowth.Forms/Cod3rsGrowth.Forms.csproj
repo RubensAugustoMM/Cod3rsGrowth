@@ -16,4 +16,37 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controladores\FiltroEscolaUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controladores\FiltroEnderecoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controladores\FiltroEmpresaUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEscolaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEnderecoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\TelaEmpresaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

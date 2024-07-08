@@ -6,6 +6,12 @@ using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servico.Validacoes;
 using Cod3rsGrowth.Servico;
 using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Forms.Forms;
+using Cod3rsGrowth.Infra;
+using LinqToDB.AspNet;
+using LinqToDB;
+using LinqToDB.AspNet.Logging;
+using System.Configuration;
 
 namespace Cod3rsGrowth.Forms;
 
@@ -21,15 +27,32 @@ internal static class Program
         var host = CriaHostBuilder().Build();
         var ServiceProvider = host.Services;
 
-        Application.Run(ServiceProvider.GetRequiredService<Form1>());
+        /*
+        using (var serviceProvider = CriaServicos()) 
+            using (var escopo = serviceProvider.CreateScope())
+        {
+            AtualizaBancoDeDados(escopo.ServiceProvider);
+        }
+        */
+
+        Application.Run(ServiceProvider.GetRequiredService<TelaPrincipalForm>());
     }
 
     static IHostBuilder CriaHostBuilder()
     {
+        String StringConexao = ConfigurationManager
+                            .ConnectionStrings["ConvenioEscolaEmpresaBD"]
+                            .ConnectionString;
+
         return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
-                services.AddScoped<IRepositorioConvenio, RepositorioConvenio>()
+                services
+                .AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
+                options
+                    .UseSqlServer(StringConexao)
+                    .UseDefaultLogging(provider))
+                .AddScoped<IRepositorioConvenio, RepositorioConvenio>()
                 .AddScoped<IRepositorioEmpresa, RepositorioEmpresa>()
                 .AddScoped<IRepositorioEndereco, RepositorioEndereco>()
                 .AddScoped<IRepositorioEscola, RepositorioEscola>()
@@ -41,17 +64,25 @@ internal static class Program
                 .AddScoped<ServicoEmpresa>()
                 .AddScoped<ServicoEndereco>()
                 .AddScoped<ServicoEscola>()
-                .AddScoped<Form1>();
+                .AddScoped<TelaEmpresaForm>()
+                .AddScoped<TelaEscolaForm>()
+                .AddScoped<TelaConvenioForm>()
+                .AddScoped<TelaEnderecoForm>()
+                .AddScoped<TelaPrincipalForm>();
             });
     }
 
     private static ServiceProvider CriaServicos()
     {
+        String StringConexao = ConfigurationManager
+                            .ConnectionStrings["ConvenioEscolaEmpresaBD"]
+                            .ConnectionString;
+
         return new ServiceCollection()
         .AddFluentMigratorCore()
         .ConfigureRunner(rb => rb
                 .AddSqlServer()
-                .WithGlobalConnectionString("Data Source = DESKTOP-DAA9S87\\SQLEXPRESS; Initial Catalog=Cod3rsGrowth; User ID=sa; Password=sap@123; Encrypt=False; TrustServerCertificate=True")
+                .WithGlobalConnectionString(StringConexao)
                 .ScanIn(typeof(Migracao202406201845_CriaTabelaEnderecos).Assembly).For.Migrations()
                 .ScanIn(typeof(Migracao202406201848_CriaTabelaEscolas).Assembly).For.Migrations()
                 .ScanIn(typeof(Migracao202406201850_CriaTabelaEmpresas).Assembly).For.Migrations()
@@ -64,6 +95,6 @@ internal static class Program
     {
         var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
-        runner.MigrateUp();
+        runner.MigrateUp(202406281624);
     }
 }

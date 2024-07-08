@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB;
@@ -7,86 +8,73 @@ namespace Cod3rsGrowth.Infra.Repositorios;
 
 public class RepositorioEndereco : IRepositorioEndereco
 {
+    private readonly ContextoAplicacao _contexto;
+
+    public RepositorioEndereco(ContextoAplicacao contexto)
+    {
+        _contexto = contexto;
+    }
+
     public void Atualizar(Endereco endrecoAtualizado)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Update(endrecoAtualizado);
-        }
+        _contexto.Update(endrecoAtualizado);
     }
 
     public void Criar(Endereco enderecoCriado)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Insert(enderecoCriado);
-        }
+        _contexto.Insert(enderecoCriado);
     }
 
     public void Deletar(int id)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            contexto.Delete(id);
-        }
+        _contexto.Delete(id);
     }
 
     public Endereco ObterPorId(int Id)
     {
-        using (var contexto = new ContextoAplicacao())
-        {
-            return contexto.TabelaEnderecos.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
-        }
+        IQueryable<Endereco> query = from endereco in _contexto.TabelaEnderecos
+                                     where endereco.Id == Id
+                                     select endereco;
+
+        return query.FirstOrDefault() ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n"); 
     }
 
     public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
     {
-        using (var contexto = new ContextoAplicacao())
+        IQueryable<Endereco> query = from endereco in _contexto.TabelaEnderecos
+                                     select endereco;
+
+        if (filtroEndereco != null)
         {
-
-
-            IQueryable<Endereco> query = from e in contexto.TabelaEnderecos
-                                         select e;
-
-            if (filtroEndereco != null)
+            if (filtroEndereco.EstadoFiltro != null)
             {
-                if (filtroEndereco.EstadoFiltro != null)
-                {
-                    query = from e in contexto.TabelaEnderecos
-                            where e.Estado == filtroEndereco.EstadoFiltro
-                            select e;
-                }
-
-                if (filtroEndereco.MunicipioFiltro != null)
-                {
-                    query = from e in contexto.TabelaEnderecos
-                            where e.Municipio.Contains(filtroEndereco.MunicipioFiltro)
-                            select e;
-                }
-
-                if (filtroEndereco.BairroFiltro != null)
-                {
-                    query = from e in contexto.TabelaEnderecos
-                            where e.Bairro.Contains(filtroEndereco.BairroFiltro)
-                            select e;
-                }
-
-                if (filtroEndereco.RuaFiltro != null)
-                {
-                    query = from e in contexto.TabelaEnderecos
-                            where e.Rua.Contains(filtroEndereco.RuaFiltro)
-                            select e;
-                }
-
-                if (filtroEndereco.CepFiltro != null)
-                {
-                    query = from e in contexto.TabelaEnderecos
-                            where e.Cep.Contains(filtroEndereco.CepFiltro)
-                            select e;
-                }
+                query = from estado in query
+                        where estado.Estado == filtroEndereco.EstadoFiltro
+                        select estado;
             }
-            
-            return query.ToList();
+
+            if (filtroEndereco.MunicipioFiltro != null)
+            {
+                query = from estado in query
+                        where estado.Municipio.Contains(filtroEndereco.MunicipioFiltro)
+                        select estado;
+            }
+
+            if (filtroEndereco.BairroFiltro != null)
+            {
+                query = from estado in query
+                        where estado.Bairro.Contains(filtroEndereco.BairroFiltro)
+                        select estado;
+            }
+
+            if (filtroEndereco.CepFiltro != null)
+            {
+                query = from estado in query
+                        where estado.Cep.Contains(filtroEndereco.CepFiltro)
+                        select estado;
+            }
         }
+
+        return query.ToList();
     }
 }

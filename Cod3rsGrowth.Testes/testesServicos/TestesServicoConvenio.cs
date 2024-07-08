@@ -19,6 +19,24 @@ public class TestesServicoConvenio : TesteBase
         _tabelas = TabelaSingleton.Instance;
         _tabelas.Escolas.Value.Add(CriaNovaEscolaTeste());
         _tabelas.Empresas.Value.Add(CriaNovaEmpresaTeste());
+        _tabelas.Enderecos.Value.Add(CriaNovoEnderecoTeste());
+    }
+
+    private Endereco CriaNovoEnderecoTeste()
+    {
+        Endereco NovoEndereco = new()
+        {
+            Id = 1005,
+            Numero = 5,
+            Cep = "72311089",
+            Municipio = "Hidrolandia",
+            Bairro = "Pedregal",
+            Rua = "Rua das Magnolias",
+            Complemento = "Em frente ao bretas",
+            Estado = EstadoEnums.Goias
+        };
+
+        return NovoEndereco;
     }
 
     private Convenio CriaNovoConvenioDeTeste()
@@ -52,7 +70,8 @@ public class TestesServicoConvenio : TesteBase
             CapitalSocial = 13,
             NaturezaJuridica = NaturezaJuridicaEnums.EmpresarioIndividual,
             Porte = PorteEnums.EmpresaPequenoPorte,
-            MatrizFilial = MatrizFilialEnums.Matriz
+            MatrizFilial = MatrizFilialEnums.Matriz,
+            IdEndereco = 1005
         };
 
         return empresaNova;
@@ -70,8 +89,8 @@ public class TestesServicoConvenio : TesteBase
             Email = "rodrigo@gmail.com",
             InicioAtividade = new DateTime(1234, 12, 3),
             CategoriaAdministrativa = CategoriaAdministrativaEnums.Estadual,
-            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno
-
+            OrganizacaoAcademica = OrganizacaoAcademicaEnums.EscolaGoverno,
+            IdEndereco = 1005
         };
 
         return NovaEscola;
