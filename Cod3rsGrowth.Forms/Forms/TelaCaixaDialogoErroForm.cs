@@ -4,28 +4,28 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEnderecoForm : Form
+    public partial class TelaCaixaDialogoErroForm : Form
     {
         private Endereco _enderecoCriado;
         private PrivateFontCollection _pixeboy;
-        private readonly ServicoEndereco _servicoEndereco;
+        private List<string> _listaErros;
 
-        public TelaCriarEnderecoForm(ServicoEndereco servicoEndereco)
+        public TelaCaixaDialogoErroForm(List<string> listaErros)
         {
             InitializeComponent();
-            _servicoEndereco = servicoEndereco;
+            _listaErros = listaErros;
         }
 
-        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregar_TelaCaixaDialogoErroForm(object sender, EventArgs e)
         {
             _enderecoCriado = new();
             InicializaFontePixeBoy();
-            InicializaComboBox();
+
+            listBoxErros.DataSource = _listaErros;
 
             foreach (Control c in Controls)
             {
@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoRequererPintura_PanelErros(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -89,52 +89,15 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
-        {
-            _enderecoCriado.Cep = textBoxCep.Text;
-            if(comboBoxEstado.SelectedItem != null)
-            {
-                _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-            }
-            _enderecoCriado.Municipio = textBoxMunicipio.Text;
-            _enderecoCriado.Bairro = textBoxBairro.Text;
-            _enderecoCriado.Rua = textBoxRua.Text;
-            _enderecoCriado.Complemento = textBoxComplemento.Text;
-            
-            var listaErros = new List<string>();
-            try
-            {
-                _servicoEndereco.Criar(_enderecoCriado);
-                Close();
-            }
-            catch (ValidationException excecao) 
-            {
-                listaErros.Add(excecao.Message);
-            }
-
-            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-            caixaDialogoErro.TopLevel = true;
-
-            caixaDialogoErro.ShowDialog(this); 
-        }
-
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void InicializaComboBox()
-        {
-            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
-            comboBoxEstado.SelectedItem = null;
-        }
-
         private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void AoClicar_botaoOk(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

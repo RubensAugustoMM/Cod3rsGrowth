@@ -215,6 +215,7 @@
             botaoCriar.TabIndex = 31;
             botaoCriar.Text = "Criar";
             botaoCriar.UseVisualStyleBackColor = false;
+            botaoCriar.Click += AoClicar_botaoCriar;
             // 
             // TelaEnderecoForm
             // 

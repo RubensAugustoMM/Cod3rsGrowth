@@ -12,6 +12,8 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoEndereco _servicoEndereco;
         private FiltroEnderecoUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
+        private Form _telaCriacao;
+        private bool _telaCriacaoAtiva;
 
         public TelaEnderecoForm(ServicoEndereco servicoEndereco)
         {
@@ -46,6 +48,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
         {
+            _telaCriacao = null;
             dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
 
             IniciaLizaControladorFiltro();
@@ -142,7 +145,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEnderecos.Columns[6].HeaderCell.Value = "Complemento";
             dataGridViewEnderecos.Columns[7].HeaderCell.Value = "Estado";
 
-            foreach(DataGridViewColumn coluna in dataGridViewEnderecos.Columns)
+            foreach (DataGridViewColumn coluna in dataGridViewEnderecos.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
@@ -194,6 +197,20 @@ namespace Cod3rsGrowth.Forms.Forms
                 EstadoEnums valorEnum = (EstadoEnums)e.Value;
                 e.Value = valorEnum.RetornaDescricao();
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+
+            if(_telaCriacao == null)
+            {
+               _telaCriacao = new TelaCriarEnderecoForm(_servicoEndereco);
+            }
+
+            _telaCriacao.StartPosition = FormStartPosition.CenterParent;
+            _telaCriacao.TopLevel = true;
+
+            _telaCriacao.ShowDialog(this); 
         }
     }
 }
