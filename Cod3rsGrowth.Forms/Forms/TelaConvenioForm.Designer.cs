@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dataGridViewConvenios = new DataGridView();
             painelLateral = new Panel();
             panel1 = new Panel();
             botaoPesquisar = new Button();
-            panelBotaoFiltrar = new Panel();
+            panelBotaoFiltros = new Panel();
             botaoFiltros = new Button();
+            panelBotaoCriar = new Panel();
+            botaoCriar = new Button();
+            panelBotaoEditar = new Panel();
+            botaoEditar = new Button();
+            panelBotaoDeletar = new Panel();
+            botaoDeletar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewConvenios).BeginInit();
             painelLateral.SuspendLayout();
             panel1.SuspendLayout();
-            panelBotaoFiltrar.SuspendLayout();
+            panelBotaoFiltros.SuspendLayout();
+            panelBotaoCriar.SuspendLayout();
+            panelBotaoEditar.SuspendLayout();
+            panelBotaoDeletar.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridViewConvenios
@@ -46,14 +55,14 @@
             dataGridViewConvenios.BackgroundColor = Color.Blue;
             dataGridViewConvenios.BorderStyle = BorderStyle.None;
             dataGridViewConvenios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Blue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Yellow;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewConvenios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Blue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Yellow;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewConvenios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewConvenios.EnableHeadersVisualStyles = false;
             dataGridViewConvenios.GridColor = Color.White;
@@ -70,8 +79,11 @@
             // painelLateral
             // 
             painelLateral.BackColor = Color.DarkGray;
+            painelLateral.Controls.Add(panelBotaoDeletar);
+            painelLateral.Controls.Add(panelBotaoEditar);
+            painelLateral.Controls.Add(panelBotaoCriar);
             painelLateral.Controls.Add(panel1);
-            painelLateral.Controls.Add(panelBotaoFiltrar);
+            painelLateral.Controls.Add(panelBotaoFiltros);
             painelLateral.Dock = DockStyle.Left;
             painelLateral.Location = new Point(0, 0);
             painelLateral.Name = "painelLateral";
@@ -82,9 +94,9 @@
             // panel1
             // 
             panel1.Controls.Add(botaoPesquisar);
-            panel1.Location = new Point(15, 233);
+            panel1.Location = new Point(12, 245);
             panel1.Name = "panel1";
-            panel1.Size = new Size(133, 57);
+            panel1.Size = new Size(133, 49);
             panel1.TabIndex = 33;
             panel1.Paint += AoRequererPintura_panelSombraBotoes;
             // 
@@ -99,20 +111,20 @@
             botaoPesquisar.ForeColor = Color.White;
             botaoPesquisar.Location = new Point(3, 3);
             botaoPesquisar.Name = "botaoPesquisar";
-            botaoPesquisar.Size = new Size(112, 44);
+            botaoPesquisar.Size = new Size(112, 36);
             botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = false;
             botaoPesquisar.Click += AoClicar_botaoPesquisar;
             // 
-            // panelBotaoFiltrar
+            // panelBotaoFiltros
             // 
-            panelBotaoFiltrar.Controls.Add(botaoFiltros);
-            panelBotaoFiltrar.Location = new Point(12, 25);
-            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
-            panelBotaoFiltrar.Size = new Size(133, 57);
-            panelBotaoFiltrar.TabIndex = 32;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoFiltros.Controls.Add(botaoFiltros);
+            panelBotaoFiltros.Location = new Point(12, 25);
+            panelBotaoFiltros.Name = "panelBotaoFiltros";
+            panelBotaoFiltros.Size = new Size(133, 49);
+            panelBotaoFiltros.TabIndex = 32;
+            panelBotaoFiltros.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoFiltros
             // 
@@ -125,11 +137,86 @@
             botaoFiltros.ForeColor = Color.White;
             botaoFiltros.Location = new Point(3, 3);
             botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(112, 44);
+            botaoFiltros.Size = new Size(112, 36);
             botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = false;
             botaoFiltros.Click += AoClicar_botaoFiltros;
+            // 
+            // panelBotaoCriar
+            // 
+            panelBotaoCriar.Controls.Add(botaoCriar);
+            panelBotaoCriar.Location = new Point(12, 80);
+            panelBotaoCriar.Name = "panelBotaoCriar";
+            panelBotaoCriar.Size = new Size(133, 49);
+            panelBotaoCriar.TabIndex = 33;
+            panelBotaoCriar.Paint += AoRequererPintura_panelSombraBotoes;
+            // 
+            // botaoCriar
+            // 
+            botaoCriar.BackColor = Color.Green;
+            botaoCriar.FlatAppearance.BorderSize = 0;
+            botaoCriar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoCriar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoCriar.FlatStyle = FlatStyle.Flat;
+            botaoCriar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoCriar.ForeColor = Color.White;
+            botaoCriar.Location = new Point(3, 3);
+            botaoCriar.Name = "botaoCriar";
+            botaoCriar.Size = new Size(112, 36);
+            botaoCriar.TabIndex = 31;
+            botaoCriar.Text = "Criar";
+            botaoCriar.UseVisualStyleBackColor = false;
+            // 
+            // panelBotaoEditar
+            // 
+            panelBotaoEditar.Controls.Add(botaoEditar);
+            panelBotaoEditar.Location = new Point(12, 135);
+            panelBotaoEditar.Name = "panelBotaoEditar";
+            panelBotaoEditar.Size = new Size(133, 49);
+            panelBotaoEditar.TabIndex = 34;
+            panelBotaoEditar.Paint += AoRequererPintura_panelSombraBotoes;
+            // 
+            // botaoEditar
+            // 
+            botaoEditar.BackColor = Color.Green;
+            botaoEditar.FlatAppearance.BorderSize = 0;
+            botaoEditar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoEditar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoEditar.FlatStyle = FlatStyle.Flat;
+            botaoEditar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoEditar.ForeColor = Color.White;
+            botaoEditar.Location = new Point(3, 3);
+            botaoEditar.Name = "botaoEditar";
+            botaoEditar.Size = new Size(112, 36);
+            botaoEditar.TabIndex = 31;
+            botaoEditar.Text = "Editar";
+            botaoEditar.UseVisualStyleBackColor = false;
+            // 
+            // panelBotaoDeletar
+            // 
+            panelBotaoDeletar.Controls.Add(botaoDeletar);
+            panelBotaoDeletar.Location = new Point(12, 190);
+            panelBotaoDeletar.Name = "panelBotaoDeletar";
+            panelBotaoDeletar.Size = new Size(133, 49);
+            panelBotaoDeletar.TabIndex = 35;
+            panelBotaoDeletar.Paint += AoRequererPintura_panelSombraBotoes;
+            // 
+            // botaoDeletar
+            // 
+            botaoDeletar.BackColor = Color.Green;
+            botaoDeletar.FlatAppearance.BorderSize = 0;
+            botaoDeletar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoDeletar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoDeletar.FlatStyle = FlatStyle.Flat;
+            botaoDeletar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoDeletar.ForeColor = Color.White;
+            botaoDeletar.Location = new Point(3, 3);
+            botaoDeletar.Name = "botaoDeletar";
+            botaoDeletar.Size = new Size(112, 36);
+            botaoDeletar.TabIndex = 31;
+            botaoDeletar.Text = "Deletar";
+            botaoDeletar.UseVisualStyleBackColor = false;
             // 
             // TelaConvenioForm
             // 
@@ -147,7 +234,10 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewConvenios).EndInit();
             painelLateral.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            panelBotaoFiltrar.ResumeLayout(false);
+            panelBotaoFiltros.ResumeLayout(false);
+            panelBotaoCriar.ResumeLayout(false);
+            panelBotaoEditar.ResumeLayout(false);
+            panelBotaoDeletar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -155,8 +245,14 @@
         private Panel painelLateral;
         private Button botaoFiltros;
         private DataGridView dataGridViewConvenios;
-        private Panel panelBotaoFiltrar;
+        private Panel panelBotaoFiltros;
         private Panel panel1;
         private Button botaoPesquisar;
+        private Panel panelBotaoDeletar;
+        private Button botaoDeletar;
+        private Panel panelBotaoEditar;
+        private Button botaoEditar;
+        private Panel panelBotaoCriar;
+        private Button botaoCriar;
     }
 }
