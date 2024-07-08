@@ -10,16 +10,11 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaConvenioForm : Form
     {
         private readonly ServicoConvenio _servicoConvenio;
-        private readonly ServicoEscola _servicoEscola;
-        private readonly ServicoEmpresa _servicoEmpresa;
         private FiltroConvenioUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
-        public TelaConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa,
-                ServicoEscola servicoEscola)
+        public TelaConvenioForm(ServicoConvenio servicoConvenio)
         {
-            _servicoEmpresa = servicoEmpresa;
-            _servicoEscola = servicoEscola;
             _servicoConvenio = servicoConvenio;
             InitializeComponent();
         }
