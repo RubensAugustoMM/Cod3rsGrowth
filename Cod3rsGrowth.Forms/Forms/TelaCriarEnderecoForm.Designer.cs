@@ -100,7 +100,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEnderecoForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoPintar_TelaCriarEnderecoForm;
+            Load += AoCarregar_TelaCriarEnderecoForm;
             Paint += AoRequererPintura_TelaCriarEnderecoForm;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);

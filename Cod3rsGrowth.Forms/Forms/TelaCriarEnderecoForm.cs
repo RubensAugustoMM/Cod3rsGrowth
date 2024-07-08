@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Modelos;
+using LinqToDB.Common;
 using System;
 using System.Drawing.Text;
 
@@ -14,7 +15,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void AoPintar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
             _enderecoCriado = new();
             InicializaFontePixeBoy();
