@@ -79,6 +79,7 @@
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 24);
             comboBoxCategoriaAdministrativa.TabIndex = 41;
+            comboBoxCategoriaAdministrativa.Format += AoFormatar_comboBoxCategoriaAdministrativa;
             comboBoxCategoriaAdministrativa.Click += AoClicar_comboBoxCategoriaAdministrativa;
             // 
             // textBoxNome
@@ -170,6 +171,7 @@
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 24);
             comboBoxOrganizacaoAcademica.TabIndex = 53;
+            comboBoxOrganizacaoAcademica.Format += AoFormatar_comboBoxOrganizacaoAcademica;
             comboBoxOrganizacaoAcademica.Click += AoClicar_comboBoxOrganizacaoAcademica;
             // 
             // dateTimePickerDataInicioAtividade
@@ -320,6 +322,7 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 24);
             comboBoxEstado.TabIndex = 74;
+            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
             // 
             // labelEstado
             // 

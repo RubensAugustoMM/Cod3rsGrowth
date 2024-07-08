@@ -1,4 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.Drawing.Text;
 
@@ -159,6 +161,12 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 e.Handled = true;
             }
+        }
+
+        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        {
+            EstadoEnums valorEnum = (EstadoEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
         }
     }
 }

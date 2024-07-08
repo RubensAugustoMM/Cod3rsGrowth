@@ -2,6 +2,9 @@
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
 using LinqToDB.Common;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -103,7 +106,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width,0);
+            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -139,9 +142,15 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEscolas.Columns[4].HeaderCell.Value = "Telefone";
             dataGridViewEscolas.Columns[5].HeaderCell.Value = "E-Mail";
             dataGridViewEscolas.Columns[6].HeaderCell.Value = "Data Início da Atividade";
-            dataGridViewEscolas.Columns[7].HeaderCell.Value = "CategoriaAdministrativa";
+            dataGridViewEscolas.Columns[7].HeaderCell.Value = "Categoria Administrativa";
             dataGridViewEscolas.Columns[8].HeaderCell.Value = "Organização Acadêmica";
             dataGridViewEscolas.Columns[9].HeaderCell.Value = "Código Endereço";
+            dataGridViewEscolas.Columns[10].HeaderCell.Value = "Estado";
+
+            foreach(DataGridViewColumn coluna in dataGridViewEscolas.Columns)
+            {
+                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
 
             dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEscolas.DefaultCellStyle.ForeColor = Color.White;
@@ -162,7 +171,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoMudarVisibilidade_TelaEscolaForm(object sender, EventArgs e)
         {
-            if(Visible)
+            if (Visible)
             {
                 dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
                 _controladorFiltro.Visible = false;
@@ -174,12 +183,36 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
-            const int altura = 86;
-            const int largura = 54;
+            int altura = botaoFiltros.Height;
+            int largura = botaoFiltros.Width;
 
             using (Brush pincel = new SolidBrush(Color.Black))
             {
-                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
+            }
+        }
+
+        private void AoFormatarCelulas_dataGridViewEscolas(object sender, DataGridViewCellFormattingEventArgs e)
+        {            
+            if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Categoria Administrativa")
+            {
+                CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
+            }
+
+            if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Organização Acadêmica")
+            {
+                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums) e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
+            }
+
+            if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Estado")
+            {
+                EstadoEnums valorEnum = (EstadoEnums)e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
             }
         }
     }

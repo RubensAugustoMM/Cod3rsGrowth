@@ -72,6 +72,7 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 41;
+            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
             comboBoxEstado.Click += AoClicar_comboBoxEstado;
             // 
             // labelMunicipio
@@ -101,11 +102,11 @@
             labelCep.AutoSize = true;
             labelCep.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCep.ForeColor = Color.White;
-            labelCep.Location = new Point(38, 83);
+            labelCep.Location = new Point(34, 83);
             labelCep.Name = "labelCep";
-            labelCep.Size = new Size(78, 21);
+            labelCep.Size = new Size(82, 21);
             labelCep.TabIndex = 44;
-            labelCep.Text = "CEP. . . . . .:";
+            labelCep.Text = "CEP. . . . . . :";
             // 
             // textBoxMunicipio
             // 

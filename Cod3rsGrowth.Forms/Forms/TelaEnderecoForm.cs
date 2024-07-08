@@ -1,9 +1,9 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using System.ComponentModel;
-using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB.Common;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -104,7 +104,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width,0);
+            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -142,6 +142,11 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEnderecos.Columns[6].HeaderCell.Value = "Complemento";
             dataGridViewEnderecos.Columns[7].HeaderCell.Value = "Estado";
 
+            foreach(DataGridViewColumn coluna in dataGridViewEnderecos.Columns)
+            {
+                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
+
             dataGridViewEnderecos.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEnderecos.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEnderecos.DefaultCellStyle.BackColor = Color.Blue;
@@ -161,7 +166,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoMudarVisibilidade_TelaEnderecoForm(object sender, EventArgs e)
         {
-            if(Visible)
+            if (Visible)
             {
                 dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
                 _controladorFiltro.Visible = false;
@@ -173,12 +178,21 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
-            const int altura = 86;
-            const int largura = 54;
+            int altura = botaoFiltros.Height;
+            int largura = botaoFiltros.Width;
 
             using (Brush pincel = new SolidBrush(Color.Black))
             {
-                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
+            }
+        }
+
+        private void AoFormatarCelulas_dataGridViewEnderecos(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewEnderecos.Columns[e.ColumnIndex].Name == "Estado")
+            {
+                EstadoEnums valorEnum = (EstadoEnums)e.Value;
+                e.Value = valorEnum.RetornaDescricao();
             }
         }
     }

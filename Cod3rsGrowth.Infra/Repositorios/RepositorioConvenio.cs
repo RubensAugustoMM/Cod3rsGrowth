@@ -85,7 +85,7 @@ public class RepositorioConvenio : IRepositorioConvenio
             if(filtroConvenioEscolaEmpresaOtd.NomeEscolaFiltro != null)
             {
                 query = from convenio in query
-                        where convenio.NomeEscola.StartsWith(filtroConvenioEscolaEmpresaOtd.NomeEscolaFiltro)
+                        where convenio.NomeEscola.Contains(filtroConvenioEscolaEmpresaOtd.NomeEscolaFiltro)
                         select convenio;
             }
 
@@ -99,7 +99,7 @@ public class RepositorioConvenio : IRepositorioConvenio
             if(filtroConvenioEscolaEmpresaOtd.RazaoSocialEmpresaFiltro != null)
             {
                 query = from convenio in query
-                        where convenio.RazaoSocialEmpresa.StartsWith(filtroConvenioEscolaEmpresaOtd.RazaoSocialEmpresaFiltro)
+                        where convenio.RazaoSocialEmpresa.Contains(filtroConvenioEscolaEmpresaOtd.RazaoSocialEmpresaFiltro)
                         select convenio;
             }
 
@@ -172,7 +172,7 @@ public class RepositorioConvenio : IRepositorioConvenio
             if (filtroConvenioEscolaEmpresaOtd.ObjetoFiltro != null)
             {
                 query = from c in query
-                        where c.Objeto.StartsWith(filtroConvenioEscolaEmpresaOtd.ObjetoFiltro)
+                        where c.Objeto.Contains(filtroConvenioEscolaEmpresaOtd.ObjetoFiltro)
                         select c;
             }
         }

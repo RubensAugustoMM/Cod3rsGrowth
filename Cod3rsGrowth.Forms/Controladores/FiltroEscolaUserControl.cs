@@ -1,4 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.Drawing.Text;
 
@@ -8,7 +10,7 @@ namespace Cod3rsGrowth.Forms.Controladores
     {
         private PrivateFontCollection _pixeboy;
         public FiltroEscolaEnderecoOtd Filtro = null;
-        private const string _formatoDaData =  "dd/MM/yyyy";
+        private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
         private const int _tamanhoMaximoCodigoMec = 8;
@@ -50,7 +52,7 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.NomeFiltro = textBoxNome.Text;
             }
 
-            if(comboBoxEstado.SelectedItem != null)
+            if (comboBoxEstado.SelectedItem != null)
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
@@ -70,9 +72,9 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.OrganizacaoAcademicaFiltro = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
             }
 
-            if(comboBoxHabilitadoStatusAtividade.SelectedItem != null)
+            if (comboBoxHabilitadoStatusAtividade.SelectedItem != null)
             {
-                if(HabilitadoEnums.Habilitado ==
+                if (HabilitadoEnums.Habilitado ==
                     (HabilitadoEnums)comboBoxHabilitadoStatusAtividade.SelectedItem)
                 {
                     Filtro.StatusAtividadeFiltro = true;
@@ -238,7 +240,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
-        { 
+        {
             if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec)
             {
                 e.Handled = true;
@@ -248,6 +250,24 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 e.Handled = true;
             }
+        }
+
+        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        {
+            EstadoEnums valorEnum = (EstadoEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        {
+            CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void AoFormatar_comboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
+        {
+            OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
         }
     }
 }

@@ -63,6 +63,7 @@
             dataGridViewEmpresas.RowTemplate.Height = 25;
             dataGridViewEmpresas.Size = new Size(623, 299);
             dataGridViewEmpresas.TabIndex = 2;
+            dataGridViewEmpresas.CellFormatting += AoFormatarCelulas_dataGridViewEmpresas;
             // 
             // painelLateral
             // 
@@ -79,9 +80,9 @@
             // panel1
             // 
             panel1.Controls.Add(botaoPesquisar);
-            panel1.Location = new Point(25, 234);
+            panel1.Location = new Point(12, 235);
             panel1.Name = "panel1";
-            panel1.Size = new Size(107, 67);
+            panel1.Size = new Size(133, 57);
             panel1.TabIndex = 34;
             panel1.Paint += AoRequererPintura_panelSombraBotoes;
             // 
@@ -96,7 +97,7 @@
             botaoPesquisar.ForeColor = Color.White;
             botaoPesquisar.Location = new Point(3, 3);
             botaoPesquisar.Name = "botaoPesquisar";
-            botaoPesquisar.Size = new Size(86, 54);
+            botaoPesquisar.Size = new Size(112, 44);
             botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = false;
@@ -105,9 +106,9 @@
             // panelBotaoFiltrar
             // 
             panelBotaoFiltrar.Controls.Add(botaoFiltros);
-            panelBotaoFiltrar.Location = new Point(25, 23);
+            panelBotaoFiltrar.Location = new Point(12, 22);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
-            panelBotaoFiltrar.Size = new Size(107, 67);
+            panelBotaoFiltrar.Size = new Size(133, 57);
             panelBotaoFiltrar.TabIndex = 33;
             panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
             // 
@@ -122,7 +123,7 @@
             botaoFiltros.ForeColor = Color.White;
             botaoFiltros.Location = new Point(3, 3);
             botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(86, 54);
+            botaoFiltros.Size = new Size(112, 44);
             botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = false;

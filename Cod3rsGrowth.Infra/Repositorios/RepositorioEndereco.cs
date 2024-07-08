@@ -56,21 +56,21 @@ public class RepositorioEndereco : IRepositorioEndereco
             if (filtroEndereco.MunicipioFiltro != null)
             {
                 query = from estado in query
-                        where estado.Municipio.StartsWith(filtroEndereco.MunicipioFiltro)
+                        where estado.Municipio.Contains(filtroEndereco.MunicipioFiltro)
                         select estado;
             }
 
             if (filtroEndereco.BairroFiltro != null)
             {
                 query = from estado in query
-                        where estado.Bairro.StartsWith(filtroEndereco.BairroFiltro)
+                        where estado.Bairro.Contains(filtroEndereco.BairroFiltro)
                         select estado;
             }
 
             if (filtroEndereco.CepFiltro != null)
             {
                 query = from estado in query
-                        where estado.Cep.StartsWith(filtroEndereco.CepFiltro)
+                        where estado.Cep.Contains(filtroEndereco.CepFiltro)
                         select estado;
             }
         }

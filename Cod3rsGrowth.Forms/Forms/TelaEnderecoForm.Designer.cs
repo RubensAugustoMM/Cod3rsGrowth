@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewEnderecos = new DataGridView();
             painelLateral = new Panel();
             panel1 = new Panel();
@@ -46,14 +46,14 @@
             dataGridViewEnderecos.BackgroundColor = Color.Blue;
             dataGridViewEnderecos.BorderStyle = BorderStyle.None;
             dataGridViewEnderecos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Blue;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Yellow;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Blue;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Yellow;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEnderecos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewEnderecos.EnableHeadersVisualStyles = false;
             dataGridViewEnderecos.GridColor = Color.White;
@@ -63,6 +63,7 @@
             dataGridViewEnderecos.RowTemplate.Height = 25;
             dataGridViewEnderecos.Size = new Size(623, 299);
             dataGridViewEnderecos.TabIndex = 2;
+            dataGridViewEnderecos.CellFormatting += AoFormatarCelulas_dataGridViewEnderecos;
             // 
             // painelLateral
             // 
@@ -79,9 +80,9 @@
             // panel1
             // 
             panel1.Controls.Add(botaoPesquisar);
-            panel1.Location = new Point(24, 233);
+            panel1.Location = new Point(12, 233);
             panel1.Name = "panel1";
-            panel1.Size = new Size(107, 67);
+            panel1.Size = new Size(133, 57);
             panel1.TabIndex = 35;
             panel1.Paint += AoRequererPintura_panelSombraBotoes;
             // 
@@ -96,7 +97,7 @@
             botaoPesquisar.ForeColor = Color.White;
             botaoPesquisar.Location = new Point(3, 3);
             botaoPesquisar.Name = "botaoPesquisar";
-            botaoPesquisar.Size = new Size(86, 54);
+            botaoPesquisar.Size = new Size(112, 44);
             botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = false;
@@ -105,9 +106,9 @@
             // panelBotaoFiltrar
             // 
             panelBotaoFiltrar.Controls.Add(botaoFiltros);
-            panelBotaoFiltrar.Location = new Point(24, 23);
+            panelBotaoFiltrar.Location = new Point(12, 23);
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
-            panelBotaoFiltrar.Size = new Size(107, 67);
+            panelBotaoFiltrar.Size = new Size(133, 57);
             panelBotaoFiltrar.TabIndex = 34;
             panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
             // 
@@ -122,7 +123,7 @@
             botaoFiltros.ForeColor = Color.White;
             botaoFiltros.Location = new Point(3, 3);
             botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(86, 54);
+            botaoFiltros.Size = new Size(112, 44);
             botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = false;

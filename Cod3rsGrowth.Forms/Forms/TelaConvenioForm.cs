@@ -9,20 +9,6 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaConvenioForm : Form
     {
-        private struct DadosExibirConvenio
-        {//AoClicarBotaoFiltros
-            public int Id { get; set; }
-            public int NumeroProcesso { get; set; }
-            public string Objeto { get; set; }
-            public decimal Valor { get; set; }
-            public DateTime DataInicio { get; set; }
-            public DateTime? DataTermino { get; set; }
-            public int IdEscola { get; set; }
-            public string NomeEscola { get; set; }
-            public int IdEmpresa { get; set; }
-            public string NomeEmpresa { get; set; }
-        }
-
         private readonly ServicoConvenio _servicoConvenio;
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEmpresa _servicoEmpresa;
@@ -65,8 +51,8 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregarForm_TelaConvenioForm(object sender, EventArgs e)
         {
-            dataGridViewConvenios.DataSource = new BindingList<DadosExibirConvenio>();
-            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(null);
+            dataGridViewConvenios.DataSource = new BindingList<FiltroConvenioEscolaEmpresaOtd>();
+            dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
 
             InicializaControladorFiltro();
             InicializaFontePixeBoy();
@@ -138,7 +124,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoPesquisar(object sender, EventArgs e)
         {
-            dataGridViewConvenios.DataSource = RetornaValoresParaSeremExibidos(null);
+            dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
         }
 
         private void InicializaCabecalhoDaGrade()
@@ -150,9 +136,14 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.Columns[4].HeaderCell.Value = "Início";
             dataGridViewConvenios.Columns[5].HeaderCell.Value = "Término";
             dataGridViewConvenios.Columns[6].HeaderCell.Value = "Código Escola";
-            dataGridViewConvenios.Columns[7].HeaderCell.Value = "Escola";
+            dataGridViewConvenios.Columns[7].HeaderCell.Value = "Nome Escola";
             dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
-            dataGridViewConvenios.Columns[9].HeaderCell.Value = "Empresa";
+            dataGridViewConvenios.Columns[9].HeaderCell.Value = "Razão Social Empresa";
+
+            foreach(DataGridViewColumn coluna in dataGridViewConvenios.Columns)
+            {
+                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
 
             dataGridViewConvenios.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewConvenios.DefaultCellStyle.ForeColor = Color.White;
@@ -182,34 +173,6 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private List<DadosExibirConvenio> RetornaValoresParaSeremExibidos(FiltroConvenioEscolaEmpresaOtd filtro)
-        {
-            List<DadosExibirConvenio> ListaConveniosExibidos = new();
-            var ListaConvenios = _servicoConvenio.ObterTodos(filtro);
-
-            foreach (var convenio in ListaConvenios)
-            {
-                var EscolaReferente = _servicoEscola.ObterPorId(convenio.IdEscola);
-                var EmpresaReferente = _servicoEmpresa.ObterPorId(convenio.IdEmpresa);
-
-                ListaConveniosExibidos.Add(new()
-                {
-                    Id = convenio.Id,
-                    NumeroProcesso = convenio.NumeroProcesso,
-                    Objeto = convenio.Objeto,
-                    Valor = convenio.Valor,
-                    DataInicio = convenio.DataInicio,
-                    DataTermino = convenio.DataTermino,
-                    IdEscola = convenio.IdEscola,
-                    NomeEscola = EscolaReferente.Nome,
-                    IdEmpresa = convenio.IdEmpresa,
-                    NomeEmpresa = EmpresaReferente.NomeFantasia
-                });
-            }
-
-            return ListaConveniosExibidos;
-        }
-
         private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
         {
             if(Visible)
@@ -224,12 +187,12 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
-            const int altura = 86;
-            const int largura = 54;
+            int altura = botaoFiltros.Height;
+            int largura = botaoFiltros.Width;
 
             using (Brush pincel = new SolidBrush(Color.Black))
             {
-                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
             }
         }
     }

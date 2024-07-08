@@ -255,6 +255,7 @@
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 40;
+            comboBoxNaturezaJuridica.Format += AoFormatar_comboBoxNaturezaJuridica;
             // 
             // comboBoxPorte
             // 
@@ -267,6 +268,7 @@
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 41;
+            comboBoxPorte.Format += AoFormatar_comboBoxPorte;
             // 
             // comboBoxMatrizFilial
             // 
@@ -491,6 +493,7 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 74;
+            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
             // 
             // labelEstado
             // 

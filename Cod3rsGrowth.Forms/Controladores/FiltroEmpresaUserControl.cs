@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.Drawing.Text;
 
@@ -91,12 +92,12 @@ namespace Cod3rsGrowth.Forms.Controladores
                 Filtro.MatrizFilialFiltro = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
             }
 
-            if(comboBoxEstado.SelectedItem != null)
+            if (comboBoxEstado.SelectedItem != null)
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
 
-            if(comboBoxHabilitadoSituacaoCadastral.SelectedItem != null)
+            if (comboBoxHabilitadoSituacaoCadastral.SelectedItem != null)
             {
                 if (HabilitadoEnums.Habilitado ==
                       (HabilitadoEnums)comboBoxHabilitadoSituacaoCadastral.SelectedItem)
@@ -306,7 +307,25 @@ namespace Cod3rsGrowth.Forms.Controladores
                 return ResultadoRetornado;
             }
 
-            return ResultadoRetornado; 
+            return ResultadoRetornado;
+        }
+
+        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        {
+            EstadoEnums valorEnum = (EstadoEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void AoFormatar_comboBoxPorte(object sender, ListControlConvertEventArgs e)
+        {
+            PorteEnums valorEnum = (PorteEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void AoFormatar_comboBoxNaturezaJuridica(object sender, ListControlConvertEventArgs e)
+        {
+            NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
         }
     }
 }

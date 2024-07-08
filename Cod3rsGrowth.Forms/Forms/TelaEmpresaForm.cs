@@ -4,6 +4,8 @@ using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio;
 using Cod3rsGrowth.Dominio.Enums;
+using System.Data.Common;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -134,7 +136,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaGrade()
         {
             dataGridViewEmpresas.Columns[0].HeaderCell.Value = "Código Empresa";
-            dataGridViewEmpresas.Columns[1].HeaderCell.Value = "Razao Social";
+            dataGridViewEmpresas.Columns[1].HeaderCell.Value = "Razão Social";
             dataGridViewEmpresas.Columns[2].HeaderCell.Value = "Nome Fantasia";
             dataGridViewEmpresas.Columns[3].HeaderCell.Value = "CNPJ";
             dataGridViewEmpresas.Columns[4].HeaderCell.Value = "Situação Cadastral";
@@ -147,6 +149,11 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.Columns[11].HeaderCell.Value = "Capital Social";
             dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
             dataGridViewEmpresas.Columns[13].HeaderCell.Value = "Estado";
+
+            foreach(DataGridViewColumn coluna in dataGridViewEmpresas.Columns)
+            {
+                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
 
             dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEmpresas.DefaultCellStyle.ForeColor = Color.White;
@@ -179,28 +186,43 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
-            const int altura = 86;
-            const int largura = 54;
+            int altura = botaoFiltros.Height;
+            int largura = botaoFiltros.Width;
 
             using (Brush pincel = new SolidBrush(Color.Black))
             {
-                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, altura, largura);
+                e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
             }
         }
 
-        private void AoFormatarCelula_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Estado")
+        private void AoFormatarCelulas_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
+        {       
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
-                if (dataGridViewEmpresas.Columns[e.ColumnIndex].ValueType == typeof(string))
-                {
-                    dataGridViewEmpresas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value);
-                }
-                else
-                {
-                    dataGridViewEmpresas.Columns[e.ColumnIndex].ValueType = typeof(string);
-                    dataGridViewEmpresas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = EnumExtencoes.RetornaDescricao((EstadoEnums)e.Value);
-                }
+                NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
+            }
+
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")
+            {
+                PorteEnums valorEnum = (PorteEnums) e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
+            }
+
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Matriz ou Filial")
+            {
+                MatrizFilialEnums valorEnum = (MatrizFilialEnums) e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
+            }
+
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].Name == "Estado")
+            {
+                EstadoEnums valorEnum = (EstadoEnums)e.Value;
+                string descricaoEnum = valorEnum.RetornaDescricao();
+                e.Value = descricaoEnum;
             }
         }
     }
