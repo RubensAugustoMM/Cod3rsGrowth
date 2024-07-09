@@ -91,6 +91,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
+            const char Separador = '\n';
             _enderecoCriado.Cep = textBoxCep.Text;
             if(comboBoxEstado.SelectedItem != null)
             {
@@ -101,23 +102,23 @@ namespace Cod3rsGrowth.Forms.Forms
             _enderecoCriado.Rua = textBoxRua.Text;
             _enderecoCriado.Complemento = textBoxComplemento.Text;
             
-            var listaErros = new List<string>();
             try
             {
                 _servicoEndereco.Criar(_enderecoCriado);
                 Close();
             }
-            catch (ValidationException excecao) 
+            catch (Exception excecao) 
             {
-                listaErros.Add(excecao.Message);
+                var listaErros = new List<string>();
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
             }
-
-            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-            caixaDialogoErro.TopLevel = true;
-
-            caixaDialogoErro.ShowDialog(this); 
+ 
         }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)
@@ -135,6 +136,20 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             var valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
+        }
+        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        {
+            const int tamanhoMaximoCep = 8;
+
+            if (textBoxCep.Text.Length == tamanhoMaximoCep && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

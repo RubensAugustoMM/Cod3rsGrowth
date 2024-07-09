@@ -27,9 +27,7 @@
     <Compile Update="Controladores\FiltroEmpresaUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\TelaCaixaDialogoErroForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\TelaCaixaDialogoErroForm.cs" />
     <Compile Update="Forms\TelaEscolaForm.cs">
       <SubType>Form</SubType>
     </Compile>

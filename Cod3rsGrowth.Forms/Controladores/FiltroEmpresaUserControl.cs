@@ -278,7 +278,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTecla_textBoxCnpj(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCnpj.Text.Length > _tamanhoMaximoCnpj)
+            if (textBoxCnpj.Text.Length == _tamanhoMaximoCnpj && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

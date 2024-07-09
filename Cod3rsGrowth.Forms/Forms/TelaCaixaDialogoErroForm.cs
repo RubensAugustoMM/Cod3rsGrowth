@@ -1,35 +1,35 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
-using Cod3rsGrowth.Dominio.Modelos;
-using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System;
 using System.Drawing.Text;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCaixaDialogoErroForm : Form
     {
-        private Endereco _enderecoCriado;
-        private PrivateFontCollection _pixeboy;
-        private List<string> _listaErros;
+        private Font _pixeboyFont;
+        private List<string> _listaErrosEntrada;
+        private List<string> _listaErrosExibida;
 
         public TelaCaixaDialogoErroForm(List<string> listaErros)
         {
             InitializeComponent();
-            _listaErros = listaErros;
+            _listaErrosEntrada = listaErros;
+            _listaErrosExibida = new List<string>();
         }
 
         private void AoCarregar_TelaCaixaDialogoErroForm(object sender, EventArgs e)
         {
-            _enderecoCriado = new();
             InicializaFontePixeBoy();
 
-            listBoxErros.DataSource = _listaErros;
+            FormataListBoxErros();
+            listBoxErros.DataSource = _listaErrosExibida;
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = _pixeboyFont;
                 ConfiguraFonte(c);
             }
         }
@@ -61,8 +61,10 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaFontePixeBoy()
         {
-            _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+            var fontCollction = new PrivateFontCollection();
+            fontCollction.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboyFont = new Font(fontCollction.Families[0], 12, FontStyle.Bold);
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -82,7 +84,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = _pixeboyFont;
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -98,6 +100,55 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicar_botaoOk(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void AoFormatar_listBoxErros(object sender, ListControlConvertEventArgs e)
+        {
+        }
+
+        private void FormataListBoxErros()
+        {
+            foreach (var mensagemErro in _listaErrosEntrada)
+            {
+                _listaErrosExibida.AddRange(TruncarTexto(mensagemErro));
+            }
+        }
+
+        private List<string> TruncarTexto(string texto)
+        {
+            string subTexto = texto;
+            var textoTruncado = texto;
+            List<string> listaRetorno = new List<string>();
+
+            int index = textoTruncado.Length - 1;
+            while (true)
+            {
+                if (textoTruncado[index] == ' ')
+                {
+                    textoTruncado = textoTruncado.Remove(index);
+                    index = textoTruncado.Length;
+
+                    if (TextRenderer.MeasureText(textoTruncado, _pixeboyFont).Width < listBoxErros.Width)
+                    {
+                        listaRetorno.Add(textoTruncado);
+                        subTexto = subTexto.Substring(index);
+                        if (TextRenderer.MeasureText(subTexto, _pixeboyFont).Width > listBoxErros.Width)
+                        {
+                            textoTruncado = subTexto;
+                            index = textoTruncado.Length;
+                        }
+                        else
+                        {
+                            listaRetorno.Add(subTexto);
+                            break;
+                        }
+                    }
+                }
+
+                index--;
+            }
+
+            return listaRetorno;
         }
     }
 }

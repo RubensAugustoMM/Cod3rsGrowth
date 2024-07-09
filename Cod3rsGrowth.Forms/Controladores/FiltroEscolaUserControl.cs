@@ -241,7 +241,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec)
+            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

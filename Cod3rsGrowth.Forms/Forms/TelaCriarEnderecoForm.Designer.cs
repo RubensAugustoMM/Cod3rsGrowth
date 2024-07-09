@@ -132,17 +132,18 @@
             textBoxCep.BackColor = Color.Cyan;
             textBoxCep.BorderStyle = BorderStyle.None;
             textBoxCep.ForeColor = Color.Black;
-            textBoxCep.Location = new Point(133, 52);
+            textBoxCep.Location = new Point(133, 46);
             textBoxCep.Name = "textBoxCep";
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 73;
+            textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
             // 
             // textBoxBairro
             // 
             textBoxBairro.BackColor = Color.Cyan;
             textBoxBairro.BorderStyle = BorderStyle.None;
             textBoxBairro.ForeColor = Color.Black;
-            textBoxBairro.Location = new Point(133, 125);
+            textBoxBairro.Location = new Point(133, 119);
             textBoxBairro.Name = "textBoxBairro";
             textBoxBairro.Size = new Size(149, 16);
             textBoxBairro.TabIndex = 72;
@@ -154,7 +155,7 @@
             comboBoxEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEstado.ForeColor = Color.Black;
             comboBoxEstado.FormattingEnabled = true;
-            comboBoxEstado.Location = new Point(133, 74);
+            comboBoxEstado.Location = new Point(133, 68);
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 67;
@@ -165,7 +166,7 @@
             textBoxMunicipio.BackColor = Color.Cyan;
             textBoxMunicipio.BorderStyle = BorderStyle.None;
             textBoxMunicipio.ForeColor = Color.Black;
-            textBoxMunicipio.Location = new Point(133, 103);
+            textBoxMunicipio.Location = new Point(133, 97);
             textBoxMunicipio.Name = "textBoxMunicipio";
             textBoxMunicipio.Size = new Size(149, 16);
             textBoxMunicipio.TabIndex = 71;
@@ -208,7 +209,7 @@
             textBoxRua.BackColor = Color.Cyan;
             textBoxRua.BorderStyle = BorderStyle.None;
             textBoxRua.ForeColor = Color.White;
-            textBoxRua.Location = new Point(133, 147);
+            textBoxRua.Location = new Point(133, 141);
             textBoxRua.Name = "textBoxRua";
             textBoxRua.Size = new Size(149, 16);
             textBoxRua.TabIndex = 76;
@@ -229,7 +230,7 @@
             textBoxComplemento.BackColor = Color.Cyan;
             textBoxComplemento.BorderStyle = BorderStyle.None;
             textBoxComplemento.ForeColor = Color.Black;
-            textBoxComplemento.Location = new Point(133, 169);
+            textBoxComplemento.Location = new Point(133, 163);
             textBoxComplemento.Name = "textBoxComplemento";
             textBoxComplemento.Size = new Size(149, 16);
             textBoxComplemento.TabIndex = 78;

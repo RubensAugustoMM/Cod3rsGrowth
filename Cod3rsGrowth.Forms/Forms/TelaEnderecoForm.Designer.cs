@@ -52,6 +52,7 @@
             // 
             // dataGridViewEnderecos
             // 
+            dataGridViewEnderecos.AllowUserToOrderColumns = true;
             dataGridViewEnderecos.BackgroundColor = Color.Blue;
             dataGridViewEnderecos.BorderStyle = BorderStyle.None;
             dataGridViewEnderecos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
