@@ -4,7 +4,6 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -93,7 +92,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
             _enderecoCriado.Cep = textBoxCep.Text;
-            if(comboBoxEstado.SelectedItem != null)
+            if (comboBoxEstado.SelectedItem != null)
             {
                 _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
@@ -101,13 +100,13 @@ namespace Cod3rsGrowth.Forms.Forms
             _enderecoCriado.Bairro = textBoxBairro.Text;
             _enderecoCriado.Rua = textBoxRua.Text;
             _enderecoCriado.Complemento = textBoxComplemento.Text;
-            
+
             try
             {
                 _servicoEndereco.Criar(_enderecoCriado);
                 Close();
             }
-            catch (Exception excecao) 
+            catch (Exception excecao)
             {
                 var listaErros = new List<string>();
                 listaErros.AddRange(excecao.Message.Split(Separador));
@@ -118,7 +117,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
             }
- 
+
         }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)

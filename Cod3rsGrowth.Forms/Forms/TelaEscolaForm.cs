@@ -11,13 +11,16 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaEscolaForm : Form
     {
         private readonly ServicoEscola _servicoEscola;
+        private readonly ServicoEndereco _servicoEndereco;
         private FiltroEscolaUserControl _controladorFiltro;
+        
         private PrivateFontCollection _pixeboy;
 
-        public TelaEscolaForm(ServicoEscola servicoEscola)
+        public TelaEscolaForm(ServicoEscola servicoEscola, ServicoEndereco servicoEndereco)
         {
             _servicoEscola = servicoEscola;
             InitializeComponent();
+            _servicoEndereco = servicoEndereco;
         }
 
         private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
@@ -147,7 +150,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEscolas.Columns[9].HeaderCell.Value = "Código Endereço";
             dataGridViewEscolas.Columns[10].HeaderCell.Value = "Estado";
 
-            foreach(DataGridViewColumn coluna in dataGridViewEscolas.Columns)
+            foreach (DataGridViewColumn coluna in dataGridViewEscolas.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
@@ -193,7 +196,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void AoFormatarCelulas_dataGridViewEscolas(object sender, DataGridViewCellFormattingEventArgs e)
-        {            
+        {
             if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Categoria Administrativa")
             {
                 CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
@@ -203,7 +206,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Organização Acadêmica")
             {
-                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums) e.Value;
+                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
@@ -214,6 +217,16 @@ namespace Cod3rsGrowth.Forms.Forms
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco,_servicoEscola);
+
+            telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEscola.TopLevel = true;
+
+            telaCriarEscola.ShowDialog(this); 
         }
     }
 }

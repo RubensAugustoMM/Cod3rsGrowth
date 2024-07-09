@@ -12,8 +12,6 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoEndereco _servicoEndereco;
         private FiltroEnderecoUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
-        private Form _telaCriacao;
-        private bool _telaCriacaoAtiva;
 
         public TelaEnderecoForm(ServicoEndereco servicoEndereco)
         {
@@ -48,7 +46,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
         {
-            _telaCriacao = null;
             dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
 
             IniciaLizaControladorFiltro();
@@ -201,16 +198,12 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoCriar(object sender, EventArgs e)
         {
+            TelaCriarEnderecoForm telaCriarEndereco = new TelaCriarEnderecoForm(_servicoEndereco);
 
-            if(_telaCriacao == null)
-            {
-               _telaCriacao = new TelaCriarEnderecoForm(_servicoEndereco);
-            }
+            telaCriarEndereco.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEndereco.TopLevel = true;
 
-            _telaCriacao.StartPosition = FormStartPosition.CenterParent;
-            _telaCriacao.TopLevel = true;
-
-            _telaCriacao.ShowDialog(this); 
+            telaCriarEndereco.ShowDialog(this); 
         }
     }
 }

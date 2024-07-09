@@ -148,7 +148,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
             dataGridViewEmpresas.Columns[13].HeaderCell.Value = "Estado";
 
-            foreach(DataGridViewColumn coluna in dataGridViewEmpresas.Columns)
+            foreach (DataGridViewColumn coluna in dataGridViewEmpresas.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
@@ -194,7 +194,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void AoFormatarCelulas_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
-        {       
+        {
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
                 NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
@@ -204,14 +204,14 @@ namespace Cod3rsGrowth.Forms.Forms
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")
             {
-                PorteEnums valorEnum = (PorteEnums) e.Value;
+                PorteEnums valorEnum = (PorteEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Matriz ou Filial")
             {
-                MatrizFilialEnums valorEnum = (MatrizFilialEnums) e.Value;
+                MatrizFilialEnums valorEnum = (MatrizFilialEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }

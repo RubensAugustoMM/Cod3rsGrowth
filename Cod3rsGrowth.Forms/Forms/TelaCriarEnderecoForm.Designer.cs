@@ -123,9 +123,9 @@
             LabelEstado.ForeColor = Color.White;
             LabelEstado.Location = new Point(14, 76);
             LabelEstado.Name = "LabelEstado";
-            LabelEstado.Size = new Size(76, 21);
+            LabelEstado.Size = new Size(97, 21);
             LabelEstado.TabIndex = 66;
-            LabelEstado.Text = "Estado. . .:";
+            LabelEstado.Text = "Estado. . . . . .:";
             // 
             // textBoxCep
             // 
@@ -178,9 +178,9 @@
             labelMunicipio.ForeColor = Color.White;
             labelMunicipio.Location = new Point(14, 99);
             labelMunicipio.Name = "labelMunicipio";
-            labelMunicipio.Size = new Size(82, 21);
+            labelMunicipio.Size = new Size(103, 21);
             labelMunicipio.TabIndex = 68;
-            labelMunicipio.Text = "Município:";
+            labelMunicipio.Text = "Município . . .:";
             // 
             // labelCep
             // 
@@ -189,9 +189,9 @@
             labelCep.ForeColor = Color.White;
             labelCep.Location = new Point(14, 46);
             labelCep.Name = "labelCep";
-            labelCep.Size = new Size(82, 21);
+            labelCep.Size = new Size(103, 21);
             labelCep.TabIndex = 70;
-            labelCep.Text = "CEP. . . . . . :";
+            labelCep.Text = "CEP. . . . . . . . . :";
             // 
             // labelBairro
             // 
@@ -200,9 +200,9 @@
             labelBairro.ForeColor = Color.White;
             labelBairro.Location = new Point(14, 120);
             labelBairro.Name = "labelBairro";
-            labelBairro.Size = new Size(72, 21);
+            labelBairro.Size = new Size(90, 21);
             labelBairro.TabIndex = 69;
-            labelBairro.Text = "Bairro. . .:";
+            labelBairro.Text = "Bairro. . . . . :";
             // 
             // textBoxRua
             // 
@@ -221,9 +221,9 @@
             labelRua.ForeColor = Color.White;
             labelRua.Location = new Point(14, 142);
             labelRua.Name = "labelRua";
-            labelRua.Size = new Size(61, 21);
+            labelRua.Size = new Size(100, 21);
             labelRua.TabIndex = 75;
-            labelRua.Text = "Rua . . .:";
+            labelRua.Text = "Rua . . . . . . . . :";
             // 
             // textBoxComplemento
             // 

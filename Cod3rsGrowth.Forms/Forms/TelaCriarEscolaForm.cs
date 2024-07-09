@@ -1,6 +1,8 @@
-﻿using Cod3rsGrowth.Dominio.Modelos;
+﻿using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Enums.Extencoes;
+using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
-using System;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -9,16 +11,21 @@ namespace Cod3rsGrowth.Forms.Forms
     {
         private Endereco _enderecoCriado;
         private PrivateFontCollection _pixeboy;
+        private readonly ServicoEndereco _servicoEndereco;
+        private readonly ServicoEscola _servicoEscola;
 
-        public TelaCriarEscolaForm()
+        public TelaCriarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola)
         {
             InitializeComponent();
+            _servicoEndereco = servicoEndereco;
+            _servicoEscola = servicoEscola;
         }
 
-        private void AoPintar_TelaCriarEscolaForm(object sender, EventArgs e)
+        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
             _enderecoCriado = new();
             InicializaFontePixeBoy();
+            InicializaComboBox();
 
             foreach (Control c in Controls)
             {
@@ -27,7 +34,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_TelaCriarEscolaForm(object sender, PaintEventArgs e)
+        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -41,13 +48,13 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloExterior,
                                                                    yInicioRetanguloExterior,
-                                                                   Width - (xInicioRetanguloExterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloExterior + Tamanho) * 2));
+                                                                   panelCriacao.Width - (xInicioRetanguloExterior + Tamanho) * 2,
+                                                                   panelCriacao.Height - (yInicioRetanguloExterior + Tamanho) * 2));
 
                     e.Graphics.DrawRectangle(caneta, new Rectangle(xInicioRetanguloInterior,
                                                                    yInicioRetanguloInterior,
-                                                                   Width - (xInicioRetanguloInterior + Tamanho) * 2,
-                                                                   Height - (yInicioRetanguloInterior + Tamanho) * 2));
+                                                                   panelCriacao.Width - (xInicioRetanguloInterior + Tamanho) * 2,
+                                                                   panelCriacao.Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
             }
         }
@@ -79,6 +86,101 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
+            }
+        }
+
+        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        {
+            const char Separador = '\n';
+            _enderecoCriado.Cep = textBoxNome.Text;
+            if (comboBoxCategoriaAdministrativa.SelectedItem != null)
+            {
+                _enderecoCriado.Estado = (EstadoEnums)comboBoxCategoriaAdministrativa.SelectedItem;
+            }
+            _enderecoCriado.Municipio = textBoxCodigoMec.Text;
+            _enderecoCriado.Bairro = textBoxTelefone.Text;
+            _enderecoCriado.Rua = textBoxEmail.Text;
+            _enderecoCriado.Complemento = textBoxComplemento.Text;
+
+            try
+            {
+                _servicoEndereco.Criar(_enderecoCriado);
+                Close();
+            }
+            catch (Exception excecao)
+            {
+                var listaErros = new List<string>();
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+            }
+
+        }
+
+        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void InicializaComboBox()
+        {
+            comboBoxCategoriaAdministrativa.DataSource = Enum.GetValues(typeof(CategoriaAdministrativaEnums));
+            comboBoxCategoriaAdministrativa.SelectedItem = null;
+
+            comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
+            comboBoxEstado.SelectedItem = null;
+
+            comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
+            comboBoxOrganizacaoAcademica.SelectedItem = null;
+
+            comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
+            comboBoxSituacaoCadastral.SelectedItem = null;
+        }
+
+        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        {
+            var valorEnum = (CategoriaAdministrativaEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
+        }
+        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        {
+            const int tamanhoMaximoCep = 8;
+
+            if (textBoxNome.Text.Length == tamanhoMaximoCep && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        {
+            if (dateTimePickerDataInicioAtividade.Value > DateTime.Now)
+            {
+                dateTimePickerDataInicioAtividade.Value = DateTime.Now;
+            }
+        }
+
+        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
+        {
+            const int tamanhoMaximoCodigoMec = 8;
+
+            if (textBoxCodigoMec.Text.Length > tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }
