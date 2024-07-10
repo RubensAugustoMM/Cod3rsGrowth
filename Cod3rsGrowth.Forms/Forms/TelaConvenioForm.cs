@@ -10,12 +10,17 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaConvenioForm : Form
     {
         private readonly ServicoConvenio _servicoConvenio;
+        private readonly ServicoEscola _servicoEscola;
+        private readonly ServicoEmpresa _servicoEmpresa;
         private FiltroConvenioUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
-        public TelaConvenioForm(ServicoConvenio servicoConvenio)
+        public TelaConvenioForm(ServicoConvenio servicoConvenio,
+            ServicoEscola servicoEscola, ServicoEmpresa servicoEmpresa)
         {
             _servicoConvenio = servicoConvenio;
+            _servicoEscola = servicoEscola;
+            _servicoEmpresa = servicoEmpresa;
             InitializeComponent();
         }
 
@@ -106,7 +111,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width,0);
+            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -135,7 +140,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
             dataGridViewConvenios.Columns[9].HeaderCell.Value = "Razão Social Empresa";
 
-            foreach(DataGridViewColumn coluna in dataGridViewConvenios.Columns)
+            foreach (DataGridViewColumn coluna in dataGridViewConvenios.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
@@ -170,7 +175,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
         {
-            if(Visible)
+            if (Visible)
             {
                 dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
                 _controladorFiltro.Visible = false;
@@ -189,6 +194,18 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+            
+            TelaCriarConvenioForm telaCriarConvenio = 
+                new TelaCriarConvenioForm(_servicoConvenio,_servicoEmpresa,_servicoEscola);
+
+            telaCriarConvenio.StartPosition = FormStartPosition.CenterParent;
+            telaCriarConvenio.TopLevel = true;
+
+            telaCriarConvenio.ShowDialog(this); 
         }
     }
 }
