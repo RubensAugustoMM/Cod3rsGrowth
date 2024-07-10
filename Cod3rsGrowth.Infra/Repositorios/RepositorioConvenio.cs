@@ -28,7 +28,7 @@ public class RepositorioConvenio : IRepositorioConvenio
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaConvenios.Where(c => c.Id == id).Delete();
     }
 
     public ConvenioEscolaEmpresaOtd ObterPorId(int Id)

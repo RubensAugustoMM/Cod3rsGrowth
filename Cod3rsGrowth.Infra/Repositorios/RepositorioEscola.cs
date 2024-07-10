@@ -28,7 +28,7 @@ public class RepositorioEscola : IRepositorioEscola
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEscolas.Where(e => e.Id == id).Delete();
     }
 
     public EscolaEnderecoOtd ObterPorId(int Id)

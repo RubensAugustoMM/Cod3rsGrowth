@@ -107,7 +107,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             _empresaCriada.DataSituacaoCadastral = DateTime.Now;
 
-            if (!string.IsNullOrEmpty(textBoxNumero.Text))
+            if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
             {
                 _empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
             }

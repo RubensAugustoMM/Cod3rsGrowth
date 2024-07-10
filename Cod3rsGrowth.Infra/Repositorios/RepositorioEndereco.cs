@@ -27,7 +27,7 @@ public class RepositorioEndereco : IRepositorioEndereco
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEnderecos.Where(e => e.Id == id).Delete();
     }
 
     public Endereco ObterPorId(int Id)

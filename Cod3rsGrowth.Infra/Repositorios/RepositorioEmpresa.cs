@@ -30,7 +30,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEmpresas.Where(e => e.Id == id).Delete();
     }
 
     public EmpresaEnderecoOtd ObterPorId(int Id)
