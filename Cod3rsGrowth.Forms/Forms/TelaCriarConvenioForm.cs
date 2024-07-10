@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System;
@@ -15,7 +16,8 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoConvenio _servicoConvenio;
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEmpresa _servicoEmpresa;
-        private bool botaoEscolaAtivo;
+        private bool _botaoEscolaAtivo;
+        private bool _botaoEmpresaAtivo;
 
         public TelaCriarConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa, ServicoEscola servicoEscola)
         {
@@ -29,10 +31,9 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             InicializaFontePixeBoy();
 
-            dataGridViewEscolasEmpresas.DataSource = _servicoEscola.ObterTodos(null);
-            botaoEscolaAtivo = true;
-
-            ConfiguraGradeEscola();
+            _botaoEmpresaAtivo = false;
+            _botaoEscolaAtivo = true;
+            listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
 
             _convenioCriado = new();
 
@@ -231,153 +232,50 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoEscola(object sender, EventArgs e)
         {
-            dataGridViewEscolasEmpresas.DataSource = _servicoEscola.ObterTodos(null);
+            _botaoEscolaAtivo = true;
 
-            botaoEscolaAtivo = true;
+            listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null) ;
 
-            ConfiguraGradeEscola();
+            _botaoEmpresaAtivo = false;
         }
 
         private void AoClicar_botaoEmpresa(object sender, EventArgs e)
         {
-            dataGridViewEscolasEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+            _botaoEmpresaAtivo = true;
 
-            botaoEscolaAtivo = false;
+            listBoxEscolaEmpresa.DataSource = _servicoEmpresa.ObterTodos(null);
 
-            ConfiguraGradeEmpresa();
-        }
-
-        private void ConfiguraGradeEmpresa()
-        {
-            dataGridViewEscolasEmpresas.Columns[0].HeaderCell.Value = "Código Empresa";
-            dataGridViewEscolasEmpresas.Columns[1].HeaderCell.Value = "Razão Social";
-            dataGridViewEscolasEmpresas.Columns[2].HeaderCell.Value = "Nome Fantasia";
-            dataGridViewEscolasEmpresas.Columns[3].HeaderCell.Value = "CNPJ";
-            dataGridViewEscolasEmpresas.Columns[4].HeaderCell.Value = "Situação Cadastral";
-            dataGridViewEscolasEmpresas.Columns[5].HeaderCell.Value = "Data da Alteração Situação Cadastral";
-            dataGridViewEscolasEmpresas.Columns[6].HeaderCell.Value = "Idade";
-            dataGridViewEscolasEmpresas.Columns[7].HeaderCell.Value = "Data de Abertura";
-            dataGridViewEscolasEmpresas.Columns[8].HeaderCell.Value = "Natureza Juridica";
-            dataGridViewEscolasEmpresas.Columns[9].HeaderCell.Value = "Porte";
-            dataGridViewEscolasEmpresas.Columns[10].HeaderCell.Value = "Matriz ou Filial";
-            dataGridViewEscolasEmpresas.Columns[11].HeaderCell.Value = "Capital Social";
-            dataGridViewEscolasEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
-            dataGridViewEscolasEmpresas.Columns[13].HeaderCell.Value = "Estado";
-
-            foreach (DataGridViewColumn coluna in dataGridViewEscolasEmpresas.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
-
-            dataGridViewEscolasEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridViewEscolasEmpresas.DefaultCellStyle.ForeColor = Color.White;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.SelectionBackColor = Color.Cyan;
-
-            dataGridViewEscolasEmpresas.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dataGridViewEscolasEmpresas.EnableHeadersVisualStyles = false;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
-        }
-
-        private void ConfiguraGradeEscola()
-        {
-            dataGridViewEscolasEmpresas.Columns[0].HeaderCell.Value = "Código Escola";
-            dataGridViewEscolasEmpresas.Columns[1].HeaderCell.Value = "Status Atividade";
-            dataGridViewEscolasEmpresas.Columns[2].HeaderCell.Value = "Nome";
-            dataGridViewEscolasEmpresas.Columns[3].HeaderCell.Value = "Código Mec";
-            dataGridViewEscolasEmpresas.Columns[4].HeaderCell.Value = "Telefone";
-            dataGridViewEscolasEmpresas.Columns[5].HeaderCell.Value = "E-Mail";
-            dataGridViewEscolasEmpresas.Columns[6].HeaderCell.Value = "Data Início da Atividade";
-            dataGridViewEscolasEmpresas.Columns[7].HeaderCell.Value = "Categoria Administrativa";
-            dataGridViewEscolasEmpresas.Columns[8].HeaderCell.Value = "Organização Acadêmica";
-            dataGridViewEscolasEmpresas.Columns[9].HeaderCell.Value = "Código Endereço";
-            dataGridViewEscolasEmpresas.Columns[10].HeaderCell.Value = "Estado";
-
-            foreach (DataGridViewColumn coluna in dataGridViewEscolasEmpresas.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
-
-            dataGridViewEscolasEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridViewEscolasEmpresas.DefaultCellStyle.ForeColor = Color.White;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolasEmpresas.DefaultCellStyle.SelectionBackColor = Color.Cyan;
-
-            dataGridViewEscolasEmpresas.RowHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            dataGridViewEscolasEmpresas.EnableHeadersVisualStyles = false;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
-        }
-
-        private void AoFormatarCelula_dataGridViewEscolasEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
-            {
-                NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
-                e.Value = valorEnum.RetornaDescricao();
-
-            }
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")
-            {
-                PorteEnums valorEnum = (PorteEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
-            }
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Matriz ou Filial")
-            {
-                MatrizFilialEnums valorEnum = (MatrizFilialEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
-            }
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].Name == "Estado")
-            {
-                EstadoEnums valorEnum = (EstadoEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
-            }
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Categoria Administrativa")
-            {
-                CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
-            }
-
-            if (dataGridViewEscolasEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Organização Acadêmica")
-            {
-                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
-            }
+            _botaoEscolaAtivo = false;
         }
 
         private void AoClicar_botaoSelecionar(object sender, EventArgs e)
         {
-            if(botaoEscolaAtivo)
+            if (_botaoEscolaAtivo)
             {
-               // if (dataGridViewEscolasEmpresas.SelectedCells[0] )
             }
             else
             {
 
             }
+        }
+
+        private void AoFormatar_listBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
+        {
+            if(_botaoEscolaAtivo&& !_botaoEmpresaAtivo)
+            {
+                EscolaEnderecoOtd escola = (EscolaEnderecoOtd)e.Value; 
+
+                e.Value = escola.Id.ToString() + " || " +
+                    escola.Nome + " || " + escola.CodigoMec + " || " + escola.Estado.RetornaDescricao(); 
+            }
+            
+            if(_botaoEmpresaAtivo && !_botaoEscolaAtivo)
+            {
+                EmpresaEnderecoOtd empresa = (EmpresaEnderecoOtd)e.Value;
+
+                e.Value = empresa.Id.ToString() + " || "
+                    + empresa.RazaoSocial + " || " + empresa.Cnpj + " || " + empresa.Estado.RetornaDescricao();
+            } 
         }
     }
 }

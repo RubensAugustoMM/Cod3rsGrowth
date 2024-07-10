@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBotaoCancelar = new Panel();
             botaoCancelar = new Button();
             panelBotaoSalvar = new Panel();
@@ -44,6 +43,7 @@
             richTextBoxObjeto = new RichTextBox();
             textBoxValor = new TextBox();
             panelDataGrid = new Panel();
+            listBoxEscolaEmpresa = new ListBox();
             textBoxEmpresa = new TextBox();
             panelBotaoSelecionar = new Panel();
             botaoSelecionar = new Button();
@@ -54,7 +54,6 @@
             panelBotaoEscolas = new Panel();
             botaoEscola = new Button();
             label2 = new Label();
-            dataGridViewEscolasEmpresas = new DataGridView();
             panelBotaoCancelar.SuspendLayout();
             panelBotaoSalvar.SuspendLayout();
             panelCriacao.SuspendLayout();
@@ -62,7 +61,6 @@
             panelBotaoSelecionar.SuspendLayout();
             panelBotaoEmpresas.SuspendLayout();
             panelBotaoEscolas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewEscolasEmpresas).BeginInit();
             SuspendLayout();
             // 
             // panelBotaoCancelar
@@ -247,6 +245,7 @@
             // panelDataGrid
             // 
             panelDataGrid.BackColor = Color.Silver;
+            panelDataGrid.Controls.Add(listBoxEscolaEmpresa);
             panelDataGrid.Controls.Add(textBoxEmpresa);
             panelDataGrid.Controls.Add(panelBotaoSelecionar);
             panelDataGrid.Controls.Add(textBoxEscola);
@@ -254,13 +253,27 @@
             panelDataGrid.Controls.Add(label3);
             panelDataGrid.Controls.Add(panelBotaoEscolas);
             panelDataGrid.Controls.Add(label2);
-            panelDataGrid.Controls.Add(dataGridViewEscolasEmpresas);
             panelDataGrid.Dock = DockStyle.Right;
             panelDataGrid.Location = new Point(311, 0);
             panelDataGrid.Name = "panelDataGrid";
             panelDataGrid.Size = new Size(350, 380);
             panelDataGrid.TabIndex = 82;
             panelDataGrid.Paint += AoRequererPintura_panelEscolas;
+            // 
+            // listBoxEscolaEmpresa
+            // 
+            listBoxEscolaEmpresa.BackColor = Color.Blue;
+            listBoxEscolaEmpresa.BorderStyle = BorderStyle.None;
+            listBoxEscolaEmpresa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            listBoxEscolaEmpresa.ForeColor = Color.White;
+            listBoxEscolaEmpresa.FormattingEnabled = true;
+            listBoxEscolaEmpresa.HorizontalScrollbar = true;
+            listBoxEscolaEmpresa.ItemHeight = 21;
+            listBoxEscolaEmpresa.Location = new Point(22, 58);
+            listBoxEscolaEmpresa.Name = "listBoxEscolaEmpresa";
+            listBoxEscolaEmpresa.Size = new Size(305, 231);
+            listBoxEscolaEmpresa.TabIndex = 105;
+            listBoxEscolaEmpresa.Format += AoFormatar_listBoxEscolaEmpresa;
             // 
             // textBoxEmpresa
             // 
@@ -392,30 +405,6 @@
             label2.TabIndex = 101;
             label2.Text = "Escola  . . . . . :";
             // 
-            // dataGridViewEscolasEmpresas
-            // 
-            dataGridViewEscolasEmpresas.BackgroundColor = Color.Blue;
-            dataGridViewEscolasEmpresas.BorderStyle = BorderStyle.None;
-            dataGridViewEscolasEmpresas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Blue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Yellow;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewEscolasEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewEscolasEmpresas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewEscolasEmpresas.EnableHeadersVisualStyles = false;
-            dataGridViewEscolasEmpresas.GridColor = Color.White;
-            dataGridViewEscolasEmpresas.Location = new Point(22, 56);
-            dataGridViewEscolasEmpresas.Name = "dataGridViewEscolasEmpresas";
-            dataGridViewEscolasEmpresas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewEscolasEmpresas.RowTemplate.Height = 25;
-            dataGridViewEscolasEmpresas.Size = new Size(305, 240);
-            dataGridViewEscolasEmpresas.TabIndex = 85;
-            dataGridViewEscolasEmpresas.CellFormatting += AoFormatarCelula_dataGridViewEscolasEmpresas;
-            // 
             // TelaCriarConvenioForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -437,7 +426,6 @@
             panelBotaoSelecionar.ResumeLayout(false);
             panelBotaoEmpresas.ResumeLayout(false);
             panelBotaoEscolas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewEscolasEmpresas).EndInit();
             ResumeLayout(false);
         }
 
@@ -475,11 +463,11 @@
         private TextBox textBox4;
         private TextBox textBox3;
         private Panel panelDataGrid;
-        private DataGridView dataGridViewEscolasEmpresas;
         private Panel panelBotaoSelecionar;
         private Panel panelBotaoEmpresas;
         private Panel panelBotaoEscolas;
         private TextBox textBoxEmpresa;
         private TextBox textBoxEscola;
+        private ListBox listBoxEscolaEmpresa;
     }
 }
