@@ -28,6 +28,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\TelaCaixaDialogoErroForm.cs" />
+    <Compile Update="Forms\TelaCriarEmpresaForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\TelaCriarEscolaForm.cs">
       <SubType>Form</SubType>
     </Compile>

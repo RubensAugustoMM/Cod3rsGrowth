@@ -10,13 +10,15 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaEmpresaForm : Form
     {
         private readonly ServicoEmpresa _servicoEmpresa;
+        private readonly ServicoEndereco _servicoEndereco;
         private FiltroEmpresaUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
-        public TelaEmpresaForm(ServicoEmpresa servicoEmpresa)
+        public TelaEmpresaForm(ServicoEmpresa servicoEmpresa, ServicoEndereco servicoEndereco)
         {
             _servicoEmpresa = servicoEmpresa;
             InitializeComponent();
+            _servicoEndereco = servicoEndereco;
         }
 
         private void AoRequererPintura_TelaEmpresaForm(object sender, PaintEventArgs e)
@@ -199,7 +201,7 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
                 e.Value = valorEnum.RetornaDescricao();
-                
+
             }
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")
@@ -222,6 +224,16 @@ namespace Cod3rsGrowth.Forms.Forms
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        { 
+            TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco,_servicoEmpresa);
+
+            telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEmpresa.TopLevel = true;
+
+            telaCriarEmpresa.ShowDialog(this); 
         }
     }
 }

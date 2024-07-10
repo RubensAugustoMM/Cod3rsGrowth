@@ -7,24 +7,24 @@ using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEscolaForm : Form
+    public partial class TelaCriarEmpresaForm : Form
     {
         private Endereco _enderecoCriado;
-        private Escola _escolaCriada;
+        private Empresa _empresaCriada;
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
-        private readonly ServicoEscola _servicoEscola;
+        private readonly ServicoEmpresa _servicoEmpresa;
 
-        public TelaCriarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola)
+        public TelaCriarEmpresaForm(ServicoEndereco servicoEndereco, ServicoEmpresa servicoEmpresa)
         {
             InitializeComponent();
             _servicoEndereco = servicoEndereco;
-            _servicoEscola = servicoEscola;
+            _servicoEmpresa = servicoEmpresa;
         }
 
         private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
-            _escolaCriada = new();
+            _empresaCriada = new();
             _enderecoCriado = new();
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -98,21 +98,34 @@ namespace Cod3rsGrowth.Forms.Forms
 
             if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
             {
-                _escolaCriada.StatusAtividade = true;
+                _empresaCriada.SitucaoCadastral = true;
             }
             else
             {
-                _escolaCriada.StatusAtividade = false;
+                _empresaCriada.SitucaoCadastral = false;
             }
 
-            _escolaCriada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
-            _escolaCriada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
+            _empresaCriada.DataSituacaoCadastral = DateTime.Now;
 
-            _escolaCriada.Nome = textBoxNome.Text;
-            _escolaCriada.CodigoMec = textBoxCodigoMec.Text;
-            _escolaCriada.Telefone = textBoxTelefone.Text;
-            _escolaCriada.Email = textBoxEmail.Text;
-            _escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
+            if (!string.IsNullOrEmpty(textBoxNumero.Text))
+            {
+                _empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
+            }
+            else
+            {
+                _empresaCriada.CapitalSocial = -1;
+            }
+
+            _empresaCriada.NaturezaJuridica = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
+            _empresaCriada.Porte = (PorteEnums)comboBoxPorte.SelectedItem;
+            _empresaCriada.MatrizFilial = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+
+            _empresaCriada.RazaoSocial = textBoxRazaoSocial.Text;
+            _empresaCriada.NomeFantasia = textBoxNomeFantasia.Text;
+            _empresaCriada.Cnpj = textBoxCnpj.Text;
+            _empresaCriada.DataAbertura = dateTimePickerDataAbertura.Value;
+
+            _empresaCriada.Idade = DateTime.Now.Year - _empresaCriada.DataAbertura.Year;
 
             _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
@@ -134,17 +147,17 @@ namespace Cod3rsGrowth.Forms.Forms
 
             try
             {
-                _escolaCriada.IdEndereco = _servicoEndereco.Criar(_enderecoCriado);
+                _empresaCriada.IdEndereco = _servicoEndereco.Criar(_enderecoCriado);
             }
             catch (Exception excecao)
             {
                 listaErros.AddRange(excecao.Message.Split(Separador));
-                _escolaCriada.IdEndereco = -1;
+                _empresaCriada.IdEndereco = -1;
             }
 
             try
             {
-                _servicoEscola.Criar(_escolaCriada);
+                _servicoEmpresa.Criar(_empresaCriada);
                 Close();
             }
             catch (Exception excecao)
@@ -154,15 +167,16 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
                 caixaDialogoErro.TopLevel = true;
-
+                 
                 caixaDialogoErro.ShowDialog(this);
 
-                if(_escolaCriada.IdEndereco != -1)
+                if(_empresaCriada.IdEndereco != -1)
                 {
-                    _servicoEndereco.Deletar(_escolaCriada.IdEndereco);
+                    _servicoEndereco.Deletar(_empresaCriada.IdEndereco);
                 }
             }
         }
+
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)
         {
@@ -171,15 +185,16 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaComboBox()
         {
-            comboBoxCategoriaAdministrativa.DataSource = Enum.GetValues(typeof(CategoriaAdministrativaEnums));
+            comboBoxPorte.DataSource = Enum.GetValues(typeof(PorteEnums));
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
-            comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
+            comboBoxNaturezaJuridica.DataSource = Enum.GetValues(typeof(NaturezaJuridicaEnums));
+            comboBoxMatrizFilial.DataSource = Enum.GetValues(typeof(MatrizFilialEnums));
             comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
         }
 
-        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatar_comboBoxPorte(object sender, ListControlConvertEventArgs e)
         {
-            var valorEnum = (CategoriaAdministrativaEnums)e.Value;
+            var valorEnum = (PorteEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
         private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
@@ -199,21 +214,14 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
-            if (dateTimePickerDataInicioAtividade.Value > DateTime.Now)
+            if (dateTimePickerDataAbertura.Value > DateTime.Now)
             {
-                dateTimePickerDataInicioAtividade.Value = DateTime.Now;
+                dateTimePickerDataAbertura.Value = DateTime.Now;
             }
         }
 
-        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_textBoxCapitalSocial(object sender, KeyPressEventArgs e)
         {
-            const int tamanhoMaximoCodigoMec = 8;
-
-            if (textBoxCodigoMec.Text.Length == tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -226,9 +234,9 @@ namespace Cod3rsGrowth.Forms.Forms
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoFormatar_comboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
+        private void AoFormatar_comboBoxNaturezaJuridica(object sender, ListControlConvertEventArgs e)
         {
-            OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
+            NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
@@ -237,11 +245,11 @@ namespace Cod3rsGrowth.Forms.Forms
             e.Handled = true;
         }
 
-        private void AoPressionarTecla_textBoxTelefone(object sender, KeyPressEventArgs e)
+        private void AoPressionarTecla_textBoxCnpj(object sender, KeyPressEventArgs e)
         {
-            const int tamanhoMaximoTelefone = 10;
+            const int tamanhoMaximoCnpj = 14;
 
-            if (textBoxTelefone.Text.Length == tamanhoMaximoTelefone && !char.IsControl(e.KeyChar))
+            if (textBoxCnpj.Text.Length == tamanhoMaximoCnpj && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -254,8 +262,8 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBoxNumero.Text) &&
-                Int64.Parse(textBoxNumero.Text) > Int32.MaxValue )
+            if (!string.IsNullOrEmpty(textBoxNumero.Text) &&
+                Int64.Parse(textBoxNumero.Text) > Int32.MaxValue)
             {
                 e.Handled = true;
             }
@@ -264,6 +272,12 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void AoFormatar_comboBoxMatrizFilial(object sender, ListControlConvertEventArgs e)
+        {
+            var valorEnum = (MatrizFilialEnums)e.Value;
+            e.Value = valorEnum.RetornaDescricao();
         }
     }
 }
