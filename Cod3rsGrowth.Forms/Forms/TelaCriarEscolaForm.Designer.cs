@@ -41,7 +41,9 @@
             labelEmail = new Label();
             textBoxEmail = new TextBox();
             panelCriacao = new Panel();
+            textBoxNumero = new TextBox();
             labelCep = new Label();
+            labelNumero = new Label();
             labelBairro = new Label();
             labelInicioAtividade = new Label();
             label2 = new Label();
@@ -126,32 +128,32 @@
             labelTitulo.AutoSize = true;
             labelTitulo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelTitulo.ForeColor = Color.White;
-            labelTitulo.Location = new Point(92, 3);
+            labelTitulo.Location = new Point(276, 0);
             labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(114, 19);
+            labelTitulo.Size = new Size(95, 19);
             labelTitulo.TabIndex = 74;
-            labelTitulo.Text = "Criação Endereço";
+            labelTitulo.Text = "Criação Escola";
             // 
             // textBoxNome
             // 
             textBoxNome.BackColor = Color.Cyan;
             textBoxNome.BorderStyle = BorderStyle.None;
             textBoxNome.ForeColor = Color.Black;
-            textBoxNome.Location = new Point(241, 39);
+            textBoxNome.Location = new Point(241, 34);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(149, 16);
             textBoxNome.TabIndex = 73;
-            textBoxNome.KeyPress += AoPressionarTecla_textBoxCep;
             // 
             // textBoxTelefone
             // 
             textBoxTelefone.BackColor = Color.Cyan;
             textBoxTelefone.BorderStyle = BorderStyle.None;
             textBoxTelefone.ForeColor = Color.Black;
-            textBoxTelefone.Location = new Point(241, 83);
+            textBoxTelefone.Location = new Point(241, 78);
             textBoxTelefone.Name = "textBoxTelefone";
             textBoxTelefone.Size = new Size(149, 16);
             textBoxTelefone.TabIndex = 72;
+            textBoxTelefone.KeyPress += AoPressionarTecla_textBoxTelefone;
             // 
             // comboBoxCategoriaAdministrativa
             // 
@@ -160,18 +162,19 @@
             comboBoxCategoriaAdministrativa.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCategoriaAdministrativa.ForeColor = Color.Black;
             comboBoxCategoriaAdministrativa.FormattingEnabled = true;
-            comboBoxCategoriaAdministrativa.Location = new Point(241, 126);
+            comboBoxCategoriaAdministrativa.Location = new Point(241, 121);
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
             comboBoxCategoriaAdministrativa.TabIndex = 67;
             comboBoxCategoriaAdministrativa.Format += AoFormatar_comboBoxCategoriaAdministrativa;
+            comboBoxCategoriaAdministrativa.KeyPress += AoPressionarTecla_comboBox;
             // 
             // textBoxCodigoMec
             // 
             textBoxCodigoMec.BackColor = Color.Cyan;
             textBoxCodigoMec.BorderStyle = BorderStyle.None;
             textBoxCodigoMec.ForeColor = Color.Black;
-            textBoxCodigoMec.Location = new Point(241, 61);
+            textBoxCodigoMec.Location = new Point(241, 56);
             textBoxCodigoMec.Name = "textBoxCodigoMec";
             textBoxCodigoMec.Size = new Size(149, 16);
             textBoxCodigoMec.TabIndex = 71;
@@ -182,7 +185,7 @@
             labelTelefone.AutoSize = true;
             labelTelefone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelTelefone.ForeColor = Color.White;
-            labelTelefone.Location = new Point(14, 78);
+            labelTelefone.Location = new Point(13, 78);
             labelTelefone.Name = "labelTelefone";
             labelTelefone.Size = new Size(193, 21);
             labelTelefone.TabIndex = 68;
@@ -193,7 +196,7 @@
             labelEmail.AutoSize = true;
             labelEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelEmail.ForeColor = Color.White;
-            labelEmail.Location = new Point(14, 99);
+            labelEmail.Location = new Point(13, 99);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(194, 21);
             labelEmail.TabIndex = 69;
@@ -203,8 +206,8 @@
             // 
             textBoxEmail.BackColor = Color.Cyan;
             textBoxEmail.BorderStyle = BorderStyle.None;
-            textBoxEmail.ForeColor = Color.White;
-            textBoxEmail.Location = new Point(241, 105);
+            textBoxEmail.ForeColor = Color.Black;
+            textBoxEmail.Location = new Point(241, 100);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(149, 16);
             textBoxEmail.TabIndex = 76;
@@ -212,7 +215,9 @@
             // panelCriacao
             // 
             panelCriacao.BackColor = Color.BlueViolet;
+            panelCriacao.Controls.Add(textBoxNumero);
             panelCriacao.Controls.Add(labelCep);
+            panelCriacao.Controls.Add(labelNumero);
             panelCriacao.Controls.Add(labelBairro);
             panelCriacao.Controls.Add(labelInicioAtividade);
             panelCriacao.Controls.Add(label2);
@@ -249,6 +254,17 @@
             panelCriacao.TabIndex = 79;
             panelCriacao.Paint += AoRequererPintura_PanelCriacao;
             // 
+            // textBoxNumero
+            // 
+            textBoxNumero.BackColor = Color.Cyan;
+            textBoxNumero.BorderStyle = BorderStyle.None;
+            textBoxNumero.ForeColor = Color.Black;
+            textBoxNumero.Location = new Point(515, 151);
+            textBoxNumero.Name = "textBoxNumero";
+            textBoxNumero.Size = new Size(149, 16);
+            textBoxNumero.TabIndex = 82;
+            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            // 
             // labelCep
             // 
             labelCep.AutoSize = true;
@@ -259,6 +275,17 @@
             labelCep.Size = new Size(103, 21);
             labelCep.TabIndex = 83;
             labelCep.Text = "CEP. . . . . . . . . :";
+            // 
+            // labelNumero
+            // 
+            labelNumero.AutoSize = true;
+            labelNumero.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNumero.ForeColor = Color.White;
+            labelNumero.Location = new Point(396, 152);
+            labelNumero.Name = "labelNumero";
+            labelNumero.Size = new Size(110, 21);
+            labelNumero.TabIndex = 81;
+            labelNumero.Text = "Numero . . . . . :";
             // 
             // labelBairro
             // 
@@ -276,7 +303,7 @@
             labelInicioAtividade.AutoSize = true;
             labelInicioAtividade.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelInicioAtividade.ForeColor = Color.White;
-            labelInicioAtividade.Location = new Point(14, 220);
+            labelInicioAtividade.Location = new Point(13, 229);
             labelInicioAtividade.Name = "labelInicioAtividade";
             labelInicioAtividade.Size = new Size(187, 20);
             labelInicioAtividade.TabIndex = 104;
@@ -287,7 +314,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(396, 152);
+            label2.Location = new Point(396, 174);
             label2.Name = "label2";
             label2.Size = new Size(112, 21);
             label2.TabIndex = 85;
@@ -298,7 +325,7 @@
             labelNome.AutoSize = true;
             labelNome.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelNome.ForeColor = Color.White;
-            labelNome.Location = new Point(14, 34);
+            labelNome.Location = new Point(13, 34);
             labelNome.Name = "labelNome";
             labelNome.Size = new Size(227, 20);
             labelNome.TabIndex = 99;
@@ -320,7 +347,7 @@
             labelCodigoMec.AutoSize = true;
             labelCodigoMec.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCodigoMec.ForeColor = Color.White;
-            labelCodigoMec.Location = new Point(14, 56);
+            labelCodigoMec.Location = new Point(13, 56);
             labelCodigoMec.Name = "labelCodigoMec";
             labelCodigoMec.Size = new Size(221, 20);
             labelCodigoMec.TabIndex = 100;
@@ -342,7 +369,7 @@
             labelCategoriaAdministrativa.AutoSize = true;
             labelCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelCategoriaAdministrativa.ForeColor = Color.White;
-            labelCategoriaAdministrativa.Location = new Point(14, 121);
+            labelCategoriaAdministrativa.Location = new Point(13, 121);
             labelCategoriaAdministrativa.Name = "labelCategoriaAdministrativa";
             labelCategoriaAdministrativa.Size = new Size(185, 20);
             labelCategoriaAdministrativa.TabIndex = 101;
@@ -364,7 +391,7 @@
             labelOrganizacaoAcademica.AutoSize = true;
             labelOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelOrganizacaoAcademica.ForeColor = Color.White;
-            labelOrganizacaoAcademica.Location = new Point(14, 151);
+            labelOrganizacaoAcademica.Location = new Point(13, 151);
             labelOrganizacaoAcademica.Name = "labelOrganizacaoAcademica";
             labelOrganizacaoAcademica.Size = new Size(210, 20);
             labelOrganizacaoAcademica.TabIndex = 102;
@@ -375,7 +402,7 @@
             labelStatusAtividade.AutoSize = true;
             labelStatusAtividade.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelStatusAtividade.ForeColor = Color.White;
-            labelStatusAtividade.Location = new Point(14, 179);
+            labelStatusAtividade.Location = new Point(13, 179);
             labelStatusAtividade.Name = "labelStatusAtividade";
             labelStatusAtividade.Size = new Size(197, 20);
             labelStatusAtividade.TabIndex = 103;
@@ -391,7 +418,7 @@
             dateTimePickerDataInicioAtividade.CalendarTrailingForeColor = Color.Cyan;
             dateTimePickerDataInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicioAtividade.Location = new Point(241, 225);
+            dateTimePickerDataInicioAtividade.Location = new Point(241, 218);
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
             dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
             dateTimePickerDataInicioAtividade.TabIndex = 98;
@@ -404,7 +431,7 @@
             comboBoxSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxSituacaoCadastral.ForeColor = Color.Black;
             comboBoxSituacaoCadastral.FormattingEnabled = true;
-            comboBoxSituacaoCadastral.Location = new Point(241, 184);
+            comboBoxSituacaoCadastral.Location = new Point(241, 179);
             comboBoxSituacaoCadastral.Name = "comboBoxSituacaoCadastral";
             comboBoxSituacaoCadastral.Size = new Size(149, 23);
             comboBoxSituacaoCadastral.TabIndex = 97;
@@ -414,7 +441,7 @@
             textBoxComplemento.BackColor = Color.Cyan;
             textBoxComplemento.BorderStyle = BorderStyle.None;
             textBoxComplemento.ForeColor = Color.Black;
-            textBoxComplemento.Location = new Point(515, 151);
+            textBoxComplemento.Location = new Point(515, 173);
             textBoxComplemento.Name = "textBoxComplemento";
             textBoxComplemento.Size = new Size(149, 16);
             textBoxComplemento.TabIndex = 95;
@@ -423,7 +450,7 @@
             // 
             textBoxRua.BackColor = Color.Cyan;
             textBoxRua.BorderStyle = BorderStyle.None;
-            textBoxRua.ForeColor = Color.White;
+            textBoxRua.ForeColor = Color.Black;
             textBoxRua.Location = new Point(515, 129);
             textBoxRua.Name = "textBoxRua";
             textBoxRua.Size = new Size(149, 16);
@@ -450,6 +477,8 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 85;
+            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
             // 
             // textBoxBairro
             // 
@@ -479,10 +508,11 @@
             comboBoxOrganizacaoAcademica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxOrganizacaoAcademica.ForeColor = Color.Black;
             comboBoxOrganizacaoAcademica.FormattingEnabled = true;
-            comboBoxOrganizacaoAcademica.Location = new Point(241, 155);
+            comboBoxOrganizacaoAcademica.Location = new Point(241, 150);
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 23);
             comboBoxOrganizacaoAcademica.TabIndex = 83;
+            comboBoxOrganizacaoAcademica.Format += AoFormatar_comboBoxOrganizacaoAcademica;
             // 
             // TelaCriarEscolaForm
             // 
@@ -540,5 +570,7 @@
         private Label labelStatusAtividade;
         private Label labelInicioAtividade;
         private Label label2;
+        private TextBox textBoxNumero;
+        private Label labelNumero;
     }
 }

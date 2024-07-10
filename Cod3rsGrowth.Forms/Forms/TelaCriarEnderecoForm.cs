@@ -91,14 +91,22 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
+
+            _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+
             _enderecoCriado.Cep = textBoxCep.Text;
-            if (comboBoxEstado.SelectedItem != null)
-            {
-                _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-            }
             _enderecoCriado.Municipio = textBoxMunicipio.Text;
             _enderecoCriado.Bairro = textBoxBairro.Text;
             _enderecoCriado.Rua = textBoxRua.Text;
+
+            if(!string.IsNullOrEmpty(textBoxNumero.Text))
+            {
+                _enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+            }
+            else
+            {
+                _enderecoCriado.Numero = -1;
+            }
             _enderecoCriado.Complemento = textBoxComplemento.Text;
 
             try
@@ -128,7 +136,6 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaComboBox()
         {
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
-            comboBoxEstado.SelectedItem = null;
         }
 
         private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
@@ -141,6 +148,25 @@ namespace Cod3rsGrowth.Forms.Forms
             const int tamanhoMaximoCep = 8;
 
             if (textBoxCep.Text.Length == tamanhoMaximoCep && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void AoPressionarTecla_comboBox(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(textBoxNumero.Text) &&
+                Int64.Parse(textBoxNumero.Text) > Int32.MaxValue )
             {
                 e.Handled = true;
             }

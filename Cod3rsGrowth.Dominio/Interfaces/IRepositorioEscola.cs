@@ -8,7 +8,7 @@ public interface IRepositorioEscola
 {
     List<EscolaEnderecoOtd> ObterTodos(FiltroEscolaEnderecoOtd? filtroEscola);
     EscolaEnderecoOtd ObterPorId(int Id);
-    void Criar(Escola escolaCriada);
+    int Criar(Escola escolaCriada);
     void Atualizar(Escola escolaAtualizada);
     void Deletar(int id);
 }

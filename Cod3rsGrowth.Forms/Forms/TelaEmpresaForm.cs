@@ -198,8 +198,8 @@ namespace Cod3rsGrowth.Forms.Forms
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
                 NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
+                e.Value = valorEnum.RetornaDescricao();
+                
             }
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")

@@ -9,7 +9,7 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCaixaDialogoErroForm : Form
     {
-        private Font _pixeboyFont;
+        private PrivateFontCollection _pixeboy;
         private List<string> _listaErrosEntrada;
         private List<string> _listaErrosExibida;
 
@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = _pixeboyFont;
+                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -61,10 +61,8 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaFontePixeBoy()
         {
-            var fontCollction = new PrivateFontCollection();
-            fontCollction.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
-
-            _pixeboyFont = new Font(fontCollction.Families[0], 12, FontStyle.Bold);
+            _pixeboy = new PrivateFontCollection();
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -84,7 +82,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = _pixeboyFont;
+                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -128,11 +126,13 @@ namespace Cod3rsGrowth.Forms.Forms
                     textoTruncado = textoTruncado.Remove(index);
                     index = textoTruncado.Length;
 
-                    if (TextRenderer.MeasureText(textoTruncado, _pixeboyFont).Width < listBoxErros.Width)
+                    if (TextRenderer.MeasureText(textoTruncado,
+                        new Font(_pixeboy.Families[0], 12, FontStyle.Bold)).Width < listBoxErros.Width)
                     {
                         listaRetorno.Add(textoTruncado);
                         subTexto = subTexto.Substring(index);
-                        if (TextRenderer.MeasureText(subTexto, _pixeboyFont).Width > listBoxErros.Width)
+                        if (TextRenderer.MeasureText(subTexto
+                            , new Font(_pixeboy.Families[0], 12, FontStyle.Bold)).Width > listBoxErros.Width)
                         {
                             textoTruncado = subTexto;
                             index = textoTruncado.Length;

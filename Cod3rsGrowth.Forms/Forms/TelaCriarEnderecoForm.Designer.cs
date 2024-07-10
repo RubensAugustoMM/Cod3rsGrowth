@@ -46,6 +46,8 @@
             textBoxComplemento = new TextBox();
             label2 = new Label();
             panelCriacao = new Panel();
+            textBoxNumero = new TextBox();
+            labelNumero = new Label();
             panelBotaoCancelar.SuspendLayout();
             panelBotaoSalvar.SuspendLayout();
             panelCriacao.SuspendLayout();
@@ -55,7 +57,7 @@
             // 
             panelBotaoCancelar.BackColor = Color.Transparent;
             panelBotaoCancelar.Controls.Add(botaoCancelar);
-            panelBotaoCancelar.Location = new Point(64, 202);
+            panelBotaoCancelar.Location = new Point(64, 230);
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
@@ -82,7 +84,7 @@
             // 
             panelBotaoSalvar.BackColor = Color.Transparent;
             panelBotaoSalvar.Controls.Add(botaoSalvar);
-            panelBotaoSalvar.Location = new Point(176, 202);
+            panelBotaoSalvar.Location = new Point(176, 230);
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
@@ -160,6 +162,7 @@
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 67;
             comboBoxEstado.Format += AoFormatar_comboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
             // 
             // textBoxMunicipio
             // 
@@ -208,7 +211,7 @@
             // 
             textBoxRua.BackColor = Color.Cyan;
             textBoxRua.BorderStyle = BorderStyle.None;
-            textBoxRua.ForeColor = Color.White;
+            textBoxRua.ForeColor = Color.Black;
             textBoxRua.Location = new Point(133, 141);
             textBoxRua.Name = "textBoxRua";
             textBoxRua.Size = new Size(149, 16);
@@ -230,7 +233,7 @@
             textBoxComplemento.BackColor = Color.Cyan;
             textBoxComplemento.BorderStyle = BorderStyle.None;
             textBoxComplemento.ForeColor = Color.Black;
-            textBoxComplemento.Location = new Point(133, 163);
+            textBoxComplemento.Location = new Point(132, 185);
             textBoxComplemento.Name = "textBoxComplemento";
             textBoxComplemento.Size = new Size(149, 16);
             textBoxComplemento.TabIndex = 78;
@@ -240,7 +243,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(14, 164);
+            label2.Location = new Point(13, 186);
             label2.Name = "label2";
             label2.Size = new Size(112, 21);
             label2.TabIndex = 77;
@@ -249,6 +252,8 @@
             // panelCriacao
             // 
             panelCriacao.BackColor = Color.BlueViolet;
+            panelCriacao.Controls.Add(textBoxNumero);
+            panelCriacao.Controls.Add(labelNumero);
             panelCriacao.Controls.Add(labelCep);
             panelCriacao.Controls.Add(panelBotaoCancelar);
             panelCriacao.Controls.Add(textBoxComplemento);
@@ -266,9 +271,31 @@
             panelCriacao.Controls.Add(textBoxCep);
             panelCriacao.Location = new Point(-1, 1);
             panelCriacao.Name = "panelCriacao";
-            panelCriacao.Size = new Size(301, 242);
+            panelCriacao.Size = new Size(301, 270);
             panelCriacao.TabIndex = 79;
             panelCriacao.Paint += AoRequererPintura_PanelCriacao;
+            // 
+            // textBoxNumero
+            // 
+            textBoxNumero.BackColor = Color.Cyan;
+            textBoxNumero.BorderStyle = BorderStyle.None;
+            textBoxNumero.ForeColor = Color.Black;
+            textBoxNumero.Location = new Point(133, 163);
+            textBoxNumero.Name = "textBoxNumero";
+            textBoxNumero.Size = new Size(149, 16);
+            textBoxNumero.TabIndex = 80;
+            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            // 
+            // labelNumero
+            // 
+            labelNumero.AutoSize = true;
+            labelNumero.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNumero.ForeColor = Color.White;
+            labelNumero.Location = new Point(14, 164);
+            labelNumero.Name = "labelNumero";
+            labelNumero.Size = new Size(110, 21);
+            labelNumero.TabIndex = 79;
+            labelNumero.Text = "Numero . . . . . :";
             // 
             // TelaCriarEnderecoForm
             // 
@@ -276,7 +303,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(312, 255);
+            ClientSize = new Size(312, 283);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEnderecoForm";
@@ -309,5 +336,7 @@
         private TextBox textBoxComplemento;
         private Label label2;
         private Panel panelCriacao;
+        private TextBox textBoxNumero;
+        private Label labelNumero;
     }
 }
