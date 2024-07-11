@@ -226,6 +226,11 @@ namespace Cod3rsGrowth.Forms.Forms
             telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
             telaCriarEscola.TopLevel = true;
 
+            telaCriarEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+            };
+
             telaCriarEscola.ShowDialog(this); 
         }
     }

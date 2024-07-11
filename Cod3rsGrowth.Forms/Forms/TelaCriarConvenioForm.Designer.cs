@@ -119,9 +119,9 @@
             labelTitulo.ForeColor = Color.White;
             labelTitulo.Location = new Point(97, 0);
             labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(114, 19);
+            labelTitulo.Size = new Size(116, 19);
             labelTitulo.TabIndex = 74;
-            labelTitulo.Text = "Criação Endereço";
+            labelTitulo.Text = "Criação Convênio";
             // 
             // LabelEstado
             // 

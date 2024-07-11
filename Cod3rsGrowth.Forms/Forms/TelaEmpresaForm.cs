@@ -233,6 +233,11 @@ namespace Cod3rsGrowth.Forms.Forms
             telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
             telaCriarEmpresa.TopLevel = true;
 
+            telaCriarEmpresa.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+            };
+
             telaCriarEmpresa.ShowDialog(this); 
         }
     }

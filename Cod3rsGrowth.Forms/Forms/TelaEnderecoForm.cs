@@ -203,6 +203,11 @@ namespace Cod3rsGrowth.Forms.Forms
             telaCriarEndereco.StartPosition = FormStartPosition.CenterParent;
             telaCriarEndereco.TopLevel = true;
 
+            telaCriarEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+            };
+
             telaCriarEndereco.ShowDialog(this); 
         }
     }

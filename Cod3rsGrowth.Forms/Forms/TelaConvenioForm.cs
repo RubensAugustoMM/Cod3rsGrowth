@@ -198,14 +198,19 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoCriar(object sender, EventArgs e)
         {
-            
-            TelaCriarConvenioForm telaCriarConvenio = 
-                new TelaCriarConvenioForm(_servicoConvenio,_servicoEmpresa,_servicoEscola);
+
+            TelaCriarConvenioForm telaCriarConvenio =
+                new TelaCriarConvenioForm(_servicoConvenio, _servicoEmpresa, _servicoEscola);
 
             telaCriarConvenio.StartPosition = FormStartPosition.CenterParent;
             telaCriarConvenio.TopLevel = true;
 
-            telaCriarConvenio.ShowDialog(this); 
+            telaCriarConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+            };
+
+            telaCriarConvenio.ShowDialog(this);
         }
     }
 }
