@@ -151,6 +151,7 @@
             textBoxTelefone.ForeColor = Color.Black;
             textBoxTelefone.Location = new Point(241, 78);
             textBoxTelefone.Name = "textBoxTelefone";
+            textBoxTelefone.ShortcutsEnabled = false;
             textBoxTelefone.Size = new Size(149, 16);
             textBoxTelefone.TabIndex = 72;
             textBoxTelefone.KeyPress += AoPressionarTecla_textBoxTelefone;
@@ -176,6 +177,7 @@
             textBoxCodigoMec.ForeColor = Color.Black;
             textBoxCodigoMec.Location = new Point(241, 56);
             textBoxCodigoMec.Name = "textBoxCodigoMec";
+            textBoxCodigoMec.ShortcutsEnabled = false;
             textBoxCodigoMec.Size = new Size(149, 16);
             textBoxCodigoMec.TabIndex = 71;
             textBoxCodigoMec.KeyPress += AoPressionarTecla_textBoxCodigoMec;
@@ -261,6 +263,7 @@
             textBoxNumero.ForeColor = Color.Black;
             textBoxNumero.Location = new Point(515, 151);
             textBoxNumero.Name = "textBoxNumero";
+            textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 82;
             textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
@@ -498,6 +501,7 @@
             textBoxCep.ForeColor = Color.Black;
             textBoxCep.Location = new Point(515, 34);
             textBoxCep.Name = "textBoxCep";
+            textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 91;
             textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;

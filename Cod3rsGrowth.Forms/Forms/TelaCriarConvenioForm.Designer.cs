@@ -209,6 +209,7 @@
             textBoxValor.ForeColor = Color.Black;
             textBoxValor.Location = new Point(156, 30);
             textBoxValor.Name = "textBoxValor";
+            textBoxValor.ShortcutsEnabled = false;
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 83;
             textBoxValor.KeyPress += AoPressionarTecla_textBoxValor;

@@ -216,7 +216,8 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             if (dateTimePickerDataAbertura.Value > DateTime.Now)
             {
-                dateTimePickerDataAbertura.Value = DateTime.Now;
+                dateTimePickerDataAbertura.Value = 
+                    new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             }
         }
 

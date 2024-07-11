@@ -119,7 +119,9 @@ namespace Cod3rsGrowth.Forms.Forms
             _convenioCriado.Objeto = richTextBoxObjeto.Text;
             _convenioCriado.DataInicio =
                 new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
-            _convenioCriado.DataTermino = dateTimePickerDataTermino.Value;
+            _convenioCriado.DataTermino =
+                new DateTime(dateTimePickerDataTermino.Value.Year, 
+                    dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
             _convenioCriado.IdEmpresa = _idEmpresaSelecionada;
             _convenioCriado.IdEscola = _idEscolaSelecionada;
             
@@ -209,7 +211,8 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             if (dateTimePickerDataTermino.Value < DateTime.Now)
             {
-                dateTimePickerDataTermino.Value = DateTime.Now;
+                dateTimePickerDataTermino.Value = 
+                    new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
             }
         }
 

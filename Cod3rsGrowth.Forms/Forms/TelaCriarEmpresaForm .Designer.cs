@@ -153,6 +153,7 @@
             textBoxCnpj.ForeColor = Color.Black;
             textBoxCnpj.Location = new Point(241, 78);
             textBoxCnpj.Name = "textBoxCnpj";
+            textBoxCnpj.ShortcutsEnabled = false;
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 72;
             textBoxCnpj.KeyPress += AoPressionarTecla_textBoxCnpj;
@@ -196,6 +197,7 @@
             textBoxCapitalSocial.ForeColor = Color.Black;
             textBoxCapitalSocial.Location = new Point(241, 100);
             textBoxCapitalSocial.Name = "textBoxCapitalSocial";
+            textBoxCapitalSocial.ShortcutsEnabled = false;
             textBoxCapitalSocial.Size = new Size(149, 16);
             textBoxCapitalSocial.TabIndex = 76;
             textBoxCapitalSocial.KeyPress += AoPressionarTecla_textBoxCapitalSocial;
@@ -300,6 +302,7 @@
             textBoxNumero.ForeColor = Color.Black;
             textBoxNumero.Location = new Point(515, 151);
             textBoxNumero.Name = "textBoxNumero";
+            textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 82;
             textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
@@ -526,6 +529,7 @@
             textBoxCep.ForeColor = Color.Black;
             textBoxCep.Location = new Point(515, 34);
             textBoxCep.Name = "textBoxCep";
+            textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 91;
             textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
