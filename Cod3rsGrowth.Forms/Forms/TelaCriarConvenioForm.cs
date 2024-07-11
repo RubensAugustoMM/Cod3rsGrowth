@@ -18,6 +18,8 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoEmpresa _servicoEmpresa;
         private bool _botaoEscolaAtivo;
         private bool _botaoEmpresaAtivo;
+        private int _idEscolaSelecionada = -1;
+        private int _idEmpresaSelecionada = -1;
 
         public TelaCriarConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa, ServicoEscola servicoEscola)
         {
@@ -103,14 +105,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
 
-            if (!string.IsNullOrEmpty(textBoxNumeroProcesso.Text))
-            {
-                _convenioCriado.NumeroProcesso = int.Parse(textBoxNumeroProcesso.Text);
-            }
-            else
-            {
-                _convenioCriado.NumeroProcesso = -1;
-            }
+            _convenioCriado.NumeroProcesso = CriaValorNumeroProcesso(); 
 
             if (!string.IsNullOrEmpty(textBoxValor.Text))
             {
@@ -120,14 +115,17 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 _convenioCriado.Valor = -1;
             }
-
+            
             _convenioCriado.Objeto = richTextBoxObjeto.Text;
-            _convenioCriado.DataInicio = DateTime.Now;
+            _convenioCriado.DataInicio =
+                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
             _convenioCriado.DataTermino = dateTimePickerDataTermino.Value;
-            /*
+            _convenioCriado.IdEmpresa = _idEmpresaSelecionada;
+            _convenioCriado.IdEscola = _idEscolaSelecionada;
+            
             try
             {
-                _servicoEndereco.Criar(_enderecoCriado);
+                _servicoConvenio.Criar(_convenioCriado);
                 Close();
             }
             catch (Exception excecao)
@@ -141,7 +139,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
             }
-            */
+            
         }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)
@@ -151,21 +149,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoPressionarTecla_textBoxValor(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void AoPressionarTecla_textBoxNumeroProcesso(object sender, KeyPressEventArgs e)
-        {
-            const int tamanhoMaximoCep = 8;
-
-            if (textBoxNumeroProcesso.Text.Length == tamanhoMaximoCep && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -224,7 +207,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
-            if (dateTimePickerDataTermino.Value > DateTime.Now)
+            if (dateTimePickerDataTermino.Value < DateTime.Now)
             {
                 dateTimePickerDataTermino.Value = DateTime.Now;
             }
@@ -232,50 +215,76 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoEscola(object sender, EventArgs e)
         {
+            _botaoEmpresaAtivo = false;
             _botaoEscolaAtivo = true;
 
-            listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null) ;
-
-            _botaoEmpresaAtivo = false;
+            listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
         }
 
         private void AoClicar_botaoEmpresa(object sender, EventArgs e)
         {
+            _botaoEscolaAtivo = false;
             _botaoEmpresaAtivo = true;
 
             listBoxEscolaEmpresa.DataSource = _servicoEmpresa.ObterTodos(null);
-
-            _botaoEscolaAtivo = false;
-        }
-
-        private void AoClicar_botaoSelecionar(object sender, EventArgs e)
-        {
-            if (_botaoEscolaAtivo)
-            {
-            }
-            else
-            {
-
-            }
         }
 
         private void AoFormatar_listBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
         {
-            if(_botaoEscolaAtivo&& !_botaoEmpresaAtivo)
+            if (_botaoEscolaAtivo)
             {
-                EscolaEnderecoOtd escola = (EscolaEnderecoOtd)e.Value; 
+                EscolaEnderecoOtd escola = (EscolaEnderecoOtd)e.Value;
 
                 e.Value = escola.Id.ToString() + " || " +
-                    escola.Nome + " || " + escola.CodigoMec + " || " + escola.Estado.RetornaDescricao(); 
+                    escola.Nome + " || " + escola.CodigoMec + " || " + escola.Estado.RetornaDescricao();
             }
-            
-            if(_botaoEmpresaAtivo && !_botaoEscolaAtivo)
+
+            if (_botaoEmpresaAtivo)
             {
                 EmpresaEnderecoOtd empresa = (EmpresaEnderecoOtd)e.Value;
 
                 e.Value = empresa.Id.ToString() + " || "
                     + empresa.RazaoSocial + " || " + empresa.Cnpj + " || " + empresa.Estado.RetornaDescricao();
-            } 
+            }
+        }
+
+        private void AoMudarIndexSelecionado_listBoxEscolaEmpresa(object sender, EventArgs e)
+        {
+            var listBox = (ListBox)sender;
+
+            if(_botaoEmpresaAtivo && !_botaoEscolaAtivo)
+            {
+                EmpresaEnderecoOtd empresaSelecionada = (EmpresaEnderecoOtd)listBox.SelectedItem;
+                textBoxEmpresaSelecionada.Text = empresaSelecionada.RazaoSocial;
+                textBoxEmpresaSelecionada.ForeColor = Color.LimeGreen;
+
+                _idEmpresaSelecionada = empresaSelecionada.Id;
+            }
+
+            if(_botaoEscolaAtivo && !_botaoEmpresaAtivo)
+            {
+                EscolaEnderecoOtd EscolaSelecionada = (EscolaEnderecoOtd)listBoxEscolaEmpresa.SelectedItem;
+                textBoxEscolaSelecionada.Text = EscolaSelecionada.Nome;
+                textBoxEscolaSelecionada.ForeColor = Color.LimeGreen;
+
+                _idEscolaSelecionada = EscolaSelecionada.Id;
+            }
+        }
+
+        private int CriaValorNumeroProcesso()
+        {
+            var listaConvenios = _servicoConvenio.ObterTodos(null);
+            var maiorNumeroProcesso = listaConvenios[0].NumeroProcesso;
+
+            foreach(var convenio in listaConvenios)
+            {
+                if(convenio.NumeroProcesso > maiorNumeroProcesso)
+                {
+                    maiorNumeroProcesso = convenio.NumeroProcesso;
+                }
+            }
+
+            return maiorNumeroProcesso +1;
         }
     }
 }

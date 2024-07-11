@@ -230,7 +230,7 @@
             // painelExibicao
             // 
             painelExibicao.BackColor = Color.Blue;
-            painelExibicao.Location = new Point(0, 94);
+            painelExibicao.Location = new Point(1, 94);
             painelExibicao.Margin = new Padding(0);
             painelExibicao.Name = "painelExibicao";
             painelExibicao.Size = new Size(800, 323);
@@ -251,7 +251,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(813, 476);
+            ClientSize = new Size(810, 469);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaPrincipalForm";

@@ -303,7 +303,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(312, 283);
+            ClientSize = new Size(311, 289);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEnderecoForm";

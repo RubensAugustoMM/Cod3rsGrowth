@@ -34,9 +34,7 @@
             botaoSalvar = new Button();
             labelTitulo = new Label();
             LabelEstado = new Label();
-            textBoxNumeroProcesso = new TextBox();
             labelMunicipio = new Label();
-            labelCep = new Label();
             labelRua = new Label();
             panelCriacao = new Panel();
             dateTimePickerDataTermino = new DateTimePicker();
@@ -44,10 +42,8 @@
             textBoxValor = new TextBox();
             panelDataGrid = new Panel();
             listBoxEscolaEmpresa = new ListBox();
-            textBoxEmpresa = new TextBox();
-            panelBotaoSelecionar = new Panel();
-            botaoSelecionar = new Button();
-            textBoxEscola = new TextBox();
+            textBoxEmpresaSelecionada = new TextBox();
+            textBoxEscolaSelecionada = new TextBox();
             panelBotaoEmpresas = new Panel();
             botaoEmpresa = new Button();
             label3 = new Label();
@@ -58,7 +54,6 @@
             panelBotaoSalvar.SuspendLayout();
             panelCriacao.SuspendLayout();
             panelDataGrid.SuspendLayout();
-            panelBotaoSelecionar.SuspendLayout();
             panelBotaoEmpresas.SuspendLayout();
             panelBotaoEscolas.SuspendLayout();
             SuspendLayout();
@@ -133,44 +128,22 @@
             LabelEstado.AutoSize = true;
             LabelEstado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             LabelEstado.ForeColor = Color.White;
-            LabelEstado.Location = new Point(13, 56);
+            LabelEstado.Location = new Point(13, 30);
             LabelEstado.Name = "LabelEstado";
             LabelEstado.Size = new Size(123, 21);
             LabelEstado.TabIndex = 66;
             LabelEstado.Text = "Valor . . . . . . . . . . :";
-            // 
-            // textBoxNumeroProcesso
-            // 
-            textBoxNumeroProcesso.BackColor = Color.Cyan;
-            textBoxNumeroProcesso.BorderStyle = BorderStyle.None;
-            textBoxNumeroProcesso.ForeColor = Color.Black;
-            textBoxNumeroProcesso.Location = new Point(156, 31);
-            textBoxNumeroProcesso.Name = "textBoxNumeroProcesso";
-            textBoxNumeroProcesso.Size = new Size(149, 16);
-            textBoxNumeroProcesso.TabIndex = 73;
-            textBoxNumeroProcesso.KeyPress += AoPressionarTecla_textBoxNumeroProcesso;
             // 
             // labelMunicipio
             // 
             labelMunicipio.AutoSize = true;
             labelMunicipio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             labelMunicipio.ForeColor = Color.White;
-            labelMunicipio.Location = new Point(13, 92);
+            labelMunicipio.Location = new Point(13, 85);
             labelMunicipio.Name = "labelMunicipio";
             labelMunicipio.Size = new Size(140, 21);
             labelMunicipio.TabIndex = 68;
             labelMunicipio.Text = "Data Término . . . . .:";
-            // 
-            // labelCep
-            // 
-            labelCep.AutoSize = true;
-            labelCep.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCep.ForeColor = Color.White;
-            labelCep.Location = new Point(13, 31);
-            labelCep.Name = "labelCep";
-            labelCep.Size = new Size(137, 21);
-            labelCep.TabIndex = 70;
-            labelCep.Text = "Numero Processo:";
             // 
             // labelRua
             // 
@@ -192,12 +165,10 @@
             panelCriacao.Controls.Add(panelBotaoSalvar);
             panelCriacao.Controls.Add(panelBotaoCancelar);
             panelCriacao.Controls.Add(panelDataGrid);
-            panelCriacao.Controls.Add(labelCep);
             panelCriacao.Controls.Add(labelMunicipio);
             panelCriacao.Controls.Add(labelRua);
             panelCriacao.Controls.Add(labelTitulo);
             panelCriacao.Controls.Add(LabelEstado);
-            panelCriacao.Controls.Add(textBoxNumeroProcesso);
             panelCriacao.Location = new Point(-1, 1);
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(661, 380);
@@ -214,7 +185,7 @@
             dateTimePickerDataTermino.CalendarTrailingForeColor = Color.Cyan;
             dateTimePickerDataTermino.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerDataTermino.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataTermino.Location = new Point(156, 91);
+            dateTimePickerDataTermino.Location = new Point(156, 84);
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 22);
             dateTimePickerDataTermino.TabIndex = 99;
@@ -236,7 +207,7 @@
             textBoxValor.BackColor = Color.Cyan;
             textBoxValor.BorderStyle = BorderStyle.None;
             textBoxValor.ForeColor = Color.Black;
-            textBoxValor.Location = new Point(156, 56);
+            textBoxValor.Location = new Point(156, 30);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 83;
@@ -246,9 +217,8 @@
             // 
             panelDataGrid.BackColor = Color.Silver;
             panelDataGrid.Controls.Add(listBoxEscolaEmpresa);
-            panelDataGrid.Controls.Add(textBoxEmpresa);
-            panelDataGrid.Controls.Add(panelBotaoSelecionar);
-            panelDataGrid.Controls.Add(textBoxEscola);
+            panelDataGrid.Controls.Add(textBoxEmpresaSelecionada);
+            panelDataGrid.Controls.Add(textBoxEscolaSelecionada);
             panelDataGrid.Controls.Add(panelBotaoEmpresas);
             panelDataGrid.Controls.Add(label3);
             panelDataGrid.Controls.Add(panelBotaoEscolas);
@@ -273,67 +243,41 @@
             listBoxEscolaEmpresa.Name = "listBoxEscolaEmpresa";
             listBoxEscolaEmpresa.Size = new Size(305, 231);
             listBoxEscolaEmpresa.TabIndex = 105;
+            listBoxEscolaEmpresa.SelectedIndexChanged += AoMudarIndexSelecionado_listBoxEscolaEmpresa;
             listBoxEscolaEmpresa.Format += AoFormatar_listBoxEscolaEmpresa;
             // 
-            // textBoxEmpresa
+            // textBoxEmpresaSelecionada
             // 
-            textBoxEmpresa.BackColor = Color.Black;
-            textBoxEmpresa.BorderStyle = BorderStyle.None;
-            textBoxEmpresa.ForeColor = Color.Red;
-            textBoxEmpresa.Location = new Point(178, 329);
-            textBoxEmpresa.Name = "textBoxEmpresa";
-            textBoxEmpresa.ReadOnly = true;
-            textBoxEmpresa.ShortcutsEnabled = false;
-            textBoxEmpresa.Size = new Size(149, 16);
-            textBoxEmpresa.TabIndex = 104;
-            textBoxEmpresa.Text = "Selecionar...";
+            textBoxEmpresaSelecionada.BackColor = Color.Black;
+            textBoxEmpresaSelecionada.BorderStyle = BorderStyle.None;
+            textBoxEmpresaSelecionada.ForeColor = Color.Red;
+            textBoxEmpresaSelecionada.Location = new Point(137, 329);
+            textBoxEmpresaSelecionada.Name = "textBoxEmpresaSelecionada";
+            textBoxEmpresaSelecionada.ReadOnly = true;
+            textBoxEmpresaSelecionada.ShortcutsEnabled = false;
+            textBoxEmpresaSelecionada.Size = new Size(190, 16);
+            textBoxEmpresaSelecionada.TabIndex = 104;
+            textBoxEmpresaSelecionada.Text = "Selecionar...";
             // 
-            // panelBotaoSelecionar
+            // textBoxEscolaSelecionada
             // 
-            panelBotaoSelecionar.BackColor = Color.Transparent;
-            panelBotaoSelecionar.Controls.Add(botaoSelecionar);
-            panelBotaoSelecionar.Location = new Point(221, 12);
-            panelBotaoSelecionar.Name = "panelBotaoSelecionar";
-            panelBotaoSelecionar.Size = new Size(126, 40);
-            panelBotaoSelecionar.TabIndex = 64;
-            panelBotaoSelecionar.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoSelecionar
-            // 
-            botaoSelecionar.BackColor = Color.Red;
-            botaoSelecionar.FlatAppearance.BorderSize = 0;
-            botaoSelecionar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoSelecionar.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoSelecionar.FlatStyle = FlatStyle.Flat;
-            botaoSelecionar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoSelecionar.ForeColor = Color.White;
-            botaoSelecionar.Location = new Point(3, 3);
-            botaoSelecionar.Name = "botaoSelecionar";
-            botaoSelecionar.Size = new Size(105, 27);
-            botaoSelecionar.TabIndex = 22;
-            botaoSelecionar.Text = "Selecionar";
-            botaoSelecionar.UseVisualStyleBackColor = false;
-            botaoSelecionar.Click += AoClicar_botaoSelecionar;
-            // 
-            // textBoxEscola
-            // 
-            textBoxEscola.BackColor = Color.Black;
-            textBoxEscola.BorderStyle = BorderStyle.None;
-            textBoxEscola.ForeColor = Color.Red;
-            textBoxEscola.HideSelection = false;
-            textBoxEscola.Location = new Point(178, 307);
-            textBoxEscola.Name = "textBoxEscola";
-            textBoxEscola.ReadOnly = true;
-            textBoxEscola.ShortcutsEnabled = false;
-            textBoxEscola.Size = new Size(149, 16);
-            textBoxEscola.TabIndex = 103;
-            textBoxEscola.Text = "Selecionar...";
+            textBoxEscolaSelecionada.BackColor = Color.Black;
+            textBoxEscolaSelecionada.BorderStyle = BorderStyle.None;
+            textBoxEscolaSelecionada.ForeColor = Color.Red;
+            textBoxEscolaSelecionada.HideSelection = false;
+            textBoxEscolaSelecionada.Location = new Point(137, 307);
+            textBoxEscolaSelecionada.Name = "textBoxEscolaSelecionada";
+            textBoxEscolaSelecionada.ReadOnly = true;
+            textBoxEscolaSelecionada.ShortcutsEnabled = false;
+            textBoxEscolaSelecionada.Size = new Size(190, 16);
+            textBoxEscolaSelecionada.TabIndex = 103;
+            textBoxEscolaSelecionada.Text = "Selecionar...";
             // 
             // panelBotaoEmpresas
             // 
             panelBotaoEmpresas.BackColor = Color.Transparent;
             panelBotaoEmpresas.Controls.Add(botaoEmpresa);
-            panelBotaoEmpresas.Location = new Point(114, 12);
+            panelBotaoEmpresas.Location = new Point(134, 11);
             panelBotaoEmpresas.Name = "panelBotaoEmpresas";
             panelBotaoEmpresas.Size = new Size(106, 40);
             panelBotaoEmpresas.TabIndex = 63;
@@ -344,7 +288,7 @@
             botaoEmpresa.BackColor = Color.Green;
             botaoEmpresa.FlatAppearance.BorderSize = 0;
             botaoEmpresa.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoEmpresa.FlatAppearance.MouseOverBackColor = Color.Cyan;
+            botaoEmpresa.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoEmpresa.FlatStyle = FlatStyle.Flat;
             botaoEmpresa.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoEmpresa.ForeColor = Color.White;
@@ -371,7 +315,7 @@
             // 
             panelBotaoEscolas.BackColor = Color.Transparent;
             panelBotaoEscolas.Controls.Add(botaoEscola);
-            panelBotaoEscolas.Location = new Point(2, 12);
+            panelBotaoEscolas.Location = new Point(22, 11);
             panelBotaoEscolas.Name = "panelBotaoEscolas";
             panelBotaoEscolas.Size = new Size(106, 40);
             panelBotaoEscolas.TabIndex = 62;
@@ -382,7 +326,7 @@
             botaoEscola.BackColor = Color.Green;
             botaoEscola.FlatAppearance.BorderSize = 0;
             botaoEscola.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoEscola.FlatAppearance.MouseOverBackColor = Color.Cyan;
+            botaoEscola.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoEscola.FlatStyle = FlatStyle.Flat;
             botaoEscola.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoEscola.ForeColor = Color.White;
@@ -411,7 +355,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(674, 402);
+            ClientSize = new Size(671, 399);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarConvenioForm";
@@ -423,7 +367,6 @@
             panelCriacao.PerformLayout();
             panelDataGrid.ResumeLayout(false);
             panelDataGrid.PerformLayout();
-            panelBotaoSelecionar.ResumeLayout(false);
             panelBotaoEmpresas.ResumeLayout(false);
             panelBotaoEscolas.ResumeLayout(false);
             ResumeLayout(false);
@@ -437,9 +380,7 @@
         private Button botaoSalvar;
         private Label labelTitulo;
         private Label LabelEstado;
-        private TextBox textBoxNumeroProcesso;
         private Label labelMunicipio;
-        private Label labelCep;
         private Label labelBairro;
         private Label labelRua;
         private Panel panelCriacao;
@@ -457,17 +398,15 @@
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePickerDataTermino;
         private Panel panel3;
-        private Button botaoSelecionar;
         private Label label3;
         private Label label2;
         private TextBox textBox4;
         private TextBox textBox3;
         private Panel panelDataGrid;
-        private Panel panelBotaoSelecionar;
         private Panel panelBotaoEmpresas;
         private Panel panelBotaoEscolas;
-        private TextBox textBoxEmpresa;
-        private TextBox textBoxEscola;
+        private TextBox textBoxEmpresaSelecionada;
+        private TextBox textBoxEscolaSelecionada;
         private ListBox listBoxEscolaEmpresa;
     }
 }

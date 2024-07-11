@@ -522,7 +522,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(693, 302);
+            ClientSize = new Size(692, 308);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEscolaForm";

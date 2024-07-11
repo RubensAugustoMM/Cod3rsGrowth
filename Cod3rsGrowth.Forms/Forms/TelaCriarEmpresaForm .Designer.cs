@@ -550,7 +550,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(693, 316);
+            ClientSize = new Size(692, 322);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEmpresaForm";
