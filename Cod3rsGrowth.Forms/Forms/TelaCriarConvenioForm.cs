@@ -81,7 +81,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
-            const int altura = 105;
+            const int altura = 85;
             const int largura = 27;
 
             using (Brush pincel = new SolidBrush(Color.Black))

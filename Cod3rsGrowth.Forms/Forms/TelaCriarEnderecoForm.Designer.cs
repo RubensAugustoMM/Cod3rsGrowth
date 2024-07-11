@@ -136,6 +136,7 @@
             textBoxCep.ForeColor = Color.Black;
             textBoxCep.Location = new Point(133, 46);
             textBoxCep.Name = "textBoxCep";
+            textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 73;
             textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
@@ -282,6 +283,7 @@
             textBoxNumero.ForeColor = Color.Black;
             textBoxNumero.Location = new Point(133, 163);
             textBoxNumero.Name = "textBoxNumero";
+            textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 80;
             textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
