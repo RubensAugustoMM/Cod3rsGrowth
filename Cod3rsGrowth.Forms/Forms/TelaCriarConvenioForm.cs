@@ -1,10 +1,8 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Enums.Extencoes;
+﻿using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
-using System;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -152,6 +150,11 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoPressionarTecla_textBoxValor(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(",") == -1))
             {
                 e.Handled = true;
             }

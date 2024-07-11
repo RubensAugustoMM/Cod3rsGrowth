@@ -52,7 +52,10 @@
             // 
             // dataGridViewEnderecos
             // 
+            dataGridViewEnderecos.AllowUserToAddRows = false;
+            dataGridViewEnderecos.AllowUserToDeleteRows = false;
             dataGridViewEnderecos.AllowUserToOrderColumns = true;
+            dataGridViewEnderecos.AllowUserToResizeRows = false;
             dataGridViewEnderecos.BackgroundColor = Color.Blue;
             dataGridViewEnderecos.BorderStyle = BorderStyle.None;
             dataGridViewEnderecos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -65,6 +68,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEnderecos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEnderecos.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewEnderecos.EnableHeadersVisualStyles = false;
             dataGridViewEnderecos.GridColor = Color.White;
             dataGridViewEnderecos.Location = new Point(165, 12);

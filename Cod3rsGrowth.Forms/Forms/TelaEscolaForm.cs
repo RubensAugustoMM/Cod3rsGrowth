@@ -3,7 +3,6 @@ using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms

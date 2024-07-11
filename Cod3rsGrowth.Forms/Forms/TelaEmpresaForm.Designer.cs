@@ -52,6 +52,10 @@
             // 
             // dataGridViewEmpresas
             // 
+            dataGridViewEmpresas.AllowUserToAddRows = false;
+            dataGridViewEmpresas.AllowUserToDeleteRows = false;
+            dataGridViewEmpresas.AllowUserToOrderColumns = true;
+            dataGridViewEmpresas.AllowUserToResizeRows = false;
             dataGridViewEmpresas.BackgroundColor = Color.Blue;
             dataGridViewEmpresas.BorderStyle = BorderStyle.None;
             dataGridViewEmpresas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -64,6 +68,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEmpresas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEmpresas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewEmpresas.EnableHeadersVisualStyles = false;
             dataGridViewEmpresas.GridColor = Color.White;
             dataGridViewEmpresas.Location = new Point(165, 12);

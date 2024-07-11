@@ -132,9 +132,9 @@
             labelTitulo.ForeColor = Color.White;
             labelTitulo.Location = new Point(276, 0);
             labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(95, 19);
+            labelTitulo.Size = new Size(110, 19);
             labelTitulo.TabIndex = 74;
-            labelTitulo.Text = "Criação Escola";
+            labelTitulo.Text = "Criação Empresa";
             // 
             // textBoxRazaoSocial
             // 

@@ -140,6 +140,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
             dataGridViewConvenios.Columns[9].HeaderCell.Value = "Razão Social Empresa";
 
+            dataGridViewConvenios.Columns[3].DefaultCellStyle.Format = "0.00";
+
             foreach (DataGridViewColumn coluna in dataGridViewConvenios.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;

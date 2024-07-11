@@ -1,9 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Enums.Extencoes;
-using LinqToDB.Common;
-using System;
+﻿using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -89,19 +85,10 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
-        {
-            var valorEnum = (EstadoEnums)e.Value;
-            e.Value = valorEnum.RetornaDescricao();
-        }
 
         private void AoClicar_botaoOk(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void AoFormatar_listBoxErros(object sender, ListControlConvertEventArgs e)
-        {
         }
 
         private void FormataListBoxErros()
@@ -109,6 +96,7 @@ namespace Cod3rsGrowth.Forms.Forms
             foreach (var mensagemErro in _listaErrosEntrada)
             {
                 _listaErrosExibida.AddRange(TruncarTexto(mensagemErro));
+                _listaErrosExibida.Add(" ");
             }
         }
 
@@ -127,12 +115,12 @@ namespace Cod3rsGrowth.Forms.Forms
                     index = textoTruncado.Length;
 
                     if (TextRenderer.MeasureText(textoTruncado,
-                        new Font(_pixeboy.Families[0], 12, FontStyle.Bold)).Width < listBoxErros.Width)
+                        new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2< listBoxErros.Width)
                     {
                         listaRetorno.Add(textoTruncado);
                         subTexto = subTexto.Substring(index);
                         if (TextRenderer.MeasureText(subTexto
-                            , new Font(_pixeboy.Families[0], 12, FontStyle.Bold)).Width > listBoxErros.Width)
+                            , new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2 > listBoxErros.Width)
                         {
                             textoTruncado = subTexto;
                             index = textoTruncado.Length;

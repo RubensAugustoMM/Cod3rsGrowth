@@ -52,6 +52,10 @@
             // 
             // dataGridViewEscolas
             // 
+            dataGridViewEscolas.AllowUserToAddRows = false;
+            dataGridViewEscolas.AllowUserToDeleteRows = false;
+            dataGridViewEscolas.AllowUserToOrderColumns = true;
+            dataGridViewEscolas.AllowUserToResizeRows = false;
             dataGridViewEscolas.BackgroundColor = Color.Blue;
             dataGridViewEscolas.BorderStyle = BorderStyle.None;
             dataGridViewEscolas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -64,6 +68,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEscolas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEscolas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewEscolas.EnableHeadersVisualStyles = false;
             dataGridViewEscolas.GridColor = Color.White;
             dataGridViewEscolas.Location = new Point(165, 12);

@@ -150,6 +150,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
             dataGridViewEmpresas.Columns[13].HeaderCell.Value = "Estado";
 
+            dataGridViewEmpresas.Columns[11].DefaultCellStyle.Format = "0.00";
+
             foreach (DataGridViewColumn coluna in dataGridViewEmpresas.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -227,8 +229,8 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void AoClicar_botaoCriar(object sender, EventArgs e)
-        { 
-            TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco,_servicoEmpresa);
+        {
+            TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco, _servicoEmpresa);
 
             telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
             telaCriarEmpresa.TopLevel = true;
@@ -238,7 +240,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
             };
 
-            telaCriarEmpresa.ShowDialog(this); 
+            telaCriarEmpresa.ShowDialog(this);
         }
     }
 }

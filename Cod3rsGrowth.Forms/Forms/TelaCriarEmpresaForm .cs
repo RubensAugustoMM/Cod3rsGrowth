@@ -227,6 +227,11 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Handled = true;
             }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(",") == -1))
+            {
+                e.Handled = true;
+            }
         }
 
         private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)

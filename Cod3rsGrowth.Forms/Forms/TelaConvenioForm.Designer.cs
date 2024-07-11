@@ -52,6 +52,10 @@
             // 
             // dataGridViewConvenios
             // 
+            dataGridViewConvenios.AllowUserToAddRows = false;
+            dataGridViewConvenios.AllowUserToDeleteRows = false;
+            dataGridViewConvenios.AllowUserToOrderColumns = true;
+            dataGridViewConvenios.AllowUserToResizeRows = false;
             dataGridViewConvenios.BackgroundColor = Color.Blue;
             dataGridViewConvenios.BorderStyle = BorderStyle.None;
             dataGridViewConvenios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -64,6 +68,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewConvenios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewConvenios.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewConvenios.EnableHeadersVisualStyles = false;
             dataGridViewConvenios.GridColor = Color.White;
             dataGridViewConvenios.Location = new Point(165, 12);

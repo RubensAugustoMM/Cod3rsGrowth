@@ -34,7 +34,7 @@ public class ValidadorEscola : AbstractValidator<Escola>
         RuleFor(escola => escola.CodigoMec.Length)
             .Equal(8)
             .When(escola => escola.CodigoMec != null)
-            .WithMessage("{PropertyName} menor ou maior que 8 characteres!");
+            .WithMessage("Código Mec menor ou maior que 8 characteres!");
 
         RuleFor(escola => escola.Telefone)
             .NotEmpty()
