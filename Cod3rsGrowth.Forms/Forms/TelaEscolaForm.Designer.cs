@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewEscolas = new DataGridView();
             painelLateral = new Panel();
@@ -41,6 +42,18 @@
             botaoFiltros = new Button();
             panelBotaoCriar = new Panel();
             botaoCriar = new Button();
+            escolaEnderecoOtdBindingSource = new BindingSource(components);
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            statusAtividadeDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            codigoMecDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            telefoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            inicioAtividadeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            categoriaAdministrativaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            organizacaoAcademicaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idEnderecoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEscolas).BeginInit();
             painelLateral.SuspendLayout();
             panelBotaoDeletar.SuspendLayout();
@@ -48,6 +61,7 @@
             panelBotaoEditar.SuspendLayout();
             panelBotaoFiltrar.SuspendLayout();
             panelBotaoCriar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)escolaEnderecoOtdBindingSource).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewEscolas
@@ -56,6 +70,7 @@
             dataGridViewEscolas.AllowUserToDeleteRows = false;
             dataGridViewEscolas.AllowUserToOrderColumns = true;
             dataGridViewEscolas.AllowUserToResizeRows = false;
+            dataGridViewEscolas.AutoGenerateColumns = false;
             dataGridViewEscolas.BackgroundColor = Color.Blue;
             dataGridViewEscolas.BorderStyle = BorderStyle.None;
             dataGridViewEscolas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -68,6 +83,8 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEscolas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEscolas.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, statusAtividadeDataGridViewCheckBoxColumn, nomeDataGridViewTextBoxColumn, codigoMecDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, inicioAtividadeDataGridViewTextBoxColumn, categoriaAdministrativaDataGridViewTextBoxColumn, organizacaoAcademicaDataGridViewTextBoxColumn, idEnderecoDataGridViewTextBoxColumn, estadoDataGridViewTextBoxColumn });
+            dataGridViewEscolas.DataSource = escolaEnderecoOtdBindingSource;
             dataGridViewEscolas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewEscolas.EnableHeadersVisualStyles = false;
             dataGridViewEscolas.GridColor = Color.White;
@@ -222,6 +239,107 @@
             botaoCriar.UseVisualStyleBackColor = false;
             botaoCriar.Click += AoClicar_botaoCriar;
             // 
+            // escolaEnderecoOtdBindingSource
+            // 
+            escolaEnderecoOtdBindingSource.DataSource = typeof(Dominio.ObjetosTranferenciaDados.EscolaEnderecoOtd);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Código Escola";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 106;
+            // 
+            // statusAtividadeDataGridViewCheckBoxColumn
+            // 
+            statusAtividadeDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            statusAtividadeDataGridViewCheckBoxColumn.DataPropertyName = "StatusAtividade";
+            statusAtividadeDataGridViewCheckBoxColumn.HeaderText = "Status Atividade";
+            statusAtividadeDataGridViewCheckBoxColumn.Name = "statusAtividadeDataGridViewCheckBoxColumn";
+            statusAtividadeDataGridViewCheckBoxColumn.ReadOnly = true;
+            statusAtividadeDataGridViewCheckBoxColumn.Width = 87;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            nomeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            nomeDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeDataGridViewTextBoxColumn.Width = 64;
+            // 
+            // codigoMecDataGridViewTextBoxColumn
+            // 
+            codigoMecDataGridViewTextBoxColumn.DataPropertyName = "CodigoMec";
+            codigoMecDataGridViewTextBoxColumn.HeaderText = "Código Mec";
+            codigoMecDataGridViewTextBoxColumn.Name = "codigoMecDataGridViewTextBoxColumn";
+            codigoMecDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // telefoneDataGridViewTextBoxColumn
+            // 
+            telefoneDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
+            telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
+            telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
+            telefoneDataGridViewTextBoxColumn.ReadOnly = true;
+            telefoneDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            emailDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            emailDataGridViewTextBoxColumn.HeaderText = "E-Mail";
+            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
+            emailDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // inicioAtividadeDataGridViewTextBoxColumn
+            // 
+            inicioAtividadeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            inicioAtividadeDataGridViewTextBoxColumn.DataPropertyName = "InicioAtividade";
+            inicioAtividadeDataGridViewTextBoxColumn.HeaderText = "Data Início da Atividade";
+            inicioAtividadeDataGridViewTextBoxColumn.Name = "inicioAtividadeDataGridViewTextBoxColumn";
+            inicioAtividadeDataGridViewTextBoxColumn.ReadOnly = true;
+            inicioAtividadeDataGridViewTextBoxColumn.Width = 97;
+            // 
+            // categoriaAdministrativaDataGridViewTextBoxColumn
+            // 
+            categoriaAdministrativaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            categoriaAdministrativaDataGridViewTextBoxColumn.DataPropertyName = "CategoriaAdministrativa";
+            categoriaAdministrativaDataGridViewTextBoxColumn.HeaderText = "Categoria Administrativa";
+            categoriaAdministrativaDataGridViewTextBoxColumn.Name = "categoriaAdministrativaDataGridViewTextBoxColumn";
+            categoriaAdministrativaDataGridViewTextBoxColumn.ReadOnly = true;
+            categoriaAdministrativaDataGridViewTextBoxColumn.Width = 148;
+            // 
+            // organizacaoAcademicaDataGridViewTextBoxColumn
+            // 
+            organizacaoAcademicaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            organizacaoAcademicaDataGridViewTextBoxColumn.DataPropertyName = "OrganizacaoAcademica";
+            organizacaoAcademicaDataGridViewTextBoxColumn.HeaderText = "Organização Acadêmica";
+            organizacaoAcademicaDataGridViewTextBoxColumn.Name = "organizacaoAcademicaDataGridViewTextBoxColumn";
+            organizacaoAcademicaDataGridViewTextBoxColumn.ReadOnly = true;
+            organizacaoAcademicaDataGridViewTextBoxColumn.Width = 145;
+            // 
+            // idEnderecoDataGridViewTextBoxColumn
+            // 
+            idEnderecoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idEnderecoDataGridViewTextBoxColumn.DataPropertyName = "IdEndereco";
+            idEnderecoDataGridViewTextBoxColumn.HeaderText = "Código Endereço";
+            idEnderecoDataGridViewTextBoxColumn.Name = "idEnderecoDataGridViewTextBoxColumn";
+            idEnderecoDataGridViewTextBoxColumn.ReadOnly = true;
+            idEnderecoDataGridViewTextBoxColumn.Width = 112;
+            // 
+            // estadoDataGridViewTextBoxColumn
+            // 
+            estadoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            estadoDataGridViewTextBoxColumn.DataPropertyName = "Estado";
+            estadoDataGridViewTextBoxColumn.HeaderText = "Estado";
+            estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
+            estadoDataGridViewTextBoxColumn.ReadOnly = true;
+            estadoDataGridViewTextBoxColumn.Width = 66;
+            // 
             // TelaEscolaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -243,6 +361,7 @@
             panelBotaoEditar.ResumeLayout(false);
             panelBotaoFiltrar.ResumeLayout(false);
             panelBotaoCriar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)escolaEnderecoOtdBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -259,5 +378,17 @@
         private Button botaoEditar;
         private Panel panelBotaoCriar;
         private Button botaoCriar;
+        private BindingSource escolaEnderecoOtdBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn statusAtividadeDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn codigoMecDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn telefoneDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn inicioAtividadeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn categoriaAdministrativaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn organizacaoAcademicaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idEnderecoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn estadoDataGridViewTextBoxColumn;
     }
 }

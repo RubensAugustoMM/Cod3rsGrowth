@@ -133,20 +133,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewEnderecos.Columns[0].HeaderCell.Value = "Código Endereço";
-            dataGridViewEnderecos.Columns[1].HeaderCell.Value = "Numero";
-            dataGridViewEnderecos.Columns[2].HeaderCell.Value = "CEP";
-            dataGridViewEnderecos.Columns[3].HeaderCell.Value = "Município";
-            dataGridViewEnderecos.Columns[4].HeaderCell.Value = "Bairro";
-            dataGridViewEnderecos.Columns[5].HeaderCell.Value = "Rua";
-            dataGridViewEnderecos.Columns[6].HeaderCell.Value = "Complemento";
-            dataGridViewEnderecos.Columns[7].HeaderCell.Value = "Estado";
-
-            foreach (DataGridViewColumn coluna in dataGridViewEnderecos.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
-
             dataGridViewEnderecos.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEnderecos.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEnderecos.DefaultCellStyle.BackColor = Color.Blue;
@@ -189,7 +175,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoFormatarCelulas_dataGridViewEnderecos(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridViewEnderecos.Columns[e.ColumnIndex].Name == "Estado")
+            if (dataGridViewEnderecos.Columns[e.ColumnIndex].HeaderText == "Estado")
             {
                 EstadoEnums valorEnum = (EstadoEnums)e.Value;
                 e.Value = valorEnum.RetornaDescricao();

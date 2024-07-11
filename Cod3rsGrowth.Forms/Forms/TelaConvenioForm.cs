@@ -129,23 +129,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewConvenios.Columns[0].HeaderCell.Value = "Código Convênio";
-            dataGridViewConvenios.Columns[1].HeaderCell.Value = "Número do Processo";
-            dataGridViewConvenios.Columns[2].HeaderCell.Value = "Objeto";
-            dataGridViewConvenios.Columns[3].HeaderCell.Value = "Valor";
-            dataGridViewConvenios.Columns[4].HeaderCell.Value = "Início";
-            dataGridViewConvenios.Columns[5].HeaderCell.Value = "Término";
-            dataGridViewConvenios.Columns[6].HeaderCell.Value = "Código Escola";
-            dataGridViewConvenios.Columns[7].HeaderCell.Value = "Nome Escola";
-            dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
-            dataGridViewConvenios.Columns[9].HeaderCell.Value = "Razão Social Empresa";
+            const string formatacaoDecimais = "0,0.00";
 
-            dataGridViewConvenios.Columns[3].DefaultCellStyle.Format = "0.00";
-
-            foreach (DataGridViewColumn coluna in dataGridViewConvenios.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
+            dataGridViewConvenios.Columns[3].DefaultCellStyle.Format = formatacaoDecimais;
 
             dataGridViewConvenios.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewConvenios.DefaultCellStyle.ForeColor = Color.White;

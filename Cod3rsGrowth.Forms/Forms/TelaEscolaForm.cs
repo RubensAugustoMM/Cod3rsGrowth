@@ -137,23 +137,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewEscolas.Columns[0].HeaderCell.Value = "Código Escola";
-            dataGridViewEscolas.Columns[1].HeaderCell.Value = "Status Atividade";
-            dataGridViewEscolas.Columns[2].HeaderCell.Value = "Nome";
-            dataGridViewEscolas.Columns[3].HeaderCell.Value = "Código Mec";
-            dataGridViewEscolas.Columns[4].HeaderCell.Value = "Telefone";
-            dataGridViewEscolas.Columns[5].HeaderCell.Value = "E-Mail";
-            dataGridViewEscolas.Columns[6].HeaderCell.Value = "Data Início da Atividade";
-            dataGridViewEscolas.Columns[7].HeaderCell.Value = "Categoria Administrativa";
-            dataGridViewEscolas.Columns[8].HeaderCell.Value = "Organização Acadêmica";
-            dataGridViewEscolas.Columns[9].HeaderCell.Value = "Código Endereço";
-            dataGridViewEscolas.Columns[10].HeaderCell.Value = "Estado";
-
-            foreach (DataGridViewColumn coluna in dataGridViewEscolas.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
-
             dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEscolas.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEscolas.DefaultCellStyle.BackColor = Color.Blue;

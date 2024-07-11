@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewEmpresas = new DataGridView();
+            empresaEnderecoOtdBindingSource = new BindingSource(components);
             painelLateral = new Panel();
             panelBotaoDeletar = new Panel();
             botaoDeletar = new Button();
@@ -41,7 +43,22 @@
             botaoFiltros = new Button();
             panelBotaoCriar = new Panel();
             botaoCriar = new Button();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            razaoSocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nomeFantasiaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cnpjDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            situcaoCadastralDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            dataSituacaoCadastralDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idadeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataAberturaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            naturezaJuridicaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            porteDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            matrizFilialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            capitalSocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idEnderecoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEmpresas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)empresaEnderecoOtdBindingSource).BeginInit();
             painelLateral.SuspendLayout();
             panelBotaoDeletar.SuspendLayout();
             panel1.SuspendLayout();
@@ -56,6 +73,7 @@
             dataGridViewEmpresas.AllowUserToDeleteRows = false;
             dataGridViewEmpresas.AllowUserToOrderColumns = true;
             dataGridViewEmpresas.AllowUserToResizeRows = false;
+            dataGridViewEmpresas.AutoGenerateColumns = false;
             dataGridViewEmpresas.BackgroundColor = Color.Blue;
             dataGridViewEmpresas.BorderStyle = BorderStyle.None;
             dataGridViewEmpresas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -68,6 +86,8 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewEmpresas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEmpresas.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, razaoSocialDataGridViewTextBoxColumn, nomeFantasiaDataGridViewTextBoxColumn, cnpjDataGridViewTextBoxColumn, situcaoCadastralDataGridViewCheckBoxColumn, dataSituacaoCadastralDataGridViewTextBoxColumn, idadeDataGridViewTextBoxColumn, dataAberturaDataGridViewTextBoxColumn, naturezaJuridicaDataGridViewTextBoxColumn, porteDataGridViewTextBoxColumn, matrizFilialDataGridViewTextBoxColumn, capitalSocialDataGridViewTextBoxColumn, idEnderecoDataGridViewTextBoxColumn, estadoDataGridViewTextBoxColumn });
+            dataGridViewEmpresas.DataSource = empresaEnderecoOtdBindingSource;
             dataGridViewEmpresas.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewEmpresas.EnableHeadersVisualStyles = false;
             dataGridViewEmpresas.GridColor = Color.White;
@@ -78,6 +98,10 @@
             dataGridViewEmpresas.Size = new Size(623, 299);
             dataGridViewEmpresas.TabIndex = 2;
             dataGridViewEmpresas.CellFormatting += AoFormatarCelulas_dataGridViewEmpresas;
+            // 
+            // empresaEnderecoOtdBindingSource
+            // 
+            empresaEnderecoOtdBindingSource.DataSource = typeof(Dominio.ObjetosTranferenciaDados.EmpresaEnderecoOtd);
             // 
             // painelLateral
             // 
@@ -222,6 +246,132 @@
             botaoCriar.UseVisualStyleBackColor = false;
             botaoCriar.Click += AoClicar_botaoCriar;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Código Empresa";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 108;
+            // 
+            // razaoSocialDataGridViewTextBoxColumn
+            // 
+            razaoSocialDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            razaoSocialDataGridViewTextBoxColumn.DataPropertyName = "RazaoSocial";
+            razaoSocialDataGridViewTextBoxColumn.HeaderText = "Razão Social";
+            razaoSocialDataGridViewTextBoxColumn.Name = "razaoSocialDataGridViewTextBoxColumn";
+            razaoSocialDataGridViewTextBoxColumn.ReadOnly = true;
+            razaoSocialDataGridViewTextBoxColumn.Width = 88;
+            // 
+            // nomeFantasiaDataGridViewTextBoxColumn
+            // 
+            nomeFantasiaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            nomeFantasiaDataGridViewTextBoxColumn.DataPropertyName = "NomeFantasia";
+            nomeFantasiaDataGridViewTextBoxColumn.HeaderText = "Nome Fantasia";
+            nomeFantasiaDataGridViewTextBoxColumn.Name = "nomeFantasiaDataGridViewTextBoxColumn";
+            nomeFantasiaDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeFantasiaDataGridViewTextBoxColumn.Width = 101;
+            // 
+            // cnpjDataGridViewTextBoxColumn
+            // 
+            cnpjDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            cnpjDataGridViewTextBoxColumn.DataPropertyName = "Cnpj";
+            cnpjDataGridViewTextBoxColumn.HeaderText = "CNPJ";
+            cnpjDataGridViewTextBoxColumn.Name = "cnpjDataGridViewTextBoxColumn";
+            cnpjDataGridViewTextBoxColumn.ReadOnly = true;
+            cnpjDataGridViewTextBoxColumn.Width = 58;
+            // 
+            // situcaoCadastralDataGridViewCheckBoxColumn
+            // 
+            situcaoCadastralDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            situcaoCadastralDataGridViewCheckBoxColumn.DataPropertyName = "SitucaoCadastral";
+            situcaoCadastralDataGridViewCheckBoxColumn.HeaderText = "Situção Cadastral";
+            situcaoCadastralDataGridViewCheckBoxColumn.Name = "situcaoCadastralDataGridViewCheckBoxColumn";
+            situcaoCadastralDataGridViewCheckBoxColumn.ReadOnly = true;
+            situcaoCadastralDataGridViewCheckBoxColumn.Width = 93;
+            // 
+            // dataSituacaoCadastralDataGridViewTextBoxColumn
+            // 
+            dataSituacaoCadastralDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataSituacaoCadastralDataGridViewTextBoxColumn.DataPropertyName = "DataSituacaoCadastral";
+            dataSituacaoCadastralDataGridViewTextBoxColumn.HeaderText = "Data da Alteração  Situação Cadastral";
+            dataSituacaoCadastralDataGridViewTextBoxColumn.Name = "dataSituacaoCadastralDataGridViewTextBoxColumn";
+            dataSituacaoCadastralDataGridViewTextBoxColumn.ReadOnly = true;
+            dataSituacaoCadastralDataGridViewTextBoxColumn.Width = 162;
+            // 
+            // idadeDataGridViewTextBoxColumn
+            // 
+            idadeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idadeDataGridViewTextBoxColumn.DataPropertyName = "Idade";
+            idadeDataGridViewTextBoxColumn.HeaderText = "Idade";
+            idadeDataGridViewTextBoxColumn.Name = "idadeDataGridViewTextBoxColumn";
+            idadeDataGridViewTextBoxColumn.ReadOnly = true;
+            idadeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // dataAberturaDataGridViewTextBoxColumn
+            // 
+            dataAberturaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataAberturaDataGridViewTextBoxColumn.DataPropertyName = "DataAbertura";
+            dataAberturaDataGridViewTextBoxColumn.HeaderText = "Data de Abertura";
+            dataAberturaDataGridViewTextBoxColumn.Name = "dataAberturaDataGridViewTextBoxColumn";
+            dataAberturaDataGridViewTextBoxColumn.ReadOnly = true;
+            dataAberturaDataGridViewTextBoxColumn.Width = 110;
+            // 
+            // naturezaJuridicaDataGridViewTextBoxColumn
+            // 
+            naturezaJuridicaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            naturezaJuridicaDataGridViewTextBoxColumn.DataPropertyName = "NaturezaJuridica";
+            naturezaJuridicaDataGridViewTextBoxColumn.HeaderText = "Natureza Juridica";
+            naturezaJuridicaDataGridViewTextBoxColumn.Name = "naturezaJuridicaDataGridViewTextBoxColumn";
+            naturezaJuridicaDataGridViewTextBoxColumn.ReadOnly = true;
+            naturezaJuridicaDataGridViewTextBoxColumn.Width = 111;
+            // 
+            // porteDataGridViewTextBoxColumn
+            // 
+            porteDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            porteDataGridViewTextBoxColumn.DataPropertyName = "Porte";
+            porteDataGridViewTextBoxColumn.HeaderText = "Porte";
+            porteDataGridViewTextBoxColumn.Name = "porteDataGridViewTextBoxColumn";
+            porteDataGridViewTextBoxColumn.ReadOnly = true;
+            porteDataGridViewTextBoxColumn.Width = 59;
+            // 
+            // matrizFilialDataGridViewTextBoxColumn
+            // 
+            matrizFilialDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            matrizFilialDataGridViewTextBoxColumn.DataPropertyName = "MatrizFilial";
+            matrizFilialDataGridViewTextBoxColumn.HeaderText = "Matriz ou Filial";
+            matrizFilialDataGridViewTextBoxColumn.Name = "matrizFilialDataGridViewTextBoxColumn";
+            matrizFilialDataGridViewTextBoxColumn.ReadOnly = true;
+            matrizFilialDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // capitalSocialDataGridViewTextBoxColumn
+            // 
+            capitalSocialDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            capitalSocialDataGridViewTextBoxColumn.DataPropertyName = "CapitalSocial";
+            capitalSocialDataGridViewTextBoxColumn.HeaderText = "Capital Social";
+            capitalSocialDataGridViewTextBoxColumn.Name = "capitalSocialDataGridViewTextBoxColumn";
+            capitalSocialDataGridViewTextBoxColumn.ReadOnly = true;
+            capitalSocialDataGridViewTextBoxColumn.Width = 94;
+            // 
+            // idEnderecoDataGridViewTextBoxColumn
+            // 
+            idEnderecoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idEnderecoDataGridViewTextBoxColumn.DataPropertyName = "IdEndereco";
+            idEnderecoDataGridViewTextBoxColumn.HeaderText = "Código Endereço";
+            idEnderecoDataGridViewTextBoxColumn.Name = "idEnderecoDataGridViewTextBoxColumn";
+            idEnderecoDataGridViewTextBoxColumn.ReadOnly = true;
+            idEnderecoDataGridViewTextBoxColumn.Width = 112;
+            // 
+            // estadoDataGridViewTextBoxColumn
+            // 
+            estadoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            estadoDataGridViewTextBoxColumn.DataPropertyName = "Estado";
+            estadoDataGridViewTextBoxColumn.HeaderText = "Estado";
+            estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
+            estadoDataGridViewTextBoxColumn.ReadOnly = true;
+            estadoDataGridViewTextBoxColumn.Width = 66;
+            // 
             // TelaEmpresaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -237,6 +387,7 @@
             VisibleChanged += AoMudarVisibilidade_TelaEmpresaForm;
             Paint += AoRequererPintura_TelaEmpresaForm;
             ((System.ComponentModel.ISupportInitialize)dataGridViewEmpresas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)empresaEnderecoOtdBindingSource).EndInit();
             painelLateral.ResumeLayout(false);
             panelBotaoDeletar.ResumeLayout(false);
             panel1.ResumeLayout(false);
@@ -259,5 +410,20 @@
         private Button botaoEditar;
         private Panel panelBotaoCriar;
         private Button botaoCriar;
+        private BindingSource empresaEnderecoOtdBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn razaoSocialDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nomeFantasiaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cnpjDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn situcaoCadastralDataGridViewCheckBoxColumn;
+        private DataGridViewTextBoxColumn dataSituacaoCadastralDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idadeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataAberturaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn naturezaJuridicaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn porteDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn matrizFilialDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn capitalSocialDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idEnderecoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn estadoDataGridViewTextBoxColumn;
     }
 }

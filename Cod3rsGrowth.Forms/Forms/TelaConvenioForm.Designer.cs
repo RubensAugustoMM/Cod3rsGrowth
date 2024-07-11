@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewConvenios = new DataGridView();
+            convenioEscolaEmpresaOtdBindingSource = new BindingSource(components);
             painelLateral = new Panel();
             panelBotaoDeletar = new Panel();
             botaoDeletar = new Button();
@@ -41,7 +43,18 @@
             botaoPesquisar = new Button();
             panelBotaoFiltros = new Panel();
             botaoFiltros = new Button();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            numeroProcessoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            objetoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            valorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataInicioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dataTerminoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idEscolaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nomeEscolaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idEmpresaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            razaoSocialEmpresaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewConvenios).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)convenioEscolaEmpresaOtdBindingSource).BeginInit();
             painelLateral.SuspendLayout();
             panelBotaoDeletar.SuspendLayout();
             panelBotaoEditar.SuspendLayout();
@@ -56,6 +69,7 @@
             dataGridViewConvenios.AllowUserToDeleteRows = false;
             dataGridViewConvenios.AllowUserToOrderColumns = true;
             dataGridViewConvenios.AllowUserToResizeRows = false;
+            dataGridViewConvenios.AutoGenerateColumns = false;
             dataGridViewConvenios.BackgroundColor = Color.Blue;
             dataGridViewConvenios.BorderStyle = BorderStyle.None;
             dataGridViewConvenios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -68,6 +82,8 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewConvenios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewConvenios.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, numeroProcessoDataGridViewTextBoxColumn, objetoDataGridViewTextBoxColumn, valorDataGridViewTextBoxColumn, dataInicioDataGridViewTextBoxColumn, dataTerminoDataGridViewTextBoxColumn, idEscolaDataGridViewTextBoxColumn, nomeEscolaDataGridViewTextBoxColumn, idEmpresaDataGridViewTextBoxColumn, razaoSocialEmpresaDataGridViewTextBoxColumn });
+            dataGridViewConvenios.DataSource = convenioEscolaEmpresaOtdBindingSource;
             dataGridViewConvenios.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewConvenios.EnableHeadersVisualStyles = false;
             dataGridViewConvenios.GridColor = Color.White;
@@ -80,6 +96,10 @@
             dataGridViewConvenios.Size = new Size(623, 299);
             dataGridViewConvenios.TabIndex = 2;
             dataGridViewConvenios.VisibleChanged += AoMudarVisibilidade_dataGridView1;
+            // 
+            // convenioEscolaEmpresaOtdBindingSource
+            // 
+            convenioEscolaEmpresaOtdBindingSource.DataSource = typeof(Dominio.ObjetosTranferenciaDados.ConvenioEscolaEmpresaOtd);
             // 
             // painelLateral
             // 
@@ -224,6 +244,96 @@
             botaoFiltros.UseVisualStyleBackColor = false;
             botaoFiltros.Click += AoClicar_botaoFiltros;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Código Convênio";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 114;
+            // 
+            // numeroProcessoDataGridViewTextBoxColumn
+            // 
+            numeroProcessoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            numeroProcessoDataGridViewTextBoxColumn.DataPropertyName = "NumeroProcesso";
+            numeroProcessoDataGridViewTextBoxColumn.HeaderText = "Número do Processo";
+            numeroProcessoDataGridViewTextBoxColumn.Name = "numeroProcessoDataGridViewTextBoxColumn";
+            numeroProcessoDataGridViewTextBoxColumn.ReadOnly = true;
+            numeroProcessoDataGridViewTextBoxColumn.Width = 130;
+            // 
+            // objetoDataGridViewTextBoxColumn
+            // 
+            objetoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            objetoDataGridViewTextBoxColumn.DataPropertyName = "Objeto";
+            objetoDataGridViewTextBoxColumn.HeaderText = "Objeto";
+            objetoDataGridViewTextBoxColumn.Name = "objetoDataGridViewTextBoxColumn";
+            objetoDataGridViewTextBoxColumn.ReadOnly = true;
+            objetoDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // valorDataGridViewTextBoxColumn
+            // 
+            valorDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            valorDataGridViewTextBoxColumn.DataPropertyName = "Valor";
+            valorDataGridViewTextBoxColumn.HeaderText = "Valor";
+            valorDataGridViewTextBoxColumn.Name = "valorDataGridViewTextBoxColumn";
+            valorDataGridViewTextBoxColumn.ReadOnly = true;
+            valorDataGridViewTextBoxColumn.Width = 57;
+            // 
+            // dataInicioDataGridViewTextBoxColumn
+            // 
+            dataInicioDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataInicioDataGridViewTextBoxColumn.DataPropertyName = "DataInicio";
+            dataInicioDataGridViewTextBoxColumn.HeaderText = "Início";
+            dataInicioDataGridViewTextBoxColumn.Name = "dataInicioDataGridViewTextBoxColumn";
+            dataInicioDataGridViewTextBoxColumn.ReadOnly = true;
+            dataInicioDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // dataTerminoDataGridViewTextBoxColumn
+            // 
+            dataTerminoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataTerminoDataGridViewTextBoxColumn.DataPropertyName = "DataTermino";
+            dataTerminoDataGridViewTextBoxColumn.HeaderText = "Término";
+            dataTerminoDataGridViewTextBoxColumn.Name = "dataTerminoDataGridViewTextBoxColumn";
+            dataTerminoDataGridViewTextBoxColumn.ReadOnly = true;
+            dataTerminoDataGridViewTextBoxColumn.Width = 74;
+            // 
+            // idEscolaDataGridViewTextBoxColumn
+            // 
+            idEscolaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idEscolaDataGridViewTextBoxColumn.DataPropertyName = "IdEscola";
+            idEscolaDataGridViewTextBoxColumn.HeaderText = "Código Escola";
+            idEscolaDataGridViewTextBoxColumn.Name = "idEscolaDataGridViewTextBoxColumn";
+            idEscolaDataGridViewTextBoxColumn.ReadOnly = true;
+            idEscolaDataGridViewTextBoxColumn.Width = 97;
+            // 
+            // nomeEscolaDataGridViewTextBoxColumn
+            // 
+            nomeEscolaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            nomeEscolaDataGridViewTextBoxColumn.DataPropertyName = "NomeEscola";
+            nomeEscolaDataGridViewTextBoxColumn.HeaderText = "Nome Escola";
+            nomeEscolaDataGridViewTextBoxColumn.Name = "nomeEscolaDataGridViewTextBoxColumn";
+            nomeEscolaDataGridViewTextBoxColumn.ReadOnly = true;
+            nomeEscolaDataGridViewTextBoxColumn.Width = 92;
+            // 
+            // idEmpresaDataGridViewTextBoxColumn
+            // 
+            idEmpresaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idEmpresaDataGridViewTextBoxColumn.DataPropertyName = "IdEmpresa";
+            idEmpresaDataGridViewTextBoxColumn.HeaderText = "Código Empresa";
+            idEmpresaDataGridViewTextBoxColumn.Name = "idEmpresaDataGridViewTextBoxColumn";
+            idEmpresaDataGridViewTextBoxColumn.ReadOnly = true;
+            idEmpresaDataGridViewTextBoxColumn.Width = 108;
+            // 
+            // razaoSocialEmpresaDataGridViewTextBoxColumn
+            // 
+            razaoSocialEmpresaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            razaoSocialEmpresaDataGridViewTextBoxColumn.DataPropertyName = "RazaoSocialEmpresa";
+            razaoSocialEmpresaDataGridViewTextBoxColumn.HeaderText = "Razão Social Empresa";
+            razaoSocialEmpresaDataGridViewTextBoxColumn.Name = "razaoSocialEmpresaDataGridViewTextBoxColumn";
+            razaoSocialEmpresaDataGridViewTextBoxColumn.ReadOnly = true;
+            razaoSocialEmpresaDataGridViewTextBoxColumn.Width = 132;
+            // 
             // TelaConvenioForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -238,6 +348,7 @@
             Load += AoCarregarForm_TelaConvenioForm;
             Paint += AoRequererPintura_TelaConvenioForm;
             ((System.ComponentModel.ISupportInitialize)dataGridViewConvenios).EndInit();
+            ((System.ComponentModel.ISupportInitialize)convenioEscolaEmpresaOtdBindingSource).EndInit();
             painelLateral.ResumeLayout(false);
             panelBotaoDeletar.ResumeLayout(false);
             panelBotaoEditar.ResumeLayout(false);
@@ -260,5 +371,16 @@
         private Button botaoEditar;
         private Panel panelBotaoCriar;
         private Button botaoCriar;
+        private BindingSource convenioEscolaEmpresaOtdBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn numeroProcessoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn objetoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn valorDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataInicioDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dataTerminoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idEscolaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nomeEscolaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idEmpresaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn razaoSocialEmpresaDataGridViewTextBoxColumn;
     }
 }
