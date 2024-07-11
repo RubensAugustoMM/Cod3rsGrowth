@@ -165,8 +165,8 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBoxNumero.Text) &&
-                Int64.Parse(textBoxNumero.Text) > Int32.MaxValue )
+            const int tamanhoMaximoNumero = 8;
+            if(textBoxNumero.Text.Length == tamanhoMaximoNumero)
             {
                 e.Handled = true;
             }
