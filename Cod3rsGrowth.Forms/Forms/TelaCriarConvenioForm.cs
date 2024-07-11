@@ -109,7 +109,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             if (!string.IsNullOrEmpty(textBoxValor.Text))
             {
-                _convenioCriado.Valor = int.Parse(textBoxValor.Text);
+                _convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
             }
             else
             {
