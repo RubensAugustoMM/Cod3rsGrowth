@@ -23,7 +23,7 @@ public class RepositorioConvenio : IRepositorioConvenio
 
     public void Criar(Convenio convenioCriado)
     {
-        _contexto.InsertWithInt32Identity(convenioCriado);
+        _contexto.Insert(convenioCriado);
     }
 
     public void Deletar(int id)

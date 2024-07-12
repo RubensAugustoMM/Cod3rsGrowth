@@ -9,7 +9,6 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarEnderecoForm : Form
     {
-        private Endereco _enderecoCriado;
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
 
@@ -21,7 +20,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
-            _enderecoCriado = new();
             InicializaFontePixeBoy();
             InicializaComboBox();
 
@@ -90,27 +88,28 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
+            Endereco enderecoCriado = new();
 
-            _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
-            _enderecoCriado.Cep = textBoxCep.Text;
-            _enderecoCriado.Municipio = textBoxMunicipio.Text;
-            _enderecoCriado.Bairro = textBoxBairro.Text;
-            _enderecoCriado.Rua = textBoxRua.Text;
+            enderecoCriado.Cep = textBoxCep.Text;
+            enderecoCriado.Municipio = textBoxMunicipio.Text;
+            enderecoCriado.Bairro = textBoxBairro.Text;
+            enderecoCriado.Rua = textBoxRua.Text;
 
             if(!string.IsNullOrEmpty(textBoxNumero.Text))
             {
-                _enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
             }
             else
             {
-                _enderecoCriado.Numero = -1;
+                enderecoCriado.Numero = -1;
             }
-            _enderecoCriado.Complemento = textBoxComplemento.Text;
+            enderecoCriado.Complemento = textBoxComplemento.Text;
 
             try
             {
-                _servicoEndereco.Criar(_enderecoCriado);
+                _servicoEndereco.Criar(ref enderecoCriado);
                 Close();
             }
             catch (Exception excecao)

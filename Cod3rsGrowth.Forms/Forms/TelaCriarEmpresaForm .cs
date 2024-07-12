@@ -9,8 +9,6 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarEmpresaForm : Form
     {
-        private Endereco _enderecoCriado;
-        private Empresa _empresaCriada;
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEmpresa _servicoEmpresa;
@@ -24,8 +22,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
-            _empresaCriada = new();
-            _enderecoCriado = new();
             InicializaFontePixeBoy();
             InicializaComboBox();
 
@@ -95,69 +91,72 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
             List<string> listaErros = new();
+            Endereco enderecoCriado = new();
+            Empresa empresaCriada = new();
 
             if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
             {
-                _empresaCriada.SitucaoCadastral = true;
+                empresaCriada.SitucaoCadastral = true;
             }
             else
             {
-                _empresaCriada.SitucaoCadastral = false;
+                empresaCriada.SitucaoCadastral = false;
             }
 
-            _empresaCriada.DataSituacaoCadastral = DateTime.Now;
+            empresaCriada.DataSituacaoCadastral = DateTime.Now;
 
             if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
             {
-                _empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
+                empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
             }
             else
             {
-                _empresaCriada.CapitalSocial = -1;
+                empresaCriada.CapitalSocial = -1;
             }
 
-            _empresaCriada.NaturezaJuridica = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
-            _empresaCriada.Porte = (PorteEnums)comboBoxPorte.SelectedItem;
-            _empresaCriada.MatrizFilial = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+            empresaCriada.NaturezaJuridica = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
+            empresaCriada.Porte = (PorteEnums)comboBoxPorte.SelectedItem;
+            empresaCriada.MatrizFilial = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
 
-            _empresaCriada.RazaoSocial = textBoxRazaoSocial.Text;
-            _empresaCriada.NomeFantasia = textBoxNomeFantasia.Text;
-            _empresaCriada.Cnpj = textBoxCnpj.Text;
-            _empresaCriada.DataAbertura = dateTimePickerDataAbertura.Value;
+            empresaCriada.RazaoSocial = textBoxRazaoSocial.Text;
+            empresaCriada.NomeFantasia = textBoxNomeFantasia.Text;
+            empresaCriada.Cnpj = textBoxCnpj.Text;
+            empresaCriada.DataAbertura = dateTimePickerDataAbertura.Value;
 
-            _empresaCriada.Idade = DateTime.Now.Year - _empresaCriada.DataAbertura.Year;
+            empresaCriada.Idade = DateTime.Now.Year - empresaCriada.DataAbertura.Year;
 
-            _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
-            _enderecoCriado.Cep = textBoxCep.Text;
-            _enderecoCriado.Municipio = textBoxMunicipio.Text;
-            _enderecoCriado.Bairro = textBoxBairro.Text;
-            _enderecoCriado.Rua = textBoxRua.Text;
+            enderecoCriado.Cep = textBoxCep.Text;
+            enderecoCriado.Municipio = textBoxMunicipio.Text;
+            enderecoCriado.Bairro = textBoxBairro.Text;
+            enderecoCriado.Rua = textBoxRua.Text;
 
             if (!string.IsNullOrEmpty(textBoxNumero.Text))
             {
-                _enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
             }
             else
             {
-                _enderecoCriado.Numero = -1;
+                enderecoCriado.Numero = -1;
             }
 
-            _enderecoCriado.Complemento = textBoxComplemento.Text;
+            enderecoCriado.Complemento = textBoxComplemento.Text;
 
             try
             {
-                _empresaCriada.IdEndereco = _servicoEndereco.Criar(_enderecoCriado);
+                _servicoEndereco.Criar(ref enderecoCriado);
+                empresaCriada.IdEndereco = enderecoCriado.Id;
             }
             catch (Exception excecao)
             {
                 listaErros.AddRange(excecao.Message.Split(Separador));
-                _empresaCriada.IdEndereco = -1;
+                empresaCriada.IdEndereco = -1;
             }
 
             try
             {
-                _servicoEmpresa.Criar(_empresaCriada);
+                _servicoEmpresa.Criar(empresaCriada);
                 Close();
             }
             catch (Exception excecao)
@@ -170,9 +169,9 @@ namespace Cod3rsGrowth.Forms.Forms
                  
                 caixaDialogoErro.ShowDialog(this);
 
-                if(_empresaCriada.IdEndereco != -1)
+                if(empresaCriada.IdEndereco != -1)
                 {
-                    _servicoEndereco.Deletar(_empresaCriada.IdEndereco);
+                    _servicoEndereco.Deletar(empresaCriada.IdEndereco);
                 }
             }
         }
@@ -228,7 +227,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 e.Handled = true;
             }
 
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(",") == -1))
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(",") != -1))
             {
                 e.Handled = true;
             }

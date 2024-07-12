@@ -81,12 +81,12 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
                 Cnpj = empresa.Cnpj,
                 SitucaoCadastral = empresa.SitucaoCadastral,
                 DataSituacaoCadastral = empresa.DataSituacaoCadastral,
-                NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
-                Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
-                MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
+                NaturezaJuridica = empresa.NaturezaJuridica,
+                Porte = empresa.Porte,
+                MatrizFilial = empresa.MatrizFilial,
                 CapitalSocial = empresa.CapitalSocial,
                 IdEndereco = empresa.IdEndereco,
-                Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornado.Estado)
+                Estado = EnderecoRetornado.Estado
             });
         }
 

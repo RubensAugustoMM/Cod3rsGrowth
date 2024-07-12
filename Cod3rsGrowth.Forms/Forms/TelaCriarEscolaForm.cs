@@ -9,8 +9,6 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarEscolaForm : Form
     {
-        private Endereco _enderecoCriado;
-        private Escola _escolaCriada;
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEscola _servicoEscola;
@@ -24,8 +22,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
-            _escolaCriada = new();
-            _enderecoCriado = new();
             InicializaFontePixeBoy();
             InicializaComboBox();
 
@@ -95,56 +91,59 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
             List<string> listaErros = new();
+            Endereco enderecoCriado = new();
+            Escola escolaCriada = new();
 
             if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
             {
-                _escolaCriada.StatusAtividade = true;
+                escolaCriada.StatusAtividade = true;
             }
             else
             {
-                _escolaCriada.StatusAtividade = false;
+                escolaCriada.StatusAtividade = false;
             }
 
-            _escolaCriada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
-            _escolaCriada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
+            escolaCriada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
+            escolaCriada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
 
-            _escolaCriada.Nome = textBoxNome.Text;
-            _escolaCriada.CodigoMec = textBoxCodigoMec.Text;
-            _escolaCriada.Telefone = textBoxTelefone.Text;
-            _escolaCriada.Email = textBoxEmail.Text;
-            _escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
+            escolaCriada.Nome = textBoxNome.Text;
+            escolaCriada.CodigoMec = textBoxCodigoMec.Text;
+            escolaCriada.Telefone = textBoxTelefone.Text;
+            escolaCriada.Email = textBoxEmail.Text;
+            escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
 
-            _enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
-            _enderecoCriado.Cep = textBoxCep.Text;
-            _enderecoCriado.Municipio = textBoxMunicipio.Text;
-            _enderecoCriado.Bairro = textBoxBairro.Text;
-            _enderecoCriado.Rua = textBoxRua.Text;
+            enderecoCriado.Cep = textBoxCep.Text;
+            enderecoCriado.Municipio = textBoxMunicipio.Text;
+            enderecoCriado.Bairro = textBoxBairro.Text;
+            enderecoCriado.Rua = textBoxRua.Text;
 
             if (!string.IsNullOrEmpty(textBoxNumero.Text))
             {
-                _enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
             }
             else
             {
-                _enderecoCriado.Numero = -1;
+                enderecoCriado.Numero = -1;
             }
 
-            _enderecoCriado.Complemento = textBoxComplemento.Text;
+            enderecoCriado.Complemento = textBoxComplemento.Text;
 
             try
             {
-                _escolaCriada.IdEndereco = _servicoEndereco.Criar(_enderecoCriado);
+                _servicoEndereco.Criar(ref enderecoCriado);
+                escolaCriada.IdEndereco = enderecoCriado.Id;
             }
             catch (Exception excecao)
             {
                 listaErros.AddRange(excecao.Message.Split(Separador));
-                _escolaCriada.IdEndereco = -1;
+                escolaCriada.IdEndereco = -1;
             }
 
             try
             {
-                _servicoEscola.Criar(_escolaCriada);
+                _servicoEscola.Criar(escolaCriada);
                 Close();
             }
             catch (Exception excecao)
@@ -157,9 +156,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
 
-                if(_escolaCriada.IdEndereco != -1)
+                if(escolaCriada.IdEndereco != -1)
                 {
-                    _servicoEndereco.Deletar(_escolaCriada.IdEndereco);
+                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
                 }
             }
         }

@@ -9,7 +9,6 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarConvenioForm : Form
     {
-        private Convenio _convenioCriado;
         private PrivateFontCollection _pixeboy;
         private readonly ServicoConvenio _servicoConvenio;
         private readonly ServicoEscola _servicoEscola;
@@ -34,8 +33,6 @@ namespace Cod3rsGrowth.Forms.Forms
             _botaoEmpresaAtivo = false;
             _botaoEscolaAtivo = true;
             listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
-
-            _convenioCriado = new();
 
             foreach (Control c in Controls)
             {
@@ -102,30 +99,31 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
+            Convenio convenioCriado = new();
 
-            _convenioCriado.NumeroProcesso = CriaValorNumeroProcesso(); 
+            convenioCriado.NumeroProcesso = CriaValorNumeroProcesso(); 
 
             if (!string.IsNullOrEmpty(textBoxValor.Text))
             {
-                _convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
+                convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
             }
             else
             {
-                _convenioCriado.Valor = -1;
+                convenioCriado.Valor = -1;
             }
             
-            _convenioCriado.Objeto = richTextBoxObjeto.Text;
-            _convenioCriado.DataInicio =
+            convenioCriado.Objeto = richTextBoxObjeto.Text;
+            convenioCriado.DataInicio =
                 new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
-            _convenioCriado.DataTermino =
+            convenioCriado.DataTermino =
                 new DateTime(dateTimePickerDataTermino.Value.Year, 
                     dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
-            _convenioCriado.IdEmpresa = _idEmpresaSelecionada;
-            _convenioCriado.IdEscola = _idEscolaSelecionada;
+            convenioCriado.IdEmpresa = _idEmpresaSelecionada;
+            convenioCriado.IdEscola = _idEscolaSelecionada;
             
             try
             {
-                _servicoConvenio.Criar(_convenioCriado);
+                _servicoConvenio.Criar(convenioCriado);
                 Close();
             }
             catch (Exception excecao)
@@ -154,7 +152,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 e.Handled = true;
             }
 
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf(",") == -1))
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(",") != -1))
             {
                 e.Handled = true;
             }

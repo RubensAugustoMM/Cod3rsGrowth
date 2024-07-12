@@ -49,10 +49,10 @@ public class MockRepositorioEscola : IRepositorioEscola
             Telefone = EscolaRetornada.Telefone,
             Email = EscolaRetornada.Email,
             InicioAtividade = EscolaRetornada.InicioAtividade,
-            CategoriaAdministrativa = EnumExtencoes.RetornaDescricao(EscolaRetornada.CategoriaAdministrativa),
-            OrganizacaoAcademica = EnumExtencoes.RetornaDescricao(EscolaRetornada.OrganizacaoAcademica),
+            CategoriaAdministrativa = EscolaRetornada.CategoriaAdministrativa,
+            OrganizacaoAcademica = EscolaRetornada.OrganizacaoAcademica,
             IdEndereco = EscolaRetornada.IdEndereco,
-            Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornado.Estado)
+            Estado = EnderecoRetornado.Estado
 
         };
 
@@ -77,10 +77,10 @@ public class MockRepositorioEscola : IRepositorioEscola
                 Telefone = escola.Telefone,
                 Email = escola.Email,
                 InicioAtividade = escola.InicioAtividade,
-                CategoriaAdministrativa = EnumExtencoes.RetornaDescricao(escola.CategoriaAdministrativa),
-                OrganizacaoAcademica = EnumExtencoes.RetornaDescricao(escola.OrganizacaoAcademica),
+                CategoriaAdministrativa = escola.CategoriaAdministrativa,
+                OrganizacaoAcademica = escola.OrganizacaoAcademica,
                 IdEndereco = escola.IdEndereco,
-                Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornado.Estado)
+                Estado = EnderecoRetornado.Estado
             });
         }
 
