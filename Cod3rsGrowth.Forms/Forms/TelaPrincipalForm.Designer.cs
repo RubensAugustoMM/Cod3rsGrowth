@@ -44,12 +44,14 @@
             tempo = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             painelExibicao = new Panel();
+            panel1 = new Panel();
             panelTopo.SuspendLayout();
             panelBotaoEnderecos.SuspendLayout();
             panelBotaoEscolas.SuspendLayout();
             panelBotaoEmpresas.SuspendLayout();
             panelBotaoConvenios.SuspendLayout();
             painelInferior.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panelTopo
@@ -228,22 +230,29 @@
             // painelExibicao
             // 
             painelExibicao.BackColor = Color.Blue;
-            painelExibicao.Dock = DockStyle.Fill;
-            painelExibicao.Location = new Point(0, 94);
+            painelExibicao.Location = new Point(1, 94);
             painelExibicao.Margin = new Padding(0);
             painelExibicao.Name = "painelExibicao";
             painelExibicao.Size = new Size(800, 323);
             painelExibicao.TabIndex = 2;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(panelTopo);
+            panel1.Controls.Add(painelExibicao);
+            panel1.Controls.Add(painelInferior);
+            panel1.Location = new Point(0, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 450);
+            panel1.TabIndex = 0;
+            // 
             // TelaPrincipalForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Navy;
-            ClientSize = new Size(800, 450);
-            Controls.Add(painelExibicao);
-            Controls.Add(painelInferior);
-            Controls.Add(panelTopo);
+            BackColor = Color.Black;
+            ClientSize = new Size(810, 469);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaPrincipalForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -256,6 +265,7 @@
             panelBotaoConvenios.ResumeLayout(false);
             painelInferior.ResumeLayout(false);
             painelInferior.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -276,5 +286,6 @@
         private Panel panelBotaoEnderecos;
         private Button botaoEnderecos;
         private Button botaoFechar;
+        private Panel panel1;
     }
 }

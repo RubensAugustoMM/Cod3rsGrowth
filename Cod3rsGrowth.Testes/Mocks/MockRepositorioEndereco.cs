@@ -32,11 +32,11 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         Tabelas.Enderecos.Value.Remove(ObterPorIdModelo(id));
     }
 
-    public EnderecoOtd ObterPorId(int id)
+    public Endereco ObterPorId(int id)
     {
         var EnderecoRetornado = ObterPorIdModelo(id);
 
-        var EnderecoOtdRetornado = new EnderecoOtd()
+        var EnderecoOtdRetornado = new Endereco()
         {
             Id = EnderecoRetornado.Id,
             Numero = EnderecoRetornado.Numero,
@@ -45,20 +45,20 @@ public class MockRepositorioEndereco : IRepositorioEndereco
             Bairro = EnderecoRetornado.Bairro,
             Rua = EnderecoRetornado.Rua,
             Complemento = EnderecoRetornado.Complemento,
-            Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornado.Estado)
+            Estado = EnderecoRetornado.Estado
         };
 
         return EnderecoOtdRetornado;
     }
 
-    public List<EnderecoOtd> ObterTodos(FiltroEndereco? filtroEnderecoOtd)
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEnderecoOtd)
     {
         var ListaEnderecos = Tabelas.Enderecos.Value;
-        List<EnderecoOtd> ListaEnderecoOtd = new();
+        List<Endereco> ListaEnderecoOtd = new();
 
         foreach (var endereco in ListaEnderecos)
         {
-            ListaEnderecoOtd.Add(new EnderecoOtd()
+            ListaEnderecoOtd.Add(new Endereco()
             {
             Id = endereco.Id,
             Numero = endereco.Numero,
@@ -67,7 +67,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
             Bairro = endereco.Bairro,
             Rua = endereco.Rua,
             Complemento = endereco.Complemento,
-            Estado = EnumExtencoes.RetornaDescricao(endereco.Estado)
+            Estado = endereco.Estado
             });
         }
 

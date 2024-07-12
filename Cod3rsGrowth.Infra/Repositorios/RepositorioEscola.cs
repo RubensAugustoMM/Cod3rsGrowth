@@ -3,7 +3,6 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.Filtros;
 using LinqToDB;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
-using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -28,7 +27,7 @@ public class RepositorioEscola : IRepositorioEscola
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEscolas.Where(e => e.Id == id).Delete();
     }
 
     public EscolaEnderecoOtd ObterPorId(int Id)

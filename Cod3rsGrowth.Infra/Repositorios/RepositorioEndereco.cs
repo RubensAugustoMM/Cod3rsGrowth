@@ -1,5 +1,4 @@
-﻿using Cod3rsGrowth.Dominio;
-using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 using LinqToDB;
@@ -22,12 +21,12 @@ public class RepositorioEndereco : IRepositorioEndereco
 
     public void Criar(Endereco enderecoCriado)
     {
-        _contexto.Insert(enderecoCriado);
+        enderecoCriado.Id = _contexto.InsertWithInt32Identity(enderecoCriado); 
     }
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEnderecos.Where(e => e.Id == id).Delete();
     }
 
     public Endereco ObterPorId(int Id)

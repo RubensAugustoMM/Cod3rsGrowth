@@ -180,7 +180,7 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(106, 40);
             panel3.TabIndex = 64;
-            panel3.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panel3.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoFechar
             // 
@@ -207,7 +207,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
-            panel2.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panel2.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoLimpar
             // 
@@ -234,7 +234,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 63;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // botaoFiltrar
             // 

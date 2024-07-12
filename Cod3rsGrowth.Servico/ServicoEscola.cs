@@ -31,8 +31,15 @@ public class ServicoEscola : IRepositorioEscola
 
     public void Criar(Escola escolaCriada)
     {
-        _validadorEscola.ValidateAndThrow(escolaCriada);
-        _repositorioEscola.Criar(escolaCriada);
+        try
+        {
+            _validadorEscola.ValidateAndThrow(escolaCriada);
+            _repositorioEscola.Criar(escolaCriada);
+        }
+        catch(Exception) 
+        {
+            throw;
+        }
     }
 
     public void Deletar(int id)

@@ -265,7 +265,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 31;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // panel1
             // 
@@ -275,7 +275,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 32;
-            panel1.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panel1.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // panel2
             // 
@@ -285,7 +285,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
-            panel2.Paint += AoRequererPintura_panelBotaoFiltrar;
+            panel2.Paint += AoRequererPintura_panelSombraBotoes;
             // 
             // labelTitulo
             // 

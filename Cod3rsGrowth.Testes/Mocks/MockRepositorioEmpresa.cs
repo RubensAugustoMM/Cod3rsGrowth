@@ -54,11 +54,11 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
             DataSituacaoCadastral = EmpresaRetornada.DataSituacaoCadastral,
             DataAbertura = EmpresaRetornada.DataAbertura,
             CapitalSocial = EmpresaRetornada.CapitalSocial,
-            NaturezaJuridica = EnumExtencoes.RetornaDescricao(EmpresaRetornada.NaturezaJuridica),
-            Porte = EnumExtencoes.RetornaDescricao(EmpresaRetornada.Porte),
-            MatrizFilial = EnumExtencoes.RetornaDescricao(EmpresaRetornada.MatrizFilial),
+            NaturezaJuridica = EmpresaRetornada.NaturezaJuridica,
+            Porte = EmpresaRetornada.Porte,
+            MatrizFilial = EmpresaRetornada.MatrizFilial,
             IdEndereco = EmpresaRetornada.IdEndereco,
-            Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornada.Estado) 
+            Estado = EnderecoRetornada.Estado 
         };
 
         return EmpresaOtdRetornada;
@@ -81,12 +81,12 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
                 Cnpj = empresa.Cnpj,
                 SitucaoCadastral = empresa.SitucaoCadastral,
                 DataSituacaoCadastral = empresa.DataSituacaoCadastral,
-                NaturezaJuridica = EnumExtencoes.RetornaDescricao(empresa.NaturezaJuridica),
-                Porte = EnumExtencoes.RetornaDescricao(empresa.Porte),
-                MatrizFilial = EnumExtencoes.RetornaDescricao(empresa.MatrizFilial),
+                NaturezaJuridica = empresa.NaturezaJuridica,
+                Porte = empresa.Porte,
+                MatrizFilial = empresa.MatrizFilial,
                 CapitalSocial = empresa.CapitalSocial,
                 IdEndereco = empresa.IdEndereco,
-                Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornado.Estado)
+                Estado = EnderecoRetornado.Estado
             });
         }
 

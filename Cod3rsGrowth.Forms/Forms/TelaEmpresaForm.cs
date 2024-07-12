@@ -2,9 +2,7 @@
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
 using LinqToDB.Common;
-using Cod3rsGrowth.Dominio;
 using Cod3rsGrowth.Dominio.Enums;
-using System.Data.Common;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -12,13 +10,15 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaEmpresaForm : Form
     {
         private readonly ServicoEmpresa _servicoEmpresa;
+        private readonly ServicoEndereco _servicoEndereco;
         private FiltroEmpresaUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
-        public TelaEmpresaForm(ServicoEmpresa servicoEmpresa)
+        public TelaEmpresaForm(ServicoEmpresa servicoEmpresa, ServicoEndereco servicoEndereco)
         {
             _servicoEmpresa = servicoEmpresa;
             InitializeComponent();
+            _servicoEndereco = servicoEndereco;
         }
 
         private void AoRequererPintura_TelaEmpresaForm(object sender, PaintEventArgs e)
@@ -135,25 +135,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaGrade()
         {
-            dataGridViewEmpresas.Columns[0].HeaderCell.Value = "Código Empresa";
-            dataGridViewEmpresas.Columns[1].HeaderCell.Value = "Razão Social";
-            dataGridViewEmpresas.Columns[2].HeaderCell.Value = "Nome Fantasia";
-            dataGridViewEmpresas.Columns[3].HeaderCell.Value = "CNPJ";
-            dataGridViewEmpresas.Columns[4].HeaderCell.Value = "Situação Cadastral";
-            dataGridViewEmpresas.Columns[5].HeaderCell.Value = "Data da Alteração Situação Cadastral";
-            dataGridViewEmpresas.Columns[6].HeaderCell.Value = "Idade";
-            dataGridViewEmpresas.Columns[7].HeaderCell.Value = "Data de Abertura";
-            dataGridViewEmpresas.Columns[8].HeaderCell.Value = "Natureza Juridica";
-            dataGridViewEmpresas.Columns[9].HeaderCell.Value = "Porte";
-            dataGridViewEmpresas.Columns[10].HeaderCell.Value = "Matriz ou Filial";
-            dataGridViewEmpresas.Columns[11].HeaderCell.Value = "Capital Social";
-            dataGridViewEmpresas.Columns[12].HeaderCell.Value = "Código Endereço";
-            dataGridViewEmpresas.Columns[13].HeaderCell.Value = "Estado";
+            const string formatacaoDecimais = "0,0.00";
 
-            foreach(DataGridViewColumn coluna in dataGridViewEmpresas.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
+            dataGridViewEmpresas.Columns[11].DefaultCellStyle.Format = formatacaoDecimais;
 
             dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEmpresas.DefaultCellStyle.ForeColor = Color.White;
@@ -196,34 +180,49 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void AoFormatarCelulas_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
-        {       
+        {
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
                 NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
-                string descricaoEnum = valorEnum.RetornaDescricao();
-                e.Value = descricaoEnum;
+                e.Value = valorEnum.RetornaDescricao();
+
             }
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Porte")
             {
-                PorteEnums valorEnum = (PorteEnums) e.Value;
+                PorteEnums valorEnum = (PorteEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
 
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Matriz ou Filial")
             {
-                MatrizFilialEnums valorEnum = (MatrizFilialEnums) e.Value;
+                MatrizFilialEnums valorEnum = (MatrizFilialEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
 
-            if (dataGridViewEmpresas.Columns[e.ColumnIndex].Name == "Estado")
+            if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderText == "Estado")
             {
                 EstadoEnums valorEnum = (EstadoEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+            TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco, _servicoEmpresa);
+
+            telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEmpresa.TopLevel = true;
+
+            telaCriarEmpresa.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+            };
+
+            telaCriarEmpresa.ShowDialog(this);
         }
     }
 }

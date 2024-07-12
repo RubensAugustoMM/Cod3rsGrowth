@@ -33,7 +33,7 @@ public class ValidadorEndereco : AbstractValidator<Endereco>
         
         RuleFor(endereco => endereco.Cep.Length)
             .Equal(8).When(endereco => endereco.Cep != null)
-            .WithMessage("{PropertyName} menor ou maior que 8 characteres!");
+            .WithMessage("CEP menor ou maior que 8 characteres!");
         
         RuleFor(endereco => endereco.Municipio)
             .NotEmpty()

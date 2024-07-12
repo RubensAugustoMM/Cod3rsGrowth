@@ -169,7 +169,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             _botaoFiltrarPressionado = false;
         }
 
-        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -241,7 +241,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec)
+            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

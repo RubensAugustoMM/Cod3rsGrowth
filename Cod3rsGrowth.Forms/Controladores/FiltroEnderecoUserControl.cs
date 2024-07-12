@@ -11,7 +11,6 @@ namespace Cod3rsGrowth.Forms.Controladores
         private PrivateFontCollection _pixeboy;
         public FiltroEndereco Filtro = null;
         private const string _textoVazio = "";
-        private const int _tamanhoMaximoCep = 8;
         public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEnderecoUserControl()
@@ -30,7 +29,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoRequererPintura_panelBotaoFiltrar(object sender, PaintEventArgs e)
+        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -152,7 +151,9 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCep.Text.Length > _tamanhoMaximoCep)
+            const int tamanhoMaximoCep = 8;
+
+            if (textBoxCep.Text.Length == tamanhoMaximoCep && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

@@ -15,12 +15,12 @@ namespace Cod3rsGrowth.Forms.Forms
         private FiltroConvenioUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
-        public TelaConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa,
-                ServicoEscola servicoEscola)
+        public TelaConvenioForm(ServicoConvenio servicoConvenio,
+            ServicoEscola servicoEscola, ServicoEmpresa servicoEmpresa)
         {
-            _servicoEmpresa = servicoEmpresa;
-            _servicoEscola = servicoEscola;
             _servicoConvenio = servicoConvenio;
+            _servicoEscola = servicoEscola;
+            _servicoEmpresa = servicoEmpresa;
             InitializeComponent();
         }
 
@@ -111,7 +111,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width,0);
+            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -129,21 +129,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewConvenios.Columns[0].HeaderCell.Value = "Código Convênio";
-            dataGridViewConvenios.Columns[1].HeaderCell.Value = "Número do Processo";
-            dataGridViewConvenios.Columns[2].HeaderCell.Value = "Objeto";
-            dataGridViewConvenios.Columns[3].HeaderCell.Value = "Valor";
-            dataGridViewConvenios.Columns[4].HeaderCell.Value = "Início";
-            dataGridViewConvenios.Columns[5].HeaderCell.Value = "Término";
-            dataGridViewConvenios.Columns[6].HeaderCell.Value = "Código Escola";
-            dataGridViewConvenios.Columns[7].HeaderCell.Value = "Nome Escola";
-            dataGridViewConvenios.Columns[8].HeaderCell.Value = "Código Empresa";
-            dataGridViewConvenios.Columns[9].HeaderCell.Value = "Razão Social Empresa";
+            const string formatacaoDecimais = "0,0.00";
 
-            foreach(DataGridViewColumn coluna in dataGridViewConvenios.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
+            dataGridViewConvenios.Columns[3].DefaultCellStyle.Format = formatacaoDecimais;
 
             dataGridViewConvenios.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewConvenios.DefaultCellStyle.ForeColor = Color.White;
@@ -175,7 +163,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
         {
-            if(Visible)
+            if (Visible)
             {
                 dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
                 _controladorFiltro.Visible = false;
@@ -194,6 +182,23 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Graphics.FillRectangle(pincel, PosicaoX, PosicaoY, largura, altura);
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+
+            TelaCriarConvenioForm telaCriarConvenio =
+                new TelaCriarConvenioForm(_servicoConvenio, _servicoEmpresa, _servicoEscola);
+
+            telaCriarConvenio.StartPosition = FormStartPosition.CenterParent;
+            telaCriarConvenio.TopLevel = true;
+
+            telaCriarConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+            };
+
+            telaCriarConvenio.ShowDialog(this);
         }
     }
 }

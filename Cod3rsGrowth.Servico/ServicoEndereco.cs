@@ -28,8 +28,15 @@ public class ServicoEndereco : IRepositorioEndereco
 
     public void Criar(Endereco enderecoCriado)
     {
-        _validadorEndereco.ValidateAndThrow(enderecoCriado);
-        _repositorioEndereco.Criar(enderecoCriado);
+        try
+        {
+            _validadorEndereco.ValidateAndThrow(enderecoCriado);
+            _repositorioEndereco.Criar(enderecoCriado);
+        }
+        catch(Exception)
+        {
+            throw;
+        }
     }
 
     public void Deletar(int Id)

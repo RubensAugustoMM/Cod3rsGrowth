@@ -3,7 +3,6 @@ using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -11,13 +10,16 @@ namespace Cod3rsGrowth.Forms.Forms
     public partial class TelaEscolaForm : Form
     {
         private readonly ServicoEscola _servicoEscola;
+        private readonly ServicoEndereco _servicoEndereco;
         private FiltroEscolaUserControl _controladorFiltro;
+        
         private PrivateFontCollection _pixeboy;
 
-        public TelaEscolaForm(ServicoEscola servicoEscola)
+        public TelaEscolaForm(ServicoEscola servicoEscola, ServicoEndereco servicoEndereco)
         {
             _servicoEscola = servicoEscola;
             InitializeComponent();
+            _servicoEndereco = servicoEndereco;
         }
 
         private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
@@ -135,23 +137,6 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewEscolas.Columns[0].HeaderCell.Value = "Código Escola";
-            dataGridViewEscolas.Columns[1].HeaderCell.Value = "Status Atividade";
-            dataGridViewEscolas.Columns[2].HeaderCell.Value = "Nome";
-            dataGridViewEscolas.Columns[3].HeaderCell.Value = "Código Mec";
-            dataGridViewEscolas.Columns[4].HeaderCell.Value = "Telefone";
-            dataGridViewEscolas.Columns[5].HeaderCell.Value = "E-Mail";
-            dataGridViewEscolas.Columns[6].HeaderCell.Value = "Data Início da Atividade";
-            dataGridViewEscolas.Columns[7].HeaderCell.Value = "Categoria Administrativa";
-            dataGridViewEscolas.Columns[8].HeaderCell.Value = "Organização Acadêmica";
-            dataGridViewEscolas.Columns[9].HeaderCell.Value = "Código Endereço";
-            dataGridViewEscolas.Columns[10].HeaderCell.Value = "Estado";
-
-            foreach(DataGridViewColumn coluna in dataGridViewEscolas.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            }
-
             dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEscolas.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEscolas.DefaultCellStyle.BackColor = Color.Blue;
@@ -193,7 +178,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void AoFormatarCelulas_dataGridViewEscolas(object sender, DataGridViewCellFormattingEventArgs e)
-        {            
+        {
             if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Categoria Administrativa")
             {
                 CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
@@ -203,7 +188,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Organização Acadêmica")
             {
-                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums) e.Value;
+                OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
@@ -214,6 +199,21 @@ namespace Cod3rsGrowth.Forms.Forms
                 string descricaoEnum = valorEnum.RetornaDescricao();
                 e.Value = descricaoEnum;
             }
+        }
+
+        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        {
+            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco,_servicoEscola);
+
+            telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEscola.TopLevel = true;
+
+            telaCriarEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+            {
+                dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+            };
+
+            telaCriarEscola.ShowDialog(this); 
         }
     }
 }

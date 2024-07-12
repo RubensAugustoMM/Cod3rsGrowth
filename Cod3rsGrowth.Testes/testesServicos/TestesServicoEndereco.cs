@@ -4,8 +4,6 @@ using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio;
-
 
 namespace Cod3rsGrowth.Testes;
 
@@ -74,7 +72,7 @@ public class TestesServicoEndereco : TesteBase
         Assert.Equal(ValorEsperado.Bairro, ValorRetornado.Bairro);
         Assert.Equal(ValorEsperado.Rua, ValorRetornado.Rua);
         Assert.Equal(ValorEsperado.Complemento, ValorRetornado.Complemento);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.Estado), ValorRetornado.Estado);
+        Assert.Equal(ValorEsperado.Estado, ValorRetornado.Estado);
     }
 
     [Theory]

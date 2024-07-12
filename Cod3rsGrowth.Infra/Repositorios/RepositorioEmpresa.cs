@@ -3,9 +3,6 @@ using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.Filtros;
 using LinqToDB;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
-using Cod3rsGrowth.Dominio.Enums;
-using System.ComponentModel;
-using Cod3rsGrowth.Dominio;
 
 namespace Cod3rsGrowth.Infra.Repositorios;
 
@@ -25,12 +22,12 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        _contexto.Insert(empresaCriada);
+        _contexto.Insert(empresaCriada);  
     }
 
     public void Deletar(int id)
     {
-        _contexto.Delete(id);
+        _contexto.TabelaEmpresas.Where(e => e.Id == id).Delete();
     }
 
     public EmpresaEnderecoOtd ObterPorId(int Id)
