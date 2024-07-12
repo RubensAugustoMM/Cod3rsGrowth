@@ -23,9 +23,9 @@ public class RepositorioEmpresa : IRepositorioEmpresa
         _contexto.Update(empresaAtualizada);
     }
 
-    public int Criar(Empresa empresaCriada)
+    public void Criar(Empresa empresaCriada)
     {
-        return _contexto.InsertWithInt32Identity(empresaCriada);
+        _contexto.InsertWithInt32Identity(empresaCriada);
     }
 
     public void Deletar(int id)

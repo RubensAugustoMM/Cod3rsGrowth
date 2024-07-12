@@ -25,10 +25,10 @@ public class ServicoConvenio : IRepositorioConvenio
         _repositorioConvenio.Atualizar(convenioAtualizado);
     }
 
-    public int Criar(Convenio convenioCriado)
+    public void Criar(Convenio convenioCriado)
     {
         _validadorConvenio.ValidateAndThrow(convenioCriado);
-        return _repositorioConvenio.Criar(convenioCriado);
+        _repositorioConvenio.Criar(convenioCriado);
     }
 
     public void Deletar(int id)

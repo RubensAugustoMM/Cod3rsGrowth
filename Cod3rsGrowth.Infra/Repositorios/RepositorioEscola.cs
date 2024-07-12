@@ -21,9 +21,9 @@ public class RepositorioEscola : IRepositorioEscola
         _contexto.Update(escolaAtualizada);
     }
 
-    public int Criar(Escola escolaCriada)
+    public void Criar(Escola escolaCriada)
     {
-        return _contexto.InsertWithInt32Identity(escolaCriada);
+        _contexto.InsertWithInt32Identity(escolaCriada);
     }
 
     public void Deletar(int id)

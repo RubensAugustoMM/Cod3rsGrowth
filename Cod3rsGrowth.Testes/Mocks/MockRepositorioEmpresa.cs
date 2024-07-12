@@ -54,11 +54,11 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
             DataSituacaoCadastral = EmpresaRetornada.DataSituacaoCadastral,
             DataAbertura = EmpresaRetornada.DataAbertura,
             CapitalSocial = EmpresaRetornada.CapitalSocial,
-            NaturezaJuridica = EnumExtencoes.RetornaDescricao(EmpresaRetornada.NaturezaJuridica),
-            Porte = EnumExtencoes.RetornaDescricao(EmpresaRetornada.Porte),
-            MatrizFilial = EnumExtencoes.RetornaDescricao(EmpresaRetornada.MatrizFilial),
+            NaturezaJuridica = EmpresaRetornada.NaturezaJuridica,
+            Porte = EmpresaRetornada.Porte,
+            MatrizFilial = EmpresaRetornada.MatrizFilial,
             IdEndereco = EmpresaRetornada.IdEndereco,
-            Estado = EnumExtencoes.RetornaDescricao(EnderecoRetornada.Estado) 
+            Estado = EnderecoRetornada.Estado 
         };
 
         return EmpresaOtdRetornada;

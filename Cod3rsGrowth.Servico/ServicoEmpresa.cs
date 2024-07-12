@@ -29,10 +29,10 @@ public class ServicoEmpresa : IRepositorioEmpresa
         _repositorioEmpresa.Atualizar(empresaAtualizada);
     }
 
-    public int Criar(Empresa empresaCriada)
+    public void Criar(Empresa empresaCriada)
     {
         _validadorEmpresa.ValidateAndThrow(empresaCriada);
-        return _repositorioEmpresa.Criar(empresaCriada);
+        _repositorioEmpresa.Criar(empresaCriada);
     }
 
     public void Deletar(int id)

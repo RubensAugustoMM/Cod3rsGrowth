@@ -8,7 +8,7 @@ public interface IRepositorioEmpresa
 {
     List<EmpresaEnderecoOtd> ObterTodos(FiltroEmpresaEnderecoOtd? FiltroEmpresa);
     EmpresaEnderecoOtd ObterPorId(int Id);
-    int Criar(Empresa empresaCriada);
+    void Criar(Empresa empresaCriada);
     void Atualizar(Empresa empresaAtualizada);
     void Deletar(int id);
 }

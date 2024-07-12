@@ -8,7 +8,7 @@ public interface IRepositorioConvenio
 {
     List<ConvenioEscolaEmpresaOtd> ObterTodos(FiltroConvenioEscolaEmpresaOtd? filtroConvenio);
     ConvenioEscolaEmpresaOtd ObterPorId(int Id);
-    int Criar(Convenio convenioCriado);
+    void Criar(Convenio convenioCriado);
     void Atualizar(Convenio convenioAtualizado);
     void Deletar(int id);
 }

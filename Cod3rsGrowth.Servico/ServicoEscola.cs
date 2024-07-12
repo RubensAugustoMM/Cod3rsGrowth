@@ -29,12 +29,12 @@ public class ServicoEscola : IRepositorioEscola
         _repositorioEscola.Atualizar(escolaAtualizada);
     }
 
-    public int Criar(Escola escolaCriada)
+    public void Criar(Escola escolaCriada)
     {
         try
         {
             _validadorEscola.ValidateAndThrow(escolaCriada);
-            return _repositorioEscola.Criar(escolaCriada);
+            _repositorioEscola.Criar(escolaCriada);
         }
         catch(Exception) 
         {

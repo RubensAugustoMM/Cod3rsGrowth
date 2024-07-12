@@ -7,7 +7,7 @@ public interface IRepositorioEndereco
 {
     List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco);
     Endereco ObterPorId(int Id);
-    int Criar(Endereco enderecoCriado);
+    void Criar(Endereco enderecoCriado);
     void Atualizar(Endereco endrecoAtualizado);
     void Deletar(int id);
 }

@@ -21,9 +21,9 @@ public class RepositorioConvenio : IRepositorioConvenio
         _contexto.Update(convenioAtualizado);
     }
 
-    public int Criar(Convenio convenioCriado)
+    public void Criar(Convenio convenioCriado)
     {
-        return _contexto.InsertWithInt32Identity(convenioCriado);
+        _contexto.InsertWithInt32Identity(convenioCriado);
     }
 
     public void Deletar(int id)
