@@ -31,6 +31,14 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewEnderecos = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            numeroDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cepDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            municipioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bairroDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ruaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            complementoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             enderecoBindingSource = new BindingSource(components);
             painelLateral = new Panel();
             panelBotaoDeletar = new Panel();
@@ -43,14 +51,6 @@
             botaoFiltros = new Button();
             panelBotaoCriar = new Panel();
             botaoCriar = new Button();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            numeroDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cepDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            municipioDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            bairroDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            ruaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            complementoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEnderecos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)enderecoBindingSource).BeginInit();
             painelLateral.SuspendLayout();
@@ -65,7 +65,6 @@
             // 
             dataGridViewEnderecos.AllowUserToAddRows = false;
             dataGridViewEnderecos.AllowUserToDeleteRows = false;
-            dataGridViewEnderecos.AllowUserToOrderColumns = true;
             dataGridViewEnderecos.AllowUserToResizeRows = false;
             dataGridViewEnderecos.AutoGenerateColumns = false;
             dataGridViewEnderecos.BackgroundColor = Color.Blue;
@@ -86,12 +85,87 @@
             dataGridViewEnderecos.EnableHeadersVisualStyles = false;
             dataGridViewEnderecos.GridColor = Color.White;
             dataGridViewEnderecos.Location = new Point(165, 12);
+            dataGridViewEnderecos.MultiSelect = false;
             dataGridViewEnderecos.Name = "dataGridViewEnderecos";
+            dataGridViewEnderecos.ReadOnly = true;
             dataGridViewEnderecos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewEnderecos.RowTemplate.Height = 25;
+            dataGridViewEnderecos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEnderecos.Size = new Size(623, 299);
             dataGridViewEnderecos.TabIndex = 2;
             dataGridViewEnderecos.CellFormatting += AoFormatarCelulas_dataGridViewEnderecos;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Código Endereço";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 112;
+            // 
+            // numeroDataGridViewTextBoxColumn
+            // 
+            numeroDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            numeroDataGridViewTextBoxColumn.DataPropertyName = "Numero";
+            numeroDataGridViewTextBoxColumn.HeaderText = "Número";
+            numeroDataGridViewTextBoxColumn.Name = "numeroDataGridViewTextBoxColumn";
+            numeroDataGridViewTextBoxColumn.ReadOnly = true;
+            numeroDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // cepDataGridViewTextBoxColumn
+            // 
+            cepDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            cepDataGridViewTextBoxColumn.DataPropertyName = "Cep";
+            cepDataGridViewTextBoxColumn.HeaderText = "CEP";
+            cepDataGridViewTextBoxColumn.Name = "cepDataGridViewTextBoxColumn";
+            cepDataGridViewTextBoxColumn.ReadOnly = true;
+            cepDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // municipioDataGridViewTextBoxColumn
+            // 
+            municipioDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            municipioDataGridViewTextBoxColumn.DataPropertyName = "Municipio";
+            municipioDataGridViewTextBoxColumn.HeaderText = "Município";
+            municipioDataGridViewTextBoxColumn.Name = "municipioDataGridViewTextBoxColumn";
+            municipioDataGridViewTextBoxColumn.ReadOnly = true;
+            municipioDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            bairroDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            bairroDataGridViewTextBoxColumn.ReadOnly = true;
+            bairroDataGridViewTextBoxColumn.Width = 62;
+            // 
+            // ruaDataGridViewTextBoxColumn
+            // 
+            ruaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            ruaDataGridViewTextBoxColumn.DataPropertyName = "Rua";
+            ruaDataGridViewTextBoxColumn.HeaderText = "Rua";
+            ruaDataGridViewTextBoxColumn.Name = "ruaDataGridViewTextBoxColumn";
+            ruaDataGridViewTextBoxColumn.ReadOnly = true;
+            ruaDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            complementoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            complementoDataGridViewTextBoxColumn.ReadOnly = true;
+            complementoDataGridViewTextBoxColumn.Width = 108;
+            // 
+            // estadoDataGridViewTextBoxColumn
+            // 
+            estadoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            estadoDataGridViewTextBoxColumn.DataPropertyName = "Estado";
+            estadoDataGridViewTextBoxColumn.HeaderText = "Estado";
+            estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
+            estadoDataGridViewTextBoxColumn.ReadOnly = true;
+            estadoDataGridViewTextBoxColumn.Width = 66;
             // 
             // enderecoBindingSource
             // 
@@ -239,76 +313,6 @@
             botaoCriar.Text = "Criar";
             botaoCriar.UseVisualStyleBackColor = false;
             botaoCriar.Click += AoClicar_botaoCriar;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Código Endereço";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Width = 112;
-            // 
-            // numeroDataGridViewTextBoxColumn
-            // 
-            numeroDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            numeroDataGridViewTextBoxColumn.DataPropertyName = "Numero";
-            numeroDataGridViewTextBoxColumn.HeaderText = "Número";
-            numeroDataGridViewTextBoxColumn.Name = "numeroDataGridViewTextBoxColumn";
-            numeroDataGridViewTextBoxColumn.ReadOnly = true;
-            numeroDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // cepDataGridViewTextBoxColumn
-            // 
-            cepDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            cepDataGridViewTextBoxColumn.DataPropertyName = "Cep";
-            cepDataGridViewTextBoxColumn.HeaderText = "CEP";
-            cepDataGridViewTextBoxColumn.Name = "cepDataGridViewTextBoxColumn";
-            cepDataGridViewTextBoxColumn.ReadOnly = true;
-            cepDataGridViewTextBoxColumn.Width = 52;
-            // 
-            // municipioDataGridViewTextBoxColumn
-            // 
-            municipioDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            municipioDataGridViewTextBoxColumn.DataPropertyName = "Municipio";
-            municipioDataGridViewTextBoxColumn.HeaderText = "Município";
-            municipioDataGridViewTextBoxColumn.Name = "municipioDataGridViewTextBoxColumn";
-            municipioDataGridViewTextBoxColumn.ReadOnly = true;
-            municipioDataGridViewTextBoxColumn.Width = 85;
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            bairroDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            bairroDataGridViewTextBoxColumn.ReadOnly = true;
-            bairroDataGridViewTextBoxColumn.Width = 62;
-            // 
-            // ruaDataGridViewTextBoxColumn
-            // 
-            ruaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            ruaDataGridViewTextBoxColumn.DataPropertyName = "Rua";
-            ruaDataGridViewTextBoxColumn.HeaderText = "Rua";
-            ruaDataGridViewTextBoxColumn.Name = "ruaDataGridViewTextBoxColumn";
-            ruaDataGridViewTextBoxColumn.ReadOnly = true;
-            ruaDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            complementoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            complementoDataGridViewTextBoxColumn.Width = 108;
-            // 
-            // estadoDataGridViewTextBoxColumn
-            // 
-            estadoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            estadoDataGridViewTextBoxColumn.DataPropertyName = "Estado";
-            estadoDataGridViewTextBoxColumn.HeaderText = "Estado";
-            estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
-            estadoDataGridViewTextBoxColumn.Width = 66;
             // 
             // TelaEnderecoForm
             // 

@@ -146,8 +146,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
         private void ConfiguraFonte(Control controle)
@@ -199,6 +199,34 @@ namespace Cod3rsGrowth.Forms.Forms
             };
 
             telaCriarConvenio.ShowDialog(this);
+        }
+
+        private void AoClicar_botaoDeletar(object sender, EventArgs e)
+        {
+            if (!dataGridViewConvenios.SelectedRows.IsNullOrEmpty())
+            {
+                int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoConvenio.ObterPorId(id), _servicoConvenio);
+
+                telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+                };
+
+                telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoConvenio.TopLevel = true;
+
+                telaExclusaoConvenio.ShowDialog(this);
+            }
+            else
+            {
+                List<string> listaErros = new();
+
+                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
+                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+            }
         }
     }
 }

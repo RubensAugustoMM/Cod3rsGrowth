@@ -150,8 +150,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
         private void AoMudarVisibilidade_TelaEscolaForm(object sender, EventArgs e)

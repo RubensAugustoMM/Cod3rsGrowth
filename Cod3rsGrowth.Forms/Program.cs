@@ -22,20 +22,19 @@ internal static class Program
     /// </summary>
     [STAThread]
     static void Main()
-    {
+    { 
+        /*
         ApplicationConfiguration.Initialize();
         var host = CriaHostBuilder().Build();
         var ServiceProvider = host.Services;
-
-        /*
+    
+        Application.Run(ServiceProvider.GetRequiredService<TelaPrincipalForm>());
+    */    
         using (var serviceProvider = CriaServicos()) 
             using (var escopo = serviceProvider.CreateScope())
         {
             AtualizaBancoDeDados(escopo.ServiceProvider);
         }
-        */
-
-        Application.Run(ServiceProvider.GetRequiredService<TelaPrincipalForm>());
     }
 
     static IHostBuilder CriaHostBuilder()

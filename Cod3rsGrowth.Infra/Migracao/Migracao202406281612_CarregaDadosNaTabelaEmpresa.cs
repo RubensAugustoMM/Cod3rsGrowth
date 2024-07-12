@@ -91,10 +91,6 @@ public class Migracao202406281612_CarregaDadosNaTabelaEmpresa : Migration
 
     public override void Down()
     {
-        Delete.FromTable("Empresas").Row(new { Cnpj = "11111111111111" });
-        Delete.FromTable("Empresas").Row(new { Cnpj = "22222222222222" });
-        Delete.FromTable("Empresas").Row(new { Cnpj = "33333333333333" });
-        Delete.FromTable("Empresas").Row(new { Cnpj = "44444444444444" });
-        Delete.FromTable("Empresas").Row(new { Cnpj = "55555555555555" });
+        Delete.FromTable("Empresas").AllRows();
     }
 }

@@ -21,6 +21,6 @@ public class Migracao202406281624_CarregaDadosNaTabelaConvenios : Migration
 
     public override void Down()
     {
-        Delete.FromTable("Convenios").Row(new { NumeroProcesso = 1 });
+        Delete.FromTable("Convenios").AllRows();
     }
 }

@@ -146,8 +146,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
         private void AoMudarVisibilidade_TelaEnderecoForm(object sender, EventArgs e)
