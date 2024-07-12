@@ -109,7 +109,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             try
             {
-                _servicoEndereco.Criar(ref enderecoCriado);
+                _servicoEndereco.Criar(enderecoCriado);
                 Close();
             }
             catch (Exception excecao)

@@ -4,8 +4,6 @@ using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio;
-
 
 namespace Cod3rsGrowth.Testes;
 
@@ -86,7 +84,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Id deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Id = idInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -100,7 +98,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Numero deve ser um valor maior ou igual a zero!";
         EnderecoEntrada.Numero = numeroInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -114,7 +112,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Cep nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Cep = cepInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -128,7 +126,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Cep Length menor ou maior que 8 characteres!";
         EnderecoEntrada.Cep = cepInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -142,7 +140,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Cep e formado somente por numeros!";
         EnderecoEntrada.Cep = cepInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -156,7 +154,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Municipio nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Municipio = municipioInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -170,7 +168,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Bairro nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Bairro = bairroInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -184,7 +182,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Rua nao pode ter valor nulo ou formado por caracteres de espaco!";
         EnderecoEntrada.Rua = ruaInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -198,7 +196,7 @@ public class TestesServicoEndereco : TesteBase
         var ValorEsperado = "Valor de Estado fora do Enum!";
         EnderecoEntrada.Estado = (EstadoEnums)estadoInformado;
 
-        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(ref EnderecoEntrada));
+        var excecao = Assert.Throws<ValidationException>(() => _servicoEndereco.Criar(EnderecoEntrada));
 
         Assert.Equal(ValorEsperado, excecao.Errors.First().ErrorMessage);
     }
@@ -211,7 +209,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Id = idInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -225,7 +223,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Numero = numeroInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -239,7 +237,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Cep = cepInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -253,7 +251,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Municipio = municipioInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -267,7 +265,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Bairro = bairroInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -281,7 +279,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Rua = ruaInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);
@@ -295,7 +293,7 @@ public class TestesServicoEndereco : TesteBase
         var EnderecoEntrada = CriaNovoEnderecoTeste();
         EnderecoEntrada.Estado = estadoInformado;
 
-        _servicoEndereco.Criar(ref EnderecoEntrada);
+        _servicoEndereco.Criar(EnderecoEntrada);
         var ValorRetornado = _tabelas.Enderecos.Value.FirstOrDefault(EnderecoEntrada);
 
         Assert.NotNull(ValorRetornado);

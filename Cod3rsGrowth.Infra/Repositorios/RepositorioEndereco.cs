@@ -19,11 +19,9 @@ public class RepositorioEndereco : IRepositorioEndereco
         _contexto.Update(endrecoAtualizado);
     }
 
-    public void Criar(ref Endereco enderecoCriado)
+    public void Criar(Endereco enderecoCriado)
     {
-        int id = _contexto.InsertWithInt32Identity(enderecoCriado);
-
-        enderecoCriado.Id = id;
+        enderecoCriado.Id = _contexto.InsertWithInt32Identity(enderecoCriado); 
     }
 
     public void Deletar(int id)

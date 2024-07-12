@@ -22,7 +22,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
         enderecoExistente.Estado = enderecoAtualizado.Estado;
     }
 
-    public void Criar(ref Endereco enderecoCriado)
+    public void Criar(Endereco enderecoCriado)
     {
         Tabelas.Enderecos.Value.Add(enderecoCriado);
     }

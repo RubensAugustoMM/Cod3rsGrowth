@@ -26,12 +26,12 @@ public class ServicoEndereco : IRepositorioEndereco
         _repositorioEndereco.Atualizar(enderecoAtualizado);
     }
 
-    public void Criar(ref Endereco enderecoCriado)
+    public void Criar(Endereco enderecoCriado)
     {
         try
         {
             _validadorEndereco.ValidateAndThrow(enderecoCriado);
-            _repositorioEndereco.Criar(ref enderecoCriado);
+            _repositorioEndereco.Criar(enderecoCriado);
         }
         catch(Exception)
         {
