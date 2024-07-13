@@ -1,5 +1,6 @@
 ﻿using LinqToDB.Common;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -172,7 +173,16 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
+
+            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
+
+            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
+
+            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
+
+            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
         }
 
         private void ConfiguraFonte(Control controle)

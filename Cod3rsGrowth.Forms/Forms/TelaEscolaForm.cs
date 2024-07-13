@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
@@ -18,8 +19,8 @@ namespace Cod3rsGrowth.Forms.Forms
         public TelaEscolaForm(ServicoEscola servicoEscola, ServicoEndereco servicoEndereco)
         {
             _servicoEscola = servicoEscola;
-            InitializeComponent();
             _servicoEndereco = servicoEndereco;
+            InitializeComponent();
         }
 
         private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
@@ -116,7 +117,16 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
+
+            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
+
+            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
+
+            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
+
+            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
         }
 
         private void botaoPesquisar_Click(object sender, EventArgs e)

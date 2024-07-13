@@ -120,8 +120,8 @@ public class TestesServicoEscola : TesteBase
         Assert.Equal(ValorEsperado.Telefone, ValorRetornado.Telefone);
         Assert.Equal(ValorEsperado.Email, ValorRetornado.Email);
         Assert.Equal(ValorEsperado.InicioAtividade.Date, ValorRetornado.InicioAtividade.Date);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.CategoriaAdministrativa), ValorRetornado.CategoriaAdministrativa);
-        Assert.Equal(EnumExtencoes.RetornaDescricao(ValorEsperado.OrganizacaoAcademica), ValorRetornado.OrganizacaoAcademica);
+        Assert.Equal(ValorEsperado.CategoriaAdministrativa, ValorRetornado.CategoriaAdministrativa);
+        Assert.Equal(ValorEsperado.OrganizacaoAcademica, ValorRetornado.OrganizacaoAcademica);
     }
 
     [Theory]
