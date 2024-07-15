@@ -210,6 +210,7 @@
             botaoDeletar.TabIndex = 31;
             botaoDeletar.Text = "Deletar";
             botaoDeletar.UseVisualStyleBackColor = false;
+            botaoDeletar.Click += botaoDeletar_Click;
             // 
             // panel1
             // 

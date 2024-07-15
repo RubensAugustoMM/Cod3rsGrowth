@@ -204,7 +204,35 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
             };
 
-            telaCriarEndereco.ShowDialog(this); 
+            telaCriarEndereco.ShowDialog(this);
+        }
+
+        private void botaoDeletar_Click(object sender, EventArgs e)
+        {
+            if (!dataGridViewEnderecos.SelectedRows.IsNullOrEmpty())
+            {
+                int id = (int)dataGridViewEnderecos.SelectedRows[0].Cells[0].Value;
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEndereco =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoEndereco.ObterPorId(id), _servicoEndereco);
+
+                telaExclusaoEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+                };
+
+                telaExclusaoEndereco.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoEndereco.TopLevel = true;
+
+                telaExclusaoEndereco.ShowDialog(this);
+            }
+            else
+            {
+                List<string> listaErros = new();
+
+                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
+                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+            }
         }
     }
 }
