@@ -113,16 +113,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
-
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void AoClicar_botaoPesquisar(object sender, EventArgs e)

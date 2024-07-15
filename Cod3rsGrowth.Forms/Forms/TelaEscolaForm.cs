@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
@@ -25,7 +24,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
         {
-            if (FormBorderStyle == FormBorderStyle.None)
+            if (painelLateral.BorderStyle == BorderStyle.None)
             {
                 const int Tamanho = 2;
                 const int xInicioRetanguloExterior = 4;
@@ -45,7 +44,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }
+            }        
         }
 
         private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
@@ -85,8 +84,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    painelLateral.Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    painelLateral.Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }
-
+            }        
         }
 
         private void AoClicar_botaoFiltros(object sender, EventArgs e)
@@ -117,16 +115,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
-
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void botaoPesquisar_Click(object sender, EventArgs e)

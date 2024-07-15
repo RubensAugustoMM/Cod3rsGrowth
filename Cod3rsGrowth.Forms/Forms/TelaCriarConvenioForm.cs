@@ -4,7 +4,6 @@ using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -70,16 +69,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
-
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -108,36 +98,19 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
-            const char Separador = '\n';
             Convenio convenioCriado = new();
 
-            convenioCriado.NumeroProcesso = CriaValorNumeroProcesso(); 
-
-            if (!string.IsNullOrEmpty(textBoxValor.Text))
-            {
-                convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
-            }
-            else
-            {
-                convenioCriado.Valor = -1;
-            }
-            
-            convenioCriado.Objeto = richTextBoxObjeto.Text;
-            convenioCriado.DataInicio =
-                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
-            convenioCriado.DataTermino =
-                new DateTime(dateTimePickerDataTermino.Value.Year, 
-                    dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
-            convenioCriado.IdEmpresa = _idEmpresaSelecionada;
-            convenioCriado.IdEscola = _idEscolaSelecionada;
-            
             try
             {
+                RecebeDadosDaTelaConvenio(convenioCriado);
+
                 _servicoConvenio.Criar(convenioCriado);
                 Close();
             }
             catch (Exception excecao)
             {
+                const char Separador = '\n';
+
                 var listaErros = new List<string>();
                 listaErros.AddRange(excecao.Message.Split(Separador));
                 var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
@@ -147,7 +120,29 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
             }
-            
+        }
+
+        private void RecebeDadosDaTelaConvenio(Convenio convenioCriado)
+        {
+            convenioCriado.NumeroProcesso = CriaValorNumeroProcesso();
+
+            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            {
+                convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
+            }
+            else
+            {
+                convenioCriado.Valor = -1;
+            }
+
+            convenioCriado.Objeto = richTextBoxObjeto.Text;
+            convenioCriado.DataInicio =
+                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            convenioCriado.DataTermino =
+                new DateTime(dateTimePickerDataTermino.Value.Year,
+                    dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
+            convenioCriado.IdEmpresa = _idEmpresaSelecionada;
+            convenioCriado.IdEscola = _idEscolaSelecionada;
         }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)
@@ -288,13 +283,17 @@ namespace Cod3rsGrowth.Forms.Forms
         private int CriaValorNumeroProcesso()
         {
             var listaConvenios = _servicoConvenio.ObterTodos(null);
-            var maiorNumeroProcesso = listaConvenios[0].NumeroProcesso;
-
-            foreach(var convenio in listaConvenios)
+            int maiorNumeroProcesso = 0;
+            if (!listaConvenios.IsNullOrEmpty())
             {
-                if(convenio.NumeroProcesso > maiorNumeroProcesso)
+                maiorNumeroProcesso = listaConvenios[0].NumeroProcesso;
+
+                foreach (var convenio in listaConvenios)
                 {
-                    maiorNumeroProcesso = convenio.NumeroProcesso;
+                    if (convenio.NumeroProcesso > maiorNumeroProcesso)
+                    {
+                        maiorNumeroProcesso = convenio.NumeroProcesso;
+                    }
                 }
             }
 

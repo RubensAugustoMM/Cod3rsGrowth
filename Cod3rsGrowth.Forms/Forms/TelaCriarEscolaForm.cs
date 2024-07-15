@@ -61,16 +61,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
-
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -104,6 +95,45 @@ namespace Cod3rsGrowth.Forms.Forms
             Endereco enderecoCriado = new();
             Escola escolaCriada = new();
 
+            try
+            {
+                RecebeDadosDaTelaEscola(escolaCriada);
+
+                RecebeDadosDaTelaEndereco(enderecoCriado);
+
+                try
+                {
+                    _servicoEndereco.Criar(enderecoCriado);
+                    escolaCriada.IdEndereco = enderecoCriado.Id;
+                }
+                catch (Exception excecao)
+                {
+                    listaErros.AddRange(excecao.Message.Split(Separador));
+                    escolaCriada.IdEndereco = -1;
+                }
+
+                _servicoEscola.Criar(escolaCriada);
+                Close();
+            }
+            catch (Exception excecao)
+            {
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+
+                if (escolaCriada.IdEndereco != -1)
+                {
+                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
+                }
+            }
+        }
+
+        private void RecebeDadosDaTelaEscola(Escola escolaCriada)
+        {
             if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
             {
                 escolaCriada.StatusAtividade = true;
@@ -121,55 +151,33 @@ namespace Cod3rsGrowth.Forms.Forms
             escolaCriada.Telefone = textBoxTelefone.Text;
             escolaCriada.Email = textBoxEmail.Text;
             escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
+        }
 
-            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-
-            enderecoCriado.Cep = textBoxCep.Text;
-            enderecoCriado.Municipio = textBoxMunicipio.Text;
-            enderecoCriado.Bairro = textBoxBairro.Text;
-            enderecoCriado.Rua = textBoxRua.Text;
-
-            if (!string.IsNullOrEmpty(textBoxNumero.Text))
-            {
-                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
-            }
-            else
-            {
-                enderecoCriado.Numero = -1;
-            }
-
-            enderecoCriado.Complemento = textBoxComplemento.Text;
-
+        private void RecebeDadosDaTelaEndereco(Endereco enderecoCriado)
+        {
             try
             {
-                _servicoEndereco.Criar(enderecoCriado);
-                escolaCriada.IdEndereco = enderecoCriado.Id;
-            }
-            catch (Exception excecao)
-            {
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                escolaCriada.IdEndereco = -1;
-            }
+                enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
-            try
-            {
-                _servicoEscola.Criar(escolaCriada);
-                Close();
-            }
-            catch (Exception excecao)
-            {
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+                enderecoCriado.Cep = textBoxCep.Text;
+                enderecoCriado.Municipio = textBoxMunicipio.Text;
+                enderecoCriado.Bairro = textBoxBairro.Text;
+                enderecoCriado.Rua = textBoxRua.Text;
 
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
-
-                if(escolaCriada.IdEndereco != -1)
+                if (!string.IsNullOrEmpty(textBoxNumero.Text))
                 {
-                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
+                    enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
                 }
+                else
+                {
+                    enderecoCriado.Numero = -1;
+                }
+
+                enderecoCriado.Complemento = textBoxComplemento.Text;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

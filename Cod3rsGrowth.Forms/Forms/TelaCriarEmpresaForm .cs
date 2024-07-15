@@ -61,16 +61,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaFontePixeBoy()
         {
             _pixeboy = new PrivateFontCollection();
-
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
-
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -104,68 +95,23 @@ namespace Cod3rsGrowth.Forms.Forms
             Endereco enderecoCriado = new();
             Empresa empresaCriada = new();
 
-            if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
-            {
-                empresaCriada.SitucaoCadastral = true;
-            }
-            else
-            {
-                empresaCriada.SitucaoCadastral = false;
-            }
-
-            empresaCriada.DataSituacaoCadastral = DateTime.Now;
-
-            if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
-            {
-                empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
-            }
-            else
-            {
-                empresaCriada.CapitalSocial = -1;
-            }
-
-            empresaCriada.NaturezaJuridica = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
-            empresaCriada.Porte = (PorteEnums)comboBoxPorte.SelectedItem;
-            empresaCriada.MatrizFilial = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
-
-            empresaCriada.RazaoSocial = textBoxRazaoSocial.Text;
-            empresaCriada.NomeFantasia = textBoxNomeFantasia.Text;
-            empresaCriada.Cnpj = textBoxCnpj.Text;
-            empresaCriada.DataAbertura = dateTimePickerDataAbertura.Value;
-
-            empresaCriada.Idade = DateTime.Now.Year - empresaCriada.DataAbertura.Year;
-
-            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-
-            enderecoCriado.Cep = textBoxCep.Text;
-            enderecoCriado.Municipio = textBoxMunicipio.Text;
-            enderecoCriado.Bairro = textBoxBairro.Text;
-            enderecoCriado.Rua = textBoxRua.Text;
-
-            if (!string.IsNullOrEmpty(textBoxNumero.Text))
-            {
-                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
-            }
-            else
-            {
-                enderecoCriado.Numero = -1;
-            }
-
-            enderecoCriado.Complemento = textBoxComplemento.Text;
-
             try
             {
-                _servicoEndereco.Criar(enderecoCriado);
-                empresaCriada.IdEndereco = enderecoCriado.Id;
-            }
-            catch (Exception excecao)
-            {
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                empresaCriada.IdEndereco = -1;
-            }
+                RecebeDadosDaTelaEmpresa(empresaCriada);
 
-            try
-            {
+                RecebeDadosDaTelaEndereco(enderecoCriado);
+
+                try
+                {
+                    _servicoEndereco.Criar(enderecoCriado);
+                    empresaCriada.IdEndereco = enderecoCriado.Id;
+                }
+                catch (Exception excecao)
+                {
+                    listaErros.AddRange(excecao.Message.Split(Separador));
+                    empresaCriada.IdEndereco = -1;
+                }
+
                 _servicoEmpresa.Criar(empresaCriada);
                 Close();
             }
@@ -176,16 +122,84 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
                 caixaDialogoErro.TopLevel = true;
-                 
+
                 caixaDialogoErro.ShowDialog(this);
 
-                if(empresaCriada.IdEndereco != -1)
+                if (empresaCriada.IdEndereco != -1)
                 {
                     _servicoEndereco.Deletar(empresaCriada.IdEndereco);
                 }
             }
         }
 
+        private void RecebeDadosDaTelaEmpresa(Empresa empresaCriada)
+        {
+            try
+            {
+                if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
+                {
+                    empresaCriada.SitucaoCadastral = true;
+                }
+                else
+                {
+                    empresaCriada.SitucaoCadastral = false;
+                }
+
+                empresaCriada.DataSituacaoCadastral = DateTime.Now;
+
+                if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
+                {
+                    empresaCriada.CapitalSocial = decimal.Parse(textBoxCapitalSocial.Text);
+                }
+                else
+                {
+                    empresaCriada.CapitalSocial = -1;
+                }
+
+                empresaCriada.NaturezaJuridica = (NaturezaJuridicaEnums)comboBoxNaturezaJuridica.SelectedItem;
+                empresaCriada.Porte = (PorteEnums)comboBoxPorte.SelectedItem;
+                empresaCriada.MatrizFilial = (MatrizFilialEnums)comboBoxMatrizFilial.SelectedItem;
+
+                empresaCriada.RazaoSocial = textBoxRazaoSocial.Text;
+                empresaCriada.NomeFantasia = textBoxNomeFantasia.Text;
+                empresaCriada.Cnpj = textBoxCnpj.Text;
+                empresaCriada.DataAbertura = dateTimePickerDataAbertura.Value;
+
+                empresaCriada.Idade = DateTime.Now.Year - empresaCriada.DataAbertura.Year;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        private void RecebeDadosDaTelaEndereco(Endereco enderecoCriado)
+        {
+            try
+            {
+                enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+
+                enderecoCriado.Cep = textBoxCep.Text;
+                enderecoCriado.Municipio = textBoxMunicipio.Text;
+                enderecoCriado.Bairro = textBoxBairro.Text;
+                enderecoCriado.Rua = textBoxRua.Text;
+
+                if (!string.IsNullOrEmpty(textBoxNumero.Text))
+                {
+                    enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+                }
+                else
+                {
+                    enderecoCriado.Numero = -1;
+                }
+
+                enderecoCriado.Complemento = textBoxComplemento.Text;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)
         {
