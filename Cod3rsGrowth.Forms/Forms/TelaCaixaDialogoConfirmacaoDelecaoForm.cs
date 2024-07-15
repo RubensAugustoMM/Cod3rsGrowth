@@ -42,6 +42,11 @@ namespace Cod3rsGrowth.Forms.Forms
                         + $"\n!!!O endereço de código:\n {empresa.IdEndereco} também será Excluído!!!";
                     break;
                 case EscolaEnderecoOtd escola:
+                    labelEntidadeExcluir.Text = $"Tem certeza que deseja excluir a Escola {escola.Nome}?\n";
+                    labelDetalhes.Text = $"Código Mec:\n {escola.CodigoMec}\n"
+                        + $"Estado:\n {EnumExtencoes.RetornaDescricao((EstadoEnums)escola.IdEndereco)}\n"
+                        + EscreveLinhaIgualdades(labelDetalhes)
+                        + $"\n!!!O endereço de código:\n {escola.IdEndereco} também será Excluído!!!";
                     break;
                 case Endereco endereco:
                     break;
@@ -136,6 +141,8 @@ namespace Cod3rsGrowth.Forms.Forms
                         servicoEmpresa.Deletar(empresa.Id);
                         break;
                     case EscolaEnderecoOtd escola:
+                        ServicoEscola servicoEscola = (ServicoEscola)_servico;
+                        servicoEscola.Deletar(escola.Id);
                         break;
                     case Endereco endereco:
                         break;

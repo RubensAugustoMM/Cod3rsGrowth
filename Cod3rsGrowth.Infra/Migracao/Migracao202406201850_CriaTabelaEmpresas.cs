@@ -19,7 +19,7 @@ public class Migracao202406201850_CriaTabelaEmpresas : Migration
             .WithColumn("NaturezaJuridica").AsInt32().NotNullable()
             .WithColumn("Porte").AsInt32().NotNullable()
             .WithColumn("MatrizFilial").AsInt32().NotNullable()
-            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDelete(System.Data.Rule.Cascade).NotNullable();
+            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDeleteOrUpdate(System.Data.Rule.Cascade).NotNullable();
     }
 
     public override void Down()

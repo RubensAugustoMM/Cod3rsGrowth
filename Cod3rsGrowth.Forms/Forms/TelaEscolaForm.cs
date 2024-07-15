@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEndereco _servicoEndereco;
         private FiltroEscolaUserControl _controladorFiltro;
-        
+
         private PrivateFontCollection _pixeboy;
 
         public TelaEscolaForm(ServicoEscola servicoEscola, ServicoEndereco servicoEndereco)
@@ -213,7 +213,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoCriar(object sender, EventArgs e)
         {
-            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco,_servicoEscola);
+            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco, _servicoEscola);
 
             telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
             telaCriarEscola.TopLevel = true;
@@ -223,7 +223,35 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
             };
 
-            telaCriarEscola.ShowDialog(this); 
+            telaCriarEscola.ShowDialog(this);
+        }
+
+        private void botaoDeletar_Click(object sender, EventArgs e)
+        {
+            if (!dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+            {
+                int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEscola =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoEscola.ObterPorId(id), _servicoEscola);
+
+                telaExclusaoEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    this.dataGridViewEscolas.DataSource = this._servicoEscola.ObterTodos(null);
+                };
+
+                telaExclusaoEscola.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoEscola.TopLevel = true;
+
+                telaExclusaoEscola.ShowDialog(this);
+            }
+            else
+            {
+                List<string> listaErros = new();
+
+                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
+                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+            }
         }
     }
 }

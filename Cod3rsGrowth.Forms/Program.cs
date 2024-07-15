@@ -35,7 +35,7 @@ internal static class Program
         {
             AtualizaBancoDeDados(escopo.ServiceProvider);
         }
-        */
+        */ 
     }
 
     static IHostBuilder CriaHostBuilder()

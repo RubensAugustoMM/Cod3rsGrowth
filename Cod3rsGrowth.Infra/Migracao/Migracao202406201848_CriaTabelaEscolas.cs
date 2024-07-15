@@ -16,7 +16,7 @@ public class Migracao202406201848_CriaTabelaEscolas : Migration
             .WithColumn("InicioAtividade").AsDateTime().NotNullable()
             .WithColumn("CategoriaAdministrativa").AsInt32().NotNullable()
             .WithColumn("OrganizacaoAcademica").AsInt32().NotNullable()
-            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDelete(System.Data.Rule.Cascade).NotNullable();
+            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDeleteOrUpdate(System.Data.Rule.Cascade).NotNullable();
     }
 
     public override void Down()
