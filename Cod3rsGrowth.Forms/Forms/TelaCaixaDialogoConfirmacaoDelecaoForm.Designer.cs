@@ -180,7 +180,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCaixaDialogoConfirmacaoDelecaoForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCaixaDialogoErroForm;
+            Load += AoCarregarTela;
             panelBotaoExcluir.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);
             panelCriacao.PerformLayout();

@@ -1,33 +1,33 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Enums.Extencoes;
+﻿using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCaixaDialogoConfirmacaoDelecaoForm : Form
     {
         private PrivateFontCollection _pixeboy;
-        private object _objetoExcluir;
-        private object _servico;
+        private string _textoEntidadeExcluir;
+        private string _descricaoEntidadeExcluir;
 
-        public TelaCaixaDialogoConfirmacaoDelecaoForm(object objetoExcluir, object servico)
+        public TelaCaixaDialogoConfirmacaoDelecaoForm(string textoEntidadeExcluir, string descricaoEntidadeExcluir)
         {
             InitializeComponent();
-            _objetoExcluir = objetoExcluir;
-            _servico = servico;
+            _textoEntidadeExcluir = textoEntidadeExcluir;
+            _descricaoEntidadeExcluir = descricaoEntidadeExcluir;
         }
 
-        private void AoCarregar_TelaCaixaDialogoErroForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             labelLinha.Text = EscreveLinhaIgualdades(labelLinha);
 
+            labelEntidadeExcluir.Text = _textoEntidadeExcluir;
+            labelDetalhes.Text = _descricaoEntidadeExcluir;
+            /*
             switch(_objetoExcluir)
             {
                 case ConvenioEscolaEmpresaOtd convenio:
@@ -56,6 +56,7 @@ namespace Cod3rsGrowth.Forms.Forms
                     +$"Complemento:\n {endereco.Complemento}";
                     break;
             }
+            */
 
             foreach (Control c in Controls)
             {

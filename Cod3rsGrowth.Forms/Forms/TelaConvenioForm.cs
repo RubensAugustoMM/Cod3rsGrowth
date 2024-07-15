@@ -6,6 +6,7 @@ using Cod3rsGrowth.Dominio.Filtros;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Cod3rsGrowth.Forms.Properties;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -214,12 +215,18 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
 
-                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
-                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoConvenio.ObterPorId(id), _servicoConvenio);
+                var convenioDeletar = _servicoConvenio.ObterPorId(id);
 
+                var mensagemEntidadeExcluir = CriaMensagemConvenioExcluir(convenioDeletar);
+                var descricaoEntidadeExcluir = CriaDescricaoConvenioExcluir(convenioDeletar);
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEntidadeExcluir, descricaoEntidadeExcluir);
+
+                bool botaoDeletarClicado = false;
                 telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+                    
                 };
 
                 telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
@@ -234,6 +241,20 @@ namespace Cod3rsGrowth.Forms.Forms
                 listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
                 TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
             }
+        }
+
+        private string CriaMensagemConvenioExcluir(ConvenioEscolaEmpresaOtd convenioDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir o Convênio {convenioDeletar.NumeroProcesso}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoConvenioExcluir(ConvenioEscolaEmpresaOtd convenioDeletar)
+        {
+            var mensagem = $"Escola:\n  {convenioDeletar.NomeEscola}\n"
+                     + $"Empresa:\n  {convenioDeletar.RazaoSocialEmpresa}\n\n"
+                     + $"Objeto:\n {convenioDeletar.Objeto}";
+            return mensagem;
         }
     }
 }
