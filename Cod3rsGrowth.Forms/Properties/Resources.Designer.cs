@@ -69,15 +69,5 @@ namespace Cod3rsGrowth.Forms.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Byte[].
-        /// </summary>
-        internal static byte[] Pixeboy_z8XGD {
-            get {
-                object obj = ResourceManager.GetObject("Pixeboy_z8XGD", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
+using Cod3rsGrowth.Forms.Properties;
 using LinqToDB.Common;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
@@ -152,18 +153,14 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
 
-            int tamanhoFonte = Properties.Resources.Pixeboy_z8XGD.Length;
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
 
-            byte[] dadosFonte = Properties.Resources.Pixeboy_z8XGD;
-
-            System.IntPtr dado = Marshal.AllocCoTaskMem(tamanhoFonte);
-
-            Marshal.Copy(dadosFonte, 0, dado, tamanhoFonte);
-
-            _pixeboy.AddMemoryFont(dado, tamanhoFonte);
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
         public void AlteraValor_botaoFiltrarPressionadoParaFalso()

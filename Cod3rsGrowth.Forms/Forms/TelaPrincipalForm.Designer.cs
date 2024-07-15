@@ -163,7 +163,7 @@
             botaoConvenios.FlatAppearance.MouseDownBackColor = Color.White;
             botaoConvenios.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoConvenios.FlatStyle = FlatStyle.Flat;
-            botaoConvenios.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoConvenios.Font = new Font("Segoe UI Symbol", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoConvenios.ForeColor = Color.White;
             botaoConvenios.Location = new Point(3, 3);
             botaoConvenios.Name = "botaoConvenios";
