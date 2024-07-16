@@ -208,7 +208,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmCriar(object sender, EventArgs e)
         {
-            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco, _servicoEscola);
+            TelaCriarAtualizarEscolaForm telaCriarEscola = new TelaCriarAtualizarEscolaForm(_servicoEndereco, _servicoEscola);
 
             telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
             telaCriarEscola.TopLevel = true;
@@ -257,16 +257,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
             catch (Exception excecao)
             {
-                const string Separador = "\n";
-                List<string> listaErros = new();
-
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
+                ExibeCaixaDeDialogoErro(excecao);
             }
         }
 
@@ -284,9 +275,53 @@ namespace Cod3rsGrowth.Forms.Forms
             return mensagem;
         }
 
-        private void botaoEditar_Click(object sender, EventArgs e)
+        private void AoClicarEmEditar(object sender, EventArgs e)
         {
+            try
+            {
+                if (dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Escola para atualizar!!!!!!");
+                }
 
+                int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
+
+                var EscolaEditar = _servicoEscola.ObterPorId(id);
+
+                TelaCriarAtualizarEscolaForm telaAtualizarEscola =
+                    new TelaCriarAtualizarEscolaForm(_servicoEndereco, _servicoEscola, EscolaEditar);
+
+                telaAtualizarEscola.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEscola.TopLevel = true;
+
+                telaAtualizarEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+                };
+
+                telaAtualizarEscola.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEscola.TopLevel = true;
+
+                telaAtualizarEscola.ShowDialog(this);
+            }
+            catch (Exception excecao)
+            {
+                ExibeCaixaDeDialogoErro(excecao);
+            }
+        }
+
+        private void ExibeCaixaDeDialogoErro(Exception excecao)
+        {
+            const string Separador = "\n";
+            List<string> listaErros = new();
+
+            listaErros.AddRange(excecao.Message.Split(Separador));
+            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+            caixaDialogoErro.TopLevel = true;
+
+            caixaDialogoErro.ShowDialog(this);
         }
     }
 }

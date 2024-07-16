@@ -162,7 +162,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
 
-                if (empresaCriada.IdEndereco != -1)
+                if (empresaCriada.IdEndereco != -1 && _empresaEnderecoAtualizarOtd == null)
                 {
                     _servicoEndereco.Deletar(empresaCriada.IdEndereco);
                 }

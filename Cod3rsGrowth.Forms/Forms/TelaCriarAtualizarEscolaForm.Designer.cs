@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaCriarEscolaForm
+    partial class TelaCriarAtualizarEscolaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -154,7 +154,7 @@
             textBoxTelefone.ShortcutsEnabled = false;
             textBoxTelefone.Size = new Size(149, 16);
             textBoxTelefone.TabIndex = 72;
-            textBoxTelefone.KeyPress += AoPressionarTecla_textBoxTelefone;
+            textBoxTelefone.KeyPress += AoPressionarTeclaTextBoxTelefone;
             // 
             // comboBoxCategoriaAdministrativa
             // 
@@ -168,7 +168,7 @@
             comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
             comboBoxCategoriaAdministrativa.TabIndex = 67;
             comboBoxCategoriaAdministrativa.Format += AoFormatarComboBoxCategoriaAdministrativa;
-            comboBoxCategoriaAdministrativa.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxCategoriaAdministrativa.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxCodigoMec
             // 
@@ -180,7 +180,7 @@
             textBoxCodigoMec.ShortcutsEnabled = false;
             textBoxCodigoMec.Size = new Size(149, 16);
             textBoxCodigoMec.TabIndex = 71;
-            textBoxCodigoMec.KeyPress += AoPressionarTecla_textBoxCodigoMec;
+            textBoxCodigoMec.KeyPress += AoPressionarTeclaTextBoxCodigoMec;
             // 
             // labelTelefone
             // 
@@ -266,7 +266,7 @@
             textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 82;
-            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            textBoxNumero.KeyPress += AoPressionarTeclaTextBoxNumero;
             // 
             // labelCep
             // 
@@ -425,7 +425,7 @@
             dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
             dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
             dateTimePickerDataInicioAtividade.TabIndex = 98;
-            dateTimePickerDataInicioAtividade.ValueChanged += AoAlterarValor_dateTimePickerDataInicioAtividade;
+            dateTimePickerDataInicioAtividade.ValueChanged += AoAlterarValorDateTimePickerDataInicioAtividade;
             // 
             // comboBoxSituacaoCadastral
             // 
@@ -438,7 +438,7 @@
             comboBoxSituacaoCadastral.Name = "comboBoxSituacaoCadastral";
             comboBoxSituacaoCadastral.Size = new Size(149, 23);
             comboBoxSituacaoCadastral.TabIndex = 97;
-            comboBoxSituacaoCadastral.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxSituacaoCadastral.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxComplemento
             // 
@@ -481,8 +481,8 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 85;
-            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
-            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxEstado.Format += AoFormatarComboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxBairro
             // 
@@ -517,8 +517,8 @@
             comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
             comboBoxOrganizacaoAcademica.Size = new Size(149, 23);
             comboBoxOrganizacaoAcademica.TabIndex = 83;
-            comboBoxOrganizacaoAcademica.Format += AoFormatar_comboBoxOrganizacaoAcademica;
-            comboBoxOrganizacaoAcademica.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxOrganizacaoAcademica.Format += AoFormatarComboBoxOrganizacaoAcademica;
+            comboBoxOrganizacaoAcademica.KeyPress += AoPressionarTeclaComboBox;
             // 
             // TelaCriarEscolaForm
             // 

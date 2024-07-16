@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
@@ -9,23 +10,38 @@ using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEscolaForm : Form
+    public partial class TelaCriarAtualizarEscolaForm : Form
     {
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEscola _servicoEscola;
+        private EscolaEnderecoOtd _escolaEnderecoOtdAtualizar = null;
+        private Endereco _enderecoAtualizar = null;
 
-        public TelaCriarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola)
+        public TelaCriarAtualizarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola)
         {
             InitializeComponent();
             _servicoEndereco = servicoEndereco;
             _servicoEscola = servicoEscola;
         }
 
+        public TelaCriarAtualizarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola, EscolaEnderecoOtd escolaEnderecoOtdAtualizar)
+        {
+            InitializeComponent();
+            _servicoEndereco = servicoEndereco;
+            _servicoEscola = servicoEscola;
+            _escolaEnderecoOtdAtualizar = escolaEnderecoOtdAtualizar;
+        }
+
         private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
+
+            if(_escolaEnderecoOtdAtualizar != null)
+            {
+                ConfiguraTelaParaAtualizar();
+            }
 
             foreach (Control c in Controls)
             {
@@ -98,27 +114,46 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
             List<string> listaErros = new();
-            Endereco enderecoCriado = new();
             Escola escolaCriada = new();
 
             try
             {
-                RecebeDadosDaTelaEscola(escolaCriada);
 
-                RecebeDadosDaTelaEndereco(enderecoCriado);
 
                 try
                 {
-                    _servicoEndereco.Criar(enderecoCriado);
-                    escolaCriada.IdEndereco = enderecoCriado.Id;
+                    if (_escolaEnderecoOtdAtualizar == null)
+                    {
+                        Endereco enderecoCriado = new();
+                            
+                        RecebeDadosDaTelaEndereco(enderecoCriado);
+                        _servicoEndereco.Criar(enderecoCriado);
+                        escolaCriada.IdEndereco = enderecoCriado.Id;
+                    }
+                    else
+                    {
+                        RecebeDadosDaTelaEndereco(_enderecoAtualizar);
+                        _servicoEndereco.Atualizar(_enderecoAtualizar); 
+                    }
                 }
                 catch (Exception excecao)
                 {
                     listaErros.AddRange(excecao.Message.Split(Separador));
                     escolaCriada.IdEndereco = -1;
                 }
+                
+                if(_escolaEnderecoOtdAtualizar == null)
+                {
+                     RecebeDadosDaTelaEscola(escolaCriada);
+                    _servicoEscola.Criar(escolaCriada); 
+                }
+                else
+                {
+                    Escola escolaAtualizar = RetornaModeloEscola(_escolaEnderecoOtdAtualizar);
+                    RecebeDadosDaTelaEscola(escolaAtualizar);
+                    _servicoEscola.Atualizar(escolaAtualizar);
+                }
 
-                _servicoEscola.Criar(escolaCriada);
                 Close();
             }
             catch (Exception excecao)
@@ -131,7 +166,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
 
-                if (escolaCriada.IdEndereco != -1)
+                if (escolaCriada.IdEndereco != -1 && _escolaEnderecoOtdAtualizar == null)
                 {
                     _servicoEndereco.Deletar(escolaCriada.IdEndereco);
                 }
@@ -220,7 +255,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
             if (dateTimePickerDataInicioAtividade.Value > DateTime.Now)
             {
@@ -229,7 +264,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCodigoMec(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCodigoMec = 8;
 
@@ -244,24 +279,24 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
             EstadoEnums valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoFormatar_comboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
         {
             OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoPressionarTecla_comboBox(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaComboBox(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void AoPressionarTecla_textBoxTelefone(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxTelefone(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoTelefone = 10;
 
@@ -276,7 +311,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxNumero(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoNumero = 8;
             if(textBoxNumero.Text.Length == tamanhoMaximoNumero)
@@ -288,6 +323,56 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void ConfiguraTelaParaAtualizar()
+        {
+            if (_escolaEnderecoOtdAtualizar.StatusAtividade)
+            {
+                comboBoxSituacaoCadastral.SelectedItem = HabilitadoEnums.Habilitado;
+            }
+            else
+            {
+                comboBoxSituacaoCadastral.SelectedItem = HabilitadoEnums.Desabilitado;
+            }
+
+            comboBoxOrganizacaoAcademica.SelectedItem = _escolaEnderecoOtdAtualizar.OrganizacaoAcademica;
+            comboBoxCategoriaAdministrativa.SelectedItem = _escolaEnderecoOtdAtualizar.CategoriaAdministrativa;
+
+            textBoxNome.Text = _escolaEnderecoOtdAtualizar.Nome;
+            textBoxCodigoMec.Text = _escolaEnderecoOtdAtualizar.CodigoMec;
+            textBoxTelefone.Text = _escolaEnderecoOtdAtualizar.Telefone;
+            textBoxEmail.Text = _escolaEnderecoOtdAtualizar.Email;
+            dateTimePickerDataInicioAtividade.Value = _escolaEnderecoOtdAtualizar.InicioAtividade;
+
+            _enderecoAtualizar = _servicoEndereco.ObterPorId(_escolaEnderecoOtdAtualizar.IdEndereco);
+
+            comboBoxEstado.SelectedItem = _enderecoAtualizar.Estado;
+            textBoxCep.Text = _enderecoAtualizar.Cep;
+            textBoxMunicipio.Text = _enderecoAtualizar.Municipio;
+            textBoxBairro.Text = _enderecoAtualizar.Bairro;
+            textBoxRua.Text = _enderecoAtualizar.Rua;
+            textBoxNumero.Text = _enderecoAtualizar.Numero.ToString();
+            textBoxComplemento.Text = _enderecoAtualizar.Complemento;
+            
+            labelTitulo.Text = "Atualizar Escola";
+        }
+
+        private Escola RetornaModeloEscola(EscolaEnderecoOtd escolaOtd)
+        {
+            Escola escolaRetorno = new Escola();
+
+            escolaRetorno.Id = escolaOtd.Id;
+            escolaRetorno.Nome = escolaOtd.Nome;
+            escolaRetorno.CodigoMec = escolaOtd.CodigoMec;
+            escolaRetorno.Telefone = escolaOtd.Telefone;
+            escolaRetorno.Email = escolaOtd.Email;
+            escolaRetorno.InicioAtividade = escolaOtd.InicioAtividade;
+            escolaRetorno.CategoriaAdministrativa = escolaOtd.CategoriaAdministrativa;
+            escolaRetorno.OrganizacaoAcademica = escolaOtd.OrganizacaoAcademica;
+            escolaRetorno.IdEndereco = escolaOtd.IdEndereco;
+
+            return escolaRetorno;
         }
     }
 }
