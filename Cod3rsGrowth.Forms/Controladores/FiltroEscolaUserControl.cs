@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void AoCarregar_FiltroEscolaUserControl(object sender, EventArgs e)
+        private void AoCarregarControlador(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -39,13 +39,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoClicar_botaoFechar(object sender, EventArgs e)
+        private void AoClicarEmFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
+        private void AoClicarEmFiltrar(object sender, EventArgs e)
         {
             Filtro = new FiltroEscolaEnderecoOtd();
 
@@ -112,7 +112,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void AoClicar_botaoLimpar(object sender, EventArgs e)
+        private void AoClicarEmLimpar(object sender, EventArgs e)
         {
             LimpaFiltro();
         }
@@ -163,7 +163,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         }
 
 
-        private void AoPressionarTecla_TextBox_somenteValoresNaturais(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxSomenteValoresNaturais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -171,12 +171,12 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        public void AlteraValorBotaoFiltrarPressionadoParaFalso()
         {
             _botaoFiltrarPressionado = false;
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -189,7 +189,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoRequererPintura_FiltroEmpresaUserControl(object sender, PaintEventArgs e)
+        private void AoPintarControladorSombra(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;
@@ -202,7 +202,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
+        private void AoPintarControladorBordas(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -224,13 +224,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
             dateTimePickerDataInicioAtividade.CustomFormat = _formatoDaData;
             _filtroDataInicioAtividade = true;
         }
 
-        private void AoClicar_comboBoxCategoriaAdministrativa(object sender, EventArgs e)
+        private void AoClicarEmComboBoxCategoriaAdministrativa(object sender, EventArgs e)
         {
             if (comboBoxCategoriaAdministrativa.DataSource == null)
             {
@@ -238,7 +238,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoClicar_comboBoxOrganizacaoAcademica(object sender, EventArgs e)
+        private void AoClicarEmComboBoxOrganizacaoAcademica(object sender, EventArgs e)
         {
             if (comboBoxOrganizacaoAcademica.DataSource == null)
             {
@@ -246,7 +246,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCodigoMec(object sender, KeyPressEventArgs e)
         {
             if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
             {
@@ -259,19 +259,19 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
             EstadoEnums valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
         {
             CategoriaAdministrativaEnums valorEnum = (CategoriaAdministrativaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoFormatar_comboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
         {
             OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();

@@ -4,8 +4,6 @@ using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -27,7 +25,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -52,7 +50,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregarForm_TelaConvenioForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewConvenios.DataSource = new BindingList<FiltroConvenioEscolaEmpresaOtd>();
             dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
@@ -68,7 +66,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -94,7 +92,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -109,7 +107,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -130,7 +128,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
+        private void AoClicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
         }
@@ -169,17 +167,17 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
+        private void AoAlterarVisibilidadeDaGrade(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -192,7 +190,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
 
             TelaCriarConvenioForm telaCriarConvenio =
@@ -209,7 +207,7 @@ namespace Cod3rsGrowth.Forms.Forms
             telaCriarConvenio.ShowDialog(this);
         }
 
-        private void AoClicar_botaoDeletar(object sender, EventArgs e)
+        private void AoClicarEmDeletar(object sender, EventArgs e)
         {
             try
             {

@@ -52,7 +52,7 @@
             panelBotaoExcluir.Name = "panelBotaoExcluir";
             panelBotaoExcluir.Size = new Size(106, 40);
             panelBotaoExcluir.TabIndex = 61;
-            panelBotaoExcluir.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoExcluir.Paint += AoPintarPainelBotao;
             // 
             // botaoExcluir
             // 
@@ -69,7 +69,7 @@
             botaoExcluir.TabIndex = 22;
             botaoExcluir.Text = "Excluir";
             botaoExcluir.UseVisualStyleBackColor = false;
-            botaoExcluir.Click += AoClicar_botaoExcluir;
+            botaoExcluir.Click += AoClicarEmExcluir;
             // 
             // labelTitulo
             // 
@@ -93,7 +93,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(307, 242);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelErros;
+            panelCriacao.Paint += AoPintarPainel;
             // 
             // panelTextos
             // 
@@ -150,7 +150,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 62;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotao;
             // 
             // botaoCancelar
             // 
@@ -167,7 +167,7 @@
             botaoCancelar.TabIndex = 22;
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = false;
-            botaoCancelar.Click += AoClicar_botaoCancelar;
+            botaoCancelar.Click += AoClicarEmCancelar;
             // 
             // TelaCaixaDialogoConfirmacaoDelecaoForm
             // 

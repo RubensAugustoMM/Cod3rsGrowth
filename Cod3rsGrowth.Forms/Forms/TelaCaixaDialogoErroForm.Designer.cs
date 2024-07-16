@@ -45,7 +45,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotoes;
             // 
             // botaoOk
             // 
@@ -62,7 +62,7 @@
             botaoOk.TabIndex = 22;
             botaoOk.Text = "Ok";
             botaoOk.UseVisualStyleBackColor = false;
-            botaoOk.Click += AoClicar_botaoOk;
+            botaoOk.Click += AoClicarEmOk;
             // 
             // labelTitulo
             // 
@@ -85,7 +85,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(301, 242);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelErros;
+            panelCriacao.Paint += AoPintarPainel;
             // 
             // listBoxErros
             // 
@@ -110,7 +110,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCaixaDialogoErroForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCaixaDialogoErroForm;
+            Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);
             panelCriacao.PerformLayout();

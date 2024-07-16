@@ -32,7 +32,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelErros(object sender, PaintEventArgs e)
+        private void AoPintarPainel(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -68,7 +68,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotao(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -93,13 +93,13 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
 
-        private void AoClicar_botaoExcluir(object sender, EventArgs e)
+        private void AoClicarEmExcluir(object sender, EventArgs e)
         {
             BotaoDeletarClicado = true;
             Close();
         }
 
-        private void AoClicar_botaoCancelar(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }        

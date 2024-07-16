@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaEmpresaForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -49,7 +49,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregar_TelaEmpresaForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
 
@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -89,7 +89,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -104,7 +104,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -125,7 +125,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
+        private void AoClicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
         }
@@ -164,17 +164,17 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
-        private void AoMudarVisibilidade_TelaEmpresaForm(object sender, EventArgs e)
+        private void AoMudarVisibilidadeDaTelaFiltros(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -187,7 +187,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatarCelulas_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
+        private void AoFormatarCelulasDataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
@@ -218,7 +218,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
             TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco, _servicoEmpresa);
 
@@ -233,7 +233,7 @@ namespace Cod3rsGrowth.Forms.Forms
             telaCriarEmpresa.ShowDialog(this);
         }
 
-        private void AoClicar_botaoDeletar(object sender, EventArgs e)
+        private void AoClicarEmDeletar(object sender, EventArgs e)
         {
             try
             { 

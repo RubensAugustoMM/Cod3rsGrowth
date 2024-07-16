@@ -1,7 +1,5 @@
-﻿using Cod3rsGrowth.Forms.Properties;
-using LinqToDB.Common;
+﻿using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -18,7 +16,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _listaErrosExibida = new List<string>();
         }
 
-        private void AoCarregar_TelaCaixaDialogoErroForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
 
@@ -32,7 +30,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelErros(object sender, PaintEventArgs e)
+        private void AoPintarPainel(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -68,7 +66,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -93,7 +91,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
 
-        private void AoClicar_botaoOk(object sender, EventArgs e)
+        private void AoClicarEmOk(object sender, EventArgs e)
         {
             Close();
         }

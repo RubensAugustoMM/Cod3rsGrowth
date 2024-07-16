@@ -66,7 +66,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotoes;
             // 
             // botaoCancelar
             // 
@@ -83,7 +83,7 @@
             botaoCancelar.TabIndex = 22;
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = false;
-            botaoCancelar.Click += AoCLicar_botaoCancelar;
+            botaoCancelar.Click += AoClicarEmCancelar;
             // 
             // panelBotaoSalvar
             // 
@@ -93,7 +93,7 @@
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
-            panelBotaoSalvar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoSalvar.Paint += AoPintarPainelBotoes;
             // 
             // botaoSalvar
             // 
@@ -110,7 +110,7 @@
             botaoSalvar.TabIndex = 31;
             botaoSalvar.Text = "Salvar";
             botaoSalvar.UseVisualStyleBackColor = false;
-            botaoSalvar.Click += AoClicar_botaoSalvar;
+            botaoSalvar.Click += AoClicarEmSalvar;
             // 
             // labelTitulo
             // 
@@ -173,7 +173,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(661, 380);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelCriacao;
+            panelCriacao.Paint += AoPintarTela;
             // 
             // dateTimePickerDataTermino
             // 
@@ -189,7 +189,7 @@
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 22);
             dateTimePickerDataTermino.TabIndex = 99;
-            dateTimePickerDataTermino.ValueChanged += AoAlterarValor_dateTimePickerDataInicioAtividade;
+            dateTimePickerDataTermino.ValueChanged += AoAlterarValorDateTimePickerDataTermino;
             // 
             // richTextBoxObjeto
             // 
@@ -212,7 +212,7 @@
             textBoxValor.ShortcutsEnabled = false;
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 83;
-            textBoxValor.KeyPress += AoPressionarTecla_textBoxValor;
+            textBoxValor.KeyPress += AoPressionarTeclaEmCaixaTextoValor;
             // 
             // panelDataGrid
             // 
@@ -229,7 +229,7 @@
             panelDataGrid.Name = "panelDataGrid";
             panelDataGrid.Size = new Size(350, 380);
             panelDataGrid.TabIndex = 82;
-            panelDataGrid.Paint += AoRequererPintura_panelEscolas;
+            panelDataGrid.Paint += AoPintarPainelEscolas;
             // 
             // listBoxEscolaEmpresa
             // 
@@ -244,8 +244,8 @@
             listBoxEscolaEmpresa.Name = "listBoxEscolaEmpresa";
             listBoxEscolaEmpresa.Size = new Size(305, 231);
             listBoxEscolaEmpresa.TabIndex = 105;
-            listBoxEscolaEmpresa.SelectedIndexChanged += AoMudarIndexSelecionado_listBoxEscolaEmpresa;
-            listBoxEscolaEmpresa.Format += AoFormatar_listBoxEscolaEmpresa;
+            listBoxEscolaEmpresa.SelectedIndexChanged += AoMudarIndexSelecionadoListBoxEscolaEmpresa;
+            listBoxEscolaEmpresa.Format += AoFormatarListBoxEscolaEmpresa;
             // 
             // textBoxEmpresaSelecionada
             // 
@@ -282,7 +282,7 @@
             panelBotaoEmpresas.Name = "panelBotaoEmpresas";
             panelBotaoEmpresas.Size = new Size(106, 40);
             panelBotaoEmpresas.TabIndex = 63;
-            panelBotaoEmpresas.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEmpresas.Paint += AoPintarPainelBotoes;
             // 
             // botaoEmpresa
             // 
@@ -299,7 +299,7 @@
             botaoEmpresa.TabIndex = 22;
             botaoEmpresa.Text = "Empresas";
             botaoEmpresa.UseVisualStyleBackColor = false;
-            botaoEmpresa.Click += AoClicar_botaoEmpresa;
+            botaoEmpresa.Click += AoClicarEmEmpresa;
             // 
             // label3
             // 
@@ -320,7 +320,7 @@
             panelBotaoEscolas.Name = "panelBotaoEscolas";
             panelBotaoEscolas.Size = new Size(106, 40);
             panelBotaoEscolas.TabIndex = 62;
-            panelBotaoEscolas.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEscolas.Paint += AoPintarPainelBotoes;
             // 
             // botaoEscola
             // 
@@ -337,7 +337,7 @@
             botaoEscola.TabIndex = 22;
             botaoEscola.Text = "Escolas";
             botaoEscola.UseVisualStyleBackColor = false;
-            botaoEscola.Click += AoClicar_botaoEscola;
+            botaoEscola.Click += AoClicarEmEscola;
             // 
             // label2
             // 
@@ -361,7 +361,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarConvenioForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCriarConvenioForm;
+            Load += AoCarregarCriar;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);

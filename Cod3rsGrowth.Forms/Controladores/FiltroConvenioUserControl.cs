@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             InitializeComponent();
         }
 
-        private void FiltroConvenioUserControl_Load(object sender, EventArgs e)
+        private void AoCarregarControlador(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -45,13 +45,13 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoCLicar_botaoFechar(object sender, EventArgs e)
+        private void AoClicarEmFechar(object sender, EventArgs e)
         {
             Visible = false;
             _botaoFiltrarPressionado = false;
         }
 
-        private void AoClicar_botaoFiltrar(object sender, EventArgs e)
+        private void AoClicarEmFiltrar(object sender, EventArgs e)
         {
             Filtro = new FiltroConvenioEscolaEmpresaOtd();
 
@@ -103,7 +103,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             Visible = false;
         }
 
-        private void AoPressionarTecla_TextBox_somenteValoresReais(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxSomenteValoresReais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
@@ -116,7 +116,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoPressionarTecla_TextBox_somenteValoresNaturais(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxSomenteValoresNaturais(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -124,7 +124,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoClicar_botaoLimpar(object sender, EventArgs e)
+        private void AoClicarEmLimpar(object sender, EventArgs e)
         {
             LimpaFiltro();
         }
@@ -163,12 +163,12 @@ namespace Cod3rsGrowth.Forms.Controladores
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        public void AlteraValor_botaoFiltrarPressionadoParaFalso()
+        public void AlteraValorBotaoFiltrarPressionadoParaFalso()
         {
             _botaoFiltrarPressionado = false;
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -181,7 +181,7 @@ namespace Cod3rsGrowth.Forms.Controladores
             }
         }
 
-        private void AoRequererPintura_panelFiltro(object sender, PaintEventArgs e)
+        private void AoPintarControladorBordas(object sender, PaintEventArgs e)
         {
             const int Tamanho = 2;
             const int xInicioRetanguloExterior = 4;
@@ -210,19 +210,19 @@ namespace Cod3rsGrowth.Forms.Controladores
             comboMaiorMenorIgualDataTermino.DataSource = Enum.GetValues(typeof(FiltrosMaiorMenorIgualEnums));
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicio(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataInicio(object sender, EventArgs e)
         {
             dateTimePickerDataInicio.CustomFormat = _formatoDaData;
             _filtroDataInicioHabilitado = true;
         }
 
-        private void AoAlterarValor_dateTimePickerDataTermino(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataTermino(object sender, EventArgs e)
         {
             dateTimePickerDataTermino.CustomFormat = _formatoDaData;
             _filtroDataTerminoHabilitado = true;
         }
 
-        private void AoRequererPintura_FiltroConvenioUserControl1(object sender, PaintEventArgs e)
+        private void AoPintarControladorSombra(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 14;
             const int PosicaoY = 16;

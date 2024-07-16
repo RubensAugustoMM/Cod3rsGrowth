@@ -99,7 +99,7 @@
             dataGridViewEmpresas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEmpresas.Size = new Size(623, 299);
             dataGridViewEmpresas.TabIndex = 2;
-            dataGridViewEmpresas.CellFormatting += AoFormatarCelulas_dataGridViewEmpresas;
+            dataGridViewEmpresas.CellFormatting += AoFormatarCelulasDataGridViewEmpresas;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -244,7 +244,7 @@
             painelLateral.Name = "painelLateral";
             painelLateral.Size = new Size(164, 323);
             painelLateral.TabIndex = 1;
-            painelLateral.Paint += AoRequererPintura_painelLateral;
+            painelLateral.Paint += AoPintarPainelLateral;
             // 
             // panelBotaoDeletar
             // 
@@ -253,7 +253,7 @@
             panelBotaoDeletar.Name = "panelBotaoDeletar";
             panelBotaoDeletar.Size = new Size(133, 49);
             panelBotaoDeletar.TabIndex = 38;
-            panelBotaoDeletar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoDeletar.Paint += AoPintarPainelBotoes;
             // 
             // botaoDeletar
             // 
@@ -270,7 +270,7 @@
             botaoDeletar.TabIndex = 31;
             botaoDeletar.Text = "Deletar";
             botaoDeletar.UseVisualStyleBackColor = false;
-            botaoDeletar.Click += AoClicar_botaoDeletar;
+            botaoDeletar.Click += AoClicarEmDeletar;
             // 
             // panel1
             // 
@@ -279,7 +279,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(133, 49);
             panel1.TabIndex = 34;
-            panel1.Paint += AoRequererPintura_panelSombraBotoes;
+            panel1.Paint += AoPintarPainelBotoes;
             // 
             // botaoPesquisar
             // 
@@ -296,7 +296,7 @@
             botaoPesquisar.TabIndex = 31;
             botaoPesquisar.Text = "Pesquisar";
             botaoPesquisar.UseVisualStyleBackColor = false;
-            botaoPesquisar.Click += AoClicar_botaoPesquisar;
+            botaoPesquisar.Click += AoClicarEmPesquisar;
             // 
             // panelBotaoEditar
             // 
@@ -305,7 +305,7 @@
             panelBotaoEditar.Name = "panelBotaoEditar";
             panelBotaoEditar.Size = new Size(133, 49);
             panelBotaoEditar.TabIndex = 37;
-            panelBotaoEditar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEditar.Paint += AoPintarPainelBotoes;
             // 
             // botaoEditar
             // 
@@ -330,7 +330,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(133, 49);
             panelBotaoFiltrar.TabIndex = 33;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoFiltrar.Paint += AoPintarPainelBotoes;
             // 
             // botaoFiltros
             // 
@@ -347,7 +347,7 @@
             botaoFiltros.TabIndex = 31;
             botaoFiltros.Text = "Filtros";
             botaoFiltros.UseVisualStyleBackColor = false;
-            botaoFiltros.Click += AoClicar_botaoFiltros;
+            botaoFiltros.Click += AoClicarEmFiltros;
             // 
             // panelBotaoCriar
             // 
@@ -356,7 +356,7 @@
             panelBotaoCriar.Name = "panelBotaoCriar";
             panelBotaoCriar.Size = new Size(133, 49);
             panelBotaoCriar.TabIndex = 36;
-            panelBotaoCriar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCriar.Paint += AoPintarPainelBotoes;
             // 
             // botaoCriar
             // 
@@ -373,7 +373,7 @@
             botaoCriar.TabIndex = 31;
             botaoCriar.Text = "Criar";
             botaoCriar.UseVisualStyleBackColor = false;
-            botaoCriar.Click += AoClicar_botaoCriar;
+            botaoCriar.Click += AoClicarEmCriar;
             // 
             // TelaEmpresaForm
             // 
@@ -386,9 +386,9 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaEmpresaForm";
             Text = "TelaConvenioForm";
-            Load += AoCarregar_TelaEmpresaForm;
-            VisibleChanged += AoMudarVisibilidade_TelaEmpresaForm;
-            Paint += AoRequererPintura_TelaEmpresaForm;
+            Load += AoCarregarTela;
+            VisibleChanged += AoMudarVisibilidadeDaTelaFiltros;
+            Paint += AoPintarTela;
             ((System.ComponentModel.ISupportInitialize)dataGridViewEmpresas).EndInit();
             ((System.ComponentModel.ISupportInitialize)empresaEnderecoOtdBindingSource).EndInit();
             painelLateral.ResumeLayout(false);

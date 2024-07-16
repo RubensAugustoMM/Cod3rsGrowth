@@ -77,7 +77,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotoes;
             // 
             // botaoCancelar
             // 
@@ -94,7 +94,7 @@
             botaoCancelar.TabIndex = 22;
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = false;
-            botaoCancelar.Click += AoCLicar_botaoCancelar;
+            botaoCancelar.Click += AoCLicarEmCancelar;
             // 
             // panelBotaoSalvar
             // 
@@ -104,7 +104,7 @@
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
-            panelBotaoSalvar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoSalvar.Paint += AoPintarPainelBotoes;
             // 
             // botaoSalvar
             // 
@@ -121,7 +121,7 @@
             botaoSalvar.TabIndex = 31;
             botaoSalvar.Text = "Salvar";
             botaoSalvar.UseVisualStyleBackColor = false;
-            botaoSalvar.Click += AoClicar_botaoSalvar;
+            botaoSalvar.Click += AoClicarEmSalvar;
             // 
             // labelTitulo
             // 
@@ -167,7 +167,7 @@
             comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
             comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
             comboBoxCategoriaAdministrativa.TabIndex = 67;
-            comboBoxCategoriaAdministrativa.Format += AoFormatar_comboBoxCategoriaAdministrativa;
+            comboBoxCategoriaAdministrativa.Format += AoFormatarComboBoxCategoriaAdministrativa;
             comboBoxCategoriaAdministrativa.KeyPress += AoPressionarTecla_comboBox;
             // 
             // textBoxCodigoMec
@@ -254,7 +254,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(682, 289);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelCriacao;
+            panelCriacao.Paint += AoPintarTela;
             // 
             // textBoxNumero
             // 
@@ -504,7 +504,7 @@
             textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 91;
-            textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
+            textBoxCep.KeyPress += AoPressionarTeclaTextBoxCep;
             // 
             // comboBoxOrganizacaoAcademica
             // 
@@ -531,7 +531,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEscolaForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCriarEnderecoForm;
+            Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);

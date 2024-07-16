@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEscolaForm = telaEscolaForm;
         }
 
-        private void AoRequererPintura_panelTopo(object sender, PaintEventArgs e)
+        private void AoPintarPainelSuperior(object sender, PaintEventArgs e)
         {
             if (panelTopo.BorderStyle == BorderStyle.None)
             {
@@ -53,26 +53,26 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregar_TelaPrincipalForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaPainelExibicao();
             timer1.Start();
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
 
-        private void AoPassarTempo_temporizador(object sender, EventArgs e)
+        private void AoPassarTempoTemporizador(object sender, EventArgs e)
         {
             data.Text = DateTime.Now.ToLongDateString();
             tempo.Text = DateTime.Now.ToLongTimeString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AoClicarEmConvenios(object sender, EventArgs e)
         {
             if(_telaConvenioAtiva)
             {
@@ -96,7 +96,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaConvenioForm.Show();
         }
 
-        private void AoClicar_botaoEmpresa(object sender, EventArgs e)
+        private void AoClicarEmEmpresas(object sender, EventArgs e)
         {
             if(_telaEmpresaAtiva)
             {
@@ -120,7 +120,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEmpresaForm.Show();
         }
 
-        private void AoClicar_botaoEnderecos(object sender, EventArgs e)
+        private void AoClicarEmEnderecos(object sender, EventArgs e)
         {
             if(_telaEnderecoAtiva)
             {
@@ -142,7 +142,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEnderecoAtiva = true;
             _telaEnderecoForm.Show();
         }
-        private void AoClicar_botaoEscolas(object sender, EventArgs e)
+        private void AoClicarEmEscolas(object sender, EventArgs e)
         {
             if(_telaEscolaAtiva)
             {
@@ -166,7 +166,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _telaEscolaForm.Show();
         }
 
-        private void AoClicar_botaoFechar(object sender, EventArgs e)
+        private void AoClicarEmFechar(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -211,7 +211,7 @@ namespace Cod3rsGrowth.Forms.Forms
             painelExibicao.Controls.Add(_telaEnderecoForm);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;

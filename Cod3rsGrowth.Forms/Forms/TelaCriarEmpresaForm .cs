@@ -1,11 +1,9 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -22,7 +20,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoEmpresa = servicoEmpresa;
         }
 
-        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -34,7 +32,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -70,7 +68,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -94,7 +92,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
             List<string> listaErros = new();
@@ -207,7 +205,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void AoCLicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
@@ -221,12 +219,12 @@ namespace Cod3rsGrowth.Forms.Forms
             comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
         }
 
-        private void AoFormatar_comboBoxPorte(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxPorte(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (PorteEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
-        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCep(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCep = 8;
 
@@ -241,7 +239,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataInicioAtividade(object sender, EventArgs e)
         {
             if (dateTimePickerDataAbertura.Value > DateTime.Now)
             {
@@ -250,7 +248,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoPressionarTecla_textBoxCapitalSocial(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCapitalSocial(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
@@ -263,24 +261,24 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
             EstadoEnums valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoFormatar_comboBoxNaturezaJuridica(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxNaturezaJuridica(object sender, ListControlConvertEventArgs e)
         {
             NaturezaJuridicaEnums valorEnum = (NaturezaJuridicaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
 
-        private void AoPressionarTecla_comboBox(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaComboBox(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void AoPressionarTecla_textBoxCnpj(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCnpj(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCnpj = 14;
 
@@ -295,7 +293,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxNumero(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoNumero = 8;
             if(textBoxNumero.Text.Length == tamanhoMaximoNumero)
@@ -309,7 +307,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatar_comboBoxMatrizFilial(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxMatrizFilial(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (MatrizFilialEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();

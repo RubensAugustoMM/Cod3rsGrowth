@@ -1,11 +1,9 @@
 ﻿using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -28,7 +26,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoConvenio = servicoConvenio;
         }
 
-        private void AoCarregar_TelaCriarConvenioForm(object sender, EventArgs e)
+        private void AoCarregarCriar(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
 
@@ -43,7 +41,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -79,7 +77,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -103,7 +101,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             Convenio convenioCriado = new();
 
@@ -152,12 +150,12 @@ namespace Cod3rsGrowth.Forms.Forms
             convenioCriado.IdEscola = _idEscolaSelecionada;
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void AoPressionarTecla_textBoxValor(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaEmCaixaTextoValor(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
@@ -170,7 +168,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_panelEmpresas(object sender, PaintEventArgs e)
+        private void AoPintarpainelEscolas(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -195,7 +193,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_panelEscolas(object sender, PaintEventArgs e)
+        private void AoPintarPainelEscolas(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -220,7 +218,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataTermino(object sender, EventArgs e)
         {
             if (dateTimePickerDataTermino.Value < DateTime.Now)
             {
@@ -229,7 +227,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoEscola(object sender, EventArgs e)
+        private void AoClicarEmEscola(object sender, EventArgs e)
         {
             _botaoEmpresaAtivo = false;
             _botaoEscolaAtivo = true;
@@ -237,7 +235,7 @@ namespace Cod3rsGrowth.Forms.Forms
             listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
         }
 
-        private void AoClicar_botaoEmpresa(object sender, EventArgs e)
+        private void AoClicarEmEmpresa(object sender, EventArgs e)
         {
             _botaoEscolaAtivo = false;
             _botaoEmpresaAtivo = true;
@@ -245,7 +243,7 @@ namespace Cod3rsGrowth.Forms.Forms
             listBoxEscolaEmpresa.DataSource = _servicoEmpresa.ObterTodos(null);
         }
 
-        private void AoFormatar_listBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarListBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
         {
             if (_botaoEscolaAtivo)
             {
@@ -264,7 +262,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoMudarIndexSelecionado_listBoxEscolaEmpresa(object sender, EventArgs e)
+        private void AoMudarIndexSelecionadoListBoxEscolaEmpresa(object sender, EventArgs e)
         {
             var listBox = (ListBox)sender;
 

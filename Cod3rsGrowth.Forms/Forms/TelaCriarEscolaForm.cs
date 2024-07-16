@@ -22,7 +22,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoEscola = servicoEscola;
         }
 
-        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -70,7 +70,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -94,7 +94,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
             List<string> listaErros = new();
@@ -187,7 +187,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void AoCLicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
@@ -200,12 +200,12 @@ namespace Cod3rsGrowth.Forms.Forms
             comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
         }
 
-        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (CategoriaAdministrativaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
-        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCep(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCep = 8;
 
