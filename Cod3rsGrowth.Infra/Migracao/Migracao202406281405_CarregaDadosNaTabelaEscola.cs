@@ -76,10 +76,6 @@ public class Migracao202406281405_CarregaDadosNaTabelaEscola : Migration
 
     public override void Down()
     {
-        Delete.FromTable("Escolas").Row(new { CodigoMec = "12345678" });
-        Delete.FromTable("Escolas").Row(new { CodigoMec = "10679454" });
-        Delete.FromTable("Escolas").Row(new { CodigoMec = "20202020" });
-        Delete.FromTable("Escolas").Row(new { CodigoMec = "40404040" });
-        Delete.FromTable("Escolas").Row(new { CodigoMec = "60606060" });
+        Delete.FromTable("Escolas").AllRows();
     }
 }

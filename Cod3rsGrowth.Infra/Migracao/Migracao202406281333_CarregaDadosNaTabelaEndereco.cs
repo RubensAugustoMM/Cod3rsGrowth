@@ -112,15 +112,6 @@ public class Migracao202406281333_CarregaDadosNaTabelaEnderecos : Migration
 
     public override void Down()
     {
-        Delete.FromTable("Enderecos").Row(new { Cep = "03965712" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "65434712" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "65754368" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "47914678" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "65857913" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "06853476" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "09876543" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "96750012" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "96759876" });
-        Delete.FromTable("Enderecos").Row(new { Cep = "09835789" });
+        Delete.FromTable("Enderecos").AllRows();
     }
 }

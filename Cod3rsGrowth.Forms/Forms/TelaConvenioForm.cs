@@ -4,6 +4,7 @@ using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.ComponentModel;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -24,7 +25,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -49,7 +50,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregarForm_TelaConvenioForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewConvenios.DataSource = new BindingList<FiltroConvenioEscolaEmpresaOtd>();
             dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
@@ -65,7 +66,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -91,7 +92,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -106,7 +107,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -117,12 +118,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
+        private void AoClicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
         }
@@ -146,8 +152,8 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewConvenios.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewConvenios.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
         private void ConfiguraFonte(Control controle)
@@ -161,17 +167,17 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoMudarVisibilidade_dataGridView1(object sender, EventArgs e)
+        private void AoAlterarVisibilidadeDaGrade(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -184,7 +190,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
 
             TelaCriarConvenioForm telaCriarConvenio =
@@ -199,6 +205,68 @@ namespace Cod3rsGrowth.Forms.Forms
             };
 
             telaCriarConvenio.ShowDialog(this);
+        }
+
+        private void AoClicarEmDeletar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewConvenios.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Convênio para excluir!!!!!!");
+                }
+                
+                int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
+
+                var convenioDeletar = _servicoConvenio.ObterPorId(id);
+
+                var mensagemConvenioExcluir = CriaMensagemConvenioExcluir(convenioDeletar);
+                var descricaoConvenioExcluir = CriaDescricaoConvenioExcluir(convenioDeletar);
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemConvenioExcluir, descricaoConvenioExcluir);
+
+                telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    {
+                        _servicoConvenio.Deletar(convenioDeletar.Id);
+                        dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+                    }
+                };
+
+                telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoConvenio.TopLevel = true;
+
+                telaExclusaoConvenio.ShowDialog(this);
+            }
+            catch(Exception excecao)
+            {
+                const string Separador = "\n";
+                List<string> listaErros = new();
+
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+            }
+        }
+
+        private string CriaMensagemConvenioExcluir(ConvenioEscolaEmpresaOtd convenioDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir o Convênio {convenioDeletar.NumeroProcesso}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoConvenioExcluir(ConvenioEscolaEmpresaOtd convenioDeletar)
+        {
+            var mensagem = $"Escola:\n  {convenioDeletar.NomeEscola}\n"
+                     + $"Empresa:\n  {convenioDeletar.RazaoSocialEmpresa}\n\n"
+                     + $"Objeto:\n {convenioDeletar.Objeto}";
+            return mensagem;
         }
     }
 }

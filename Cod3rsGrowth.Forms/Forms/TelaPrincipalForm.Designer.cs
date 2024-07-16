@@ -67,7 +67,7 @@
             panelTopo.Name = "panelTopo";
             panelTopo.Size = new Size(800, 94);
             panelTopo.TabIndex = 0;
-            panelTopo.Paint += AoRequererPintura_panelTopo;
+            panelTopo.Paint += AoPintarPainelSuperior;
             // 
             // panelBotaoEnderecos
             // 
@@ -76,7 +76,7 @@
             panelBotaoEnderecos.Name = "panelBotaoEnderecos";
             panelBotaoEnderecos.Size = new Size(134, 57);
             panelBotaoEnderecos.TabIndex = 39;
-            panelBotaoEnderecos.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEnderecos.Paint += AoPintarPainelBotoes;
             // 
             // botaoEnderecos
             // 
@@ -93,7 +93,7 @@
             botaoEnderecos.TabIndex = 31;
             botaoEnderecos.Text = "Endereços";
             botaoEnderecos.UseVisualStyleBackColor = false;
-            botaoEnderecos.Click += AoClicar_botaoEnderecos;
+            botaoEnderecos.Click += AoClicarEmEnderecos;
             // 
             // panelBotaoEscolas
             // 
@@ -102,7 +102,7 @@
             panelBotaoEscolas.Name = "panelBotaoEscolas";
             panelBotaoEscolas.Size = new Size(134, 57);
             panelBotaoEscolas.TabIndex = 38;
-            panelBotaoEscolas.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEscolas.Paint += AoPintarPainelBotoes;
             // 
             // botaoEscolas
             // 
@@ -119,7 +119,7 @@
             botaoEscolas.TabIndex = 31;
             botaoEscolas.Text = "Escolas";
             botaoEscolas.UseVisualStyleBackColor = false;
-            botaoEscolas.Click += AoClicar_botaoEscolas;
+            botaoEscolas.Click += AoClicarEmEscolas;
             // 
             // panelBotaoEmpresas
             // 
@@ -128,7 +128,7 @@
             panelBotaoEmpresas.Name = "panelBotaoEmpresas";
             panelBotaoEmpresas.Size = new Size(134, 57);
             panelBotaoEmpresas.TabIndex = 37;
-            panelBotaoEmpresas.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoEmpresas.Paint += AoPintarPainelBotoes;
             // 
             // botaoEmpresas
             // 
@@ -145,7 +145,7 @@
             botaoEmpresas.TabIndex = 31;
             botaoEmpresas.Text = "Empresas";
             botaoEmpresas.UseVisualStyleBackColor = false;
-            botaoEmpresas.Click += AoClicar_botaoEmpresa;
+            botaoEmpresas.Click += AoClicarEmEmpresas;
             // 
             // panelBotaoConvenios
             // 
@@ -154,7 +154,7 @@
             panelBotaoConvenios.Name = "panelBotaoConvenios";
             panelBotaoConvenios.Size = new Size(134, 57);
             panelBotaoConvenios.TabIndex = 36;
-            panelBotaoConvenios.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoConvenios.Paint += AoPintarPainelBotoes;
             // 
             // botaoConvenios
             // 
@@ -163,7 +163,7 @@
             botaoConvenios.FlatAppearance.MouseDownBackColor = Color.White;
             botaoConvenios.FlatAppearance.MouseOverBackColor = Color.Yellow;
             botaoConvenios.FlatStyle = FlatStyle.Flat;
-            botaoConvenios.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoConvenios.Font = new Font("Segoe UI Symbol", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             botaoConvenios.ForeColor = Color.White;
             botaoConvenios.Location = new Point(3, 3);
             botaoConvenios.Name = "botaoConvenios";
@@ -171,7 +171,7 @@
             botaoConvenios.TabIndex = 31;
             botaoConvenios.Text = "Convênios";
             botaoConvenios.UseVisualStyleBackColor = false;
-            botaoConvenios.Click += button1_Click;
+            botaoConvenios.Click += AoClicarEmConvenios;
             // 
             // painelInferior
             // 
@@ -201,7 +201,7 @@
             botaoFechar.TabIndex = 4;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += AoClicar_botaoFechar;
+            botaoFechar.Click += AoClicarEmFechar;
             // 
             // data
             // 
@@ -225,7 +225,7 @@
             // 
             // timer1
             // 
-            timer1.Tick += AoPassarTempo_temporizador;
+            timer1.Tick += AoPassarTempoTemporizador;
             // 
             // painelExibicao
             // 
@@ -257,7 +257,7 @@
             Name = "TelaPrincipalForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TelaPrincipalForm";
-            Load += AoCarregar_TelaPrincipalForm;
+            Load += AoCarregarTela;
             panelTopo.ResumeLayout(false);
             panelBotaoEnderecos.ResumeLayout(false);
             panelBotaoEscolas.ResumeLayout(false);

@@ -3,25 +3,27 @@ using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCaixaDialogoErroForm : Form
+    public partial class TelaCaixaDialogoConfirmacaoDelecaoForm : Form
     {
         private PrivateFontCollection _pixeboy;
-        private List<string> _listaErrosEntrada;
-        private List<string> _listaErrosExibida;
+        private string _textoEntidadeExcluir;
+        private string _descricaoEntidadeExcluir;
+        public bool BotaoDeletarClicado = false;
 
-        public TelaCaixaDialogoErroForm(List<string> listaErros)
+        public TelaCaixaDialogoConfirmacaoDelecaoForm(string textoEntidadeExcluir, string descricaoEntidadeExcluir)
         {
             InitializeComponent();
-            _listaErrosEntrada = listaErros;
-            _listaErrosExibida = new List<string>();
+            _textoEntidadeExcluir = textoEntidadeExcluir;
+            _descricaoEntidadeExcluir = descricaoEntidadeExcluir;
         }
 
         private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
+            labelLinha.Text = EscreveLinhaIgualdades(labelLinha);
 
-            FormataListBoxErros();
-            listBoxErros.DataSource = _listaErrosExibida;
+            labelEntidadeExcluir.Text = _textoEntidadeExcluir;
+            labelDetalhes.Text = _descricaoEntidadeExcluir;
 
             foreach (Control c in Controls)
             {
@@ -66,7 +68,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotao(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -91,57 +93,28 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
 
-        private void AoClicarEmOk(object sender, EventArgs e)
+        private void AoClicarEmExcluir(object sender, EventArgs e)
         {
+            BotaoDeletarClicado = true;
             Close();
         }
 
-        private void FormataListBoxErros()
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
-            foreach (var mensagemErro in _listaErrosEntrada)
-            {
-                _listaErrosExibida.AddRange(TruncarTexto(mensagemErro));
-                _listaErrosExibida.Add(" ");
-            }
-        }
+            Close();
+        }        
 
-        private List<string> TruncarTexto(string texto)
+        private string EscreveLinhaIgualdades(Label label)
         {
-            string subTexto = texto;
-            var textoTruncado = texto;
-            List<string> listaRetorno = new List<string>();
-
-            int index = textoTruncado.Length - 1;
-            while (true)
+            string stringRetorno = "==";
+            
+            while(TextRenderer.MeasureText(stringRetorno,
+                        new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width < label.MaximumSize.Width)
             {
-                if (textoTruncado[index] == ' ')
-                {
-                    textoTruncado = textoTruncado.Remove(index);
-                    index = textoTruncado.Length;
-
-                    if (TextRenderer.MeasureText(textoTruncado,
-                        new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2< listBoxErros.Width)
-                    {
-                        listaRetorno.Add(textoTruncado);
-                        subTexto = subTexto.Substring(index);
-                        if (TextRenderer.MeasureText(subTexto
-                            , new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2 > listBoxErros.Width)
-                        {
-                            textoTruncado = subTexto;
-                            index = textoTruncado.Length;
-                        }
-                        else
-                        {
-                            listaRetorno.Add(subTexto);
-                            break;
-                        }
-                    }
-                }
-
-                index--;
+                stringRetorno += "==";
             }
 
-            return listaRetorno;
+            return stringRetorno;
         }
     }
 }

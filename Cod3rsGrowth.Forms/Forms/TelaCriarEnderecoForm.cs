@@ -56,9 +56,14 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
         private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
@@ -90,25 +95,10 @@ namespace Cod3rsGrowth.Forms.Forms
             const char Separador = '\n';
             Endereco enderecoCriado = new();
 
-            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-
-            enderecoCriado.Cep = textBoxCep.Text;
-            enderecoCriado.Municipio = textBoxMunicipio.Text;
-            enderecoCriado.Bairro = textBoxBairro.Text;
-            enderecoCriado.Rua = textBoxRua.Text;
-
-            if(!string.IsNullOrEmpty(textBoxNumero.Text))
-            {
-                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
-            }
-            else
-            {
-                enderecoCriado.Numero = -1;
-            }
-            enderecoCriado.Complemento = textBoxComplemento.Text;
-
             try
             {
+                RecebeDadosDaTelaEndereco(enderecoCriado); 
+
                 _servicoEndereco.Criar(enderecoCriado);
                 Close();
             }
@@ -123,7 +113,34 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
             }
+        }
 
+        private void RecebeDadosDaTelaEndereco(Endereco enderecoCriado)
+        {
+            try
+            {
+                enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
+
+                enderecoCriado.Cep = textBoxCep.Text;
+                enderecoCriado.Municipio = textBoxMunicipio.Text;
+                enderecoCriado.Bairro = textBoxBairro.Text;
+                enderecoCriado.Rua = textBoxRua.Text;
+
+                if (!string.IsNullOrEmpty(textBoxNumero.Text))
+                {
+                    enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
+                }
+                else
+                {
+                    enderecoCriado.Numero = -1;
+                }
+
+                enderecoCriado.Complemento = textBoxComplemento.Text;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void AoCLicar_botaoCancelar(object sender, EventArgs e)

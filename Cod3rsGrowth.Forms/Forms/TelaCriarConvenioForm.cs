@@ -26,7 +26,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoConvenio = servicoConvenio;
         }
 
-        private void AoCarregar_TelaCriarConvenioForm(object sender, EventArgs e)
+        private void AoCarregarCriar(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
 
@@ -41,7 +41,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -67,12 +67,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -96,38 +101,21 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            const char Separador = '\n';
             Convenio convenioCriado = new();
 
-            convenioCriado.NumeroProcesso = CriaValorNumeroProcesso(); 
-
-            if (!string.IsNullOrEmpty(textBoxValor.Text))
-            {
-                convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
-            }
-            else
-            {
-                convenioCriado.Valor = -1;
-            }
-            
-            convenioCriado.Objeto = richTextBoxObjeto.Text;
-            convenioCriado.DataInicio =
-                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day); 
-            convenioCriado.DataTermino =
-                new DateTime(dateTimePickerDataTermino.Value.Year, 
-                    dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
-            convenioCriado.IdEmpresa = _idEmpresaSelecionada;
-            convenioCriado.IdEscola = _idEscolaSelecionada;
-            
             try
             {
+                RecebeDadosDaTelaConvenio(convenioCriado);
+
                 _servicoConvenio.Criar(convenioCriado);
                 Close();
             }
             catch (Exception excecao)
             {
+                const char Separador = '\n';
+
                 var listaErros = new List<string>();
                 listaErros.AddRange(excecao.Message.Split(Separador));
                 var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
@@ -137,15 +125,37 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 caixaDialogoErro.ShowDialog(this);
             }
-            
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void RecebeDadosDaTelaConvenio(Convenio convenioCriado)
+        {
+            convenioCriado.NumeroProcesso = CriaValorNumeroProcesso();
+
+            if (!string.IsNullOrEmpty(textBoxValor.Text))
+            {
+                convenioCriado.Valor = decimal.Parse(textBoxValor.Text);
+            }
+            else
+            {
+                convenioCriado.Valor = -1;
+            }
+
+            convenioCriado.Objeto = richTextBoxObjeto.Text;
+            convenioCriado.DataInicio =
+                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            convenioCriado.DataTermino =
+                new DateTime(dateTimePickerDataTermino.Value.Year,
+                    dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
+            convenioCriado.IdEmpresa = _idEmpresaSelecionada;
+            convenioCriado.IdEscola = _idEscolaSelecionada;
+        }
+
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void AoPressionarTecla_textBoxValor(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaEmCaixaTextoValor(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
@@ -158,7 +168,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_panelEmpresas(object sender, PaintEventArgs e)
+        private void AoPintarpainelEscolas(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -183,7 +193,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_panelEscolas(object sender, PaintEventArgs e)
+        private void AoPintarPainelEscolas(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -208,7 +218,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
+        private void AoAlterarValorDateTimePickerDataTermino(object sender, EventArgs e)
         {
             if (dateTimePickerDataTermino.Value < DateTime.Now)
             {
@@ -217,7 +227,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoEscola(object sender, EventArgs e)
+        private void AoClicarEmEscola(object sender, EventArgs e)
         {
             _botaoEmpresaAtivo = false;
             _botaoEscolaAtivo = true;
@@ -225,7 +235,7 @@ namespace Cod3rsGrowth.Forms.Forms
             listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
         }
 
-        private void AoClicar_botaoEmpresa(object sender, EventArgs e)
+        private void AoClicarEmEmpresa(object sender, EventArgs e)
         {
             _botaoEscolaAtivo = false;
             _botaoEmpresaAtivo = true;
@@ -233,7 +243,7 @@ namespace Cod3rsGrowth.Forms.Forms
             listBoxEscolaEmpresa.DataSource = _servicoEmpresa.ObterTodos(null);
         }
 
-        private void AoFormatar_listBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarListBoxEscolaEmpresa(object sender, ListControlConvertEventArgs e)
         {
             if (_botaoEscolaAtivo)
             {
@@ -252,7 +262,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoMudarIndexSelecionado_listBoxEscolaEmpresa(object sender, EventArgs e)
+        private void AoMudarIndexSelecionadoListBoxEscolaEmpresa(object sender, EventArgs e)
         {
             var listBox = (ListBox)sender;
 
@@ -278,13 +288,17 @@ namespace Cod3rsGrowth.Forms.Forms
         private int CriaValorNumeroProcesso()
         {
             var listaConvenios = _servicoConvenio.ObterTodos(null);
-            var maiorNumeroProcesso = listaConvenios[0].NumeroProcesso;
-
-            foreach(var convenio in listaConvenios)
+            int maiorNumeroProcesso = 0;
+            if (!listaConvenios.IsNullOrEmpty())
             {
-                if(convenio.NumeroProcesso > maiorNumeroProcesso)
+                maiorNumeroProcesso = listaConvenios[0].NumeroProcesso;
+
+                foreach (var convenio in listaConvenios)
                 {
-                    maiorNumeroProcesso = convenio.NumeroProcesso;
+                    if (convenio.NumeroProcesso > maiorNumeroProcesso)
+                    {
+                        maiorNumeroProcesso = convenio.NumeroProcesso;
+                    }
                 }
             }
 

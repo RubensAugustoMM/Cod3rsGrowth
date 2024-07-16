@@ -31,18 +31,6 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewEmpresas = new DataGridView();
-            empresaEnderecoOtdBindingSource = new BindingSource(components);
-            painelLateral = new Panel();
-            panelBotaoDeletar = new Panel();
-            botaoDeletar = new Button();
-            panel1 = new Panel();
-            botaoPesquisar = new Button();
-            panelBotaoEditar = new Panel();
-            botaoEditar = new Button();
-            panelBotaoFiltrar = new Panel();
-            botaoFiltros = new Button();
-            panelBotaoCriar = new Panel();
-            botaoCriar = new Button();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             razaoSocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeFantasiaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -57,6 +45,18 @@
             capitalSocialDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idEnderecoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             estadoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            empresaEnderecoOtdBindingSource = new BindingSource(components);
+            painelLateral = new Panel();
+            panelBotaoDeletar = new Panel();
+            botaoDeletar = new Button();
+            panel1 = new Panel();
+            botaoPesquisar = new Button();
+            panelBotaoEditar = new Panel();
+            botaoEditar = new Button();
+            panelBotaoFiltrar = new Panel();
+            botaoFiltros = new Button();
+            panelBotaoCriar = new Panel();
+            botaoCriar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEmpresas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)empresaEnderecoOtdBindingSource).BeginInit();
             painelLateral.SuspendLayout();
@@ -71,7 +71,6 @@
             // 
             dataGridViewEmpresas.AllowUserToAddRows = false;
             dataGridViewEmpresas.AllowUserToDeleteRows = false;
-            dataGridViewEmpresas.AllowUserToOrderColumns = true;
             dataGridViewEmpresas.AllowUserToResizeRows = false;
             dataGridViewEmpresas.AutoGenerateColumns = false;
             dataGridViewEmpresas.BackgroundColor = Color.Blue;
@@ -92,159 +91,15 @@
             dataGridViewEmpresas.EnableHeadersVisualStyles = false;
             dataGridViewEmpresas.GridColor = Color.White;
             dataGridViewEmpresas.Location = new Point(165, 12);
+            dataGridViewEmpresas.MultiSelect = false;
             dataGridViewEmpresas.Name = "dataGridViewEmpresas";
+            dataGridViewEmpresas.ReadOnly = true;
             dataGridViewEmpresas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewEmpresas.RowTemplate.Height = 25;
+            dataGridViewEmpresas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEmpresas.Size = new Size(623, 299);
             dataGridViewEmpresas.TabIndex = 2;
-            dataGridViewEmpresas.CellFormatting += AoFormatarCelulas_dataGridViewEmpresas;
-            // 
-            // empresaEnderecoOtdBindingSource
-            // 
-            empresaEnderecoOtdBindingSource.DataSource = typeof(Dominio.ObjetosTranferenciaDados.EmpresaEnderecoOtd);
-            // 
-            // painelLateral
-            // 
-            painelLateral.BackColor = Color.DarkGray;
-            painelLateral.Controls.Add(panelBotaoDeletar);
-            painelLateral.Controls.Add(panel1);
-            painelLateral.Controls.Add(panelBotaoEditar);
-            painelLateral.Controls.Add(panelBotaoFiltrar);
-            painelLateral.Controls.Add(panelBotaoCriar);
-            painelLateral.Dock = DockStyle.Left;
-            painelLateral.Location = new Point(0, 0);
-            painelLateral.Name = "painelLateral";
-            painelLateral.Size = new Size(164, 323);
-            painelLateral.TabIndex = 1;
-            painelLateral.Paint += AoRequererPintura_painelLateral;
-            // 
-            // panelBotaoDeletar
-            // 
-            panelBotaoDeletar.Controls.Add(botaoDeletar);
-            panelBotaoDeletar.Location = new Point(12, 177);
-            panelBotaoDeletar.Name = "panelBotaoDeletar";
-            panelBotaoDeletar.Size = new Size(133, 49);
-            panelBotaoDeletar.TabIndex = 38;
-            panelBotaoDeletar.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoDeletar
-            // 
-            botaoDeletar.BackColor = Color.Green;
-            botaoDeletar.FlatAppearance.BorderSize = 0;
-            botaoDeletar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoDeletar.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoDeletar.FlatStyle = FlatStyle.Flat;
-            botaoDeletar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoDeletar.ForeColor = Color.White;
-            botaoDeletar.Location = new Point(3, 3);
-            botaoDeletar.Name = "botaoDeletar";
-            botaoDeletar.Size = new Size(112, 36);
-            botaoDeletar.TabIndex = 31;
-            botaoDeletar.Text = "Deletar";
-            botaoDeletar.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(botaoPesquisar);
-            panel1.Location = new Point(12, 232);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(133, 49);
-            panel1.TabIndex = 34;
-            panel1.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoPesquisar
-            // 
-            botaoPesquisar.BackColor = Color.Green;
-            botaoPesquisar.FlatAppearance.BorderSize = 0;
-            botaoPesquisar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoPesquisar.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoPesquisar.FlatStyle = FlatStyle.Flat;
-            botaoPesquisar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoPesquisar.ForeColor = Color.White;
-            botaoPesquisar.Location = new Point(3, 3);
-            botaoPesquisar.Name = "botaoPesquisar";
-            botaoPesquisar.Size = new Size(112, 36);
-            botaoPesquisar.TabIndex = 31;
-            botaoPesquisar.Text = "Pesquisar";
-            botaoPesquisar.UseVisualStyleBackColor = false;
-            botaoPesquisar.Click += AoClicar_botaoPesquisar;
-            // 
-            // panelBotaoEditar
-            // 
-            panelBotaoEditar.Controls.Add(botaoEditar);
-            panelBotaoEditar.Location = new Point(12, 122);
-            panelBotaoEditar.Name = "panelBotaoEditar";
-            panelBotaoEditar.Size = new Size(133, 49);
-            panelBotaoEditar.TabIndex = 37;
-            panelBotaoEditar.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoEditar
-            // 
-            botaoEditar.BackColor = Color.Green;
-            botaoEditar.FlatAppearance.BorderSize = 0;
-            botaoEditar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoEditar.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoEditar.FlatStyle = FlatStyle.Flat;
-            botaoEditar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoEditar.ForeColor = Color.White;
-            botaoEditar.Location = new Point(3, 3);
-            botaoEditar.Name = "botaoEditar";
-            botaoEditar.Size = new Size(112, 36);
-            botaoEditar.TabIndex = 31;
-            botaoEditar.Text = "Editar";
-            botaoEditar.UseVisualStyleBackColor = false;
-            // 
-            // panelBotaoFiltrar
-            // 
-            panelBotaoFiltrar.Controls.Add(botaoFiltros);
-            panelBotaoFiltrar.Location = new Point(12, 12);
-            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
-            panelBotaoFiltrar.Size = new Size(133, 49);
-            panelBotaoFiltrar.TabIndex = 33;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoFiltros
-            // 
-            botaoFiltros.BackColor = Color.Green;
-            botaoFiltros.FlatAppearance.BorderSize = 0;
-            botaoFiltros.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoFiltros.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoFiltros.FlatStyle = FlatStyle.Flat;
-            botaoFiltros.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoFiltros.ForeColor = Color.White;
-            botaoFiltros.Location = new Point(3, 3);
-            botaoFiltros.Name = "botaoFiltros";
-            botaoFiltros.Size = new Size(112, 36);
-            botaoFiltros.TabIndex = 31;
-            botaoFiltros.Text = "Filtros";
-            botaoFiltros.UseVisualStyleBackColor = false;
-            botaoFiltros.Click += AoClicar_botaoFiltros;
-            // 
-            // panelBotaoCriar
-            // 
-            panelBotaoCriar.Controls.Add(botaoCriar);
-            panelBotaoCriar.Location = new Point(12, 67);
-            panelBotaoCriar.Name = "panelBotaoCriar";
-            panelBotaoCriar.Size = new Size(133, 49);
-            panelBotaoCriar.TabIndex = 36;
-            panelBotaoCriar.Paint += AoRequererPintura_panelSombraBotoes;
-            // 
-            // botaoCriar
-            // 
-            botaoCriar.BackColor = Color.Green;
-            botaoCriar.FlatAppearance.BorderSize = 0;
-            botaoCriar.FlatAppearance.MouseDownBackColor = Color.White;
-            botaoCriar.FlatAppearance.MouseOverBackColor = Color.Yellow;
-            botaoCriar.FlatStyle = FlatStyle.Flat;
-            botaoCriar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            botaoCriar.ForeColor = Color.White;
-            botaoCriar.Location = new Point(3, 3);
-            botaoCriar.Name = "botaoCriar";
-            botaoCriar.Size = new Size(112, 36);
-            botaoCriar.TabIndex = 31;
-            botaoCriar.Text = "Criar";
-            botaoCriar.UseVisualStyleBackColor = false;
-            botaoCriar.Click += AoClicar_botaoCriar;
+            dataGridViewEmpresas.CellFormatting += AoFormatarCelulasDataGridViewEmpresas;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -372,6 +227,154 @@
             estadoDataGridViewTextBoxColumn.ReadOnly = true;
             estadoDataGridViewTextBoxColumn.Width = 66;
             // 
+            // empresaEnderecoOtdBindingSource
+            // 
+            empresaEnderecoOtdBindingSource.DataSource = typeof(Dominio.ObjetosTranferenciaDados.EmpresaEnderecoOtd);
+            // 
+            // painelLateral
+            // 
+            painelLateral.BackColor = Color.DarkGray;
+            painelLateral.Controls.Add(panelBotaoDeletar);
+            painelLateral.Controls.Add(panel1);
+            painelLateral.Controls.Add(panelBotaoEditar);
+            painelLateral.Controls.Add(panelBotaoFiltrar);
+            painelLateral.Controls.Add(panelBotaoCriar);
+            painelLateral.Dock = DockStyle.Left;
+            painelLateral.Location = new Point(0, 0);
+            painelLateral.Name = "painelLateral";
+            painelLateral.Size = new Size(164, 323);
+            painelLateral.TabIndex = 1;
+            painelLateral.Paint += AoPintarPainelLateral;
+            // 
+            // panelBotaoDeletar
+            // 
+            panelBotaoDeletar.Controls.Add(botaoDeletar);
+            panelBotaoDeletar.Location = new Point(12, 177);
+            panelBotaoDeletar.Name = "panelBotaoDeletar";
+            panelBotaoDeletar.Size = new Size(133, 49);
+            panelBotaoDeletar.TabIndex = 38;
+            panelBotaoDeletar.Paint += AoPintarPainelBotoes;
+            // 
+            // botaoDeletar
+            // 
+            botaoDeletar.BackColor = Color.Green;
+            botaoDeletar.FlatAppearance.BorderSize = 0;
+            botaoDeletar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoDeletar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoDeletar.FlatStyle = FlatStyle.Flat;
+            botaoDeletar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoDeletar.ForeColor = Color.White;
+            botaoDeletar.Location = new Point(3, 3);
+            botaoDeletar.Name = "botaoDeletar";
+            botaoDeletar.Size = new Size(112, 36);
+            botaoDeletar.TabIndex = 31;
+            botaoDeletar.Text = "Deletar";
+            botaoDeletar.UseVisualStyleBackColor = false;
+            botaoDeletar.Click += AoClicarEmDeletar;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(botaoPesquisar);
+            panel1.Location = new Point(12, 232);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(133, 49);
+            panel1.TabIndex = 34;
+            panel1.Paint += AoPintarPainelBotoes;
+            // 
+            // botaoPesquisar
+            // 
+            botaoPesquisar.BackColor = Color.Green;
+            botaoPesquisar.FlatAppearance.BorderSize = 0;
+            botaoPesquisar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoPesquisar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoPesquisar.FlatStyle = FlatStyle.Flat;
+            botaoPesquisar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoPesquisar.ForeColor = Color.White;
+            botaoPesquisar.Location = new Point(3, 3);
+            botaoPesquisar.Name = "botaoPesquisar";
+            botaoPesquisar.Size = new Size(112, 36);
+            botaoPesquisar.TabIndex = 31;
+            botaoPesquisar.Text = "Pesquisar";
+            botaoPesquisar.UseVisualStyleBackColor = false;
+            botaoPesquisar.Click += AoClicarEmPesquisar;
+            // 
+            // panelBotaoEditar
+            // 
+            panelBotaoEditar.Controls.Add(botaoEditar);
+            panelBotaoEditar.Location = new Point(12, 122);
+            panelBotaoEditar.Name = "panelBotaoEditar";
+            panelBotaoEditar.Size = new Size(133, 49);
+            panelBotaoEditar.TabIndex = 37;
+            panelBotaoEditar.Paint += AoPintarPainelBotoes;
+            // 
+            // botaoEditar
+            // 
+            botaoEditar.BackColor = Color.Green;
+            botaoEditar.FlatAppearance.BorderSize = 0;
+            botaoEditar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoEditar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoEditar.FlatStyle = FlatStyle.Flat;
+            botaoEditar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoEditar.ForeColor = Color.White;
+            botaoEditar.Location = new Point(3, 3);
+            botaoEditar.Name = "botaoEditar";
+            botaoEditar.Size = new Size(112, 36);
+            botaoEditar.TabIndex = 31;
+            botaoEditar.Text = "Editar";
+            botaoEditar.UseVisualStyleBackColor = false;
+            // 
+            // panelBotaoFiltrar
+            // 
+            panelBotaoFiltrar.Controls.Add(botaoFiltros);
+            panelBotaoFiltrar.Location = new Point(12, 12);
+            panelBotaoFiltrar.Name = "panelBotaoFiltrar";
+            panelBotaoFiltrar.Size = new Size(133, 49);
+            panelBotaoFiltrar.TabIndex = 33;
+            panelBotaoFiltrar.Paint += AoPintarPainelBotoes;
+            // 
+            // botaoFiltros
+            // 
+            botaoFiltros.BackColor = Color.Green;
+            botaoFiltros.FlatAppearance.BorderSize = 0;
+            botaoFiltros.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoFiltros.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoFiltros.FlatStyle = FlatStyle.Flat;
+            botaoFiltros.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoFiltros.ForeColor = Color.White;
+            botaoFiltros.Location = new Point(3, 3);
+            botaoFiltros.Name = "botaoFiltros";
+            botaoFiltros.Size = new Size(112, 36);
+            botaoFiltros.TabIndex = 31;
+            botaoFiltros.Text = "Filtros";
+            botaoFiltros.UseVisualStyleBackColor = false;
+            botaoFiltros.Click += AoClicarEmFiltros;
+            // 
+            // panelBotaoCriar
+            // 
+            panelBotaoCriar.Controls.Add(botaoCriar);
+            panelBotaoCriar.Location = new Point(12, 67);
+            panelBotaoCriar.Name = "panelBotaoCriar";
+            panelBotaoCriar.Size = new Size(133, 49);
+            panelBotaoCriar.TabIndex = 36;
+            panelBotaoCriar.Paint += AoPintarPainelBotoes;
+            // 
+            // botaoCriar
+            // 
+            botaoCriar.BackColor = Color.Green;
+            botaoCriar.FlatAppearance.BorderSize = 0;
+            botaoCriar.FlatAppearance.MouseDownBackColor = Color.White;
+            botaoCriar.FlatAppearance.MouseOverBackColor = Color.Yellow;
+            botaoCriar.FlatStyle = FlatStyle.Flat;
+            botaoCriar.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            botaoCriar.ForeColor = Color.White;
+            botaoCriar.Location = new Point(3, 3);
+            botaoCriar.Name = "botaoCriar";
+            botaoCriar.Size = new Size(112, 36);
+            botaoCriar.TabIndex = 31;
+            botaoCriar.Text = "Criar";
+            botaoCriar.UseVisualStyleBackColor = false;
+            botaoCriar.Click += AoClicarEmCriar;
+            // 
             // TelaEmpresaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -383,9 +386,9 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaEmpresaForm";
             Text = "TelaConvenioForm";
-            Load += AoCarregar_TelaEmpresaForm;
-            VisibleChanged += AoMudarVisibilidade_TelaEmpresaForm;
-            Paint += AoRequererPintura_TelaEmpresaForm;
+            Load += AoCarregarTela;
+            VisibleChanged += AoMudarVisibilidadeDaTelaFiltros;
+            Paint += AoPintarTela;
             ((System.ComponentModel.ISupportInitialize)dataGridViewEmpresas).EndInit();
             ((System.ComponentModel.ISupportInitialize)empresaEnderecoOtdBindingSource).EndInit();
             painelLateral.ResumeLayout(false);

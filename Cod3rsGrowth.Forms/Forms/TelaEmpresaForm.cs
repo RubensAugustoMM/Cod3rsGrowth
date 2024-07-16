@@ -1,9 +1,12 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
+using Cod3rsGrowth.Forms.Properties;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -17,11 +20,11 @@ namespace Cod3rsGrowth.Forms.Forms
         public TelaEmpresaForm(ServicoEmpresa servicoEmpresa, ServicoEndereco servicoEndereco)
         {
             _servicoEmpresa = servicoEmpresa;
-            InitializeComponent();
             _servicoEndereco = servicoEndereco;
+            InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaEmpresaForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -46,7 +49,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregar_TelaEmpresaForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
 
@@ -61,7 +64,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -86,7 +89,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -101,7 +104,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -112,12 +115,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
+        private void AoClicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(_controladorFiltro.Filtro);
         }
@@ -152,21 +160,21 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
-        private void AoMudarVisibilidade_TelaEmpresaForm(object sender, EventArgs e)
+        private void AoMudarVisibilidadeDaTelaFiltros(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -179,7 +187,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatarCelulas_dataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
+        private void AoFormatarCelulasDataGridViewEmpresas(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridViewEmpresas.Columns[e.ColumnIndex].HeaderCell.Value == "Natureza Juridica")
             {
@@ -210,7 +218,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
             TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco, _servicoEmpresa);
 
@@ -223,6 +231,68 @@ namespace Cod3rsGrowth.Forms.Forms
             };
 
             telaCriarEmpresa.ShowDialog(this);
+        }
+
+        private void AoClicarEmDeletar(object sender, EventArgs e)
+        {
+            try
+            { 
+                if (dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Empresa para excluir!!!!!!");
+                }
+
+                int id = (int)dataGridViewEmpresas.SelectedRows[0].Cells[0].Value;
+
+                var empresaDeletar = _servicoEmpresa.ObterPorId(id);
+                
+                var mensagemEmpresaExcluir = CriaMensagemEmpresaExcluir(empresaDeletar);
+                var descricaoEmpresaExcluir = CriaDescricaoEmpresaExcluir(empresaDeletar);
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEmpresaExcluir, descricaoEmpresaExcluir);
+
+                telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    {
+                        _servicoEmpresa.Deletar(id);
+                        dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+                    }
+                };
+
+                telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoConvenio.TopLevel = true;
+
+                telaExclusaoConvenio.ShowDialog(this);
+            }
+            catch(Exception excecao)
+            {
+                const string Separador = "\n";
+                List<string> listaErros = new();
+
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+            }
+        }
+
+        private string CriaMensagemEmpresaExcluir(EmpresaEnderecoOtd empresaDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir a Empresa {empresaDeletar.RazaoSocial}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoEmpresaExcluir(EmpresaEnderecoOtd empresaDeletar)
+        {
+            var mensagem = $"Nome Fantasia:\n {empresaDeletar.NomeFantasia}\n\n CNPJ:\n {empresaDeletar.Cnpj}\n "
+                        + $"Estado:\n {EnumExtencoes.RetornaDescricao(empresaDeletar.Estado)}\n\n"
+                        + $"\n!!!O endereço de código:\n {empresaDeletar.IdEndereco} também será Excluído!!!";
+            return mensagem;
         }
     }
 }

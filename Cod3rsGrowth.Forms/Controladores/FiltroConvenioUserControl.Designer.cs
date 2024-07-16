@@ -148,7 +148,7 @@
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(149, 16);
             textBoxValor.TabIndex = 7;
-            textBoxValor.KeyPress += AoPressionarTecla_TextBox_somenteValoresReais;
+            textBoxValor.KeyPress += AoPressionarTeclaTextBoxSomenteValoresReais;
             // 
             // dateTimePickerDataInicio
             // 
@@ -164,7 +164,7 @@
             dateTimePickerDataInicio.Name = "dateTimePickerDataInicio";
             dateTimePickerDataInicio.Size = new Size(149, 22);
             dateTimePickerDataInicio.TabIndex = 8;
-            dateTimePickerDataInicio.ValueChanged += AoAlterarValor_dateTimePickerDataInicio;
+            dateTimePickerDataInicio.ValueChanged += AoAlterarValorDateTimePickerDataInicio;
             // 
             // textBoxIdEscola
             // 
@@ -176,7 +176,7 @@
             textBoxIdEscola.Name = "textBoxIdEscola";
             textBoxIdEscola.Size = new Size(149, 16);
             textBoxIdEscola.TabIndex = 9;
-            textBoxIdEscola.KeyPress += AoPressionarTecla_TextBox_somenteValoresNaturais;
+            textBoxIdEscola.KeyPress += AoPressionarTeclaTextBoxSomenteValoresNaturais;
             // 
             // textBoxIdEmpresa
             // 
@@ -188,7 +188,7 @@
             textBoxIdEmpresa.Name = "textBoxIdEmpresa";
             textBoxIdEmpresa.Size = new Size(149, 16);
             textBoxIdEmpresa.TabIndex = 10;
-            textBoxIdEmpresa.KeyPress += AoPressionarTecla_TextBox_somenteValoresNaturais;
+            textBoxIdEmpresa.KeyPress += AoPressionarTeclaTextBoxSomenteValoresNaturais;
             // 
             // dateTimePickerDataTermino
             // 
@@ -204,7 +204,7 @@
             dateTimePickerDataTermino.Name = "dateTimePickerDataTermino";
             dateTimePickerDataTermino.Size = new Size(149, 22);
             dateTimePickerDataTermino.TabIndex = 11;
-            dateTimePickerDataTermino.ValueChanged += AoAlterarValor_dateTimePickerDataTermino;
+            dateTimePickerDataTermino.ValueChanged += AoAlterarValorDateTimePickerDataTermino;
             // 
             // botaoFechar
             // 
@@ -221,7 +221,7 @@
             botaoFechar.TabIndex = 14;
             botaoFechar.Text = "Fechar";
             botaoFechar.UseVisualStyleBackColor = false;
-            botaoFechar.Click += AoCLicar_botaoFechar;
+            botaoFechar.Click += AoClicarEmFechar;
             // 
             // botaoFiltrar
             // 
@@ -238,7 +238,7 @@
             botaoFiltrar.TabIndex = 31;
             botaoFiltrar.Text = "Filtrar";
             botaoFiltrar.UseVisualStyleBackColor = false;
-            botaoFiltrar.Click += AoClicar_botaoFiltrar;
+            botaoFiltrar.Click += AoClicarEmFiltrar;
             // 
             // botaoLimpar
             // 
@@ -255,7 +255,7 @@
             botaoLimpar.TabIndex = 22;
             botaoLimpar.Text = "Limpar";
             botaoLimpar.UseVisualStyleBackColor = false;
-            botaoLimpar.Click += AoClicar_botaoLimpar;
+            botaoLimpar.Click += AoClicarEmLimpar;
             // 
             // panelBotaoFiltrar
             // 
@@ -265,7 +265,7 @@
             panelBotaoFiltrar.Name = "panelBotaoFiltrar";
             panelBotaoFiltrar.Size = new Size(106, 40);
             panelBotaoFiltrar.TabIndex = 31;
-            panelBotaoFiltrar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoFiltrar.Paint += AoPintarPainelBotoes;
             // 
             // panel1
             // 
@@ -275,7 +275,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(106, 40);
             panel1.TabIndex = 32;
-            panel1.Paint += AoRequererPintura_panelSombraBotoes;
+            panel1.Paint += AoPintarPainelBotoes;
             // 
             // panel2
             // 
@@ -285,7 +285,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(106, 40);
             panel2.TabIndex = 33;
-            panel2.Paint += AoRequererPintura_panelSombraBotoes;
+            panel2.Paint += AoPintarPainelBotoes;
             // 
             // labelTitulo
             // 
@@ -328,7 +328,7 @@
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Size = new Size(502, 291);
             panelFiltro.TabIndex = 35;
-            panelFiltro.Paint += AoRequererPintura_panelFiltro;
+            panelFiltro.Paint += AoPintarControladorSombra;
             // 
             // labelRazaoSocialEmpresa
             // 
@@ -418,8 +418,8 @@
             Controls.Add(panelFiltro);
             Name = "FiltroConvenioUserControl";
             Size = new Size(512, 310);
-            Load += FiltroConvenioUserControl_Load;
-            Paint += AoRequererPintura_FiltroConvenioUserControl1;
+            Load += AoCarregarControlador;
+            Paint += AoPintarControladorSombra;
             panelBotaoFiltrar.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);

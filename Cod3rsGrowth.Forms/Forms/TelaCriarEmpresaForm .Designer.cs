@@ -79,7 +79,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotoes;
             // 
             // botaoCancelar
             // 
@@ -96,7 +96,7 @@
             botaoCancelar.TabIndex = 22;
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = false;
-            botaoCancelar.Click += AoCLicar_botaoCancelar;
+            botaoCancelar.Click += AoCLicarEmCancelar;
             // 
             // panelBotaoSalvar
             // 
@@ -106,7 +106,7 @@
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
-            panelBotaoSalvar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoSalvar.Paint += AoPintarPainelBotoes;
             // 
             // botaoSalvar
             // 
@@ -123,7 +123,7 @@
             botaoSalvar.TabIndex = 31;
             botaoSalvar.Text = "Salvar";
             botaoSalvar.UseVisualStyleBackColor = false;
-            botaoSalvar.Click += AoClicar_botaoSalvar;
+            botaoSalvar.Click += AoClicarEmSalvar;
             // 
             // labelTitulo
             // 
@@ -156,7 +156,7 @@
             textBoxCnpj.ShortcutsEnabled = false;
             textBoxCnpj.Size = new Size(149, 16);
             textBoxCnpj.TabIndex = 72;
-            textBoxCnpj.KeyPress += AoPressionarTecla_textBoxCnpj;
+            textBoxCnpj.KeyPress += AoPressionarTeclaTextBoxCnpj;
             // 
             // textBoxNomeFantasia
             // 
@@ -200,7 +200,7 @@
             textBoxCapitalSocial.ShortcutsEnabled = false;
             textBoxCapitalSocial.Size = new Size(149, 16);
             textBoxCapitalSocial.TabIndex = 76;
-            textBoxCapitalSocial.KeyPress += AoPressionarTecla_textBoxCapitalSocial;
+            textBoxCapitalSocial.KeyPress += AoPressionarTeclaTextBoxCapitalSocial;
             // 
             // panelCriacao
             // 
@@ -244,7 +244,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(682, 303);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelCriacao;
+            panelCriacao.Paint += AoPintarTela;
             // 
             // labelPorte
             // 
@@ -268,7 +268,7 @@
             comboBoxPorte.Name = "comboBoxPorte";
             comboBoxPorte.Size = new Size(149, 23);
             comboBoxPorte.TabIndex = 107;
-            comboBoxPorte.Format += AoFormatar_comboBoxPorte;
+            comboBoxPorte.Format += AoFormatarComboBoxPorte;
             // 
             // labelMatrizFilial
             // 
@@ -292,8 +292,8 @@
             comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
             comboBoxMatrizFilial.Size = new Size(149, 23);
             comboBoxMatrizFilial.TabIndex = 105;
-            comboBoxMatrizFilial.Format += AoFormatar_comboBoxMatrizFilial;
-            comboBoxMatrizFilial.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxMatrizFilial.Format += AoFormatarComboBoxMatrizFilial;
+            comboBoxMatrizFilial.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxNumero
             // 
@@ -305,7 +305,7 @@
             textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 82;
-            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            textBoxNumero.KeyPress += AoPressionarTeclaTextBoxNumero;
             // 
             // labelCep
             // 
@@ -453,7 +453,7 @@
             dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
             dateTimePickerDataAbertura.Size = new Size(149, 22);
             dateTimePickerDataAbertura.TabIndex = 98;
-            dateTimePickerDataAbertura.ValueChanged += AoAlterarValor_dateTimePickerDataInicioAtividade;
+            dateTimePickerDataAbertura.ValueChanged += AoAlterarValorDateTimePickerDataInicioAtividade;
             // 
             // comboBoxSituacaoCadastral
             // 
@@ -466,7 +466,7 @@
             comboBoxSituacaoCadastral.Name = "comboBoxSituacaoCadastral";
             comboBoxSituacaoCadastral.Size = new Size(149, 23);
             comboBoxSituacaoCadastral.TabIndex = 97;
-            comboBoxSituacaoCadastral.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxSituacaoCadastral.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxComplemento
             // 
@@ -509,8 +509,8 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 85;
-            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
-            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxEstado.Format += AoFormatarComboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxBairro
             // 
@@ -532,7 +532,7 @@
             textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 91;
-            textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
+            textBoxCep.KeyPress += AoPressionarTeclaTextBoxCep;
             // 
             // comboBoxNaturezaJuridica
             // 
@@ -545,8 +545,8 @@
             comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
             comboBoxNaturezaJuridica.Size = new Size(149, 23);
             comboBoxNaturezaJuridica.TabIndex = 83;
-            comboBoxNaturezaJuridica.Format += AoFormatar_comboBoxNaturezaJuridica;
-            comboBoxNaturezaJuridica.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxNaturezaJuridica.Format += AoFormatarComboBoxNaturezaJuridica;
+            comboBoxNaturezaJuridica.KeyPress += AoPressionarTeclaComboBox;
             // 
             // TelaCriarEmpresaForm
             // 
@@ -559,7 +559,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEmpresaForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCriarEnderecoForm;
+            Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);

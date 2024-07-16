@@ -1,9 +1,12 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
+using Cod3rsGrowth.Forms.Properties;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -19,7 +22,7 @@ namespace Cod3rsGrowth.Forms.Forms
             InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaEnderecoForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -44,7 +47,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
 
@@ -59,7 +62,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -84,7 +87,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -99,7 +102,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -110,12 +113,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoClicar_botaoPesquisar(object sender, EventArgs e)
+        private void AoClicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(_controladorFiltro.Filtro);
         }
@@ -146,21 +154,21 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
-        private void AoMudarVisibilidade_TelaEnderecoForm(object sender, EventArgs e)
+        private void AoMudarVisibilidadeTela(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -173,7 +181,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatarCelulas_dataGridViewEnderecos(object sender, DataGridViewCellFormattingEventArgs e)
+        private void AoFormatarCelulasDataGridViewEnderecos(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridViewEnderecos.Columns[e.ColumnIndex].HeaderText == "Estado")
             {
@@ -182,7 +190,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
             TelaCriarEnderecoForm telaCriarEndereco = new TelaCriarEnderecoForm(_servicoEndereco);
 
@@ -194,7 +202,69 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
             };
 
-            telaCriarEndereco.ShowDialog(this); 
+            telaCriarEndereco.ShowDialog(this);
+        }
+
+        private void AoClicarEmDeletar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewEnderecos.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Endereço para excluir!!!!!!");
+                }
+
+                int id = (int)dataGridViewEnderecos.SelectedRows[0].Cells[0].Value;
+
+                var enderecoDeletar = _servicoEndereco.ObterPorId(id);
+                
+                var mensagemEnderecoExcluir = CriaMensagemEnderecoExcluir(enderecoDeletar);
+                var descricaoEnderecoExcluir = CriaDescricaoEnderecoExcluir(enderecoDeletar);
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEndereco =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEnderecoExcluir, descricaoEnderecoExcluir);
+
+                telaExclusaoEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    if(telaExclusaoEndereco.BotaoDeletarClicado)
+                    {
+                        _servicoEndereco.Deletar(id);
+                        dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+                    }
+                };
+
+                telaExclusaoEndereco.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoEndereco.TopLevel = true;
+
+                telaExclusaoEndereco.ShowDialog(this);
+            }
+            catch(Exception excecao)
+            {
+                const string Separador = "\n";
+                List<string> listaErros = new();
+
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+            }
+        }
+
+        private string CriaMensagemEnderecoExcluir(Endereco enderecoDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir o Endereço com CEP {enderecoDeletar.Cep}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoEnderecoExcluir(Endereco enderecoDeletar)
+        {
+            var mensagem = $"Município:\n  {enderecoDeletar.Municipio}\nBairro:\n  {enderecoDeletar.Bairro}\n"
+                           + $"Rua:\n {enderecoDeletar.Rua}\n" + $"Estado:\n {EnumExtencoes.RetornaDescricao(enderecoDeletar.Estado)}\n"
+                           +$"Complemento:\n {enderecoDeletar.Complemento}";
+            return mensagem;
         }
     }
 }

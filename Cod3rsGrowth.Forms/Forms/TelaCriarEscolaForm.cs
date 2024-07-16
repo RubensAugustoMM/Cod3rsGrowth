@@ -1,9 +1,11 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -20,7 +22,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoEscola = servicoEscola;
         }
 
-        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -32,7 +34,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -58,12 +60,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -87,13 +94,52 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             const char Separador = '\n';
             List<string> listaErros = new();
             Endereco enderecoCriado = new();
             Escola escolaCriada = new();
 
+            try
+            {
+                RecebeDadosDaTelaEscola(escolaCriada);
+
+                RecebeDadosDaTelaEndereco(enderecoCriado);
+
+                try
+                {
+                    _servicoEndereco.Criar(enderecoCriado);
+                    escolaCriada.IdEndereco = enderecoCriado.Id;
+                }
+                catch (Exception excecao)
+                {
+                    listaErros.AddRange(excecao.Message.Split(Separador));
+                    escolaCriada.IdEndereco = -1;
+                }
+
+                _servicoEscola.Criar(escolaCriada);
+                Close();
+            }
+            catch (Exception excecao)
+            {
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+
+                if (escolaCriada.IdEndereco != -1)
+                {
+                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
+                }
+            }
+        }
+
+        private void RecebeDadosDaTelaEscola(Escola escolaCriada)
+        {
             if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
             {
                 escolaCriada.StatusAtividade = true;
@@ -111,59 +157,37 @@ namespace Cod3rsGrowth.Forms.Forms
             escolaCriada.Telefone = textBoxTelefone.Text;
             escolaCriada.Email = textBoxEmail.Text;
             escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
+        }
 
-            enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
-
-            enderecoCriado.Cep = textBoxCep.Text;
-            enderecoCriado.Municipio = textBoxMunicipio.Text;
-            enderecoCriado.Bairro = textBoxBairro.Text;
-            enderecoCriado.Rua = textBoxRua.Text;
-
-            if (!string.IsNullOrEmpty(textBoxNumero.Text))
-            {
-                enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
-            }
-            else
-            {
-                enderecoCriado.Numero = -1;
-            }
-
-            enderecoCriado.Complemento = textBoxComplemento.Text;
-
+        private void RecebeDadosDaTelaEndereco(Endereco enderecoCriado)
+        {
             try
             {
-                _servicoEndereco.Criar(enderecoCriado);
-                escolaCriada.IdEndereco = enderecoCriado.Id;
-            }
-            catch (Exception excecao)
-            {
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                escolaCriada.IdEndereco = -1;
-            }
+                enderecoCriado.Estado = (EstadoEnums)comboBoxEstado.SelectedItem;
 
-            try
-            {
-                _servicoEscola.Criar(escolaCriada);
-                Close();
-            }
-            catch (Exception excecao)
-            {
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+                enderecoCriado.Cep = textBoxCep.Text;
+                enderecoCriado.Municipio = textBoxMunicipio.Text;
+                enderecoCriado.Bairro = textBoxBairro.Text;
+                enderecoCriado.Rua = textBoxRua.Text;
 
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
-
-                if(escolaCriada.IdEndereco != -1)
+                if (!string.IsNullOrEmpty(textBoxNumero.Text))
                 {
-                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
+                    enderecoCriado.Numero = int.Parse(textBoxNumero.Text);
                 }
+                else
+                {
+                    enderecoCriado.Numero = -1;
+                }
+
+                enderecoCriado.Complemento = textBoxComplemento.Text;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void AoCLicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
@@ -176,12 +200,12 @@ namespace Cod3rsGrowth.Forms.Forms
             comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
         }
 
-        private void AoFormatar_comboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (CategoriaAdministrativaEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
-        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCep(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCep = 8;
 

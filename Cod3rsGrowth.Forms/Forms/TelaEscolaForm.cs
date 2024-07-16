@@ -4,6 +4,7 @@ using System.Drawing.Text;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -12,19 +13,19 @@ namespace Cod3rsGrowth.Forms.Forms
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEndereco _servicoEndereco;
         private FiltroEscolaUserControl _controladorFiltro;
-        
+
         private PrivateFontCollection _pixeboy;
 
         public TelaEscolaForm(ServicoEscola servicoEscola, ServicoEndereco servicoEndereco)
         {
             _servicoEscola = servicoEscola;
-            InitializeComponent();
             _servicoEndereco = servicoEndereco;
+            InitializeComponent();
         }
 
-        private void AoRequererPintura_TelaConvenioForm(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
-            if (FormBorderStyle == FormBorderStyle.None)
+            if (painelLateral.BorderStyle == BorderStyle.None)
             {
                 const int Tamanho = 2;
                 const int xInicioRetanguloExterior = 4;
@@ -44,10 +45,10 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }
+            }        
         }
 
-        private void AoCarregar_TelaConvenioForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
 
@@ -55,14 +56,14 @@ namespace Cod3rsGrowth.Forms.Forms
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
 
-        private void AoRequererPintura_painelLateral(object sender, PaintEventArgs e)
+        private void AoPintarPainelLateral(object sender, PaintEventArgs e)
         {
             if (painelLateral.BorderStyle == BorderStyle.None)
             {
@@ -84,11 +85,10 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    painelLateral.Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    painelLateral.Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }
-
+            }        
         }
 
-        private void AoClicar_botaoFiltros(object sender, EventArgs e)
+        private void AoClicarEmFiltros(object sender, EventArgs e)
         {
             _controladorFiltro.Visible = true;
         }
@@ -103,7 +103,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 if (_controladorFiltro._botaoFiltrarPressionado)
                 {
                     dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
-                    _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                    _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
                     _controladorFiltro.LimpaFiltro();
                 }
             };
@@ -114,12 +114,17 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {
+        {    
             _pixeboy = new PrivateFontCollection();
-            _pixeboy.AddFontFile("C:\\Users\\Usuario\\Desktop\\Cod3rsGrowth\\Cod3rsGrowth\\Cod3rsGrowth.Forms\\Resources\\Pixeboy-z8XGD.ttf");
+
+            string caminhoDados = Environment.CurrentDirectory;
+            caminhoDados = caminhoDados.Replace("bin\\Debug\\net7.0-windows", "");
+            string caminhaDados = Path.Combine(caminhoDados, "Resources\\Pixeboy-z8XGD.ttf");
+
+            _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void botaoPesquisar_Click(object sender, EventArgs e)
+        private void AoCLicarEmPesquisar(object sender, EventArgs e)
         {
             dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(_controladorFiltro.Filtro);
         }
@@ -150,21 +155,21 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
-            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Cyan;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Blue;
         }
 
-        private void AoMudarVisibilidade_TelaEscolaForm(object sender, EventArgs e)
+        private void AoMudarVisibilidadeTela(object sender, EventArgs e)
         {
             if (Visible)
             {
                 dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
                 _controladorFiltro.Visible = false;
-                _controladorFiltro.AlteraValor_botaoFiltrarPressionadoParaFalso();
+                _controladorFiltro.AlteraValorBotaoFiltrarPressionadoParaFalso();
             }
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -177,7 +182,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoFormatarCelulas_dataGridViewEscolas(object sender, DataGridViewCellFormattingEventArgs e)
+        private void AoFormatarCelulasDataGridViewEscolas(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridViewEscolas.Columns[e.ColumnIndex].HeaderCell.Value == "Categoria Administrativa")
             {
@@ -201,9 +206,9 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoCriar(object sender, EventArgs e)
+        private void AoClicarEmCriar(object sender, EventArgs e)
         {
-            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco,_servicoEscola);
+            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco, _servicoEscola);
 
             telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
             telaCriarEscola.TopLevel = true;
@@ -213,7 +218,70 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
             };
 
-            telaCriarEscola.ShowDialog(this); 
+            telaCriarEscola.ShowDialog(this);
+        }
+
+        private void AoClicarEmDeletar(object sender, EventArgs e)
+        {
+            try 
+            {
+                if(dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Escola para excluir!!!!!!");
+                }
+
+                int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
+
+                var escolaDeletar = _servicoEscola.ObterPorId(id);
+                
+                var mensagemEscolaExcluir = CriaMensagemEscolaExcluir(escolaDeletar);
+                var descricaoEscolaExcluir = CriaDescricaoEscolaExcluir(escolaDeletar);
+
+
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEscola =
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEscolaExcluir, descricaoEscolaExcluir);
+
+                telaExclusaoEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    if(telaExclusaoEscola.BotaoDeletarClicado)
+                    {
+                        _servicoEscola.Deletar(id);
+                        dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+                    }
+                };
+
+                telaExclusaoEscola.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoEscola.TopLevel = true;
+
+                telaExclusaoEscola.ShowDialog(this);
+            }
+            catch(Exception excecao)
+            {
+                const string Separador = "\n";
+                List<string> listaErros = new();
+
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
+            }
+        }
+
+        private string CriaMensagemEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n";;
+            return mensagem;
+        }
+
+        private string CriaDescricaoEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
+        {
+            var mensagem = $"Código Mec:\n {escolaDeletar.CodigoMec}\n"
+                           + $"Estado:\n {EnumExtencoes.RetornaDescricao(escolaDeletar.Estado)}\n\n"
+                           + $"\n!!!O endereço de código:\n {escolaDeletar.IdEndereco} também será Excluído!!!";
+            return mensagem;
         }
     }
 }
