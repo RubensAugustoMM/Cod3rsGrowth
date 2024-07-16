@@ -7,18 +7,19 @@ using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarConvenioForm : Form
+    public partial class TelaCriarAtualizarConvenioForm : Form
     {
         private PrivateFontCollection _pixeboy;
         private readonly ServicoConvenio _servicoConvenio;
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEmpresa _servicoEmpresa;
+        private ConvenioEscolaEmpresaOtd _convenioEscolaEmpresaOtdAtualizar = null;
         private bool _botaoEscolaAtivo;
         private bool _botaoEmpresaAtivo;
         private int _idEscolaSelecionada = -1;
         private int _idEmpresaSelecionada = -1;
 
-        public TelaCriarConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa, ServicoEscola servicoEscola)
+        public TelaCriarAtualizarConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa, ServicoEscola servicoEscola)
         {
             InitializeComponent();
             _servicoEmpresa = servicoEmpresa;
@@ -26,13 +27,31 @@ namespace Cod3rsGrowth.Forms.Forms
             _servicoConvenio = servicoConvenio;
         }
 
-        private void AoCarregarCriar(object sender, EventArgs e)
+        public TelaCriarAtualizarConvenioForm(ServicoConvenio servicoConvenio, ServicoEmpresa servicoEmpresa, ServicoEscola servicoEscola, ConvenioEscolaEmpresaOtd convenioEscolaEmpresaOtdAtualizar)
+        {
+            InitializeComponent();
+            _servicoEmpresa = servicoEmpresa;
+            _servicoEscola = servicoEscola;
+            _servicoConvenio = servicoConvenio;
+            _convenioEscolaEmpresaOtdAtualizar = convenioEscolaEmpresaOtdAtualizar;
+        }
+
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
 
             _botaoEmpresaAtivo = false;
             _botaoEscolaAtivo = true;
             listBoxEscolaEmpresa.DataSource = _servicoEscola.ObterTodos(null);
+
+            if(_convenioEscolaEmpresaOtdAtualizar != null) 
+            {
+                ConfiguraTelaParaAtualizar();
+            }
+
+            labelTitulo.Location = new Point((Width - panelDataGrid.Width)/2 - labelTitulo.Width / 2, labelTitulo.Location.Y);
+
+            richTextBoxObjeto.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
 
             foreach (Control c in Controls)
             {
@@ -103,13 +122,22 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            Convenio convenioCriado = new();
-
             try
             {
-                RecebeDadosDaTelaConvenio(convenioCriado);
 
-                _servicoConvenio.Criar(convenioCriado);
+                if (_convenioEscolaEmpresaOtdAtualizar == null)
+                {
+                    Convenio convenioCriado = new();
+                    RecebeDadosDaTelaConvenio(convenioCriado);
+                    _servicoConvenio.Criar(convenioCriado);
+                }
+                else
+                {
+                    Convenio convenioAtualizar = RetornaModeloConvenio(_convenioEscolaEmpresaOtdAtualizar);
+
+                    RecebeDadosDaTelaConvenio(convenioAtualizar);
+                    _servicoConvenio.Atualizar(convenioAtualizar);
+                }
                 Close();
             }
             catch (Exception excecao)
@@ -141,8 +169,17 @@ namespace Cod3rsGrowth.Forms.Forms
             }
 
             convenioCriado.Objeto = richTextBoxObjeto.Text;
-            convenioCriado.DataInicio =
-                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+
+            if (_convenioEscolaEmpresaOtdAtualizar == null)
+            {
+                convenioCriado.DataInicio =
+                    new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            }
+            else
+            {
+                convenioCriado.DataInicio = _convenioEscolaEmpresaOtdAtualizar.DataInicio;
+            }
+
             convenioCriado.DataTermino =
                 new DateTime(dateTimePickerDataTermino.Value.Year,
                     dateTimePickerDataTermino.Value.Month, dateTimePickerDataTermino.Value.Day);
@@ -303,6 +340,41 @@ namespace Cod3rsGrowth.Forms.Forms
             }
 
             return maiorNumeroProcesso +1;
+        }
+
+        private void ConfiguraTelaParaAtualizar()
+        {
+            textBoxValor.Text = _convenioEscolaEmpresaOtdAtualizar.Valor.ToString();
+            richTextBoxObjeto.Text = _convenioEscolaEmpresaOtdAtualizar.Objeto;
+            dateTimePickerDataTermino.Value = _convenioEscolaEmpresaOtdAtualizar.DataTermino.Value;
+
+            _idEmpresaSelecionada = _convenioEscolaEmpresaOtdAtualizar.IdEmpresa;
+            var empresa = _servicoEmpresa.ObterPorId(_idEmpresaSelecionada);
+            textBoxEmpresaSelecionada.Text = empresa.RazaoSocial;
+            textBoxEmpresaSelecionada.ForeColor = Color.LimeGreen;
+
+            _idEscolaSelecionada = _convenioEscolaEmpresaOtdAtualizar.IdEscola;
+            var escola = _servicoEscola.ObterPorId(_idEscolaSelecionada);
+            textBoxEscolaSelecionada.Text = escola.Nome;
+            textBoxEscolaSelecionada.ForeColor = Color.LimeGreen;
+
+            labelTitulo.Text = "Atualizar Convênio";
+        }
+
+        private Convenio RetornaModeloConvenio(ConvenioEscolaEmpresaOtd convenioOtd)
+        {
+            Convenio ConvenioRetorno = new Convenio();
+
+            ConvenioRetorno.Id = convenioOtd.Id;
+            ConvenioRetorno.NumeroProcesso = convenioOtd.NumeroProcesso;
+            ConvenioRetorno.Objeto = convenioOtd.Objeto;
+            ConvenioRetorno.Valor = convenioOtd.Valor;
+            ConvenioRetorno.DataInicio = convenioOtd.DataInicio;
+            ConvenioRetorno.DataTermino = convenioOtd.DataTermino;
+            ConvenioRetorno.IdEscola = convenioOtd.IdEscola;
+            ConvenioRetorno.IdEmpresa = convenioOtd.IdEmpresa;
+
+            return ConvenioRetorno;
         }
     }
 }

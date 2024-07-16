@@ -118,7 +118,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -193,8 +193,8 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicarEmCriar(object sender, EventArgs e)
         {
 
-            TelaCriarConvenioForm telaCriarConvenio =
-                new TelaCriarConvenioForm(_servicoConvenio, _servicoEmpresa, _servicoEscola);
+            TelaCriarAtualizarConvenioForm telaCriarConvenio =
+                new TelaCriarAtualizarConvenioForm(_servicoConvenio, _servicoEmpresa, _servicoEscola);
 
             telaCriarConvenio.StartPosition = FormStartPosition.CenterParent;
             telaCriarConvenio.TopLevel = true;
@@ -215,7 +215,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     throw new Exception("!!!!!!Selecione um Convênio para excluir!!!!!!");
                 }
-                
+
                 int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
 
                 var convenioDeletar = _servicoConvenio.ObterPorId(id);
@@ -228,7 +228,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    if (telaExclusaoConvenio.BotaoDeletarClicado)
                     {
                         _servicoConvenio.Deletar(convenioDeletar.Id);
                         dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
@@ -240,18 +240,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
-                const string Separador = "\n";
-                List<string> listaErros = new();
-
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
+                ExibeCaixaDeDialogoErro(excecao);
             }
         }
 
@@ -267,6 +258,55 @@ namespace Cod3rsGrowth.Forms.Forms
                      + $"Empresa:\n  {convenioDeletar.RazaoSocialEmpresa}\n\n"
                      + $"Objeto:\n {convenioDeletar.Objeto}";
             return mensagem;
+        }
+
+        private void AoCLicarEmEditar(object sender, EventArgs e)
+        { 
+            try
+            {
+                if (dataGridViewConvenios.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Empresas para atualizar!!!!!!");
+                }
+
+                int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
+
+                var convenioEditar = _servicoConvenio.ObterPorId(id);
+
+                TelaCriarAtualizarConvenioForm telaAtualizarConvenio = 
+                    new TelaCriarAtualizarConvenioForm(_servicoConvenio,_servicoEmpresa,_servicoEscola, convenioEditar);
+
+                telaAtualizarConvenio.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarConvenio.TopLevel = true;
+
+                telaAtualizarConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+                };
+
+                telaAtualizarConvenio.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarConvenio.TopLevel = true;
+
+                telaAtualizarConvenio.ShowDialog(this);
+            }
+            catch (Exception excecao)
+            {
+                ExibeCaixaDeDialogoErro(excecao);
+            }
+        }
+
+        private void ExibeCaixaDeDialogoErro(Exception excecao)
+        {
+            const string Separador = "\n";
+            List<string> listaErros = new();
+
+            listaErros.AddRange(excecao.Message.Split(Separador));
+            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+            caixaDialogoErro.TopLevel = true;
+
+            caixaDialogoErro.ShowDialog(this);
         }
     }
 }

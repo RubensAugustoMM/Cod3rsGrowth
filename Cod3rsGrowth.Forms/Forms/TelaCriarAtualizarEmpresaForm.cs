@@ -40,6 +40,9 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 ConfiguraTelaParaAtualizar();
             }
+
+            labelTitulo.Location = new Point(Width/2 - labelTitulo.Width / 2, labelTitulo.Location.Y);
+
             foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);

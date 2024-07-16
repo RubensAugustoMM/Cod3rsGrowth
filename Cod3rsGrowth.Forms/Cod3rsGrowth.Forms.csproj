@@ -34,7 +34,7 @@
     <Compile Update="Forms\TelaCriarAtualizarEmpresaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\TelaCriarConvenioForm.cs">
+    <Compile Update="Forms\TelaCriarAtualizarConvenioForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\TelaCriarAtualizarEscolaForm.cs">

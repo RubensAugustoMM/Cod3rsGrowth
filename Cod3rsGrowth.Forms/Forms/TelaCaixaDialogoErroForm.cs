@@ -1,4 +1,5 @@
 ﻿using LinqToDB.Common;
+using Microsoft.IdentityModel.Tokens;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
@@ -114,6 +115,11 @@ namespace Cod3rsGrowth.Forms.Forms
             int index = textoTruncado.Length - 1;
             while (true)
             {
+                if(textoTruncado.IsNullOrEmpty())
+                {
+                    break;
+                }
+
                 if (textoTruncado[index] == ' ')
                 {
                     textoTruncado = textoTruncado.Remove(index);
