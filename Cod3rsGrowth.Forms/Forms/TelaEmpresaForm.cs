@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -236,7 +236,7 @@ namespace Cod3rsGrowth.Forms.Forms
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 if (dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
                 {
                     throw new Exception("!!!!!!Selecione uma Empresa para excluir!!!!!!");
@@ -245,7 +245,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 int id = (int)dataGridViewEmpresas.SelectedRows[0].Cells[0].Value;
 
                 var empresaDeletar = _servicoEmpresa.ObterPorId(id);
-                
+
                 var mensagemEmpresaExcluir = CriaMensagemEmpresaExcluir(empresaDeletar);
                 var descricaoEmpresaExcluir = CriaDescricaoEmpresaExcluir(empresaDeletar);
 
@@ -254,7 +254,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    if (telaExclusaoConvenio.BotaoDeletarClicado)
                     {
                         _servicoEmpresa.Deletar(id);
                         dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
@@ -266,7 +266,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
                 const string Separador = "\n";
                 List<string> listaErros = new();
@@ -293,6 +293,11 @@ namespace Cod3rsGrowth.Forms.Forms
                         + $"Estado:\n {EnumExtencoes.RetornaDescricao(empresaDeletar.Estado)}\n\n"
                         + $"\n!!!O endereço de código:\n {empresaDeletar.IdEndereco} também será Excluído!!!";
             return mensagem;
+        }
+
+        private void botaoEditar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

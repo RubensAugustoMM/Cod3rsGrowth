@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaCriarEnderecoForm
+    partial class TelaCriarAtualizarEnderecoForm
     {
         /// <summary>
         /// Required designer variable.

@@ -7,21 +7,34 @@ using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEnderecoForm : Form
+    public partial class TelaCriarAtualizarEnderecoForm : Form
     {
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
+        private Endereco _enderecoAtualizar = null;
 
-        public TelaCriarEnderecoForm(ServicoEndereco servicoEndereco)
+        public TelaCriarAtualizarEnderecoForm(ServicoEndereco servicoEndereco)
         {
             InitializeComponent();
             _servicoEndereco = servicoEndereco;
+        }
+
+        public TelaCriarAtualizarEnderecoForm(ServicoEndereco servicoEndereco, Endereco enderecoAtualizado)
+        {
+            InitializeComponent();
+            _servicoEndereco = servicoEndereco;
+            _enderecoAtualizar = enderecoAtualizado;
         }
 
         private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
+            
+            if(_enderecoAtualizar != null)
+            {
+                ConfiguraTelaParaAtualizar();
+            }
 
             foreach (Control c in Controls)
             {
@@ -92,18 +105,25 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoSalvar(object sender, EventArgs e)
         {
-            const char Separador = '\n';
-            Endereco enderecoCriado = new();
-
             try
             {
-                RecebeDadosDaTelaEndereco(enderecoCriado); 
+                if (_enderecoAtualizar == null)
+                {
+                    Endereco enderecoCriado = new();
 
-                _servicoEndereco.Criar(enderecoCriado);
+                    _servicoEndereco.Criar(enderecoCriado);
+                }
+                else
+                {
+                    RecebeDadosDaTelaEndereco(_enderecoAtualizar);
+                    _servicoEndereco.Atualizar(_enderecoAtualizar);
+                }
+
                 Close();
             }
             catch (Exception excecao)
             {
+                const char Separador = '\n';
                 var listaErros = new List<string>();
                 listaErros.AddRange(excecao.Message.Split(Separador));
                 var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
@@ -190,6 +210,17 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void ConfiguraTelaParaAtualizar()
+        {  
+            comboBoxEstado.SelectedItem = _enderecoAtualizar.Estado;
+            textBoxCep.Text = _enderecoAtualizar.Cep;
+            textBoxMunicipio.Text = _enderecoAtualizar.Municipio;
+            textBoxBairro.Text = _enderecoAtualizar.Bairro;
+            textBoxRua.Text = _enderecoAtualizar.Rua;
+            textBoxNumero.Text = _enderecoAtualizar.Numero.ToString();
+            textBoxComplemento.Text = _enderecoAtualizar.Complemento;
         }
     }
 }

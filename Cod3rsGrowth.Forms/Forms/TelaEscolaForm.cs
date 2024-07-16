@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }        
+            }
         }
 
         private void AoCarregarTela(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    painelLateral.Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    painelLateral.Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }        
+            }
         }
 
         private void AoClicarEmFiltros(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -223,9 +223,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                if(dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                if (dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
                 {
                     throw new Exception("!!!!!!Selecione uma Escola para excluir!!!!!!");
                 }
@@ -233,7 +233,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
 
                 var escolaDeletar = _servicoEscola.ObterPorId(id);
-                
+
                 var mensagemEscolaExcluir = CriaMensagemEscolaExcluir(escolaDeletar);
                 var descricaoEscolaExcluir = CriaDescricaoEscolaExcluir(escolaDeletar);
 
@@ -243,7 +243,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoEscola.BotaoDeletarClicado)
+                    if (telaExclusaoEscola.BotaoDeletarClicado)
                     {
                         _servicoEscola.Deletar(id);
                         dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
@@ -255,7 +255,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEscola.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
                 const string Separador = "\n";
                 List<string> listaErros = new();
@@ -272,7 +272,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private string CriaMensagemEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
         {
-            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n";;
+            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n"; ;
             return mensagem;
         }
 
@@ -282,6 +282,11 @@ namespace Cod3rsGrowth.Forms.Forms
                            + $"Estado:\n {EnumExtencoes.RetornaDescricao(escolaDeletar.Estado)}\n\n"
                            + $"\n!!!O endereço de código:\n {escolaDeletar.IdEndereco} também será Excluído!!!";
             return mensagem;
+        }
+
+        private void botaoEditar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
