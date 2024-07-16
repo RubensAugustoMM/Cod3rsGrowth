@@ -271,18 +271,18 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 var enderecoEditar = _servicoEndereco.ObterPorId(id);
 
-                TelaCriarAtualizarEnderecoForm telaCriarEndereco = 
+                TelaCriarAtualizarEnderecoForm telaAtualizarEndereco = 
                     new TelaCriarAtualizarEnderecoForm(_servicoEndereco, enderecoEditar);
 
-                telaCriarEndereco.StartPosition = FormStartPosition.CenterParent;
-                telaCriarEndereco.TopLevel = true;
+                telaAtualizarEndereco.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEndereco.TopLevel = true;
 
-                telaCriarEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
+                telaAtualizarEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
                     dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
                 };
 
-                telaCriarEndereco.ShowDialog(this);
+                telaAtualizarEndereco.ShowDialog(this);
             }
             catch (Exception excecao)
             {

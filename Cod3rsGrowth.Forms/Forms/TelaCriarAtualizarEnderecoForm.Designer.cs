@@ -61,7 +61,7 @@
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
-            panelBotaoCancelar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoCancelar.Paint += AoPintarPainelBotoes;
             // 
             // botaoCancelar
             // 
@@ -78,7 +78,7 @@
             botaoCancelar.TabIndex = 22;
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = false;
-            botaoCancelar.Click += AoCLicar_botaoCancelar;
+            botaoCancelar.Click += AoCLicarEmCancelar;
             // 
             // panelBotaoSalvar
             // 
@@ -88,7 +88,7 @@
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
-            panelBotaoSalvar.Paint += AoRequererPintura_panelSombraBotoes;
+            panelBotaoSalvar.Paint += AoPintarPainelBotoes;
             // 
             // botaoSalvar
             // 
@@ -105,7 +105,7 @@
             botaoSalvar.TabIndex = 31;
             botaoSalvar.Text = "Salvar";
             botaoSalvar.UseVisualStyleBackColor = false;
-            botaoSalvar.Click += AoClicar_botaoSalvar;
+            botaoSalvar.Click += AoClicarEmSalvar;
             // 
             // labelTitulo
             // 
@@ -139,7 +139,7 @@
             textBoxCep.ShortcutsEnabled = false;
             textBoxCep.Size = new Size(149, 16);
             textBoxCep.TabIndex = 73;
-            textBoxCep.KeyPress += AoPressionarTecla_textBoxCep;
+            textBoxCep.KeyPress += AoPressionarTeclaTextBoxCep;
             // 
             // textBoxBairro
             // 
@@ -162,8 +162,8 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 67;
-            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
-            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxEstado.Format += AoFormatarComboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxMunicipio
             // 
@@ -274,7 +274,7 @@
             panelCriacao.Name = "panelCriacao";
             panelCriacao.Size = new Size(301, 270);
             panelCriacao.TabIndex = 79;
-            panelCriacao.Paint += AoRequererPintura_PanelCriacao;
+            panelCriacao.Paint += AoPintarTela;
             // 
             // textBoxNumero
             // 
@@ -286,7 +286,7 @@
             textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 80;
-            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            textBoxNumero.KeyPress += AoPressionarTeclaTextBoxNumero;
             // 
             // labelNumero
             // 
@@ -310,7 +310,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarEnderecoForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregar_TelaCriarEnderecoForm;
+            Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);

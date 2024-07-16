@@ -1,30 +1,45 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEmpresaForm : Form
+    public partial class TelaCriarAtualizarEmpresaForm : Form
     {
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEmpresa _servicoEmpresa;
+        private EmpresaEnderecoOtd _empresaEnderecoAtualizarOtd = null;
+        private Endereco _enderecoAtualizar;
 
-        public TelaCriarEmpresaForm(ServicoEndereco servicoEndereco, ServicoEmpresa servicoEmpresa)
+        public TelaCriarAtualizarEmpresaForm(ServicoEndereco servicoEndereco, ServicoEmpresa servicoEmpresa)
         {
             InitializeComponent();
             _servicoEndereco = servicoEndereco;
             _servicoEmpresa = servicoEmpresa;
         }
 
+        public TelaCriarAtualizarEmpresaForm(ServicoEndereco servicoEndereco, ServicoEmpresa servicoEmpresa, EmpresaEnderecoOtd empresaEnderecoOtd)
+        {
+            InitializeComponent();
+            _servicoEndereco = servicoEndereco;
+            _servicoEmpresa = servicoEmpresa;
+            _empresaEnderecoAtualizarOtd = empresaEnderecoOtd; 
+        }
+
         private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
-
+            
+            if(_empresaEnderecoAtualizarOtd != null)
+            {
+                ConfiguraTelaParaAtualizar();
+            }
             foreach (Control c in Controls)
             {
                 c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
@@ -96,19 +111,25 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             const char Separador = '\n';
             List<string> listaErros = new();
-            Endereco enderecoCriado = new();
             Empresa empresaCriada = new();
 
             try
             {
-                RecebeDadosDaTelaEmpresa(empresaCriada);
-
-                RecebeDadosDaTelaEndereco(enderecoCriado);
-
                 try
                 {
-                    _servicoEndereco.Criar(enderecoCriado);
-                    empresaCriada.IdEndereco = enderecoCriado.Id;
+                    if(_empresaEnderecoAtualizarOtd == null)
+                    {
+                        Endereco enderecoCriado = new();
+
+                        RecebeDadosDaTelaEndereco(enderecoCriado);
+                        _servicoEndereco.Criar(enderecoCriado);
+                        empresaCriada.IdEndereco = enderecoCriado.Id;
+                    }
+                    else
+                    {
+                        RecebeDadosDaTelaEndereco(_enderecoAtualizar);
+                        _servicoEndereco.Atualizar(_enderecoAtualizar);
+                    }
                 }
                 catch (Exception excecao)
                 {
@@ -116,7 +137,19 @@ namespace Cod3rsGrowth.Forms.Forms
                     empresaCriada.IdEndereco = -1;
                 }
 
-                _servicoEmpresa.Criar(empresaCriada);
+
+                if(_empresaEnderecoAtualizarOtd == null)
+                {
+                    _servicoEmpresa.Criar(empresaCriada);
+                }
+                else
+                {
+                    Empresa empresaAtualizar = RetornaModeloEmpresa(_empresaEnderecoAtualizarOtd);
+
+                    RecebeDadosDaTelaEmpresa(empresaAtualizar);
+                    _servicoEmpresa.Atualizar(empresaAtualizar);
+                }
+
                 Close();
             }
             catch (Exception excecao)
@@ -148,8 +181,15 @@ namespace Cod3rsGrowth.Forms.Forms
                 {
                     empresaCriada.SitucaoCadastral = false;
                 }
-
-                empresaCriada.DataSituacaoCadastral = DateTime.Now;
+                
+                if(_empresaEnderecoAtualizarOtd == null)
+                {
+                    empresaCriada.DataSituacaoCadastral = DateTime.Now;
+                }
+                else if(_empresaEnderecoAtualizarOtd.SitucaoCadastral != empresaCriada.SitucaoCadastral)
+                {
+                    empresaCriada.DataSituacaoCadastral = DateTime.Now; 
+                }
 
                 if (!string.IsNullOrEmpty(textBoxCapitalSocial.Text))
                 {
@@ -311,6 +351,62 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             var valorEnum = (MatrizFilialEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
+        }
+
+        private void ConfiguraTelaParaAtualizar()
+        {
+            if (_empresaEnderecoAtualizarOtd.SitucaoCadastral)
+            {
+                comboBoxSituacaoCadastral.SelectedItem = HabilitadoEnums.Habilitado;
+            }
+            else
+            {
+                comboBoxSituacaoCadastral.SelectedItem = HabilitadoEnums.Desabilitado;
+            }
+
+            textBoxCapitalSocial.Text = _empresaEnderecoAtualizarOtd.CapitalSocial.ToString();
+
+            comboBoxNaturezaJuridica.SelectedItem = _empresaEnderecoAtualizarOtd.NaturezaJuridica;
+            comboBoxPorte.SelectedItem = _empresaEnderecoAtualizarOtd.Porte;
+            comboBoxMatrizFilial.SelectedItem = _empresaEnderecoAtualizarOtd.MatrizFilial;
+
+            textBoxRazaoSocial.Text = _empresaEnderecoAtualizarOtd.RazaoSocial;
+            textBoxNomeFantasia.Text = _empresaEnderecoAtualizarOtd.NomeFantasia;
+            textBoxCnpj.Text = _empresaEnderecoAtualizarOtd.Cnpj;
+            dateTimePickerDataAbertura.Value = _empresaEnderecoAtualizarOtd.DataAbertura;
+
+            _enderecoAtualizar = _servicoEndereco.ObterPorId(_empresaEnderecoAtualizarOtd.IdEndereco);
+
+            comboBoxEstado.SelectedItem = _enderecoAtualizar.Estado;
+            textBoxCep.Text = _enderecoAtualizar.Cep;
+            textBoxMunicipio.Text = _enderecoAtualizar.Municipio;
+            textBoxBairro.Text = _enderecoAtualizar.Bairro;
+            textBoxRua.Text = _enderecoAtualizar.Rua;
+            textBoxNumero.Text = _enderecoAtualizar.Numero.ToString();
+            textBoxComplemento.Text = _enderecoAtualizar.Complemento;
+            
+            labelTitulo.Text = "Atualizar Empresa";
+        }
+
+        private Empresa RetornaModeloEmpresa(EmpresaEnderecoOtd empresaOtd)
+        {
+            Empresa empresaRetorno = new Empresa();
+
+            empresaRetorno.Id = empresaOtd.Id;
+            empresaRetorno.RazaoSocial = empresaOtd.RazaoSocial;
+            empresaRetorno.NomeFantasia = empresaOtd.NomeFantasia;
+            empresaRetorno.Cnpj = empresaOtd.Cnpj;
+            empresaRetorno.SitucaoCadastral = empresaOtd.SitucaoCadastral;
+            empresaRetorno.DataSituacaoCadastral = empresaOtd.DataSituacaoCadastral;
+            empresaRetorno.Idade = empresaOtd.Idade;
+            empresaRetorno.DataAbertura = empresaOtd.DataAbertura;
+            empresaRetorno.NaturezaJuridica = empresaOtd.NaturezaJuridica;
+            empresaRetorno.Porte = empresaOtd.Porte;
+            empresaRetorno.MatrizFilial = empresaOtd.MatrizFilial;
+            empresaRetorno.CapitalSocial = empresaOtd.CapitalSocial;
+            empresaRetorno.IdEndereco = empresaOtd.IdEndereco;
+
+            return empresaRetorno;
         }
     }
 }

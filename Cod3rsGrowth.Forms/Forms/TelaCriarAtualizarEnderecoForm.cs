@@ -26,7 +26,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _enderecoAtualizar = enderecoAtualizado;
         }
 
-        private void AoCarregar_TelaCriarEnderecoForm(object sender, EventArgs e)
+        private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -43,7 +43,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoRequererPintura_PanelCriacao(object sender, PaintEventArgs e)
+        private void AoPintarTela(object sender, PaintEventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.None)
             {
@@ -79,7 +79,7 @@ namespace Cod3rsGrowth.Forms.Forms
             _pixeboy.AddFontFile(caminhaDados);
         }
 
-        private void AoRequererPintura_panelSombraBotoes(object sender, PaintEventArgs e)
+        private void AoPintarPainelBotoes(object sender, PaintEventArgs e)
         {
             const int PosicaoX = 11;
             const int PosicaoY = 13;
@@ -103,7 +103,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoClicar_botaoSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoCLicar_botaoCancelar(object sender, EventArgs e)
+        private void AoCLicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }
@@ -173,12 +173,12 @@ namespace Cod3rsGrowth.Forms.Forms
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
         }
 
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
             var valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
-        private void AoPressionarTecla_textBoxCep(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxCep(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoCep = 8;
 
@@ -193,12 +193,12 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoPressionarTecla_comboBox(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaComboBox(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxNumero(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoNumero = 8;
             if(textBoxNumero.Text.Length == tamanhoMaximoNumero)
@@ -221,6 +221,8 @@ namespace Cod3rsGrowth.Forms.Forms
             textBoxRua.Text = _enderecoAtualizar.Rua;
             textBoxNumero.Text = _enderecoAtualizar.Numero.ToString();
             textBoxComplemento.Text = _enderecoAtualizar.Complemento;
+
+            labelTitulo.Text = "Atualizar Endereço";
         }
     }
 }
