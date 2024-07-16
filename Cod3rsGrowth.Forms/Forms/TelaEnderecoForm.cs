@@ -6,6 +6,7 @@ using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Forms.Properties;
+using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -206,16 +207,30 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoDeletar_Click(object sender, EventArgs e)
         {
-            if (!dataGridViewEnderecos.SelectedRows.IsNullOrEmpty())
+            try
             {
+                if (dataGridViewEnderecos.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Endereço para excluir!!!!!!");
+                }
+
                 int id = (int)dataGridViewEnderecos.SelectedRows[0].Cells[0].Value;
 
+                var enderecoDeletar = _servicoEndereco.ObterPorId(id);
+                
+                var mensagemEnderecoExcluir = CriaMensagemEnderecoExcluir(enderecoDeletar);
+                var descricaoEnderecoExcluir = CriaDescricaoEnderecoExcluir(enderecoDeletar);
+
                 TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEndereco =
-                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoEndereco.ObterPorId(id), _servicoEndereco);
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEnderecoExcluir, descricaoEnderecoExcluir);
 
                 telaExclusaoEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+                    if(telaExclusaoEndereco.BotaoDeletarClicado)
+                    {
+                        _servicoEndereco.Deletar(id);
+                        dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+                    }
                 };
 
                 telaExclusaoEndereco.StartPosition = FormStartPosition.CenterParent;
@@ -223,13 +238,33 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEndereco.ShowDialog(this);
             }
-            else
+            catch(Exception excecao)
             {
+                const string Separador = "\n";
                 List<string> listaErros = new();
 
-                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
-                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
             }
+        }
+
+        private string CriaMensagemEnderecoExcluir(Endereco enderecoDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir o Endereço com CEP {enderecoDeletar.Cep}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoEnderecoExcluir(Endereco enderecoDeletar)
+        {
+            var mensagem = $"Município:\n  {enderecoDeletar.Municipio}\nBairro:\n  {enderecoDeletar.Bairro}\n"
+                           + $"Rua:\n {enderecoDeletar.Rua}\n" + $"Estado:\n {EnumExtencoes.RetornaDescricao(enderecoDeletar.Estado)}\n"
+                           +$"Complemento:\n {enderecoDeletar.Complemento}";
+            return mensagem;
         }
     }
 }

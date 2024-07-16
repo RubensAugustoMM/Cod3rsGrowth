@@ -6,6 +6,7 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Forms.Properties;
 using System.Runtime.InteropServices;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -224,16 +225,31 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void botaoDeletar_Click(object sender, EventArgs e)
         {
-            if (!dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+            try 
             {
+                if(dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Escola para excluir!!!!!!");
+                }
+
                 int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
 
+                var escolaDeletar = _servicoEscola.ObterPorId(id);
+                
+                var mensagemEscolaExcluir = CriaMensagemEscolaExcluir(escolaDeletar);
+                var descricaoEscolaExcluir = CriaDescricaoEscolaExcluir(escolaDeletar);
+
+
                 TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEscola =
-                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoEscola.ObterPorId(id), _servicoEscola);
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEscolaExcluir, descricaoEscolaExcluir);
 
                 telaExclusaoEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    this.dataGridViewEscolas.DataSource = this._servicoEscola.ObterTodos(null);
+                    if(telaExclusaoEscola.BotaoDeletarClicado)
+                    {
+                        _servicoEscola.Deletar(id);
+                        dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+                    }
                 };
 
                 telaExclusaoEscola.StartPosition = FormStartPosition.CenterParent;
@@ -241,13 +257,33 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEscola.ShowDialog(this);
             }
-            else
+            catch(Exception excecao)
             {
+                const string Separador = "\n";
                 List<string> listaErros = new();
 
-                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
-                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
             }
+        }
+
+        private string CriaMensagemEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n";;
+            return mensagem;
+        }
+
+        private string CriaDescricaoEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
+        {
+            var mensagem = $"Código Mec:\n {escolaDeletar.CodigoMec}\n"
+                           + $"Estado:\n {EnumExtencoes.RetornaDescricao(escolaDeletar.Estado)}\n\n"
+                           + $"\n!!!O endereço de código:\n {escolaDeletar.IdEndereco} também será Excluído!!!";
+            return mensagem;
         }
     }
 }

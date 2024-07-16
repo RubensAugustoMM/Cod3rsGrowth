@@ -6,6 +6,7 @@ using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Forms.Properties;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
@@ -234,16 +235,30 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoDeletar(object sender, EventArgs e)
         {
-            if (!dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
-            {
+            try
+            { 
+                if (dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Empresa para excluir!!!!!!");
+                }
+
                 int id = (int)dataGridViewEmpresas.SelectedRows[0].Cells[0].Value;
 
+                var empresaDeletar = _servicoEmpresa.ObterPorId(id);
+                
+                var mensagemEmpresaExcluir = CriaMensagemEmpresaExcluir(empresaDeletar);
+                var descricaoEmpresaExcluir = CriaDescricaoEmpresaExcluir(empresaDeletar);
+
                 TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
-                    new TelaCaixaDialogoConfirmacaoDelecaoForm(_servicoEmpresa.ObterPorId(id), _servicoEmpresa);
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEmpresaExcluir, descricaoEmpresaExcluir);
 
                 telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    {
+                        _servicoEmpresa.Deletar(id);
+                        dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+                    }
                 };
 
                 telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
@@ -251,13 +266,33 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.ShowDialog(this);
             }
-            else
+            catch(Exception excecao)
             {
+                const string Separador = "\n";
                 List<string> listaErros = new();
 
-                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
-                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
             }
+        }
+
+        private string CriaMensagemEmpresaExcluir(EmpresaEnderecoOtd empresaDeletar)
+        {
+            var mensagem = $"Tem certeza que deseja excluir a Empresa {empresaDeletar.RazaoSocial}?\n";
+            return mensagem;
+        }
+
+        private string CriaDescricaoEmpresaExcluir(EmpresaEnderecoOtd empresaDeletar)
+        {
+            var mensagem = $"Nome Fantasia:\n {empresaDeletar.NomeFantasia}\n\n CNPJ:\n {empresaDeletar.Cnpj}\n "
+                        + $"Estado:\n {EnumExtencoes.RetornaDescricao(empresaDeletar.Estado)}\n\n"
+                        + $"\n!!!O endereço de código:\n {empresaDeletar.IdEndereco} também será Excluído!!!";
+            return mensagem;
         }
     }
 }

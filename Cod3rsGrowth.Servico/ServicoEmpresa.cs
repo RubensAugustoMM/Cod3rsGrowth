@@ -58,8 +58,7 @@ public class ServicoEmpresa : IRepositorioEmpresa
 
         if (!ResultadoValidacao.IsValid)
             throw new ValidationException(ResultadoValidacao.Errors.First().ErrorMessage);
-        
-        _repositorioEndereco.Deletar(EmpresaDeletar.IdEndereco);
+
         _repositorioEmpresa.Deletar(id);
     }
 

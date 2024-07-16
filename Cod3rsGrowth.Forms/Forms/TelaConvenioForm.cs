@@ -211,22 +211,30 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicar_botaoDeletar(object sender, EventArgs e)
         {
-            if (!dataGridViewConvenios.SelectedRows.IsNullOrEmpty())
+            try
             {
+                if (dataGridViewConvenios.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Convênio para excluir!!!!!!");
+                }
+                
                 int id = (int)dataGridViewConvenios.SelectedRows[0].Cells[0].Value;
 
                 var convenioDeletar = _servicoConvenio.ObterPorId(id);
 
-                var mensagemEntidadeExcluir = CriaMensagemConvenioExcluir(convenioDeletar);
-                var descricaoEntidadeExcluir = CriaDescricaoConvenioExcluir(convenioDeletar);
+                var mensagemConvenioExcluir = CriaMensagemConvenioExcluir(convenioDeletar);
+                var descricaoConvenioExcluir = CriaDescricaoConvenioExcluir(convenioDeletar);
 
                 TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
-                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEntidadeExcluir, descricaoEntidadeExcluir);
+                    new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemConvenioExcluir, descricaoConvenioExcluir);
 
-                bool botaoDeletarClicado = false;
                 telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    
+                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    {
+                        _servicoConvenio.Deletar(convenioDeletar.Id);
+                        dataGridViewConvenios.DataSource = _servicoConvenio.ObterTodos(null);
+                    }
                 };
 
                 telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
@@ -234,12 +242,18 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoConvenio.ShowDialog(this);
             }
-            else
+            catch(Exception excecao)
             {
+                const string Separador = "\n";
                 List<string> listaErros = new();
 
-                listaErros.Add("!!!!!!Selecione um Convênio para excluir!!!!!!");
-                TelaCaixaDialogoErroForm telaErro = new TelaCaixaDialogoErroForm(listaErros);
+                listaErros.AddRange(excecao.Message.Split(Separador));
+                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+                caixaDialogoErro.TopLevel = true;
+
+                caixaDialogoErro.ShowDialog(this);
             }
         }
 
