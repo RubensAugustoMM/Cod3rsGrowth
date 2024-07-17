@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }        
+            }
         }
 
         private void AoCarregarTela(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace Cod3rsGrowth.Forms.Forms
                                                                    painelLateral.Width - (xInicioRetanguloInterior + Tamanho) * 2,
                                                                    painelLateral.Height - (yInicioRetanguloInterior + Tamanho) * 2));
                 }
-            }        
+            }
         }
 
         private void AoClicarEmFiltros(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -208,7 +208,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmCriar(object sender, EventArgs e)
         {
-            TelaCriarEscolaForm telaCriarEscola = new TelaCriarEscolaForm(_servicoEndereco, _servicoEscola);
+            TelaCriarAtualizarEscolaForm telaCriarEscola = new TelaCriarAtualizarEscolaForm(_servicoEndereco, _servicoEscola);
 
             telaCriarEscola.StartPosition = FormStartPosition.CenterParent;
             telaCriarEscola.TopLevel = true;
@@ -223,9 +223,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                if(dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                if (dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
                 {
                     throw new Exception("!!!!!!Selecione uma Escola para excluir!!!!!!");
                 }
@@ -233,7 +233,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
 
                 var escolaDeletar = _servicoEscola.ObterPorId(id);
-                
+
                 var mensagemEscolaExcluir = CriaMensagemEscolaExcluir(escolaDeletar);
                 var descricaoEscolaExcluir = CriaDescricaoEscolaExcluir(escolaDeletar);
 
@@ -243,7 +243,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoEscola.BotaoDeletarClicado)
+                    if (telaExclusaoEscola.BotaoDeletarClicado)
                     {
                         _servicoEscola.Deletar(id);
                         dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
@@ -255,24 +255,15 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEscola.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
-                const string Separador = "\n";
-                List<string> listaErros = new();
-
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
+                ExibeCaixaDeDialogoErro(excecao);
             }
         }
 
         private string CriaMensagemEscolaExcluir(EscolaEnderecoOtd escolaDeletar)
         {
-            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n";;
+            var mensagem = $"Tem certeza que deseja excluir a Escola {escolaDeletar.Nome}?\n"; ;
             return mensagem;
         }
 
@@ -282,6 +273,55 @@ namespace Cod3rsGrowth.Forms.Forms
                            + $"Estado:\n {EnumExtencoes.RetornaDescricao(escolaDeletar.Estado)}\n\n"
                            + $"\n!!!O endereço de código:\n {escolaDeletar.IdEndereco} também será Excluído!!!";
             return mensagem;
+        }
+
+        private void AoClicarEmEditar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewEscolas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione uma Escola para atualizar!!!!!!");
+                }
+
+                int id = (int)dataGridViewEscolas.SelectedRows[0].Cells[0].Value;
+
+                var EscolaEditar = _servicoEscola.ObterPorId(id);
+
+                TelaCriarAtualizarEscolaForm telaAtualizarEscola =
+                    new TelaCriarAtualizarEscolaForm(_servicoEndereco, _servicoEscola, EscolaEditar);
+
+                telaAtualizarEscola.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEscola.TopLevel = true;
+
+                telaAtualizarEscola.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewEscolas.DataSource = _servicoEscola.ObterTodos(null);
+                };
+
+                telaAtualizarEscola.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEscola.TopLevel = true;
+
+                telaAtualizarEscola.ShowDialog(this);
+            }
+            catch (Exception excecao)
+            {
+                ExibeCaixaDeDialogoErro(excecao);
+            }
+        }
+
+        private void ExibeCaixaDeDialogoErro(Exception excecao)
+        {
+            const string Separador = "\n";
+            List<string> listaErros = new();
+
+            listaErros.AddRange(excecao.Message.Split(Separador));
+            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+            caixaDialogoErro.TopLevel = true;
+
+            caixaDialogoErro.ShowDialog(this);
         }
     }
 }

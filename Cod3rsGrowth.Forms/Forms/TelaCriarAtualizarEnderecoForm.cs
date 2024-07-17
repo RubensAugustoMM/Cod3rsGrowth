@@ -1,31 +1,42 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
-    public partial class TelaCriarEscolaForm : Form
+    public partial class TelaCriarAtualizarEnderecoForm : Form
     {
         private PrivateFontCollection _pixeboy;
         private readonly ServicoEndereco _servicoEndereco;
-        private readonly ServicoEscola _servicoEscola;
+        private Endereco _enderecoAtualizar = null;
 
-        public TelaCriarEscolaForm(ServicoEndereco servicoEndereco, ServicoEscola servicoEscola)
+        public TelaCriarAtualizarEnderecoForm(ServicoEndereco servicoEndereco)
         {
             InitializeComponent();
             _servicoEndereco = servicoEndereco;
-            _servicoEscola = servicoEscola;
+        }
+
+        public TelaCriarAtualizarEnderecoForm(ServicoEndereco servicoEndereco, Endereco enderecoAtualizado)
+        {
+            InitializeComponent();
+            _servicoEndereco = servicoEndereco;
+            _enderecoAtualizar = enderecoAtualizado;
         }
 
         private void AoCarregarTela(object sender, EventArgs e)
         {
             InicializaFontePixeBoy();
             InicializaComboBox();
+            
+            if(_enderecoAtualizar != null)
+            {
+                ConfiguraTelaParaAtualizar();
+            }
+
+            labelTitulo.Location = new Point(Width/2 - labelTitulo.Width / 2, labelTitulo.Location.Y);
 
             foreach (Control c in Controls)
             {
@@ -96,33 +107,26 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            const char Separador = '\n';
-            List<string> listaErros = new();
-            Endereco enderecoCriado = new();
-            Escola escolaCriada = new();
-
             try
             {
-                RecebeDadosDaTelaEscola(escolaCriada);
-
-                RecebeDadosDaTelaEndereco(enderecoCriado);
-
-                try
+                if (_enderecoAtualizar == null)
                 {
+                    Endereco enderecoCriado = new();
+
                     _servicoEndereco.Criar(enderecoCriado);
-                    escolaCriada.IdEndereco = enderecoCriado.Id;
                 }
-                catch (Exception excecao)
+                else
                 {
-                    listaErros.AddRange(excecao.Message.Split(Separador));
-                    escolaCriada.IdEndereco = -1;
+                    RecebeDadosDaTelaEndereco(_enderecoAtualizar);
+                    _servicoEndereco.Atualizar(_enderecoAtualizar);
                 }
 
-                _servicoEscola.Criar(escolaCriada);
                 Close();
             }
             catch (Exception excecao)
             {
+                const char Separador = '\n';
+                var listaErros = new List<string>();
                 listaErros.AddRange(excecao.Message.Split(Separador));
                 var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
 
@@ -130,33 +134,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 caixaDialogoErro.TopLevel = true;
 
                 caixaDialogoErro.ShowDialog(this);
-
-                if (escolaCriada.IdEndereco != -1)
-                {
-                    _servicoEndereco.Deletar(escolaCriada.IdEndereco);
-                }
             }
-        }
-
-        private void RecebeDadosDaTelaEscola(Escola escolaCriada)
-        {
-            if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
-            {
-                escolaCriada.StatusAtividade = true;
-            }
-            else
-            {
-                escolaCriada.StatusAtividade = false;
-            }
-
-            escolaCriada.OrganizacaoAcademica = (OrganizacaoAcademicaEnums)comboBoxOrganizacaoAcademica.SelectedItem;
-            escolaCriada.CategoriaAdministrativa = (CategoriaAdministrativaEnums)comboBoxCategoriaAdministrativa.SelectedItem;
-
-            escolaCriada.Nome = textBoxNome.Text;
-            escolaCriada.CodigoMec = textBoxCodigoMec.Text;
-            escolaCriada.Telefone = textBoxTelefone.Text;
-            escolaCriada.Email = textBoxEmail.Text;
-            escolaCriada.InicioAtividade = dateTimePickerDataInicioAtividade.Value;
         }
 
         private void RecebeDadosDaTelaEndereco(Endereco enderecoCriado)
@@ -194,15 +172,12 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaComboBox()
         {
-            comboBoxCategoriaAdministrativa.DataSource = Enum.GetValues(typeof(CategoriaAdministrativaEnums));
             comboBoxEstado.DataSource = Enum.GetValues(typeof(EstadoEnums));
-            comboBoxOrganizacaoAcademica.DataSource = Enum.GetValues(typeof(OrganizacaoAcademicaEnums));
-            comboBoxSituacaoCadastral.DataSource = Enum.GetValues(typeof(HabilitadoEnums));
         }
 
-        private void AoFormatarComboBoxCategoriaAdministrativa(object sender, ListControlConvertEventArgs e)
+        private void AoFormatarComboBoxEstado(object sender, ListControlConvertEventArgs e)
         {
-            var valorEnum = (CategoriaAdministrativaEnums)e.Value;
+            var valorEnum = (EstadoEnums)e.Value;
             e.Value = valorEnum.RetornaDescricao();
         }
         private void AoPressionarTeclaTextBoxCep(object sender, KeyPressEventArgs e)
@@ -220,63 +195,12 @@ namespace Cod3rsGrowth.Forms.Forms
             }
         }
 
-        private void AoAlterarValor_dateTimePickerDataInicioAtividade(object sender, EventArgs e)
-        {
-            if (dateTimePickerDataInicioAtividade.Value > DateTime.Now)
-            {
-                dateTimePickerDataInicioAtividade.Value = 
-                    new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-            }
-        }
-
-        private void AoPressionarTecla_textBoxCodigoMec(object sender, KeyPressEventArgs e)
-        {
-            const int tamanhoMaximoCodigoMec = 8;
-
-            if (textBoxCodigoMec.Text.Length == tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void AoFormatar_comboBoxEstado(object sender, ListControlConvertEventArgs e)
-        {
-            EstadoEnums valorEnum = (EstadoEnums)e.Value;
-            e.Value = valorEnum.RetornaDescricao();
-        }
-
-        private void AoFormatar_comboBoxOrganizacaoAcademica(object sender, ListControlConvertEventArgs e)
-        {
-            OrganizacaoAcademicaEnums valorEnum = (OrganizacaoAcademicaEnums)e.Value;
-            e.Value = valorEnum.RetornaDescricao();
-        }
-
-        private void AoPressionarTecla_comboBox(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaComboBox(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void AoPressionarTecla_textBoxTelefone(object sender, KeyPressEventArgs e)
-        {
-            const int tamanhoMaximoTelefone = 10;
-
-            if (textBoxTelefone.Text.Length == tamanhoMaximoTelefone && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void AoPressionarTecla_textBoxNumero(object sender, KeyPressEventArgs e)
+        private void AoPressionarTeclaTextBoxNumero(object sender, KeyPressEventArgs e)
         {
             const int tamanhoMaximoNumero = 8;
             if(textBoxNumero.Text.Length == tamanhoMaximoNumero)
@@ -288,6 +212,19 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void ConfiguraTelaParaAtualizar()
+        {  
+            comboBoxEstado.SelectedItem = _enderecoAtualizar.Estado;
+            textBoxCep.Text = _enderecoAtualizar.Cep;
+            textBoxMunicipio.Text = _enderecoAtualizar.Municipio;
+            textBoxBairro.Text = _enderecoAtualizar.Bairro;
+            textBoxRua.Text = _enderecoAtualizar.Rua;
+            textBoxNumero.Text = _enderecoAtualizar.Numero.ToString();
+            textBoxComplemento.Text = _enderecoAtualizar.Complemento;
+
+            labelTitulo.Text = "Atualizar Endereço";
         }
     }
 }

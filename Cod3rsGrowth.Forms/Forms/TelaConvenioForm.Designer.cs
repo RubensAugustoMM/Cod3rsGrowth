@@ -257,6 +257,7 @@
             botaoEditar.TabIndex = 31;
             botaoEditar.Text = "Editar";
             botaoEditar.UseVisualStyleBackColor = false;
+            botaoEditar.Click += AoCLicarEmEditar;
             // 
             // panelBotaoCriar
             // 

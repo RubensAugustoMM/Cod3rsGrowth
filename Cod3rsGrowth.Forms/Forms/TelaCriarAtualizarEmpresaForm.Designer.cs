@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaCriarEscolaForm
+    partial class TelaCriarAtualizarEmpresaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,29 +33,31 @@
             panelBotaoSalvar = new Panel();
             botaoSalvar = new Button();
             labelTitulo = new Label();
-            textBoxNome = new TextBox();
-            textBoxTelefone = new TextBox();
-            comboBoxCategoriaAdministrativa = new ComboBox();
-            textBoxCodigoMec = new TextBox();
-            labelTelefone = new Label();
-            labelEmail = new Label();
-            textBoxEmail = new TextBox();
+            textBoxRazaoSocial = new TextBox();
+            textBoxCnpj = new TextBox();
+            textBoxNomeFantasia = new TextBox();
+            labelCnpj = new Label();
+            labelCapitalSocial = new Label();
+            textBoxCapitalSocial = new TextBox();
             panelCriacao = new Panel();
+            labelPorte = new Label();
+            comboBoxPorte = new ComboBox();
+            labelMatrizFilial = new Label();
+            comboBoxMatrizFilial = new ComboBox();
             textBoxNumero = new TextBox();
             labelCep = new Label();
             labelNumero = new Label();
             labelBairro = new Label();
-            labelInicioAtividade = new Label();
+            labelDataAbertura = new Label();
             label2 = new Label();
-            labelNome = new Label();
+            labelRazaoSocial = new Label();
             labelMunicipio = new Label();
-            labelCodigoMec = new Label();
+            labelNomeFantasia = new Label();
             labelRua = new Label();
-            labelCategoriaAdministrativa = new Label();
             LabelEstado = new Label();
-            labelOrganizacaoAcademica = new Label();
-            labelStatusAtividade = new Label();
-            dateTimePickerDataInicioAtividade = new DateTimePicker();
+            labelNaturezaJuridica = new Label();
+            labelSituacaoCadastral = new Label();
+            dateTimePickerDataAbertura = new DateTimePicker();
             comboBoxSituacaoCadastral = new ComboBox();
             textBoxComplemento = new TextBox();
             textBoxRua = new TextBox();
@@ -63,7 +65,7 @@
             comboBoxEstado = new ComboBox();
             textBoxBairro = new TextBox();
             textBoxCep = new TextBox();
-            comboBoxOrganizacaoAcademica = new ComboBox();
+            comboBoxNaturezaJuridica = new ComboBox();
             panelBotaoCancelar.SuspendLayout();
             panelBotaoSalvar.SuspendLayout();
             panelCriacao.SuspendLayout();
@@ -73,7 +75,7 @@
             // 
             panelBotaoCancelar.BackColor = Color.Transparent;
             panelBotaoCancelar.Controls.Add(botaoCancelar);
-            panelBotaoCancelar.Location = new Point(446, 249);
+            panelBotaoCancelar.Location = new Point(446, 262);
             panelBotaoCancelar.Name = "panelBotaoCancelar";
             panelBotaoCancelar.Size = new Size(106, 40);
             panelBotaoCancelar.TabIndex = 61;
@@ -100,7 +102,7 @@
             // 
             panelBotaoSalvar.BackColor = Color.Transparent;
             panelBotaoSalvar.Controls.Add(botaoSalvar);
-            panelBotaoSalvar.Location = new Point(558, 249);
+            panelBotaoSalvar.Location = new Point(558, 262);
             panelBotaoSalvar.Name = "panelBotaoSalvar";
             panelBotaoSalvar.Size = new Size(106, 40);
             panelBotaoSalvar.TabIndex = 60;
@@ -130,108 +132,97 @@
             labelTitulo.ForeColor = Color.White;
             labelTitulo.Location = new Point(276, 0);
             labelTitulo.Name = "labelTitulo";
-            labelTitulo.Size = new Size(95, 19);
+            labelTitulo.Size = new Size(110, 19);
             labelTitulo.TabIndex = 74;
-            labelTitulo.Text = "Criação Escola";
+            labelTitulo.Text = "Criação Empresa";
             // 
-            // textBoxNome
+            // textBoxRazaoSocial
             // 
-            textBoxNome.BackColor = Color.Cyan;
-            textBoxNome.BorderStyle = BorderStyle.None;
-            textBoxNome.ForeColor = Color.Black;
-            textBoxNome.Location = new Point(241, 34);
-            textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(149, 16);
-            textBoxNome.TabIndex = 73;
+            textBoxRazaoSocial.BackColor = Color.Cyan;
+            textBoxRazaoSocial.BorderStyle = BorderStyle.None;
+            textBoxRazaoSocial.ForeColor = Color.Black;
+            textBoxRazaoSocial.Location = new Point(241, 34);
+            textBoxRazaoSocial.Name = "textBoxRazaoSocial";
+            textBoxRazaoSocial.Size = new Size(149, 16);
+            textBoxRazaoSocial.TabIndex = 73;
             // 
-            // textBoxTelefone
+            // textBoxCnpj
             // 
-            textBoxTelefone.BackColor = Color.Cyan;
-            textBoxTelefone.BorderStyle = BorderStyle.None;
-            textBoxTelefone.ForeColor = Color.Black;
-            textBoxTelefone.Location = new Point(241, 78);
-            textBoxTelefone.Name = "textBoxTelefone";
-            textBoxTelefone.ShortcutsEnabled = false;
-            textBoxTelefone.Size = new Size(149, 16);
-            textBoxTelefone.TabIndex = 72;
-            textBoxTelefone.KeyPress += AoPressionarTecla_textBoxTelefone;
+            textBoxCnpj.BackColor = Color.Cyan;
+            textBoxCnpj.BorderStyle = BorderStyle.None;
+            textBoxCnpj.ForeColor = Color.Black;
+            textBoxCnpj.Location = new Point(241, 78);
+            textBoxCnpj.Name = "textBoxCnpj";
+            textBoxCnpj.ShortcutsEnabled = false;
+            textBoxCnpj.Size = new Size(149, 16);
+            textBoxCnpj.TabIndex = 72;
+            textBoxCnpj.KeyPress += AoPressionarTeclaTextBoxCnpj;
             // 
-            // comboBoxCategoriaAdministrativa
+            // textBoxNomeFantasia
             // 
-            comboBoxCategoriaAdministrativa.BackColor = Color.Cyan;
-            comboBoxCategoriaAdministrativa.FlatStyle = FlatStyle.Flat;
-            comboBoxCategoriaAdministrativa.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxCategoriaAdministrativa.ForeColor = Color.Black;
-            comboBoxCategoriaAdministrativa.FormattingEnabled = true;
-            comboBoxCategoriaAdministrativa.Location = new Point(241, 121);
-            comboBoxCategoriaAdministrativa.Name = "comboBoxCategoriaAdministrativa";
-            comboBoxCategoriaAdministrativa.Size = new Size(149, 23);
-            comboBoxCategoriaAdministrativa.TabIndex = 67;
-            comboBoxCategoriaAdministrativa.Format += AoFormatarComboBoxCategoriaAdministrativa;
-            comboBoxCategoriaAdministrativa.KeyPress += AoPressionarTecla_comboBox;
+            textBoxNomeFantasia.BackColor = Color.Cyan;
+            textBoxNomeFantasia.BorderStyle = BorderStyle.None;
+            textBoxNomeFantasia.ForeColor = Color.Black;
+            textBoxNomeFantasia.Location = new Point(241, 56);
+            textBoxNomeFantasia.Name = "textBoxNomeFantasia";
+            textBoxNomeFantasia.Size = new Size(149, 16);
+            textBoxNomeFantasia.TabIndex = 71;
             // 
-            // textBoxCodigoMec
+            // labelCnpj
             // 
-            textBoxCodigoMec.BackColor = Color.Cyan;
-            textBoxCodigoMec.BorderStyle = BorderStyle.None;
-            textBoxCodigoMec.ForeColor = Color.Black;
-            textBoxCodigoMec.Location = new Point(241, 56);
-            textBoxCodigoMec.Name = "textBoxCodigoMec";
-            textBoxCodigoMec.ShortcutsEnabled = false;
-            textBoxCodigoMec.Size = new Size(149, 16);
-            textBoxCodigoMec.TabIndex = 71;
-            textBoxCodigoMec.KeyPress += AoPressionarTecla_textBoxCodigoMec;
+            labelCnpj.AutoSize = true;
+            labelCnpj.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCnpj.ForeColor = Color.White;
+            labelCnpj.Location = new Point(13, 78);
+            labelCnpj.Name = "labelCnpj";
+            labelCnpj.Size = new Size(199, 21);
+            labelCnpj.TabIndex = 68;
+            labelCnpj.Text = "Cnpj . . . . . . . . . . . . . . . . . . . . . .:";
             // 
-            // labelTelefone
+            // labelCapitalSocial
             // 
-            labelTelefone.AutoSize = true;
-            labelTelefone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTelefone.ForeColor = Color.White;
-            labelTelefone.Location = new Point(13, 78);
-            labelTelefone.Name = "labelTelefone";
-            labelTelefone.Size = new Size(193, 21);
-            labelTelefone.TabIndex = 68;
-            labelTelefone.Text = "Telefone . . . . . . . . . . . . . . . . . :";
+            labelCapitalSocial.AutoSize = true;
+            labelCapitalSocial.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCapitalSocial.ForeColor = Color.White;
+            labelCapitalSocial.Location = new Point(13, 99);
+            labelCapitalSocial.Name = "labelCapitalSocial";
+            labelCapitalSocial.Size = new Size(183, 21);
+            labelCapitalSocial.TabIndex = 69;
+            labelCapitalSocial.Text = "Capital Social . . . . . . . . . . .:";
             // 
-            // labelEmail
+            // textBoxCapitalSocial
             // 
-            labelEmail.AutoSize = true;
-            labelEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelEmail.ForeColor = Color.White;
-            labelEmail.Location = new Point(13, 99);
-            labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(194, 21);
-            labelEmail.TabIndex = 69;
-            labelEmail.Text = "E-Mail . . . . . . . . . . . . . . . . . . . :";
-            // 
-            // textBoxEmail
-            // 
-            textBoxEmail.BackColor = Color.Cyan;
-            textBoxEmail.BorderStyle = BorderStyle.None;
-            textBoxEmail.ForeColor = Color.Black;
-            textBoxEmail.Location = new Point(241, 100);
-            textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(149, 16);
-            textBoxEmail.TabIndex = 76;
+            textBoxCapitalSocial.BackColor = Color.Cyan;
+            textBoxCapitalSocial.BorderStyle = BorderStyle.None;
+            textBoxCapitalSocial.ForeColor = Color.Black;
+            textBoxCapitalSocial.Location = new Point(241, 100);
+            textBoxCapitalSocial.Name = "textBoxCapitalSocial";
+            textBoxCapitalSocial.ShortcutsEnabled = false;
+            textBoxCapitalSocial.Size = new Size(149, 16);
+            textBoxCapitalSocial.TabIndex = 76;
+            textBoxCapitalSocial.KeyPress += AoPressionarTeclaTextBoxCapitalSocial;
             // 
             // panelCriacao
             // 
             panelCriacao.BackColor = Color.BlueViolet;
+            panelCriacao.Controls.Add(labelPorte);
+            panelCriacao.Controls.Add(comboBoxPorte);
+            panelCriacao.Controls.Add(labelMatrizFilial);
+            panelCriacao.Controls.Add(comboBoxMatrizFilial);
             panelCriacao.Controls.Add(textBoxNumero);
             panelCriacao.Controls.Add(labelCep);
             panelCriacao.Controls.Add(labelNumero);
             panelCriacao.Controls.Add(labelBairro);
-            panelCriacao.Controls.Add(labelInicioAtividade);
+            panelCriacao.Controls.Add(labelDataAbertura);
             panelCriacao.Controls.Add(label2);
-            panelCriacao.Controls.Add(labelNome);
+            panelCriacao.Controls.Add(labelRazaoSocial);
             panelCriacao.Controls.Add(labelMunicipio);
-            panelCriacao.Controls.Add(labelCodigoMec);
+            panelCriacao.Controls.Add(labelNomeFantasia);
             panelCriacao.Controls.Add(labelRua);
-            panelCriacao.Controls.Add(labelCategoriaAdministrativa);
             panelCriacao.Controls.Add(LabelEstado);
-            panelCriacao.Controls.Add(labelOrganizacaoAcademica);
-            panelCriacao.Controls.Add(labelStatusAtividade);
-            panelCriacao.Controls.Add(dateTimePickerDataInicioAtividade);
+            panelCriacao.Controls.Add(labelNaturezaJuridica);
+            panelCriacao.Controls.Add(labelSituacaoCadastral);
+            panelCriacao.Controls.Add(dateTimePickerDataAbertura);
             panelCriacao.Controls.Add(comboBoxSituacaoCadastral);
             panelCriacao.Controls.Add(textBoxComplemento);
             panelCriacao.Controls.Add(textBoxRua);
@@ -239,22 +230,70 @@
             panelCriacao.Controls.Add(comboBoxEstado);
             panelCriacao.Controls.Add(textBoxBairro);
             panelCriacao.Controls.Add(textBoxCep);
-            panelCriacao.Controls.Add(comboBoxOrganizacaoAcademica);
+            panelCriacao.Controls.Add(comboBoxNaturezaJuridica);
             panelCriacao.Controls.Add(panelBotaoCancelar);
             panelCriacao.Controls.Add(panelBotaoSalvar);
-            panelCriacao.Controls.Add(labelEmail);
-            panelCriacao.Controls.Add(labelTelefone);
-            panelCriacao.Controls.Add(textBoxEmail);
-            panelCriacao.Controls.Add(textBoxCodigoMec);
-            panelCriacao.Controls.Add(comboBoxCategoriaAdministrativa);
+            panelCriacao.Controls.Add(labelCapitalSocial);
+            panelCriacao.Controls.Add(labelCnpj);
+            panelCriacao.Controls.Add(textBoxCapitalSocial);
+            panelCriacao.Controls.Add(textBoxNomeFantasia);
             panelCriacao.Controls.Add(labelTitulo);
-            panelCriacao.Controls.Add(textBoxTelefone);
-            panelCriacao.Controls.Add(textBoxNome);
+            panelCriacao.Controls.Add(textBoxCnpj);
+            panelCriacao.Controls.Add(textBoxRazaoSocial);
             panelCriacao.Location = new Point(-1, 1);
             panelCriacao.Name = "panelCriacao";
-            panelCriacao.Size = new Size(682, 289);
+            panelCriacao.Size = new Size(682, 303);
             panelCriacao.TabIndex = 79;
             panelCriacao.Paint += AoPintarTela;
+            // 
+            // labelPorte
+            // 
+            labelPorte.AutoSize = true;
+            labelPorte.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelPorte.ForeColor = Color.White;
+            labelPorte.Location = new Point(13, 150);
+            labelPorte.Name = "labelPorte";
+            labelPorte.Size = new Size(147, 20);
+            labelPorte.TabIndex = 108;
+            labelPorte.Text = "Porte . . . . . . . . . . . .:";
+            // 
+            // comboBoxPorte
+            // 
+            comboBoxPorte.BackColor = Color.Cyan;
+            comboBoxPorte.FlatStyle = FlatStyle.Flat;
+            comboBoxPorte.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxPorte.ForeColor = Color.Black;
+            comboBoxPorte.FormattingEnabled = true;
+            comboBoxPorte.Location = new Point(241, 150);
+            comboBoxPorte.Name = "comboBoxPorte";
+            comboBoxPorte.Size = new Size(149, 23);
+            comboBoxPorte.TabIndex = 107;
+            comboBoxPorte.Format += AoFormatarComboBoxPorte;
+            // 
+            // labelMatrizFilial
+            // 
+            labelMatrizFilial.AutoSize = true;
+            labelMatrizFilial.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelMatrizFilial.ForeColor = Color.White;
+            labelMatrizFilial.Location = new Point(13, 179);
+            labelMatrizFilial.Name = "labelMatrizFilial";
+            labelMatrizFilial.Size = new Size(187, 20);
+            labelMatrizFilial.TabIndex = 106;
+            labelMatrizFilial.Text = "Matriz Filial . . . . . . . . . . . .:";
+            // 
+            // comboBoxMatrizFilial
+            // 
+            comboBoxMatrizFilial.BackColor = Color.Cyan;
+            comboBoxMatrizFilial.FlatStyle = FlatStyle.Flat;
+            comboBoxMatrizFilial.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxMatrizFilial.ForeColor = Color.Black;
+            comboBoxMatrizFilial.FormattingEnabled = true;
+            comboBoxMatrizFilial.Location = new Point(241, 179);
+            comboBoxMatrizFilial.Name = "comboBoxMatrizFilial";
+            comboBoxMatrizFilial.Size = new Size(149, 23);
+            comboBoxMatrizFilial.TabIndex = 105;
+            comboBoxMatrizFilial.Format += AoFormatarComboBoxMatrizFilial;
+            comboBoxMatrizFilial.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxNumero
             // 
@@ -266,7 +305,7 @@
             textBoxNumero.ShortcutsEnabled = false;
             textBoxNumero.Size = new Size(149, 16);
             textBoxNumero.TabIndex = 82;
-            textBoxNumero.KeyPress += AoPressionarTecla_textBoxNumero;
+            textBoxNumero.KeyPress += AoPressionarTeclaTextBoxNumero;
             // 
             // labelCep
             // 
@@ -301,16 +340,16 @@
             labelBairro.TabIndex = 82;
             labelBairro.Text = "Bairro. . . . . :";
             // 
-            // labelInicioAtividade
+            // labelDataAbertura
             // 
-            labelInicioAtividade.AutoSize = true;
-            labelInicioAtividade.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelInicioAtividade.ForeColor = Color.White;
-            labelInicioAtividade.Location = new Point(13, 219);
-            labelInicioAtividade.Name = "labelInicioAtividade";
-            labelInicioAtividade.Size = new Size(187, 20);
-            labelInicioAtividade.TabIndex = 104;
-            labelInicioAtividade.Text = "Inicio Atividade. . . . . . . . .:";
+            labelDataAbertura.AutoSize = true;
+            labelDataAbertura.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDataAbertura.ForeColor = Color.White;
+            labelDataAbertura.Location = new Point(13, 248);
+            labelDataAbertura.Name = "labelDataAbertura";
+            labelDataAbertura.Size = new Size(206, 20);
+            labelDataAbertura.TabIndex = 104;
+            labelDataAbertura.Text = "Data Abertura . . . . . . . . . . . :";
             // 
             // label2
             // 
@@ -323,16 +362,16 @@
             label2.TabIndex = 85;
             label2.Text = "Complemento:";
             // 
-            // labelNome
+            // labelRazaoSocial
             // 
-            labelNome.AutoSize = true;
-            labelNome.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelNome.ForeColor = Color.White;
-            labelNome.Location = new Point(13, 34);
-            labelNome.Name = "labelNome";
-            labelNome.Size = new Size(227, 20);
-            labelNome.TabIndex = 99;
-            labelNome.Text = "Nome . . . . . . . . . . . . . . . . . . . . . :";
+            labelRazaoSocial.AutoSize = true;
+            labelRazaoSocial.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelRazaoSocial.ForeColor = Color.White;
+            labelRazaoSocial.Location = new Point(13, 34);
+            labelRazaoSocial.Name = "labelRazaoSocial";
+            labelRazaoSocial.Size = new Size(215, 20);
+            labelRazaoSocial.TabIndex = 99;
+            labelRazaoSocial.Text = "Razão Social . . . . . . . . . . . . . :";
             // 
             // labelMunicipio
             // 
@@ -345,16 +384,16 @@
             labelMunicipio.TabIndex = 81;
             labelMunicipio.Text = "Município . . .:";
             // 
-            // labelCodigoMec
+            // labelNomeFantasia
             // 
-            labelCodigoMec.AutoSize = true;
-            labelCodigoMec.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCodigoMec.ForeColor = Color.White;
-            labelCodigoMec.Location = new Point(13, 56);
-            labelCodigoMec.Name = "labelCodigoMec";
-            labelCodigoMec.Size = new Size(221, 20);
-            labelCodigoMec.TabIndex = 100;
-            labelCodigoMec.Text = "Codigo Mec . . . . . . . . . . . . . . . :";
+            labelNomeFantasia.AutoSize = true;
+            labelNomeFantasia.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNomeFantasia.ForeColor = Color.White;
+            labelNomeFantasia.Location = new Point(13, 56);
+            labelNomeFantasia.Name = "labelNomeFantasia";
+            labelNomeFantasia.Size = new Size(221, 20);
+            labelNomeFantasia.TabIndex = 100;
+            labelNomeFantasia.Text = "Nome Fantasia . . . . . . . . . . . . :";
             // 
             // labelRua
             // 
@@ -367,17 +406,6 @@
             labelRua.TabIndex = 84;
             labelRua.Text = "Rua . . . . . . . . :";
             // 
-            // labelCategoriaAdministrativa
-            // 
-            labelCategoriaAdministrativa.AutoSize = true;
-            labelCategoriaAdministrativa.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCategoriaAdministrativa.ForeColor = Color.White;
-            labelCategoriaAdministrativa.Location = new Point(13, 121);
-            labelCategoriaAdministrativa.Name = "labelCategoriaAdministrativa";
-            labelCategoriaAdministrativa.Size = new Size(185, 20);
-            labelCategoriaAdministrativa.TabIndex = 101;
-            labelCategoriaAdministrativa.Text = "Categoria Administrativa:";
-            // 
             // LabelEstado
             // 
             LabelEstado.AutoSize = true;
@@ -389,43 +417,43 @@
             LabelEstado.TabIndex = 80;
             LabelEstado.Text = "Estado. . . . . .:";
             // 
-            // labelOrganizacaoAcademica
+            // labelNaturezaJuridica
             // 
-            labelOrganizacaoAcademica.AutoSize = true;
-            labelOrganizacaoAcademica.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelOrganizacaoAcademica.ForeColor = Color.White;
-            labelOrganizacaoAcademica.Location = new Point(13, 151);
-            labelOrganizacaoAcademica.Name = "labelOrganizacaoAcademica";
-            labelOrganizacaoAcademica.Size = new Size(210, 20);
-            labelOrganizacaoAcademica.TabIndex = 102;
-            labelOrganizacaoAcademica.Text = "Organizacao Academica . . .:";
+            labelNaturezaJuridica.AutoSize = true;
+            labelNaturezaJuridica.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelNaturezaJuridica.ForeColor = Color.White;
+            labelNaturezaJuridica.Location = new Point(13, 123);
+            labelNaturezaJuridica.Name = "labelNaturezaJuridica";
+            labelNaturezaJuridica.Size = new Size(196, 20);
+            labelNaturezaJuridica.TabIndex = 102;
+            labelNaturezaJuridica.Text = "Natureza Juridica . . . . . . . :";
             // 
-            // labelStatusAtividade
+            // labelSituacaoCadastral
             // 
-            labelStatusAtividade.AutoSize = true;
-            labelStatusAtividade.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelStatusAtividade.ForeColor = Color.White;
-            labelStatusAtividade.Location = new Point(13, 179);
-            labelStatusAtividade.Name = "labelStatusAtividade";
-            labelStatusAtividade.Size = new Size(197, 20);
-            labelStatusAtividade.TabIndex = 103;
-            labelStatusAtividade.Text = "Status Atividade. . . . . . . . .:";
+            labelSituacaoCadastral.AutoSize = true;
+            labelSituacaoCadastral.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSituacaoCadastral.ForeColor = Color.White;
+            labelSituacaoCadastral.Location = new Point(13, 208);
+            labelSituacaoCadastral.Name = "labelSituacaoCadastral";
+            labelSituacaoCadastral.Size = new Size(200, 20);
+            labelSituacaoCadastral.TabIndex = 103;
+            labelSituacaoCadastral.Text = "Situação Cadastral. . . . . . .:";
             // 
-            // dateTimePickerDataInicioAtividade
+            // dateTimePickerDataAbertura
             // 
-            dateTimePickerDataInicioAtividade.CalendarFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePickerDataInicioAtividade.CalendarForeColor = Color.Cyan;
-            dateTimePickerDataInicioAtividade.CalendarMonthBackground = Color.Cyan;
-            dateTimePickerDataInicioAtividade.CalendarTitleBackColor = Color.Cyan;
-            dateTimePickerDataInicioAtividade.CalendarTitleForeColor = Color.Cyan;
-            dateTimePickerDataInicioAtividade.CalendarTrailingForeColor = Color.Cyan;
-            dateTimePickerDataInicioAtividade.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePickerDataInicioAtividade.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicioAtividade.Location = new Point(241, 208);
-            dateTimePickerDataInicioAtividade.Name = "dateTimePickerDataInicioAtividade";
-            dateTimePickerDataInicioAtividade.Size = new Size(149, 22);
-            dateTimePickerDataInicioAtividade.TabIndex = 98;
-            dateTimePickerDataInicioAtividade.ValueChanged += AoAlterarValor_dateTimePickerDataInicioAtividade;
+            dateTimePickerDataAbertura.CalendarFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerDataAbertura.CalendarForeColor = Color.Cyan;
+            dateTimePickerDataAbertura.CalendarMonthBackground = Color.Cyan;
+            dateTimePickerDataAbertura.CalendarTitleBackColor = Color.Cyan;
+            dateTimePickerDataAbertura.CalendarTitleForeColor = Color.Cyan;
+            dateTimePickerDataAbertura.CalendarTrailingForeColor = Color.Cyan;
+            dateTimePickerDataAbertura.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerDataAbertura.Format = DateTimePickerFormat.Short;
+            dateTimePickerDataAbertura.Location = new Point(241, 237);
+            dateTimePickerDataAbertura.Name = "dateTimePickerDataAbertura";
+            dateTimePickerDataAbertura.Size = new Size(149, 22);
+            dateTimePickerDataAbertura.TabIndex = 98;
+            dateTimePickerDataAbertura.ValueChanged += AoAlterarValorDateTimePickerDataInicioAtividade;
             // 
             // comboBoxSituacaoCadastral
             // 
@@ -434,11 +462,11 @@
             comboBoxSituacaoCadastral.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxSituacaoCadastral.ForeColor = Color.Black;
             comboBoxSituacaoCadastral.FormattingEnabled = true;
-            comboBoxSituacaoCadastral.Location = new Point(241, 179);
+            comboBoxSituacaoCadastral.Location = new Point(241, 208);
             comboBoxSituacaoCadastral.Name = "comboBoxSituacaoCadastral";
             comboBoxSituacaoCadastral.Size = new Size(149, 23);
             comboBoxSituacaoCadastral.TabIndex = 97;
-            comboBoxSituacaoCadastral.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxSituacaoCadastral.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxComplemento
             // 
@@ -481,8 +509,8 @@
             comboBoxEstado.Name = "comboBoxEstado";
             comboBoxEstado.Size = new Size(149, 23);
             comboBoxEstado.TabIndex = 85;
-            comboBoxEstado.Format += AoFormatar_comboBoxEstado;
-            comboBoxEstado.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxEstado.Format += AoFormatarComboBoxEstado;
+            comboBoxEstado.KeyPress += AoPressionarTeclaComboBox;
             // 
             // textBoxBairro
             // 
@@ -506,30 +534,30 @@
             textBoxCep.TabIndex = 91;
             textBoxCep.KeyPress += AoPressionarTeclaTextBoxCep;
             // 
-            // comboBoxOrganizacaoAcademica
+            // comboBoxNaturezaJuridica
             // 
-            comboBoxOrganizacaoAcademica.BackColor = Color.Cyan;
-            comboBoxOrganizacaoAcademica.FlatStyle = FlatStyle.Flat;
-            comboBoxOrganizacaoAcademica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxOrganizacaoAcademica.ForeColor = Color.Black;
-            comboBoxOrganizacaoAcademica.FormattingEnabled = true;
-            comboBoxOrganizacaoAcademica.Location = new Point(241, 150);
-            comboBoxOrganizacaoAcademica.Name = "comboBoxOrganizacaoAcademica";
-            comboBoxOrganizacaoAcademica.Size = new Size(149, 23);
-            comboBoxOrganizacaoAcademica.TabIndex = 83;
-            comboBoxOrganizacaoAcademica.Format += AoFormatar_comboBoxOrganizacaoAcademica;
-            comboBoxOrganizacaoAcademica.KeyPress += AoPressionarTecla_comboBox;
+            comboBoxNaturezaJuridica.BackColor = Color.Cyan;
+            comboBoxNaturezaJuridica.FlatStyle = FlatStyle.Flat;
+            comboBoxNaturezaJuridica.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxNaturezaJuridica.ForeColor = Color.Black;
+            comboBoxNaturezaJuridica.FormattingEnabled = true;
+            comboBoxNaturezaJuridica.Location = new Point(241, 122);
+            comboBoxNaturezaJuridica.Name = "comboBoxNaturezaJuridica";
+            comboBoxNaturezaJuridica.Size = new Size(149, 23);
+            comboBoxNaturezaJuridica.TabIndex = 83;
+            comboBoxNaturezaJuridica.Format += AoFormatarComboBoxNaturezaJuridica;
+            comboBoxNaturezaJuridica.KeyPress += AoPressionarTeclaComboBox;
             // 
-            // TelaCriarEscolaForm
+            // TelaCriarEmpresaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(692, 308);
+            ClientSize = new Size(692, 322);
             Controls.Add(panelCriacao);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "TelaCriarEscolaForm";
+            Name = "TelaCriarEmpresaForm";
             Text = "TelaCriarEnderecoForm";
             Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
@@ -546,15 +574,14 @@
         private Panel panelBotaoSalvar;
         private Button botaoSalvar;
         private Label labelTitulo;
-        private TextBox textBoxNome;
-        private TextBox textBoxTelefone;
-        private ComboBox comboBoxCategoriaAdministrativa;
-        private TextBox textBoxCodigoMec;
-        private Label labelTelefone;
-        private Label labelEmail;
-        private TextBox textBoxEmail;
+        private TextBox textBoxRazaoSocial;
+        private TextBox textBoxCnpj;
+        private TextBox textBoxNomeFantasia;
+        private Label labelCnpj;
+        private Label labelCapitalSocial;
+        private TextBox textBoxCapitalSocial;
         private Panel panelCriacao;
-        private ComboBox comboBoxOrganizacaoAcademica;
+        private ComboBox comboBoxNaturezaJuridica;
         private ComboBox comboBoxSituacaoCadastral;
         private Label labelCep;
         private TextBox textBoxComplemento;
@@ -568,15 +595,18 @@
         private TextBox textBoxBairro;
         private Label LabelEstado;
         private TextBox textBoxCep;
-        private DateTimePicker dateTimePickerDataInicioAtividade;
-        private Label labelNome;
-        private Label labelCodigoMec;
-        private Label labelCategoriaAdministrativa;
-        private Label labelOrganizacaoAcademica;
-        private Label labelStatusAtividade;
-        private Label labelInicioAtividade;
+        private DateTimePicker dateTimePickerDataAbertura;
+        private Label labelRazaoSocial;
+        private Label labelNomeFantasia;
+        private Label labelNaturezaJuridica;
+        private Label labelSituacaoCadastral;
+        private Label labelDataAbertura;
         private Label label2;
         private TextBox textBoxNumero;
         private Label labelNumero;
+        private Label labelMatrizFilial;
+        private ComboBox comboBoxMatrizFilial;
+        private Label labelPorte;
+        private ComboBox comboBoxPorte;
     }
 }

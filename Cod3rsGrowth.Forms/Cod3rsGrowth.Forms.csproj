@@ -31,13 +31,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\TelaCaixaDialogoConfirmacaoDelecaoForm.cs" />
-    <Compile Update="Forms\TelaCriarEmpresaForm .cs">
+    <Compile Update="Forms\TelaCriarAtualizarEmpresaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\TelaCriarConvenioForm.cs">
+    <Compile Update="Forms\TelaCriarAtualizarConvenioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\TelaCriarEscolaForm.cs">
+    <Compile Update="Forms\TelaCriarAtualizarEscolaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\TelaEscolaForm.cs">

@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms.Forms
 {
-    partial class TelaCriarConvenioForm
+    partial class TelaCriarAtualizarConvenioForm
     {
         /// <summary>
         /// Required designer variable.
@@ -361,7 +361,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "TelaCriarConvenioForm";
             Text = "TelaCriarEnderecoForm";
-            Load += AoCarregarCriar;
+            Load += AoCarregarTela;
             panelBotaoCancelar.ResumeLayout(false);
             panelBotaoSalvar.ResumeLayout(false);
             panelCriacao.ResumeLayout(false);

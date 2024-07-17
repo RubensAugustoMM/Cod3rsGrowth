@@ -113,7 +113,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -192,7 +192,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmCriar(object sender, EventArgs e)
         {
-            TelaCriarEnderecoForm telaCriarEndereco = new TelaCriarEnderecoForm(_servicoEndereco);
+            TelaCriarAtualizarEnderecoForm telaCriarEndereco = new TelaCriarAtualizarEnderecoForm(_servicoEndereco);
 
             telaCriarEndereco.StartPosition = FormStartPosition.CenterParent;
             telaCriarEndereco.TopLevel = true;
@@ -217,7 +217,7 @@ namespace Cod3rsGrowth.Forms.Forms
                 int id = (int)dataGridViewEnderecos.SelectedRows[0].Cells[0].Value;
 
                 var enderecoDeletar = _servicoEndereco.ObterPorId(id);
-                
+
                 var mensagemEnderecoExcluir = CriaMensagemEnderecoExcluir(enderecoDeletar);
                 var descricaoEnderecoExcluir = CriaDescricaoEnderecoExcluir(enderecoDeletar);
 
@@ -226,7 +226,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoEndereco.BotaoDeletarClicado)
+                    if (telaExclusaoEndereco.BotaoDeletarClicado)
                     {
                         _servicoEndereco.Deletar(id);
                         dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
@@ -238,18 +238,9 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 telaExclusaoEndereco.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
-                const string Separador = "\n";
-                List<string> listaErros = new();
-
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
+                ExibeCaixaDeDialogoErro(excecao);
             }
         }
 
@@ -263,8 +254,54 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             var mensagem = $"Município:\n  {enderecoDeletar.Municipio}\nBairro:\n  {enderecoDeletar.Bairro}\n"
                            + $"Rua:\n {enderecoDeletar.Rua}\n" + $"Estado:\n {EnumExtencoes.RetornaDescricao(enderecoDeletar.Estado)}\n"
-                           +$"Complemento:\n {enderecoDeletar.Complemento}";
+                           + $"Complemento:\n {enderecoDeletar.Complemento}";
             return mensagem;
+        }
+
+        private void AoCLicarEmEditar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewEnderecos.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Endereço para excluir!!!!!!");
+                }
+
+                int id = (int)dataGridViewEnderecos.SelectedRows[0].Cells[0].Value;
+
+                var enderecoEditar = _servicoEndereco.ObterPorId(id);
+
+                TelaCriarAtualizarEnderecoForm telaAtualizarEndereco = 
+                    new TelaCriarAtualizarEnderecoForm(_servicoEndereco, enderecoEditar);
+
+                telaAtualizarEndereco.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEndereco.TopLevel = true;
+
+                telaAtualizarEndereco.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewEnderecos.DataSource = _servicoEndereco.ObterTodos(null);
+                };
+
+                telaAtualizarEndereco.ShowDialog(this);
+            }
+            catch (Exception excecao)
+            {
+                ExibeCaixaDeDialogoErro(excecao);
+            }
+        }
+
+        private void ExibeCaixaDeDialogoErro(Exception excecao)
+        {
+            const string Separador = "\n";
+            List<string> listaErros = new();
+
+            listaErros.AddRange(excecao.Message.Split(Separador));
+            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+            caixaDialogoErro.TopLevel = true;
+
+            caixaDialogoErro.ShowDialog(this);
         }
     }
 }

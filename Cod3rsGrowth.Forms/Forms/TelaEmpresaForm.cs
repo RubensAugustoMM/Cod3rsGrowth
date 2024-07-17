@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.Forms.Forms
         }
 
         private void InicializaFontePixeBoy()
-        {    
+        {
             _pixeboy = new PrivateFontCollection();
 
             string caminhoDados = Environment.CurrentDirectory;
@@ -220,7 +220,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void AoClicarEmCriar(object sender, EventArgs e)
         {
-            TelaCriarEmpresaForm telaCriarEmpresa = new TelaCriarEmpresaForm(_servicoEndereco, _servicoEmpresa);
+            TelaCriarAtualizarEmpresaForm telaCriarEmpresa = new TelaCriarAtualizarEmpresaForm(_servicoEndereco, _servicoEmpresa);
 
             telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
             telaCriarEmpresa.TopLevel = true;
@@ -230,13 +230,16 @@ namespace Cod3rsGrowth.Forms.Forms
                 dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
             };
 
+            telaCriarEmpresa.StartPosition = FormStartPosition.CenterParent;
+            telaCriarEmpresa.TopLevel = true;
+
             telaCriarEmpresa.ShowDialog(this);
         }
 
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 if (dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
                 {
                     throw new Exception("!!!!!!Selecione uma Empresa para excluir!!!!!!");
@@ -245,39 +248,30 @@ namespace Cod3rsGrowth.Forms.Forms
                 int id = (int)dataGridViewEmpresas.SelectedRows[0].Cells[0].Value;
 
                 var empresaDeletar = _servicoEmpresa.ObterPorId(id);
-                
+
                 var mensagemEmpresaExcluir = CriaMensagemEmpresaExcluir(empresaDeletar);
                 var descricaoEmpresaExcluir = CriaDescricaoEmpresaExcluir(empresaDeletar);
 
-                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoConvenio =
+                TelaCaixaDialogoConfirmacaoDelecaoForm telaExclusaoEmpresa =
                     new TelaCaixaDialogoConfirmacaoDelecaoForm(mensagemEmpresaExcluir, descricaoEmpresaExcluir);
 
-                telaExclusaoConvenio.FormClosing += (object sender, FormClosingEventArgs e) =>
+                telaExclusaoEmpresa.FormClosing += (object sender, FormClosingEventArgs e) =>
                 {
-                    if(telaExclusaoConvenio.BotaoDeletarClicado)
+                    if (telaExclusaoEmpresa.BotaoDeletarClicado)
                     {
                         _servicoEmpresa.Deletar(id);
                         dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
                     }
                 };
 
-                telaExclusaoConvenio.StartPosition = FormStartPosition.CenterParent;
-                telaExclusaoConvenio.TopLevel = true;
+                telaExclusaoEmpresa.StartPosition = FormStartPosition.CenterParent;
+                telaExclusaoEmpresa.TopLevel = true;
 
-                telaExclusaoConvenio.ShowDialog(this);
+                telaExclusaoEmpresa.ShowDialog(this);
             }
-            catch(Exception excecao)
+            catch (Exception excecao)
             {
-                const string Separador = "\n";
-                List<string> listaErros = new();
-
-                listaErros.AddRange(excecao.Message.Split(Separador));
-                var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
-
-                caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
-                caixaDialogoErro.TopLevel = true;
-
-                caixaDialogoErro.ShowDialog(this);
+                ExibeCaixaDeDialogoErro(excecao);
             }
         }
 
@@ -293,6 +287,55 @@ namespace Cod3rsGrowth.Forms.Forms
                         + $"Estado:\n {EnumExtencoes.RetornaDescricao(empresaDeletar.Estado)}\n\n"
                         + $"\n!!!O endereço de código:\n {empresaDeletar.IdEndereco} também será Excluído!!!";
             return mensagem;
+        }
+
+        private void AoClicarEmEditar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridViewEmpresas.SelectedRows.IsNullOrEmpty())
+                {
+                    throw new Exception("!!!!!!Selecione um Empresas para atualizar!!!!!!");
+                }
+
+                int id = (int)dataGridViewEmpresas.SelectedRows[0].Cells[0].Value;
+
+                var empresaEditar = _servicoEmpresa.ObterPorId(id);
+
+                TelaCriarAtualizarEmpresaForm telaAtualizarEmpresa = 
+                    new TelaCriarAtualizarEmpresaForm(_servicoEndereco,_servicoEmpresa,empresaEditar);
+
+                telaAtualizarEmpresa.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEmpresa.TopLevel = true;
+
+                telaAtualizarEmpresa.FormClosing += (object sender, FormClosingEventArgs e) =>
+                {
+                    dataGridViewEmpresas.DataSource = _servicoEmpresa.ObterTodos(null);
+                };
+
+                telaAtualizarEmpresa.StartPosition = FormStartPosition.CenterParent;
+                telaAtualizarEmpresa.TopLevel = true;
+
+                telaAtualizarEmpresa.ShowDialog(this);
+            }
+            catch (Exception excecao)
+            {
+                ExibeCaixaDeDialogoErro(excecao);
+            }
+        }
+
+        private void ExibeCaixaDeDialogoErro(Exception excecao)
+        {
+            const string Separador = "\n";
+            List<string> listaErros = new();
+
+            listaErros.AddRange(excecao.Message.Split(Separador));
+            var caixaDialogoErro = new TelaCaixaDialogoErroForm(listaErros);
+
+            caixaDialogoErro.StartPosition = FormStartPosition.CenterParent;
+            caixaDialogoErro.TopLevel = true;
+
+            caixaDialogoErro.ShowDialog(this);
         }
     }
 }
