@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.Dominio.Interfaces;
 
 public interface IRepositorioEndereco
 {
-    List<Endereco> ObterTodos(FiltroEndereco filtroEndereco);
+    List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco);
     Endereco ObterPorId(int Id);
     void Criar(Endereco enderecoCriado);
     void Atualizar(Endereco endrecoAtualizado);

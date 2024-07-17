@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Filtros;
+﻿using Cod3rsGrowth.Dominio;
+using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
 
@@ -10,7 +11,7 @@ public class MockRepositorioEndereco : IRepositorioEndereco
 
     public void Atualizar(Endereco enderecoAtualizado)
     {
-        var enderecoExistente = ObterPorId(enderecoAtualizado.Id);
+        var enderecoExistente =  Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == enderecoAtualizado.Id) ?? throw new Exception($"Nenhum Endereco com Id {enderecoAtualizado.Id} existe no contexto atual!\n");
 
         enderecoExistente.Numero = enderecoAtualizado.Numero;
         enderecoExistente.Cep = enderecoAtualizado.Cep;
@@ -28,16 +29,53 @@ public class MockRepositorioEndereco : IRepositorioEndereco
 
     public void Deletar(int id)
     {
-        Tabelas.Enderecos.Value.Remove(ObterPorId(id));
+        Tabelas.Enderecos.Value.Remove(ObterPorIdModelo(id));
     }
 
-    public Endereco ObterPorId(int Id)
+    public Endereco ObterPorId(int id)
     {
-        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Endereco com Id {Id} existe no contexto atual!\n");
+        var EnderecoRetornado = ObterPorIdModelo(id);
+
+        var EnderecoOtdRetornado = new Endereco()
+        {
+            Id = EnderecoRetornado.Id,
+            Numero = EnderecoRetornado.Numero,
+            Cep = EnderecoRetornado.Cep,
+            Municipio = EnderecoRetornado.Municipio,
+            Bairro = EnderecoRetornado.Bairro,
+            Rua = EnderecoRetornado.Rua,
+            Complemento = EnderecoRetornado.Complemento,
+            Estado = EnderecoRetornado.Estado
+        };
+
+        return EnderecoOtdRetornado;
     }
 
-    public List<Endereco> ObterTodos(FiltroEndereco? filtroEndereco)
+    public List<Endereco> ObterTodos(FiltroEndereco? filtroEnderecoOtd)
     {
-        return Tabelas.Enderecos.Value;
+        var ListaEnderecos = Tabelas.Enderecos.Value;
+        List<Endereco> ListaEnderecoOtd = new();
+
+        foreach (var endereco in ListaEnderecos)
+        {
+            ListaEnderecoOtd.Add(new Endereco()
+            {
+            Id = endereco.Id,
+            Numero = endereco.Numero,
+            Cep = endereco.Cep,
+            Municipio = endereco.Municipio,
+            Bairro = endereco.Bairro,
+            Rua = endereco.Rua,
+            Complemento = endereco.Complemento,
+            Estado = endereco.Estado
+            });
+        }
+
+        return ListaEnderecoOtd;
+    }
+
+    private Endereco ObterPorIdModelo(int id)
+    {
+        return Tabelas.Enderecos.Value.FirstOrDefault(c => c.Id == id) ?? throw new Exception($"Nenhum Endereco com Id {id} existe no contexto atual!\n");
     }
 }

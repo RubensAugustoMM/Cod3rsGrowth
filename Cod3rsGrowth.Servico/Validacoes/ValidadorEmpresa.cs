@@ -44,7 +44,7 @@ public class ValidadorEmpresa : AbstractValidator<Empresa>
         RuleFor(empresa => empresa.Cnpj.Length)
             .Equal(14)
             .When(empresa => empresa.Cnpj != null)
-            .WithMessage("{PropertyName} menor ou maior que 14 characteres!");
+            .WithMessage("CNPJ menor ou maior que 14 characteres!");
         
         RuleFor(empresa => empresa.DataSituacaoCadastral)
             .GreaterThan(empresa => empresa.DataAbertura)

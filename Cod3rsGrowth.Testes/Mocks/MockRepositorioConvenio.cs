@@ -1,16 +1,17 @@
 ﻿using Cod3rsGrowth.Dominio.Filtros;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Modelos;
+using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Testes.Mocks;
 
-public class MockRepositorioConvenio : IRepositorioConvenio
+public class MockRepositorioConvenio : IRepositorioConvenio 
 {
     TabelaSingleton Tabelas = TabelaSingleton.Instance;
 
     public void Atualizar(Convenio convenioAtulizado)
     {
-        var convenioExistente = ObterPorId(convenioAtulizado.Id);
+        var convenioExistente = ObterPorIdModelo(convenioAtulizado.Id);
 
         convenioExistente.NumeroProcesso = convenioAtulizado.NumeroProcesso;
         convenioExistente.Objeto = convenioAtulizado.Objeto;
@@ -28,16 +29,62 @@ public class MockRepositorioConvenio : IRepositorioConvenio
 
     public void Deletar(int id)
     {
-        Tabelas.Convenios.Value.Remove(ObterPorId(id));
+                Tabelas.Convenios.Value.Remove(ObterPorIdModelo(id));
     }
 
-    public Convenio ObterPorId(int Id)
+    public ConvenioEscolaEmpresaOtd ObterPorId(int id)
     {
-        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == Id) ?? throw new Exception($"Nenhum Convenio com Id {Id} existe no contexto atual!\n");
+        var ConvenioRetornado = ObterPorIdModelo(id);
+        var escolaRetornada = Tabelas.Escolas.Value.FirstOrDefault(e => e.Id == ConvenioRetornado.IdEscola) ?? throw new Exception($"Nenhuma Escola com Id {ConvenioRetornado.IdEscola} existe no contexto atual!\n");
+        var EmpresaRetornada = Tabelas.Empresas.Value.FirstOrDefault(e => e.Id == ConvenioRetornado.IdEmpresa) ?? throw new Exception($"Nenhuma Empresa com Id {ConvenioRetornado.IdEmpresa} existe no contexto atual!\n");
+
+        var ConvenioOtdRetornado = new ConvenioEscolaEmpresaOtd()
+        {
+            Id = ConvenioRetornado.Id,
+            NumeroProcesso = ConvenioRetornado.NumeroProcesso,
+            Objeto = ConvenioRetornado.Objeto,
+            Valor = ConvenioRetornado.Valor,
+            DataInicio = ConvenioRetornado.DataInicio,
+            DataTermino = ConvenioRetornado.DataTermino,
+            IdEscola = ConvenioRetornado.IdEscola,
+            NomeEscola = escolaRetornada.Nome,
+            IdEmpresa = ConvenioRetornado.IdEmpresa,
+            RazaoSocialEmpresa = EmpresaRetornada.RazaoSocial 
+        };
+
+        return ConvenioOtdRetornado; 
     }
 
-    public List<Convenio> ObterTodos(FiltroConvenio? filtroConvenio)
+    public List<ConvenioEscolaEmpresaOtd> ObterTodos(FiltroConvenioEscolaEmpresaOtd? filtroConvenio)
     {
-        return Tabelas.Convenios.Value;
+        var ListaConvenios = Tabelas.Convenios.Value;
+        List<ConvenioEscolaEmpresaOtd> ListaConvenioEscolaEmpresaOtd = new();
+
+        foreach (var convenio in ListaConvenios)
+        {
+            var escolaRetornada = Tabelas.Escolas.Value.FirstOrDefault(e => e.Id == convenio.IdEscola) ?? throw new Exception($"Nenhuma Escola com Id {convenio.IdEscola} existe no contexto atual!\n");
+            var EmpresaRetornada = Tabelas.Empresas.Value.FirstOrDefault(e => e.Id == convenio.IdEmpresa) ?? throw new Exception($"Nenhuma Empresa com Id {convenio.IdEmpresa} existe no contexto atual!\n");
+
+            ListaConvenioEscolaEmpresaOtd.Add(new ConvenioEscolaEmpresaOtd()
+            {
+                Id = convenio.Id,
+                NumeroProcesso = convenio.NumeroProcesso,
+                Objeto = convenio.Objeto,
+                Valor = convenio.Valor,
+                DataInicio = convenio.DataInicio,
+                DataTermino = convenio.DataTermino,
+                IdEscola = convenio.IdEscola,
+                NomeEscola = escolaRetornada.Nome,
+                IdEmpresa = convenio.IdEmpresa,
+                RazaoSocialEmpresa = EmpresaRetornada.RazaoSocial
+            });
+        }
+
+        return ListaConvenioEscolaEmpresaOtd;
+    }
+
+    private Convenio ObterPorIdModelo(int id)
+    {
+        return Tabelas.Convenios.Value.FirstOrDefault(c => c.Id == id) ?? throw new Exception($"Nenhum Convenio com Id {id} existe no contexto atual!\n");
     }
 }
