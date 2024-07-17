@@ -13,21 +13,21 @@ public class Migracao202406201850_CriaTabelaEmpresas : Migration
             .WithColumn("NomeFantasia").AsString().NotNullable()
             .WithColumn("Cnpj").AsString().NotNullable()
             .WithColumn("SituacaoCadastral").AsBoolean().NotNullable()
-            .WithColumn("DataSituacaoCadastral").AsDate().NotNullable()
+            .WithColumn("DataSituacaoCadastral").AsDateTime().NotNullable()
             .WithColumn("DataAbertura").AsDateTime().NotNullable()
             .WithColumn("CapitalSocial").AsDecimal().NotNullable()
             .WithColumn("NaturezaJuridica").AsInt32().NotNullable()
             .WithColumn("Porte").AsInt32().NotNullable()
             .WithColumn("MatrizFilial").AsInt32().NotNullable()
-            .WithColumn("IdEndereco").AsInt32().NotNullable();
-
-        Create.ForeignKey("fk_Empresas_Enderecos").FromTable("Empresas").ForeignColumn("IdEndereco")
-            .ToTable("Enderecos").PrimaryColumn("Id");
+            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDeleteOrUpdate(System.Data.Rule.Cascade).NotNullable();
     }
 
     public override void Down()
     {
-        Delete.ForeignKey("fk_Empresas_Enderecos").OnTable("Empresas");
+        Delete.ForeignKey()
+            .FromTable("Empresas").ForeignColumn("IdEndereco")
+            .ToTable("Enderecos").PrimaryColumn("Id");
+
         Delete.Table("Empresas");
     }
 }

@@ -16,15 +16,15 @@ public class Migracao202406201848_CriaTabelaEscolas : Migration
             .WithColumn("InicioAtividade").AsDateTime().NotNullable()
             .WithColumn("CategoriaAdministrativa").AsInt32().NotNullable()
             .WithColumn("OrganizacaoAcademica").AsInt32().NotNullable()
-            .WithColumn("IdEndereco").AsInt32().NotNullable();
-
-        Create.ForeignKey("fk_Escolas_Enderecos").FromTable("Escolas").ForeignColumn("IdEndereco")
-            .ToTable("Enderecos").PrimaryColumn("Id");
+            .WithColumn("IdEndereco").AsInt32().ForeignKey("Enderecos", "Id").OnDeleteOrUpdate(System.Data.Rule.Cascade).NotNullable();
     }
 
     public override void Down()
     {
-        Delete.ForeignKey("fk_Escolas_Enderecos").OnTable("Escolas");
+        Delete.ForeignKey()
+            .FromTable("Escolas").ForeignColumn("IdEndereco")
+            .ToTable("Enderecos").PrimaryColumn("Id");
+
         Delete.Table("Escolas");
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Dominio.Filtros;
 
-public class FiltroConvenio
+public class FiltroConvenioEscolaEmpresaOtd
 {
     public string? ObjetoFiltro { get; set; }
     public bool? MaiorOuIgualValor { get; set; }
@@ -10,5 +10,7 @@ public class FiltroConvenio
     public bool? MaiorOuIgualDataTermino { get; set; }
     public DateTime? DataTerminoFiltro { get; set; }
     public int? IdEscolaFiltro { get; set; }
+    public string? NomeEscolaFiltro { get; set; }
     public int? IdEmpresaFiltro { get; set; }
+    public string? RazaoSocialEmpresaFiltro { get; set; }
 }
