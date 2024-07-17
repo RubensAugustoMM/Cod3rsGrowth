@@ -1,19 +1,20 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaEmpresaForm : Form
     {
+        private const int _tamanhoFonte = 12;
+
         private readonly ServicoEmpresa _servicoEmpresa;
         private readonly ServicoEndereco _servicoEndereco;
+
         private FiltroEmpresaUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
@@ -57,9 +58,9 @@ namespace Cod3rsGrowth.Forms.Forms
             InicializaFontePixeBoy();
             InicializaGrade();
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -109,7 +110,9 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
+            const int localizacaoYFiltro = 0;
+
+            _controladorFiltro.Location = new Point(painelLateral.Width, localizacaoYFiltro);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -134,7 +137,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -144,10 +147,11 @@ namespace Cod3rsGrowth.Forms.Forms
         private void InicializaGrade()
         {
             const string formatacaoDecimais = "0,0.00";
+            const int indexColunaCapitalSocial = 11;
 
-            dataGridViewEmpresas.Columns[11].DefaultCellStyle.Format = formatacaoDecimais;
+            dataGridViewEmpresas.Columns[indexColunaCapitalSocial].DefaultCellStyle.Format = formatacaoDecimais;
 
-            dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEmpresas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEmpresas.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEmpresas.DefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEmpresas.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -157,7 +161,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEmpresas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
             dataGridViewEmpresas.EnableHeadersVisualStyles = false;
-            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEmpresas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;

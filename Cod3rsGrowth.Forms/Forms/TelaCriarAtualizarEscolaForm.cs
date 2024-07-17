@@ -2,19 +2,20 @@
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Modelos;
 using Cod3rsGrowth.Dominio.ObjetosTranferenciaDados;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Servico;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarAtualizarEscolaForm : Form
     {
-        private PrivateFontCollection _pixeboy;
+        private const int _tamanhoFonte = 12;
+
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEscola _servicoEscola;
+
+        private PrivateFontCollection _pixeboy;
         private EscolaEnderecoOtd _escolaEnderecoOtdAtualizar = null;
         private Endereco _enderecoAtualizar = null;
 
@@ -47,7 +48,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -105,7 +106,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);

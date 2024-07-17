@@ -1,18 +1,18 @@
-﻿using Cod3rsGrowth.Forms.Properties;
-using LinqToDB.Common;
+﻿using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaPrincipalForm : Form
     {
-        private PrivateFontCollection _pixeboy;
+        private const int _tamanhoFonte = 12;
+
         private readonly TelaConvenioForm _telaConvenioForm;
         private readonly TelaEmpresaForm _telaEmpresaForm;
         private readonly TelaEnderecoForm _telaEnderecoForm;
         private readonly TelaEscolaForm _telaEscolaForm;
 
+        private PrivateFontCollection _pixeboy;
         private bool _telaConvenioAtiva;
         private bool _telaEmpresaAtiva;
         private bool _telaEnderecoAtiva;
@@ -61,7 +61,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -186,7 +186,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);

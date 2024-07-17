@@ -1,17 +1,16 @@
-﻿using Cod3rsGrowth.Dominio;
-using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroEnderecoUserControl : UserControl
     {
+        private const string _textoVazio = "";
+
         private PrivateFontCollection _pixeboy;
         public FiltroEndereco Filtro = null;
-        private const string _textoVazio = "";
         public bool _botaoFiltrarPressionado { get; private set; }
 
         public FiltroEnderecoUserControl()
@@ -21,12 +20,14 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoCarregarControlador(object sender, EventArgs e)
         {
+            const int tamanhoFonte = 12;
+
             InicializaFontePixeBoy();
             InicializaComboBox();
 
             foreach (Control c in this.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], tamanhoFonte, FontStyle.Bold);
             }
         }
 

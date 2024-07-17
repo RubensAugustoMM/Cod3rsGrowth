@@ -1,21 +1,18 @@
-﻿using Cod3rsGrowth.Dominio;
-using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
-using Cod3rsGrowth.Forms.Properties;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroEscolaUserControl : UserControl
     {
-        private PrivateFontCollection _pixeboy;
-        public FiltroEscolaEnderecoOtd Filtro = null;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
-        private const int _tamanhoMaximoCodigoMec = 8;
+
+        private PrivateFontCollection _pixeboy;
+        public FiltroEscolaEnderecoOtd Filtro = null;
         private bool _filtroDataInicioAtividade;
         public bool _botaoFiltrarPressionado { get; private set; }
 
@@ -26,6 +23,8 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoCarregarControlador(object sender, EventArgs e)
         {
+            const int tamanhoFonte = 12;
+
             InicializaFontePixeBoy();
             InicializaComboBox();
 
@@ -35,7 +34,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], tamanhoFonte, FontStyle.Bold);
             }
         }
 
@@ -248,7 +247,9 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTeclaTextBoxCodigoMec(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCodigoMec.Text.Length > _tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
+            const int tamanhoMaximoCodigoMec = 8;
+
+            if (textBoxCodigoMec.Text.Length > tamanhoMaximoCodigoMec && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

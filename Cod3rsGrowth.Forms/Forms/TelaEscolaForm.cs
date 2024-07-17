@@ -10,8 +10,11 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaEscolaForm : Form
     {
+        private const int _tamanhoFonte = 12;
+
         private readonly ServicoEscola _servicoEscola;
         private readonly ServicoEndereco _servicoEndereco;
+
         private FiltroEscolaUserControl _controladorFiltro;
 
         private PrivateFontCollection _pixeboy;
@@ -58,7 +61,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -108,7 +111,9 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
+            const int localizacaoYFiltro = 0;
+
+            _controladorFiltro.Location = new Point(painelLateral.Width, localizacaoYFiltro);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -133,7 +138,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -142,7 +147,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEscolas.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEscolas.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEscolas.DefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEscolas.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -152,7 +157,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEscolas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
             dataGridViewEscolas.EnableHeadersVisualStyles = false;
-            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEscolas.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEscolas.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;

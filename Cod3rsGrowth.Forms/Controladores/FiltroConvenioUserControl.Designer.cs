@@ -328,7 +328,7 @@
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Size = new Size(502, 291);
             panelFiltro.TabIndex = 35;
-            panelFiltro.Paint += AoPintarControladorSombra;
+            panelFiltro.Paint += AoPintarControladorBordas;
             // 
             // labelRazaoSocialEmpresa
             // 

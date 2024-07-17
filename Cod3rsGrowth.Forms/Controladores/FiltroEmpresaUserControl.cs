@@ -1,21 +1,18 @@
-﻿using Cod3rsGrowth.Dominio;
-using Cod3rsGrowth.Dominio.Enums;
+﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
 using Cod3rsGrowth.Dominio.Filtros;
-using Cod3rsGrowth.Forms.Properties;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroEmpresaUserControl : UserControl
     {
-        private PrivateFontCollection _pixeboy;
-        public FiltroEmpresaEnderecoOtd Filtro = null;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
-        private const int _tamanhoMaximoCnpj = 14;
+
+        private PrivateFontCollection _pixeboy;
+        public FiltroEmpresaEnderecoOtd Filtro = null;
         private bool _filtroDataAbertura;
         private bool _filtroDataSituacaoCadastral;
         public bool _botaoFiltrarPressionado { get; private set; }
@@ -27,6 +24,8 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoCarregarControlador(object sender, EventArgs e)
         {
+            const int tamanhoFonte = 12;
+
             InicializaFontePixeBoy();
             InicializaComboBox();
 
@@ -40,7 +39,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], tamanhoFonte, FontStyle.Bold);
             }
         }
 
@@ -285,7 +284,9 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoPressionarTeclaTextBoxCnpj(object sender, KeyPressEventArgs e)
         {
-            if (textBoxCnpj.Text.Length == _tamanhoMaximoCnpj && !char.IsControl(e.KeyChar))
+            const int tamanhoMaximoCnpj = 14;
+
+            if (textBoxCnpj.Text.Length == tamanhoMaximoCnpj && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

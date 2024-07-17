@@ -10,9 +10,12 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCriarAtualizarEmpresaForm : Form
     {
-        private PrivateFontCollection _pixeboy;
+        private const int _tamanhoFonte = 12;
+
         private readonly ServicoEndereco _servicoEndereco;
         private readonly ServicoEmpresa _servicoEmpresa;
+
+        private PrivateFontCollection _pixeboy;
         private EmpresaEnderecoOtd _empresaEnderecoAtualizarOtd = null;
         private Endereco _enderecoAtualizar;
 
@@ -45,7 +48,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -103,7 +106,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);

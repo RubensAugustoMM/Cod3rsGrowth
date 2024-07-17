@@ -5,6 +5,8 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCaixaDialogoConfirmacaoDelecaoForm : Form
     {
+        private const int _tamanhoFonte = 12;
+
         private PrivateFontCollection _pixeboy;
         private string _textoEntidadeExcluir;
         private string _descricaoEntidadeExcluir;
@@ -27,7 +29,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -85,7 +87,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -106,10 +108,11 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private string EscreveLinhaIgualdades(Label label)
         {
+            const int tamanhoFonteLinha = 15;
             string stringRetorno = "==";
             
             while(TextRenderer.MeasureText(stringRetorno,
-                        new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width < label.MaximumSize.Width)
+                        new Font(_pixeboy.Families[0], tamanhoFonteLinha, FontStyle.Bold)).Width < label.MaximumSize.Width)
             {
                 stringRetorno += "==";
             }

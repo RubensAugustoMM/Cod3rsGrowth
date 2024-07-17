@@ -1,18 +1,19 @@
 ﻿using Cod3rsGrowth.Forms.Controladores;
 using Cod3rsGrowth.Servico;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Enums.Extencoes;
-using Cod3rsGrowth.Forms.Properties;
 using Cod3rsGrowth.Dominio.Modelos;
 
 namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaEnderecoForm : Form
     {
+        private const int _tamanhoFonte = 12;
+
         private readonly ServicoEndereco _servicoEndereco;
+
         private FiltroEnderecoUserControl _controladorFiltro;
         private PrivateFontCollection _pixeboy;
 
@@ -55,9 +56,9 @@ namespace Cod3rsGrowth.Forms.Forms
             InicializaFontePixeBoy();
             InicializaCabecalhoDaGrade();
 
-            foreach (Control c in this.Controls)
+            foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -107,7 +108,9 @@ namespace Cod3rsGrowth.Forms.Forms
                 }
             };
 
-            _controladorFiltro.Location = new Point(painelLateral.Width, 0);
+            const int localizacaoYFiltro = 0;
+
+            _controladorFiltro.Location = new Point(painelLateral.Width, localizacaoYFiltro);
             Controls.Add(_controladorFiltro);
             _controladorFiltro.BringToFront();
         }
@@ -132,7 +135,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -141,7 +144,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void InicializaCabecalhoDaGrade()
         {
-            dataGridViewEnderecos.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEnderecos.DefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEnderecos.DefaultCellStyle.ForeColor = Color.White;
             dataGridViewEnderecos.DefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEnderecos.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -151,7 +154,7 @@ namespace Cod3rsGrowth.Forms.Forms
             dataGridViewEnderecos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
 
             dataGridViewEnderecos.EnableHeadersVisualStyles = false;
-            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+            dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.ForeColor = Color.Lime;
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
             dataGridViewEnderecos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.Lime;

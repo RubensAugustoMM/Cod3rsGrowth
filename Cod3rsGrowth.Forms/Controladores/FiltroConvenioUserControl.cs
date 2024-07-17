@@ -1,19 +1,18 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Filtros;
-using Cod3rsGrowth.Forms.Properties;
 using LinqToDB.Common;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroConvenioUserControl : UserControl
     {
-        private PrivateFontCollection _pixeboy;
-        public FiltroConvenioEscolaEmpresaOtd Filtro = null;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
+
+        private PrivateFontCollection _pixeboy;
+        public FiltroConvenioEscolaEmpresaOtd Filtro = null;
         private bool _filtroDataInicioHabilitado;
         private bool _filtroDataTerminoHabilitado;
         public bool _botaoFiltrarPressionado { get; private set; }
@@ -26,6 +25,8 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoCarregarControlador(object sender, EventArgs e)
         {
+            const int tamanhoFonte = 12;
+
             InicializaFontePixeBoy();
             InicializaComboBox();
             botaoFiltrar.BringToFront();
@@ -40,7 +41,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 10, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -239,7 +240,7 @@ namespace Cod3rsGrowth.Forms.Controladores
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);

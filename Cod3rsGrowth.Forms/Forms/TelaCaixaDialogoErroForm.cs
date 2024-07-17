@@ -6,6 +6,8 @@ namespace Cod3rsGrowth.Forms.Forms
 {
     public partial class TelaCaixaDialogoErroForm : Form
     {
+        private const int _tamanhoFonte = 12;
+        
         private PrivateFontCollection _pixeboy;
         private List<string> _listaErrosEntrada;
         private List<string> _listaErrosExibida;
@@ -26,7 +28,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }
@@ -84,7 +86,7 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             foreach (Control c in controle.Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], 12, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
 
                 if (!c.Controls.IsNullOrEmpty())
                     ConfiguraFonte(c);
@@ -99,10 +101,11 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void FormataListBoxErros()
         {
+            const string stringVazia = " ";
             foreach (var mensagemErro in _listaErrosEntrada)
             {
                 _listaErrosExibida.AddRange(TruncarTexto(mensagemErro));
-                _listaErrosExibida.Add(" ");
+                _listaErrosExibida.Add(stringVazia);
             }
         }
 
@@ -112,7 +115,9 @@ namespace Cod3rsGrowth.Forms.Forms
             var textoTruncado = texto;
             List<string> listaRetorno = new List<string>();
 
-            int index = textoTruncado.Length - 1;
+            int index = textoTruncado.Length;
+            index--;
+
             while (true)
             {
                 if(textoTruncado.IsNullOrEmpty())
@@ -122,16 +127,17 @@ namespace Cod3rsGrowth.Forms.Forms
 
                 if (textoTruncado[index] == ' ')
                 {
+                    const int tamanhoFonteListaErros = 15;
                     textoTruncado = textoTruncado.Remove(index);
                     index = textoTruncado.Length;
 
                     if (TextRenderer.MeasureText(textoTruncado,
-                        new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2< listBoxErros.Width)
+                        new Font(_pixeboy.Families[0], tamanhoFonteListaErros, FontStyle.Bold)).Width-2< listBoxErros.Width)
                     {
                         listaRetorno.Add(textoTruncado);
                         subTexto = subTexto.Substring(index);
                         if (TextRenderer.MeasureText(subTexto
-                            , new Font(_pixeboy.Families[0], 15, FontStyle.Bold)).Width-2 > listBoxErros.Width)
+                            , new Font(_pixeboy.Families[0], tamanhoFonteListaErros, FontStyle.Bold)).Width-2 > listBoxErros.Width)
                         {
                             textoTruncado = subTexto;
                             index = textoTruncado.Length;
