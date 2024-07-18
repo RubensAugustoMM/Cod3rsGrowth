@@ -6,6 +6,7 @@ using Cod3rsGrowth.Servico.Validacoes;
 using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB;
+using Cod3rsGrowth.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,20 +44,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UsarTratadorDeExcecoesProblemDetails(app.Services.GetRequiredService<ILoggerFactory>());
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
-
-public class ConfiguracoesStringConexao
-{
-    public static string RetornaStringConexao()
-    {
-        return System.Configuration.ConfigurationManager
-            .ConnectionStrings["ConvenioEscolaEmpresaBD"]
-            .ConnectionString;
-    }
-}
