@@ -22,7 +22,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
     public void Criar(Empresa empresaCriada)
     {
-        _contexto.Insert(empresaCriada);  
+        empresaCriada.Id = _contexto.InsertWithInt32Identity(empresaCriada);  
     }
 
     public void Deletar(int id)
