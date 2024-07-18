@@ -17,35 +17,30 @@ public class ConveniosController : ControllerBase
         _servicoConvenio = servicoConvenio;
     }
 
-    // GET: api/ControladorConvenios
     [HttpGet]
     public List<ConvenioEscolaEmpresaOtd> ObterTodos([FromBody] FiltroConvenioEscolaEmpresaOtd filtroConvenio)
     {
         return _servicoConvenio.ObterTodos(filtroConvenio);
     }
 
-    // GET: api/ControladorConvenios/5
     [HttpGet("{id}")]
     public ConvenioEscolaEmpresaOtd ObterPorId(int id)
     {
         return _servicoConvenio.ObterPorId(id);
     }
 
-    // POST: api/ControladorConvenios
     [HttpPost]
     public void Criar([FromBody] Convenio convenioCriar)
     {
         _servicoConvenio.Criar(convenioCriar);
     }
 
-    // PUT: api/ControladorConvenios/5
     [HttpPut]
     public void Atualizar([FromBody] Convenio convenioAtualizar)
     {
         _servicoConvenio.Atualizar(convenioAtualizar);
     }
 
-    // DELETE: api/ControladorConvenios/5
     [HttpDelete("{id}")]
     public void Deletar(int id)
     {
