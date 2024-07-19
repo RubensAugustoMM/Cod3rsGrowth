@@ -18,7 +18,7 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult ObterTodos([FromBody] FiltroConvenioEscolaEmpresaOtd filtroConvenio)
+    public IActionResult ObterTodos([FromQuery] FiltroConvenioEscolaEmpresaOtd filtroConvenio)
     {
         var convenios =  _servicoConvenio.ObterTodos(filtroConvenio);
         return Ok(convenios);

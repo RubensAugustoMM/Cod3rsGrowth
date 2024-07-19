@@ -18,7 +18,7 @@ public class EscolasController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult ObterTodos([FromBody] FiltroEscolaEnderecoOtd filtroEscola)
+    public IActionResult ObterTodos([FromQuery] FiltroEscolaEnderecoOtd filtroEscola)
     {
         var escolas = _servicoEscola.ObterTodos(filtroEscola);
         return Ok(escolas);
