@@ -17,9 +17,10 @@ public class EnderecoController : ControllerBase
     }
 
     [HttpGet]
-    public List<Endereco> ObterTodos([FromBody] FiltroEndereco filtroEndereco)
+    public IActionResult ObterTodos([FromQuery] FiltroEndereco filtroEndereco)
     {
-        return _servicoEndereco.ObterTodos(filtroEndereco);
+        var enderecos = _servicoEndereco.ObterTodos(filtroEndereco);
+        return Ok(enderecos);
     }
 
     [HttpGet("{id}")]
