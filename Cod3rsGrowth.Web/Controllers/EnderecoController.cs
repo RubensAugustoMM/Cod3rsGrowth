@@ -24,9 +24,10 @@ public class EnderecoController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Endereco ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoEndereco.ObterPorId(id);
+        var endereco = _servicoEndereco.ObterPorId(id);
+        return Ok(endereco);
     }
 
     [HttpPost]
