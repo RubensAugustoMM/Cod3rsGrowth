@@ -46,8 +46,9 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public void Deletar(int id)
+    public IActionResult Deletar(int id)
     {
         _servicoConvenio.Deletar(id);
+        return NoContent();
     }
 }
