@@ -39,9 +39,10 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpPut]
-    public void Atualizar([FromBody] Convenio convenioAtualizar)
+    public IActionResult Atualizar([FromBody] Convenio convenioAtualizar)
     {
         _servicoConvenio.Atualizar(convenioAtualizar);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
