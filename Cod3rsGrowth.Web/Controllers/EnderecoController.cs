@@ -17,32 +17,37 @@ public class EnderecoController : ControllerBase
     }
 
     [HttpGet]
-    public List<Endereco> ObterTodos([FromBody] FiltroEndereco filtroEndereco)
+    public IActionResult ObterTodos([FromQuery] FiltroEndereco filtroEndereco)
     {
-        return _servicoEndereco.ObterTodos(filtroEndereco);
+        var enderecos = _servicoEndereco.ObterTodos(filtroEndereco);
+        return Ok(enderecos);
     }
 
     [HttpGet("{id}")]
-    public Endereco ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoEndereco.ObterPorId(id);
+        var endereco = _servicoEndereco.ObterPorId(id);
+        return Ok(endereco);
     }
 
     [HttpPost]
-    public void Criar([FromBody] Endereco enderecoCriar)
+    public IActionResult Criar([FromBody] Endereco enderecoCriar)
     {
         _servicoEndereco.Criar(enderecoCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = enderecoCriar.Id }, enderecoCriar);
     }
 
     [HttpPut]
-    public void Atualizar([FromBody] Endereco enderecoAtualizar)
+    public IActionResult Atualizar([FromBody] Endereco enderecoAtualizar)
     {
         _servicoEndereco.Atualizar(enderecoAtualizar);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public void Deletar(int id)
+    public IActionResult Deletar(int id)
     {
         _servicoEndereco.Deletar(id);
+        return NoContent();
     }
 }

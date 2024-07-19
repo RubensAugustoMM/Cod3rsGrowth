@@ -18,32 +18,37 @@ public class EscolasController : ControllerBase
     }
 
     [HttpGet]
-    public List<EscolaEnderecoOtd> ObterTodos([FromBody] FiltroEscolaEnderecoOtd filtroEscola)
+    public IActionResult ObterTodos([FromQuery] FiltroEscolaEnderecoOtd filtroEscola)
     {
-        return _servicoEscola.ObterTodos(filtroEscola);
+        var escolas = _servicoEscola.ObterTodos(filtroEscola);
+        return Ok(escolas);
     }
 
     [HttpGet("{id}")]
-    public EscolaEnderecoOtd ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoEscola.ObterPorId(id);
+        var escola = _servicoEscola.ObterPorId(id);
+        return Ok(escola);
     }
 
     [HttpPost]
-    public void Criar([FromBody] Escola escolaCriar)
+    public IActionResult Criar([FromBody] Escola escolaCriar)
     {
         _servicoEscola.Criar(escolaCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = escolaCriar.Id }, escolaCriar);
     }
 
     [HttpPut]
-    public void Atualizar([FromBody] Escola escolaAtualizar)
+    public IActionResult Atualizar([FromBody] Escola escolaAtualizar)
     {
         _servicoEscola.Atualizar(escolaAtualizar);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public void Deletar(int id)
+    public IActionResult Deletar(int id)
     {
         _servicoEscola.Deletar(id);
+        return NoContent();
     }
 }

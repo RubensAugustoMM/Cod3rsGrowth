@@ -18,32 +18,37 @@ public class EmpresasController : ControllerBase
     }
 
     [HttpGet]
-    public List<EmpresaEnderecoOtd> ObterTodos([FromBody] FiltroEmpresaEnderecoOtd filtroEmpresa)
+    public IActionResult ObterTodos([FromQuery] FiltroEmpresaEnderecoOtd filtroEmpresa)
     {
-        return _servicoEmpresa.ObterTodos(filtroEmpresa);
+        var empresas = _servicoEmpresa.ObterTodos(filtroEmpresa);
+        return Ok(empresas);
     }
 
     [HttpGet("{id}")]
-    public EmpresaEnderecoOtd ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoEmpresa.ObterPorId(id);
+        var empresa = _servicoEmpresa.ObterPorId(id);
+        return Ok(empresa);
     }
 
     [HttpPost]
-    public void Criar([FromBody] Empresa empresaCriar)
+    public IActionResult Criar([FromBody] Empresa empresaCriar)
     {
         _servicoEmpresa.Criar(empresaCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = empresaCriar.Id }, empresaCriar);
     }
 
     [HttpPut]
-    public void Atualizar([FromBody] Empresa empresaAtualizar)
+    public IActionResult Atualizar([FromBody] Empresa empresaAtualizar)
     {
         _servicoEmpresa.Atualizar(empresaAtualizar);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public void Deletar(int id)
+    public IActionResult Deletar(int id)
     {
         _servicoEmpresa.Deletar(id);
+        return NoContent();
     }
 }

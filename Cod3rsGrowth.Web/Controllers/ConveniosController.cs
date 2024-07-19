@@ -18,32 +18,37 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpGet]
-    public List<ConvenioEscolaEmpresaOtd> ObterTodos([FromBody] FiltroConvenioEscolaEmpresaOtd filtroConvenio)
+    public IActionResult ObterTodos([FromQuery] FiltroConvenioEscolaEmpresaOtd filtroConvenio)
     {
-        return _servicoConvenio.ObterTodos(filtroConvenio);
+        var convenios =  _servicoConvenio.ObterTodos(filtroConvenio);
+        return Ok(convenios);
     }
 
     [HttpGet("{id}")]
-    public ConvenioEscolaEmpresaOtd ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoConvenio.ObterPorId(id);
+        var convenio = _servicoConvenio.ObterPorId(id);
+        return Ok(convenio);
     }
 
     [HttpPost]
-    public void Criar([FromBody] Convenio convenioCriar)
+    public IActionResult Criar([FromBody] Convenio convenioCriar)
     {
         _servicoConvenio.Criar(convenioCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = convenioCriar.Id }, convenioCriar);
     }
 
     [HttpPut]
-    public void Atualizar([FromBody] Convenio convenioAtualizar)
+    public IActionResult Atualizar([FromBody] Convenio convenioAtualizar)
     {
         _servicoConvenio.Atualizar(convenioAtualizar);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public void Deletar(int id)
+    public IActionResult Deletar(int id)
     {
         _servicoConvenio.Deletar(id);
+        return NoContent();
     }
 }
