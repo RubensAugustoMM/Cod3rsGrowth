@@ -12,6 +12,10 @@ nupkg/
 # Rider
 .idea
 
+#js
+/dist
+/node_modules
+
 # User-specific files
 *.suo
 *.user
