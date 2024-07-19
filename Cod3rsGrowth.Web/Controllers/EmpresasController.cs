@@ -18,9 +18,10 @@ public class EmpresasController : ControllerBase
     }
 
     [HttpGet]
-    public List<EmpresaEnderecoOtd> ObterTodos([FromBody] FiltroEmpresaEnderecoOtd filtroEmpresa)
+    public IActionResult ObterTodos([FromQuery] FiltroEmpresaEnderecoOtd filtroEmpresa)
     {
-        return _servicoEmpresa.ObterTodos(filtroEmpresa);
+        var empresas = _servicoEmpresa.ObterTodos(filtroEmpresa);
+        return Ok(empresas);
     }
 
     [HttpGet("{id}")]
