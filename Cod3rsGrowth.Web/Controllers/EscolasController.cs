@@ -32,9 +32,10 @@ public class EscolasController : ControllerBase
     }
 
     [HttpPost]
-    public void Criar([FromBody] Escola escolaCriar)
+    public IActionResult Criar([FromBody] Escola escolaCriar)
     {
         _servicoEscola.Criar(escolaCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = escolaCriar.Id }, escolaCriar);
     }
 
     [HttpPut]

@@ -32,9 +32,10 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpPost]
-    public void Criar([FromBody] Convenio convenioCriar)
+    public IActionResult Criar([FromBody] Convenio convenioCriar)
     {
         _servicoConvenio.Criar(convenioCriar);
+        return CreatedAtAction(nameof(ObterPorId), new { id = convenioCriar.Id }, convenioCriar);
     }
 
     [HttpPut]
