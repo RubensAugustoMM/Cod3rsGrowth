@@ -13,8 +13,7 @@ nupkg/
 .idea
 
 #js
-/dist
-/node_modules
+Cod3rsGrowth.Web/RaizAplicacao/node_modules
 
 # User-specific files
 *.suo
