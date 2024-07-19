@@ -7,6 +7,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 {
     public partial class FiltroConvenioUserControl : UserControl
     {
+        private const int _tamanhoFonte = 12;
         private const string _formatoDaData = "dd/MM/yyyy";
         private const string _textoVazio = "";
         private const string _dataVazia = " ";
@@ -25,7 +26,6 @@ namespace Cod3rsGrowth.Forms.Controladores
 
         private void AoCarregarControlador(object sender, EventArgs e)
         {
-            const int tamanhoFonte = 12;
 
             InicializaFontePixeBoy();
             InicializaComboBox();
@@ -41,7 +41,7 @@ namespace Cod3rsGrowth.Forms.Controladores
 
             foreach (Control c in Controls)
             {
-                c.Font = new Font(_pixeboy.Families[0], tamanhoFonte, FontStyle.Bold);
+                c.Font = new Font(_pixeboy.Families[0], _tamanhoFonte, FontStyle.Bold);
                 ConfiguraFonte(c);
             }
         }

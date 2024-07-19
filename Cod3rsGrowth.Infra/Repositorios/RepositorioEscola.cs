@@ -22,7 +22,7 @@ public class RepositorioEscola : IRepositorioEscola
 
     public void Criar(Escola escolaCriada)
     {
-        _contexto.Insert(escolaCriada);
+        escolaCriada.Id = _contexto.InsertWithInt32Identity(escolaCriada);
     }
 
     public void Deletar(int id)
