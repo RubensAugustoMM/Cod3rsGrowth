@@ -25,9 +25,10 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ConvenioEscolaEmpresaOtd ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoConvenio.ObterPorId(id);
+        var convenio = _servicoConvenio.ObterPorId(id);
+        return Ok(convenio);
     }
 
     [HttpPost]

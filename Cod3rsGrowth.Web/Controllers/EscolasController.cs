@@ -25,9 +25,10 @@ public class EscolasController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public EscolaEnderecoOtd ObterPorId(int id)
+    public IActionResult ObterPorId(int id)
     {
-        return _servicoEscola.ObterPorId(id);
+        var escola = _servicoEscola.ObterPorId(id);
+        return Ok(escola);
     }
 
     [HttpPost]
