@@ -7,12 +7,14 @@ using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB;
 using Cod3rsGrowth.Web;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string StringConexao = ConfiguracoesStringConexao.RetornaStringConexao();
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDirectoryBrowser();
 
 builder.Services.AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
         options
@@ -35,6 +37,7 @@ builder.Services.AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,6 +49,14 @@ if (app.Environment.IsDevelopment())
 
 app.UsarTratadorDeExcecoesProblemDetails(app.Services.GetRequiredService<ILoggerFactory>());
 app.UseHttpsRedirection();
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot/webapp")),
+    EnableDirectoryBrowsing = true
+});
+app.UseStaticFiles();
+
 app.UseAuthorization();
 app.MapControllers();
 

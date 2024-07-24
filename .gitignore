@@ -9,6 +9,9 @@ nupkg/
 # Visual Studio Code
 .vscode
 
+#js
+Cod3rsGrowth.Web/RaizAplicacao/node_modules
+
 # Rider
 .idea
 
