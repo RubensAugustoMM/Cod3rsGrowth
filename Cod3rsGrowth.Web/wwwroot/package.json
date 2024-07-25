@@ -1,8 +1,0 @@
-{
-  "name": "codersgrowth.webapp",
-  "version": "1.0.0",
-  "description": "Treinamento da invent",
-  "scripts": {
-    "start": "ui5 serve -o index.html"
-  }
-}
