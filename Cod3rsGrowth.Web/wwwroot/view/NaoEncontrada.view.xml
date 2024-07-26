@@ -1,0 +1,9 @@
+<mvc:View
+   controllerName="ui5.cod3rsgrowth.controller.NaoEncontada"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+   <MessagePage
+      title="{i18n>NaoEncontrada}"
+      text="{i18n>NaoEncontrada.texto}"
+      description="{i18n>NaoEncontrada.descricao}"/>
+</mvc:View>

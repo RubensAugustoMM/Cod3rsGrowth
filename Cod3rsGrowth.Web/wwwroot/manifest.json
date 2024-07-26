@@ -45,6 +45,49 @@
       "viewName": "ui5.cod3rsgrowth.view.App",
       "type": "XML",
       "id": "app"
+    },
+    "resources":{
+      "css":[
+        {
+          "uri":"css/styles.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "ui5.codersgrowth.app",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "bypassed": {
+        "target": "notFound"
+        },
+        "async": "true"
+      },
+      "routes":[{
+        "pattern": "",
+        "name": "paginaPrincipal",
+        "target": "paginaPrincipal"
+      }
+
+      ],
+      "targets": {
+        "inicio":{
+          "id": "paginaPrincipal",
+          "nome":"PaginaPrincipal",
+          "level": 1
+        },
+        
+			"notFound": {
+        "path": "ui5.codersgrowth.app.naoEncontrada",
+          "id": "naoEncontrada",
+          "name": "NaoEncontrada",
+          "transition": "show"
+          }
+        }
+      }
     }
   }
-}

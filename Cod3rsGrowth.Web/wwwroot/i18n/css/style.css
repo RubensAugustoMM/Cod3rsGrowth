@@ -1,0 +1,12 @@
+html[dir="ltr"] .cod3rsGrowth .myCustomButton.sapMBtn {
+    margin-right: 0.125rem
+ }
+ 
+ html[dir="rtl"] .cod3rsGrowth .myCustomButton.sapMBtn {
+    margin-left: 0.125rem
+ }
+ 
+ .cod3rsGrowth .myCustomText {
+    display: inline-block;
+    font-weight: bold;
+ }

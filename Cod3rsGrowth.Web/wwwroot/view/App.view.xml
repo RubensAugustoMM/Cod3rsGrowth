@@ -1,16 +1,11 @@
 <mvc:View
-        xmlns="sap.m"
-        xmlns:mvc="sap.ui.core.mvc"
-        controllerName="ui5.cod3rsgrowth.controller.App"
+    controllerName="ui5.cod3rsgrowth.controller.App"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
 >
-        <Button
-                text="{i18n>showHelloButtonText}"
-                press=".onShowHello"
-        />
-        <Input
-                value="{/recipient/name}"
-                description="Hello {/recipient/name}"
-                valueLiveUpdate="true"
-                width="60%"
-        />
+    <Shell>
+        <App class="cod3rsGrowth"
+            id="app"/>
+    </Shell>
 </mvc:View>
