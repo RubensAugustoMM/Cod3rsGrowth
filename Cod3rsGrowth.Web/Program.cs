@@ -57,7 +57,15 @@ app.UseFileServer(new FileServerOptions
 {
     EnableDirectoryBrowsing = true
 });
-app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    RedirectToAppendTrailingSlash = true,
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
 
 app.UseAuthorization();
 app.MapControllers();

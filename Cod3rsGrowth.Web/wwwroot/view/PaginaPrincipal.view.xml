@@ -1,10 +1,28 @@
-<mvc:XMLView 
-controllerName="ui5.cod3rsgrowth.controller.App"
-xmlns="sap.m"
-xmlns:mvc="sap.ui.core.mvc" >
-<Page title="Pagina Principal" >
-    <content>
-        <mvc:XMLView viewName="ui5.cod3rsgrowth.view.OlaPainel" />
-    </content>
-</Page>
-</mvc:XMLView>
+<mvc:View
+    controllerName="ui5.cod3rsgrowth.controller.OlaPainel"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page title="Pagina Principal">
+        <content>
+            <Panel headerText="{i18n>olaMundoPainel}">
+                <content>
+                    <Button
+                        text="{i18n>showHellobuttonText}"
+                        press=".onShowHello"
+                        class="myCustomButton"
+                    />
+                    <Input
+                        value="{/recipient/name}"
+                        valueLiveUpdate="true"
+                        width="60%"
+                    />
+                    <FormattedText
+                        htmlText="Hello {/recipient/name}"
+                        class="sapUiSmallMargin sapThemeHighlight-asColor myCustomText"
+                    />
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
