@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="wwwroot\webapp\i18n\css\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\webapp\view\App.view.xml" />
   </ItemGroup>
 </Project>

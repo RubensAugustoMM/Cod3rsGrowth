@@ -1,0 +1,89 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "ui5.cod3rsgrowth",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{tituloApp}}",
+    "description": "{{descricaoApp}}",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {}
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ui5.cod3rsgrowth.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ],
+          "fallbackLocale": ""
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "ui5.cod3rsgrowth.view.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "i18n/css/styles.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "view",
+        "ViewType": "XML",
+        "path": "ui5.cod3rsgrowth.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "bypassed": {
+          "target": "naoEncontrada"
+        },
+        "async": "true"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "PaginaPrincipal",
+          "target":"paginaPrincipal"
+        }
+      ],
+      "targets": {
+        "naoEncontrada": {
+          "viewName": "NaoEncontrada",
+          "viewType": "XML",
+          "viewId": "naoEncontrada"
+        },
+        "paginaPrincipal": {
+          "viewName": "PaginaPrincipal",
+          "viewId": "paginaPrincipal",
+          "viewType": "XML"
+        }
+      }
+    }
+  }
+}

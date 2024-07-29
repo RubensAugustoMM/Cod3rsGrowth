@@ -8,6 +8,7 @@ using LinqToDB.AspNet.Logging;
 using LinqToDB;
 using Cod3rsGrowth.Web;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,13 +50,22 @@ if (app.Environment.IsDevelopment())
 
 app.UsarTratadorDeExcecoesProblemDetails(app.Services.GetRequiredService<ILoggerFactory>());
 app.UseHttpsRedirection();
+
+var provedor = new FileExtensionContentTypeProvider();
+provedor.Mappings[".properties"] = "text/plain";
 app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(builder.Environment.ContentRootPath, "wwwroot/webapp")),
     EnableDirectoryBrowsing = true
 });
-app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    RedirectToAppendTrailingSlash = true,
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
 
 app.UseAuthorization();
 app.MapControllers();
