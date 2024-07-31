@@ -9,23 +9,10 @@
             id="app">
             <masterPages>
                 <Page id="masterPages">
-                    <content>
-                        <List >
-                            <items>
-                                <StandardListItem title="Convênios" press="aoPressionarConvenios"/>
-                                <StandardListItem title="Empresas" press="aoPressionarEmpresas"/>
-                                <StandardListItem title="Escolas" press="aoPressionarEscolas"/>
-                                <StandardListItem title="Endereços" press="aoPressionarEnderecos"/>
-                            </items>
-                        </List>
-                    </content>
                 </Page>
             </masterPages>
             <detailPages>
-                <Page id="paginaDetalhes" title="paginaDetalhes" >
-                    <content>
-
-                    </content>
+                <Page id="detailPages">
                 </Page>
             </detailPages>
         </SplitApp>

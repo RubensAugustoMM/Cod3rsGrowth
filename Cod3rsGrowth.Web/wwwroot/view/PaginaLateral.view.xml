@@ -1,0 +1,38 @@
+<mvc:View
+    controllerName="ui5.cod3rsgrowth.controller.PaginaLateral"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true"
+>
+    <Page>
+        <content>
+            <List
+                id="listaLateral"
+                mode="SingleSelectMaster"
+            >
+                <items>
+                    <StandardListItem
+                        title="{i18n>botaoLateralConvenios}"
+                        press=".aoClicarConvenios"
+                    >
+                    </StandardListItem>
+                    <StandardListItem
+                        title="{i18n>botaoLateralEmpresas}"
+                        press=".aoClicarEmpresas"
+                    >
+                    </StandardListItem>
+                    <StandardListItem
+                        title="{i18n>botaoLateralEscolas}"
+                        press=".aoClicarEscolas"
+                    >
+                    </StandardListItem>
+                    <StandardListItem
+                        title="{i18n>botaoLateralEnderecos}"
+                        press=".aoClicarEnderecos"
+                    >
+                    </StandardListItem>
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>

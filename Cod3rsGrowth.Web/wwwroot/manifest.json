@@ -58,18 +58,23 @@
         "ViewType": "XML",
         "path": "ui5.cod3rsgrowth.view",
         "controlId": "app",
-        "controlAggregation": "pages",
+        "controlAggregation": "detailPages",
         "transition": "slide",
         "bypassed": {
           "target": "naoEncontrada"
         },
-        "async": "true"
+        "async": true
       },
       "routes": [
         {
           "pattern": "",
-          "name": "PaginaPrincipal",
-          "target":"paginaPrincipal"
+          "name": "PaginaLateral",
+          "target": "paginaLateral"
+        },
+        {
+          "pattern": "PaginaLista/",
+          "name": "PaginaLista",
+          "target": "paginaLista"
         }
       ],
       "targets": {
@@ -78,10 +83,18 @@
           "viewType": "XML",
           "viewId": "naoEncontrada"
         },
-        "paginaPrincipal": {
-          "viewName": "PaginaPrincipal",
-          "viewId": "paginaPrincipal",
-          "viewType": "XML"
+        "paginaLateral":{
+          "viewName": "PaginaLateral",
+          "viewType": "XML",
+          "viewId": "paginaLateral",
+          "controlAggregation": "masterPages"
+        },
+        "paginaLista":{
+          "viewName": "PaginaLista",
+          "viewType": "XML",
+          "viewId": "paginaLista",
+          "controlAggregation": "detailPages",
+          "controlId": "app"
         }
       }
     }
