@@ -37,7 +37,24 @@
           ],
           "fallbackLocale": ""
         }
+      },
+      "convenios" : {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri" : "https://localhost:7187/api/Convenios"
+      },
+      "empresas" : {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri" : "https://localhost:7187/api/Empresas"
+      },
+      "escolas" : {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri" : "https://localhost:7187/api/Escolas"
+      },
+      "enderecos" : {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri" : "https://localhost:7187/api/Enderecos"
       }
+  
     },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
