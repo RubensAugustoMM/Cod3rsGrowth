@@ -1,8 +1,10 @@
-<mvc:View xmlns:table="sap.ui.table"
-    controllerName="ui5.cod3rsgrowth.controller.PaginaLista"
+<mvc:View 
+    controllerName="ui5.cod3rsgrowth.controller.Lista"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page title="{i18n>detailTitle}">
+    xmlns:table="sap.ui.table"
+    xmlns="sap.m"
+    displayBlock="true">
+    <Page title="{i18n>detailTitle}" id="lista">
         <content>
             <Panel headerText="Filtro">
                 <content>
@@ -10,7 +12,7 @@
                 </content>
             </Panel> 
             <table:Table >
-                
+
             </table:Table>
         </content>
     </Page>

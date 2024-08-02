@@ -5,15 +5,46 @@
     displayBlock="true"
 >
     <Shell>
-        <SplitApp class="cod3rsGrowth"
-            id="app">
+        <SplitApp
+            class="cod3rsGrowth"
+            id="app"
+        >
             <masterPages>
                 <Page id="masterPages">
+                    <content>
+                        <List
+                            id="listaLateral"
+                            includeItemInSelection="false"
+                            mode="None"
+                        >
+                            <items>
+                                <StandardListItem
+                                    type="Active"
+                                    title="{i18n>botaoLateralConvenios}"
+                                    press=".aoClicarConvenios"
+                                />
+                                <StandardListItem
+                                    type="Active"
+                                    title="{i18n>botaoLateralEmpresas}"
+                                    press=".aoClicarEmpresas"
+                                />
+                                <StandardListItem
+                                    type="Active"
+                                    title="{i18n>botaoLateralEscolas}"
+                                    press=".aoClicarEscolas"
+                                />
+                                <StandardListItem
+                                    type="Active"
+                                    title="{i18n>botaoLateralEnderecos}"
+                                    press=".aoClicarEnderecos"
+                                />
+                            </items>
+                        </List>
+                    </content>
                 </Page>
             </masterPages>
             <detailPages>
-                <Page id="detailPages">
-                </Page>
+                <Page id="detailPages" />
             </detailPages>
         </SplitApp>
     </Shell>

@@ -37,24 +37,7 @@
           ],
           "fallbackLocale": ""
         }
-      },
-      "convenios" : {
-      "type": "sap.ui.model.json.JSONModel",
-      "uri" : "https://localhost:7187/api/Convenios"
-      },
-      "empresas" : {
-      "type": "sap.ui.model.json.JSONModel",
-      "uri" : "https://localhost:7187/api/Empresas"
-      },
-      "escolas" : {
-      "type": "sap.ui.model.json.JSONModel",
-      "uri" : "https://localhost:7187/api/Escolas"
-      },
-      "enderecos" : {
-      "type": "sap.ui.model.json.JSONModel",
-      "uri" : "https://localhost:7187/api/Enderecos"
       }
-  
     },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
@@ -72,7 +55,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "type": "view",
-        "ViewType": "XML",
+        "viewType": "XML",
         "path": "ui5.cod3rsgrowth.view",
         "controlId": "app",
         "controlAggregation": "detailPages",
@@ -85,13 +68,28 @@
       "routes": [
         {
           "pattern": "",
-          "name": "PaginaLateral",
-          "target": "paginaLateral"
+          "name": "ConveniosInicio",
+          "target": "lista"
         },
         {
-          "pattern": "PaginaLista/",
-          "name": "PaginaLista",
-          "target": "paginaLista"
+          "pattern": "convenios",
+          "name": "Convenios",
+          "target": "lista"
+        },
+        {
+          "pattern": "empresas",
+          "name": "Empresas",
+          "target": "lista"
+        },
+        {
+          "pattern": "escolas",
+          "name": "Escolas",
+          "target": "lista"
+        },
+        {
+          "pattern": "enderecos",
+          "name": "Enderecos",
+          "target": "lista"
         }
       ],
       "targets": {
@@ -100,18 +98,12 @@
           "viewType": "XML",
           "viewId": "naoEncontrada"
         },
-        "paginaLateral":{
-          "viewName": "PaginaLateral",
+        "lista": {
+          "viewName": "Lista",
           "viewType": "XML",
-          "viewId": "paginaLateral",
-          "controlAggregation": "masterPages"
-        },
-        "paginaLista":{
-          "viewName": "PaginaLista",
-          "viewType": "XML",
-          "viewId": "paginaLista",
-          "controlAggregation": "detailPages",
-          "controlId": "app"
+          "viewId": "lista",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
         }
       }
     }
