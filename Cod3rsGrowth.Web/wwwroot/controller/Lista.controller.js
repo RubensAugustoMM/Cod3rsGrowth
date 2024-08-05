@@ -1,11 +1,15 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], (Controller) =>  {
+	"sap/ui/core/mvc/Controller",
+	"ui5/cod3rsgrowth/modelos/DataRepository"
+], (Controller,
+	DataRepository) =>  {
 	"use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
         onInit() {
 			const oRouter = this.getOwnerComponent().getRouter();
+			const DataRepository = this.getOwnerComponent().DataRepository;
+			DataRepository.obterTodosConvenios();
 
 			oRouter.getRoute("Convenios").attachMatched(this._onRouteMatched, this);
 			oRouter.getRoute("Empresas").attachMatched(this._onRouteMatched, this);

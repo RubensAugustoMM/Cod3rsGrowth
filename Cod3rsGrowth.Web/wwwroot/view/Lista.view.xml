@@ -1,7 +1,6 @@
 <mvc:View 
     controllerName="ui5.cod3rsgrowth.controller.Lista"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:table="sap.ui.table"
     xmlns="sap.m"
     displayBlock="true">
     <Page title="{i18n>detailTitle}" id="lista">
@@ -11,9 +10,25 @@
 
                 </content>
             </Panel> 
-            <table:Table >
-
-            </table:Table>
+            <Table id="tabela" items="{/convenios}">
+                <headerToolbar>
+                    <Toolbar>
+                        <content>
+                            <Title text="Convenios"></Title>
+                        </content>
+                    </Toolbar>
+                </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="numero Processo"></Text>
+                        </Column>
+                    </columns>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{numeroProcesso}"/>
+                        </cells>
+                    </ColumnListItem>
+            </Table>
         </content>
     </Page>
 </mvc:View>
