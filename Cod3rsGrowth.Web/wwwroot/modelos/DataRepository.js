@@ -1,13 +1,13 @@
 sap.ui.define([
     "sap/ui/base/Object",
     "sap/ui/model/json/JSONModel",
-    "./ServicoConvenios",
+    "./ServicoEscolas",
     "ui5/cod3rsgrowth/utilitarios/config",
     "ui5/cod3rsgrowth/modelos/ServicoEmpresas"
 ], function (
     baseObject,
 	JSONModel,
-	ServicoConvenios,
+	ServicoEscolas,
 	config,
 	ServicoEmpresas
 ) {
@@ -32,7 +32,7 @@ sap.ui.define([
         }
     },
 
-        oServicoFinal = jQuery.extend(true, commonAPIs, ServicoConvenios, ServicoEmpresas, config),
+        oServicoFinal = jQuery.extend(true, commonAPIs, ServicoEscolas, ServicoEmpresas, config),
         oServico = baseObject.extend("ui5.cod3rsgrowth.modelos.DataRepository", oServicoFinal)
     return oServico;
 });

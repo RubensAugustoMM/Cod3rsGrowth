@@ -72,11 +72,6 @@
           "target": "lista"
         },
         {
-          "pattern": "convenios",
-          "name": "Convenios",
-          "target": "lista"
-        },
-        {
           "pattern": "empresas",
           "name": "Empresas",
           "target": "lista"
@@ -84,11 +79,6 @@
         {
           "pattern": "escolas",
           "name": "Escolas",
-          "target": "lista"
-        },
-        {
-          "pattern": "enderecos",
-          "name": "Enderecos",
           "target": "lista"
         }
       ],

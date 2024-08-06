@@ -11,22 +11,10 @@
                 </content>
             </Panel> 
             <Table id="tabela" items="{/items}">
-                <headerToolbar>
-                    <Toolbar>
-                        <content>
-                            <Title text="Convenios"></Title>
-                        </content>
-                    </Toolbar>
-                </headerToolbar>
+
                     <columns>
-                        <Column>
-                            <Text text="numero Processo"></Text>
-                        </Column>
                     </columns>
                     <ColumnListItem>
-                        <cells>
-                            <Text text="{numeroProcesso}"/>
-                        </cells>
                     </ColumnListItem>
             </Table>
         </content>

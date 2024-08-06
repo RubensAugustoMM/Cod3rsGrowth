@@ -20,11 +20,6 @@
                             <items>
                                 <StandardListItem
                                     type="Active"
-                                    title="{i18n>botaoLateralConvenios}"
-                                    press=".aoClicarConvenios"
-                                />
-                                <StandardListItem
-                                    type="Active"
                                     title="{i18n>botaoLateralEmpresas}"
                                     press=".aoClicarEmpresas"
                                 />
@@ -32,11 +27,6 @@
                                     type="Active"
                                     title="{i18n>botaoLateralEscolas}"
                                     press=".aoClicarEscolas"
-                                />
-                                <StandardListItem
-                                    type="Active"
-                                    title="{i18n>botaoLateralEnderecos}"
-                                    press=".aoClicarEnderecos"
                                 />
                             </items>
                         </List>
