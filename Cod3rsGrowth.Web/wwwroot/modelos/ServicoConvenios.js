@@ -3,18 +3,21 @@ sap.ui.define([
 ) {
     return {
         obterTodosConvenios: function () {
-            jQuery.get({
-                url:this._baseURL + '/convenios',
-            success : function(aConvenios)
-            {
-                var oModel = this.getDataModel();
-                oModel.setProperty("/convenios", aConvenios);
-            }.bind(this)
-            })
+            return new Promise((resolve, reject) => {
+                jQuery.get({
+                    url: this._baseURL + '/convenios',
+                    success: function(aConvenios) {
+                        resolve(aConvenios);
+                    },
+                    error: function(oError) {
+                        reject(oError);
+                    }
+                });
+            });
         },
-        obterPorIdConvenio: function (sIdUsuario) { },
-        deletarConvenio: function (sIdUsuario) { },
-        atualizarConvenio: function (sIdUsuario) { },
+        obterConvenioPorId: function (sIdConvenios) { },
+        deletarConvenio: function (sIdConvenios) { },
+        atualizarConvenio: function (sIdConvenios) { },
         criarConvenio: function (oData) { }
     }
 });

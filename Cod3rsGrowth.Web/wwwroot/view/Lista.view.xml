@@ -10,7 +10,7 @@
 
                 </content>
             </Panel> 
-            <Table id="tabela" items="{/convenios}">
+            <Table id="tabela" items="{/items}">
                 <headerToolbar>
                     <Toolbar>
                         <content>

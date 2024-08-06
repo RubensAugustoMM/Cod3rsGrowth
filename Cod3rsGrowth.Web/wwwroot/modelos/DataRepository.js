@@ -2,18 +2,20 @@ sap.ui.define([
     "sap/ui/base/Object",
     "sap/ui/model/json/JSONModel",
     "./ServicoConvenios",
-    "ui5/cod3rsgrowth/utilitarios/config"
+    "ui5/cod3rsgrowth/utilitarios/config",
+    "ui5/cod3rsgrowth/modelos/ServicoEmpresas"
 ], function (
     baseObject,
-    JSONModel,
-    ServicoConvenios,
-    config
+	JSONModel,
+	ServicoConvenios,
+	config,
+	ServicoEmpresas
 ) {
     "use strict";
     var commonAPIs =
     {
         baseData: {
-            convenios: []
+            items: []
         },
         /**
          * @override
@@ -30,7 +32,7 @@ sap.ui.define([
         }
     },
 
-        oServicoFinal = jQuery.extend(true, commonAPIs, ServicoConvenios, config),
+        oServicoFinal = jQuery.extend(true, commonAPIs, ServicoConvenios, ServicoEmpresas, config),
         oServico = baseObject.extend("ui5.cod3rsgrowth.modelos.DataRepository", oServicoFinal)
     return oServico;
 });
