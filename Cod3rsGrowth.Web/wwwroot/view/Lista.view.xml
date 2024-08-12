@@ -5,13 +5,16 @@
     displayBlock="true">
     <Page title="{i18n>detailTitle}" id="lista">
         <content>
-            <Panel headerText="Filtro">
-                <content>
-
-                </content>
-            </Panel> 
             <Table id="tabela" items="{/items}">
-
+                <headerToolbar>
+                    <Toolbar>
+                       <Title text="{i18n>tituloFiltro}"/>
+                       <ToolbarSpacer/>
+                       <SearchField 
+                          width="50%" 
+                          search=".aoFiltrarTabela"/>
+                    </Toolbar>
+                 </headerToolbar>
                     <columns>
                     </columns>
                     <ColumnListItem>

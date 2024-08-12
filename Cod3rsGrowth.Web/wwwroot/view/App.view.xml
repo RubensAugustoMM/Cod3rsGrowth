@@ -20,11 +20,13 @@
                             <items>
                                 <StandardListItem
                                     type="Active"
+                                    id="botaoLateralEmpresas"
                                     title="{i18n>botaoLateralEmpresas}"
                                     press=".aoClicarEmpresas"
                                 />
                                 <StandardListItem
                                     type="Active"
+                                    id="botaoLateralEscolas"
                                     title="{i18n>botaoLateralEscolas}"
                                     press=".aoClicarEscolas"
                                 />

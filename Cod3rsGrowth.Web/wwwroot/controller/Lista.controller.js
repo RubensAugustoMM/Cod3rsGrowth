@@ -1,11 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "ui5/cod3rsgrowth/modelos/DataRepository"
+    "ui5/cod3rsgrowth/modelos/DataRepository",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "ui5/cod3rsgrowth/modelos/Formatador"
 ], (Controller,
-    DataRepository) => {
+    DataRepository,
+    Filter,
+    FilterOperator,
+    Formatador) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
+
+        formatador: Formatador,
+
         onInit() {
             const oRouter = this.getOwnerComponent().getRouter();
 
@@ -45,7 +54,7 @@ sap.ui.define([
             oTable.removeAllColumns();
 
             const aCampos = {
-                nomeFantasia: "Empresa",
+                nomeFantasia: "nome",
                 cnpj: "CNPJ",
                 situcaoCadastral: "Situação Cadastral",
                 dataAbertura: "Data Abertura",
@@ -109,6 +118,33 @@ sap.ui.define([
                     cells: Object.keys(aCampos).map(sCampo => new sap.m.Text({ text: "{" + sCampo + "}" }))
                 })
             })
-        }
+        },
+
+        aoFiltrarTabela(oEvent)
+        {
+			const aFilter = [];
+			const sQuery = oEvent.getParameter("query");
+            const oRouter = this.getOwnerComponent().getRouter();
+
+            const sRotaAtual = oRouter.getRouteInfoByHash(window.location.hash).name;
+            var parametroFiltrar = "";
+
+            if (sRotaAtual === "Empresas")
+            {
+                var parametroFiltrar = "nomeFantasia";
+            }
+            else
+            {
+                var parametroFiltrar = "nome";
+            }
+
+			if (sQuery) {
+				aFilter.push(new Filter(parametroFiltrar, FilterOperator.Contains, sQuery));
+			}
+
+			const oList = this.byId("tabela");
+			const oBinding = oList.getBinding("/items");
+			oBinding.filter(aFilter);
+		}
     });
 });
