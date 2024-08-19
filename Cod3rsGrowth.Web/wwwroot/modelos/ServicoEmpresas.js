@@ -2,10 +2,11 @@ sap.ui.define([
 ], function(
 ) {
     return {
-        obterTodasEmpresas: function () {
+        obterTodasEmpresas: function (oFiltro) {
             return new Promise((resolve, reject) => {
+                const sQueryParams = oFiltro ? '?' + jQuery.param(oFiltro) : '';
                 jQuery.get({
-                    url: this._baseURL + '/empresas',
+                    url: this._baseURL + '/empresas' + sQueryParams,
                     success: function(aEmpresas) {
                         resolve(aEmpresas);
                     },

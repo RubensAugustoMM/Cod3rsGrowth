@@ -2,6 +2,9 @@ sap.ui.define([], () => {
 	"use strict";
 
 	return {
+		_retornaModeloi18n(oView) {
+			return oView.getModel("i18n").getResourceBundle();
+		},
 		textoEstado(numeroEstado) {
 			switch (numeroEstado) {
 				case 0:
@@ -25,7 +28,7 @@ sap.ui.define([], () => {
 				case 9:
 					return "Mato Grosso-MT";
 				case 10:
-					return "Mato Grosso do Sol-MS";
+					return "Mato Grosso do Sul-MS";
 				case 11:
 					return "Minas Gerais-MG";
 				case 12:
@@ -51,7 +54,7 @@ sap.ui.define([], () => {
 				case 22:
 					return "Santa Catarina-SC";
 				case 23:
-					return "Sã0 Paulo-SP";
+					return "São Paulo-SP";
 				case 24:
 					return "Sergipe-SE";
 				case 25:
@@ -59,7 +62,64 @@ sap.ui.define([], () => {
 				case 26:
 					return "Distrito Federal-DF";
 				default:
-					return sStatus;
+					return "";
+			}
+		},
+
+		textoNaturezaJuridica(numeroNaturezaJuridica, oView) {
+			var oModeloi18n = oView.getModel("i18n").getResourceBundle();
+
+			switch (numeroNaturezaJuridica) {
+				case 0:
+					return  oModeloi18n.getText("Formatador.MicroempreendedorIndividual");
+				case 1:
+					return oModeloi18n.getText("Formatador.EmpresarioIndividual");
+				case 2:
+					return oModeloi18n.getText("Formatador.SociedadeEmpresariaLimitada");
+				case 3:
+					return oModeloi18n.getText("Formatador.SociedadeEmpresariaUnipessoalLimitada");
+				case 4:
+					return oModeloi18n.getText("Formatador.SociedadeSimplesPura");
+				case 5:
+					return oModeloi18n.getText("Formatador.SociedadeSimplesLimitada");
+				case 6:
+					return oModeloi18n.getText("Formatador.SociedadeAnonimaAberta");
+				case 7:
+					return oModeloi18n.getText("Formatador.SociedadeAnonimaFechada");
+				default:
+					return "";
+			}
+		},
+
+		textoOrganizacaoAcademica(numeroOrganizacaoAcademica, oView) {
+			var oModeloi18n = oView.getModel("i18n").getResourceBundle();
+
+			switch (numeroOrganizacaoAcademica) {
+				case 0:
+					return oModeloi18n.getText("Formatador.Faculdade");
+				case 1:
+					return oModeloi18n.getText("Formatador.CentroUniversitario");
+				case 2:
+					return oModeloi18n.getText("Formatador.InstitutoFederal");
+				case 3:
+					return oModeloi18n.getText("Formatador.Universidade");
+				case 4:
+					return oModeloi18n.getText("Formatador.EscolaDoGoverno");
+				default:
+					return "";
+			}
+		},
+
+		textoSituacaoCadastral(valorSituacaoCadastral, oView) {
+			var oModeloi18n = this._retornaModeloi18n(oView);
+
+			if (valorSituacaoCadastral)
+			{
+				return oModeloi18n.getText("Formatador.Ativa");
+			}
+			else
+			{
+				return oModeloi18n.getText("Formatador.Inativa");
 			}
 		}
 	};

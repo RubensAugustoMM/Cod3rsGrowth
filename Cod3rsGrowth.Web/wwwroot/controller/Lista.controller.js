@@ -3,12 +3,16 @@ sap.ui.define([
     "ui5/cod3rsgrowth/modelos/DataRepository",
 	"sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "ui5/cod3rsgrowth/modelos/Formatador"
+    "ui5/cod3rsgrowth/modelos/Formatador",
+    "ui5/cod3rsgrowth/utilitarios/config",
+    "sap/ui/core/Fragment"
 ], (Controller,
-    DataRepository,
-    Filter,
-    FilterOperator,
-    Formatador) => {
+	DataRepository,
+	Filter,
+	FilterOperator,
+	Formatador,
+    config,
+    Fragment) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -51,12 +55,16 @@ sap.ui.define([
             const oTable = this.byId("tabela");
             const oModel = this.getView().getModel();
 
+            this.RemoverFragmentoFiltroEmpresas();
+
+            this.CarregaFragmentoFiltroEmpresas();
+
             oTable.removeAllColumns();
 
             const aCampos = {
                 nomeFantasia: "nome",
                 cnpj: "CNPJ",
-                situcaoCadastral: "Situação Cadastral",
+                situacaoCadastral: "Situação Cadastral",
                 dataAbertura: "Data Abertura",
                 naturezaJuridica: "Natureaza Juridica",
                 capitalSocial: "Capital Social",
@@ -75,11 +83,43 @@ sap.ui.define([
                 .catch(oError => {
                     console.error("Erro ao obter convênios:", oError);
                 });
-        
+
+            var oView = this.getView(); 
+       
             oTable.bindItems({
                 path: "/items",
                 template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => new sap.m.Text({ text: "{" + sCampo + "}" }))
+                    cells: Object.keys(aCampos).map(sCampo => {
+                        if (sCampo === "estado") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter:  this.formatador.textoEstado
+                                }
+                            });
+                        }
+                        if (sCampo === "naturezaJuridica") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (naturezaJuridica) {
+                                        return this.formatador.textoNaturezaJuridica(naturezaJuridica, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        if (sCampo === "situacaoCadastral") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (situacaoCadastral) {
+                                        return this.formatador.textoSituacaoCadastral(situacaoCadastral, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        return new sap.m.Text({ text: "{" + sCampo + "}" });
+                    })
                 })
             })
         },
@@ -89,6 +129,8 @@ sap.ui.define([
             const oTable = this.byId("tabela");
             const oModel = this.getView().getModel();
 
+            this.RemoverFragmentoFiltroEmpresas();
+            
             oTable.removeAllColumns();
 
             const aCampos = {
@@ -96,7 +138,7 @@ sap.ui.define([
                 codigoMec: "Código MEC",
                 statusAtividade: "Status Atividade",
                 organizacaoAcademica: "Organização Acadêmica",
-                estado: "Estado",
+                estado: "Estado"
             };
 
             Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
@@ -112,39 +154,101 @@ sap.ui.define([
                     console.error("Erro ao obter convênios:", oError);
                 });
         
+                var oView = this.getView(); 
+
+
             oTable.bindItems({
                 path: "/items",
                 template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => new sap.m.Text({ text: "{" + sCampo + "}" }))
+                    cells: Object.keys(aCampos).map(sCampo => {
+                        if (sCampo === "estado") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: this.formatador.textoEstado
+                                }
+                            });
+                        }
+
+                        if (sCampo === "organizacaoAcademica") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (organizacaoAcademica) {
+                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        if (sCampo === "statusAtividade") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (statusAtividade) {
+                                        return this.formatador.textoSituacaoCadastral(statusAtividade, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+
+                        return new sap.m.Text({ text: "{" + sCampo + "}" });
+                    })
                 })
             })
         },
-
-        aoFiltrarTabela(oEvent)
-        {
-			const aFilter = [];
-			const sQuery = oEvent.getParameter("query");
+        aoFiltrarTabela(oEvent) {
+            const sQuery = oEvent.getParameter("query");
             const oRouter = this.getOwnerComponent().getRouter();
-
+            const oModel = this.getView().getModel();
+        
             const sRotaAtual = oRouter.getRouteInfoByHash(window.location.hash).name;
-            var parametroFiltrar = "";
-
-            if (sRotaAtual === "Empresas")
-            {
-                var parametroFiltrar = "nomeFantasia";
+            let sURL = config.getBaseURL();
+            
+            if (sRotaAtual === "Empresas") {
+                sURL += "/api/Empresas?nomeFantasia=" + encodeURIComponent(sQuery);
+            } else if (sRotaAtual === "Escolas") {
+                sURL += "/api/Escolas?nome=" + encodeURIComponent(sQuery);
             }
-            else
-            {
-                var parametroFiltrar = "nome";
+        
+            jQuery.ajax({
+                url: sURL,
+                method: "GET",
+                success: function(aData) {
+                    oModel.setProperty("/items", aData);
+                },
+                error: function(oError) {
+                    console.error("Erro ao filtrar dados:", oError);
+                }
+            });
+        },
+
+        CarregaFragmentoFiltroEmpresas()
+        {
+            const oView = this.getView();
+
+            Fragment.load({
+                id: oView.getId(), 
+                name: "ui5.cod3rsgrowth.view.FiltroEmpresas",
+                controller: this 
+            }).then(function (oPanel) {
+                const oMainToolbar = oView.byId("painelFiltros");
+                oMainToolbar.addContent(oPanel);
+            });          
+        }, 
+
+        RemoverFragmentoFiltroEmpresas: function () {
+            const oView = this.getView();
+            const oMainToolbar = oView.byId("painelFiltros");
+            const oFragmentContent = oView.byId(oView.getId() + "--filtroEmpresasFragment");
+
+            if (oFragmentContent) {
+                oMainToolbar.removeContent(oFragmentContent);
+                oFragmentContent.destroy();
             }
+        },
 
-			if (sQuery) {
-				aFilter.push(new Filter(parametroFiltrar, FilterOperator.Contains, sQuery));
-			}
+        aoPressionarBotaoFiltrar() {
 
-			const oList = this.byId("tabela");
-			const oBinding = oList.getBinding("/items");
-			oBinding.filter(aFilter);
-		}
+        }
     });
 });
