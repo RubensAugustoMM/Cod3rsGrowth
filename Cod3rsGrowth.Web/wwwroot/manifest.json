@@ -9,7 +9,7 @@
     "applicationVersion": {
       "version": "1.0.0"
     },
-    "dataSources": {}
+    "dataSources": {    }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -37,6 +37,18 @@
           ],
           "fallbackLocale": ""
         }
+      },
+      "naturezaJuridica":{
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "modelos/ModelosJson/ValoresNaturezaJuridica.json"
+      },
+      "estados":{
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "modelos/ModelosJson/ValoresEstados.json"
+      },
+      "habilitado":{
+        "type": "sap.ui.model.json,JSONModel",
+        "uri": "modelos/ModelosJson/ValoresHabilitado.json"
       }
     },
     "rootView": {

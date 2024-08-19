@@ -1,0 +1,112 @@
+{
+    "Estados": [
+        {
+            "Codigo": 0,
+            "Valor": "Acre-AC"
+        },
+        {
+            "Codigo": 1,
+            "Valor": "Alagoas-AL"
+        },
+        {
+            "Codigo": 2,
+            "Valor": "Amapa-AP"
+        },
+        {
+            "Codigo": 3,
+            "Valor": "Amazonas-AM"
+        },
+        {
+            "Codigo": 4,
+            "Valor": "Bahia-BA"
+        },
+        {
+            "Codigo": 5,
+            "Valor": "Ceara-CE"
+        },
+        {
+            "Codigo": 6,
+            "Valor": "Espirito Santo-ES"
+        },
+        {
+            "Codigo": 7,
+            "Valor": "Goiás-GO"
+        },
+        {
+            "Codigo": 8,
+            "Valor": "Maranhão-MA"
+        },
+        {
+            "Codigo": 9,
+            "Valor": "Mato Grosso-MT"
+        },
+        {
+            "Codigo": 10,
+            "Valor": "Mato Grosso do Sul-MS"
+        },
+        {
+            "Codigo": 11,
+            "Valor": "Minas Gerais-MS"
+        },
+        {
+            "Codigo": 12,
+            "Valor": "Para-PA"
+        },
+        {
+            "Codigo": 13,
+            "Valor": "Paraiba-PB"
+        },
+        {
+            "Codigo": 14,
+            "Valor": "Parana-PR"
+        },
+        {
+            "Codigo": 15,
+            "Valor": "Pernambuco-PE"
+        },
+        {
+            "Codigo": 16,
+            "Valor": "Piaui-PI"
+        },
+        {
+            "Codigo": 17,
+            "Valor": "Rio de Janeiro-RJ"
+        },
+        {
+            "Codigo": 18,
+            "Valor": "Rio Grande do Norte-RN"
+        },
+        {
+            "Codigo": 19,
+            "Valor": "Rio Grande do Sul-RS"
+        },
+        {
+            "Codigo": 20,
+            "Valor": "Rondonia-RO"
+        },
+        {
+            "Codigo": 21,
+            "Valor": "Roraima-RR"
+        },
+        {
+            "Codigo": 22,
+            "Valor": "Santa Catarina-SC"
+        },
+        {
+            "Codigo": 23,
+            "Valor": "São Paulo-SP"
+        },
+        {
+            "Codigo": 24,
+            "Valor": "Sergipe-SE"
+        },
+        {
+            "Codigo": 25,
+            "Valor": "Tocantins-TO"
+        },
+        {
+            "Codigo": 26,
+            "Valor": "Distrito Federal-DF"
+        }
+    ]
+}

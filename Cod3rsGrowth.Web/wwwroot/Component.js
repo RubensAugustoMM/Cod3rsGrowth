@@ -1,12 +1,14 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
    "sap/ui/model/resource/ResourceModel",
-   "ui5/cod3rsgrowth/modelos/ModelosJson/ValoresNaturezaJuridica",
-   "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository"
+   "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/Device"
 ], (UIComponent,
 	ResourceModel,
-    ValoresNaturezaJuridica,
-	DataRepository) => {
+	DataRepository,
+    JSONModel,
+    Device) => {
     "use strict";
 
     return UIComponent.extend("ui5.cod3rsgrowth.Component", {
@@ -17,11 +19,10 @@ sap.ui.define([
 
         init() {
             UIComponent.prototype.init.apply(this, arguments);
-             // set i18n model
              const i18nModel = new ResourceModel({
                 bundleName: "ui5.cod3rsgrowth.i18n.i18n"
              });
-             this.setModel(i18nModel, "i18n");
+            this.setModel(i18nModel, "i18n"); 
 
             this.DataRepository = new DataRepository(this);
 

@@ -56,11 +56,17 @@
                     headerText="{i18n>FiltroEmpresa.SituacaoCadastral}"
                 >
                     <content>
-                        <ComboBox
+                        <Select
                             id="filtroSituacaoCadastral"
                             width="100%"
-                            value="{/situacaoCadastral}"
-                        />
+                            selectedKey="{/SituacaoCadastralSelecionada}"
+                            items="{habilitado>/Habilitado}"
+                        >
+                            <c:Item
+                                key="{habilitado>Codigo}"
+                                text="{habilitado>Valor}"
+                            />
+                        </Select>
                     </content>
                 </Panel>
                 <Panel
@@ -81,11 +87,18 @@
                     headerText="{i18n>FiltroEmpresa.NaturezaJuridica}"
                 >
                     <content>
-                        <ComboBox
+                        <Select
                             id="filtroNaturezaJuridica"
                             width="100%"
-                            value="{/naturezaJuridica}"
-                        />
+                            selectedKey="{/NaturezaJuridicaSelecionada}"
+                            items="{ path: 'naturezaJuridica>/NaturezaJuridica',
+                                sorter: {path:'Valor'}}"
+                        >
+                            <c:Item
+                                key="{naturezaJuridica>Codigo}"
+                                text="{naturezaJuridica>Valor}"
+                            />
+                        </Select>
                     </content>
                 </Panel>
                 <Panel
@@ -96,8 +109,15 @@
                         <ComboBox
                             id="filtroEstado"
                             width="100%"
-
-                        />
+                            selectedKey="{/EstadoSelecionado}"
+                            items="{path: 'estados>/Estados',
+                        sorter: {path:'Valor'}}"
+                        >
+                            <c:Item
+                                key="{estados>Codigo}"
+                                text="{estados>Valor}"
+                            />
+                        </ComboBox>
                     </content>
                 </Panel>
                 <Panel width="50%" />

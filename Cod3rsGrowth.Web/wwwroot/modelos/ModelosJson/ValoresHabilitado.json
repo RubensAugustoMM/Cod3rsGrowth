@@ -1,0 +1,16 @@
+{
+    "Habilitado":[
+        {
+            "Codigo": -1,
+            "Valor": ""
+        },
+        {
+            "Codigo": 0,
+            "Valor": "Desabilitado"
+        },
+        {
+            "Codigo": 1,
+            "Valor": "Habilitado"
+        }
+    ]
+}
