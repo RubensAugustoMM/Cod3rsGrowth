@@ -15,6 +15,7 @@ sap.ui.define([
                 });
             });
         },
+
         obterConvenioPorId: function (sIdEscolas) { },
         deletarConvenio: function (sIdEscolas) { },
         atualizarConvenio: function (sIdEscolas) { },

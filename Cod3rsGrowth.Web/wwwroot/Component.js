@@ -1,9 +1,11 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
    "sap/ui/model/resource/ResourceModel",
-   "ui5/cod3rsgrowth/modelos/DataRepository"
+   "ui5/cod3rsgrowth/modelos/ModelosJson/ValoresNaturezaJuridica",
+   "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository"
 ], (UIComponent,
 	ResourceModel,
+    ValoresNaturezaJuridica,
 	DataRepository) => {
     "use strict";
 

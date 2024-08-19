@@ -4,7 +4,7 @@ sap.ui.define([
     return {
         obterTodasEmpresas: function (oFiltro) {
             return new Promise((resolve, reject) => {
-                const sQueryParams = oFiltro ? '?' + jQuery.param(oFiltro) : '';
+                const sQueryParams = oFiltro ? '?' + "RazaoSocialFiltro=" + oFiltro.Razaosocial + jQuery.param(oFiltro) : '';
                 jQuery.get({
                     url: this._baseURL + '/empresas' + sQueryParams,
                     success: function(aEmpresas) {

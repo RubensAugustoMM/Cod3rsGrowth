@@ -1,18 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "ui5/cod3rsgrowth/modelos/DataRepository",
+    "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository",
 	"sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "ui5/cod3rsgrowth/modelos/Formatador",
     "ui5/cod3rsgrowth/utilitarios/config",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/ui/core/routing/HashChanger"
 ], (Controller,
 	DataRepository,
 	Filter,
 	FilterOperator,
 	Formatador,
-    config,
-    Fragment) => {
+	config,
+	Fragment,
+	HashChanger) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -197,7 +199,6 @@ sap.ui.define([
             })
         },
         aoFiltrarTabela(oEvent) {
-            const sQuery = oEvent.getParameter("query");
             const oRouter = this.getOwnerComponent().getRouter();
             const oModel = this.getView().getModel();
         
@@ -247,8 +248,38 @@ sap.ui.define([
             }
         },
 
-        aoPressionarBotaoFiltrar() {
+        aoPressionarBotaoFiltrar(oEvent) {
+            const sQuery = oEvent.getParameter("query");
+            const router = this.getOwnerComponent().getRouter();
+            const hashAtual = router.getHashChanger().getHash();
+            const rotaAtual = router.getRouteInfoByHash(hashAtual).name;
 
+            let URL = config.getBaseURL();
+
+            switch (rotaAtual)
+            {
+                case "Escolas":
+                    console.log("Filtro Escolas ativado.");
+                    break;
+                case "Empresas":
+                    console.log("FIltro Empresas ativado.");
+                    break;
+                default:
+                    break;
+            }
+        },
+
+        retornaFiltroEmpresas()
+        {
+            return {
+                SituacaoCadastralFiltro: this.byId("filtroSituacaoCadastral").getValue(),
+                RazaoSocialFiltro: this.byId("filtroNomeEmpresa").getValue(),
+                CnpjFiltro: this.byId("filtroCnpj").getValue(),
+                CapitalSocialFiltro: this.byId("filtroCapitalSocial").getValue(), 
+                DataAberturaFiltro: this.byId("filtroDataAbertura").getValue(),
+                NaturezaJuridicaFiltro: this.byId("filtroNaturezaJuridica").getValue(),
+                EstadoFiltro: this.byId("filtroEstado").getValue()
+            }   
         }
     });
 });
