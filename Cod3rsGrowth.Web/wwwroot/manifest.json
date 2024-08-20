@@ -47,7 +47,7 @@
         "uri": "modelos/ModelosJson/ValoresEstados.json"
       },
       "habilitado":{
-        "type": "sap.ui.model.json,JSONModel",
+        "type": "sap.ui.model.json.JSONModel",
         "uri": "modelos/ModelosJson/ValoresHabilitado.json"
       }
     },

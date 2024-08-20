@@ -60,7 +60,8 @@
                             id="filtroSituacaoCadastral"
                             width="100%"
                             selectedKey="{/SituacaoCadastralSelecionada}"
-                            items="{habilitado>/Habilitado}"
+                            items="{path:'habilitado>/Habilitado',
+                            sorter: {path: 'Valor'}}"
                         >
                             <c:Item
                                 key="{habilitado>Codigo}"
