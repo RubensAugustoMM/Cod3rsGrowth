@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
 >
-    <Panel id="filtroEmpresasFragment">
+    <Panel id="filtroEscolaFragment">
         <content>
             <FlexBox
                 displayInline="true"
@@ -13,12 +13,12 @@
             >
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.nome}"
+                    headerText="{i18n>FiltroEscola.nome}"
                 >
                     <content>
                         <Input
-                            id="filtroNomeEmpresa"
-                            value="{/nomeEmpresa}"
+                            id="filtroNomeEscola"
+                            value="{/nomeEscola}"
                             valueLiveUpdate="true"
                             width="100%"
                         />
@@ -26,29 +26,15 @@
                 </Panel>
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.CNPJ}"
+                    headerText="{i18n>FiltroEscola.CodigoMec}"
                 >
                     <content>
                         <Input
-                            id="filtroCnpj"
-                            value="{/cnpjEmpresa}"
+                            id="filtroCodigoMec"
+                            value="{/CodigoMec}"
                             valueLiveUpdate="true"
                             type="Number"
-                            maxLength="14"
-                            width="100%"
-                        />
-                    </content>
-                </Panel>
-                <Panel
-                    width="50%"
-                    headerText="{i18n>FiltroEmpresa.CapitalSocial}"
-                >
-                    <content>
-                        <Input
-                            id="filtroCapitalSocial"
-                            value="{/capitalSocialEmpresa}"
-                            type="Number"
-                            valueLiveUpdate="true"
+                            maxLength="8"
                             width="100%"
                         />
                     </content>
@@ -56,13 +42,13 @@
 
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.SituacaoCadastral}"
+                    headerText="{i18n>FiltroEscola.StatusAtividade}"
                 >
                     <content>
                         <Select
-                            id="filtroSituacaoCadastral"
+                            id="filtroStatusAtividade"
                             width="100%"
-                            selectedKey="{/situacaoCadastralSelecionada}"
+                            selectedKey="{/statusAtividadeSelecionada}"
                             items="{path:'habilitado>/Habilitado',
                             sorter: {path: 'Valor'}}"
                         >
@@ -75,27 +61,14 @@
                 </Panel>
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.DataAbertura}"
-                >
-                    <content>
-                        <DatePicker
-                            id="filtroDataAbertura"
-                            value="{/dataAbertura}"
-                            ariaDescribedBy="Data abertura"
-                            width="100%"
-                        />
-                    </content>
-                </Panel>
-                <Panel
-                    width="50%"
-                    headerText="{i18n>FiltroEmpresa.NaturezaJuridica}"
+                    headerText="{i18n>FiltroEscola.OrganizacaoAcademica}"
                 >
                     <content>
                         <Select
                             id="filtroNaturezaJuridica"
                             width="100%"
-                            selectedKey="{/naturezaJuridicaSelecionada}"
-                            items="{ path: 'naturezaJuridica>/NaturezaJuridica',
+                            selectedKey="{/organizacaoAcademicaSelecionada}"
+                            items="{ path: 'organizacaoAcademica>/OrganizacaoAcademica',
                                 sorter: {path:'Valor'}}"
                         >
                             <c:Item
@@ -107,7 +80,7 @@
                 </Panel>
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.Estado}"
+                    headerText="{i18n>Filtro.Estado}"
                 >
                     <content>
                         <ComboBox
@@ -131,7 +104,7 @@
                 >
                     <Button
                         width="auto"
-                        text="{i18n>FiltroEmpresa.Filtrar}"
+                        text="{i18n>FiltroEscola.Filtrar}"
                         press=".aoPressionarBotaoFiltrar"
                     />
                 </VBox>
@@ -139,3 +112,4 @@
         </content>
     </Panel>
 </c:FragmentDefinition>
+

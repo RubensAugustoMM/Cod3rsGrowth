@@ -1,0 +1,28 @@
+{
+    "OrganizacaoAcademica": [
+        {
+            "Codigo": -1,
+            "Valor": ""
+        },
+        {
+            "Codigo": 0,
+            "Valor": "Faculdade"
+        },
+        {
+            "Codigo": 1,
+            "Valor": "Centro Universitario"
+        },
+        {
+            "Codigo": 2,
+            "Valor": "Instituto Federal"
+        },
+        {
+            "Codigo": 3,
+            "Valor": "Universidade"
+        },
+        {
+            "Codigo": 4,
+            "Valor": "Escola do Governo"
+        }
+    ]
+}

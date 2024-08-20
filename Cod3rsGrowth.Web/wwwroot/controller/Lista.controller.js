@@ -70,85 +70,18 @@ sap.ui.define([
 
         _handleEmpresasRoute: function () {
             this.RemoverFragmentoFiltroEmpresas();
-
+            this.RemoverFragmentoFiltroEscolas();
             this.CarregaFragmentoFiltroEmpresas();
-
             this.populaTabelaEmpresaComDados({});
-
             this.formataElementosTabelaEmpresas();
         },
 
         _handleEscolasRoute: function () {
-            const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTabela = this.byId("tabela");
-            const oModel = this.getView().getModel();
-
             this.RemoverFragmentoFiltroEmpresas();
-
-            oTabela.removeAllColumns();
-
-            const aCampos = {
-                nome: "Nome",
-                codigoMec: "Código MEC",
-                statusAtividade: "Status Atividade",
-                organizacaoAcademica: "Organização Acadêmica",
-                estado: "Estado"
-            };
-
-            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
-                oTabela.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: sHeader })
-                }));
-            });
-            DataRepository.obterTodasEscolas()
-                .then(aEscolas => {
-                    oModel.setProperty("/items", aEscolas);
-                })
-                .catch(oError => {
-                    console.error("Erro ao obter convênios:", oError);
-                });
-
-            var oView = this.getView();
-
-
-            oTabela.bindItems({
-                path: "/items",
-                template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => {
-                        if (sCampo === "estado") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: this.formatador.textoEstado
-                                }
-                            });
-                        }
-
-                        if (sCampo === "organizacaoAcademica") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (organizacaoAcademica) {
-                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, oView);
-                                    }.bind(this)
-                                }
-                            });
-                        }
-                        if (sCampo === "statusAtividade") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (statusAtividade) {
-                                        return this.formatador.textoSituacaoCadastral(statusAtividade, oView);
-                                    }.bind(this)
-                                }
-                            });
-                        }
-
-                        return new sap.m.Text({ text: "{" + sCampo + "}" });
-                    })
-                })
-            })
+            this.RemoverFragmentoFiltroEscolas();
+            this.CarregaFragmentoFiltroEscolas();
+            this.populaTabelaEscolaComDados({});
+            this.formataElementosTabelaEscola();
         },
         aoFiltrarTabela(oEvent) {
             const oRouter = this.getOwnerComponent().getRouter();
@@ -188,10 +121,34 @@ sap.ui.define([
             });
         },
 
-        RemoverFragmentoFiltroEmpresas: function () {
+        RemoverFragmentoFiltroEmpresas() {
             const oView = this.getView();
             const oMainToolbar = oView.byId("painelFiltros");
             const oFragmentContent = oView.byId(oView.getId() + "--filtroEmpresasFragment");
+
+            if (oFragmentContent) {
+                oMainToolbar.removeContent(oFragmentContent);
+                oFragmentContent.destroy();
+            }
+        },
+
+        CarregaFragmentoFiltroEscolas() {
+            const oView = this.getView();
+
+            Fragment.load({
+                id: oView.getId(),
+                name: "ui5.cod3rsgrowth.view.FiltroEscolas",
+                controller: this
+            }).then(function (oPanel) {
+                const oMainToolbar = oView.byId("painelFiltros");
+                oMainToolbar.addContent(oPanel);
+            }); 
+        },
+
+        RemoverFragmentoFiltroEscolas() {
+            const oView = this.getView();
+            const oMainToolbar = oView.byId("painelFiltros");
+            const oFragmentContent = oView.byId(oView.getId() + "--filtroEscolasFragment");
 
             if (oFragmentContent) {
                 oMainToolbar.removeContent(oFragmentContent);
@@ -253,11 +210,6 @@ sap.ui.define([
                 estado: "Estado"
             };
 
-            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
-                oTabela.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: sHeader })
-                }));
-            });
             DataRepository.obterTodasEmpresas(oFiltro)
                 .then(aEmpresas => {
                     oModel.setProperty("/items", aEmpresas);
@@ -343,6 +295,89 @@ sap.ui.define([
                                 }
                             })
                         }
+                        return new sap.m.Text({ text: "{" + sCampo + "}" });
+                    })
+                })
+            })
+        },
+
+        populaTabelaEscolaComDados(oFiltro) {
+            const DataRepository = this.getOwnerComponent().DataRepository;
+            const oTabela = this.byId("tabela");
+            const oModel = this.getView().getModel();
+
+            const aCampos = {
+                nome: "Nome",
+                codigoMec: "Código MEC",
+                statusAtividade: "Status Atividade",
+                organizacaoAcademica: "Organização Acadêmica",
+                estado: "Estado"
+            };
+
+            DataRepository.obterTodasEscolas()
+                .then(aEscolas => {
+                    oModel.setProperty("/items", aEscolas);
+                })
+                .catch(oError => {
+                    console.error("Erro ao obter convênios:", oError);
+                });
+        },
+
+        formataElementosTabelaEscola() {
+            const oTabela = this.byId("tabela");
+
+            oTabela.removeAllColumns();
+
+            const aCampos = {
+                nome: "Nome",
+                codigoMec: "Código MEC",
+                statusAtividade: "Status Atividade",
+                organizacaoAcademica: "Organização Acadêmica",
+                estado: "Estado"
+            };
+
+            var oView = this.getView();
+
+            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
+                oTabela.addColumn(new sap.m.Column({
+                    header: new sap.m.Label({ text: sHeader })
+                }));
+            });
+
+            oTabela.bindItems({
+                path: "/items",
+                template: new sap.m.ColumnListItem({
+                    cells: Object.keys(aCampos).map(sCampo => {
+                        if (sCampo === "estado") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: this.formatador.textoEstado
+                                }
+                            });
+                        }
+
+                        if (sCampo === "organizacaoAcademica") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (organizacaoAcademica) {
+                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        if (sCampo === "statusAtividade") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (statusAtividade) {
+                                        return this.formatador.textoSituacaoCadastral(statusAtividade, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+
                         return new sap.m.Text({ text: "{" + sCampo + "}" });
                     })
                 })

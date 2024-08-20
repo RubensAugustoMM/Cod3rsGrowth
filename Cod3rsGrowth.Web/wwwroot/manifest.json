@@ -49,7 +49,12 @@
       "habilitado":{
         "type": "sap.ui.model.json.JSONModel",
         "uri": "modelos/ModelosJson/ValoresHabilitado.json"
+      },
+      "organizacaoAcademica":{
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "modelos/ModelosJson/ValoresOrganizacaoAcademica.json"
       }
+
     },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
@@ -79,12 +84,7 @@
       },
       "routes": [
         {
-          "pattern": "",
-          "name": "ConveniosInicio",
-          "target": "lista"
-        },
-        {
-          "pattern": "empresas",
+          "pattern":  "",
           "name": "Empresas",
           "target": "lista"
         },
