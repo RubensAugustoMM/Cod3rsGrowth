@@ -1,25 +1,39 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository",
-	"sap/ui/model/Filter",
+    "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "ui5/cod3rsgrowth/modelos/Formatador",
     "ui5/cod3rsgrowth/utilitarios/config",
     "sap/ui/core/Fragment",
-    "sap/ui/core/routing/HashChanger"
+    "sap/ui/core/routing/HashChanger",
+    "sap/ui/core/format/NumberFormat",
+    "sap/ca/ui/model/format/DateFormat"
 ], (Controller,
-	DataRepository,
-	Filter,
-	FilterOperator,
-	Formatador,
-	config,
-	Fragment,
-	HashChanger) => {
+    DataRepository,
+    Filter,
+    FilterOperator,
+    Formatador,
+    config,
+    Fragment,
+    HashChanger,
+    NumberFormat,
+    DateFormat) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
 
         formatador: Formatador,
+        oOpcoesFormatadorDecimais: {
+            minIntegerDigits: 1,
+            MaxIntegerDigits: 3,
+            minFractionsDigits: 2,
+            maxFractionDigits: 2,
+            style: "short"
+        },
+        oOpcoesFormatadorData: {
+            format: "ddmmyyyy"
+        }, 
 
         onInit() {
             const oRouter = this.getOwnerComponent().getRouter();
@@ -72,7 +86,7 @@ sap.ui.define([
                 capitalSocial: "Capital Social",
                 estado: "Estado"
             };
-            
+
             Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
                 oTable.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: sHeader })
@@ -86,8 +100,8 @@ sap.ui.define([
                     console.error("Erro ao obter convênios:", oError);
                 });
 
-            var oView = this.getView(); 
-       
+            var oView = this.getView();
+
             oTable.bindItems({
                 path: "/items",
                 template: new sap.m.ColumnListItem({
@@ -96,7 +110,7 @@ sap.ui.define([
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
-                                    formatter:  this.formatador.textoEstado
+                                    formatter: this.formatador.textoEstado
                                 }
                             });
                         }
@@ -120,6 +134,41 @@ sap.ui.define([
                                 }
                             });
                         }
+                        if (sCampo === "capitalSocial") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (capitalSocial) {
+                                        var oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
+                                        return oFormatadorFloat.format(capitalSocial);
+                                    }.bind(this)
+                                }
+                            })
+                        }
+                        if (sCampo === "dataAbertura") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (dataAbertura) {
+                                        var oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
+                                        return oFormatadorData.format(dataAbertura);
+                                    }
+                                }
+                            })
+                        }
+                        if(sCampo === "cnpj")
+                        {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (dataAbertura) {
+                                        const cnpjCpf = dataAbertura.replace(/\D/g, '');
+                                   
+                                        return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
+                                    }
+                                }
+                            })
+                        }
                         return new sap.m.Text({ text: "{" + sCampo + "}" });
                     })
                 })
@@ -132,7 +181,7 @@ sap.ui.define([
             const oModel = this.getView().getModel();
 
             this.RemoverFragmentoFiltroEmpresas();
-            
+
             oTable.removeAllColumns();
 
             const aCampos = {
@@ -155,8 +204,8 @@ sap.ui.define([
                 .catch(oError => {
                     console.error("Erro ao obter convênios:", oError);
                 });
-        
-                var oView = this.getView(); 
+
+            var oView = this.getView();
 
 
             oTable.bindItems({
@@ -201,41 +250,40 @@ sap.ui.define([
         aoFiltrarTabela(oEvent) {
             const oRouter = this.getOwnerComponent().getRouter();
             const oModel = this.getView().getModel();
-        
+
             const sRotaAtual = oRouter.getRouteInfoByHash(window.location.hash).name;
             let sURL = config.getBaseURL();
-            
+
             if (sRotaAtual === "Empresas") {
                 sURL += "/api/Empresas?nomeFantasia=" + encodeURIComponent(sQuery);
             } else if (sRotaAtual === "Escolas") {
                 sURL += "/api/Escolas?nome=" + encodeURIComponent(sQuery);
             }
-        
+
             jQuery.ajax({
                 url: sURL,
                 method: "GET",
-                success: function(aData) {
+                success: function (aData) {
                     oModel.setProperty("/items", aData);
                 },
-                error: function(oError) {
+                error: function (oError) {
                     console.error("Erro ao filtrar dados:", oError);
                 }
             });
         },
 
-        CarregaFragmentoFiltroEmpresas()
-        {
+        CarregaFragmentoFiltroEmpresas() {
             const oView = this.getView();
 
             Fragment.load({
-                id: oView.getId(), 
+                id: oView.getId(),
                 name: "ui5.cod3rsgrowth.view.FiltroEmpresas",
-                controller: this 
+                controller: this
             }).then(function (oPanel) {
                 const oMainToolbar = oView.byId("painelFiltros");
                 oMainToolbar.addContent(oPanel);
-            });          
-        }, 
+            });
+        },
 
         RemoverFragmentoFiltroEmpresas: function () {
             const oView = this.getView();
@@ -256,8 +304,7 @@ sap.ui.define([
 
             let URL = config.getBaseURL();
 
-            switch (rotaAtual)
-            {
+            switch (rotaAtual) {
                 case "Escolas":
                     console.log("Filtro Escolas ativado.");
                     break;
@@ -269,17 +316,16 @@ sap.ui.define([
             }
         },
 
-        retornaFiltroEmpresas()
-        {
+        retornaFiltroEmpresas() {
             return {
                 SituacaoCadastralFiltro: this.byId("filtroSituacaoCadastral").getValue(),
                 RazaoSocialFiltro: this.byId("filtroNomeEmpresa").getValue(),
                 CnpjFiltro: this.byId("filtroCnpj").getValue(),
-                CapitalSocialFiltro: this.byId("filtroCapitalSocial").getValue(), 
+                CapitalSocialFiltro: this.byId("filtroCapitalSocial").getValue(),
                 DataAberturaFiltro: this.byId("filtroDataAbertura").getValue(),
                 NaturezaJuridicaFiltro: this.byId("filtroNaturezaJuridica").getValue(),
                 EstadoFiltro: this.byId("filtroEstado").getValue()
-            }   
+            }
         }
     });
 });

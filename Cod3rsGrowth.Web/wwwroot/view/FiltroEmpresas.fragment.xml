@@ -45,6 +45,7 @@
                         <Input
                             id="filtroCapitalSocial"
                             value="{/capitalSocialEmpresa}"
+                            type="Number"
                             valueLiveUpdate="true"
                             width="100%"
                         />
