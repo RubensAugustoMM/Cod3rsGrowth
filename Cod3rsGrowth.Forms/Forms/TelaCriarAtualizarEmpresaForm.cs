@@ -181,18 +181,18 @@ namespace Cod3rsGrowth.Forms.Forms
             {
                 if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
                 {
-                    empresaCriada.SitucaoCadastral = true;
+                    empresaCriada.SituacaoCadastral = true;
                 }
                 else
                 {
-                    empresaCriada.SitucaoCadastral = false;
+                    empresaCriada.SituacaoCadastral = false;
                 }
                 
                 if(_empresaEnderecoAtualizarOtd == null)
                 {
                     empresaCriada.DataSituacaoCadastral = DateTime.Now;
                 }
-                else if(_empresaEnderecoAtualizarOtd.SitucaoCadastral != empresaCriada.SitucaoCadastral)
+                else if(_empresaEnderecoAtualizarOtd.SituacaoCadastral != empresaCriada.SituacaoCadastral)
                 {
                     empresaCriada.DataSituacaoCadastral = DateTime.Now; 
                 }
@@ -361,7 +361,7 @@ namespace Cod3rsGrowth.Forms.Forms
 
         private void ConfiguraTelaParaAtualizar()
         {
-            if (_empresaEnderecoAtualizarOtd.SitucaoCadastral)
+            if (_empresaEnderecoAtualizarOtd.SituacaoCadastral)
             {
                 comboBoxSituacaoCadastral.SelectedItem = HabilitadoEnums.Habilitado;
             }
@@ -402,7 +402,7 @@ namespace Cod3rsGrowth.Forms.Forms
             empresaRetorno.RazaoSocial = empresaOtd.RazaoSocial;
             empresaRetorno.NomeFantasia = empresaOtd.NomeFantasia;
             empresaRetorno.Cnpj = empresaOtd.Cnpj;
-            empresaRetorno.SitucaoCadastral = empresaOtd.SitucaoCadastral;
+            empresaRetorno.SituacaoCadastral = empresaOtd.SituacaoCadastral;
             empresaRetorno.DataSituacaoCadastral = empresaOtd.DataSituacaoCadastral;
             empresaRetorno.Idade = empresaOtd.Idade;
             empresaRetorno.DataAbertura = empresaOtd.DataAbertura;

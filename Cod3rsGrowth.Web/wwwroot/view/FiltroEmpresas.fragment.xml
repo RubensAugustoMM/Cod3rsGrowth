@@ -18,6 +18,7 @@
                     <content>
                         <Input
                             id="filtroNomeEmpresa"
+                            value="{/nomeEmpresa}"
                             valueLiveUpdate="true"
                             width="100%"
                         />
@@ -30,6 +31,7 @@
                     <content>
                         <Input
                             id="filtroCnpj"
+                            value="{/cnpjEmpresa}"
                             valueLiveUpdate="true"
                             width="100%"
                         />
@@ -42,6 +44,7 @@
                     <content>
                         <Input
                             id="filtroCapitalSocial"
+                            value="{/capitalSocialEmpresa}"
                             type="Number"
                             valueLiveUpdate="true"
                             width="100%"
@@ -57,6 +60,7 @@
                         <Select
                             id="filtroSituacaoCadastral"
                             width="100%"
+                            selectedKey="{/situacaoCadastralSelecionada}"
                             items="{path:'habilitado>/Habilitado',
                             sorter: {path: 'Valor'}}"
                         >
@@ -74,6 +78,7 @@
                     <content>
                         <DatePicker
                             id="filtroDataAbertura"
+                            value="{/dataAbertura}"
                             ariaDescribedBy="Data abertura"
                             width="100%"
                         />
@@ -87,6 +92,7 @@
                         <Select
                             id="filtroNaturezaJuridica"
                             width="100%"
+                            selectedKey="{/naturezaJuridicaSelecionada}"
                             items="{ path: 'naturezaJuridica>/NaturezaJuridica',
                                 sorter: {path:'Valor'}}"
                         >
@@ -105,6 +111,7 @@
                         <ComboBox
                             id="filtroEstado"
                             width="100%"
+                            selectedKey="{/estadoSelecionado}"
                             items="{path: 'estados>/Estados',
                         sorter: {path:'Valor'}}"
                         >

@@ -49,7 +49,7 @@ public class TestesServicoEmpresa : TesteBase
             RazaoSocial = "Fast! transportes LTDA",
             NomeFantasia = "Fast! transportes",
             Cnpj = "12345678901234",
-            SitucaoCadastral = true,
+            SituacaoCadastral = true,
             DataSituacaoCadastral = new DateTime(2024, 12, 03),
             DataAbertura = new DateTime(2023, 12, 03),
             CapitalSocial = 123124124,
@@ -113,7 +113,7 @@ public class TestesServicoEmpresa : TesteBase
         Assert.Equal(EmpresaEntrada.RazaoSocial, ValorRetornado.RazaoSocial);
         Assert.Equal(EmpresaEntrada.NomeFantasia, ValorRetornado.NomeFantasia);
         Assert.Equal(EmpresaEntrada.Cnpj, ValorRetornado.Cnpj);
-        Assert.Equal(EmpresaEntrada.SitucaoCadastral, ValorRetornado.SitucaoCadastral);
+        Assert.Equal(EmpresaEntrada.SituacaoCadastral, ValorRetornado.SituacaoCadastral);
         Assert.Equal(EmpresaEntrada.DataSituacaoCadastral.Date, ValorRetornado.DataSituacaoCadastral.Date);
         Assert.Equal(EmpresaEntrada.DataAbertura.Date, ValorRetornado.DataAbertura.Date);
         Assert.Equal(EmpresaEntrada.CapitalSocial, ValorRetornado.CapitalSocial);

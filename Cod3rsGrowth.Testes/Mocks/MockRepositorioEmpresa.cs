@@ -19,7 +19,7 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
         EmpresaExistente.RazaoSocial = empresaAtualizada.RazaoSocial;
         EmpresaExistente.NomeFantasia = empresaAtualizada.NomeFantasia;
         EmpresaExistente.Cnpj = empresaAtualizada.Cnpj;
-        EmpresaExistente.SitucaoCadastral = empresaAtualizada.SitucaoCadastral;
+        EmpresaExistente.SituacaoCadastral = empresaAtualizada.SituacaoCadastral;
         EmpresaExistente.DataSituacaoCadastral = empresaAtualizada.DataSituacaoCadastral;
         EmpresaExistente.DataAbertura = empresaAtualizada.DataAbertura;
         EmpresaExistente.CapitalSocial = empresaAtualizada.CapitalSocial;
@@ -50,7 +50,7 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
             RazaoSocial = EmpresaRetornada.RazaoSocial,
             NomeFantasia = EmpresaRetornada.NomeFantasia,
             Cnpj = EmpresaRetornada.Cnpj,
-            SitucaoCadastral = EmpresaRetornada.SitucaoCadastral,
+            SituacaoCadastral = EmpresaRetornada.SituacaoCadastral,
             DataSituacaoCadastral = EmpresaRetornada.DataSituacaoCadastral,
             DataAbertura = EmpresaRetornada.DataAbertura,
             CapitalSocial = EmpresaRetornada.CapitalSocial,
@@ -79,7 +79,7 @@ public class MockRepositorioEmpresa : IRepositorioEmpresa
                 RazaoSocial = empresa.RazaoSocial,
                 NomeFantasia = empresa.NomeFantasia,
                 Cnpj = empresa.Cnpj,
-                SitucaoCadastral = empresa.SitucaoCadastral,
+                SituacaoCadastral = empresa.SituacaoCadastral,
                 DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                 NaturezaJuridica = empresa.NaturezaJuridica,
                 Porte = empresa.Porte,

@@ -69,36 +69,11 @@ sap.ui.define([
         },
 
         _handleEmpresasRoute: function () {
-            const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTabela = this.byId("tabela");
-            const oModel = this.getView().getModel();
-
             this.RemoverFragmentoFiltroEmpresas();
 
             this.CarregaFragmentoFiltroEmpresas();
 
-            const aCampos = {
-                nomeFantasia: "nome",
-                cnpj: "CNPJ",
-                situacaoCadastral: "Situação Cadastral",
-                dataAbertura: "Data Abertura",
-                naturezaJuridica: "Natureaza Juridica",
-                capitalSocial: "Capital Social",
-                estado: "Estado"
-            };
-
-            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
-                oTabela.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: sHeader })
-                }));
-            });
-            DataRepository.obterTodasEmpresas()
-                .then(aEmpresas => {
-                    oModel.setProperty("/items", aEmpresas);
-                })
-                .catch(oError => {
-                    console.error("Erro ao obter convênios:", oError);
-                });
+            this.populaTabelaEmpresaComDados({});
 
             this.formataElementosTabelaEmpresas();
         },
@@ -233,10 +208,13 @@ sap.ui.define([
             let URL = config.getBaseURL();
 
             switch (rotaAtual) {
-                case "Escolas":
-                    console.log("Filtro Escolas ativado.");
-                    break;
                 case "Empresas":
+                    console.log("Filtro Escolas ativado.");
+                    let oFiltro = this.retornaFiltroEmpresas();
+
+                    this.populaTabelaEmpresaComDados(oFiltro);
+                    break;
+                case "Escolas":
                     console.log("FIltro Empresas ativado.");
                     break;
                 default:
@@ -245,15 +223,48 @@ sap.ui.define([
         },
 
         retornaFiltroEmpresas() {
+            var oModel = this.getView().getModel();
             return {
-                SituacaoCadastralFiltro: this.byId("filtroSituacaoCadastral").getValue(),
-                RazaoSocialFiltro: this.byId("filtroNomeEmpresa").getValue(),
-                CnpjFiltro: this.byId("filtroCnpj").getValue(),
-                CapitalSocialFiltro: this.byId("filtroCapitalSocial").getValue(),
-                DataAberturaFiltro: this.byId("filtroDataAbertura").getValue(),
-                NaturezaJuridicaFiltro: this.byId("filtroNaturezaJuridica").getValue(),
-                EstadoFiltro: this.byId("filtroEstado").getValue()
+                SituacaoCadastralFiltro: oModel.getProperty("/situacaoCadastralSelecionada"),
+                RazaoSocialFiltro: oModel.getProperty("/nomeEmpresa"),
+                CnpjFiltro: oModel.getProperty("/cnpjEmpresa"),
+                CapitalSocialFiltro: oModel.getProperty("/capitalSocialEmpresa"),
+                DataAberturaFiltro: oModel.getProperty("/dataAbertura"),
+                NaturezaJuridicaFiltro: oModel.getProperty("/naturezaJuridicaSelecionada"),
+                EstadoFiltro: oModel.getProperty("/estadoSelecionado")
             }
+        },
+
+        populaTabelaEmpresaComDados(oFiltro)
+        {
+            const DataRepository = this.getOwnerComponent().DataRepository;
+            const oTabela = this.byId("tabela");
+            const oModel = this.getView().getModel();
+
+            oTabela.removeAllColumns();
+
+            const aCampos = {
+                nomeFantasia: "nome",
+                cnpj: "CNPJ",
+                situacaoCadastral: "Situação Cadastral",
+                dataAbertura: "Data Abertura",
+                naturezaJuridica: "Natureaza Juridica",
+                capitalSocial: "Capital Social",
+                estado: "Estado"
+            };
+
+            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
+                oTabela.addColumn(new sap.m.Column({
+                    header: new sap.m.Label({ text: sHeader })
+                }));
+            });
+            DataRepository.obterTodasEmpresas(oFiltro)
+                .then(aEmpresas => {
+                    oModel.setProperty("/items", aEmpresas);
+                })
+                .catch(oError => {
+                    console.error("Erro ao obter convênios:", oError);
+                });
         },
 
         formataElementosTabelaEmpresas() {

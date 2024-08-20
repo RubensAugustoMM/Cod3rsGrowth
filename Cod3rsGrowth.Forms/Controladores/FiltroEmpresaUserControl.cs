@@ -103,11 +103,11 @@ namespace Cod3rsGrowth.Forms.Controladores
                 if (HabilitadoEnums.Habilitado ==
                       (HabilitadoEnums)comboBoxHabilitadoSituacaoCadastral.SelectedItem)
                 {
-                    Filtro.SitucaoCadastralFiltro = true;
+                    Filtro.SituacaoCadastralFiltro = true;
                 }
                 else
                 {
-                    Filtro.SitucaoCadastralFiltro = false;
+                    Filtro.SituacaoCadastralFiltro = false;
                 }
             }
 
