@@ -8,7 +8,8 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/core/routing/HashChanger",
     "sap/ui/core/format/NumberFormat",
-    "sap/ca/ui/model/format/DateFormat"
+    "sap/ca/ui/model/format/DateFormat",
+    "sap/ui/model/json/JSONModel"
 ], (Controller,
     DataRepository,
     Filter,
@@ -18,7 +19,8 @@ sap.ui.define([
     Fragment,
     HashChanger,
     NumberFormat,
-    DateFormat) => {
+    DateFormat,
+    JSONModel) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -33,7 +35,7 @@ sap.ui.define([
         },
         oOpcoesFormatadorData: {
             format: "ddmmyyyy"
-        }, 
+        },
 
         onInit() {
             const oRouter = this.getOwnerComponent().getRouter();
@@ -68,14 +70,12 @@ sap.ui.define([
 
         _handleEmpresasRoute: function () {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTable = this.byId("tabela");
+            const oTabela = this.byId("tabela");
             const oModel = this.getView().getModel();
 
             this.RemoverFragmentoFiltroEmpresas();
 
             this.CarregaFragmentoFiltroEmpresas();
-
-            oTable.removeAllColumns();
 
             const aCampos = {
                 nomeFantasia: "nome",
@@ -88,7 +88,7 @@ sap.ui.define([
             };
 
             Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
-                oTable.addColumn(new sap.m.Column({
+                oTabela.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: sHeader })
                 }));
             });
@@ -100,89 +100,17 @@ sap.ui.define([
                     console.error("Erro ao obter convênios:", oError);
                 });
 
-            var oView = this.getView();
-
-            oTable.bindItems({
-                path: "/items",
-                template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => {
-                        if (sCampo === "estado") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: this.formatador.textoEstado
-                                }
-                            });
-                        }
-                        if (sCampo === "naturezaJuridica") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (naturezaJuridica) {
-                                        return this.formatador.textoNaturezaJuridica(naturezaJuridica, oView);
-                                    }.bind(this)
-                                }
-                            });
-                        }
-                        if (sCampo === "situacaoCadastral") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (situacaoCadastral) {
-                                        return this.formatador.textoSituacaoCadastral(situacaoCadastral, oView);
-                                    }.bind(this)
-                                }
-                            });
-                        }
-                        if (sCampo === "capitalSocial") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (capitalSocial) {
-                                        var oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
-                                        return oFormatadorFloat.format(capitalSocial);
-                                    }.bind(this)
-                                }
-                            })
-                        }
-                        if (sCampo === "dataAbertura") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (dataAbertura) {
-                                        var oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
-                                        return oFormatadorData.format(dataAbertura);
-                                    }
-                                }
-                            })
-                        }
-                        if(sCampo === "cnpj")
-                        {
-                            return new sap.m.Text({
-                                text: {
-                                    path: sCampo,
-                                    formatter: function (dataAbertura) {
-                                        const cnpjCpf = dataAbertura.replace(/\D/g, '');
-                                   
-                                        return cnpjCpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "\$1.\$2.\$3/\$4-\$5");
-                                    }
-                                }
-                            })
-                        }
-                        return new sap.m.Text({ text: "{" + sCampo + "}" });
-                    })
-                })
-            })
+            this.formataElementosTabelaEmpresas();
         },
 
         _handleEscolasRoute: function () {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTable = this.byId("tabela");
+            const oTabela = this.byId("tabela");
             const oModel = this.getView().getModel();
 
             this.RemoverFragmentoFiltroEmpresas();
 
-            oTable.removeAllColumns();
+            oTabela.removeAllColumns();
 
             const aCampos = {
                 nome: "Nome",
@@ -193,7 +121,7 @@ sap.ui.define([
             };
 
             Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
-                oTable.addColumn(new sap.m.Column({
+                oTabela.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: sHeader })
                 }));
             });
@@ -208,7 +136,7 @@ sap.ui.define([
             var oView = this.getView();
 
 
-            oTable.bindItems({
+            oTabela.bindItems({
                 path: "/items",
                 template: new sap.m.ColumnListItem({
                     cells: Object.keys(aCampos).map(sCampo => {
@@ -326,6 +254,88 @@ sap.ui.define([
                 NaturezaJuridicaFiltro: this.byId("filtroNaturezaJuridica").getValue(),
                 EstadoFiltro: this.byId("filtroEstado").getValue()
             }
+        },
+
+        formataElementosTabelaEmpresas() {
+            const oTabela = this.byId("tabela");
+            oTabela.removeAllColumns();
+
+            const aCampos = {
+                nomeFantasia: "nome",
+                cnpj: "CNPJ",
+                situacaoCadastral: "Situação Cadastral",
+                dataAbertura: "Data Abertura",
+                naturezaJuridica: "Natureaza Juridica",
+                capitalSocial: "Capital Social",
+                estado: "Estado"
+            };
+
+            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
+                oTabela.addColumn(new sap.m.Column({
+                    header: new sap.m.Label({ text: sHeader })
+                }));
+            });
+
+            var oView = this.getView();
+
+            oTabela.bindItems({
+                path: "/items",
+                template: new sap.m.ColumnListItem({
+                    cells: Object.keys(aCampos).map(sCampo => {
+                        if (sCampo === "estado") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: this.formatador.textoEstado
+                                }
+                            });
+                        }
+                        if (sCampo === "naturezaJuridica") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (naturezaJuridica) {
+                                        return this.formatador.textoNaturezaJuridica(naturezaJuridica, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        if (sCampo === "situacaoCadastral") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (situacaoCadastral) {
+                                        return this.formatador.textoSituacaoCadastral(situacaoCadastral, oView);
+                                    }.bind(this)
+                                }
+                            });
+                        }
+                        if (sCampo === "capitalSocial") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (capitalSocial) {
+                                        var oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
+                                        return oFormatadorFloat.format(capitalSocial);
+                                    }.bind(this)
+                                }
+                            })
+                        }
+                        if (sCampo === "dataAbertura") {
+                            return new sap.m.Text({
+                                text: {
+                                    path: sCampo,
+                                    formatter: function (dataAbertura) {
+                                        var oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
+                                        return oFormatadorData.format(dataAbertura);
+                                    }
+                                }
+                            })
+                        }
+                        return new sap.m.Text({ text: "{" + sCampo + "}" });
+                    })
+                })
+            })
         }
     });
 });
