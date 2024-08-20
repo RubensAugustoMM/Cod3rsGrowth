@@ -132,7 +132,7 @@
                     <Button
                         width="auto"
                         text="{i18n>FiltroEmpresa.Filtrar}"
-                        press=".aoPressionarBotaoFiltrar"
+                        press=".aoPressionarBotaoFiltrarEmpresa"
                     />
                 </VBox>
             </FlexBox>

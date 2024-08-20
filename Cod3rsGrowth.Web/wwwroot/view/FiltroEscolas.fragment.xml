@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:c="sap.ui.core"
 >
-    <Panel id="filtroEscolaFragment">
+    <Panel id="filtroEscolasFragment">
         <content>
             <FlexBox
                 displayInline="true"
@@ -31,7 +31,7 @@
                     <content>
                         <Input
                             id="filtroCodigoMec"
-                            value="{/CodigoMec}"
+                            value="{/codigoMec}"
                             valueLiveUpdate="true"
                             type="Number"
                             maxLength="8"
@@ -65,15 +65,15 @@
                 >
                     <content>
                         <Select
-                            id="filtroNaturezaJuridica"
+                            id="filtroOrganizacaoAcademica"
                             width="100%"
                             selectedKey="{/organizacaoAcademicaSelecionada}"
                             items="{ path: 'organizacaoAcademica>/OrganizacaoAcademica',
                                 sorter: {path:'Valor'}}"
                         >
                             <c:Item
-                                key="{naturezaJuridica>Codigo}"
-                                text="{naturezaJuridica>Valor}"
+                                key="{organizacaoAcademica>Codigo}"
+                                text="{organizacaoAcademica>Valor}"
                             />
                         </Select>
                     </content>
@@ -105,7 +105,7 @@
                     <Button
                         width="auto"
                         text="{i18n>FiltroEscola.Filtrar}"
-                        press=".aoPressionarBotaoFiltrar"
+                        press=".aoPressionarBotaoFiltrarEscola"
                     />
                 </VBox>
             </FlexBox>

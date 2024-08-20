@@ -156,27 +156,17 @@ sap.ui.define([
             }
         },
 
-        aoPressionarBotaoFiltrar(oEvent) {
-            const sQuery = oEvent.getParameter("query");
-            const router = this.getOwnerComponent().getRouter();
-            const hashAtual = router.getHashChanger().getHash();
-            const rotaAtual = router.getRouteInfoByHash(hashAtual).name;
-
-            let URL = config.getBaseURL();
-
-            switch (rotaAtual) {
-                case "Empresas":
-                    console.log("Filtro Escolas ativado.");
-                    let oFiltro = this.retornaFiltroEmpresas();
-
-                    this.populaTabelaEmpresaComDados(oFiltro);
-                    break;
-                case "Escolas":
-                    console.log("FIltro Empresas ativado.");
-                    break;
-                default:
-                    break;
-            }
+        aoPressionarBotaoFiltrarEmpresa(oEvent) {
+            let oFiltro = this.retornaFiltroEmpresas();
+            this.populaTabelaEmpresaComDados(oFiltro);
+            this.formataElementosTabelaEmpresas();
+        },
+        
+        aoPressionarBotaoFiltrarEscola(oEvent)
+        {
+            let oFiltro = this.retornaFiltroEscolas();
+            this.populaTabelaEscolaComDados(oFiltro);
+            this.formataElementosTabelaEscola();
         },
 
         retornaFiltroEmpresas() {
@@ -188,6 +178,17 @@ sap.ui.define([
                 CapitalSocialFiltro: oModel.getProperty("/capitalSocialEmpresa"),
                 DataAberturaFiltro: oModel.getProperty("/dataAbertura"),
                 NaturezaJuridicaFiltro: oModel.getProperty("/naturezaJuridicaSelecionada"),
+                EstadoFiltro: oModel.getProperty("/estadoSelecionado")
+            }
+        },
+
+        retornaFiltroEscolas() {
+            var oModel = this.getView().getModel();
+            return {
+                NomeFiltro: oModel.getProperty("/nomeEscola"),
+                CodigoMecFiltro: oModel.getProperty("/codigoMec"),
+                StatusAtividadeFiltro: oModel.getProperty("/statusAtividadeSelecionada"),
+                OrganizacaoAcademicaFiltro: oModel.getProperty("/organizacaoAcademicaSelecionada"),
                 EstadoFiltro: oModel.getProperty("/estadoSelecionado")
             }
         },
@@ -314,7 +315,7 @@ sap.ui.define([
                 estado: "Estado"
             };
 
-            DataRepository.obterTodasEscolas()
+            DataRepository.obterTodasEscolas(oFiltro)
                 .then(aEscolas => {
                     oModel.setProperty("/items", aEscolas);
                 })
