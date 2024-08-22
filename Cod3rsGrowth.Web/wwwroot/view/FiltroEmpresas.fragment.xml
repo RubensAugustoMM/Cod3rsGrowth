@@ -80,7 +80,14 @@
                     <content>
                         <DatePicker
                             id="filtroDataAbertura"
-                            value="{/dataAbertura}"
+                            value="{
+                                path: '/dataAbertura',
+                            type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                            source: {
+                                pattern: 'yyyy-MM-ddTHH:mm:ss'
+                            }
+                        }}"
                             ariaDescribedBy="Data abertura"
                             width="100%"
                         />

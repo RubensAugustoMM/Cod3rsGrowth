@@ -28,7 +28,7 @@ sap.ui.define([
                         }
                     }
 
-                    if (oFiltro["DataAberturaFiltro"] !== undefined) {
+                    if (oFiltro["DataAberturaFiltro"] !== undefined && oFiltro["DataAberturaFiltro"] !== null) {
                         parametrosQuery += "&DataAberturaFiltro=" + oFiltro["DataAberturaFiltro"];
                     }
 

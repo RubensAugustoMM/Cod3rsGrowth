@@ -34,7 +34,7 @@ sap.ui.define([
             style: "short"
         },
         oOpcoesFormatadorData: {
-            format: "ddmmyyyy"
+            pattern: 'yyyy-MM-ddTHH:mm:ss'
         },
 
         onInit() {
@@ -148,7 +148,7 @@ sap.ui.define([
             }).then(function (oPanel) {
                 const oMainToolbar = oView.byId("painelFiltros");
                 oMainToolbar.addContent(oPanel);
-            }); 
+            });
         },
 
         RemoverFragmentoFiltroEscolas() {
@@ -167,9 +167,8 @@ sap.ui.define([
             this.populaTabelaEmpresaComDados(oFiltro);
             this.formataElementosTabelaEmpresas();
         },
-        
-        aoPressionarBotaoFiltrarEscola(oEvent)
-        {
+
+        aoPressionarBotaoFiltrarEscola(oEvent) {
             let oFiltro = this.retornaFiltroEscolas();
             this.populaTabelaEscolaComDados(oFiltro);
             this.formataElementosTabelaEscola();
@@ -199,8 +198,7 @@ sap.ui.define([
             }
         },
 
-        populaTabelaEmpresaComDados(oFiltro)
-        {
+        populaTabelaEmpresaComDados(oFiltro) {
             const DataRepository = this.getOwnerComponent().DataRepository;
             const oTabela = this.byId("tabela");
             const oModel = this.getView().getModel();
