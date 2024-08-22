@@ -4,29 +4,33 @@ sap.ui.define([
 ], function (Opa5, Press) {
     "use strict";
 
+    var viewName = ".App"
     Opa5.createPageObjects({
         naPaginaAPP: {
 
             actions: {
-                iPressionaBotaoLateralEmpresa: function () {
+                aoPressionarBotaoLateralEmpresas: function () {
                     return this.waitFor({
+                        viewName: viewName,
                         controlType: "sap.m.StandardListItem",
-                        success: function (itemsListaLateral) {
-                            new Press().executeOn(itemsListaLateral[0]);
-                        },
+                        id: "botaoLateralEmpresas",
+                        actions:  new Press(),
                         errorMessage: "Não foi possível encontrar o botaoLateralEmpresa na lista lateral."
-                    });
+                    })
 				},
 				
-				iPressionaBotaoLateralEscolas: function () {
+				aoPressionarBotaoLateralEscolas: function () {
 					return this.waitFor({
+                        viewName: viewName,
 						controlType: "sap.m.StandardListItem",
-						success: function (itemsListaLateral) {
-							new Press().executeOn(itemsListaLateral[1]);
-						},
-						errorMessage:"Não foi possivel encontrar o botalLateralEscola na lista lateral"
+                        id: "botaoLateralEscolas",
+						actions: new Press(),
+						errorMessage:"Não foi possivel encontrar o botaolLateralEscola na lista lateral"
 					})
 				}
+            },
+            assertions: {
+
             }
         }
     });

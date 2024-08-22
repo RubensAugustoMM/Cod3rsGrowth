@@ -1,8 +1,14 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
     "./arrangements/Startup",
-    "./AppListaJourney"
-], function (Opa5, Startup,  AppListaEmpresasJourney) {
+    "./JornadaApp",
+    "./JornadaListaEmpresas",
+    "./JornadaListaEscolas"
+], function (Opa5,
+    Startup,
+    JornadaApp,
+    JornadaListaEmpresas,
+    JornadaListaEscolas) {
     "use strict";
 
     Opa5.extendConfig({
