@@ -9,7 +9,8 @@
             id="painelFiltros"
             height="auto"
             width="auto"
-            expandable="true">
+            expandable="true"
+            expanded="{/painelExpandido}">
             </Panel>
 
             <Table id="tabela" items="{/items}">

@@ -69,6 +69,9 @@ sap.ui.define([
         },
 
         _handleEmpresasRoute: function () {
+            let oModel = this.getView().getModel();
+            oModel.setProperty('/painelExpandido', false);
+
             this.RemoverFragmentoFiltroEmpresas();
             this.RemoverFragmentoFiltroEscolas();
             this.CarregaFragmentoFiltroEmpresas();
@@ -77,6 +80,9 @@ sap.ui.define([
         },
 
         _handleEscolasRoute: function () {
+            let oModel = this.getView().getModel();
+            oModel.setProperty('/painelExpandido', false);
+
             this.RemoverFragmentoFiltroEmpresas();
             this.RemoverFragmentoFiltroEscolas();
             this.CarregaFragmentoFiltroEscolas();
