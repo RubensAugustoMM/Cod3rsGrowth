@@ -107,7 +107,7 @@
                 </Panel>
                 <Panel
                     width="50%"
-                    headerText="{i18n>FiltroEmpresa.Estado}"
+                    headerText="{i18n>Filtro.Estado}"
                 >
                     <content>
                         <ComboBox
