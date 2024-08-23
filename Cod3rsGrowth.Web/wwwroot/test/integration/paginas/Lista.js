@@ -17,7 +17,10 @@ sap.ui.define([
                         viewName: viewName,
                         controlType: "sap.m.Panel",
                         id: "painelFiltros",
-                        actions: new Press(),
+                        actions: function (painelFiltros) {
+                            painelFiltros.expanded = true
+                            painelFiltros.setProperty("expanded", true);
+                        },
                         errorMessage: "Não foi possivel encontrar o painel de filtros"
                     });
                 }
