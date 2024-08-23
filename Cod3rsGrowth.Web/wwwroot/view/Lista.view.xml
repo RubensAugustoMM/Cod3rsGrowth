@@ -14,6 +14,13 @@
             </Panel>
 
             <Table id="tabela" items="{/items}">
+                <headerToolbar>
+                    <OverflowToolbar >
+                        
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://add"/>
+                    </OverflowToolbar>
+                </headerToolbar>
                     <columns>
                     </columns>
                     <ColumnListItem>
