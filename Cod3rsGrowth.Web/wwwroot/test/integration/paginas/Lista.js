@@ -7,7 +7,7 @@ sap.ui.define([
     Press) {
     "use strict";
 
-    var viewName = ".Lista";
+    let viewName = ".Lista";
 
     Opa5.createPageObjects({
         naPaginaDeListagem: {
