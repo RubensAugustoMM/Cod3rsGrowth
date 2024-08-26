@@ -40,36 +40,15 @@ sap.ui.define([
         onInit() {
             const oRouter = this.getOwnerComponent().getRouter();
 
-            oRouter.getRoute("Empresas").attachMatched(this._onRouteMatched, this);
-            oRouter.getRoute("Escolas").attachMatched(this._onRouteMatched, this);
+            oRouter.getRoute("Empresas").attachMatched(this._aoCoincidirComRotaEmpresas, this);
+            oRouter.getRoute("Escolas").attachMatched(this._aoCoincidirComRotaEscolas, this);
         },
 
-        _onRouteMatched(oEvent) {
-            var nomeRota = oEvent.getParameter("name");
-            console.log("Rota ativada:", nomeRota);
-
-            var i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-
-            var titulo;
-
-            switch (nomeRota) {
-                case "Empresas":
-                    titulo = i18n.getText("tituloEmpresas");
-                    this.byId("lista").setTitle(titulo)
-                    this._handleEmpresasRoute();
-                    break;
-                case "Escolas":
-                    titulo = i18n.getText("tituloEscolas");
-                    this.byId("lista").setTitle(titulo)
-                    this._handleEscolasRoute();
-                    break;
-                default:
-                    console.log("Rota não reconhecida.");
-            }
-        },
-
-        _handleEmpresasRoute: function () {
+        _aoCoincidirComRotaEmpresas: function () {
             let oModel = this.getView().getModel();
+            let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            let titulo = i18n.getText("tituloEmpresas");
+            this.byId("lista").setTitle(titulo)
             oModel.setProperty('/painelExpandido', false);
 
             this.RemoverFragmentoFiltroEmpresas();
@@ -79,8 +58,11 @@ sap.ui.define([
             this.formataElementosTabelaEmpresas();
         },
 
-        _handleEscolasRoute: function () {
+        _aoCoincidirComRotaEscolas: function () {
             let oModel = this.getView().getModel();
+            let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            let titulo = i18n.getText("tituloEscolas");
+            this.byId("lista").setTitle(titulo);
             oModel.setProperty('/painelExpandido', false);
 
             this.RemoverFragmentoFiltroEmpresas();
@@ -88,30 +70,6 @@ sap.ui.define([
             this.CarregaFragmentoFiltroEscolas();
             this.populaTabelaEscolaComDados({});
             this.formataElementosTabelaEscola();
-        },
-        aoFiltrarTabela(oEvent) {
-            const oRouter = this.getOwnerComponent().getRouter();
-            const oModel = this.getView().getModel();
-
-            const sRotaAtual = oRouter.getRouteInfoByHash(window.location.hash).name;
-            let sURL = config.getBaseURL();
-
-            if (sRotaAtual === "Empresas") {
-                sURL += "/api/Empresas?nomeFantasia=" + encodeURIComponent(sQuery);
-            } else if (sRotaAtual === "Escolas") {
-                sURL += "/api/Escolas?nome=" + encodeURIComponent(sQuery);
-            }
-
-            jQuery.ajax({
-                url: sURL,
-                method: "GET",
-                success: function (aData) {
-                    oModel.setProperty("/items", aData);
-                },
-                error: function (oError) {
-                    console.error("Erro ao filtrar dados:", oError);
-                }
-            });
         },
 
         CarregaFragmentoFiltroEmpresas() {
