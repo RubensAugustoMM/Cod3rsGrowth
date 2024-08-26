@@ -2,58 +2,73 @@ sap.ui.define([
 ], function (
 ) {
     return {
-        obterTodasEmpresas: function (oFiltro) {
-            return new Promise((resolve, reject) => {
-                let parametrosQuery = "";
-                if (Object.keys(oFiltro).length !== 0) {
+        obterTodasEmpresas: async function (oFiltro) {
+            let parametrosQuery = "";
+            
+            try {
+                const aChavesFiltro = Object.keys(oFiltro);
+                if (aChavesFiltro.length !== 0) {
                     parametrosQuery += '?';
-
-                    if (oFiltro["RazaoSocialFiltro"] !== undefined) {
-                        parametrosQuery += "&RazaoSocialFiltro=" + oFiltro["RazaoSocialFiltro"];
+                    
+                    const posicaoArrayRazaoSocialFiltro = 1;
+                    if (oFiltro[aChavesFiltro[posicaoArrayRazaoSocialFiltro]] !== undefined) {
+                        const sParametroFiltroRazaoSocial = `&${aChavesFiltro[posicaoArrayRazaoSocialFiltro]}=`;
+                        parametrosQuery += sParametroFiltroRazaoSocial  + oFiltro[aChavesFiltro[posicaoArrayRazaoSocialFiltro]];
                     }
 
-                    if (oFiltro["CnpjFiltro"] !== undefined) {
-                        parametrosQuery += "&CnpjFiltro=" + oFiltro["CnpjFiltro"];
+                    const posicaoArrayCnpjFiltro = 2;
+                    if (oFiltro[aChavesFiltro[posicaoArrayCnpjFiltro]] !== undefined) {
+                        const sParametroFiltroCnpj = `&${aChavesFiltro[posicaoArrayCnpjFiltro]}=`;
+                        parametrosQuery += sParametroFiltroCnpj  + oFiltro["CnpjFiltro"];
                     }
 
-                    if (parseInt(oFiltro["SituacaoCadastralFiltro"]) !== -1) {
-                        parametrosQuery += "&SituacaoCadastralFiltro=";
-                        var valorSituacaoCadastralFiltro = parseInt(oFiltro["SituacaoCadastralFiltro"]);
-
-                        if (valorSituacaoCadastralFiltro === 1) {
-                            parametrosQuery += "true";
-                        }
-                        else {
-                            parametrosQuery += "false";
-                        }
+                    const posicaoArraySituacaoCadastralFiltro = 0;
+                    const valoresHabilitadosIndefinido = -1;
+                    const valoresHabilitadosHabilitado = 1;
+                    if (parseInt(oFiltro[aChavesFiltro[posicaoArraySituacaoCadastralFiltro]]) !== valoresHabilitadosIndefinido) {
+                        const sParametroFiltroSituacaoCadastral = `&${aChavesFiltro[posicaoArraySituacaoCadastralFiltro]}=`;
+                        var valorSituacaoCadastralFiltro = parseInt(oFiltro[aChavesFiltro[posicaoArraySituacaoCadastralFiltro]]);
+                        parametrosQuery += sParametroFiltroSituacaoCadastral;
+                        parametrosQuery += valorSituacaoCadastralFiltro == valoresHabilitadosHabilitado;
                     }
 
-                    if (oFiltro["DataAberturaFiltro"] !== undefined && oFiltro["DataAberturaFiltro"] !== null) {
-                        parametrosQuery += "&DataAberturaFiltro=" + oFiltro["DataAberturaFiltro"];
+                    const posicaoArrayDataAberturaFiltro = 4;
+                    if (oFiltro[aChavesFiltro[posicaoArrayDataAberturaFiltro]] !== undefined &&
+                        oFiltro[aChavesFiltro[posicaoArrayDataAberturaFiltro]] !== null) {
+                        const sParametroFiltroDataAbertura = `&${aChavesFiltro[posicaoArrayDataAberturaFiltro]}=`;
+                        parametrosQuery += sParametroFiltroDataAbertura + oFiltro[aChavesFiltro[posicaoArrayDataAberturaFiltro]];
                     }
 
-                    if (oFiltro["CapitalSocialFiltro"] !== undefined) {
-                        parametrosQuery += "&CapitalSocialFiltro=" + oFiltro["CapitalSocialFiltro"];
+                    const posicaoArrayCapitalSocialFiltro = 3;
+                    if (oFiltro[aChavesFiltro[posicaoArrayCapitalSocialFiltro]] !== undefined) {
+                        const sParametroFiltroCapitalSocial = `&${aChavesFiltro[posicaoArrayCapitalSocialFiltro]}=`;
+                        parametrosQuery += sParametroFiltroCapitalSocial + oFiltro[aChavesFiltro[posicaoArrayCapitalSocialFiltro]];
                     }
 
-                    if (parseInt(oFiltro["NaturezaJuridicaFiltro"]) !== -1) {
-                        parametrosQuery += "&NaturezaJuridicaFiltro=" + oFiltro["NaturezaJuridicaFiltro"];
+                    const posicaoArrayNaturezaJuridicaFiltro = 5;
+                    const valoresNaturezaJuridicaIndefinido = -1; 
+                    if (parseInt(oFiltro[aChavesFiltro[posicaoArrayNaturezaJuridicaFiltro]]) !== valoresNaturezaJuridicaIndefinido) {
+                        const sParametroFiltroNaturezaJuridica = `&${aChavesFiltro[posicaoArrayNaturezaJuridicaFiltro]}=`;
+                        parametrosQuery += sParametroFiltroNaturezaJuridica + oFiltro[aChavesFiltro[posicaoArrayNaturezaJuridicaFiltro]];
                     }
 
-                    if (oFiltro["EstadoFiltro"] !== undefined) {
-                        parametrosQuery += "&EstadoFiltro=" + oFiltro["EstadoFiltro"];
+                    const posicaoArrayEstadoFiltro = 6;
+                    if (oFiltro[aChavesFiltro[posicaoArrayEstadoFiltro]] !== undefined) {
+                        const sParametroFiltroEstado = `&${aChavesFiltro[posicaoArrayEstadoFiltro]}=`;
+                        parametrosQuery += sParametroFiltroEstado + oFiltro[aChavesFiltro[posicaoArrayEstadoFiltro]];
                     }
                 }
-                jQuery.get({
-                    url: this._baseURL + '/Empresas' + parametrosQuery,
-                    success: function (aEmpresas) {
-                        resolve(aEmpresas);
-                    },
-                    error: function (oError) {
-                        reject(oError);
-                    }
-                });
-            });
+
+                const resposta = await fetch(this._baseURL + '/Empresas' + parametrosQuery);
+
+                if (!resposta.ok) throw new Error(resposta.status);
+
+                return await resposta.json();
+            }
+            catch (erro) {
+                const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
+                console.error(mensagemDeErro + erro);
+            }
         },
         obterEmpresaPorId: function (sIdEmpresas) { },
         deletarEmpresa: function (sIdEmpresas) { },
