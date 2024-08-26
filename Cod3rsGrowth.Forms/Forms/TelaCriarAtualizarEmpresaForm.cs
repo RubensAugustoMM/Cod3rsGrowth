@@ -179,15 +179,9 @@ namespace Cod3rsGrowth.Forms.Forms
         {
             try
             {
-                if (HabilitadoEnums.Habilitado == (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem)
-                {
-                    empresaCriada.SituacaoCadastral = true;
-                }
-                else
-                {
-                    empresaCriada.SituacaoCadastral = false;
-                }
-                
+                empresaCriada.SituacaoCadastral = HabilitadoEnums.Habilitado == 
+                                                  (HabilitadoEnums)comboBoxSituacaoCadastral.SelectedItem;
+
                 if(_empresaEnderecoAtualizarOtd == null)
                 {
                     empresaCriada.DataSituacaoCadastral = DateTime.Now;
