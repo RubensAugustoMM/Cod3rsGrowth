@@ -26,6 +26,13 @@ sap.ui.define([
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
 
         formatador: Formatador,
+        sIdLista: "lista",
+        sIdTabela: "tabela",
+        sIdPainelFiltro: "painelFiltros",
+        sNomeI18n: "i18n",
+        sNomePropriedadePainelExpandido: "/painelExpandido",
+        sNomePropriedadeTabelaItems: "/items",
+
         oOpcoesFormatadorDecimais: {
             minIntegerDigits: 1,
             MaxIntegerDigits: 3,
@@ -38,155 +45,162 @@ sap.ui.define([
         },
 
         onInit() {
+            const nomeRotaEmpresa = "Empresas";
+            const nomeRotaEscolas = "Escolas";
             const oRouter = this.getOwnerComponent().getRouter();
 
-            oRouter.getRoute("Empresas").attachMatched(this._aoCoincidirComRotaEmpresas, this);
-            oRouter.getRoute("Escolas").attachMatched(this._aoCoincidirComRotaEscolas, this);
+            oRouter.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
+            oRouter.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
         },
 
         _aoCoincidirComRotaEmpresas: function () {
+            const si18nTituloEmpresas = "tituloEmpresas";
             let oModel = this.getView().getModel();
-            let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            let titulo = i18n.getText("tituloEmpresas");
-            this.byId("lista").setTitle(titulo)
-            oModel.setProperty('/painelExpandido', false);
+            let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
+            this.byId(this.sIdLista).setTitle(i18n.getText(si18nTituloEmpresas))
+            oModel.setProperty(this.sNomePropriedadePainelExpandido, false);
 
-            this.RemoverFragmentoFiltroEmpresas();
-            this.RemoverFragmentoFiltroEscolas();
-            this.CarregaFragmentoFiltroEmpresas();
-            this.populaTabelaEmpresaComDados({});
-            this.formataElementosTabelaEmpresas();
+            this._removerFragmentoFiltroEmpresas();
+            this._removerFragmentoFiltroEscolas();
+            this._carregaFragmentoFiltroEmpresas();
+            this._populaTabelaEmpresaComDados({});
+            this._formataElementosTabelaEmpresas();
         },
 
         _aoCoincidirComRotaEscolas: function () {
+            const si18nTituloEscolas = "tituloEsocolas";
             let oModel = this.getView().getModel();
-            let i18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-            let titulo = i18n.getText("tituloEscolas");
-            this.byId("lista").setTitle(titulo);
-            oModel.setProperty('/painelExpandido', false);
+            let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
+            this.byId(this.sIdLista).setTitle(i18n.getText(si18nTituloEscolas));
+            oModel.setProperty(this.sNomePropriedadePainelExpandido, false);
 
-            this.RemoverFragmentoFiltroEmpresas();
-            this.RemoverFragmentoFiltroEscolas();
-            this.CarregaFragmentoFiltroEscolas();
-            this.populaTabelaEscolaComDados({});
-            this.formataElementosTabelaEscola();
+            this._removerFragmentoFiltroEmpresas();
+            this._removerFragmentoFiltroEscolas();
+            this._carregaFragmentoFiltroEscolas();
+            this._populaTabelaEscolaComDados({});
+            this._formataElementosTabelaEscola();
         },
 
-        CarregaFragmentoFiltroEmpresas() {
+        _carregaFragmentoFiltroEmpresas() {
+            const sNomeFragmentoFiltroEmpresas = "ui5.cod3rsgrowth.view.FiltroEmpresas";
             const oView = this.getView();
 
             Fragment.load({
                 id: oView.getId(),
-                name: "ui5.cod3rsgrowth.view.FiltroEmpresas",
+                name: sNomeFragmentoFiltroEmpresas,
                 controller: this
-            }).then(function (oPanel) {
-                const oMainToolbar = oView.byId("painelFiltros");
+            }).then((oPanel) => {
+                const oMainToolbar = oView.byId(this.sIdPainelFiltro);
                 oMainToolbar.addContent(oPanel);
             });
         },
 
-        RemoverFragmentoFiltroEmpresas() {
+        _removerFragmentoFiltroEmpresas() {
             const oView = this.getView();
-            const oMainToolbar = oView.byId("painelFiltros");
-            const oFragmentContent = oView.byId(oView.getId() + "--filtroEmpresasFragment");
+            const oPainelFiltro = this.byId(this.sIdPainelFiltro);
+            const oConteudoPainelFiltro = this.byId(oView.getId() + "--filtroEmpresasFragment");
 
-            if (oFragmentContent) {
-                oMainToolbar.removeContent(oFragmentContent);
-                oFragmentContent.destroy();
+            if (oConteudoPainelFiltro) {
+                oPainelFiltro.removeContent(oConteudoPainelFiltro);
+                oConteudoPainelFiltro.destroy();
             }
         },
 
-        CarregaFragmentoFiltroEscolas() {
+        _carregaFragmentoFiltroEscolas() {
+            const sNomeFragmentoFiltroEscolas = "ui5.cod3rsgrowth.view.FiltroEscolas";
             const oView = this.getView();
 
             Fragment.load({
                 id: oView.getId(),
-                name: "ui5.cod3rsgrowth.view.FiltroEscolas",
+                name: sNomeFragmentoFiltroEscolas,
                 controller: this
-            }).then(function (oPanel) {
-                const oMainToolbar = oView.byId("painelFiltros");
+            }).then((oPanel) => {
+                const oMainToolbar = oView.byId(this.sIdPainelFiltro);
                 oMainToolbar.addContent(oPanel);
             });
         },
 
-        RemoverFragmentoFiltroEscolas() {
+        _removerFragmentoFiltroEscolas() {
             const oView = this.getView();
-            const oMainToolbar = oView.byId("painelFiltros");
-            const oFragmentContent = oView.byId(oView.getId() + "--filtroEscolasFragment");
+            const oPainelFiltro = this.byId(this.sIdPainelFiltro);
+            const oConteudoPainelFiltro = oView.byId(oView.getId() + "--filtroEscolasFragment");
 
-            if (oFragmentContent) {
-                oMainToolbar.removeContent(oFragmentContent);
-                oFragmentContent.destroy();
+            if (oConteudoPainelFiltro) {
+                oPainelFiltro.removeContent(oConteudoPainelFiltro);
+                oConteudoPainelFiltro.destroy();
             }
         },
 
-        aoPressionarBotaoFiltrarEmpresa(oEvent) {
-            let oFiltro = this.retornaFiltroEmpresas();
-            this.populaTabelaEmpresaComDados(oFiltro);
-            this.formataElementosTabelaEmpresas();
+        aoPressionarBotaoFiltrarEmpresa() {
+            let oFiltro = this._retornaFiltroEmpresas();
+            this._populaTabelaEmpresaComDados(oFiltro);
+            this._formataElementosTabelaEmpresas();
         },
 
-        aoPressionarBotaoFiltrarEscola(oEvent) {
-            let oFiltro = this.retornaFiltroEscolas();
-            this.populaTabelaEscolaComDados(oFiltro);
-            this.formataElementosTabelaEscola();
+        aoPressionarBotaoFiltrarEscola() {
+            let oFiltro = this._retornaFiltroEscolas();
+            this._populaTabelaEscolaComDados(oFiltro);
+            this._formataElementosTabelaEscola();
         },
+        _retornaFiltroEmpresas() {
+            let oModel = this.getView().getModel();
+            const sNomePropriedadeSituacaoCadastralSelecioada = "/situacaoCadastralSelecionada";
+            const sNomePropriedadeNomeEmpresa = "/nomeEmpresa";
+            const sNomePropriedadeCnpjEmpresa = "/cnpjEmpresa";
+            const sNomePropriedadeCapitalSocialEmpresa = "/capitalSocialEmpresa";
+            const sNomePropriedadeDataAbertura = "/dataAbertura";
+            const sNomePropriedadeNaturezaJuridicaSelecionada = "/naturezaJuridicaSelecionada";
+            const sNomePropriedadeEstadoSelecionado = "/estadoSelecionado";
 
-        retornaFiltroEmpresas() {
-            var oModel = this.getView().getModel();
             return {
-                SituacaoCadastralFiltro: oModel.getProperty("/situacaoCadastralSelecionada"),
-                RazaoSocialFiltro: oModel.getProperty("/nomeEmpresa"),
-                CnpjFiltro: oModel.getProperty("/cnpjEmpresa"),
-                CapitalSocialFiltro: oModel.getProperty("/capitalSocialEmpresa"),
-                DataAberturaFiltro: oModel.getProperty("/dataAbertura"),
-                NaturezaJuridicaFiltro: oModel.getProperty("/naturezaJuridicaSelecionada"),
-                EstadoFiltro: oModel.getProperty("/estadoSelecionado")
+                SituacaoCadastralFiltro: oModel.getProperty(sNomePropriedadeSituacaoCadastralSelecioada),
+                RazaoSocialFiltro: oModel.getProperty(sNomePropriedadeNomeEmpresa),
+                CnpjFiltro: oModel.getProperty(sNomePropriedadeCnpjEmpresa),
+                CapitalSocialFiltro: oModel.getProperty(sNomePropriedadeCapitalSocialEmpresa),
+                DataAberturaFiltro: oModel.getProperty(sNomePropriedadeDataAbertura),
+                NaturezaJuridicaFiltro: oModel.getProperty(sNomePropriedadeNaturezaJuridicaSelecionada),
+                EstadoFiltro: oModel.getProperty(sNomePropriedadeEstadoSelecionado)
             }
         },
 
-        retornaFiltroEscolas() {
-            var oModel = this.getView().getModel();
+        _retornaFiltroEscolas() {
+            let oModel = this.getView().getModel();
+            const sNomePropriedadeNomeEscola = "/nomeEscola";
+            const sNomePropriedadeCodigoMec = "/codigoMec";
+            const sNomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
+            const sNomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecioada";
+            const sNomePropriedadeEstadoSelecionado = "/estadoSelecionado";
+
             return {
-                NomeFiltro: oModel.getProperty("/nomeEscola"),
-                CodigoMecFiltro: oModel.getProperty("/codigoMec"),
-                StatusAtividadeFiltro: oModel.getProperty("/statusAtividadeSelecionada"),
-                OrganizacaoAcademicaFiltro: oModel.getProperty("/organizacaoAcademicaSelecionada"),
-                EstadoFiltro: oModel.getProperty("/estadoSelecionado")
+                NomeFiltro: oModel.getProperty(sNomePropriedadeNomeEscola),
+                CodigoMecFiltro: oModel.getProperty(sNomePropriedadeCodigoMec),
+                StatusAtividadeFiltro: oModel.getProperty(sNomePropriedadeStatusAtividadeSelecionada),
+                OrganizacaoAcademicaFiltro: oModel.getProperty(sNomePropriedadeOrganizacaoAcademicaSelecioada),
+                EstadoFiltro: oModel.getProperty(sNomePropriedadeEstadoSelecionado)
             }
         },
 
-        populaTabelaEmpresaComDados(oFiltro) {
+        _populaTabelaEmpresaComDados(oFiltro) {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTabela = this.byId("tabela");
+            const oTabela = this.byId(this.sIdTabela);
             const oModel = this.getView().getModel();
 
             oTabela.removeAllColumns();
 
-            const aCampos = {
-                nomeFantasia: "nome",
-                cnpj: "CNPJ",
-                situacaoCadastral: "Situação Cadastral",
-                dataAbertura: "Data Abertura",
-                naturezaJuridica: "Natureaza Juridica",
-                capitalSocial: "Capital Social",
-                estado: "Estado"
-            };
-
             DataRepository.obterTodasEmpresas(oFiltro)
                 .then(aEmpresas => {
-                    oModel.setProperty("/items", aEmpresas);
+                    oModel.setProperty(this.sNomePropriedadeTabelaItems, aEmpresas);
                 })
                 .catch(oError => {
-                    console.error("Erro ao obter convênios:", oError);
+                    const sMensagemDeErro = "Erro ao obter Empresas:";
+                    console.error(sMensagemDeErro, oError);
                 });
         },
 
-        formataElementosTabelaEmpresas() {
-            const oTabela = this.byId("tabela");
+        _formataElementosTabelaEmpresas() {
+            const oTabela = this.byId(this.sIdTabela);
             oTabela.removeAllColumns();
-
-            const aCampos = {
+            const oCamposEmpresas = {
                 nomeFantasia: "nome",
                 cnpj: "CNPJ",
                 situacaoCadastral: "Situação Cadastral",
@@ -194,21 +208,22 @@ sap.ui.define([
                 naturezaJuridica: "Natureaza Juridica",
                 capitalSocial: "Capital Social",
                 estado: "Estado"
-            };
+            }
 
-            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
+
+            Object.entries(oCamposEmpresas).forEach(([sCampo, sHeader]) => {
                 oTabela.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: sHeader })
                 }));
             });
 
-            var oView = this.getView();
+            let oView = this.getView();
 
             oTabela.bindItems({
-                path: "/items",
+                path: this.sNomePropriedadeTabelaItems,
                 template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => {
-                        if (sCampo === "estado") {
+                    cells: Object.keys(oCamposEmpresas).map(sCampo => {
+                        if (sCampo === oCamposEmpresas["estado"]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
@@ -216,7 +231,10 @@ sap.ui.define([
                                 }
                             });
                         }
-                        if (sCampo === "naturezaJuridica") {
+
+                        const arrayChavesCamposEmpresas = Object.keys(oCamposEmpresas);
+                        const posicaoArrayNaturezaJuridica = 4;
+                        if (sCampo === arrayChavesCamposEmpresas[posicaoArrayNaturezaJuridica]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
@@ -226,7 +244,9 @@ sap.ui.define([
                                 }
                             });
                         }
-                        if (sCampo === "situacaoCadastral") {
+
+                        const posicaoArraySituacaoCadastral = 2;
+                        if (sCampo === arrayChavesCamposEmpresas[posicaoArraySituacaoCadastral]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
@@ -236,23 +256,27 @@ sap.ui.define([
                                 }
                             });
                         }
-                        if (sCampo === "capitalSocial") {
+
+                        const posicaoArrayCapitalSocial = 5;
+                        if (sCampo === arrayChavesCamposEmpresas[posicaoArrayCapitalSocial]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
                                     formatter: function (capitalSocial) {
-                                        var oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
+                                        let oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
                                         return oFormatadorFloat.format(capitalSocial);
                                     }.bind(this)
                                 }
                             })
                         }
-                        if (sCampo === "dataAbertura") {
+
+                        const posicaoArrayDataAbertura = 3;
+                        if (sCampo === arrayChavesCamposEmpresas[posicaoArrayDataAbertura]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
                                     formatter: function (dataAbertura) {
-                                        var oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
+                                        let oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
                                         return oFormatadorData.format(dataAbertura);
                                     }
                                 }
@@ -264,34 +288,26 @@ sap.ui.define([
             })
         },
 
-        populaTabelaEscolaComDados(oFiltro) {
+        _populaTabelaEscolaComDados(oFiltro) {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const oTabela = this.byId("tabela");
             const oModel = this.getView().getModel();
-
-            const aCampos = {
-                nome: "Nome",
-                codigoMec: "Código MEC",
-                statusAtividade: "Status Atividade",
-                organizacaoAcademica: "Organização Acadêmica",
-                estado: "Estado"
-            };
 
             DataRepository.obterTodasEscolas(oFiltro)
                 .then(aEscolas => {
-                    oModel.setProperty("/items", aEscolas);
+                    oModel.setProperty(this.sNomePropriedadeTabelaItems, aEscolas);
                 })
                 .catch(oError => {
-                    console.error("Erro ao obter convênios:", oError);
+                    const sMensagemDeErro = "Erro ao obter Escolas:"
+                    console.error(sMensagemDeErro, oError);
                 });
         },
 
-        formataElementosTabelaEscola() {
-            const oTabela = this.byId("tabela");
+        _formataElementosTabelaEscola() {
+            const oTabela = this.byId(this.sIdTabela);
 
             oTabela.removeAllColumns();
 
-            const aCampos = {
+            const oCamposEscolas = {
                 nome: "Nome",
                 codigoMec: "Código MEC",
                 statusAtividade: "Status Atividade",
@@ -299,18 +315,18 @@ sap.ui.define([
                 estado: "Estado"
             };
 
-            var oView = this.getView();
+            let oView = this.getView();
 
-            Object.entries(aCampos).forEach(([sCampo, sHeader]) => {
+            Object.entries(oCamposEscolas).forEach(([sCampo, sHeader]) => {
                 oTabela.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: sHeader })
                 }));
             });
 
             oTabela.bindItems({
-                path: "/items",
+                path: this.sNomePropriedadeTabelaItems,
                 template: new sap.m.ColumnListItem({
-                    cells: Object.keys(aCampos).map(sCampo => {
+                    cells: Object.keys(oCamposEscolas).map(sCampo => {
                         if (sCampo === "estado") {
                             return new sap.m.Text({
                                 text: {
@@ -319,8 +335,10 @@ sap.ui.define([
                                 }
                             });
                         }
-
-                        if (sCampo === "organizacaoAcademica") {
+ 
+                        const posicaoArrayOrganizacaoAcademica = 3;
+                        const arrayChavesCamposEscolas = Object.keys(oCamposEscolas);                       
+                        if (sCampo === arrayChavesCamposEscolas[posicaoArrayOrganizacaoAcademica]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
@@ -330,7 +348,9 @@ sap.ui.define([
                                 }
                             });
                         }
-                        if (sCampo === "statusAtividade") {
+
+                        const posicaoArrayStatusAtividade = 2;
+                        if (sCampo === arrayChavesCamposEscolas[posicaoArrayStatusAtividade]) {
                             return new sap.m.Text({
                                 text: {
                                     path: sCampo,
