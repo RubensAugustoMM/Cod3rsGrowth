@@ -3,27 +3,21 @@ sap.ui.define([
 ], (Controller) => {
 	"use strict";
 
+
 	return Controller.extend("ui5.cod3rsgrowth.controller.App", {
 		onInit() {
 		},
-        aoClicarConvenios(){ 
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Convenios");
-        },
 
         aoClicarEmpresas() {
+			const nomeRotaEmpresas = "Empresas";
 			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Empresas");
+			oRouter.navTo(nomeRotaEmpresas);
         },
 
         aoClicarEscolas() {
+			const nomeRotaEscolas = "Escolas";
 			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Escolas");
-        },
-
-        aoClicarEnderecos() {
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Enderecos");
-		}
+			oRouter.navTo(nomeRotaEscolas);
+        }
 	});
 });
