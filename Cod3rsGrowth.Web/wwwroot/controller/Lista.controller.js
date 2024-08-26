@@ -232,7 +232,7 @@ sap.ui.define([
             const sNomePropriedadeNomeEscola = "/nomeEscola";
             const sNomePropriedadeCodigoMec = "/codigoMec";
             const sNomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
-            const sNomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecioada";
+            const sNomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecionada";
             const sNomePropriedadeEstadoSelecionado = "/estadoSelecionado";
             
             try {

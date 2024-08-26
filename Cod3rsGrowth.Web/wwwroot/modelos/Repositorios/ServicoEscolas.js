@@ -2,46 +2,63 @@ sap.ui.define([
 ], function (
 ) {
     return {
-        obterTodasEscolas: function (oFiltro) {
-            return new Promise((resolve, reject) => {
-                let parametrosQuery = "";
+        obterTodasEscolas: async function (oFiltro) {
+            let parametrosQuery = "";
+            try {
+                
+                const aChavesFiltro = Object.keys(oFiltro);
                 if (Object.keys(oFiltro).length !== 0) {
                     parametrosQuery += "?";
 
-                    if (parseInt(oFiltro["StatusAtividadeFiltro"]) !== -1) {
-                        var valorStatusAtividade = parseInt(oFiltro["StatusAtividadeFiltro"]);
-                        parametrosQuery += "&StatusAtividadeFiltro=";
+                    const posicaoArrayStatusAtividadeFiltro = 2;
+                    const chaveFiltroStatusAtividade = aChavesFiltro[posicaoArrayStatusAtividadeFiltro];
+                    const valoresHabilitadosIndefinido = -1;
+                    if (parseInt(oFiltro[chaveFiltroNome]) !== valoresHabilitadosIndefinido) {
+                        const sParametroFiltroStatusAtividade = `&${chaveFiltroNome}=`;
+                        let valorStatusAtividade = parseInt(oFiltro[chaveFiltroNome]);
+                        parametrosQuery += sParametroFiltroStatusAtividade;;
+                    const valoresHabilitadosHabilitado = 1;
+                        parametrosQuery += valorStatusAtividade == valoresHabilitadosHabilitado; 
+                    }
 
-                        if (valorStatusAtividade === 1) {
-                            parametrosQuery += "true";
-                        }
-                        else {
-                            parametrosQuery += "false";
-                        }
+                    const posicaoArrayNomeFiltro = 0;
+                    const chaveFiltroNome = aChavesFiltro[posicaoArrayNomeFiltro];
+                    if (oFiltro[chaveFiltroNome] !== undefined) {
+                        let sParametroFiltroNome = `&${chaveFiltroNome}=`;
+                        parametrosQuery += sParametroFiltroNome + oFiltro[chaveFiltroNome];
                     }
-                    if (oFiltro["NomeFiltro"] !== undefined) {
-                        parametrosQuery += "&NomeFiltro=" + oFiltro["NomeFiltro"];
+
+                    const posicaoArrayCodigoMecFiltro = 1;
+                    const chaveFiltroCodigoMec = aChavesFiltro[posicaoArrayCodigoMecFiltro];
+                    if (oFiltro[chaveFiltroCodigoMec] !== undefined) {
+                        let sParametroFiltroCodigoMec = `&${chaveFiltroCodigoMec}=`;
+                        parametrosQuery += sParametroFiltroCodigoMec + oFiltro[chaveFiltroCodigoMec];
                     }
-                    if (oFiltro["CodigoMecFiltro"] !== undefined) {
-                        parametrosQuery += "&CodigoMecFiltro=" + oFiltro["CodigoMecFiltro"];
+
+                    const posicaoArrayOrganizacaoAcademicaFiltro = 3;
+                    const chaveFiltoOrganizacaoAcademica = aChavesFiltro[posicaoArrayOrganizacaoAcademicaFiltro];
+                    const valoresOrganizacaoAcademicaIndefinido = -1;
+                    if (parseInt(oFiltro[chaveFiltoOrganizacaoAcademica]) !== valoresOrganizacaoAcademicaIndefinido) {
+                        let sParametroFiltroOrganizacaoAcademica = `&${chaveFiltoOrganizacaoAcademica}=`;
+                        parametrosQuery += sParametroFiltroOrganizacaoAcademica + oFiltro[chaveFiltoOrganizacaoAcademica];
                     }
-                    if (parseInt(oFiltro["OrganizacaoAcademicaFiltro"]) !== -1) {
-                        parametrosQuery += "&OrganizacaoAcademicaFiltro=" + oFiltro["OrganizacaoAcademicaFiltro"];
-                    }
-                    if (oFiltro["EstadoFiltro"] !== undefined) {
-                        parametrosQuery += "&EstadoFiltro=" + oFiltro["EstadoFiltro"];
+
+                    const posicaoArrayEstadoFiltro = 4;
+                    const chaveFiltroEstado = aChavesFiltro[posicaoArrayEstadoFiltro];
+                    if (oFiltro[chaveFiltroEstado] !== undefined) {
+                        let sPArametroFiltroEstado = `&${chaveFiltroEstado}=`;
+                        parametrosQuery += sPArametroFiltroEstado + oFiltro[chaveFiltroEstado];
                     }
                 }
-                jQuery.get({
-                    url: this._baseURL + '/Escolas' + parametrosQuery,
-                    success: function (aEscolas) {
-                        resolve(aEscolas);
-                    },
-                    error: function (oError) {
-                        reject(oError);
-                    }
-                });
-            });
+
+                const resposta = await this._baseURL + '/Escolas' + parametrosQuery;
+                    if(!resposta.ok) throw new Error(reposta.status);
+                    return await reposta.json();
+            }
+            catch (erro) {
+                const mensagemDeErro = "Erro ao receber dados de Escolas:\n";
+                console.error(mensagemDeErro + erro);
+            }
         },
 
         obterEscolaPorId: function (sIdEscolas) { },
