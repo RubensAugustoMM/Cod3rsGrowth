@@ -4,8 +4,8 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/core/format/NumberFormat",
     "sap/ca/ui/model/format/DateFormat",
-	"ui5/cod3rsgrowth/modelos/Repositorios/ServicoEmpresas",
-	"ui5/cod3rsgrowth/modelos/Repositorios/ServicoEscolas",
+	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
+	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
     "sap/ui/model/json/JSONModel"
 ], (Controller,
 	Formatador,
@@ -79,8 +79,6 @@ sap.ui.define([
             const i18nTituloEscolas = "tituloEsocolas";
 
             try {
-
-                debugger;
                 let modelo = this.getView().getModel();
                 let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEscolas));

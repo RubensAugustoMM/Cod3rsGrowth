@@ -3,7 +3,7 @@ sap.ui.define([
     "sap/ui/model/resource/ResourceModel",
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device",
-    "ui5/cod3rsgrowth/modelos/Repositorios/ServicoEnums",
+    "ui5/cod3rsgrowth/modelos/Servicos/ServicoEnums",
 ], (UIComponent,
     ResourceModel,
     JSONModel,
