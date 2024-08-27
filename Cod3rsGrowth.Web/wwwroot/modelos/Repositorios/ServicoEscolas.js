@@ -1,5 +1,7 @@
 sap.ui.define([
+	"ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEscolas"
 ], function (
+    RepositorioEscolas
 ) {
     return {
         obterTodasEscolas: async function (filtro) {
@@ -45,11 +47,7 @@ sap.ui.define([
                     parametrosQuery += PArametroFiltroEstado + filtro[chaveFiltroEstado];
                 }
 
-
-                const rotaEscolas = "/Escolas";
-                const resposta = await fetch(this._baseURL + rotaEscolas + parametrosQuery);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
+                return await RepositorioEscolas.obterTodasEscolas(parametrosQuery);
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao receber dados de Escolas:\n";

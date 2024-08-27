@@ -1,26 +1,20 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
     "ui5/cod3rsgrowth/modelos/Formatador",
-    "ui5/cod3rsgrowth/utilitarios/config",
     "sap/ui/core/Fragment",
-    "sap/ui/core/routing/HashChanger",
     "sap/ui/core/format/NumberFormat",
     "sap/ca/ui/model/format/DateFormat",
-    "sap/ui/model/json/JSONModel",
+	"ui5/cod3rsgrowth/modelos/Repositorios/ServicoEmpresas",
+	"ui5/cod3rsgrowth/modelos/Repositorios/ServicoEscolas",
+    "sap/ui/model/json/JSONModel"
 ], (Controller,
-    DataRepository,
-    Filter,
-    FilterOperator,
-    Formatador,
-    config,
-    Fragment,
-    HashChanger,
-    NumberFormat,
-    DateFormat,
-    JSONModel) => {
+	Formatador,
+	Fragment,
+	NumberFormat,
+	DateFormat,
+	ServicoEmpresas,
+	ServicoEscolas,
+	JSONModel) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -85,6 +79,8 @@ sap.ui.define([
             const i18nTituloEscolas = "tituloEsocolas";
 
             try {
+
+                debugger;
                 let modelo = this.getView().getModel();
                 let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEscolas));
@@ -259,7 +255,7 @@ sap.ui.define([
 
                 tabela.removeAllColumns();
 
-                DataRepository.obterTodasEmpresas(filtro)
+                ServicoEmpresas.obterTodasEmpresas(filtro)
                     .then(empresas => {
                         modelo.setProperty(this.nomePropriedadeTabelaItems, empresas);
                     })
@@ -379,7 +375,7 @@ sap.ui.define([
             const DataRepository = this.getOwnerComponent().DataRepository;
             const modelo = this.getView().getModel();
 
-            DataRepository.obterTodasEscolas(filtro)
+            ServicoEscolas.obterTodasEscolas(filtro)
                 .then(escolas => {
                     modelo.setProperty(this.nomePropriedadeTabelaItems, escolas);
                 })

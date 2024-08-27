@@ -1,11 +1,9 @@
 sap.ui.define([
-    "ui5/cod3rsgrowth/utilitarios/config"
-], function (
-	config) {
+], function () {
     "use strict";
 
     return {
-        urlBase: config.getBaseURL(),
+        urlBase: "/api",
         async retornaModeloEstadoEnum() {
             try {
             const rotaEnum = "/EstadoEnum";

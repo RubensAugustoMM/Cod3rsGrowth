@@ -1,16 +1,14 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-   "sap/ui/model/resource/ResourceModel",
-   "ui5/cod3rsgrowth/modelos/Repositorios/DataRepository",
+    "sap/ui/model/resource/ResourceModel",
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device",
-    "ui5/cod3rsgrowth/modelos/Repositorios/ServicoEnums"
+    "ui5/cod3rsgrowth/modelos/Repositorios/ServicoEnums",
 ], (UIComponent,
-	ResourceModel,
-	DataRepository,
-	JSONModel,
+    ResourceModel,
+    JSONModel,
 	Device,
-	ServicoEnums) => {
+	ServicoEnums,) => {
     "use strict";
 
     return UIComponent.extend("ui5.cod3rsgrowth.Component", {
@@ -24,6 +22,9 @@ sap.ui.define([
              const modeloI18n = new ResourceModel({
                 bundleName: "ui5.cod3rsgrowth.i18n.i18n"
              });
+
+            const modelo = new JSONModel();
+            this.setModel(modelo);
 
             let nomeModeloi18n = "i18n";
             this.setModel(modeloI18n, nomeModeloi18n); 
@@ -47,8 +48,6 @@ sap.ui.define([
             let modeloEstados =
                 new JSONModel(await ServicoEnums.retornaModeloEstadoEnum());
             this.setModel(modeloEstados, nomeModeloEstados);
-
-            this.DataRepository = new DataRepository(this);
 
             this.getRouter().initialize();
         }
