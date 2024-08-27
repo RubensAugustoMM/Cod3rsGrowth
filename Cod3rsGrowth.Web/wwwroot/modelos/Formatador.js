@@ -2,8 +2,8 @@ sap.ui.define([], () => {
 	"use strict";
 
 	return {
-		_retornaModeloi18n(oView) {
-			return oView.getModel("i18n").getResourceBundle();
+		_retornaModeloi18n(view) {
+			return view.getModel("i18n").getResourceBundle();
 		},
 		textoEstado(numeroEstado) {
 			switch (numeroEstado) {
@@ -66,8 +66,8 @@ sap.ui.define([], () => {
 			}
 		},
 
-		textoNaturezaJuridica(numeroNaturezaJuridica, oView) {
-			var oModeloi18n = oView.getModel("i18n").getResourceBundle();
+		textoNaturezaJuridica(numeroNaturezaJuridica, view) {
+			var oModeloi18n = view.getModel("i18n").getResourceBundle();
 
 			switch (numeroNaturezaJuridica) {
 				case 0:
@@ -91,8 +91,8 @@ sap.ui.define([], () => {
 			}
 		},
 
-		textoOrganizacaoAcademica(numeroOrganizacaoAcademica, oView) {
-			var oModeloi18n = oView.getModel("i18n").getResourceBundle();
+		textoOrganizacaoAcademica(numeroOrganizacaoAcademica, view) {
+			var oModeloi18n = view.getModel("i18n").getResourceBundle();
 
 			switch (numeroOrganizacaoAcademica) {
 				case 0:
@@ -110,8 +110,8 @@ sap.ui.define([], () => {
 			}
 		},
 
-		textoSituacaoCadastral(valorSituacaoCadastral, oView) {
-			var oModeloi18n = this._retornaModeloi18n(oView);
+		textoSituacaoCadastral(valorSituacaoCadastral, view) {
+			var oModeloi18n = this._retornaModeloi18n(view);
 
 			if (valorSituacaoCadastral)
 			{

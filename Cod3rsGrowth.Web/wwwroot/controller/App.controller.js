@@ -10,14 +10,14 @@ sap.ui.define([
 
         aoClicarEmpresas() {
 			const nomeRotaEmpresas = "Empresas";
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo(nomeRotaEmpresas);
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.navTo(nomeRotaEmpresas);
         },
 
         aoClicarEscolas() {
 			const nomeRotaEscolas = "Escolas";
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo(nomeRotaEscolas);
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.navTo(nomeRotaEscolas);
         }
 	});
 });

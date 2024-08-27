@@ -2,67 +2,67 @@ sap.ui.define([
 ], function (
 ) {
     return {
-        obterTodasEmpresas: async function (oFiltro) {
+        obterTodasEmpresas: async function (filtro) {
             let parametrosQuery = "";
             
             try {
-                const aChavesFiltro = Object.keys(oFiltro);
-                if (aChavesFiltro.length !== 0) {
+                const chavesFiltro = Object.keys(filtro);
+                if (chavesFiltro.length !== 0) {
                     parametrosQuery += '?';
                     
                     const posicaoArrayRazaoSocialFiltro = 1;
-                    const chaveFiltroRazaoSocial = aChavesFiltro[posicaoArrayRazaoSocialFiltro];
-                    if (oFiltro[chaveFiltroRazaoSocial] !== undefined) {
+                    const chaveFiltroRazaoSocial = chavesFiltro[posicaoArrayRazaoSocialFiltro];
+                    if (filtro[chaveFiltroRazaoSocial] !== undefined) {
                         const sParametroFiltroRazaoSocial = `&${chaveFiltroRazaoSocial}=`;
-                        parametrosQuery += sParametroFiltroRazaoSocial  + oFiltro[chaveFiltroRazaoSocial];
+                        parametrosQuery += sParametroFiltroRazaoSocial  + filtro[chaveFiltroRazaoSocial];
                     }
 
                     const posicaoArrayCnpjFiltro = 2;
-                    const chaveFiltroCnpj = aChavesFiltro[posicaoArrayCnpjFiltro];
-                    if (oFiltro[chaveFiltroCnpj] !== undefined) {
+                    const chaveFiltroCnpj = chavesFiltro[posicaoArrayCnpjFiltro];
+                    if (filtro[chaveFiltroCnpj] !== undefined) {
                         const sParametroFiltroCnpj = `&${chaveFiltroCnpj}=`;
-                        parametrosQuery += sParametroFiltroCnpj  + oFiltro[chaveFiltroCnpj];
+                        parametrosQuery += sParametroFiltroCnpj  + filtro[chaveFiltroCnpj];
                     }
 
                     const posicaoArraySituacaoCadastralFiltro = 0;
-                    const chaveFiltroSituacaoCadastral = aChavesFiltro[posicaoArraySituacaoCadastralFiltro];
+                    const chaveFiltroSituacaoCadastral = chavesFiltro[posicaoArraySituacaoCadastralFiltro];
                     const valoresHabilitadosIndefinido = -1;
-                    if (parseInt(oFiltro[chaveFiltroSituacaoCadastral]) !== valoresHabilitadosIndefinido) {
+                    if (parseInt(filtro[chaveFiltroSituacaoCadastral]) !== valoresHabilitadosIndefinido) {
                         const sParametroFiltroSituacaoCadastral = `&${chaveFiltroSituacaoCadastral}=`;
-                        var valorSituacaoCadastralFiltro = parseInt(oFiltro[chaveFiltroSituacaoCadastral]);
+                        var valorSituacaoCadastralFiltro = parseInt(filtro[chaveFiltroSituacaoCadastral]);
                         parametrosQuery += sParametroFiltroSituacaoCadastral;
                         const valoresHabilitadosHabilitado = 1;
                         parametrosQuery += valorSituacaoCadastralFiltro == valoresHabilitadosHabilitado;
                     }
 
                     const posicaoArrayDataAberturaFiltro = 4;
-                    const chaveFiltroDataAberturaFiltro = aChavesFiltro[posicaoArrayDataAberturaFiltro];
-                    if (oFiltro[chaveFiltroDataAberturaFiltro] !== undefined &&
-                        oFiltro[chaveFiltroDataAberturaFiltro] !== null) {
+                    const chaveFiltroDataAberturaFiltro = chavesFiltro[posicaoArrayDataAberturaFiltro];
+                    if (filtro[chaveFiltroDataAberturaFiltro] !== undefined &&
+                        filtro[chaveFiltroDataAberturaFiltro] !== null) {
                         const sParametroFiltroDataAbertura = `&${chaveFiltroDataAberturaFiltro}=`;
-                        parametrosQuery += sParametroFiltroDataAbertura + oFiltro[chaveFiltroDataAberturaFiltro];
+                        parametrosQuery += sParametroFiltroDataAbertura + filtro[chaveFiltroDataAberturaFiltro];
                     }
 
                     const posicaoArrayCapitalSocialFiltro = 3;
-                    const chaveFiltroCapitalSocial = aChavesFiltro[posicaoArrayCapitalSocialFiltro];
-                    if (oFiltro[chaveFiltroCapitalSocial] !== undefined) {
+                    const chaveFiltroCapitalSocial = chavesFiltro[posicaoArrayCapitalSocialFiltro];
+                    if (filtro[chaveFiltroCapitalSocial] !== undefined) {
                         const sParametroFiltroCapitalSocial = `&${chaveFiltroCapitalSocial}=`;
-                        parametrosQuery += sParametroFiltroCapitalSocial + oFiltro[chaveFiltroCapitalSocial];
+                        parametrosQuery += sParametroFiltroCapitalSocial + filtro[chaveFiltroCapitalSocial];
                     }
 
                     const posicaoArrayNaturezaJuridicaFiltro = 5;
-                    const chaveFiltroNaturezaJuridica = aChavesFiltro[posicaoArrayNaturezaJuridicaFiltro];
+                    const chaveFiltroNaturezaJuridica = chavesFiltro[posicaoArrayNaturezaJuridicaFiltro];
                     const valoresNaturezaJuridicaIndefinido = -1; 
-                    if (parseInt(oFiltro[chaveFiltroNaturezaJuridica]) !== valoresNaturezaJuridicaIndefinido) {
+                    if (parseInt(filtro[chaveFiltroNaturezaJuridica]) !== valoresNaturezaJuridicaIndefinido) {
                         const sParametroFiltroNaturezaJuridica = `&${chaveFiltroNaturezaJuridica}=`;
-                        parametrosQuery += sParametroFiltroNaturezaJuridica + oFiltro[chaveFiltroNaturezaJuridica];
+                        parametrosQuery += sParametroFiltroNaturezaJuridica + filtro[chaveFiltroNaturezaJuridica];
                     }
 
                     const posicaoArrayEstadoFiltro = 6;
-                    const chaveFiltroEstado = aChavesFiltro[posicaoArrayEstadoFiltro];
-                    if (oFiltro[chaveFiltroEstado] !== undefined) {
+                    const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
+                    if (filtro[chaveFiltroEstado] !== undefined) {
                         const sParametroFiltroEstado = `&${chaveFiltroEstado}=`;
-                        parametrosQuery += sParametroFiltroEstado + oFiltro[chaveFiltroEstado];
+                        parametrosQuery += sParametroFiltroEstado + filtro[chaveFiltroEstado];
                     }
                 }
 
@@ -74,10 +74,6 @@ sap.ui.define([
                 const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
                 console.error(mensagemDeErro + erro);
             }
-        },
-        obterEmpresaPorId: function (sIdEmpresas) { },
-        deletarEmpresa: function (sIdEmpresas) { },
-        atualizarEmpresa: function (sIdEmpresas) { },
-        criarEmpresa: function (oData) { }
+        }
     }
 });

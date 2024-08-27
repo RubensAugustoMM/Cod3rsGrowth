@@ -49,10 +49,10 @@ sap.ui.define([
             const nomeRotaEscolas = "Escolas";
 
             try {
-                const oRouter = this.getOwnerComponent().getRouter();
+                const roteador = this.getOwnerComponent().getRouter();
 
-                oRouter.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
-                oRouter.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
+                roteador.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
+                roteador.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao inicializar a tela de listagem:\n";
@@ -61,13 +61,13 @@ sap.ui.define([
         },
 
         _aoCoincidirComRotaEmpresas: function () {
-            const si18nTituloEmpresas = "tituloEmpresas";
+            const i18nTituloEmpresas = "tituloEmpresas";
 
             try {
-                let oModel = this.getView().getModel();
+                let modelo = this.getView().getModel();
                 let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
-                this.byId(this.sIdLista).setTitle(i18n.getText(si18nTituloEmpresas))
-                oModel.setProperty(this.sNomePropriedadePainelExpandido, false);
+                this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEmpresas))
+                modelo.setProperty(this.sNomePropriedadePainelExpandido, false);
 
                 this._removerFragmentoFiltroEmpresas();
                 this._removerFragmentoFiltroEscolas();
@@ -82,13 +82,13 @@ sap.ui.define([
         },
 
         _aoCoincidirComRotaEscolas: function () {
-            const si18nTituloEscolas = "tituloEsocolas";
+            const i18nTituloEscolas = "tituloEsocolas";
 
             try {
-                let oModel = this.getView().getModel();
+                let modelo = this.getView().getModel();
                 let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
-                this.byId(this.sIdLista).setTitle(i18n.getText(si18nTituloEscolas));
-                oModel.setProperty(this.sNomePropriedadePainelExpandido, false);
+                this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEscolas));
+                modelo.setProperty(this.sNomePropriedadePainelExpandido, false);
 
                 this._removerFragmentoFiltroEmpresas();
                 this._removerFragmentoFiltroEscolas();
@@ -103,18 +103,18 @@ sap.ui.define([
         },
 
         _carregaFragmentoFiltroEmpresas() {
-            const sNomeFragmentoFiltroEmpresas = "ui5.cod3rsgrowth.view.FiltroEmpresas";
+            const nomeFragmentoFiltroEmpresas = "ui5.cod3rsgrowth.view.FiltroEmpresas";
 
             try {
-                const oView = this.getView();
+                const view = this.getView();
 
                 Fragment.load({
-                    id: oView.getId(),
-                    name: sNomeFragmentoFiltroEmpresas,
+                    id: view.getId(),
+                    name: nomeFragmentoFiltroEmpresas,
                     controller: this
-                }).then((oPanel) => {
-                    const oMainToolbar = oView.byId(this.sIdPainelFiltro);
-                    oMainToolbar.addContent(oPanel);
+                }).then((panel) => {
+                    const mainToolbar = view.byId(this.sIdPainelFiltro);
+                    mainToolbar.addContent(panel);
                 });
             }
             catch (erro) {
@@ -125,13 +125,13 @@ sap.ui.define([
 
         _removerFragmentoFiltroEmpresas() {
             try {
-                const oView = this.getView();
-                const oPainelFiltro = this.byId(this.sIdPainelFiltro);
-                const oConteudoPainelFiltro = this.byId(oView.getId() + "--filtroEmpresasFragment");
+                const view = this.getView();
+                const painelFiltro = this.byId(this.sIdPainelFiltro);
+                const conteudoPainelFiltro = this.byId(view.getId() + "--filtroEmpresasFragment");
 
-                if (oConteudoPainelFiltro) {
-                    oPainelFiltro.removeContent(oConteudoPainelFiltro);
-                    oConteudoPainelFiltro.destroy();
+                if (conteudoPainelFiltro) {
+                    painelFiltro.removeContent(conteudoPainelFiltro);
+                    conteudoPainelFiltro.destroy();
                 }
             }
             catch (erro) {
@@ -141,18 +141,18 @@ sap.ui.define([
         },
 
         _carregaFragmentoFiltroEscolas() {
-            const sNomeFragmentoFiltroEscolas = "ui5.cod3rsgrowth.view.FiltroEscolas";
+            const nomeFragmentoFiltroEscolas = "ui5.cod3rsgrowth.view.FiltroEscolas";
 
             try {
-                const oView = this.getView();
+                const view = this.getView();
 
                 Fragment.load({
-                    id: oView.getId(),
-                    name: sNomeFragmentoFiltroEscolas,
+                    id: view.getId(),
+                    name: nomeFragmentoFiltroEscolas,
                     controller: this
-                }).then((oPanel) => {
-                    const oMainToolbar = oView.byId(this.sIdPainelFiltro);
-                    oMainToolbar.addContent(oPanel);
+                }).then((panel) => {
+                    const mainToolbar = view.byId(this.sIdPainelFiltro);
+                    mainToolbar.addContent(panel);
                 });
             }
             catch (erro) {
@@ -163,13 +163,13 @@ sap.ui.define([
 
         _removerFragmentoFiltroEscolas() {
             try {
-                const oView = this.getView();
-                const oPainelFiltro = this.byId(this.sIdPainelFiltro);
-                const oConteudoPainelFiltro = oView.byId(oView.getId() + "--filtroEscolasFragment");
+                const view = this.getView();
+                const painelFiltro = this.byId(this.sIdPainelFiltro);
+                const conteudoPainelFiltro = view.byId(view.getId() + "--filtroEscolasFragment");
 
-                if (oConteudoPainelFiltro) {
-                    oPainelFiltro.removeContent(oConteudoPainelFiltro);
-                    oConteudoPainelFiltro.destroy();
+                if (conteudoPainelFiltro) {
+                    painelFiltro.removeContent(conteudoPainelFiltro);
+                    conteudoPainelFiltro.destroy();
                 }
             }
             catch (erro) {
@@ -180,8 +180,8 @@ sap.ui.define([
 
         aoPressionarBotaoFiltrarEmpresa() {
             try {
-                let oFiltro = this._retornaFiltroEmpresas();
-                this._populaTabelaEmpresaComDados(oFiltro);
+                let filtro = this._retornaFiltroEmpresas();
+                this._populaTabelaEmpresaComDados(filtro);
                 this._formataElementosTabelaEmpresas();
             }
             catch (erro) {
@@ -192,8 +192,8 @@ sap.ui.define([
 
         aoPressionarBotaoFiltrarEscola() {
             try { 
-                let oFiltro = this._retornaFiltroEscolas();
-                this._populaTabelaEscolaComDados(oFiltro);
+                let filtro = this._retornaFiltroEscolas();
+                this._populaTabelaEscolaComDados(filtro);
                 this._formataElementosTabelaEscola();
             }
             catch (erro) {
@@ -202,24 +202,24 @@ sap.ui.define([
             }
         },
         _retornaFiltroEmpresas() {
-            const sNomePropriedadeSituacaoCadastralSelecioada = "/situacaoCadastralSelecionada";
-            const sNomePropriedadeNomeEmpresa = "/nomeEmpresa";
-            const sNomePropriedadeCnpjEmpresa = "/cnpjEmpresa";
-            const sNomePropriedadeCapitalSocialEmpresa = "/capitalSocialEmpresa";
-            const sNomePropriedadeDataAbertura = "/dataAbertura";
-            const sNomePropriedadeNaturezaJuridicaSelecionada = "/naturezaJuridicaSelecionada";
-            const sNomePropriedadeEstadoSelecionado = "/estadoSelecionado";
+            const nomePropriedadeSituacaoCadastralSelecioada = "/situacaoCadastralSelecionada";
+            const nomePropriedadeNomeEmpresa = "/nomeEmpresa";
+            const nomePropriedadeCnpjEmpresa = "/cnpjEmpresa";
+            const nomePropriedadeCapitalSocialEmpresa = "/capitalSocialEmpresa";
+            const nomePropriedadeDataAbertura = "/dataAbertura";
+            const nomePropriedadeNaturezaJuridicaSelecionada = "/naturezaJuridicaSelecionada";
+            const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
             
             try {
-                let oModel = this.getView().getModel();
+                let modelo = this.getView().getModel();
                 return {
-                    SituacaoCadastralFiltro: oModel.getProperty(sNomePropriedadeSituacaoCadastralSelecioada),
-                    RazaoSocialFiltro: oModel.getProperty(sNomePropriedadeNomeEmpresa),
-                    CnpjFiltro: oModel.getProperty(sNomePropriedadeCnpjEmpresa),
-                    CapitalSocialFiltro: oModel.getProperty(sNomePropriedadeCapitalSocialEmpresa),
-                    DataAberturaFiltro: oModel.getProperty(sNomePropriedadeDataAbertura),
-                    NaturezaJuridicaFiltro: oModel.getProperty(sNomePropriedadeNaturezaJuridicaSelecionada),
-                    EstadoFiltro: oModel.getProperty(sNomePropriedadeEstadoSelecionado)
+                    SituacaoCadastralFiltro: modelo.getProperty(nomePropriedadeSituacaoCadastralSelecioada),
+                    RazaoSocialFiltro: modelo.getProperty(nomePropriedadeNomeEmpresa),
+                    CnpjFiltro: modelo.getProperty(nomePropriedadeCnpjEmpresa),
+                    CapitalSocialFiltro: modelo.getProperty(nomePropriedadeCapitalSocialEmpresa),
+                    DataAberturaFiltro: modelo.getProperty(nomePropriedadeDataAbertura),
+                    NaturezaJuridicaFiltro: modelo.getProperty(nomePropriedadeNaturezaJuridicaSelecionada),
+                    EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
                 }
             }
             catch (erro) {
@@ -229,20 +229,20 @@ sap.ui.define([
         },
 
         _retornaFiltroEscolas() {
-            const sNomePropriedadeNomeEscola = "/nomeEscola";
-            const sNomePropriedadeCodigoMec = "/codigoMec";
-            const sNomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
-            const sNomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecionada";
-            const sNomePropriedadeEstadoSelecionado = "/estadoSelecionado";
+            const nomePropriedadeNomeEscola = "/nomeEscola";
+            const nomePropriedadeCodigoMec = "/codigoMec";
+            const nomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
+            const nomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecionada";
+            const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
             
             try {
-                let oModel = this.getView().getModel();
+                let modelo = this.getView().getModel();
                 return {
-                    NomeFiltro: oModel.getProperty(sNomePropriedadeNomeEscola),
-                    CodigoMecFiltro: oModel.getProperty(sNomePropriedadeCodigoMec),
-                    StatusAtividadeFiltro: oModel.getProperty(sNomePropriedadeStatusAtividadeSelecionada),
-                    OrganizacaoAcademicaFiltro: oModel.getProperty(sNomePropriedadeOrganizacaoAcademicaSelecioada),
-                    EstadoFiltro: oModel.getProperty(sNomePropriedadeEstadoSelecionado)
+                    NomeFiltro: modelo.getProperty(nomePropriedadeNomeEscola),
+                    CodigoMecFiltro: modelo.getProperty(nomePropriedadeCodigoMec),
+                    StatusAtividadeFiltro: modelo.getProperty(nomePropriedadeStatusAtividadeSelecionada),
+                    OrganizacaoAcademicaFiltro: modelo.getProperty(nomePropriedadeOrganizacaoAcademicaSelecioada),
+                    EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
                 }
             }
             catch (erro) {
@@ -251,21 +251,21 @@ sap.ui.define([
             }
         },
 
-        _populaTabelaEmpresaComDados(oFiltro) {
+        _populaTabelaEmpresaComDados(filtro) {
             try {
                 const DataRepository = this.getOwnerComponent().DataRepository;
-                const oTabela = this.byId(this.sIdTabela);
-                const oModel = this.getView().getModel();
+                const tabela = this.byId(this.sIdTabela);
+                const modelo = this.getView().getModel();
 
-                oTabela.removeAllColumns();
+                tabela.removeAllColumns();
 
-                DataRepository.obterTodasEmpresas(oFiltro)
-                    .then(aEmpresas => {
-                        oModel.setProperty(this.sNomePropriedadeTabelaItems, aEmpresas);
+                DataRepository.obterTodasEmpresas(filtro)
+                    .then(empresas => {
+                        modelo.setProperty(this.sNomePropriedadeTabelaItems, empresas);
                     })
-                    .catch(oError => {
+                    .catch(error => {
                         const sMensagemDeErro = "Erro ao obter Empresas:\n";
-                        console.error(sMensagemDeErro, oError);
+                        console.error(sMensagemDeErro, error);
                     });
             }
             catch (erro) {
@@ -275,7 +275,7 @@ sap.ui.define([
         },
 
         _formataElementosTabelaEmpresas() {
-            const oCamposEmpresas = {
+            const camposEmpresas = {
                 nomeFantasia: "nome",
                 cnpj: "CNPJ",
                 situacaoCadastral: "Situação Cadastral",
@@ -285,7 +285,7 @@ sap.ui.define([
                 estado: "Estado"
             }
 
-            const arrayChavesCamposEmpresas = Object.keys(oCamposEmpresas);
+            const arrayChavesCamposEmpresas = Object.keys(camposEmpresas);
             const posicaoArrayEstado = 6;
             const posicaoArrayCapitalSocial = 5;
             const posicaoArrayNaturezaJuridica = 4;
@@ -293,58 +293,58 @@ sap.ui.define([
             const posicaoArraySituacaoCadastral = 2;
 
             try {
-                const oTabela = this.byId(this.sIdTabela);
-                oTabela.removeAllColumns();
+                const tabela = this.byId(this.sIdTabela);
+                tabela.removeAllColumns();
 
 
-                Object.entries(oCamposEmpresas).forEach(([sCampo, sHeader]) => {
-                    oTabela.addColumn(new sap.m.Column({
+                Object.entries(camposEmpresas).forEach(([sCampo, sHeader]) => {
+                    tabela.addColumn(new sap.m.Column({
                         header: new sap.m.Label({ text: sHeader })
                     }));
                 });
 
-                let oView = this.getView();
+                let view = this.getView();
 
-                oTabela.bindItems({
+                tabela.bindItems({
                     path: this.sNomePropriedadeTabelaItems,
                     template: new sap.m.ColumnListItem({
-                        cells: Object.keys(oCamposEmpresas).map(sCampo => {
+                        cells: Object.keys(camposEmpresas).map(campo => {
 
-                            if (sCampo === arrayChavesCamposEmpresas[posicaoArrayEstado]) {
+                            if (campo === arrayChavesCamposEmpresas[posicaoArrayEstado]) {
                                 return new sap.m.Text({
                                     text: {
-                                        path: sCampo,
+                                        path: campo,
                                         formatter: this.formatador.textoEstado
                                     }
                                 });
                             }
 
-                            if (sCampo === arrayChavesCamposEmpresas[posicaoArrayNaturezaJuridica]) {
+                            if (campo === arrayChavesCamposEmpresas[posicaoArrayNaturezaJuridica]) {
                                 return new sap.m.Text({
                                     text: {
-                                        path: sCampo,
+                                        path: campo,
                                         formatter: function (naturezaJuridica) {
-                                            return this.formatador.textoNaturezaJuridica(naturezaJuridica, oView);
+                                            return this.formatador.textoNaturezaJuridica(naturezaJuridica, view);
                                         }.bind(this)
                                     }
                                 });
                             }
 
-                            if (sCampo === arrayChavesCamposEmpresas[posicaoArraySituacaoCadastral]) {
+                            if (campo === arrayChavesCamposEmpresas[posicaoArraySituacaoCadastral]) {
                                 return new sap.m.Text({
                                     text: {
-                                        path: sCampo,
+                                        path: campo,
                                         formatter: function (situacaoCadastral) {
-                                            return this.formatador.textoSituacaoCadastral(situacaoCadastral, oView);
+                                            return this.formatador.textoSituacaoCadastral(situacaoCadastral, view);
                                         }.bind(this)
                                     }
                                 });
                             }
 
-                            if (sCampo === arrayChavesCamposEmpresas[posicaoArrayCapitalSocial]) {
+                            if (campo === arrayChavesCamposEmpresas[posicaoArrayCapitalSocial]) {
                                 return new sap.m.Text({
                                     text: {
-                                        path: sCampo,
+                                        path: campo,
                                         formatter: function (capitalSocial) {
                                             let oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
                                             return oFormatadorFloat.format(capitalSocial);
@@ -353,10 +353,10 @@ sap.ui.define([
                                 })
                             }
 
-                            if (sCampo === arrayChavesCamposEmpresas[posicaoArrayDataAbertura]) {
+                            if (campo === arrayChavesCamposEmpresas[posicaoArrayDataAbertura]) {
                                 return new sap.m.Text({
                                     text: {
-                                        path: sCampo,
+                                        path: campo,
                                         formatter: function (dataAbertura) {
                                             let oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
                                             return oFormatadorData.format(dataAbertura);
@@ -364,7 +364,7 @@ sap.ui.define([
                                     }
                                 })
                             }
-                            return new sap.m.Text({ text: "{" + sCampo + "}" });
+                            return new sap.m.Text({ text: "{" + campo + "}" });
                         })
                     })
                 })
@@ -376,13 +376,13 @@ sap.ui.define([
             }
         },
 
-        _populaTabelaEscolaComDados(oFiltro) {
+        _populaTabelaEscolaComDados(filtro) {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const oModel = this.getView().getModel();
+            const model = this.getView().getModel();
 
-            DataRepository.obterTodasEscolas(oFiltro)
+            DataRepository.obterTodasEscolas(filtro)
                 .then(aEscolas => {
-                    oModel.setProperty(this.sNomePropriedadeTabelaItems, aEscolas);
+                    model.setProperty(this.sNomePropriedadeTabelaItems, aEscolas);
                 })
                 .catch(oError => {
                     const sMensagemDeErro = "Erro ao obter Escolas:"
@@ -391,9 +391,9 @@ sap.ui.define([
         },
 
         _formataElementosTabelaEscola() {
-            const oTabela = this.byId(this.sIdTabela);
+            const tabela = this.byId(this.sIdTabela);
 
-            oTabela.removeAllColumns();
+            tabela.removeAllColumns();
 
             const oCamposEscolas = {
                 nome: "Nome",
@@ -405,13 +405,13 @@ sap.ui.define([
 
             let oView = this.getView();
 
-            Object.entries(oCamposEscolas).forEach(([sCampo, sHeader]) => {
-                oTabela.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: sHeader })
+            Object.entries(oCamposEscolas).forEach(([sCampo, cabecalho]) => {
+                tabela.addColumn(new sap.m.Column({
+                    header: new sap.m.Label({ text: cabecalho })
                 }));
             });
 
-            oTabela.bindItems({
+            tabela.bindItems({
                 path: this.sNomePropriedadeTabelaItems,
                 template: new sap.m.ColumnListItem({
                     cells: Object.keys(oCamposEscolas).map(sCampo => {
