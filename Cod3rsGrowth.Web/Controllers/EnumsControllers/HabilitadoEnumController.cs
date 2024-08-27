@@ -12,14 +12,19 @@ public class HabilitadoEnumController : ControllerBase
     [HttpGet]
     public IActionResult ObterModeloJson()
     {
-        var dicionarioHabilitado = new Dictionary<int, string>();
+        var habilitadoJson = new HabilitadoEnumJson();
         var valoresHabilitado = Enum.GetValues(typeof(HabilitadoEnums)).Cast<HabilitadoEnums>();
         foreach (var habilitado in valoresHabilitado)
         {
-            dicionarioHabilitado.Add((int)habilitado, habilitado.RetornaDescricao()); 
+            habilitadoJson.Habilitado.Add((int)habilitado, habilitado.RetornaDescricao()); 
         }
 
-        var enumHabilitadoJson = JsonSerializer.Serialize(dicionarioHabilitado);
-        return Ok(enumHabilitadoJson);
+        var jsonString = JsonSerializer.Serialize(habilitadoJson);
+        return Ok(jsonString);
+    }
+
+    private class HabilitadoEnumJson
+    {
+        public Dictionary<int, string> Habilitado { get; set; } = new();
     }
 }

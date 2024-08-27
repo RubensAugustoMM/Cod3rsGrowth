@@ -12,14 +12,19 @@ public class NaturezaJuridicaEnumController : ControllerBase
     [HttpGet]
     public IActionResult ObterModeloJson()
     {
-        var dicionarioNaturezaJuridica = new Dictionary<int, string>();
+        var naturezaJuridicaJson = new NaturezaJuridicaEnumJson();
         var valoresNaturezaJuridica = Enum.GetValues(typeof(NaturezaJuridicaEnums)).Cast<NaturezaJuridicaEnums>();
         foreach (var naturezaJuridica in valoresNaturezaJuridica)
         {
-            dicionarioNaturezaJuridica.Add((int)naturezaJuridica, naturezaJuridica.RetornaDescricao()); 
+            naturezaJuridicaJson.NaturezaJuridica.Add((int)naturezaJuridica, naturezaJuridica.RetornaDescricao()); 
         }
 
-        var enumNaturezaJuridicaJson = JsonSerializer.Serialize(dicionarioNaturezaJuridica);
-        return Ok(enumNaturezaJuridicaJson);
+        var jsonString = JsonSerializer.Serialize(naturezaJuridicaJson);
+        return Ok(jsonString);
+    }
+    
+    private class NaturezaJuridicaEnumJson
+    {
+        public Dictionary<int, string> NaturezaJuridica { get; set; } = new(); 
     }
 }

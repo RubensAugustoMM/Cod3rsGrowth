@@ -12,14 +12,19 @@ public class OrganizacaoAcademicaEnumController : ControllerBase
     [HttpGet]
     public IActionResult ObterModeloJson()
     {
-        var dicionarioOrganizacaoAcademica = new Dictionary<int, string>();
+        var organizacaoAcademicaEnumJson = new OrganizacaoAcademicaEnumJson();
         var valoresOrganizacaoAcademica = Enum.GetValues(typeof(OrganizacaoAcademicaEnums)).Cast<OrganizacaoAcademicaEnums>();
         foreach (var organizacaoAcademica in valoresOrganizacaoAcademica)
         {
-            dicionarioOrganizacaoAcademica.Add((int)organizacaoAcademica, organizacaoAcademica.RetornaDescricao()); 
+            organizacaoAcademicaEnumJson.OrganizacaoAcademica.Add((int)organizacaoAcademica, organizacaoAcademica.RetornaDescricao()); 
         }
 
-        var enumOrganizacaoAcademicaJson = JsonSerializer.Serialize(dicionarioOrganizacaoAcademica);
-        return Ok(enumOrganizacaoAcademicaJson);
+        var jsonStrng = JsonSerializer.Serialize(organizacaoAcademicaEnumJson);
+        return Ok(jsonStrng);
+    }
+    
+    private class OrganizacaoAcademicaEnumJson
+    {
+        public Dictionary<int, string> OrganizacaoAcademica { get; set; } = new();
     }
 }
