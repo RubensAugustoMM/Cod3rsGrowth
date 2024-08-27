@@ -28,7 +28,7 @@ sap.ui.define([
         }
     },
 
-        oServicoFinal = jQuery.extend(true, commonAPIs, ServicoEscolas, ServicoEmpresas, config),
-        oServico = baseObject.extend("ui5.cod3rsgrowth.modelos.Repositorios.DataRepository", oServicoFinal)
-    return oServico;
+        servicoFinal = jQuery.extend(true, commonAPIs, ServicoEscolas, ServicoEmpresas, config),
+        servico = baseObject.extend("ui5.cod3rsgrowth.modelos.Repositorios.DataRepository", servicoFinal)
+    return servico;
 });

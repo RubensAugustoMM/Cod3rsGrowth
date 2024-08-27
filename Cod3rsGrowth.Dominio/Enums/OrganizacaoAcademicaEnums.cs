@@ -5,7 +5,7 @@ public enum OrganizacaoAcademicaEnums
 { 
     [Description("Faculdade")] 
     Faculdade, 
-    [Description("Centro Universitario")]  
+    [Description("Centro Universitário")]  
     CentroUniversitario, 
     [Description("Instituto Federal")]  
     InstitutoFederal,  
