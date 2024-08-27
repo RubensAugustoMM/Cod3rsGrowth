@@ -12,19 +12,24 @@ public class EstadoEnumController : ControllerBase
     [HttpGet]
     public IActionResult ObterModeloJson()
     {
-        var estadoJson = new EstadoEnumJson();
+        var estadoJson = new EstadosEnumJson();
         var valoresEstado = Enum.GetValues(typeof(EstadoEnums)).Cast<EstadoEnums>();
         foreach (var estado in valoresEstado)
         {
-            estadoJson.Estados.Add((int)estado, estado.RetornaDescricao()); 
+            estadoJson.Estados.Add(new EnumJson
+            {
+                Codigo = (int)estado,
+                Valor = estado.RetornaDescricao()
+            }); 
         }
 
-        var jsonString = JsonSerializer.Serialize<EstadoEnumJson>(estadoJson);
+        var jsonString = JsonSerializer.Serialize(estadoJson);
         return Ok(jsonString);
     }
 
-    private class EstadoEnumJson
+    private struct EstadosEnumJson
     {
-        public Dictionary<int, string> Estados { get; set; } = new(); 
+        public EstadosEnumJson(){ }
+        public List<EnumJson> Estados { get; set; } = new();
     }
 }

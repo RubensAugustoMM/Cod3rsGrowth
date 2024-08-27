@@ -37,25 +37,8 @@
           ],
           "fallbackLocale": ""
         }
-      },
-      "naturezaJuridica":{
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "modelos/ModelosJson/ValoresNaturezaJuridica.json"
-      },
-      "estados":{
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "modelos/ModelosJson/ValoresEstados.json"
-      },
-      "habilitado":{
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "modelos/ModelosJson/ValoresHabilitado.json"
-      },
-      "organizacaoAcademica":{
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "modelos/ModelosJson/ValoresOrganizacaoAcademica.json"
       }
-
-    },
+        },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
       "type": "XML",

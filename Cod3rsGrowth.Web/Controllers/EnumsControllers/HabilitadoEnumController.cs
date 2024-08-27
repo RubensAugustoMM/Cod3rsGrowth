@@ -16,15 +16,20 @@ public class HabilitadoEnumController : ControllerBase
         var valoresHabilitado = Enum.GetValues(typeof(HabilitadoEnums)).Cast<HabilitadoEnums>();
         foreach (var habilitado in valoresHabilitado)
         {
-            habilitadoJson.Habilitado.Add((int)habilitado, habilitado.RetornaDescricao()); 
+            habilitadoJson.Habilitado.Add(new EnumJson
+            {
+                Codigo = (int) habilitado,
+                Valor = habilitado.RetornaDescricao() 
+            }); 
         }
 
         var jsonString = JsonSerializer.Serialize(habilitadoJson);
         return Ok(jsonString);
     }
 
-    private class HabilitadoEnumJson
+    private struct HabilitadoEnumJson
     {
-        public Dictionary<int, string> Habilitado { get; set; } = new();
+        public HabilitadoEnumJson() { }
+        public List<EnumJson> Habilitado { get; set; } = new();
     }
 }

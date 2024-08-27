@@ -16,15 +16,20 @@ public class NaturezaJuridicaEnumController : ControllerBase
         var valoresNaturezaJuridica = Enum.GetValues(typeof(NaturezaJuridicaEnums)).Cast<NaturezaJuridicaEnums>();
         foreach (var naturezaJuridica in valoresNaturezaJuridica)
         {
-            naturezaJuridicaJson.NaturezaJuridica.Add((int)naturezaJuridica, naturezaJuridica.RetornaDescricao()); 
+            naturezaJuridicaJson.NaturezaJuridica.Add(new EnumJson
+            {
+                Codigo = (int)naturezaJuridica,
+                Valor = naturezaJuridica.RetornaDescricao()
+            }); 
         }
 
         var jsonString = JsonSerializer.Serialize(naturezaJuridicaJson);
         return Ok(jsonString);
     }
     
-    private class NaturezaJuridicaEnumJson
+    private struct NaturezaJuridicaEnumJson
     {
-        public Dictionary<int, string> NaturezaJuridica { get; set; } = new(); 
+        public NaturezaJuridicaEnumJson() { }
+        public List<EnumJson> NaturezaJuridica { get; set; } = new(); 
     }
 }

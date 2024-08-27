@@ -59,7 +59,7 @@
                     headerText="{i18n>FiltroEmpresa.SituacaoCadastral}"
                 >
                     <content>
-                        <Select
+                        <ComboBox
                             id="filtroSituacaoCadastral"
                             width="100%"
                             selectedKey="{/situacaoCadastralSelecionada}"
@@ -70,7 +70,7 @@
                                 key="{habilitado>Codigo}"
                                 text="{habilitado>Valor}"
                             />
-                        </Select>
+                    </ComboBox>
                     </content>
                 </Panel>
                 <Panel
@@ -98,7 +98,7 @@
                     headerText="{i18n>FiltroEmpresa.NaturezaJuridica}"
                 >
                     <content>
-                        <Select
+                        <ComboBox
                             id="filtroNaturezaJuridica"
                             width="100%"
                             selectedKey="{/naturezaJuridicaSelecionada}"
@@ -109,7 +109,7 @@
                                 key="{naturezaJuridica>Codigo}"
                                 text="{naturezaJuridica>Valor}"
                             />
-                        </Select>
+                    </ComboBox>
                     </content>
                 </Panel>
                 <Panel

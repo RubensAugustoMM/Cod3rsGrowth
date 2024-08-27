@@ -9,7 +9,7 @@ sap.ui.define([
     "sap/ui/core/routing/HashChanger",
     "sap/ui/core/format/NumberFormat",
     "sap/ca/ui/model/format/DateFormat",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
 ], (Controller,
     DataRepository,
     Filter,
@@ -27,20 +27,20 @@ sap.ui.define([
 
         formatador: Formatador,
         sIdLista: "lista",
-        sIdTabela: "tabela",
-        sIdPainelFiltro: "painelFiltros",
-        sNomeI18n: "i18n",
-        sNomePropriedadePainelExpandido: "/painelExpandido",
-        sNomePropriedadeTabelaItems: "/items",
+        idTabela: "tabela",
+        idPainelFiltro: "painelFiltros",
+        nomeModeloI18n: "i18n",
+        nomePropriedadePainelExpandido: "/painelExpandido",
+        nomePropriedadeTabelaItems: "/items",
 
-        oOpcoesFormatadorDecimais: {
+        opcoesFormatadorDecimais: {
             minIntegerDigits: 1,
             MaxIntegerDigits: 3,
             minFractionsDigits: 2,
             maxFractionDigits: 2,
             style: "short"
         },
-        oOpcoesFormatadorData: {
+        opcoesFormatadorData: {
             pattern: 'yyyy-MM-ddTHH:mm:ss'
         },
 
@@ -65,9 +65,9 @@ sap.ui.define([
 
             try {
                 let modelo = this.getView().getModel();
-                let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
+                let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEmpresas))
-                modelo.setProperty(this.sNomePropriedadePainelExpandido, false);
+                modelo.setProperty(this.nomePropriedadePainelExpandido, false);
 
                 this._removerFragmentoFiltroEmpresas();
                 this._removerFragmentoFiltroEscolas();
@@ -86,9 +86,9 @@ sap.ui.define([
 
             try {
                 let modelo = this.getView().getModel();
-                let i18n = this.getOwnerComponent().getModel(this.sNomeI18n).getResourceBundle();
+                let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEscolas));
-                modelo.setProperty(this.sNomePropriedadePainelExpandido, false);
+                modelo.setProperty(this.nomePropriedadePainelExpandido, false);
 
                 this._removerFragmentoFiltroEmpresas();
                 this._removerFragmentoFiltroEscolas();
@@ -113,7 +113,7 @@ sap.ui.define([
                     name: nomeFragmentoFiltroEmpresas,
                     controller: this
                 }).then((panel) => {
-                    const mainToolbar = view.byId(this.sIdPainelFiltro);
+                    const mainToolbar = view.byId(this.idPainelFiltro);
                     mainToolbar.addContent(panel);
                 });
             }
@@ -126,7 +126,7 @@ sap.ui.define([
         _removerFragmentoFiltroEmpresas() {
             try {
                 const view = this.getView();
-                const painelFiltro = this.byId(this.sIdPainelFiltro);
+                const painelFiltro = this.byId(this.idPainelFiltro);
                 const conteudoPainelFiltro = this.byId(view.getId() + "--filtroEmpresasFragment");
 
                 if (conteudoPainelFiltro) {
@@ -151,7 +151,7 @@ sap.ui.define([
                     name: nomeFragmentoFiltroEscolas,
                     controller: this
                 }).then((panel) => {
-                    const mainToolbar = view.byId(this.sIdPainelFiltro);
+                    const mainToolbar = view.byId(this.idPainelFiltro);
                     mainToolbar.addContent(panel);
                 });
             }
@@ -164,7 +164,7 @@ sap.ui.define([
         _removerFragmentoFiltroEscolas() {
             try {
                 const view = this.getView();
-                const painelFiltro = this.byId(this.sIdPainelFiltro);
+                const painelFiltro = this.byId(this.idPainelFiltro);
                 const conteudoPainelFiltro = view.byId(view.getId() + "--filtroEscolasFragment");
 
                 if (conteudoPainelFiltro) {
@@ -191,7 +191,7 @@ sap.ui.define([
         },
 
         aoPressionarBotaoFiltrarEscola() {
-            try { 
+            try {
                 let filtro = this._retornaFiltroEscolas();
                 this._populaTabelaEscolaComDados(filtro);
                 this._formataElementosTabelaEscola();
@@ -209,7 +209,7 @@ sap.ui.define([
             const nomePropriedadeDataAbertura = "/dataAbertura";
             const nomePropriedadeNaturezaJuridicaSelecionada = "/naturezaJuridicaSelecionada";
             const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
-            
+
             try {
                 let modelo = this.getView().getModel();
                 return {
@@ -234,7 +234,7 @@ sap.ui.define([
             const nomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
             const nomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecionada";
             const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
-            
+
             try {
                 let modelo = this.getView().getModel();
                 return {
@@ -254,18 +254,18 @@ sap.ui.define([
         _populaTabelaEmpresaComDados(filtro) {
             try {
                 const DataRepository = this.getOwnerComponent().DataRepository;
-                const tabela = this.byId(this.sIdTabela);
+                const tabela = this.byId(this.idTabela);
                 const modelo = this.getView().getModel();
 
                 tabela.removeAllColumns();
 
                 DataRepository.obterTodasEmpresas(filtro)
                     .then(empresas => {
-                        modelo.setProperty(this.sNomePropriedadeTabelaItems, empresas);
+                        modelo.setProperty(this.nomePropriedadeTabelaItems, empresas);
                     })
                     .catch(error => {
-                        const sMensagemDeErro = "Erro ao obter Empresas:\n";
-                        console.error(sMensagemDeErro, error);
+                        const mensagemDeErro = "Erro ao obter Empresas:\n";
+                        console.error(mensagemDeErro, error);
                     });
             }
             catch (erro) {
@@ -293,20 +293,20 @@ sap.ui.define([
             const posicaoArraySituacaoCadastral = 2;
 
             try {
-                const tabela = this.byId(this.sIdTabela);
+                const tabela = this.byId(this.idTabela);
                 tabela.removeAllColumns();
 
 
-                Object.entries(camposEmpresas).forEach(([sCampo, sHeader]) => {
+                Object.entries(camposEmpresas).forEach(([campo, cabecalho]) => {
                     tabela.addColumn(new sap.m.Column({
-                        header: new sap.m.Label({ text: sHeader })
+                        header: new sap.m.Label({ text: cabecalho })
                     }));
                 });
 
                 let view = this.getView();
 
                 tabela.bindItems({
-                    path: this.sNomePropriedadeTabelaItems,
+                    path: this.nomePropriedadeTabelaItems,
                     template: new sap.m.ColumnListItem({
                         cells: Object.keys(camposEmpresas).map(campo => {
 
@@ -346,8 +346,8 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (capitalSocial) {
-                                            let oFormatadorFloat = NumberFormat.getFloatInstance(this.oOpcoesFormatadorDecimais);
-                                            return oFormatadorFloat.format(capitalSocial);
+                                            let formatadorFloat = NumberFormat.getFloatInstance(this.opcoesFormatadorDecimais);
+                                            return formatadorFloat.format(capitalSocial);
                                         }.bind(this)
                                     }
                                 })
@@ -358,8 +358,8 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (dataAbertura) {
-                                            let oFormatadorData = DateFormat.getDateInstance(this.oOpcoesFormatadorData);
-                                            return oFormatadorData.format(dataAbertura);
+                                            let formatadorData = DateFormat.getDateInstance(this.opcoesFormatadorData);
+                                            return formatadorData.format(dataAbertura);
                                         }
                                     }
                                 })
@@ -369,8 +369,7 @@ sap.ui.define([
                     })
                 })
             }
-            catch (erro)
-            {
+            catch (erro) {
                 const mensagemDeErro = "Erro ao formatar elementos da tabela Empresa:\n";
                 console.error(mensagemDeErro + erro);
             }
@@ -378,24 +377,24 @@ sap.ui.define([
 
         _populaTabelaEscolaComDados(filtro) {
             const DataRepository = this.getOwnerComponent().DataRepository;
-            const model = this.getView().getModel();
+            const modelo = this.getView().getModel();
 
             DataRepository.obterTodasEscolas(filtro)
-                .then(aEscolas => {
-                    model.setProperty(this.sNomePropriedadeTabelaItems, aEscolas);
+                .then(escolas => {
+                    modelo.setProperty(this.nomePropriedadeTabelaItems, escolas);
                 })
-                .catch(oError => {
-                    const sMensagemDeErro = "Erro ao obter Escolas:"
-                    console.error(sMensagemDeErro, oError);
+                .catch(error => {
+                    const mensagemDeErro = "Erro ao obter Escolas:"
+                    console.error(mensagemDeErro, error);
                 });
         },
 
         _formataElementosTabelaEscola() {
-            const tabela = this.byId(this.sIdTabela);
+            const tabela = this.byId(this.idTabela);
 
             tabela.removeAllColumns();
 
-            const oCamposEscolas = {
+            const camposEscolas = {
                 nome: "Nome",
                 codigoMec: "Código MEC",
                 statusAtividade: "Status Atividade",
@@ -403,53 +402,53 @@ sap.ui.define([
                 estado: "Estado"
             };
 
-            let oView = this.getView();
+            let view = this.getView();
 
-            Object.entries(oCamposEscolas).forEach(([sCampo, cabecalho]) => {
+            Object.entries(camposEscolas).forEach(([campo, cabecalho]) => {
                 tabela.addColumn(new sap.m.Column({
                     header: new sap.m.Label({ text: cabecalho })
                 }));
             });
 
             tabela.bindItems({
-                path: this.sNomePropriedadeTabelaItems,
+                path: this.nomePropriedadeTabelaItems,
                 template: new sap.m.ColumnListItem({
-                    cells: Object.keys(oCamposEscolas).map(sCampo => {
-                        if (sCampo === "estado") {
+                    cells: Object.keys(camposEscolas).map(campo => {
+                        if (campo === "estado") {
                             return new sap.m.Text({
                                 text: {
-                                    path: sCampo,
+                                    path: campo,
                                     formatter: this.formatador.textoEstado
                                 }
                             });
                         }
 
                         const posicaoArrayOrganizacaoAcademica = 3;
-                        const arrayChavesCamposEscolas = Object.keys(oCamposEscolas);
-                        if (sCampo === arrayChavesCamposEscolas[posicaoArrayOrganizacaoAcademica]) {
+                        const arrayChavesCamposEscolas = Object.keys(camposEscolas);
+                        if (campo === arrayChavesCamposEscolas[posicaoArrayOrganizacaoAcademica]) {
                             return new sap.m.Text({
                                 text: {
-                                    path: sCampo,
+                                    path: campo,
                                     formatter: function (organizacaoAcademica) {
-                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, oView);
+                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, view);
                                     }.bind(this)
                                 }
                             });
                         }
 
                         const posicaoArrayStatusAtividade = 2;
-                        if (sCampo === arrayChavesCamposEscolas[posicaoArrayStatusAtividade]) {
+                        if (campo === arrayChavesCamposEscolas[posicaoArrayStatusAtividade]) {
                             return new sap.m.Text({
                                 text: {
-                                    path: sCampo,
+                                    path: campo,
                                     formatter: function (statusAtividade) {
-                                        return this.formatador.textoSituacaoCadastral(statusAtividade, oView);
+                                        return this.formatador.textoSituacaoCadastral(statusAtividade, view);
                                     }.bind(this)
                                 }
                             });
                         }
 
-                        return new sap.m.Text({ text: "{" + sCampo + "}" });
+                        return new sap.m.Text({ text: "{" + campo + "}" });
                     })
                 })
             })

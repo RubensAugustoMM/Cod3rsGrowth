@@ -16,15 +16,20 @@ public class OrganizacaoAcademicaEnumController : ControllerBase
         var valoresOrganizacaoAcademica = Enum.GetValues(typeof(OrganizacaoAcademicaEnums)).Cast<OrganizacaoAcademicaEnums>();
         foreach (var organizacaoAcademica in valoresOrganizacaoAcademica)
         {
-            organizacaoAcademicaEnumJson.OrganizacaoAcademica.Add((int)organizacaoAcademica, organizacaoAcademica.RetornaDescricao()); 
+            organizacaoAcademicaEnumJson.OrganizacaoAcademica.Add(new EnumJson
+            {
+                Codigo = (int)organizacaoAcademica,
+                Valor =  organizacaoAcademica.RetornaDescricao()
+            }); 
         }
 
         var jsonStrng = JsonSerializer.Serialize(organizacaoAcademicaEnumJson);
         return Ok(jsonStrng);
     }
     
-    private class OrganizacaoAcademicaEnumJson
+    private struct OrganizacaoAcademicaEnumJson
     {
-        public Dictionary<int, string> OrganizacaoAcademica { get; set; } = new();
+        public OrganizacaoAcademicaEnumJson() { }
+        public List<EnumJson> OrganizacaoAcademica { get; set; } = new();
     }
 }
