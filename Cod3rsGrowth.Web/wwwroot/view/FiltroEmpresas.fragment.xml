@@ -88,7 +88,7 @@
                                 pattern: 'yyyy-MM-ddTHH:mm:ss'
                             }
                         }}"
-                            ariaDescribedBy="Data abertura"
+                            ariaDescribedBy="{i18>CriarEditarEmpresas.dataAbertura}"
                             width="100%"
                         />
                     </content>

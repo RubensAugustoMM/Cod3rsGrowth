@@ -1,30 +1,36 @@
-<mvc:View 
+<mvc:View
     controllerName="ui5.cod3rsgrowth.controller.Lista"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    displayBlock="true">
+    displayBlock="true"
+>
     <Page id="lista">
         <content>
-            <Panel headerText="{i18n>Lista.Filtros}"
-            id="painelFiltros"
-            height="auto"
-            width="auto"
-            expandable="true"
-            expanded="{/painelExpandido}">
-            </Panel>
+            <Panel
+                headerText="{i18n>Lista.Filtros}"
+                id="painelFiltros"
+                height="auto"
+                width="auto"
+                expandable="true"
+                expanded="{/painelExpandido}"
+            />
 
-            <Table id="tabela" items="{/items}">
+            <Table
+                id="tabela"
+                items="{/items}"
+            >
                 <headerToolbar>
-                    <OverflowToolbar >
-                        
+                    <OverflowToolbar>
                         <ToolbarSpacer />
-                        <Button icon="sap-icon://add"/>
+                        <Button
+                            id="botaoCriar"
+                            press=".aoPressionarBotaoCriar"
+                            icon="sap-icon://add"
+                        />
                     </OverflowToolbar>
                 </headerToolbar>
-                    <columns>
-                    </columns>
-                    <ColumnListItem>
-                    </ColumnListItem>
+                <columns />
+                <ColumnListItem />
             </Table>
         </content>
     </Page>

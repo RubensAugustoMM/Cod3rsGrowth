@@ -75,6 +75,11 @@
           "pattern": "escolas",
           "name": "Escolas",
           "target": "lista"
+        },
+        {
+          "pattern":  "Empresas/Criar",
+          "name": "EmpresaCriar",
+          "target": "empresaCriar"
         }
       ],
       "targets": {
@@ -87,6 +92,13 @@
           "viewName": "Lista",
           "viewType": "XML",
           "viewId": "lista",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
+        },
+        "empresaCriar":{
+          "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
+          "viewName": "CriarEditarEmpresas",
+          "viewId": "CriarEditarEmpresas",
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         }
