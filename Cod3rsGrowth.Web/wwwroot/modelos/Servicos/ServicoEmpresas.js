@@ -6,6 +6,7 @@ sap.ui.define([
 	MessageBox
 ) {
     return {
+        _nomeModeloI18n: "i18n",
         obterTodasEmpresas: async function (filtro) {
             let parametrosQuery = "";
             try {
@@ -68,17 +69,32 @@ sap.ui.define([
                 return await RepositorioEmpresas.obterTodasEmpresas(parametrosQuery);
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
                 const i18nMensagemDeErro = "ServicoEmpresas.ErroAoObterEmpresas";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
                 const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                console.error(mensagemDeErro + erro);
-                MessageBox.show(erro.message, {
-                    icon: MessageBox.Icon.ERROR,
-                    title: mensagemDeErro,
-                    actions: [MessageBox.Action.CLOSE]
-                });
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
+        },
+        
+        criarEmpresa: async function (parametros) {
+            try {
+                return await RepositorioEmpresas.criarEmpresa(parametros);
+            }
+            catch(erro)
+            {
+                const i18nMensagemDeErro = "ServicoEmpresas.ErroAoCriarEmpresa";
+                const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            }
+        },
+        _mostraMensagemDeErro(mensagemDeErro, erro) {
+            console.error(mensagemDeErro + erro.message);
+            MessageBox.show(erro.message, {
+                icon: MessageBox.Icon.ERROR,
+                title: mensagemDeErro,
+                actions: [MessageBox.Action.CLOSE]
+            });
         }
     }
 });
