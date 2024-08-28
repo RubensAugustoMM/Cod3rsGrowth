@@ -70,7 +70,7 @@ sap.ui.define([
             catch (erro) {
                 const mensagemDeErro = "Erro ao receber modelo Habilitado:\n";
                 console.error(mensagemDeErro + erro);
-                MessageBox.show(erro, {
+                MessageBox.show(erro.message, {
                     icon: MessageBox.Icon.ERROR,
                     title: mensagemDeErro,
                     actions: [MessageBox.Action.CLOSE]
