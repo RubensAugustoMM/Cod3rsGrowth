@@ -10,6 +10,7 @@
     <Page
         id="criarEditarEmpresas"
         showNavButton="true"
+		navButtonPress="aoPressionarBotaoDeNavegacao"
         title="{i18n>CriarEditarEmpresas.Titulo}"
         titleAlignment="Center"
     >
