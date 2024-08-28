@@ -65,6 +65,36 @@ sap.ui.define(["sap/m/MessageBox"
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
+        async retornaModeloPorteEnum() {
+            try {
+                const rotaEnum = "/PorteEnum";
+                const resposta = await fetch(this.urlBase + rotaEnum);
+                if (!resposta.ok) throw new Error(resposta.status);
+                return await resposta.json();
+            }
+            catch (erro) {
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaPorteEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            }
+        },
+        async retornaModeloMatrizFilialEnum() {
+            try {
+                const rotaEnum = "/MatrizFilialEnum";
+                const resposta = await fetch(this.urlBase + rotaEnum);
+                if (!resposta.ok) throw new Error(resposta.status);
+                return await resposta.json();
+            }
+            catch (erro) {
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaMatrizFilialEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            }
+        },
 
         _mostraMensagemDeErro(mensagemDeErro, erro) {
             console.error(mensagemDeErro + erro.message);

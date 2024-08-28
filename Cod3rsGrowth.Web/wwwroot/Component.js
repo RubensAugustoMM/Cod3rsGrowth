@@ -49,6 +49,16 @@ sap.ui.define([
                 new JSONModel(await ServicoEnums.retornaModeloEstadoEnum());
             this.setModel(modeloEstados, nomeModeloEstados);
 
+            let nomeModeloPorte = "porte";
+            let modeloPorte =
+                new JSONModel(await ServicoEnums.retornaModeloPorteEnum());
+            this.setModel(modeloPorte, nomeModeloPorte);
+
+            let nomeModeloMatrizFilial = "matrizFilial";
+            let modeloMatrizFilial =
+                new JSONModel(await ServicoEnums.retornaModeloMatrizFilialEnum());
+            this.setModel(modeloMatrizFilial, nomeModeloMatrizFilial);
+
             this.getRouter().initialize();
         }
     });
