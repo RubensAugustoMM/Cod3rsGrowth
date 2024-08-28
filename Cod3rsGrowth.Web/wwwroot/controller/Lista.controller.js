@@ -4,9 +4,10 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/core/format/NumberFormat",
     "sap/ca/ui/model/format/DateFormat",
-	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
-	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
-    "sap/ui/model/json/JSONModel"
+    "ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
+    "ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
 ], (Controller,
 	Formatador,
 	Fragment,
@@ -14,7 +15,8 @@ sap.ui.define([
 	DateFormat,
 	ServicoEmpresas,
 	ServicoEscolas,
-	JSONModel) => {
+	JSONModel,
+	MessageBox) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -50,7 +52,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao inicializar a tela de listagem:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -71,7 +73,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao carregar rota 'Empresas':\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -92,7 +94,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao carregar rota 'Escolas':\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -113,7 +115,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao carregar fragmento filtor empresas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -130,7 +132,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao remover fragmento filtro Empresas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -151,7 +153,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao carregar fragmento filtro escolas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -168,7 +170,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao remover fragmento de filtro de escolas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -180,7 +182,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao pressionar botão filtrar empresas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -192,7 +194,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao pressionar botão para filtrar Escolas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
         _retornaFiltroEmpresas() {
@@ -218,7 +220,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao retornar valores do filtro empresas:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -241,7 +243,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao retornar valores do filtro escolas:\n"
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -259,12 +261,12 @@ sap.ui.define([
                     })
                     .catch(error => {
                         const mensagemDeErro = "Erro ao obter Empresas:\n";
-                        console.error(mensagemDeErro, error);
+                        this._mostraMensagemDeErro(mensagemDeErro, erro);
                     });
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao popular tabela Empresas com dados:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -365,7 +367,7 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao formatar elementos da tabela Empresa:\n";
-                console.error(mensagemDeErro + erro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
@@ -379,7 +381,7 @@ sap.ui.define([
                 })
                 .catch(error => {
                     const mensagemDeErro = "Erro ao obter Escolas:"
-                    console.error(mensagemDeErro, error);
+                    this._mostraMensagemDeErro(mensagemDeErro, erro);
                 });
         },
 
@@ -446,6 +448,15 @@ sap.ui.define([
                     })
                 })
             })
+        },
+
+        _mostraMensagemDeErro(mensagemDeErro, erro) {
+            console.error(mensagemDeErro + erro.message);
+            MessageBox.show(erro.message, {
+                icon: MessageBox.Icon.ERROR,
+                title: mensagemDeErro,
+                actions: [MessageBox.Action.CLOSE]
+            });
         }
     });
 });

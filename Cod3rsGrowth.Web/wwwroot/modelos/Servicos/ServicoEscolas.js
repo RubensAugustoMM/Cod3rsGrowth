@@ -51,7 +51,12 @@ sap.ui.define([
             }
             catch (erro) {
                 const mensagemDeErro = "Erro ao receber dados de Escolas:\n";
-                console.error(mensagemDeErro + erro);
+                console.error(mensagemDeErro + erro.message);
+                MessageBox.show(erro.message, {
+                    icon: MessageBox.Icon.ERROR,
+                    title: mensagemDeErro,
+                    actions: [MessageBox.Action.CLOSE]
+                });
             }
         }
     }

@@ -1,5 +1,6 @@
-sap.ui.define([
-], function() {
+sap.ui.define(["sap/m/MessageBox"
+], function(
+	MessageBox) {
     return {
         _urlBase: "api/Empresas",
         
@@ -10,7 +11,13 @@ sap.ui.define([
                 return await resposta.json();
             }
             catch (erro) {
-                throw erro;
+                const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
+                console.error(mensagemDeErro + erro.message);
+                MessageBox.show(erro.message, {
+                    icon: MessageBox.Icon.ERROR,
+                    title: mensagemDeErro,
+                    actions: [MessageBox.Action.CLOSE]
+                });
             }
         }
     }

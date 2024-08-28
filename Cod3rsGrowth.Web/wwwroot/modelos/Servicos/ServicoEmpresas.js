@@ -1,7 +1,9 @@
 sap.ui.define([
-    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEmpresas"
+    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEmpresas",
+    "sap/m/MessageBox"
 ], function (
-	RepositorioEmpresas
+    RepositorioEmpresas,
+	MessageBox
 ) {
     return {
         obterTodasEmpresas: async function (filtro) {
@@ -63,11 +65,16 @@ sap.ui.define([
                     parametrosQuery += sParametroFiltroEstado + filtro[chaveFiltroEstado];
                 }
 
-                return await RepositorioEmpresas.obterTodasEmpresas(parametrosQuery); 
+                return await RepositorioEmpresas.obterTodasEmpresas(parametrosQuery);
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
+                const mensagemDeErro = "Erro ao receber modelo Habilitado:\n";
                 console.error(mensagemDeErro + erro);
+                MessageBox.show(erro, {
+                    icon: MessageBox.Icon.ERROR,
+                    title: mensagemDeErro,
+                    actions: [MessageBox.Action.CLOSE]
+                });
             }
         }
     }
