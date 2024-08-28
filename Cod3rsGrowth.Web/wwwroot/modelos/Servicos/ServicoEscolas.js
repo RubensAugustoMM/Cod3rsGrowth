@@ -50,8 +50,10 @@ sap.ui.define([
                 return await RepositorioEscolas.obterTodasEscolas(parametrosQuery);
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber dados de Escolas:\n";
-                console.error(mensagemDeErro + erro.message);
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEscolas.ErroAoObterEscolas";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);                console.error(mensagemDeErro + erro.message);
                 MessageBox.show(erro.message, {
                     icon: MessageBox.Icon.ERROR,
                     title: mensagemDeErro,

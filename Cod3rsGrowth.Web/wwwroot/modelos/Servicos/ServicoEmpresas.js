@@ -68,7 +68,10 @@ sap.ui.define([
                 return await RepositorioEmpresas.obterTodasEmpresas(parametrosQuery);
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Habilitado:\n";
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEmpresas.ErroAoObterEmpresas";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 console.error(mensagemDeErro + erro);
                 MessageBox.show(erro.message, {
                     icon: MessageBox.Icon.ERROR,

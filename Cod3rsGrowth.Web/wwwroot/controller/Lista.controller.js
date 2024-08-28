@@ -9,14 +9,14 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 ], (Controller,
-	Formatador,
-	Fragment,
-	NumberFormat,
-	DateFormat,
-	ServicoEmpresas,
-	ServicoEscolas,
-	JSONModel,
-	MessageBox) => {
+    Formatador,
+    Fragment,
+    NumberFormat,
+    DateFormat,
+    ServicoEmpresas,
+    ServicoEscolas,
+    JSONModel,
+    MessageBox) => {
     "use strict";
 
     return Controller.extend("ui5.cod3rsgrowth.controller.Lista", {
@@ -51,17 +51,19 @@ sap.ui.define([
                 roteador.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao inicializar a tela de listagem:\n";
+                const i18nMensagemDeErro = "Lista.ErroInicializarTelaListagem";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
         _aoCoincidirComRotaEmpresas: function () {
-            const i18nTituloEmpresas = "tituloEmpresas";
+            const i18nTituloEmpresas = "Lista.TituloEmpresas";
+            let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
 
             try {
                 let modelo = this.getView().getModel();
-                let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEmpresas))
                 modelo.setProperty(this.nomePropriedadePainelExpandido, false);
 
@@ -72,17 +74,18 @@ sap.ui.define([
                 this._formataElementosTabelaEmpresas();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao carregar rota 'Empresas':\n";
+                const i18nMensagemDeErro = "Lista.ErroRotaEmpresas";
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
         _aoCoincidirComRotaEscolas: function () {
-            const i18nTituloEscolas = "tituloEsocolas";
+            const i18nTituloEscolas = "Lista.TituloEsocolas";
+            let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
 
             try {
                 let modelo = this.getView().getModel();
-                let i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
                 this.byId(this.sIdLista).setTitle(i18n.getText(i18nTituloEscolas));
                 modelo.setProperty(this.nomePropriedadePainelExpandido, false);
 
@@ -93,7 +96,8 @@ sap.ui.define([
                 this._formataElementosTabelaEscola();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao carregar rota 'Escolas':\n";
+                const i18nMensagemDeErro = "Lista.ErroRotaEscolas";
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -114,7 +118,9 @@ sap.ui.define([
                 });
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao carregar fragmento filtor empresas:\n";
+                const i18nMensagemDeErro = "Lista.ErroCarregarFiltroEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -131,7 +137,9 @@ sap.ui.define([
                 }
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao remover fragmento filtro Empresas:\n";
+                const i18nMensagemDeErro = "Lista.ErroRemoveFiltroEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -152,7 +160,9 @@ sap.ui.define([
                 });
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao carregar fragmento filtro escolas:\n";
+                const i18nMensagemDeErro = "Lista.ErroCarregarFiltroEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -169,7 +179,9 @@ sap.ui.define([
                 }
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao remover fragmento de filtro de escolas:\n";
+                const i18nMensagemDeErro = "Lista.ErroRemoveFiltroEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -181,7 +193,9 @@ sap.ui.define([
                 this._formataElementosTabelaEmpresas();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao pressionar botão filtrar empresas:\n";
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoFiltrarEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -193,7 +207,9 @@ sap.ui.define([
                 this._formataElementosTabelaEscola();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao pressionar botão para filtrar Escolas:\n";
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoFiltrarEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -219,7 +235,9 @@ sap.ui.define([
                 }
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao retornar valores do filtro empresas:\n";
+                const i18nMensagemDeErro = "Lista.ErroRetornaFiltroEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -242,14 +260,15 @@ sap.ui.define([
                 }
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao retornar valores do filtro escolas:\n"
+                const i18nMensagemDeErro = "Lista.ErroRetornaFiltroEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
         _populaTabelaEmpresaComDados(filtro) {
             try {
-                const DataRepository = this.getOwnerComponent().DataRepository;
                 const tabela = this.byId(this.idTabela);
                 const modelo = this.getView().getModel();
 
@@ -259,13 +278,17 @@ sap.ui.define([
                     .then(empresas => {
                         modelo.setProperty(this.nomePropriedadeTabelaItems, empresas);
                     })
-                    .catch(error => {
-                        const mensagemDeErro = "Erro ao obter Empresas:\n";
+                    .catch(erro => {
+                        const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresasRequisicao";
+                        const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                        const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                         this._mostraMensagemDeErro(mensagemDeErro, erro);
                     });
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao popular tabela Empresas com dados:\n";
+                const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -366,88 +389,110 @@ sap.ui.define([
                 })
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao formatar elementos da tabela Empresa:\n";
+                const i18nMensagemDeErro = "Lista.ErroFormataTabelaEmpresas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
 
         _populaTabelaEscolaComDados(filtro) {
-            const DataRepository = this.getOwnerComponent().DataRepository;
-            const modelo = this.getView().getModel();
+            try {
+                const tabela = this.byId(this.idTabela);
+                const modelo = this.getView().getModel();
 
-            ServicoEscolas.obterTodasEscolas(filtro)
-                .then(escolas => {
-                    modelo.setProperty(this.nomePropriedadeTabelaItems, escolas);
-                })
-                .catch(error => {
-                    const mensagemDeErro = "Erro ao obter Escolas:"
-                    this._mostraMensagemDeErro(mensagemDeErro, erro);
-                });
+                tabela.removeAllColumns();
+
+                ServicoEscolas.obterTodasEscolas(filtro)
+                    .then(escolas => {
+                        modelo.setProperty(this.nomePropriedadeTabelaItems, escolas);
+                    })
+                    .catch(erro => {
+                        const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEscolasRequisicao";
+                        const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                        const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                        this._mostraMensagemDeErro(mensagemDeErro, erro);
+                    });
+            }
+            catch (erro) {
+                const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            }
         },
 
         _formataElementosTabelaEscola() {
-            const tabela = this.byId(this.idTabela);
+            try {
+                const tabela = this.byId(this.idTabela);
 
-            tabela.removeAllColumns();
+                tabela.removeAllColumns();
 
-            const camposEscolas = {
-                nome: "Nome",
-                codigoMec: "Código MEC",
-                statusAtividade: "Status Atividade",
-                organizacaoAcademica: "Organização Acadêmica",
-                estado: "Estado"
-            };
+                const camposEscolas = {
+                    nome: "Nome",
+                    codigoMec: "Código MEC",
+                    statusAtividade: "Status Atividade",
+                    organizacaoAcademica: "Organização Acadêmica",
+                    estado: "Estado"
+                };
 
-            let view = this.getView();
+                let view = this.getView();
 
-            Object.entries(camposEscolas).forEach(([campo, cabecalho]) => {
-                tabela.addColumn(new sap.m.Column({
-                    header: new sap.m.Label({ text: cabecalho })
-                }));
-            });
+                Object.entries(camposEscolas).forEach(([campo, cabecalho]) => {
+                    tabela.addColumn(new sap.m.Column({
+                        header: new sap.m.Label({ text: cabecalho })
+                    }));
+                });
 
-            tabela.bindItems({
-                path: this.nomePropriedadeTabelaItems,
-                template: new sap.m.ColumnListItem({
-                    cells: Object.keys(camposEscolas).map(campo => {
-                        if (campo === "estado") {
-                            return new sap.m.Text({
-                                text: {
-                                    path: campo,
-                                    formatter: this.formatador.textoEstado
-                                }
-                            });
-                        }
+                tabela.bindItems({
+                    path: this.nomePropriedadeTabelaItems,
+                    template: new sap.m.ColumnListItem({
+                        cells: Object.keys(camposEscolas).map(campo => {
+                            if (campo === "estado") {
+                                return new sap.m.Text({
+                                    text: {
+                                        path: campo,
+                                        formatter: this.formatador.textoEstado
+                                    }
+                                });
+                            }
 
-                        const posicaoArrayOrganizacaoAcademica = 3;
-                        const arrayChavesCamposEscolas = Object.keys(camposEscolas);
-                        if (campo === arrayChavesCamposEscolas[posicaoArrayOrganizacaoAcademica]) {
-                            return new sap.m.Text({
-                                text: {
-                                    path: campo,
-                                    formatter: function (organizacaoAcademica) {
-                                        return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, view);
-                                    }.bind(this)
-                                }
-                            });
-                        }
+                            const posicaoArrayOrganizacaoAcademica = 3;
+                            const arrayChavesCamposEscolas = Object.keys(camposEscolas);
+                            if (campo === arrayChavesCamposEscolas[posicaoArrayOrganizacaoAcademica]) {
+                                return new sap.m.Text({
+                                    text: {
+                                        path: campo,
+                                        formatter: function (organizacaoAcademica) {
+                                            return this.formatador.textoOrganizacaoAcademica(organizacaoAcademica, view);
+                                        }.bind(this)
+                                    }
+                                });
+                            }
 
-                        const posicaoArrayStatusAtividade = 2;
-                        if (campo === arrayChavesCamposEscolas[posicaoArrayStatusAtividade]) {
-                            return new sap.m.Text({
-                                text: {
-                                    path: campo,
-                                    formatter: function (statusAtividade) {
-                                        return this.formatador.textoSituacaoCadastral(statusAtividade, view);
-                                    }.bind(this)
-                                }
-                            });
-                        }
+                            const posicaoArrayStatusAtividade = 2;
+                            if (campo === arrayChavesCamposEscolas[posicaoArrayStatusAtividade]) {
+                                return new sap.m.Text({
+                                    text: {
+                                        path: campo,
+                                        formatter: function (statusAtividade) {
+                                            return this.formatador.textoSituacaoCadastral(statusAtividade, view);
+                                        }.bind(this)
+                                    }
+                                });
+                            }
 
-                        return new sap.m.Text({ text: "{" + campo + "}" });
+                            return new sap.m.Text({ text: "{" + campo + "}" });
+                        })
                     })
                 })
-            })
+            }
+            catch (erro) {
+                const i18nMensagemDeErro = "Lista.ErroFormataTabelaEscolas";
+                const i18n = this.getOwnerComponent().getModel(this.nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            }
         },
 
         _mostraMensagemDeErro(mensagemDeErro, erro) {

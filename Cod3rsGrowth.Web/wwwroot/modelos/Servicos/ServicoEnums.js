@@ -13,7 +13,10 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Estados:\n";
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaEstadoEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -25,7 +28,10 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Habilitado:\n";
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaHabilitadoEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -37,7 +43,10 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Natureza Juridica:\n";
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaNaturezaJuridicaEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
@@ -49,7 +58,10 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Organizacao Academica:\n";
+                const nomeModeloI18n = "i18n";
+                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaOrganizacaoAcademicaEnum";
+                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
+                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                 this._mostraMensagemDeErro(mensagemDeErro, erro);
             }
         },
