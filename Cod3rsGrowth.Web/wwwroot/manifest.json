@@ -9,7 +9,7 @@
     "applicationVersion": {
       "version": "1.0.0"
     },
-    "dataSources": {}
+    "dataSources": {    }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -38,7 +38,7 @@
           "fallbackLocale": ""
         }
       }
-    },
+        },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
       "type": "XML",
@@ -55,21 +55,26 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "type": "view",
-        "ViewType": "XML",
+        "viewType": "XML",
         "path": "ui5.cod3rsgrowth.view",
         "controlId": "app",
-        "controlAggregation": "pages",
+        "controlAggregation": "detailPages",
         "transition": "slide",
         "bypassed": {
           "target": "naoEncontrada"
         },
-        "async": "true"
+        "async": true
       },
       "routes": [
         {
-          "pattern": "",
-          "name": "PaginaPrincipal",
-          "target":"paginaPrincipal"
+          "pattern":  "",
+          "name": "Empresas",
+          "target": "lista"
+        },
+        {
+          "pattern": "escolas",
+          "name": "Escolas",
+          "target": "lista"
         }
       ],
       "targets": {
@@ -78,10 +83,12 @@
           "viewType": "XML",
           "viewId": "naoEncontrada"
         },
-        "paginaPrincipal": {
-          "viewName": "PaginaPrincipal",
-          "viewId": "paginaPrincipal",
-          "viewType": "XML"
+        "lista": {
+          "viewName": "Lista",
+          "viewType": "XML",
+          "viewId": "lista",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
         }
       }
     }

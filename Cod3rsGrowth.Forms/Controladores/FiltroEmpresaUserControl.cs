@@ -97,18 +97,14 @@ namespace Cod3rsGrowth.Forms.Controladores
             {
                 Filtro.EstadoFiltro = (EstadoEnums)comboBoxEstado.SelectedItem;
             }
-
+            
             if (comboBoxHabilitadoSituacaoCadastral.SelectedItem != null)
             {
-                if (HabilitadoEnums.Habilitado ==
-                      (HabilitadoEnums)comboBoxHabilitadoSituacaoCadastral.SelectedItem)
-                {
-                    Filtro.SitucaoCadastralFiltro = true;
-                }
-                else
-                {
-                    Filtro.SitucaoCadastralFiltro = false;
-                }
+                var deveMostrarSituacaoCadastralFiltro = HabilitadoEnums.Habilitado ==
+                                                         (HabilitadoEnums)comboBoxHabilitadoSituacaoCadastral
+                                                             .SelectedItem;
+
+                Filtro.SituacaoCadastralFiltro = deveMostrarSituacaoCadastralFiltro;
             }
 
             if (_filtroDataAbertura)

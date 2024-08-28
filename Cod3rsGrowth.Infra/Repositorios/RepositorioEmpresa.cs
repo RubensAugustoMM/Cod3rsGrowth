@@ -41,7 +41,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                                         RazaoSocial = empresa.RazaoSocial,
                                         NomeFantasia = empresa.NomeFantasia,
                                         Cnpj = empresa.Cnpj,
-                                        SitucaoCadastral = empresa.SitucaoCadastral,
+                                        SituacaoCadastral = empresa.SituacaoCadastral,
                                         DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                                         Idade = empresa.Idade,
                                         DataAbertura = empresa.DataAbertura,
@@ -66,7 +66,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                                                    RazaoSocial = empresa.RazaoSocial,
                                                    NomeFantasia = empresa.NomeFantasia,
                                                    Cnpj = empresa.Cnpj,
-                                                   SitucaoCadastral = empresa.SitucaoCadastral,
+                                                   SituacaoCadastral = empresa.SituacaoCadastral,
                                                    DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                                                    Idade = empresa.Idade,
                                                    DataAbertura = empresa.DataAbertura,
@@ -80,10 +80,10 @@ public class RepositorioEmpresa : IRepositorioEmpresa
 
         if (filtroEmpresaEnderecoOtd != null)
         {
-            if(filtroEmpresaEnderecoOtd.SitucaoCadastralFiltro != null)
+            if(filtroEmpresaEnderecoOtd.SituacaoCadastralFiltro != null)
             {
                 query = from empresa in query
-                        where empresa.SitucaoCadastral == filtroEmpresaEnderecoOtd.SitucaoCadastralFiltro
+                        where empresa.SituacaoCadastral == filtroEmpresaEnderecoOtd.SituacaoCadastralFiltro
                         let naturezaJuridica = empresa.NaturezaJuridica
                         let porte = empresa.Porte
                         let matrizFilial = empresa.MatrizFilial
@@ -94,7 +94,7 @@ public class RepositorioEmpresa : IRepositorioEmpresa
                             RazaoSocial = empresa.RazaoSocial,
                             NomeFantasia = empresa.NomeFantasia,
                             Cnpj = empresa.Cnpj,
-                            SitucaoCadastral = empresa.SitucaoCadastral,
+                            SituacaoCadastral = empresa.SituacaoCadastral,
                             DataSituacaoCadastral = empresa.DataSituacaoCadastral,
                             Idade = empresa.Idade,
                             DataAbertura = empresa.DataAbertura,

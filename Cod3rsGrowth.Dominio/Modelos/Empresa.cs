@@ -15,7 +15,7 @@ public class Empresa
     [Column("Cnpj"), NotNull]
     public string Cnpj { get; set; }
     [Column("SituacaoCadastral"), NotNull]
-    public bool SitucaoCadastral { get; set; }
+    public bool SituacaoCadastral { get; set; }
     [Column("DataSituacaoCadastral"), NotNull]
     public DateTime DataSituacaoCadastral { get; set; } = new();
     [Column("Idade"), NotNull]

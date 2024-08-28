@@ -371,7 +371,7 @@ public class TestesServicoEndereco : TesteBase
             RazaoSocial = "Fast! transportes LTDA",
             NomeFantasia = "Fast! transportes",
             Cnpj = "12345678901234",
-            SitucaoCadastral = true,
+            SituacaoCadastral = true,
             DataSituacaoCadastral = new DateTime(2024, 12, 03),
             DataAbertura = new DateTime(2023, 12, 03),
             CapitalSocial = 123124124,

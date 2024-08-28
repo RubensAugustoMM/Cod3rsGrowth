@@ -1,0 +1,115 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Panel id="filtroEscolasFragment">
+        <content>
+            <FlexBox
+                displayInline="true"
+                fitContainer="true"
+                renderType="Bare"
+                width="100%"
+                wrap="Wrap"
+            >
+                <Panel
+                    width="50%"
+                    headerText="{i18n>FiltroEscola.nome}"
+                >
+                    <content>
+                        <Input
+                            id="filtroNomeEscola"
+                            value="{/nomeEscola}"
+                            valueLiveUpdate="true"
+                            width="100%"
+                        />
+                    </content>
+                </Panel>
+                <Panel
+                    width="50%"
+                    headerText="{i18n>FiltroEscola.CodigoMec}"
+                >
+                    <content>
+                        <Input
+                            id="filtroCodigoMec"
+                            value="{/codigoMec}"
+                            valueLiveUpdate="true"
+                            type="Number"
+                            maxLength="8"
+                            width="100%"
+                        />
+                    </content>
+                </Panel>
+
+                <Panel
+                    width="50%"
+                    headerText="{i18n>FiltroEscola.StatusAtividade}"
+                >
+                    <content>
+                        <ComboBox
+                            id="filtroStatusAtividade"
+                            width="100%"
+                            selectedKey="{/statusAtividadeSelecionada}"
+                            items="{path:'habilitado>/Habilitado',
+                            sorter: {path: 'Valor'}}"
+                        >
+                            <c:Item
+                                key="{habilitado>Codigo}"
+                                text="{habilitado>Valor}"
+                            />
+                    </ComboBox>
+                    </content>
+                </Panel>
+                <Panel
+                    width="50%"
+                    headerText="{i18n>FiltroEscola.OrganizacaoAcademica}"
+                >
+                    <content>
+                        <ComboBox
+                            id="filtroOrganizacaoAcademica"
+                            width="100%"
+                            selectedKey="{/organizacaoAcademicaSelecionada}"
+                            items="{ path: 'organizacaoAcademica>/OrganizacaoAcademica',
+                                sorter: {path:'Valor'}}"
+                        >
+                            <c:Item
+                                key="{organizacaoAcademica>Codigo}"
+                                text="{organizacaoAcademica>Valor}"
+                            />
+                    </ComboBox>
+                    </content>
+                </Panel>
+                <Panel
+                    width="50%"
+                    headerText="{i18n>Filtro.Estado}"
+                >
+                    <content>
+                        <ComboBox
+                            id="filtroEstado"
+                            width="100%"
+                            selectedKey="{/estadoSelecionado}"
+                            items="{path: 'estados>/Estados',
+                        sorter: {path:'Valor'}}"
+                        >
+                            <c:Item
+                                key="{estados>Codigo}"
+                                text="{estados>Valor}"
+                            />
+                        </ComboBox>
+                    </content>
+                </Panel>
+                <Panel width="50%" />
+                <VBox
+                    width="95%"
+                    alignItems="End"
+                >
+                    <Button
+                        width="auto"
+                        text="{i18n>FiltroEscola.Filtrar}"
+                        press=".aoPressionarBotaoFiltrarEscola"
+                    />
+                </VBox>
+            </FlexBox>
+        </content>
+    </Panel>
+</c:FragmentDefinition>
+

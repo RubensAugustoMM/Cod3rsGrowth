@@ -44,7 +44,7 @@ public class ServicoEmpresa : IRepositorioEmpresa
             RazaoSocial = EmpresaEnderecoOtdDeletar.RazaoSocial,
             NomeFantasia = EmpresaEnderecoOtdDeletar.NomeFantasia,
             Cnpj = EmpresaEnderecoOtdDeletar.Cnpj,
-            SitucaoCadastral = EmpresaEnderecoOtdDeletar.SitucaoCadastral,
+            SituacaoCadastral = EmpresaEnderecoOtdDeletar.SituacaoCadastral,
             DataSituacaoCadastral = EmpresaEnderecoOtdDeletar.DataSituacaoCadastral,
             Idade = EmpresaEnderecoOtdDeletar.Idade,
             DataAbertura = EmpresaEnderecoOtdDeletar.DataAbertura,

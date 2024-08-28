@@ -64,7 +64,7 @@ public class TestesServicoConvenio : TesteBase
             RazaoSocial = "Carlinhos Ferragens LTDA",
             NomeFantasia = "Carlinhos Ferragens",
             Cnpj = "11122233344",
-            SitucaoCadastral = true,
+            SituacaoCadastral = true,
             DataSituacaoCadastral = new DateTime(1000, 12, 03),
             DataAbertura = new DateTime(1000, 12, 03),
             CapitalSocial = 13,

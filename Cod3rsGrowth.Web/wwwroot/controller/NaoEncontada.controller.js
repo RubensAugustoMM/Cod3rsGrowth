@@ -1,9 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller"
- ], function (Controller) {
-    "use strict";
+ ], (Controller) => {
+   "use strict";
+    
     return Controller.extend("ui5.cod3rsgrowth.controller.NaoEncontada", {
-       onInit: function () {
+       onInit() {
        }
     });
  });

@@ -5,7 +5,39 @@
     displayBlock="true"
 >
     <Shell>
-        <App class="cod3rsGrowth"
-            id="app"/>
+        <SplitApp
+            class="cod3rsGrowth"
+            id="app"
+        >
+            <masterPages>
+                <Page id="masterPages">
+                    <content>
+                        <List
+                            id="listaLateral"
+                            includeItemInSelection="false"
+                            mode="None"
+                        >
+                            <items>
+                                <StandardListItem
+                                    type="Active"
+                                    id="botaoLateralEmpresas"
+                                    title="{i18n>botaoLateralEmpresas}"
+                                    press=".aoClicarEmpresas"
+                                />
+                                <StandardListItem
+                                    type="Active"
+                                    id="botaoLateralEscolas"
+                                    title="{i18n>botaoLateralEscolas}"
+                                    press=".aoClicarEscolas"
+                                />
+                            </items>
+                        </List>
+                    </content>
+                </Page>
+            </masterPages>
+            <detailPages>
+                <Page id="detailPages" />
+            </detailPages>
+        </SplitApp>
     </Shell>
 </mvc:View>
