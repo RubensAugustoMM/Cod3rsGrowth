@@ -55,12 +55,14 @@ sap.ui.define([
             }
         },
         criarEndereco: async function (parametros) {
+            debugger;
             const valorNumericoPadrao = 0
             const valorStringPadrao = "";
             try {
             const parametrosEndereco = {
                 id: valorNumericoPadrao,
-                numero: parametros.numero != null ? parseInt(parametros.numero) : valorNumericoPadrao,
+                numero: parametros.numero != null && parametros.numero != valorNumericoPadrao ?
+                    parseInt(parametros.numero) : -1,
                 cep: parametros.cep != null ? parametros.cep : valorStringPadrao,
                 municipio: parametros.municipio != null ? parametros.municipio : valorStringPadrao,
                 bairro: parametros.bairro != null ? parametros.bairro : valorStringPadrao,

@@ -64,7 +64,7 @@ sap.ui.define([
 				return {
 					razaoSocial: modelo.getProperty(nomePropriedadeRazaoSocialEmpresa),
 					nomeFantasia: modelo.getProperty(nomePropriedadeNomeFantasiaEmpresa),
-					cnpj: modelo.getProperty(nomePropriedadeCnpjEmpresa),
+					cnpj: modelo.getProperty(nomePropriedadeCnpjEmpresa).toString(),
 					situacaoCadastral: modelo.getProperty(nomePropriedadeSituacaoCadastralEmpresa),
 					dataSituacaoCadastral: new Date(),
 					dataAbertura: modelo.getProperty(nomePropriedadeDataAberturaEmpresa),
@@ -120,9 +120,9 @@ sap.ui.define([
 					empresaCriar.idEndereco = respostaEndereco.id;
 					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar)
 					debugger;
-					const chaveOk = "ok";
 					if (!respostaEmpresa.ok &&  !respostaEndereco.ok &&
-						respostaEmpresa.ok != undefined && respostaEndereco.ok != undefined) {
+						respostaEmpresa.ok != undefined && respostaEndereco.ok != undefined ||
+						respostaEmpresa.Status != undefined || respostaEndereco.Status !=undefined) {
 						debugger;
 						const status500 = 500;
 						const status400 = 400;

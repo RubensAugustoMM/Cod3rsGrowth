@@ -66,12 +66,20 @@
                                     <Label
                                         text="{i18n>CriarEditarEmpresas.CnpjLabel}"
                                     />
-                                    <Input
+                                    <MaskInput
+                                        mask="99999999999999"
+                                        placeholder="_"
                                         id="cnpjInput"
-                                        value="{/cnpjEmpresaEntrada}"
-                                        valueLiveUpdate="true"
+                                        value="{
+                                            path:'/cnpjEmpresaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 14
+                                            }
+                                        }"
                                         width="auto"
-                                    />
+                                    >
+                                    </MaskInput>
                                 </VBox>
                                 <VBox alignItems="Inherit">
                                     <Label
@@ -196,10 +204,17 @@
                                     <Label
                                         text="{i18n>CriarEditarEmpresas.CepLabel}"
                                     />
-                                    <Input
+                                    <MaskInput
+                                        mask="99999999"
+                                        placeholder="_"
                                         id="cepInput"
-                                        value="{/cepEmpresaEntrado}"
-                                        valueLiveUpdate="true"
+                                        value="{
+                                            path:'/cepEmpresaEntrado',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 14
+                                            }
+                                        }"
                                         width="auto"
                                     />
                                 </VBox>
@@ -259,10 +274,13 @@
                                     <Label
                                         text="{i18n>CriarEditarEmpresas.NumeroLabel}"
                                     />
-                                    <Input
+                                    <MaskInput
+                                        mask="9999999999"
                                         id="numeroInput"
-                                        value="{/numeroEmpresaEntrado}"
-                                        valueLiveUpdate="true"
+                                        value="{
+                                            path:'/numeroEmpresaEntrado',
+                                            type: 'sap.ui.model.type.Integer'
+                                        }"
                                         width="auto"
                                     />
                                 </VBox>
