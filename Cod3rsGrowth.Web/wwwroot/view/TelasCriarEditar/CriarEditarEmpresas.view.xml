@@ -204,17 +204,10 @@
                                     <Label
                                         text="{i18n>CriarEditarEmpresas.CepLabel}"
                                     />
-                                    <MaskInput
-                                        mask="99999999"
-                                        placeholder="_"
+                                    <Input
                                         id="cepInput"
-                                        value="{
-                                            path:'/cepEmpresaEntrado',
-                                            type: 'sap.ui.model.type.Integer',
-                                            constraints: {
-                                                maxLength: 14
-                                            }
-                                        }"
+                                        value="{/cepEmpresaEntrado}"
+                                        valueLiveUpdate="true"
                                         width="auto"
                                     />
                                 </VBox>
@@ -274,13 +267,10 @@
                                     <Label
                                         text="{i18n>CriarEditarEmpresas.NumeroLabel}"
                                     />
-                                    <MaskInput
-                                        mask="9999999999"
+                                    <Input
                                         id="numeroInput"
-                                        value="{
-                                            path:'/numeroEmpresaEntrado',
-                                            type: 'sap.ui.model.type.Integer'
-                                        }"
+                                        value="{/numeroEmpresaEntrado}"
+                                        valueLiveUpdate="true"
                                         width="auto"
                                     />
                                 </VBox>
