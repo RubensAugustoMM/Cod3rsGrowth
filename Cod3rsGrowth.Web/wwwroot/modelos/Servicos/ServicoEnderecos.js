@@ -14,40 +14,40 @@ sap.ui.define([
                     const chavesFiltro = Object.keys(filtro);
                     const posicaoArrayNumeroFiltro = 0;
                     const chaveFiltroNumero = chavesFiltro[posicaoArrayNumeroFiltro];
-                    if (filtro[chaveFiltroNumero] !== undefined) {
+                    if (filtro.NumeroFiltro !== undefined) {
                         const parametroFiltroNumero = `&${chaveFiltroNumero}=`;
-                        let valorNumero = filtro[chaveFiltroNumero];
+                        let valorNumero = filtro.NumeroFiltro;
                         parametrosFiltro += parametroFiltroNumero += valorNumero;
                     }
 
                     const posicaoArrayCepFiltro = 1;
                     const chaveFiltroCep = chavesFiltro[posicaoArrayCepFiltro];
-                    if (filtro[chaveFiltroCep] !== undefined) {
+                    if (filtro.CepFiltro !== undefined) {
                         const parametroFiltroCep = `&${chaveFiltroCep}=`;
-                        let valorCep = filtro[chaveFiltroCep];
+                        let valorCep = filtro.CepFiltro;
                         parametrosFiltro += parametroFiltroCep += valorCep;
                     }
 
                     const posicaoArrayMunicipioFiltro = 2;
                     const chaveFiltroMunicipio = chavesFiltro[posicaoArrayMunicipioFiltro];
-                    if (filtro[chaveFiltroMunicipio !== undefined]) {
+                    if (filtro.MunicipioFiltro !== undefined) {
                         const parametroFiltroMunicipio = `&${chaveFiltroMunicipio}=`;
-                        let valorMunicipio = filtro[chaveFiltroMunicipio];
+                        let valorMunicipio = filtro.MunicipioFiltro;
                         parametrosFiltro += parametroFiltroMunicipio += valorMunicipio;
                     }
 
                     const posicaoArrayBairroFiltro = 3;
                     const chaveFiltroBairro = chavesFiltro[posicaoArrayBairroFiltro];
-                    if (filtro[chaveFiltroBairro] !== undefined) {
+                    if (filtro.BairroFiltro !== undefined) {
                         const parametroFiltroBairro = `&${chaveFiltroBairro}=`;
-                        let valorBairro = filtro[chaveFiltroBairro];
+                        let valorBairro = filtro.BairroFiltro;
                         parametrosFiltro += parametroFiltroBairro += valorBairro;
                     }
                     const posicaoArrayEstadoFiltro = 4;
                     const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
-                    if (filtro[chaveFiltroEstado] !== undefined) {
+                    if (filtro.EstadoFiltro !== undefined) {
                         let PArametroFiltroEstado = `&${chaveFiltroEstado}=`;
-                        parametrosFiltro += PArametroFiltroEstado + filtro[chaveFiltroEstado];
+                        parametrosFiltro += PArametroFiltroEstado + filtro.EstadoFiltro;
                     }
                 }
                 return await RepositorioEnderecos.obterTodosEnderecos(parametroFiltro);
@@ -58,32 +58,18 @@ sap.ui.define([
         },
         criarEndereco: async function (parametros) {
             debugger;
-            const chavesParametro = Object.keys(parametros);
-            const posicaoArrayNumero = 0;
-            const posicaoArrayCep = 1;
-            const posicaoArrayMunicipio = 2;
-            const posicaoArrayBairro = 3;
-            const posicaoArrayRua = 4;
-            const posicaoArrayComplemento = 5;
-            const posicaoArrayEstado = 6;
             const valorNumericoPadrao = 0
             const valorStringPadrao = "";
             try {
             const parametrosEndereco = {
                 id: valorNumericoPadrao,
-                numero: parametros[chavesParametro[posicaoArrayNumero]] != null ?
-                    parseInt(parametros[chavesParametro[posicaoArrayNumero]]) : valorNumericoPadrao,
-                cep: parametros[chavesParametro[posicaoArrayCep]] != null ?
-                    parametros[chavesParametro[posicaoArrayCep]] : valorStringPadrao,
-                municipio: parametros[chavesParametro[posicaoArrayMunicipio]] != null ?
-                    parametros[chavesParametro[posicaoArrayMunicipio]] : valorStringPadrao,
-                bairro: parametros[chavesParametro[posicaoArrayBairro]] != null ?
-                    parametros[chavesParametro[posicaoArrayBairro]] : valorStringPadrao,
-                rua: parametros[chavesParametro[posicaoArrayRua]] != null ?
-                    parametros[chavesParametro[posicaoArrayRua]] : valorStringPadrao,
-                complemento: parametros[chavesParametro[posicaoArrayComplemento]] != null ?
-                    parametros[chavesParametro[posicaoArrayComplemento]] : valorStringPadrao,
-                estado: parseInt(parametros[chavesParametro[posicaoArrayEstado]] ?? valorNumericoPadrao)
+                numero: parametros.numero != null ? parseInt(parametros.numero) : valorNumericoPadrao,
+                cep: parametros.cep != null ? parametros.cep : valorStringPadrao,
+                municipio: parametros.municipio != null ? parametros.municipio : valorStringPadrao,
+                bairro: parametros.bairro != null ? parametros.bairro : valorStringPadrao,
+                rua: parametros.rua != null ? parametros.rua : valorStringPadrao,
+                complemento: parametros.complemento != null ? parametros.complemento : valorStringPadrao,
+                estado: parseInt(parametros.estado ?? valorNumericoPadrao)
             }
                 return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
             } 

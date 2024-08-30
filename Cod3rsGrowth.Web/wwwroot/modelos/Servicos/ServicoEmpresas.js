@@ -12,23 +12,23 @@ sap.ui.define([
                     const chavesFiltro = Object.keys(filtro);
                     const posicaoArrayRazaoSocialFiltro = 1;
                     const chaveFiltroRazaoSocial = chavesFiltro[posicaoArrayRazaoSocialFiltro];
-                    if (filtro[chaveFiltroRazaoSocial] !== undefined) {
+                    if (filtro.RazaoSocialFiltro !== undefined) {
                         const parametroFiltroRazaoSocial = `&${chaveFiltroRazaoSocial}=`;
-                        parametrosFiltro += parametroFiltroRazaoSocial + filtro[chaveFiltroRazaoSocial];
+                        parametrosFiltro += parametroFiltroRazaoSocial + filtro.RazaoSocialFiltro;
                     }
 
                     const posicaoArrayCnpjFiltro = 2;
                     const chaveFiltroCnpj = chavesFiltro[posicaoArrayCnpjFiltro];
-                    if (filtro[chaveFiltroCnpj] !== undefined) {
+                    if (filtro.CnpjFiltro !== undefined) {
                         const parametroFiltroCnpj = `&${chaveFiltroCnpj}=`;
-                        parametrosFiltro += parametroFiltroCnpj + filtro[chaveFiltroCnpj];
+                        parametrosFiltro += parametroFiltroCnpj + filtro.CnpjFiltro;
                     }
 
                     const posicaoArraySituacaoCadastralFiltro = 0;
                     const chaveFiltroSituacaoCadastral = chavesFiltro[posicaoArraySituacaoCadastralFiltro];
-                    if (filtro[chaveFiltroSituacaoCadastral] !== undefined) {
+                    if (filtro.SituacaoCadastralFiltro !== undefined) {
                         const parametroFiltroSituacaoCadastral = `&${chaveFiltroSituacaoCadastral}=`;
-                        var valorSituacaoCadastralFiltro = parseInt(filtro[chaveFiltroSituacaoCadastral]);
+                        var valorSituacaoCadastralFiltro = parseInt(filtro.SituacaoCadastralFiltro);
                         parametrosFiltro += parametroFiltroSituacaoCadastral;
                         const valoresHabilitadosHabilitado = 1;
                         parametrosFiltro += valorSituacaoCadastralFiltro == valoresHabilitadosHabilitado;
@@ -36,31 +36,31 @@ sap.ui.define([
 
                     const posicaoArrayDataAberturaFiltro = 4;
                     const chaveFiltroDataAberturaFiltro = chavesFiltro[posicaoArrayDataAberturaFiltro];
-                    if (filtro[chaveFiltroDataAberturaFiltro] !== undefined &&
-                        filtro[chaveFiltroDataAberturaFiltro] !== null) {
+                    if (filtro.DataAberturaFiltro !== undefined &&
+                        filtro.DataAberturaFiltro !== null) {
                         const parametroFiltroDataAbertura = `&${chaveFiltroDataAberturaFiltro}=`;
-                        parametrosFiltro += parametroFiltroDataAbertura + filtro[chaveFiltroDataAberturaFiltro];
+                        parametrosFiltro += parametroFiltroDataAbertura + filtro.DataAberturaFiltro;
                     }
 
                     const posicaoArrayCapitalSocialFiltro = 3;
                     const chaveFiltroCapitalSocial = chavesFiltro[posicaoArrayCapitalSocialFiltro];
-                    if (filtro[chaveFiltroCapitalSocial] !== undefined) {
+                    if (filtro.CapitalSocialFiltro !== undefined) {
                         const parametroFiltroCapitalSocial = `&${chaveFiltroCapitalSocial}=`;
-                        parametrosFiltro += parametroFiltroCapitalSocial + filtro[chaveFiltroCapitalSocial];
+                        parametrosFiltro += parametroFiltroCapitalSocial + filtro.CapitalSocialFiltro;
                     }
 
                     const posicaoArrayNaturezaJuridicaFiltro = 5;
                     const chaveFiltroNaturezaJuridica = chavesFiltro[posicaoArrayNaturezaJuridicaFiltro];
-                    if (filtro[chaveFiltroNaturezaJuridica] !== undefined) {
+                    if (filtro.NaturezaJuridicaFiltro !== undefined) {
                         const parametroFiltroNaturezaJuridica = `&${chaveFiltroNaturezaJuridica}=`;
-                        parametrosFiltro += parametroFiltroNaturezaJuridica + filtro[chaveFiltroNaturezaJuridica];
+                        parametrosFiltro += parametroFiltroNaturezaJuridica + filtro.NaturezaJuridicaFiltro;
                     }
 
                     const posicaoArrayEstadoFiltro = 6;
                     const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
-                    if (filtro[chaveFiltroEstado] !== undefined) {
+                    if (filtro.EstadoFiltro !== undefined) {
                         const parametroFiltroEstado = `&${chaveFiltroEstado}=`;
-                        parametrosFiltro += parametroFiltroEstado + filtro[chaveFiltroEstado];
+                        parametrosFiltro += parametroFiltroEstado + filtro.EstadoFiltro;
                     }
                 }
                 return await RepositorioEmpresas.obterTodasEmpresas(parametrosFiltro);
@@ -72,43 +72,25 @@ sap.ui.define([
 
         criarEmpresa: async function (parametros) {
             debugger;
-            const chavesParametro = Object.keys(parametros);
-            const posicaoArrayRazaoSocial = 0;
-            const posicaoArrayNomeFantasia = 1;
-            const posicaoArrayCnpj = 2;
-            const posicaoArraySituacaoCadastral = 3;
-            const posicaoArrayDataSituacaoCadastral = 4;
-            const posicaoArrayDataAbertura = 5;
-            const posicaoArrayNaturezaJuridica = 6;
-            const posicaoArrayPorte = 7;
-            const posicaoArrayMatrizFilial = 8;
-            const posicaoArrayCapitalSocial = 9;
-            const posicaoArrayIdEndereco = 10;
             const valorNumericoPadrao = 0;
             const valorStringPadrao = "";
             const valorDataPadrao = "0001-01-01T01:01:01";
             try {
                 const parametrosEmpresa = {
                     id: valorNumericoPadrao,
-                    razaoSocial: parametros[chavesParametro[posicaoArrayRazaoSocial]] != null ?
-                        parametros[chavesParametro[posicaoArrayRazaoSocial]] : valorStringPadrao,
-                    nomeFantasia: parametros[chavesParametro[posicaoArrayNomeFantasia]] != null ?
-                        parametros[chavesParametro[posicaoArrayNomeFantasia]] : valorStringPadrao,
-                    cnpj: parametros[chavesParametro[posicaoArrayCnpj]] != null ?
-                        parametros[chavesParametro[posicaoArrayCnpj]] : valorStringPadrao,
-                    situacaoCadastral: parseInt(parametros[chavesParametro[posicaoArraySituacaoCadastral]] ?? valorNumericoPadrao),
-                    dataSituacaoCadastral: parametros[chavesParametro[posicaoArrayDataSituacaoCadastral]] != null ?
-                        parametros[chavesParametro[posicaoArrayDataSituacaoCadastral]] : valorStringPadrao,
-                    idade: parametros[chavesParametro[posicaoArrayDataAbertura]] != null ?
-                        new Date().getYear() - new Date(parametros[chavesParametro[posicaoArrayDataAbertura]]).getYear() : valorNumericoPadrao,
-                    dataAbertura: parametros[chavesParametro[posicaoArrayDataAbertura]] != null ?
-                        parametros[chavesParametro[posicaoArrayDataAbertura]] : new Date(valorDataPadrao),
-                    naturezaJuridica: parseInt(parametros[chavesParametro[posicaoArrayNaturezaJuridica]] ?? valorNumericoPadrao),
-                    porte: parseInt(parametros[chavesParametro[posicaoArrayPorte]] ?? valorNumericoPadrao),
-                    matrizFilial: parseInt(parametros[chavesParametro[posicaoArrayMatrizFilial]] ?? valorNumericoPadrao),
-                    capitalSocial: parseInt(parametros[chavesParametro[posicaoArrayCapitalSocial]]) ?
-                        parseInt(parametros[chavesParametro[posicaoArrayCapitalSocial]]) : valorNumericoPadrao,
-                    idEndereco: parametros[chavesParametro[posicaoArrayIdEndereco]] ?? valorNumericoPadrao
+                    razaoSocial: parametros.razaoSocial != null ? parametros.razaoSocial : valorStringPadrao,
+                    nomeFantasia: parametros.razaoSocial != null ? parametros.razaoSocial : valorStringPadrao,
+                    cnpj: parametros.cnpj != null ? parametros.cnpj : valorStringPadrao,
+                    situacaoCadastral: parseInt(parametros.situacaoCadastral ?? valorNumericoPadrao),
+                    dataSituacaoCadastral: parametros.dataSituacaoCadastral != null ? parametros.dataSituacaoCadastral : valorStringPadrao,
+                    idade: parametros.dataAbertura != null ?
+                        new Date().getYear() - new Date(parametros.dataAbertura).getYear() : valorNumericoPadrao,
+                    dataAbertura: parametros.dataAbertura != null ? parametros.dataAbertura : new Date(valorDataPadrao),
+                    naturezaJuridica: parseInt(parametros.naturezaJuridica ?? valorNumericoPadrao),
+                    porte: parseInt(parametros.porte ?? valorNumericoPadrao),
+                    matrizFilial: parseInt(parametros.matrizFilial ?? valorNumericoPadrao),
+                    capitalSocial: parseFloat(parametros.capitalSocial) ? parseInt(parametros.capitalSocial) : valorNumericoPadrao,
+                    idEndereco: parametros.idEndereco ?? valorNumericoPadrao
                 }
                 const valorHabilitado = 1;
                 parametrosEmpresa[chavesParametro[posicaoArraySituacaoCadastral]] =

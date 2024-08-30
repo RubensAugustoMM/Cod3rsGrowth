@@ -117,8 +117,7 @@ sap.ui.define([
 				if (this._rotaAtual == "EmpresaCriar") {
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco());
 					let empresaCriar = this._retornaValoresEmpresa();
-					const chaveIdEndereco = "idEndereco";
-					empresaCriar.idEndereco = respostaEndereco[chaveIdEndereco];
+					empresaCriar.idEndereco = respostaEndereco.id;
 					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(this._retornaValoresEmpresa())
 					debugger;
 					if (!respostaEmpresa.ok || !respostaEndereco.ok) {

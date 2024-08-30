@@ -78,6 +78,7 @@
                                         text="{i18n>CriarEditarEmpresas.CapitalSocialLabel}"
                                     />
                                     <Input
+                                        type="Number"
                                         id="capitalSocialInput"
                                         value="{/capitalSocialEmpresaEntrada}"
                                         valueLiveUpdate="true"
