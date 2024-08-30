@@ -13,11 +13,7 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaEstadoEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
             }
         },
         async retornaModeloHabilitadoEnum() {
@@ -28,11 +24,7 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaHabilitadoEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
             }
         },
         async retornaModeloNaturezaJuridicaEnum() {
@@ -43,11 +35,7 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaNaturezaJuridicaEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
             }
         },
         async retornaModeloOrganizacaoAcademicaEnum() {
@@ -58,11 +46,8 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaOrganizacaoAcademicaEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
+
             }
         },
         async retornaModeloPorteEnum() {
@@ -73,11 +58,7 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaPorteEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
             }
         },
         async retornaModeloMatrizFilialEnum() {
@@ -88,21 +69,8 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const nomeModeloI18n = "i18n";
-                const i18nMensagemDeErro = "ServicoEnums.ErroRetornaMatrizFilialEnum";
-                const i18n = this.getOwnerComponent().getModel(nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+                throw erro;
             }
-        },
-
-        _mostraMensagemDeErro(mensagemDeErro, erro) {
-            console.error(mensagemDeErro + erro.message);
-            MessageBox.show(erro.message, {
-                icon: MessageBox.Icon.ERROR,
-                title: mensagemDeErro,
-                actions: [MessageBox.Action.CLOSE]
-            });
         }
     }
 });

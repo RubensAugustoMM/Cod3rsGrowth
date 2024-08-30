@@ -225,7 +225,7 @@ sap.ui.define([
             const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
 
             try {
-                let modelo = this.getView().getModel();
+                const modelo = this.getView().getModel();
                 return {
                     SituacaoCadastralFiltro: modelo.getProperty(nomePropriedadeSituacaoCadastralSelecioada),
                     RazaoSocialFiltro: modelo.getProperty(nomePropriedadeNomeEmpresa),
@@ -281,6 +281,7 @@ sap.ui.define([
                         modelo.setProperty(this._nomePropriedadeTabelaItems, empresas);
                     })
                     .catch(erro => {
+                        debugger;
                         const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresasRequisicao";
                         const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
                         const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
@@ -525,8 +526,8 @@ sap.ui.define([
             }
         },
         _mostraMensagemDeErro(mensagemDeErro, erro) {
-            console.error(mensagemDeErro + erro.message);
-            MessageBox.show(erro.message, {
+            console.error(mensagemDeErro + erro);
+            MessageBox.show(erro, {
                 icon: MessageBox.Icon.ERROR,
                 title: mensagemDeErro,
                 actions: [MessageBox.Action.CLOSE]

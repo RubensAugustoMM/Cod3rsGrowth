@@ -46,7 +46,7 @@
                                     />
                                     <Input
                                         id="razaoSocialInput"
-                                        value="{/razaoSocialEmpresa}"
+                                        value="{/razaoSocialEmpresaEntrada}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -57,7 +57,7 @@
                                     />
                                     <Input
                                         id="nomeFantasiaInput"
-                                        value="{/nomeFantasiaEmpresa}"
+                                        value="{/nomeFantasiaEmpresaEntrada}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -68,7 +68,7 @@
                                     />
                                     <Input
                                         id="cnpjInput"
-                                        value="{/cnpjEmpresa}"
+                                        value="{/cnpjEmpresaEntrada}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -79,7 +79,7 @@
                                     />
                                     <Input
                                         id="capitalSocialInput"
-                                        value="{/capitalSocialEmpresa}"
+                                        value="{/capitalSocialEmpresaEntrada}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -197,7 +197,7 @@
                                     />
                                     <Input
                                         id="cepInput"
-                                        value="{/cepEmpresa}"
+                                        value="{/cepEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -225,7 +225,7 @@
                                     />
                                     <Input
                                         id="municipioInput"
-                                        value="{/municipioEmpresa}"
+                                        value="{/municipioEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -236,7 +236,7 @@
                                     />
                                     <Input
                                         id="bairroInput"
-                                        value="{/bairroEmpresa}"
+                                        value="{/bairroEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -249,7 +249,7 @@
                                     />
                                     <Input
                                         id="ruaInput"
-                                        value="{/ruaEmpresa}"
+                                        value="{/ruaEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -260,7 +260,7 @@
                                     />
                                     <Input
                                         id="numeroInput"
-                                        value="{/numeroEmpresa}"
+                                        value="{/numeroEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -271,7 +271,7 @@
                                     />
                                     <Input
                                         id="complementoInput"
-                                        value="{/complementoEmpresa}"
+                                        value="{/complementoEmpresaEntrado}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -286,7 +286,7 @@
                                 id="botaoSalvar"
                                 width="60%"
                                 text="{i18n>CriarEditarEmpresas.Salvar}"
-                                press="aoPressionarSalvar"
+                                press=".aoPressionarSalvar"
                             />
                         </VBox>
                     </content>

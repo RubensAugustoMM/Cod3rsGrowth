@@ -7,11 +7,11 @@ namespace Cod3rsGrowth.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EnderecoController : ControllerBase
+public class EnderecosController : ControllerBase
 {
     private readonly ServicoEndereco _servicoEndereco;
 
-    public EnderecoController(ServicoEndereco servicoEndereco)
+    public EnderecosController(ServicoEndereco servicoEndereco)
     {
         _servicoEndereco = servicoEndereco;
     }
@@ -30,7 +30,7 @@ public class EnderecoController : ControllerBase
         return Ok(endereco);
     }
 
-    [HttpPost]
+    [HttpPost("[action]")]
     public IActionResult Criar([FromBody] Endereco enderecoCriar)
     {
         _servicoEndereco.Criar(enderecoCriar);
