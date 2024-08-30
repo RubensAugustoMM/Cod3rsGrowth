@@ -110,17 +110,20 @@ sap.ui.define([
 			}
 		},
 		aoPressionarSalvar: async function () {
-			debugger;
 			let respostaEndereco;
 			let textoErro = "";
 			try {
 				if (this._rotaAtual == "EmpresaCriar") {
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco());
 					let empresaCriar = this._retornaValoresEmpresa();
-					empresaCriar.idEndereco = respostaEndereco.id;
-					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(this._retornaValoresEmpresa())
 					debugger;
-					if (!respostaEmpresa.ok || !respostaEndereco.ok) {
+					empresaCriar.idEndereco = respostaEndereco.id;
+					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar)
+					debugger;
+					const chaveOk = "ok";
+					if (!respostaEmpresa.ok &&  !respostaEndereco.ok &&
+						respostaEmpresa.ok != undefined && respostaEndereco.ok != undefined) {
+						debugger;
 						const status500 = 500;
 						const status400 = 400;
 						if (respostaEmpresa.Status == status400) {
@@ -135,6 +138,7 @@ sap.ui.define([
 						if (respostaEndereco.Status == status500) {
 							textoErro += respostaEndereco.Detail;
 						}
+
 						throw new Error(textoErro);
 					}
 					this.aoPressionarBotaoDeNavegacao();
@@ -166,8 +170,9 @@ sap.ui.define([
 			}
 		},
 		_mostraMensagemDeErro(mensagemDeErro, erro) {
-			console.error(mensagemDeErro + erro.stack);
-			MessageBox.show(erro.stack, {
+			debugger;
+			console.error(mensagemDeErro + erro.message);
+			MessageBox.show(erro.message, {
 				icon: MessageBox.Icon.ERROR,
 				title: mensagemDeErro,
 				actions: [MessageBox.Action.CLOSE]

@@ -15,7 +15,6 @@ sap.ui.define([
             }
         },
         criarEmpresa: async function (parametros) {
-            debugger;
             try {
                 const urlAcao = "/Criar"
                 const resposta = await fetch(this._urlBase + urlAcao, {

@@ -71,7 +71,6 @@ sap.ui.define([
         },
 
         criarEmpresa: async function (parametros) {
-            debugger;
             const valorNumericoPadrao = 0;
             const valorStringPadrao = "";
             const valorDataPadrao = "0001-01-01T01:01:01";
@@ -93,8 +92,8 @@ sap.ui.define([
                     idEndereco: parametros.idEndereco ?? valorNumericoPadrao
                 }
                 const valorHabilitado = 1;
-                parametrosEmpresa[chavesParametro[posicaoArraySituacaoCadastral]] =
-                    valorHabilitado == parseInt(parametros[chavesParametro[posicaoArraySituacaoCadastral]]);
+                parametrosEmpresa.situacaoCadastral =
+                    valorHabilitado == parseInt(parametros.situacaoCadastral);
                 return await RepositorioEmpresas.criarEmpresa(parametrosEmpresa);
             }
             catch (erro) {

@@ -1,8 +1,6 @@
 sap.ui.define([
-    "sap/m/MessageBox",
     "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEnderecos"
 ], function (
-    MessageBox,
     RepositorioEnderecos
 ) {
     return {
@@ -57,7 +55,6 @@ sap.ui.define([
             }
         },
         criarEndereco: async function (parametros) {
-            debugger;
             const valorNumericoPadrao = 0
             const valorStringPadrao = "";
             try {
