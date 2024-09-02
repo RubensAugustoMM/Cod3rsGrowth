@@ -1,23 +1,40 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"sap/ui/core/routing/History",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
 	"sap/viz/ui5/types/layout/Stack",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
-	"sap/ui/core/date/UI5Date"
+	"sap/ui/core/date/UI5Date",
+	"sap/m/MessageBox"
 ], function (
 	Controller,
 	History,
 	ServicoEmpresas,
-	MessageBox,
 	Stack,
 	ServicoEnderecos,
 	UI5Date,
-	History,
 	MessageBox
 ) {
 	"use strict";
 
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEmpresas", {
+
+		_nomePropriedadeCepEmpresa: "/cepEmpresaEntrado",
+		_nomePropriedadeEstadoEmpresa: "/estadoSelecionadoEmpresa",
+		_nomePropriedadeMunicipioEmpresa: "/municipioEmpresaEntrado",
+		_nomePropriedadeBairroEmpresa: "/bairroEmpresaEntrado",
+		_nomePropriedadeRuaEmpresa: "/ruaEmpresaEntrado",
+		_nomePropriedadeNumeroEmpresa: "/numeroEmpresaEntrado",
+		_nomePropriedadeComplementoEmpresa: "/complementoEmpresaEntrado",
+		_nomePropriedadeRazaoSocialEmpresa: "/razaoSocialEmpresaEntrada",
+		_nomePropriedadeNomeFantasiaEmpresa: "/nomeFantasiaEmpresaEntrada",
+		_nomePropriedadeCnpjEmpresa: "/cnpjEmpresaEntrada",
+		_nomePropriedadeCapitalSocialEmpresa: "/capitalSocialEmpresaEntrada",
+		_nomePropriedadeNaturezaJuridicaEmpresa: "/naturezaJuridicaSelecionada",
+		_nomePropriedadePorteEmpresa: "/porteSelecionado",
+		_nomePropriedadeMatrizFilialEmpresa: "/matrizFilialSelecionado",
+		_nomePropriedadeSituacaoCadastralEmpresa: "/situacaoCadastralSelecionado",
+		_nomePropriedadeDataAberturaEmpresa: "/dataAberturaSelecionada",
 		_rotaAtual: "",
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEmpresas: "criarEditarEmpresas",
@@ -58,29 +75,19 @@ sap.ui.define([
 			}
 		},
 		_retornaValoresEmpresa() {
-			const nomePropriedadeRazaoSocialEmpresa = "/razaoSocialEmpresaEntrada";
-			const nomePropriedadeNomeFantasiaEmpresa = "/nomeFantasiaEmpresaEntrada";
-			const nomePropriedadeCnpjEmpresa = "/cnpjEmpresaEntrada";
-			const nomePropriedadeCapitalSocialEmpresa = "/capitalSocialEmpresaEntrada";
-			const nomePropriedadeNaturezaJuridicaEmpresa = "/naturezaJuridicaSelecionada";
-			const nomePropriedadePorteEmpresa = "/porteSelecionado";
-			const nomePropriedadeMatrizFilialEmpresa = "/matrizFilialSelecionado";
-			const nomePropriedadeSituacaoCadastralEmpresa = "/situacaoCadastralSelecionado";
-			const nomePropriedadeDataAberturaEmpresa = "/dataAberturaSelecionada";
-
 			try {
 				const modelo = this.getView().getModel();
 				return {
-					razaoSocial: modelo.getProperty(nomePropriedadeRazaoSocialEmpresa),
-					nomeFantasia: modelo.getProperty(nomePropriedadeNomeFantasiaEmpresa),
-					cnpj: String(modelo.getProperty(nomePropriedadeCnpjEmpresa)),
-					situacaoCadastral: modelo.getProperty(nomePropriedadeSituacaoCadastralEmpresa),
+					razaoSocial: modelo.getProperty(this._nomePropriedadeRazaoSocialEmpresa),
+					nomeFantasia: modelo.getProperty(this._nomePropriedadeNomeFantasiaEmpresa),
+					cnpj: String(modelo.getProperty(this._nomePropriedadeCnpjEmpresa)),
+					situacaoCadastral: modelo.getProperty(this._nomePropriedadeSituacaoCadastralEmpresa),
 					dataSituacaoCadastral: new Date(),
-					dataAbertura: modelo.getProperty(nomePropriedadeDataAberturaEmpresa),
-					naturezaJuridica: modelo.getProperty(nomePropriedadeNaturezaJuridicaEmpresa),
-					porte: modelo.getProperty(nomePropriedadePorteEmpresa),
-					matrizFilial: modelo.getProperty(nomePropriedadeMatrizFilialEmpresa),
-					capitalSocial: modelo.getProperty(nomePropriedadeCapitalSocialEmpresa),
+					dataAbertura: modelo.getProperty(this._nomePropriedadeDataAberturaEmpresa),
+					naturezaJuridica: modelo.getProperty(this._nomePropriedadeNaturezaJuridicaEmpresa),
+					porte: modelo.getProperty(this._nomePropriedadePorteEmpresa),
+					matrizFilial: modelo.getProperty(this._nomePropriedadeMatrizFilialEmpresa),
+					capitalSocial: modelo.getProperty(this._nomePropriedadeCapitalSocialEmpresa),
 					idEndereco: 0
 				}
 			}
@@ -92,23 +99,16 @@ sap.ui.define([
 			}
 		},
 		_retornaValoresEndereco() {
-			const nomePropriedadeCepEmpresa = "/cepEmpresaEntrado";
-			const nomePropriedadeEstadoEmpresa = "/estadoSelecionadoEmpresa";
-			const nomePropriedadeMunicipioEmpresa = "/municipioEmpresaEntrado";
-			const nomePropriedadeBairroEmpresa = "/bairroEmpresaEntrado";
-			const nomePropriedadeRuaEmpresa = "/ruaEmpresaEntrado";
-			const nomePropriedadeNumeroEmpresa = "/numeroEmpresaEntrado";
-			const nomePropriedadeComplementoEmpresa = "/complementoEmpresaEntrado";
 			try {
 				const modelo = this.getView().getModel();
 				return {
-					numero: modelo.getProperty(nomePropriedadeNumeroEmpresa),
-					cep: modelo.getProperty(nomePropriedadeCepEmpresa),
-					municipio: modelo.getProperty(nomePropriedadeMunicipioEmpresa),
-					bairro: modelo.getProperty(nomePropriedadeBairroEmpresa),
-					rua: modelo.getProperty(nomePropriedadeRuaEmpresa),
-					complemento: modelo.getProperty(nomePropriedadeComplementoEmpresa),
-					estado: modelo.getProperty(nomePropriedadeEstadoEmpresa)
+					numero: String(modelo.getProperty(this._nomePropriedadeNumeroEmpresa)),
+					cep: String(modelo.getProperty(this._nomePropriedadeCepEmpresa)),
+					municipio: modelo.getProperty(this._nomePropriedadeMunicipioEmpresa),
+					bairro: modelo.getProperty(this._nomePropriedadeBairroEmpresa),
+					rua: modelo.getProperty(this._nomePropriedadeRuaEmpresa),
+					complemento: modelo.getProperty(this._nomePropriedadeComplementoEmpresa),
+					estado: modelo.getProperty(this._nomePropriedadeEstadoEmpresa)
 				}
 			}
 			catch (erro) {
@@ -135,6 +135,9 @@ sap.ui.define([
 						debugger;
 						const status500 = 500;
 						const status400 = 400;
+						if (respostaEndereco.Status == undefined) {
+							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
+						}
 						if (respostaEmpresa.Status == status400) {
 							textoErro += this._retornaTextoErro(respostaEmpresa);
 						}
@@ -167,9 +170,26 @@ sap.ui.define([
 		},
 
 		aoPressionarBotaoDeNavegacao() {
+
 			const historico = History.getInstance();
 			const hashAnterior = historico.getPreviousHash();
-
+			const modelo = this.getView().getModel();
+			modelo.setProperty(this._nomePropriedadeRazaoSocialEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeNomeFantasiaEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeCnpjEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeSituacaoCadastralEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeDataAberturaEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeNaturezaJuridicaEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadePorteEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeMatrizFilialEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeCapitalSocialEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeNumeroEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeCepEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeMunicipioEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeBairroEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeRuaEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeComplementoEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeEstadoEmpresa,undefined);
 			if (hashAnterior != undefined) {
 				window.history.go(-1);
 			}

@@ -44,7 +44,7 @@ public class EnderecosController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("[action]/{id}")]
     public IActionResult Deletar(int id)
     {
         _servicoEndereco.Deletar(id);

@@ -160,7 +160,7 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}" />
+                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}" labelFor="dataAberturaDatePicker"/>
                                     <DatePicker
                                         id="dataAberturaDatePicker"
                                         value="{
@@ -197,10 +197,12 @@
                             <VBox alignItems="Center">
                                 <VBox alignItems="Inherit">
                                     <Label text="{i18n>CepLabel}" />
-                                    <Input
+                                    <MaskInput
+                                    mask="99999999"
                                         id="cepInput"
-                                        value="{/cepEmpresaEntrado}"
-                                        valueLiveUpdate="true"
+                                        value="{
+                                            path:'/cepEmpresaEntrado',
+                                        type: 'sap.ui.model.type.Integer'}"
                                         width="auto"
                                     />
                                 </VBox>
@@ -255,6 +257,7 @@
                                 <VBox alignItems="Inherit">
                                     <Label text="{i18n>NumeroLabel}" />
                                     <Input
+                                    type="Number"
                                         id="numeroInput"
                                         value="{/numeroEmpresaEntrado}"
                                         valueLiveUpdate="true"
@@ -278,7 +281,7 @@
                         >
                             <Button
                                 id="botaoSalvar"
-                                width="60%"
+                                width="auto"
                                 text="{i18n>Salvar}"
                                 press=".aoPressionarSalvar"
                             />

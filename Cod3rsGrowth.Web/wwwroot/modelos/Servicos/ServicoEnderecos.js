@@ -55,6 +55,7 @@ sap.ui.define([
             }
         },
         criarEndereco: async function (parametros) {
+            debugger;
             const valorNumericoPadrao = 0
             const valorStringPadrao = "";
             try {
@@ -71,6 +72,14 @@ sap.ui.define([
             }
                 return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
             } 
+            catch (erro) {
+                throw erro;
+            }
+        },
+        deletarEndereco: async function(id) {
+            try {
+                RepositorioEnderecos.deletarEndereco(id);
+            }
             catch (erro) {
                 throw erro;
             }

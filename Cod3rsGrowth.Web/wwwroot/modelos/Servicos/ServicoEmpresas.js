@@ -78,7 +78,7 @@ sap.ui.define([
                 const parametrosEmpresa = {
                     id: valorNumericoPadrao,
                     razaoSocial: parametros.razaoSocial != null ? parametros.razaoSocial : valorStringPadrao,
-                    nomeFantasia: parametros.razaoSocial != null ? parametros.razaoSocial : valorStringPadrao,
+                    nomeFantasia: parametros.nomeFantasia != null ? parametros.nomeFantasia : valorStringPadrao,
                     cnpj: parametros.cnpj != null ? parametros.cnpj : valorStringPadrao,
                     situacaoCadastral: parseInt(parametros.situacaoCadastral ?? valorNumericoPadrao),
                     dataSituacaoCadastral: parametros.dataSituacaoCadastral != null ? parametros.dataSituacaoCadastral : valorStringPadrao,

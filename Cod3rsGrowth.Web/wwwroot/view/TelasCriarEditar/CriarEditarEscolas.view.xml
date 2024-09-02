@@ -36,43 +36,59 @@
 							justifyContent="SpaceAround"
 							alignContent="Center"
 						>
-								<VBox alignItems="Center">
-									<VBox alignItems="Inherit">
-										<Label text="{i18n>CriarEditarEscolas.Nome}" />
-										<Input
-											id="nomeInput"
-											value="{/nomeEscolaEntrada}"
-											width="auto"
-										/>
-									</VBox>
-									<VBox alignItems="Inherit">
-										<Label text="{i18n>CriarEditarEscolas.CodigoMec}" />
-										<Input
-											id="codigoMecInput"
-											value="{/codigoMecEscolaEntrada}"
-											width="auto"
-										/>
-									</VBox>
-									<VBox alignItems="Inherit">
-										<Label text="{i18n>CriarEditarEscolas.Telefone}" />
-										<Input
-											id="telefoneInput"
-											value="{/telefoneEscolaEntrada}"
-											width="auto"
-										/>
-									</VBox>
-									<VBox alignItems="Inherit">
-										<Label text="{i18n>CriarEditarEscola.Email}" />
-										<Input
-											id="emailInput"
-											value="{/emailEscolaEntrada}"
-											width="auto"
-										/>
-									</VBox>
+							<VBox alignItems="Center">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscolas.Nome}" />
+									<Input
+										id="nomeInput"
+										value="{/nomeEscolaEntrada}"
+										width="auto"
+									/>
 								</VBox>
 								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscolas.CodigoMec}" />
+                                    <MaskInput
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="codigoMecInput"
+                                        value="{
+                                            path: '/codigoMecEscolaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 8
+                                            }
+                                        }"
+                                        width="auto"
+                                    />
+								</VBox>
 								<VBox alignItems="Inherit">
-									<Label text="{i18n>CriarEditarEscola.CategoriaAministrativa}"/>
+									<Label text="{i18n>CriarEditarEscolas.Telefone}" />
+									<MaskInput
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="telefoneInput"
+                                        value="{
+                                            path: '/telefoneEscolaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 9
+                                            }
+                                        }"
+                                        width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.Email}" />
+									<Input
+										id="emailInput"
+										value="{/emailEscolaEntrada}"
+										width="auto"
+									/>
+								</VBox>
+							</VBox>
+							<VBox alignItems="Inherit">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.CategoriaAdministrativa}" />
 									<ComboBox
 										id="categoriaAdministrativaComboBox"
 										width="auto"
@@ -129,7 +145,7 @@
 									</ComboBox>
 								</VBox>
 								<VBox alignItems="Inherit">
-									<Label text="{i18>CriarEditarEscola.dataInicioAtividade}" />
+									<Label text="{i18>CriarEditarEscola.dataInicioAtividade}" labelFor="dataInicioAtividade"/>
 									<DatePicker
 										id="dataInicioAtividade"
 										value="{
@@ -166,11 +182,19 @@
 							<VBox alignItems="Center">
 								<VBox alignItems="Inherit">
 									<Label text="{i18n>CepLabel}" />
-									<Input
-										id="cepInput"
-										value="{/cepEscolaEntrado}"
-										valueLiveUpdate="true"
-										width="auto"
+									<MaskInput
+
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="cepInput"
+                                        value="{
+                                            path: '/cepEscolaEntrado',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 8
+                                            }
+                                        }"
+                                        width="auto"
 									/>
 								</VBox>
 								<VBox alignItems="Inherit">
@@ -224,6 +248,7 @@
 								<VBox alignItems="Inherit">
 									<Label text="{i18n>NumeroLabel}" />
 									<Input
+										type="Number"
 										id="numeroInput"
 										value="{/numeroEscolaEntrado}"
 										valueLiveUpdate="true"
@@ -247,8 +272,8 @@
 						>
 							<Button
 								id="botaoSalvar"
-								width="60%"
-								text="{i18n>CriarEditarEscolas.Salvar}"
+								width="auto"
+								text="{i18n>Salvar}"
 								press=".aoPressionarSalvar"
 							/>
 						</VBox>

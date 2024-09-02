@@ -45,6 +45,20 @@ sap.ui.define([
             } catch (erro) {
                 throw erro;
             }
+        },
+        deletarEndereco: async function (id) {
+            try {
+                const urlAcao = "/Deletar/" + id;
+                const resposta = await fetch(this._urlBase + urlAcao, {
+                    method: 'DELETE'
+                });
+                return await resposta.json();
+            }
+            catch (erro) {
+                throw erro;
+            }
         }
     }
+
+    
 });
