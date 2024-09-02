@@ -6,7 +6,6 @@
 	displayBlock="true"
 	height="100%"
 	busyIndicatorDelay="0"
-	id="CriarEditarEscolas"
 >
 	<Page
 		id="criarEditarEscolas"
@@ -42,7 +41,7 @@
 										<Label text="{i18n>CriarEditarEscolas.Nome}" />
 										<Input
 											id="nomeInput"
-											value="{/nomeEmpresaEntrada}"
+											value="{/nomeEscolaEntrada}"
 											width="auto"
 										/>
 									</VBox>
@@ -50,7 +49,7 @@
 										<Label text="{i18n>CriarEditarEscolas.CodigoMec}" />
 										<Input
 											id="codigoMecInput"
-											value="{/codigMecEscolaEntrada}"
+											value="{/codigoMecEscolaEntrada}"
 											width="auto"
 										/>
 									</VBox>
@@ -86,8 +85,8 @@
 										}"
 									>
 										<c:Item
-											key="{categoriaAdministrativa>CategoriaAdministrativa}"
-											text="{categoriaAdministrativa>CategoriaAdministrativa}"
+											key="{categoriaAdministrativa>Codigo}"
+											text="{categoriaAdministrativa>Valor}"
 										/>
 									</ComboBox>
 								</VBox>
@@ -169,7 +168,7 @@
 									<Label text="{i18n>CepLabel}" />
 									<Input
 										id="cepInput"
-										value="{/cepEmpresaEntrado}"
+										value="{/cepEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -179,7 +178,7 @@
 									<ComboBox
 										id="estadoComboBox"
 										width="auto"
-										selectedKey="{/estadoSelecionadoEmpresa}"
+										selectedKey="{/estadoSelecionadoEscola}"
 										items="{
 											path: 'estados>/Estados',
 											sorter: {
@@ -197,7 +196,7 @@
 									<Label text="{i18n>MunicipioLabel}" />
 									<Input
 										id="municipioInput"
-										value="{/municipioEmpresaEntrado}"
+										value="{/municipioEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -206,7 +205,7 @@
 									<Label text="{i18n>BairroLabel}" />
 									<Input
 										id="bairroInput"
-										value="{/bairroEmpresaEntrado}"
+										value="{/bairroEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -217,7 +216,7 @@
 									<Label text="{i18n>RuaLabel}" />
 									<Input
 										id="ruaInput"
-										value="{/ruaEmpresaEntrado}"
+										value="{/ruaEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -226,7 +225,7 @@
 									<Label text="{i18n>NumeroLabel}" />
 									<Input
 										id="numeroInput"
-										value="{/numeroEmpresaEntrado}"
+										value="{/numeroEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -235,7 +234,7 @@
 									<Label text="{i18n>ComplementoLabel}" />
 									<Input
 										id="complementoInput"
-										value="{/complementoEmpresaEntrado}"
+										value="{/complementoEscolaEntrado}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -249,7 +248,7 @@
 							<Button
 								id="botaoSalvar"
 								width="60%"
-								text="{i18n>CriarEditarEmpresas.Salvar}"
+								text="{i18n>CriarEditarEscolas.Salvar}"
 								press=".aoPressionarSalvar"
 							/>
 						</VBox>

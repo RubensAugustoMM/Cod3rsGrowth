@@ -16,7 +16,6 @@ sap.ui.define([
             }
         },
         criarEndereco: async function (parametros) {
-            debugger;
             const posicaoArrayId = 0
             const posicaoArrayNumero = 1;
             const posicaoArrayCep = 2;

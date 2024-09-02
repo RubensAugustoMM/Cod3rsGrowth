@@ -1,8 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
-	"sap/m/MessageBox",
 	"sap/viz/ui5/types/layout/Stack",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
 	"sap/ui/core/date/UI5Date"
@@ -13,7 +11,9 @@ sap.ui.define([
 	MessageBox,
 	Stack,
 	ServicoEnderecos,
-	UI5Date
+	UI5Date,
+	History,
+	MessageBox
 ) {
 	"use strict";
 

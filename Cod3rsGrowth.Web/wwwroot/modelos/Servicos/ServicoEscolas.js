@@ -61,6 +61,33 @@ sap.ui.define([
                     actions: [MessageBox.Action.CLOSE]
                 });
             }
+        },
+        criarEscola: async function (parametros) {
+            debugger;
+            const valorNumericoPadrao = 0; 
+            const valorHabilitado = 1;
+            const valorStringPadrao = "";
+            const valorDataPadrao = "0001-01-01T01:01:01";
+            try {
+                const parametrosEscola = {
+                    id: valorNumericoPadrao,
+                    statusAtividade: parseInt(parametros.statusAtividade ?? valorNumericoPadrao), 
+                    nome: parametros.nome ?? valorStringPadrao,
+                    codigoMec: parametros.codigoMec ?? valorStringPadrao,
+                    telefone: parametros.codigoMec ?? valorStringPadrao,
+                    email: parametros.email ?? valorStringPadrao,
+                    inicioAtividade: parametros.inicioAtividade ?? valorDataPadrao,
+                    categoriaAdministrativa: parseInt(parametros.categoriaAdministrativa ?? valorNumericoPadrao),
+                    organizacaoAcademica: parseInt(parametros.organizacaoAcademica ?? valorNumericoPadrao),
+                    idEndereco: parametros.idEndereco ?? valorNumericoPadrao
+                };
+                parametrosEscola.statusAtividade =
+                    valorHabilitado == parseInt(parametros.situacaoCadastral);
+                return await RepositorioEscolas.criarEscola(parametrosEscola);
+            }
+            catch (erro) {
+                throw erro;
+            }
         }
     }
 });

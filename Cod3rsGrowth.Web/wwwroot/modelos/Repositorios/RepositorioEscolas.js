@@ -11,13 +11,34 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
-                console.error(mensagemDeErro + erro.message);
-                MessageBox.show(erro.message, {
-                    icon: MessageBox.Icon.ERROR,
-                    title: mensagemDeErro,
-                    actions: [MessageBox.Action.CLOSE]
+                throw erro;
+            }
+        },
+        criarEscola: async function (parametros) {
+            try {
+                const urlAcao = "/Criar"
+                const resposta = await fetch(this._urlBase + urlAcao, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id: parametros.id,
+                        statusAtividade: parametros.statusAtividade,
+                        nome: parametros.nome,
+                        codigoMec: parametros.codigoMec,
+                        telefone: parametros.telefone,
+                        email: parametros.email,
+                        inicioAtividade: parametros.inicioAtividade,
+                        categoriaAdministrativa: parametros.categoriaAdministrativa,
+                        organizacaoAcademica: parametros.organizacaoAcademica,
+                        idEndereco: parametros.idEndereco
+                    })
+
                 });
+                return await resposta.json();
+            }
+            catch (erro) {
+                console.log(erro);
+                throw erro;
             }
         }
     }
