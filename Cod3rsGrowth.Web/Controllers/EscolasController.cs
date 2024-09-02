@@ -31,7 +31,7 @@ public class EscolasController : ControllerBase
         return Ok(escola);
     }
 
-    [HttpPost]
+    [HttpPost("[action]")]
     public IActionResult Criar([FromBody] Escola escolaCriar)
     {
         _servicoEscola.Criar(escolaCriar);

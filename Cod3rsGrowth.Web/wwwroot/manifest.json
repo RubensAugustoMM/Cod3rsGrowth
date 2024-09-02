@@ -80,6 +80,11 @@
           "pattern":  "Empresas/Criar",
           "name": "EmpresaCriar",
           "target": "empresaCriar"
+        },
+        {
+          "pattern": "Escolas/Criar",
+          "name": "EscolaCriar",
+          "target": "escolaCriar"
         }
       ],
       "targets": {
@@ -99,6 +104,13 @@
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEmpresas",
           "viewId": "CriarEditarEmpresas",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
+        },
+        "escolaCriar":{
+          "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
+          "viewName": "CriarEditarEscolas",
+          "viewId": "CriarEditarEscolas",
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         }

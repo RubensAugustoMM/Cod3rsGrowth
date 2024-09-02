@@ -4,11 +4,11 @@ sap.ui.define(["sap/m/MessageBox"
     "use strict";
 
     return {
-        urlBase: "/api",
+        _urlBase: "/api",
         async retornaModeloEstadoEnum() {
             try {
                 const rotaEnum = "/EstadoEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }
@@ -19,7 +19,7 @@ sap.ui.define(["sap/m/MessageBox"
         async retornaModeloHabilitadoEnum() {
             try {
                 const rotaEnum = "/HabilitadoEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }
@@ -30,7 +30,7 @@ sap.ui.define(["sap/m/MessageBox"
         async retornaModeloNaturezaJuridicaEnum() {
             try {
                 const rotaEnum = "/NaturezaJuridicaEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }
@@ -41,7 +41,7 @@ sap.ui.define(["sap/m/MessageBox"
         async retornaModeloOrganizacaoAcademicaEnum() {
             try {
                 const rotaEnum = "/OrganizacaoAcademicaEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }
@@ -53,7 +53,7 @@ sap.ui.define(["sap/m/MessageBox"
         async retornaModeloPorteEnum() {
             try {
                 const rotaEnum = "/PorteEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }
@@ -64,7 +64,18 @@ sap.ui.define(["sap/m/MessageBox"
         async retornaModeloMatrizFilialEnum() {
             try {
                 const rotaEnum = "/MatrizFilialEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
+                const resposta = await fetch(this._urlBase + rotaEnum);
+                if (!resposta.ok) throw new Error(resposta.status);
+                return await resposta.json();
+            }
+            catch (erro) {
+                throw erro;
+            }
+        },
+        async retornaModeloCategoriaAdministrativaEnum() {
+            try {
+                const rotaEnum = "/CategoriaAdministrativaEnum";
+                const resposta = await fetch(this._urlBase + rotaEnum);
                 if (!resposta.ok) throw new Error(resposta.status);
                 return await resposta.json();
             }

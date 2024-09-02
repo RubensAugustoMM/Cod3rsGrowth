@@ -10,9 +10,7 @@
     <Page
         id="criarEditarEmpresas"
         showNavButton="true"
-		navButtonPress="aoPressionarBotaoDeNavegacao"
-        title=""
-        titleAlignment="Center"
+        navButtonPress="aoPressionarBotaoDeNavegacao"
     >
         <content>
             <FlexBox
@@ -25,9 +23,7 @@
                 <Panel>
                     <headerToolbar>
                         <OverflowToolbar>
-                            <Title
-                                text="{i18n>CriarEditarEmpresas.TituloPainelEmpresa}"
-                            />
+                            <Title text="{i18n>CriarEditarEmpresas.TituloPainelEmpresa}" />
                         </OverflowToolbar>
                     </headerToolbar>
                     <content>
@@ -41,9 +37,7 @@
                         >
                             <VBox alignItems="Center">
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.RazaoSocialLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.RazaoSocialLabel}" />
                                     <Input
                                         id="razaoSocialInput"
                                         value="{/razaoSocialEmpresaEntrada}"
@@ -52,9 +46,7 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.NomeFantasiaLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.NomeFantasiaLabel}" />
                                     <Input
                                         id="nomeFantasiaInput"
                                         value="{/nomeFantasiaEmpresaEntrada}"
@@ -63,28 +55,23 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.CnpjLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.CnpjLabel}" />
                                     <MaskInput
                                         mask="99999999999999"
                                         placeholder="_"
                                         id="cnpjInput"
                                         value="{
-                                            path:'/cnpjEmpresaEntrada',
+                                            path: '/cnpjEmpresaEntrada',
                                             type: 'sap.ui.model.type.Integer',
                                             constraints: {
                                                 maxLength: 14
                                             }
                                         }"
                                         width="auto"
-                                    >
-                                    </MaskInput>
+                                    />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.CapitalSocialLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.CapitalSocialLabel}" />
                                     <Input
                                         type="Number"
                                         id="capitalSocialInput"
@@ -94,15 +81,17 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.NaturezaJuridicaLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.NaturezaJuridicaLabel}" />
                                     <ComboBox
                                         id="naturezaJuridicaComboBox"
                                         width="auto"
                                         selectedKey="{/naturezaJuridicaSelecionada}"
-                                        items="{path:'naturezaJuridica>/NaturezaJuridica',
-                            sorter: {path: 'Valor'}}"
+                                        items="{
+                                            path: 'naturezaJuridica>/NaturezaJuridica',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
                                     >
                                         <c:Item
                                             key="{naturezaJuridica>Codigo}"
@@ -113,15 +102,17 @@
                             </VBox>
                             <VBox alignItems="Center">
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.PorteLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.PorteLabel}" />
                                     <ComboBox
                                         id="porteComboBox"
                                         width="auto"
                                         selectedKey="{/porteSelecionado}"
-                                        items="{path:'porte>/Porte',
-                            sorter: {path: 'Valor'}}"
+                                        items="{
+                                            path: 'porte>/Porte',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
                                     >
                                         <c:Item
                                             key="{porte>Codigo}"
@@ -130,15 +121,17 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.MatrizFilialLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.MatrizFilialLabel}" />
                                     <ComboBox
                                         id="matrizFilalComboBox"
                                         width="auto"
                                         selectedKey="{/matrizFilialSelecionado}"
-                                        items="{path:'matrizFilial>/MatrizFilial',
-                            sorter: {path: 'Valor'}}"
+                                        items="{
+                                            path: 'matrizFilial>/MatrizFilial',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
                                     >
                                         <c:Item
                                             key="{matrizFilial>Codigo}"
@@ -147,15 +140,17 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.SituacaoCadastralLabel}"
-                                    />
+                                    <Label text="{i18n>CriarEditarEmpresas.SituacaoCadastralLabel}" />
                                     <ComboBox
                                         id="situacaoCadastralComboBox"
                                         width="auto"
                                         selectedKey="{/situacaoCadastralSelecionado}"
-                                        items="{path:'habilitado>/Habilitado',
-                            sorter: {path: 'Valor'}}"
+                                        items="{
+                                            path: 'habilitado>/Habilitado',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
                                     >
                                         <c:Item
                                             key="{habilitado>Codigo}"
@@ -164,17 +159,18 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}"/>
+                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}" />
                                     <DatePicker
                                         id="dataAberturaDatePicker"
                                         value="{
-                                path: '/dataAberturaSelecionada',
-                            type: 'sap.ui.model.type.Date',
-                        formatOptions: {
-                            source: {
-                                pattern: 'yyyy-MM-ddTHH:mm:ss'
-                            }
-                        }}"
+                                            path: '/dataAberturaSelecionada',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                                source: {
+                                                    pattern: 'yyyy-MM-ddTHH:mm:ss'
+                                                }
+                                            }
+                                        }"
                                         width="auto"
                                     />
                                 </VBox>
@@ -185,9 +181,7 @@
                 <Panel>
                     <headerToolbar>
                         <OverflowToolbar>
-                            <Title
-                                text="{i18n>CriarEditarEmpresas.TituloPainelEndereco}"
-                            />
+                            <Title text="{i18n>TituloPainelEndereco}" />
                         </OverflowToolbar>
                     </headerToolbar>
                     <content>
@@ -201,9 +195,7 @@
                         >
                             <VBox alignItems="Center">
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.CepLabel}"
-                                    />
+                                    <Label text="{i18n>CepLabel}" />
                                     <Input
                                         id="cepInput"
                                         value="{/cepEmpresaEntrado}"
@@ -212,15 +204,17 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.EstadoLabel}"
-                                    />
+                                    <Label text="{i18n>EstadoLabel}" />
                                     <ComboBox
                                         id="estadoComboBox"
                                         width="auto"
                                         selectedKey="{/estadoSelecionadoEmpresa}"
-                                        items="{path:'estados>/Estados',
-                            sorter: {path: 'Valor'}}"
+                                        items="{
+                                            path: 'estados>/Estados',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
                                     >
                                         <c:Item
                                             key="{estados>Codigo}"
@@ -229,9 +223,7 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.MunicipioLabel}"
-                                    />
+                                    <Label text="{i18n>MunicipioLabel}" />
                                     <Input
                                         id="municipioInput"
                                         value="{/municipioEmpresaEntrado}"
@@ -240,9 +232,7 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.BairroLabel}"
-                                    />
+                                    <Label text="{i18n>BairroLabel}" />
                                     <Input
                                         id="bairroInput"
                                         value="{/bairroEmpresaEntrado}"
@@ -253,9 +243,7 @@
                             </VBox>
                             <VBox alignItems="Center">
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.RuaLabel}"
-                                    />
+                                    <Label text="{i18n>RuaLabel}" />
                                     <Input
                                         id="ruaInput"
                                         value="{/ruaEmpresaEntrado}"
@@ -264,9 +252,7 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.NumeroLabel}"
-                                    />
+                                    <Label text="{i18n>NumeroLabel}" />
                                     <Input
                                         id="numeroInput"
                                         value="{/numeroEmpresaEntrado}"
@@ -275,9 +261,7 @@
                                     />
                                 </VBox>
                                 <VBox alignItems="Inherit">
-                                    <Label
-                                        text="{i18n>CriarEditarEmpresas.ComplementoLabel}"
-                                    />
+                                    <Label text="{i18n>ComplementoLabel}" />
                                     <Input
                                         id="complementoInput"
                                         value="{/complementoEmpresaEntrado}"
@@ -294,7 +278,7 @@
                             <Button
                                 id="botaoSalvar"
                                 width="60%"
-                                text="{i18n>CriarEditarEmpresas.Salvar}"
+                                text="{i18n>Salvar}"
                                 press=".aoPressionarSalvar"
                             />
                         </VBox>

@@ -59,6 +59,11 @@ sap.ui.define([
                 new JSONModel(await ServicoEnums.retornaModeloMatrizFilialEnum());
             this.setModel(modeloMatrizFilial, nomeModeloMatrizFilial);
 
+            let nomeModeloCategoriaAdministrativa = "categoriaAdministrativa";
+            let modeloCategoriaAdministrativa =
+                new JSONModel(await ServicoEnums.retornaModeloCategoriaAdministrativaEnum());
+            this.setModel(modeloCategoriaAdministrativa, nomeModeloCategoriaAdministrativa)
+
             this.getRouter().initialize();
         }
     });
