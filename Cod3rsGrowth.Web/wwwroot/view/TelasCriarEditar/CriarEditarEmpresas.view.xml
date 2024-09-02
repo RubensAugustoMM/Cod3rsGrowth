@@ -164,6 +164,7 @@
                                     </ComboBox>
                                 </VBox>
                                 <VBox alignItems="Inherit">
+                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}"/>
                                     <DatePicker
                                         id="dataAberturaDatePicker"
                                         value="{
@@ -174,7 +175,6 @@
                                 pattern: 'yyyy-MM-ddTHH:mm:ss'
                             }
                         }}"
-                                        ariaDescribedBy="{i18>CriarEditarEmpresas.dataAbertura}"
                                         width="auto"
                                     />
                                 </VBox>

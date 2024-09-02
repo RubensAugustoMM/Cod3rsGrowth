@@ -4,14 +4,16 @@ sap.ui.define([
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
 	"sap/m/MessageBox",
 	"sap/viz/ui5/types/layout/Stack",
-	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos"
+	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
+	"sap/ui/core/date/UI5Date"
 ], function (
 	Controller,
 	History,
 	ServicoEmpresas,
 	MessageBox,
 	Stack,
-	ServicoEnderecos
+	ServicoEnderecos,
+	UI5Date
 ) {
 	"use strict";
 
@@ -35,11 +37,18 @@ sap.ui.define([
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
 			try {
+				const idDataAberturaDatePicker = "dataAberturaDatePicker";
 				const parametroNomeRota = "name";
 				this._rotaAtual = oEvent.getParameter(parametroNomeRota);
 				const i18TituloEmpresaCriar = "CriarEditarEmpresas.TituloCriar";
 				let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
+				let dataAtual = new Date();
+				this.byId(idDataAberturaDatePicker).setMaxDate(
+					UI5Date.getInstance(
+						dataAtual.getFullYear(),
+						dataAtual.getMonth(),
+						dataAtual.getDay()));
 			}
 			catch (erro) {
 				const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
@@ -64,7 +73,7 @@ sap.ui.define([
 				return {
 					razaoSocial: modelo.getProperty(nomePropriedadeRazaoSocialEmpresa),
 					nomeFantasia: modelo.getProperty(nomePropriedadeNomeFantasiaEmpresa),
-					cnpj: modelo.getProperty(nomePropriedadeCnpjEmpresa).toString(),
+					cnpj: String(modelo.getProperty(nomePropriedadeCnpjEmpresa)),
 					situacaoCadastral: modelo.getProperty(nomePropriedadeSituacaoCadastralEmpresa),
 					dataSituacaoCadastral: new Date(),
 					dataAbertura: modelo.getProperty(nomePropriedadeDataAberturaEmpresa),
@@ -120,16 +129,16 @@ sap.ui.define([
 					empresaCriar.idEndereco = respostaEndereco.id;
 					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar)
 					debugger;
-					if (!respostaEmpresa.ok &&  !respostaEndereco.ok &&
+					if (!respostaEmpresa.ok && !respostaEndereco.ok &&
 						respostaEmpresa.ok != undefined && respostaEndereco.ok != undefined ||
-						respostaEmpresa.Status != undefined || respostaEndereco.Status !=undefined) {
+						respostaEmpresa.Status != undefined || respostaEndereco.Status != undefined) {
 						debugger;
 						const status500 = 500;
 						const status400 = 400;
 						if (respostaEmpresa.Status == status400) {
 							textoErro += this._retornaTextoErro(respostaEmpresa);
 						}
-						if (respostaEmpresa.Status == status500) {	
+						if (respostaEmpresa.Status == status500) {
 							textoErro += respostaEmpresa.Detail;
 						}
 						if (respostaEndereco.Status == status400) {
