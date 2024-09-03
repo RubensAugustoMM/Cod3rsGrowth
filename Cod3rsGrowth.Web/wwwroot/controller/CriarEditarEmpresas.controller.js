@@ -174,22 +174,22 @@ sap.ui.define([
 			const historico = History.getInstance();
 			const hashAnterior = historico.getPreviousHash();
 			const modelo = this.getView().getModel();
-			modelo.setProperty(this._nomePropriedadeRazaoSocialEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeNomeFantasiaEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeCnpjEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeSituacaoCadastralEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeDataAberturaEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeNaturezaJuridicaEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadePorteEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeMatrizFilialEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeCapitalSocialEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeNumeroEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeCepEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeMunicipioEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeBairroEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeRuaEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeComplementoEmpresa,undefined);
-			modelo.setProperty(this._nomePropriedadeEstadoEmpresa,undefined);
+			modelo.setProperty(this._nomePropriedadeRazaoSocialEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeNomeFantasiaEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeCnpjEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeSituacaoCadastralEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeDataAberturaEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeNaturezaJuridicaEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadePorteEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeMatrizFilialEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeCapitalSocialEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeNumeroEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeCepEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeMunicipioEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeBairroEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeRuaEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeComplementoEmpresa, undefined);
+			modelo.setProperty(this._nomePropriedadeEstadoEmpresa, undefined);
 			if (hashAnterior != undefined) {
 				window.history.go(-1);
 			}

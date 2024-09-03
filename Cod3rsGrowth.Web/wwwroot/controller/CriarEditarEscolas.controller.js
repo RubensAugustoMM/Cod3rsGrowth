@@ -5,7 +5,7 @@ sap.ui.define([
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
 	"sap/ui/core/routing/History",
 	"sap/m/MessageBox"
-], function(
+], function (
 	Controller,
 	UI5Date,
 	ServicoEscolas,
@@ -17,31 +17,31 @@ sap.ui.define([
 
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEscolas", {
 
-			_nomePropriedadeNome: "/nomeEscolaEntrada",
-			_nomePropriedadeCodigoMec: "/codigoMecEscolaEntrada",
-			_nomePropriedadeTelefone: "/telefoneEscolaEntrada",
-			_nomePropriedadeEmail: "/emailEscolaEntrada",
-			_nomePropriedadeCategoriaAdministrativa: "/categoriaAdministrativaSelecionada",
-			_nomePropriedadeOrganizacaoAcademica: "/organizacaoAcademicaSelecionada",
-			_nomePropriedadeStatusAtividade: "/statusAtividadeSelecionada",
-			_nomePropriedadeInicioAtividadeSelecionada: "/dataInicioAtividadeSelecionada",
-			_nomePropriedadeCepEscola: "/cepEscolaEntrado",
-			_nomePropriedadeEstadoEscola: "/estadoSelecionadoEscola",
-			_nomePropriedadeMunicipioEscola: "/municipioEscolaEntrado",
-			_nomePropriedadeBairroEscola: "/bairroEscolaEntrado",
-			_nomePropriedadeRuaEscola: "/ruaEscolaEntrado",
-			_nomePropriedadeNumeroEscola: "/numeroEscolaEntrado",
-			_nomePropriedadeComplementoEscola: "/complementoEscolaEntrado",
+		_nomePropriedadeNome: "/nomeEscolaEntrada",
+		_nomePropriedadeCodigoMec: "/codigoMecEscolaEntrada",
+		_nomePropriedadeTelefone: "/telefoneEscolaEntrada",
+		_nomePropriedadeEmail: "/emailEscolaEntrada",
+		_nomePropriedadeCategoriaAdministrativa: "/categoriaAdministrativaSelecionada",
+		_nomePropriedadeOrganizacaoAcademica: "/organizacaoAcademicaSelecionada",
+		_nomePropriedadeStatusAtividade: "/statusAtividadeSelecionada",
+		_nomePropriedadeInicioAtividadeSelecionada: "/dataInicioAtividadeSelecionada",
+		_nomePropriedadeCepEscola: "/cepEscolaEntrado",
+		_nomePropriedadeEstadoEscola: "/estadoSelecionadoEscola",
+		_nomePropriedadeMunicipioEscola: "/municipioEscolaEntrado",
+		_nomePropriedadeBairroEscola: "/bairroEscolaEntrado",
+		_nomePropriedadeRuaEscola: "/ruaEscolaEntrado",
+		_nomePropriedadeNumeroEscola: "/numeroEscolaEntrado",
+		_nomePropriedadeComplementoEscola: "/complementoEscolaEntrado",
 		_rotaAtual: "",
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEscolas: "criarEditarEscolas",
-		onInit() { 
+		onInit() {
 			const nomeRotaEscolaCirar = "EscolaCriar";
 			try {
 				const roteador = this.getOwnerComponent().getRouter();
 				roteador.getRoute(nomeRotaEscolaCirar).attachMatched(this._aoCoincidirComRotaEscolaCriar, this);
 			}
-			catch (erro) {	
+			catch (erro) {
 				const i18nMensagemDeErro = "CriarEditarEscola.ErroAoInicializarTela";
 				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
 				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
@@ -65,15 +65,15 @@ sap.ui.define([
 					)
 				);
 			}
-			catch(erro)
-			{
+			catch (erro) {
 				const i18nMensagemDeErro = "CriarEditarEscola.ErroAoCoincidirRotaCriar"
 				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
 				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
 				this._mostraMensagemDeErro(mensagemDeErro, erro);
 			}
 		},
-		_retornaValoresEscola() {			try {
+		_retornaValoresEscola() {
+			try {
 				const modelo = this.getView().getModel();
 				return {
 					statusAtividade: modelo.getProperty(this._nomePropriedadeStatusAtividade),
@@ -140,10 +140,9 @@ sap.ui.define([
 						debugger;
 						const status500 = 500;
 						const status400 = 400;
-							if (respostaEndereco.Status == undefined)
-							{
-								ServicoEnderecos.deletarEndereco(respostaEndereco.id);
-							}
+						if (respostaEndereco.Status == undefined) {
+							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
+						}
 						if (respostaEscola.Status == status400) {
 							textoErro += this._retornaTextoErro(respostaEscola);
 						}

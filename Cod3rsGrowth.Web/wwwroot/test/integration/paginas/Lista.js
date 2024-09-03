@@ -12,6 +12,24 @@ sap.ui.define([
     Opa5.createPageObjects({
         naPaginaDeListagem: {
             actions: {
+                aoClicarBotaoCriarEmpresa: function (){
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Button",
+                        id: "botaoCriar",
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão criar empresa."
+                    });
+                },
+                aoClicarBotaoCriarEscola: function (){
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Button",
+                        id: "botaoCriar",
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão criar escola."
+                    });
+                },
                 aoClicarNoPainelFiltros: function () {
                     return this.waitFor({
                         viewName: viewName,

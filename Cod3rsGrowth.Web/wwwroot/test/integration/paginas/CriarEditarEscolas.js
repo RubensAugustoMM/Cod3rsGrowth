@@ -9,10 +9,10 @@ sap.ui.define([
     Press) {
     "use strict";
 
-    let viewName = ".TelasCriarEditar.CriarEditarEmpresas";
+    let viewName = ".TelasCriarEditar.CriarEditarEscolas";
 
     Opa5.createPageObjects({
-        naPaginaDeCriacaoEmpresa: {
+        naPaginaDeCriacaoEscola: {
             actions: {
                 aoClicarNoBotaoVoltar() {
                     return this.waitFor({
@@ -28,26 +28,26 @@ sap.ui.define([
                 }
             },
             assertions: {
-                aPaginaDeCriacaoDeEmpresasDeveSerCarregadaCorretamente() {
+                aPaginaDeCriacaoDeEscolasDeveSerCarregadaCorretamente() {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Page",
-                        id: "criarEditarEmpresas",
+                        id: "criarEditarEscolas",
                         success: function () {
-                            Opa5.assert.ok(true, "A página de criação de Empresas foi carregada corretamente")
+                            Opa5.assert.ok(true, "A página de criação de Escolas foi carregada corretamente")
                         },
                         errorMessage: "A páginade criação de empresas não foi carregada corretamente"
                     });
                 },
-                oPainelEmpresaDeveSerCarregadoCorretamente() {
+                oPainelEscolaDeveSerCarregadoCorretamente() {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Panel",
-                        id: "painelEmpresa",
+                        id: "painelEscola",
                         success: function () {
-                            Opa5.assert.ok(true, "O painel Empresa foi carregado corretamente.")
+                            Opa5.assert.ok(true, "O painel Escola foi carregado corretamente.")
                         },
-                        errorMessage: "O painel Empresa não foi carregado corretamente "
+                        errorMessage: "O painel Escola não foi carregado corretamente "
                     });
                 },
                 oPainelEnderecoDeveSerCarregadoCorretamente() {

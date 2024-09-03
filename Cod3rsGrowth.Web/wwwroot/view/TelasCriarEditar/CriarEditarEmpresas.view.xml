@@ -21,7 +21,7 @@
                 width="auto"
                 wrap="Wrap"
             >
-                <Panel>
+                <Panel id="painelEmpresa">
                     <headerToolbar>
                         <OverflowToolbar>
                             <Title text="{i18n>CriarEditarEmpresas.TituloPainelEmpresa}" />
@@ -179,7 +179,7 @@
                         </FlexBox>
                     </content>
                 </Panel>
-                <Panel>
+                <Panel id="painelEndereco">
                     <headerToolbar>
                         <OverflowToolbar>
                             <Title text="{i18n>TituloPainelEndereco}" />
