@@ -9,7 +9,7 @@
     "applicationVersion": {
       "version": "1.0.0"
     },
-    "dataSources": {    }
+    "dataSources": {}
   },
   "sap.ui": {
     "technology": "UI5",
@@ -38,7 +38,7 @@
           "fallbackLocale": ""
         }
       }
-        },
+    },
     "rootView": {
       "viewName": "ui5.cod3rsgrowth.view.App",
       "type": "XML",
@@ -67,7 +67,7 @@
       },
       "routes": [
         {
-          "pattern":  "",
+          "pattern": "",
           "name": "Empresas",
           "target": "lista"
         },
@@ -77,7 +77,7 @@
           "target": "lista"
         },
         {
-          "pattern":  "Empresas/Criar",
+          "pattern": "Empresas/Criar",
           "name": "EmpresaCriar",
           "target": "empresaCriar"
         },
@@ -100,14 +100,14 @@
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         },
-        "empresaCriar":{
+        "empresaCriar": {
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEmpresas",
           "viewId": "CriarEditarEmpresas",
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         },
-        "escolaCriar":{
+        "escolaCriar": {
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEscolas",
           "viewId": "CriarEditarEscolas",

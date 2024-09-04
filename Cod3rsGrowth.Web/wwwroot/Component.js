@@ -7,29 +7,29 @@ sap.ui.define([
 ], (UIComponent,
     ResourceModel,
     JSONModel,
-	Device,
-	ServicoEnums,) => {
+    Device,
+    ServicoEnums,) => {
     "use strict";
 
     return UIComponent.extend("ui5.cod3rsgrowth.Component", {
-        metadata : {
+        metadata: {
             interfaces: ["sap.ui.core.IAsyncContentCreation"],
             manifest: "json"
-         },
+        },
 
         async init() {
             UIComponent.prototype.init.apply(this, arguments);
-             const modeloI18n = new ResourceModel({
+            const modeloI18n = new ResourceModel({
                 bundleName: "ui5.cod3rsgrowth.i18n.i18n"
-             });
+            });
 
             const modelo = new JSONModel();
             this.setModel(modelo);
 
             let nomeModeloi18n = "i18n";
-            this.setModel(modeloI18n, nomeModeloi18n); 
+            this.setModel(modeloI18n, nomeModeloi18n);
 
-            let nomeModeloSituacaoCadastral = "habilitado"; 
+            let nomeModeloSituacaoCadastral = "habilitado";
             let modeloSituacaoCadastral =
                 new JSONModel(await ServicoEnums.retornaModeloHabilitadoEnum());
             this.setModel(modeloSituacaoCadastral, nomeModeloSituacaoCadastral);
@@ -64,6 +64,14 @@ sap.ui.define([
                 new JSONModel(await ServicoEnums.retornaModeloCategoriaAdministrativaEnum());
             this.setModel(modeloCategoriaAdministrativa, nomeModeloCategoriaAdministrativa)
 
+            const valoresPadrao = {
+                valorNumericoPadrao: 0,
+                valorStringPadrao: "",
+                valorDataPadrao: "0001-01-01T01:01:01"
+            };
+            const nomeModeloValoresPadrao = "valoresPadrao";
+            const modeloValoresPadrao = new JSONModel(valoresPadrao);
+            this.setModel(modeloValoresPadrao, nomeModeloValoresPadrao);
             this.getRouter().initialize();
         }
     });

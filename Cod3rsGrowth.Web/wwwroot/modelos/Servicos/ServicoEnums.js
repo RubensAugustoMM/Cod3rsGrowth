@@ -6,82 +6,46 @@ sap.ui.define(["sap/m/MessageBox"
     return {
         _urlBase: "/api",
         async retornaModeloEstadoEnum() {
-            try {
-                const rotaEnum = "/EstadoEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/EstadoEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloHabilitadoEnum() {
-            try {
-                const rotaEnum = "/HabilitadoEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/HabilitadoEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloNaturezaJuridicaEnum() {
-            try {
-                const rotaEnum = "/NaturezaJuridicaEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/NaturezaJuridicaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloOrganizacaoAcademicaEnum() {
-            try {
-                const rotaEnum = "/OrganizacaoAcademicaEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-
-            }
+            const rotaEnum = "/OrganizacaoAcademicaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloPorteEnum() {
-            try {
-                const rotaEnum = "/PorteEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/PorteEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloMatrizFilialEnum() {
-            try {
-                const rotaEnum = "/MatrizFilialEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/MatrizFilialEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloCategoriaAdministrativaEnum() {
-            try {
-                const rotaEnum = "/CategoriaAdministrativaEnum";
-                const resposta = await fetch(this._urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                throw erro;
-            }
+            const rotaEnum = "/CategoriaAdministrativaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         }
     }
 });

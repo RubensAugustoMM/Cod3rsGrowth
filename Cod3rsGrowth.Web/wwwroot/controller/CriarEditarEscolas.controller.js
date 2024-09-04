@@ -15,23 +15,22 @@ sap.ui.define([
 ) {
 	"use strict";
 
+	const NOME_PROPRIEDADA_NOME = "/nomeEscolaEntrada";
+	const NOME_PROPRIEDADE_CODIGO_MEC = "/codigoMecEscolaEntrada";
+	const NOME_PROPRIEDADE_TELEFONE = "/telefoneEscolaEntrada";
+	const NOME_PROPRIEDADE_EMAIL = "/emailEscolaEntrada";
+	const NOME_PROPRIEDADE_CATEGORIA_ADMINISTRATIVA = "/categoriaAdministrativaSelecionada";
+	const NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA = "/organizacaoAcademicaSelecionada";
+	const NOME_PROPRIEDADE_STATUS_ATIVIDADE = "/statusAtividadeSelecionada";
+	const NOME_PROPRIEDADE_INICIO_ATIVIDADE_SELECIONADA = "/dataInicioAtividadeSelecionada";
+	const NOME_PROPRIEDADE_CEP_ESCOLA = "/cepEscolaEntrado";
+	const NOME_PROPRIEDADE_ESTADO_ESCOLA = "/estadoSelecionadoEscola";
+	const NOME_PROPRIEDADE_MUNICIPIO_ESCOLA = "/municipioEscolaEntrado";
+	const NOME_PROPRIEDADE_BAIRRO_ESCOLA = "/bairroEscolaEntrado";
+	const NOME_PROPRIEDADE_RUA_ESCOLA = "/ruaEscolaEntrado";
+	const NOME_PROPRIEDADE_NUMERO_ESCOLA = "/numeroEscolaEntrado";
+	const NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA = "/complementoEscolaEntrado";
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEscolas", {
-
-		_nomePropriedadeNome: "/nomeEscolaEntrada",
-		_nomePropriedadeCodigoMec: "/codigoMecEscolaEntrada",
-		_nomePropriedadeTelefone: "/telefoneEscolaEntrada",
-		_nomePropriedadeEmail: "/emailEscolaEntrada",
-		_nomePropriedadeCategoriaAdministrativa: "/categoriaAdministrativaSelecionada",
-		_nomePropriedadeOrganizacaoAcademica: "/organizacaoAcademicaSelecionada",
-		_nomePropriedadeStatusAtividade: "/statusAtividadeSelecionada",
-		_nomePropriedadeInicioAtividadeSelecionada: "/dataInicioAtividadeSelecionada",
-		_nomePropriedadeCepEscola: "/cepEscolaEntrado",
-		_nomePropriedadeEstadoEscola: "/estadoSelecionadoEscola",
-		_nomePropriedadeMunicipioEscola: "/municipioEscolaEntrado",
-		_nomePropriedadeBairroEscola: "/bairroEscolaEntrado",
-		_nomePropriedadeRuaEscola: "/ruaEscolaEntrado",
-		_nomePropriedadeNumeroEscola: "/numeroEscolaEntrado",
-		_nomePropriedadeComplementoEscola: "/complementoEscolaEntrado",
 		_rotaAtual: "",
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEscolas: "criarEditarEscolas",
@@ -62,27 +61,27 @@ sap.ui.define([
 		_retornaValoresEscola() {
 			const modelo = this.getView().getModel();
 			return {
-				statusAtividade: modelo.getProperty(this._nomePropriedadeStatusAtividade),
-				nome: modelo.getProperty(this._nomePropriedadeNome),
-				codigoMec: String(modelo.getProperty(this._nomePropriedadeCodigoMec)),
-				telefone: String(modelo.getProperty(this._nomePropriedadeTelefone)),
-				email: modelo.getProperty(this._nomePropriedadeEmail),
-				inicioAtividade: modelo.getProperty(this._nomePropriedadeInicioAtividadeSelecionada),
-				categoriaAdministrativa: modelo.getProperty(this._nomePropriedadeCategoriaAdministrativa),
-				organizacaoAcademica: modelo.getProperty(this._nomePropriedadeOrganizacaoAcademica),
+				statusAtividade: modelo.getProperty(NOME_PROPRIEDADE_STATUS_ATIVIDADE),
+				nome: modelo.getProperty(NOME_PROPRIEDADA_NOME),
+				codigoMec: String(modelo.getProperty(NOME_PROPRIEDADE_CODIGO_MEC)),
+				telefone: String(modelo.getProperty(NOME_PROPRIEDADE_TELEFONE)),
+				email: modelo.getProperty(NOME_PROPRIEDADE_EMAIL),
+				inicioAtividade: modelo.getProperty(NOME_PROPRIEDADE_INICIO_ATIVIDADE_SELECIONADA),
+				categoriaAdministrativa: modelo.getProperty(NOME_PROPRIEDADE_CATEGORIA_ADMINISTRATIVA),
+				organizacaoAcademica: modelo.getProperty(NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA),
 				idEndereco: 0
 			}
 		},
 		_retornaValoresEndereco() {
 			const modelo = this.getView().getModel();
 			return {
-				numero: modelo.getProperty(this._nomePropriedadeNumeroEscola),
-				cep: String(modelo.getProperty(this._nomePropriedadeCepEscola)),
-				municipio: modelo.getProperty(this._nomePropriedadeMunicipioEscola),
-				bairro: modelo.getProperty(this._nomePropriedadeBairroEscola),
-				rua: modelo.getProperty(this._nomePropriedadeRuaEscola),
-				complemento: modelo.getProperty(this._nomePropriedadeComplementoEscola),
-				estado: modelo.getProperty(this._nomePropriedadeEstadoEscola)
+				numero: modelo.getProperty(NOME_PROPRIEDADE_NUMERO_ESCOLA),
+				cep: String(modelo.getProperty(NOME_PROPRIEDADE_CEP_ESCOLA)),
+				municipio: modelo.getProperty(NOME_PROPRIEDADE_MUNICIPIO_ESCOLA),
+				bairro: modelo.getProperty(NOME_PROPRIEDADE_BAIRRO_ESCOLA),
+				rua: modelo.getProperty(NOME_PROPRIEDADE_RUA_ESCOLA),
+				complemento: modelo.getProperty(NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA),
+				estado: modelo.getProperty(NOME_PROPRIEDADE_ESTADO_ESCOLA)
 			}
 		},
 		_mostraMensagemDeErro(mensagemDeErro, erro) {
@@ -105,16 +104,18 @@ sap.ui.define([
 				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			}
 			this._trataErros(i18nMensagemDeErro, async () => {
+				debugger;
 				if (this._rotaAtual == "EscolaCriar") {
-					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco());
-					let empresaCriar = this._retornaValoresEscola();
+					const nomeModelo = "valoresPadrao";
+					const modelo = this.getView().getModel(nomeModelo);
+					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
+					let escolaCriar = this._retornaValoresEscola();
 					debugger;
-					empresaCriar.idEndereco = respostaEndereco.id;
-					let respostaEscola = await ServicoEscolas.criarEscola(empresaCriar)
+					escolaCriar.idEndereco = respostaEndereco.id;
+					let respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
 					debugger;
-					if (!respostaEscola.ok && !respostaEndereco.ok &&
-						respostaEscola.ok != undefined && respostaEndereco.ok != undefined ||
-						respostaEscola.Status != undefined || respostaEndereco.Status != undefined) {
+					if (respostaEscola.Status != undefined ||
+						respostaEndereco.Status != undefined) {
 						debugger;
 						const status500 = 500;
 						const status400 = 400;
@@ -147,21 +148,21 @@ sap.ui.define([
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				const modelo = this.getView().getModel();
-				modelo.setProperty(this._nomePropriedadeNome, undefined);
-				modelo.setProperty(this._nomePropriedadeCodigoMec, undefined);
-				modelo.setProperty(this._nomePropriedadeTelefone, undefined);
-				modelo.setProperty(this._nomePropriedadeEmail, undefined);
-				modelo.setProperty(this._nomePropriedadeCategoriaAdministrativa, undefined);
-				modelo.setProperty(this._nomePropriedadeOrganizacaoAcademica, undefined);
-				modelo.setProperty(this._nomePropriedadeStatusAtividade, undefined);
-				modelo.setProperty(this._nomePropriedadeInicioAtividadeSelecionada, undefined);
-				modelo.setProperty(this._nomePropriedadeCepEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeEstadoEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeBairroEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeMunicipioEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeRuaEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeNumeroEscola, undefined);
-				modelo.setProperty(this._nomePropriedadeComplementoEscola, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_CODIGO_MEC, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_TELEFONE, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_EMAIL, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_CATEGORIA_ADMINISTRATIVA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADA_NOME, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_STATUS_ATIVIDADE, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_INICIO_ATIVIDADE_SELECIONADA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_CEP_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_ESTADO_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_BAIRRO_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_MUNICIPIO_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_RUA_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_NUMERO_ESCOLA, undefined);
+				modelo.setProperty(NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA, undefined);
 				if (hashAnterior != undefined) {
 					window.history.go(-1);
 				}
@@ -184,17 +185,23 @@ sap.ui.define([
 			return textoRetorno;
 		},
 		_trataErros(nomeModeloTituloErro, funcao) {
+			debugger;
 			const modelo = this.getView().getModel();
 			const nomePropriedadeOcupado = "/ocupado";
 			modelo.setProperty(nomePropriedadeOcupado, true);
+			let erroPego;
 			return Promise.resolve(funcao())
 				.catch(erro => {
-					const i18n = this._retornaModeloI18n();
-					const TituloErro = i18n.getText(nomeModeloTituloErro);
-					this._mostraMensagemDeErro(TituloErro, erro);
+					erroPego = erro;
 				})
 				.finally(() => {
+					debugger;
 					modelo.setProperty(nomePropriedadeOcupado, false)
+					if (erroPego != null) {
+						const i18n = this._retornaModeloI18n();
+						const TituloErro = i18n.getText(nomeModeloTituloErro);
+						this._mostraMensagemDeErro(TituloErro, erroPego);
+					}
 				});
 		},
 		_retornaModeloI18n() {

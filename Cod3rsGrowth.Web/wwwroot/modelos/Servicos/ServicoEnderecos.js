@@ -5,60 +5,54 @@ sap.ui.define([
 ) {
     return {
         obterTodosEnderecos: async function (filtro) {
-            parametrosFiltro += "?";
-
-            try {
-                if (filtro != undefined && filtro != null) {
-                    const chavesFiltro = Object.keys(filtro);
-                    const posicaoArrayNumeroFiltro = 0;
-                    const chaveFiltroNumero = chavesFiltro[posicaoArrayNumeroFiltro];
-                    if (filtro.NumeroFiltro !== undefined) {
-                        const parametroFiltroNumero = `&${chaveFiltroNumero}=`;
-                        let valorNumero = filtro.NumeroFiltro;
-                        parametrosFiltro += parametroFiltroNumero += valorNumero;
-                    }
-
-                    const posicaoArrayCepFiltro = 1;
-                    const chaveFiltroCep = chavesFiltro[posicaoArrayCepFiltro];
-                    if (filtro.CepFiltro !== undefined) {
-                        const parametroFiltroCep = `&${chaveFiltroCep}=`;
-                        let valorCep = filtro.CepFiltro;
-                        parametrosFiltro += parametroFiltroCep += valorCep;
-                    }
-
-                    const posicaoArrayMunicipioFiltro = 2;
-                    const chaveFiltroMunicipio = chavesFiltro[posicaoArrayMunicipioFiltro];
-                    if (filtro.MunicipioFiltro !== undefined) {
-                        const parametroFiltroMunicipio = `&${chaveFiltroMunicipio}=`;
-                        let valorMunicipio = filtro.MunicipioFiltro;
-                        parametrosFiltro += parametroFiltroMunicipio += valorMunicipio;
-                    }
-
-                    const posicaoArrayBairroFiltro = 3;
-                    const chaveFiltroBairro = chavesFiltro[posicaoArrayBairroFiltro];
-                    if (filtro.BairroFiltro !== undefined) {
-                        const parametroFiltroBairro = `&${chaveFiltroBairro}=`;
-                        let valorBairro = filtro.BairroFiltro;
-                        parametrosFiltro += parametroFiltroBairro += valorBairro;
-                    }
-                    const posicaoArrayEstadoFiltro = 4;
-                    const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
-                    if (filtro.EstadoFiltro !== undefined) {
-                        let PArametroFiltroEstado = `&${chaveFiltroEstado}=`;
-                        parametrosFiltro += PArametroFiltroEstado + filtro.EstadoFiltro;
-                    }
+            if (filtro != undefined && filtro != null) {
+                const chavesFiltro = Object.keys(filtro);
+                const posicaoArrayNumeroFiltro = 0;
+                const chaveFiltroNumero = chavesFiltro[posicaoArrayNumeroFiltro];
+                if (filtro.NumeroFiltro !== undefined) {
+                    const parametroFiltroNumero = `&${chaveFiltroNumero}=`;
+                    let valorNumero = filtro.NumeroFiltro;
+                    parametrosFiltro += parametroFiltroNumero += valorNumero;
                 }
-                return await RepositorioEnderecos.obterTodosEnderecos(parametroFiltro);
+
+                const posicaoArrayCepFiltro = 1;
+                const chaveFiltroCep = chavesFiltro[posicaoArrayCepFiltro];
+                if (filtro.CepFiltro !== undefined) {
+                    const parametroFiltroCep = `&${chaveFiltroCep}=`;
+                    let valorCep = filtro.CepFiltro;
+                    parametrosFiltro += parametroFiltroCep += valorCep;
+                }
+
+                const posicaoArrayMunicipioFiltro = 2;
+                const chaveFiltroMunicipio = chavesFiltro[posicaoArrayMunicipioFiltro];
+                if (filtro.MunicipioFiltro !== undefined) {
+                    const parametroFiltroMunicipio = `&${chaveFiltroMunicipio}=`;
+                    let valorMunicipio = filtro.MunicipioFiltro;
+                    parametrosFiltro += parametroFiltroMunicipio += valorMunicipio;
+                }
+
+                const posicaoArrayBairroFiltro = 3;
+                const chaveFiltroBairro = chavesFiltro[posicaoArrayBairroFiltro];
+                if (filtro.BairroFiltro !== undefined) {
+                    const parametroFiltroBairro = `&${chaveFiltroBairro}=`;
+                    let valorBairro = filtro.BairroFiltro;
+                    parametrosFiltro += parametroFiltroBairro += valorBairro;
+                }
+                const posicaoArrayEstadoFiltro = 4;
+                const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
+                if (filtro.EstadoFiltro !== undefined) {
+                    let PArametroFiltroEstado = `&${chaveFiltroEstado}=`;
+                    parametrosFiltro += PArametroFiltroEstado + filtro.EstadoFiltro;
+                }
             }
-            catch (erro) {
-                throw erro;
-            }
+            return await RepositorioEnderecos.obterTodosEnderecos(parametroFiltro);
         },
-        criarEndereco: async function (parametros) {
+        criarEndereco: async function (parametros, modelo) {
             debugger;
-            const valorNumericoPadrao = 0
-            const valorStringPadrao = "";
-            try {
+            const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
+            const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
+            const valorNumericoPadrao = modelo.getProperty(nomeProrpriedadeValorNumericoPadrao);
+            const valorStringPadrao = modelo.getProperty(nomePropriedadeValorStringPadrao);
             const parametrosEndereco = {
                 id: valorNumericoPadrao,
                 numero: parametros.numero != null && parametros.numero != valorNumericoPadrao ?
@@ -70,19 +64,10 @@ sap.ui.define([
                 complemento: parametros.complemento != null ? parametros.complemento : valorStringPadrao,
                 estado: parseInt(parametros.estado ?? valorNumericoPadrao)
             }
-                return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
-            } 
-            catch (erro) {
-                throw erro;
-            }
+            return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
         },
-        deletarEndereco: async function(id) {
-            try {
-                RepositorioEnderecos.deletarEndereco(id);
-            }
-            catch (erro) {
-                throw erro;
-            }
+        deletarEndereco: async function (id) {
+            RepositorioEnderecos.deletarEndereco(id);
         }
     }
 });

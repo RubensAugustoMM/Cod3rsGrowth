@@ -436,20 +436,26 @@ sap.ui.define([
                 actions: [MessageBox.Action.CLOSE]
             });
         },
-        _trataErros(nomeModeloTituloErro, funcao) {
-            const modelo = this.getView().getModel();
-            const nomePropriedadeOcupado = "/ocupado";
-            modelo.setProperty(nomePropriedadeOcupado, true);
-            return Promise.resolve(funcao())
-                .catch(erro => {
-                    const i18n = this._retornaModeloI18n();
-                    const TituloErro = i18n.getText(nomeModeloTituloErro);
-                    this._mostraMensagemDeErro(TituloErro, erro);
-                })
-                .finally(() => {
-                    modelo.setProperty(nomePropriedadeOcupado, false)
-                });
-        },
+		_trataErros(nomeModeloTituloErro, funcao) {
+			debugger;
+			const modelo = this.getView().getModel();
+			const nomePropriedadeOcupado = "/ocupado";
+			modelo.setProperty(nomePropriedadeOcupado, true);
+			let erroPego;
+			return Promise.resolve(funcao())
+				.catch(erro => {
+					erroPego = erro;
+				})
+				.finally(() => {
+					debugger;
+					modelo.setProperty(nomePropriedadeOcupado, false)
+					if (erroPego != null) {
+						const i18n = this._retornaModeloI18n();
+						const TituloErro = i18n.getText(nomeModeloTituloErro);
+						this._mostraMensagemDeErro(TituloErro, erroPego);
+					}
+				});
+		},
         _retornaModeloI18n() {
             return this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
         }
