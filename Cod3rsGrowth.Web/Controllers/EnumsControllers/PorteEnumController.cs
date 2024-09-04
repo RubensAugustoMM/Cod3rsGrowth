@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 public class PorteEnumController : ControllerBase
 {
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var porteEnumJson = new PorteEnumJson();
         var valoresPorte = Enum.GetValues(typeof(PorteEnums)).Cast<PorteEnums>();

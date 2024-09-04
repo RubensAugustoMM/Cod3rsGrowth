@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 public class CategoriaAdministrativaEnumController : ControllerBase
 {
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var categoriaAdministrativaJson = new CategoriaAdministrativaEnumJson();
         var valoresCategoriaAdministrativa = Enum.GetValues(typeof(CategoriaAdministrativaEnums)).Cast<CategoriaAdministrativaEnums>();

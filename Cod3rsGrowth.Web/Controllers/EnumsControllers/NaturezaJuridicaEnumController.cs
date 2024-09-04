@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 public class NaturezaJuridicaEnumController : ControllerBase
 {
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var naturezaJuridicaJson = new NaturezaJuridicaEnumJson();
         var valoresNaturezaJuridica = Enum.GetValues(typeof(NaturezaJuridicaEnums)).Cast<NaturezaJuridicaEnums>();

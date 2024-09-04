@@ -13,7 +13,7 @@ public class MatrizFilialEnumController : ControllerBase
 {
     
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var matrizFilialEnumJson = new MatrizFilialEnumJson();
         var valoresMatrizFilial = Enum.GetValues(typeof(MatrizFilialEnums)).Cast<MatrizFilialEnums>();
