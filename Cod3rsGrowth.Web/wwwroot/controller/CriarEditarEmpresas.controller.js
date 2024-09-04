@@ -42,10 +42,6 @@ sap.ui.define([
 			const nomeRotaEmpresaCriar = "EmpresaCriar";
 			const roteador = this.getOwnerComponent().getRouter();
 			roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
-			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroIniciarTela";
-			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
 			try {
@@ -70,48 +66,40 @@ sap.ui.define([
 			}
 		},
 		_retornaValoresEmpresa() {
-			try {
-				const modelo = this.getView().getModel();
-				return {
-					razaoSocial: modelo.getProperty(this._nomePropriedadeRazaoSocialEmpresa),
-					nomeFantasia: modelo.getProperty(this._nomePropriedadeNomeFantasiaEmpresa),
-					cnpj: String(modelo.getProperty(this._nomePropriedadeCnpjEmpresa)),
-					situacaoCadastral: modelo.getProperty(this._nomePropriedadeSituacaoCadastralEmpresa),
-					dataSituacaoCadastral: new Date(),
-					dataAbertura: modelo.getProperty(this._nomePropriedadeDataAberturaEmpresa),
-					naturezaJuridica: modelo.getProperty(this._nomePropriedadeNaturezaJuridicaEmpresa),
-					porte: modelo.getProperty(this._nomePropriedadePorteEmpresa),
-					matrizFilial: modelo.getProperty(this._nomePropriedadeMatrizFilialEmpresa),
-					capitalSocial: modelo.getProperty(this._nomePropriedadeCapitalSocialEmpresa),
-					idEndereco: 0
-				}
+			const modelo = this.getView().getModel();
+			return {
+				razaoSocial: modelo.getProperty(this._nomePropriedadeRazaoSocialEmpresa),
+				nomeFantasia: modelo.getProperty(this._nomePropriedadeNomeFantasiaEmpresa),
+				cnpj: String(modelo.getProperty(this._nomePropriedadeCnpjEmpresa)),
+				situacaoCadastral: modelo.getProperty(this._nomePropriedadeSituacaoCadastralEmpresa),
+				dataSituacaoCadastral: new Date(),
+				dataAbertura: modelo.getProperty(this._nomePropriedadeDataAberturaEmpresa),
+				naturezaJuridica: modelo.getProperty(this._nomePropriedadeNaturezaJuridicaEmpresa),
+				porte: modelo.getProperty(this._nomePropriedadePorteEmpresa),
+				matrizFilial: modelo.getProperty(this._nomePropriedadeMatrizFilialEmpresa),
+				capitalSocial: modelo.getProperty(this._nomePropriedadeCapitalSocialEmpresa),
+				idEndereco: 0
 			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
+			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_retornaValoresEndereco() {
-			try {
-				const modelo = this.getView().getModel();
-				return {
-					numero: String(modelo.getProperty(this._nomePropriedadeNumeroEmpresa)),
-					cep: String(modelo.getProperty(this._nomePropriedadeCepEmpresa)),
-					municipio: modelo.getProperty(this._nomePropriedadeMunicipioEmpresa),
-					bairro: modelo.getProperty(this._nomePropriedadeBairroEmpresa),
-					rua: modelo.getProperty(this._nomePropriedadeRuaEmpresa),
-					complemento: modelo.getProperty(this._nomePropriedadeComplementoEmpresa),
-					estado: modelo.getProperty(this._nomePropriedadeEstadoEmpresa)
-				}
+			const modelo = this.getView().getModel();
+			return {
+				numero: String(modelo.getProperty(this._nomePropriedadeNumeroEmpresa)),
+				cep: String(modelo.getProperty(this._nomePropriedadeCepEmpresa)),
+				municipio: modelo.getProperty(this._nomePropriedadeMunicipioEmpresa),
+				bairro: modelo.getProperty(this._nomePropriedadeBairroEmpresa),
+				rua: modelo.getProperty(this._nomePropriedadeRuaEmpresa),
+				complemento: modelo.getProperty(this._nomePropriedadeComplementoEmpresa),
+				estado: modelo.getProperty(this._nomePropriedadeEstadoEmpresa)
 			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
+			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;

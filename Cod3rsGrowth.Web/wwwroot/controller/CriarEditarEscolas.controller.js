@@ -39,75 +39,47 @@ sap.ui.define([
 			const nomeRotaEscolaCirar = "EscolaCriar";
 			const roteador = this.getOwnerComponent().getRouter();
 			roteador.getRoute(nomeRotaEscolaCirar).attachMatched(this._aoCoincidirComRotaEscolaCriar, this);
-			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoInicializarTela";
-			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_aoCoincidirComRotaEscolaCriar(oEvent) {
-			try {
-				const idDataInicioAtividadeDatePicker = "dataInicioAtividade";
-				const parametroNomeRota = "name";
-				this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-				const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
-				let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
-				let dataAtual = new Date();
-				this.byId(idDataInicioAtividadeDatePicker).setMaxDate(
-					UI5Date.getInstance(
-						dataAtual.getFullYear(),
-						dataAtual.getMonth(),
-						dataAtual.getDate()
-					)
-				);
-			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEscola.ErroAoCoincidirRotaCriar"
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			const idDataInicioAtividadeDatePicker = "dataInicioAtividade";
+			const parametroNomeRota = "name";
+			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
+			const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
+			let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+			this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
+			let dataAtual = new Date();
+			this.byId(idDataInicioAtividadeDatePicker).setMaxDate(
+				UI5Date.getInstance(
+					dataAtual.getFullYear(),
+					dataAtual.getMonth(),
+					dataAtual.getDate()
+				)
+			);
 		},
 		_retornaValoresEscola() {
-			try {
-				const modelo = this.getView().getModel();
-				return {
-					statusAtividade: modelo.getProperty(this._nomePropriedadeStatusAtividade),
-					nome: modelo.getProperty(this._nomePropriedadeNome),
-					codigoMec: String(modelo.getProperty(this._nomePropriedadeCodigoMec)),
-					telefone: String(modelo.getProperty(this._nomePropriedadeTelefone)),
-					email: modelo.getProperty(this._nomePropriedadeEmail),
-					inicioAtividade: modelo.getProperty(this._nomePropriedadeInicioAtividadeSelecionada),
-					categoriaAdministrativa: modelo.getProperty(this._nomePropriedadeCategoriaAdministrativa),
-					organizacaoAcademica: modelo.getProperty(this._nomePropriedadeOrganizacaoAcademica),
-					idEndereco: 0
-				}
-			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEscola.ErroRecebeDadosTela"
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
+			const modelo = this.getView().getModel();
+			return {
+				statusAtividade: modelo.getProperty(this._nomePropriedadeStatusAtividade),
+				nome: modelo.getProperty(this._nomePropriedadeNome),
+				codigoMec: String(modelo.getProperty(this._nomePropriedadeCodigoMec)),
+				telefone: String(modelo.getProperty(this._nomePropriedadeTelefone)),
+				email: modelo.getProperty(this._nomePropriedadeEmail),
+				inicioAtividade: modelo.getProperty(this._nomePropriedadeInicioAtividadeSelecionada),
+				categoriaAdministrativa: modelo.getProperty(this._nomePropriedadeCategoriaAdministrativa),
+				organizacaoAcademica: modelo.getProperty(this._nomePropriedadeOrganizacaoAcademica),
+				idEndereco: 0
 			}
 		},
 		_retornaValoresEndereco() {
-			try {
-				const modelo = this.getView().getModel();
-				return {
-					numero: modelo.getProperty(this._nomePropriedadeNumeroEscola),
-					cep: String(modelo.getProperty(this._nomePropriedadeCepEscola)),
-					municipio: modelo.getProperty(this._nomePropriedadeMunicipioEscola),
-					bairro: modelo.getProperty(this._nomePropriedadeBairroEscola),
-					rua: modelo.getProperty(this._nomePropriedadeRuaEscola),
-					complemento: modelo.getProperty(this._nomePropriedadeComplementoEscola),
-					estado: modelo.getProperty(this._nomePropriedadeEstadoEscola)
-				}
-			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEscola.ErroRecebeDadosTela";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
+			const modelo = this.getView().getModel();
+			return {
+				numero: modelo.getProperty(this._nomePropriedadeNumeroEscola),
+				cep: String(modelo.getProperty(this._nomePropriedadeCepEscola)),
+				municipio: modelo.getProperty(this._nomePropriedadeMunicipioEscola),
+				bairro: modelo.getProperty(this._nomePropriedadeBairroEscola),
+				rua: modelo.getProperty(this._nomePropriedadeRuaEscola),
+				complemento: modelo.getProperty(this._nomePropriedadeComplementoEscola),
+				estado: modelo.getProperty(this._nomePropriedadeEstadoEscola)
 			}
 		},
 		_mostraMensagemDeErro(mensagemDeErro, erro) {

@@ -46,10 +46,6 @@ sap.ui.define([
             const roteador = this.getOwnerComponent().getRouter();
             roteador.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
             roteador.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
-            const i18nMensagemDeErro = "Lista.ErroInicializarTelaListagem";
-            const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-            const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-            this._mostraMensagemDeErro(mensagemDeErro, erro);
         },
 
         _aoCoincidirComRotaEmpresas: function (oEvent) {
@@ -217,24 +213,15 @@ sap.ui.define([
             const nomePropriedadeDataAbertura = "/dataAbertura";
             const nomePropriedadeNaturezaJuridicaSelecionada = "/naturezaJuridicaSelecionada";
             const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
-
-            try {
-                const modelo = this.getView().getModel();
-                return {
-                    SituacaoCadastralFiltro: modelo.getProperty(nomePropriedadeSituacaoCadastralSelecioada),
-                    RazaoSocialFiltro: modelo.getProperty(nomePropriedadeNomeEmpresa),
-                    CnpjFiltro: modelo.getProperty(nomePropriedadeCnpjEmpresa),
-                    CapitalSocialFiltro: modelo.getProperty(nomePropriedadeCapitalSocialEmpresa),
-                    DataAberturaFiltro: modelo.getProperty(nomePropriedadeDataAbertura),
-                    NaturezaJuridicaFiltro: modelo.getProperty(nomePropriedadeNaturezaJuridicaSelecionada),
-                    EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
-                }
-            }
-            catch (erro) {
-                const i18nMensagemDeErro = "Lista.ErroRetornaFiltroEmpresas";
-                const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            const modelo = this.getView().getModel();
+            return {
+                SituacaoCadastralFiltro: modelo.getProperty(nomePropriedadeSituacaoCadastralSelecioada),
+                RazaoSocialFiltro: modelo.getProperty(nomePropriedadeNomeEmpresa),
+                CnpjFiltro: modelo.getProperty(nomePropriedadeCnpjEmpresa),
+                CapitalSocialFiltro: modelo.getProperty(nomePropriedadeCapitalSocialEmpresa),
+                DataAberturaFiltro: modelo.getProperty(nomePropriedadeDataAbertura),
+                NaturezaJuridicaFiltro: modelo.getProperty(nomePropriedadeNaturezaJuridicaSelecionada),
+                EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
             }
         },
 
@@ -244,22 +231,13 @@ sap.ui.define([
             const nomePropriedadeStatusAtividadeSelecionada = "/statusAtividadeSelecionada";
             const nomePropriedadeOrganizacaoAcademicaSelecioada = "/organizacaoAcademicaSelecionada";
             const nomePropriedadeEstadoSelecionado = "/estadoSelecionado";
-
-            try {
-                let modelo = this.getView().getModel();
-                return {
-                    NomeFiltro: modelo.getProperty(nomePropriedadeNomeEscola),
-                    CodigoMecFiltro: modelo.getProperty(nomePropriedadeCodigoMec),
-                    StatusAtividadeFiltro: modelo.getProperty(nomePropriedadeStatusAtividadeSelecionada),
-                    OrganizacaoAcademicaFiltro: modelo.getProperty(nomePropriedadeOrganizacaoAcademicaSelecioada),
-                    EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
-                }
-            }
-            catch (erro) {
-                const i18nMensagemDeErro = "Lista.ErroRetornaFiltroEscolas";
-                const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
+            let modelo = this.getView().getModel();
+            return {
+                NomeFiltro: modelo.getProperty(nomePropriedadeNomeEscola),
+                CodigoMecFiltro: modelo.getProperty(nomePropriedadeCodigoMec),
+                StatusAtividadeFiltro: modelo.getProperty(nomePropriedadeStatusAtividadeSelecionada),
+                OrganizacaoAcademicaFiltro: modelo.getProperty(nomePropriedadeOrganizacaoAcademicaSelecioada),
+                EstadoFiltro: modelo.getProperty(nomePropriedadeEstadoSelecionado)
             }
         },
 
