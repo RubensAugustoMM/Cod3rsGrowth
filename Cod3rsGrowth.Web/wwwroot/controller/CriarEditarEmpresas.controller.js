@@ -40,17 +40,12 @@ sap.ui.define([
 		_idCriarEditarEmpresas: "criarEditarEmpresas",
 		onInit() {
 			const nomeRotaEmpresaCriar = "EmpresaCriar";
-			try {
-				const roteador = this.getOwnerComponent().getRouter();
-
-				roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
-			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEmpresas.ErroIniciarTela";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
+			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroIniciarTela";
+			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
 			try {

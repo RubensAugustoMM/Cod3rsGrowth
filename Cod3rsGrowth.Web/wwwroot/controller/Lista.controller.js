@@ -43,19 +43,13 @@ sap.ui.define([
         onInit() {
             const nomeRotaEmpresa = "Empresas";
             const nomeRotaEscolas = "Escolas";
-
-            try {
-                const roteador = this.getOwnerComponent().getRouter();
-
-                roteador.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
-                roteador.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
-            }
-            catch (erro) {
-                const i18nMensagemDeErro = "Lista.ErroInicializarTelaListagem";
-                const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-                const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
-            }
+            const roteador = this.getOwnerComponent().getRouter();
+            roteador.getRoute(nomeRotaEmpresa).attachMatched(this._aoCoincidirComRotaEmpresas, this);
+            roteador.getRoute(nomeRotaEscolas).attachMatched(this._aoCoincidirComRotaEscolas, this);
+            const i18nMensagemDeErro = "Lista.ErroInicializarTelaListagem";
+            const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+            const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+            this._mostraMensagemDeErro(mensagemDeErro, erro);
         },
 
         _aoCoincidirComRotaEmpresas: function (oEvent) {
