@@ -37,12 +37,12 @@ sap.ui.define([
 		_idCriarEditarEscolas: "criarEditarEscolas",
 		onInit() {
 			const nomeRotaEscolaCirar = "EscolaCriar";
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.getRoute(nomeRotaEscolaCirar).attachMatched(this._aoCoincidirComRotaEscolaCriar, this);
-				const i18nMensagemDeErro = "CriarEditarEscola.ErroAoInicializarTela";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.getRoute(nomeRotaEscolaCirar).attachMatched(this._aoCoincidirComRotaEscolaCriar, this);
+			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoInicializarTela";
+			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
+			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_aoCoincidirComRotaEscolaCriar(oEvent) {
 			try {
