@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoriaAdministrativaEnum : ControllerBase
+public class CategoriaAdministrativaEnumController : ControllerBase
 {
     [HttpGet]
     public IActionResult ObterModeloJson()
