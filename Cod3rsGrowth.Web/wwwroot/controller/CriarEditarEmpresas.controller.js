@@ -42,28 +42,23 @@ sap.ui.define([
 			const nomeRotaEmpresaCriar = "EmpresaCriar";
 			const roteador = this.getOwnerComponent().getRouter();
 			roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
+			const idDataAberturaDatePicker = "dataAberturaDatePicker";
+			let dataAtual = new Date();
+			this.byId(idDataAberturaDatePicker).setMaxDate(
+				UI5Date.getInstance(
+					dataAtual.getFullYear(),
+					dataAtual.getMonth(),
+					dataAtual.getDay()));
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
-			try {
-				const idDataAberturaDatePicker = "dataAberturaDatePicker";
-				const parametroNomeRota = "name";
-				this._rotaAtual = oEvent.getParameter(parametroNomeRota);
+			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
+			const parametroNomeRota = "name";
+			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
+			this._trataErros(i18nMensagemDeErro, () => {
 				const i18TituloEmpresaCriar = "CriarEditarEmpresas.TituloCriar";
-				let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+				const i18n = this._retornaModeloI18n();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
-				let dataAtual = new Date();
-				this.byId(idDataAberturaDatePicker).setMaxDate(
-					UI5Date.getInstance(
-						dataAtual.getFullYear(),
-						dataAtual.getMonth(),
-						dataAtual.getDay()));
-			}
-			catch (erro) {
-				const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			});
 		},
 		_retornaValoresEmpresa() {
 			const modelo = this.getView().getModel();
@@ -80,10 +75,6 @@ sap.ui.define([
 				capitalSocial: modelo.getProperty(this._nomePropriedadeCapitalSocialEmpresa),
 				idEndereco: 0
 			}
-			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
-			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		_retornaValoresEndereco() {
 			const modelo = this.getView().getModel();
@@ -96,15 +87,18 @@ sap.ui.define([
 				complemento: modelo.getProperty(this._nomePropriedadeComplementoEmpresa),
 				estado: modelo.getProperty(this._nomePropriedadeEstadoEmpresa)
 			}
-			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroRecebeDadosTela";
-			const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-			const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-			this._mostraMensagemDeErro(mensagemDeErro, erro);
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
 			let textoErro = "";
-			try {
+			let i18nMensagemDeErro;
+			if (this._rotaAtual == "EmpresaCriar") {
+				i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoTentarCriarEmpresa";
+			}
+			else {
+				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
+			}
+			this._trataErros(i18nMensagemDeErro, async () => {
 				if (this._rotaAtual == "EmpresaCriar") {
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco());
 					let empresaCriar = this._retornaValoresEmpresa();
@@ -138,48 +132,40 @@ sap.ui.define([
 					}
 					this.aoPressionarBotaoDeNavegacao();
 				}
-			} catch (erro) {
-				let i18nMensagemDeErro;
-				if (this._rotaAtual == "EmpresaCriar") {
-					i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoTentarCriarEmpresa";
-				}
-				else {
-					i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
-				}
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			});
 		},
 
 		aoPressionarBotaoDeNavegacao() {
-
-			const historico = History.getInstance();
-			const hashAnterior = historico.getPreviousHash();
-			const modelo = this.getView().getModel();
-			modelo.setProperty(this._nomePropriedadeRazaoSocialEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeNomeFantasiaEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeCnpjEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeSituacaoCadastralEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeDataAberturaEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeNaturezaJuridicaEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadePorteEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeMatrizFilialEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeCapitalSocialEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeNumeroEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeCepEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeMunicipioEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeBairroEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeRuaEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeComplementoEmpresa, undefined);
-			modelo.setProperty(this._nomePropriedadeEstadoEmpresa, undefined);
-			if (hashAnterior != undefined) {
-				window.history.go(-1);
-			}
-			else {
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.navTo("Empresas", {}, {}, true);
-			}
+			let i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoClicarBotaoNavegacao";
+			this._trataErros(i18nMensagemDeErro, () => {
+				const historico = History.getInstance();
+				const hashAnterior = historico.getPreviousHash();
+				const modelo = this.getView().getModel();
+				modelo.setProperty(this._nomePropriedadeRazaoSocialEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeNomeFantasiaEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeCnpjEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeSituacaoCadastralEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeDataAberturaEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeNaturezaJuridicaEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadePorteEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeMatrizFilialEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeCapitalSocialEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeNumeroEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeCepEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeMunicipioEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeBairroEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeRuaEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeComplementoEmpresa, undefined);
+				modelo.setProperty(this._nomePropriedadeEstadoEmpresa, undefined);
+				if (hashAnterior != undefined) {
+					window.history.go(-1);
+				}
+				else {
+					const roteador = this.getOwnerComponent().getRouter();
+					const nomeRotaEmpresas = "Empresas";
+					roteador.navTo(nomeRotaEmpresas, {}, {}, true);
+				}
+			})
 		},
 		_mostraMensagemDeErro(mensagemDeErro, erro) {
 			debugger;
@@ -200,6 +186,23 @@ sap.ui.define([
 				}));
 			}));
 			return textoRetorno;
+		},
+		_trataErros(nomeModeloTituloErro, funcao) {
+			const modelo = this.getView().getModel();
+			const nomePropriedadeOcupado = "/ocupado";
+			modelo.setProperty(nomePropriedadeOcupado, true);
+			return Promise.resolve(funcao())
+				.catch(erro => {
+					const i18n = this._retornaModeloI18n();
+					const TituloErro = i18n.getText(nomeModeloTituloErro);
+					this._mostraMensagemDeErro(TituloErro, erro);
+				})
+				.finally(() => {
+					modelo.setProperty(nomePropriedadeOcupado, false)
+				});
+		},
+		_retornaModeloI18n() {
+			return this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
 		}
 	});
 });

@@ -42,19 +42,22 @@ sap.ui.define([
 		},
 		_aoCoincidirComRotaEscolaCriar(oEvent) {
 			const idDataInicioAtividadeDatePicker = "dataInicioAtividade";
+			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoCoincidirRotas";
 			const parametroNomeRota = "name";
-			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
-			let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-			this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
-			let dataAtual = new Date();
-			this.byId(idDataInicioAtividadeDatePicker).setMaxDate(
-				UI5Date.getInstance(
-					dataAtual.getFullYear(),
-					dataAtual.getMonth(),
-					dataAtual.getDate()
-				)
-			);
+			this._trataErros(i18nMensagemDeErro, () => {
+				this._rotaAtual = oEvent.getParameter(parametroNomeRota);
+				const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
+				let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
+				let dataAtual = new Date();
+				this.byId(idDataInicioAtividadeDatePicker).setMaxDate(
+					UI5Date.getInstance(
+						dataAtual.getFullYear(),
+						dataAtual.getMonth(),
+						dataAtual.getDate()
+					)
+				);
+			});
 		},
 		_retornaValoresEscola() {
 			const modelo = this.getView().getModel();
@@ -94,7 +97,14 @@ sap.ui.define([
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
 			let textoErro = "";
-			try {
+			let i18nMensagemDeErro;
+			if (this._rotaAtual == "EscolaCriar") {
+				i18nMensagemDeErro = "CriarEditarEscola.ErroAoTentarCriarEscola";
+			}
+			else {
+				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
+			}
+			this._trataErros(i18nMensagemDeErro, async () => {
 				if (this._rotaAtual == "EscolaCriar") {
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco());
 					let empresaCriar = this._retornaValoresEscola();
@@ -128,46 +138,39 @@ sap.ui.define([
 					}
 					this.aoPressionarBotaoDeNavegacao();
 				}
-			} catch (erro) {
-				let i18nMensagemDeErro;
-				if (this._rotaAtual == "EscolaCriar") {
-					i18nMensagemDeErro = "CriarEditarEscola.ErroAoTentarCriarEscola";
-				}
-				else {
-					i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
-				}
-				const i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
-				const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
-				this._mostraMensagemDeErro(mensagemDeErro, erro);
-			}
+			});
 		},
 
 		aoPressionarBotaoDeNavegacao() {
-			const historico = History.getInstance();
-			const hashAnterior = historico.getPreviousHash();
-			const modelo = this.getView().getModel();
-			modelo.setProperty(this._nomePropriedadeNome, undefined);
-			modelo.setProperty(this._nomePropriedadeCodigoMec, undefined);
-			modelo.setProperty(this._nomePropriedadeTelefone, undefined);
-			modelo.setProperty(this._nomePropriedadeEmail, undefined);
-			modelo.setProperty(this._nomePropriedadeCategoriaAdministrativa, undefined);
-			modelo.setProperty(this._nomePropriedadeOrganizacaoAcademica, undefined);
-			modelo.setProperty(this._nomePropriedadeStatusAtividade, undefined);
-			modelo.setProperty(this._nomePropriedadeInicioAtividadeSelecionada, undefined);
-			modelo.setProperty(this._nomePropriedadeCepEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeEstadoEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeBairroEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeMunicipioEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeRuaEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeNumeroEscola, undefined);
-			modelo.setProperty(this._nomePropriedadeComplementoEscola, undefined);
-			if (hashAnterior != undefined) {
-				window.history.go(-1);
-			}
-			else {
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.navTo("Escolas", {}, {}, true);
-			}
+			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoClicarBotaoDeNavegaca";
+			this._trataErros(i18nMensagemDeErro, () => {
+				const historico = History.getInstance();
+				const hashAnterior = historico.getPreviousHash();
+				const modelo = this.getView().getModel();
+				modelo.setProperty(this._nomePropriedadeNome, undefined);
+				modelo.setProperty(this._nomePropriedadeCodigoMec, undefined);
+				modelo.setProperty(this._nomePropriedadeTelefone, undefined);
+				modelo.setProperty(this._nomePropriedadeEmail, undefined);
+				modelo.setProperty(this._nomePropriedadeCategoriaAdministrativa, undefined);
+				modelo.setProperty(this._nomePropriedadeOrganizacaoAcademica, undefined);
+				modelo.setProperty(this._nomePropriedadeStatusAtividade, undefined);
+				modelo.setProperty(this._nomePropriedadeInicioAtividadeSelecionada, undefined);
+				modelo.setProperty(this._nomePropriedadeCepEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeEstadoEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeBairroEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeMunicipioEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeRuaEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeNumeroEscola, undefined);
+				modelo.setProperty(this._nomePropriedadeComplementoEscola, undefined);
+				if (hashAnterior != undefined) {
+					window.history.go(-1);
+				}
+				else {
+					const roteador = this.getOwnerComponent().getRouter();
+					const nomeRotaEscolas = "Escolas";
+					roteador.navTo(nomeRotaEscolas, {}, {}, true);
+				}
+			})
 		},
 		_retornaTextoErro(resposta) {
 			let textoRetorno = "";
@@ -179,6 +182,23 @@ sap.ui.define([
 				}));
 			}));
 			return textoRetorno;
+		},
+		_trataErros(nomeModeloTituloErro, funcao) {
+			const modelo = this.getView().getModel();
+			const nomePropriedadeOcupado = "/ocupado";
+			modelo.setProperty(nomePropriedadeOcupado, true);
+			return Promise.resolve(funcao())
+				.catch(erro => {
+					const i18n = this._retornaModeloI18n();
+					const TituloErro = i18n.getText(nomeModeloTituloErro);
+					this._mostraMensagemDeErro(TituloErro, erro);
+				})
+				.finally(() => {
+					modelo.setProperty(nomePropriedadeOcupado, false)
+				});
+		},
+		_retornaModeloI18n() {
+			return this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
 		}
 	});
 });
