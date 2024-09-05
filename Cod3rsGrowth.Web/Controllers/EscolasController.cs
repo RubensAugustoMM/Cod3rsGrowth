@@ -38,11 +38,11 @@ public class EscolasController : ControllerBase
         return CreatedAtAction(nameof(ObterPorId), new { id = escolaCriar.Id }, escolaCriar);
     }
 
-    [HttpPut]
+    [HttpPut("[action]")]
     public IActionResult Atualizar([FromBody] Escola escolaAtualizar)
     {
         _servicoEscola.Atualizar(escolaAtualizar);
-        return NoContent();
+        return Ok(escolaAtualizar);
     }
 
     [HttpDelete("{id}")]

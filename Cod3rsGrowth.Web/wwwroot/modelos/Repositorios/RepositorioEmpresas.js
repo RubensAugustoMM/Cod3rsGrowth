@@ -16,6 +16,16 @@ sap.ui.define([
                 body: JSON.stringify(parametros)
             });
             return await resposta.json();
+        },
+        editarEmpresa: async function (parametros) {
+            debugger;
+            const urlAcao = "/Editar"
+            const resposta = await fetch(this._urlBase + urlAcao, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(parametros)
+            });
+            return await resposta.json();
         }
     }
 });

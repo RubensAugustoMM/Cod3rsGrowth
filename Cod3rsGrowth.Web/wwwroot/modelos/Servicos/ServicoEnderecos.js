@@ -12,7 +12,7 @@ sap.ui.define([
                 if (filtro.NumeroFiltro !== undefined) {
                     const parametroFiltroNumero = `&${chaveFiltroNumero}=`;
                     let valorNumero = filtro.NumeroFiltro;
-                    parametrosFiltro += parametroFiltroNumero += valorNumero;
+                    parametrosFiltro += parametroFiltroNumero + valorNumero;
                 }
 
                 const posicaoArrayCepFiltro = 1;
@@ -20,7 +20,7 @@ sap.ui.define([
                 if (filtro.CepFiltro !== undefined) {
                     const parametroFiltroCep = `&${chaveFiltroCep}=`;
                     let valorCep = filtro.CepFiltro;
-                    parametrosFiltro += parametroFiltroCep += valorCep;
+                    parametrosFiltro += parametroFiltroCep + valorCep;
                 }
 
                 const posicaoArrayMunicipioFiltro = 2;
@@ -28,7 +28,7 @@ sap.ui.define([
                 if (filtro.MunicipioFiltro !== undefined) {
                     const parametroFiltroMunicipio = `&${chaveFiltroMunicipio}=`;
                     let valorMunicipio = filtro.MunicipioFiltro;
-                    parametrosFiltro += parametroFiltroMunicipio += valorMunicipio;
+                    parametrosFiltro += parametroFiltroMunicipio + valorMunicipio;
                 }
 
                 const posicaoArrayBairroFiltro = 3;
@@ -36,7 +36,7 @@ sap.ui.define([
                 if (filtro.BairroFiltro !== undefined) {
                     const parametroFiltroBairro = `&${chaveFiltroBairro}=`;
                     let valorBairro = filtro.BairroFiltro;
-                    parametrosFiltro += parametroFiltroBairro += valorBairro;
+                    parametrosFiltro += parametroFiltroBairro + valorBairro;
                 }
                 const posicaoArrayEstadoFiltro = 4;
                 const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];

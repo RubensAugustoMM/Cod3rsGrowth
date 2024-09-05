@@ -206,15 +206,13 @@ sap.ui.define([
             this._trataErros(i18nMensagemDeErro, () => {
                 const tabela = this.byId(this._idTabela);
                 const modelo = this.getView().getModel();
-
                 tabela.removeAllColumns();
 
                 ServicoEmpresas.obterTodasEmpresas(filtro)
                     .then(empresas => {
                         modelo.setProperty(this._nomePropriedadeTabelaItems, empresas);
                     })
-                    .catch(erro => {
-            
+                    .catch(erro => { 
                         const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresasRequisicao";
                         const i18n = this._retornaModeloI18n();
                         const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
@@ -252,12 +250,13 @@ sap.ui.define([
                         header: new sap.m.Label({ text: cabecalho })
                     }));
                 });
-
                 let view = this.getView();
 
                 tabela.bindItems({
                     path: this._nomePropriedadeTabelaItems,
                     template: new sap.m.ColumnListItem({
+                        type: "DetailAndActive",
+                        detailPress: (oEvent) => this._aoPressionarBotaoEditarEmpresa(oEvent),
                         cells: Object.keys(camposEmpresas).map(campo => {
 
                             if (campo === arrayChavesCamposEmpresas[posicaoArrayEstado]) {
@@ -369,6 +368,8 @@ sap.ui.define([
                 tabela.bindItems({
                     path: this._nomePropriedadeTabelaItems,
                     template: new sap.m.ColumnListItem({
+                        detailPress: (oEvent) => this._aoPressionarBotaoEditarEscola(oEvent),
+                        type: "DetailAndActive",
                         cells: Object.keys(camposEscolas).map(campo => {
                             if (campo === "estado") {
                                 return new sap.m.Text({
@@ -427,6 +428,30 @@ sap.ui.define([
                     roteador.navTo(nomeRotaCriarEscolas);
                 });
             }
+        },
+        _aoPressionarBotaoEditarEmpresa(oEvent) {
+            const empresaEditar = oEvent.getSource()
+                .getBindingContext().getObject();
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoEditarEmpresa";
+                this._trataErros(i18nMensagemDeErro, () => {
+                    const nomeRotaEditarEmpresa = "EmpresaEditar";
+                    const roteador = this.getOwnerComponent().getRouter();
+                    roteador.navTo(nomeRotaEditarEmpresa, {
+                        caminhoEmpresa: window.encodeURIComponent(empresaEditar.id)
+                    });
+                });
+        },
+        _aoPressionarBotaoEditarEscola(oEvent) {
+            const escolaEditar = oEvent.getSource()
+                .getBindingContext().getObject();
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoEditarEscola";
+                this._trataErros(i18nMensagemDeErro, () => {
+                    const nomeRotaEditarEscola = "EscolaEditar";
+                    const roteador = this.getOwnerComponent().getRouter();
+                    roteador.navTo(nomeRotaEditarEscola, {
+                        caminhoEscola: window.encodeURIComponent(escolaEditar.id)
+                    });
+                });
         },
         _mostraMensagemDeErro(mensagemDeErro, erro) {
             MessageBox.show(erro, {
