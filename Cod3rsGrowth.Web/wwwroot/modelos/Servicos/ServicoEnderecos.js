@@ -47,6 +47,13 @@ sap.ui.define([
             }
             return await RepositorioEnderecos.obterTodosEnderecos(parametroFiltro);
         },
+        obterEnderecoPorId: async function (id) {
+            return await RepositorioEnderecos.obterEnderecoPorId(id);
+        },
+        editarEndereco: async function (parametros) {
+            debugger;
+            return await RepositorioEnderecos.criarEndereco(parametros);
+        },
         criarEndereco: async function (parametros, modelo) {
             const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
             const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
