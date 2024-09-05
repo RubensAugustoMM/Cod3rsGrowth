@@ -111,8 +111,8 @@ sap.ui.define([
 					empresaCriar.idEndereco = respostaEndereco.id;
 					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);
 					debugger;
-					if (respostaEmpresa.status != undefined ||
-						respostaEndereco.status != undefined) {
+					if (respostaEmpresa.Status != undefined ||
+						respostaEndereco.Status != undefined) {
 						debugger;
 						const status500 = 500;
 						const status400 = 400;
