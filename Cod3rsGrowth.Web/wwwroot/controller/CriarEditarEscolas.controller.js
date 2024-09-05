@@ -30,7 +30,9 @@ sap.ui.define([
 	const NOME_PROPRIEDADE_RUA_ESCOLA = "/ruaEscolaEntrado";
 	const NOME_PROPRIEDADE_NUMERO_ESCOLA = "/numeroEscolaEntrado";
 	const NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA = "/complementoEscolaEntrado";
+	const NOME_ROTA_ESCOLA_EDITAR = "EscolaEditar";
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEscolas", {
+		_idEscolaCriar: 0,
 		_rotaAtual: "",
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEscolas: "criarEditarEscolas",
@@ -38,6 +40,7 @@ sap.ui.define([
 			const nomeRotaEscolaCirar = "EscolaCriar";
 			const roteador = this.getOwnerComponent().getRouter();
 			roteador.getRoute(nomeRotaEscolaCirar).attachMatched(this._aoCoincidirComRotaEscolaCriar, this);
+			roteador.getRoute(NOME_ROTA_ESCOLA_EDITAR).attachBeforeMatched(this._aoCoincidirComRotaEscolaEditar, this);
 		},
 		_aoCoincidirComRotaEscolaCriar(oEvent) {
 			const idDataInicioAtividadeDatePicker = "dataInicioAtividade";
@@ -58,6 +61,19 @@ sap.ui.define([
 				);
 			});
 		},
+		_aoCoincidirComRotaEscolaEditar() {
+			const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRotaEditar";
+			const parametroNomeRota = "name";
+			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
+			this._trataErros(i18nMensagemDeErro, () => {
+				const nomeArgumentosCaminhoEscola = "arguments";
+				this._populaTelaComValoresEscolaEditar(
+					oEvent.getParameter(nomeArgumentosCaminhoEscola).caminhoEscola);
+				const i18TituloEscolaEditar = "CriarEditarEmpresas.TituloEditar";
+				const i18n = this._retornaModeloI18n();
+				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18TituloEscolaEditar));
+			});
+		},
 		_retornaValoresEscola() {
 			const modelo = this.getView().getModel();
 			return {
@@ -71,6 +87,49 @@ sap.ui.define([
 				organizacaoAcademica: modelo.getProperty(NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA),
 				idEndereco: 0
 			}
+		},
+		_populaTelaComValoresEscolaEditar: async function (idEscolaAtualizar) {	
+			this._idEscolaAtualizar = idEscolaAtualizar;
+			const modelo = this.getView().getModel();
+			const empresaEditar = await ServicoEmpresas.
+				obterEmpresaPorId(idEscolaAtualizar);
+			modelo.setProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA,
+				empresaEditar.razaoSocial);
+			modelo.setProperty(NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA,
+				empresaEditar.nomeFantasia);
+			modelo.setProperty(NOME_PROPRIEDADE_CNPJ_EMPRESA,
+				empresaEditar.cnpj);
+			modelo.setProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA,
+				empresaEditar.situacaoCadastral ? 1 : 0);
+			modelo.setProperty(NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA,
+				empresaEditar.dataAbertura);
+			modelo.setProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA,
+				empresaEditar.naturezaJuridica);
+			modelo.setProperty(NOME_PROPRIEDADE_PORTE_EMPRESA,
+				empresaEditar.porte);
+			modelo.setProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA,
+				empresaEditar.matrizFilial);
+			modelo.setProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA,
+				empresaEditar.capitalSocial);
+			await this._populaTelaComValoresEnderecoDaEscolaEditar(empresaEditar.idEndereco);
+		},
+		_populaTelaComValoresEnderecoDaEscolaEditar: async function (id) {
+			const modelo = this.getView().getModel();
+			const enderecoEmpresaEditar = await ServicoEnderecos.obterEnderecoPorId(id);
+			modelo.setProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA,
+				enderecoEmpresaEditar.numero);
+			modelo.setProperty(NOME_PROPRIEDADE_CEP_EMPRESA,
+				enderecoEmpresaEditar.cep);
+			modelo.setProperty(NOME_PROPRIEDADE_MUNICIPIO_EMPRESA,
+				enderecoEmpresaEditar.municipio);
+			modelo.setProperty(NOME_PROPRIEDADE_BAIRRO_EMPRESA,
+				enderecoEmpresaEditar.bairro);
+			modelo.setProperty(NOME_PROPRIEDADE_RUA_EMPRESA,
+				enderecoEmpresaEditar.rua);
+			modelo.setProperty(NOME_PROPRIEDADE_COMPLEMENTO_EMPRESA,
+				enderecoEmpresaEditar.complemento);
+			modelo.setProperty(NOME_PROPRIEDADE_ESTADO_EMPRESA,
+				enderecoEmpresaEditar.estado);
 		},
 		_retornaValoresEndereco() {
 			const modelo = this.getView().getModel();
@@ -106,11 +165,11 @@ sap.ui.define([
 					const nomeModelo = "valoresPadrao";
 					const modelo = this.getView().getModel(nomeModelo);
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
-					let escolaCriar = this._retornaValoresEscola();	
+					let escolaCriar = this._retornaValoresEscola();
 					escolaCriar.idEndereco = respostaEndereco.id;
-					let respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)	
+					let respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
 					if (respostaEscola.Status != undefined ||
-						respostaEndereco.Status != undefined) {	
+						respostaEndereco.Status != undefined) {
 						const status500 = 500;
 						const status400 = 400;
 						if (respostaEndereco.Status == undefined) {
@@ -185,7 +244,7 @@ sap.ui.define([
 				.catch(erro => {
 					erroPego = erro;
 				})
-				.finally(() => {	
+				.finally(() => {
 					modelo.setProperty(nomePropriedadeOcupado, false)
 					if (erroPego != null) {
 						const i18n = this._retornaModeloI18n();

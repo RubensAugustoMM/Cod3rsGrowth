@@ -22,10 +22,6 @@
                 <headerToolbar>
                     <OverflowToolbar>
                         <ToolbarSpacer />
-                        <Button id="botaoEditar"
-                            press=".aoPressionarBotaoEditar"
-                            icon="sap-icon://edit">
-                        </Button>
                         <Button
                             id="botaoCriar"
                             press=".aoPressionarBotaoCriar"

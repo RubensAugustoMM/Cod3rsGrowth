@@ -60,9 +60,9 @@ sap.ui.define([
 				const nomeArgumentosCaminhoEmpresa = "arguments";
 				this._populaTelaComValoresEmpresaEditar(
 					oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa);
-				const i18TituloEmpresaCriar = "CriarEditarEmpresas.TituloEditar";
+				const i18TituloEmpresaEditar = "CriarEditarEmpresas.TituloEditar";
 				const i18n = this._retornaModeloI18n();
-				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
+				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaEditar));
 			});
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
