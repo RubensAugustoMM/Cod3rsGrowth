@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 public class EstadoEnumController : ControllerBase
 {
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var estadoJson = new EstadosEnumJson();
         var valoresEstado = Enum.GetValues(typeof(EstadoEnums)).Cast<EstadoEnums>();

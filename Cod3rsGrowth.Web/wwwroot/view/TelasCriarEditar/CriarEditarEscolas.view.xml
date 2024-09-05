@@ -1,0 +1,285 @@
+<mvc:View
+	controllerName="ui5.cod3rsgrowth.controller.CriarEditarEscolas"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+	<Page
+		id="criarEditarEscolas"
+		navButtonPress="aoPressionarBotaoDeNavegacao"
+		showNavButton="true"
+		title=""
+	>
+		<content>
+			<FlexBox
+				displayInline="true"
+				fitContainer="true"
+				renderType="Bare"
+				width="auto"
+				wrap="Wrap"
+			>
+				<Panel id="painelEscola">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>CriarEditarEscolas.TituloPainelEscola}" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<content>
+						<FlexBox
+							displayInline="true"
+							fitContainer="true"
+							width="auto"
+							wrap="Wrap"
+							justifyContent="SpaceAround"
+							alignContent="Center"
+						>
+							<VBox alignItems="Center">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscolas.Nome}" />
+									<Input
+										id="nomeInput"
+										value="{/nomeEscolaEntrada}"
+										width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscolas.CodigoMec}" />
+                                    <MaskInput
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="codigoMecInput"
+                                        value="{
+                                            path: '/codigoMecEscolaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 8
+                                            }
+                                        }"
+                                        width="auto"
+                                    />
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscolas.Telefone}" />
+									<MaskInput
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="telefoneInput"
+                                        value="{
+                                            path: '/telefoneEscolaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 9
+                                            }
+                                        }"
+                                        width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.Email}" />
+									<Input
+										id="emailInput"
+										value="{/emailEscolaEntrada}"
+										width="auto"
+									/>
+								</VBox>
+							</VBox>
+							<VBox alignItems="Inherit">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.CategoriaAdministrativa}" />
+									<ComboBox
+										id="categoriaAdministrativaComboBox"
+										width="auto"
+										selectedKey="{/categoriaAdministrativaSelecionada}"
+										items="{
+											path: 'categoriaAdministrativa>/CategoriaAdministrativa',
+											sorter: {
+												path: 'Valor'
+											}
+										}"
+									>
+										<c:Item
+											key="{categoriaAdministrativa>Codigo}"
+											text="{categoriaAdministrativa>Valor}"
+										/>
+									</ComboBox>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.OrganizacaoAcademica}" />
+									<ComboBox
+										id="organizacaoAcademicaComboBox"
+										width="auto"
+										selectedKey="{/organizacaoAcademicaSelecionada}"
+										items="{
+											path: 'organizacaoAcademica>/OrganizacaoAcademica',
+											sorter: {
+												path: 'valor'
+											}
+										}"
+									>
+										<c:Item
+											key="{organizacaoAcademica>Codigo}"
+											text="{organizacaoAcademica>Valor}"
+										/>
+									</ComboBox>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CriarEditarEscola.StatusAtividade}" />
+									<ComboBox
+										id="statusAtividadeComboBox"
+										width="auto"
+										selectedKey="{/statusAtividadeSelecionada}"
+										items="{
+											path: 'habilitado>/Habilitado',
+											sorter: {
+												path: 'valor'
+											}
+										}"
+									>
+										<c:Item
+											key="{habilitado>Codigo}"
+											text="{habilitado>Valor}"
+										/>
+									</ComboBox>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18>CriarEditarEscola.dataInicioAtividade}" labelFor="dataInicioAtividade"/>
+									<DatePicker
+										id="dataInicioAtividade"
+										value="{
+											path: '/dataInicioAtividadeSelecionada',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {
+												source: {
+													pattern: 'yyyy-MM-ddTHH:mm:ss'
+												}
+											}
+										}"
+										width="auto"
+									/>
+								</VBox>
+							</VBox>
+						</FlexBox>
+					</content>
+				</Panel>
+				<Panel id="painelEndereco">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>TituloPainelEndereco}" />
+						</OverflowToolbar>
+					</headerToolbar>
+					<content>
+						<FlexBox
+							displayInline="true"
+							fitContainer="true"
+							width="auto"
+							wrap="Wrap"
+							justifyContent="SpaceAround"
+							alignContent="Center"
+						>
+							<VBox alignItems="Center">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>CepLabel}" />
+									<MaskInput
+
+                                        mask="99999999"
+                                        placeholder="_"
+                                        id="cepInput"
+                                        value="{
+                                            path: '/cepEscolaEntrado',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 8
+                                            }
+                                        }"
+                                        width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>EstadoLabel}" />
+									<ComboBox
+										id="estadoComboBox"
+										width="auto"
+										selectedKey="{/estadoSelecionadoEscola}"
+										items="{
+											path: 'estados>/Estados',
+											sorter: {
+												path: 'Valor'
+											}
+										}"
+									>
+										<c:Item
+											key="{estados>Codigo}"
+											text="{estados>Valor}"
+										/>
+									</ComboBox>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>MunicipioLabel}" />
+									<Input
+										id="municipioInput"
+										value="{/municipioEscolaEntrado}"
+										valueLiveUpdate="true"
+										width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>BairroLabel}" />
+									<Input
+										id="bairroInput"
+										value="{/bairroEscolaEntrado}"
+										valueLiveUpdate="true"
+										width="auto"
+									/>
+								</VBox>
+							</VBox>
+							<VBox alignItems="Center">
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>RuaLabel}" />
+									<Input
+										id="ruaInput"
+										value="{/ruaEscolaEntrado}"
+										valueLiveUpdate="true"
+										width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>NumeroLabel}" />
+									<Input
+										type="Number"
+										id="numeroInput"
+										value="{/numeroEscolaEntrado}"
+										valueLiveUpdate="true"
+										width="auto"
+									/>
+								</VBox>
+								<VBox alignItems="Inherit">
+									<Label text="{i18n>ComplementoLabel}" />
+									<Input
+										id="complementoInput"
+										value="{/complementoEscolaEntrado}"
+										valueLiveUpdate="true"
+										width="auto"
+									/>
+								</VBox>
+							</VBox>
+						</FlexBox>
+						<VBox
+							alignItems="End"
+							width="100%"
+						>
+							<Button
+								id="botaoSalvar"
+								width="auto"
+								text="{i18n>Salvar}"
+								press=".aoPressionarSalvar"
+							/>
+						</VBox>
+					</content>
+				</Panel>
+			</FlexBox>
+		</content>
+	</Page>
+</mvc:View>

@@ -21,7 +21,7 @@ sap.ui.define([
 
             Then.naPaginaDeListagem.aPaginaDeListagemDeEscolasFoiCarregadaCorretamente();
 
-            Then.iTeardownMyApp();
+            Then.iTeardownMyAppFrame();
         });
     });
 })

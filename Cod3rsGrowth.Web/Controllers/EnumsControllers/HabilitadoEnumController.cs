@@ -10,7 +10,7 @@ namespace Cod3rsGrowth.Web.Controllers.EnumsControllers;
 public class HabilitadoEnumController : ControllerBase
 {
     [HttpGet]
-    public IActionResult ObterModeloJson()
+    public IActionResult ObterTodos()
     {
         var habilitadoJson = new HabilitadoEnumJson();
         var valoresHabilitado = Enum.GetValues(typeof(HabilitadoEnums)).Cast<HabilitadoEnums>();

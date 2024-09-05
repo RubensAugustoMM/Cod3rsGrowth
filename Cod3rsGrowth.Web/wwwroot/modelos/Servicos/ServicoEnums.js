@@ -4,63 +4,48 @@ sap.ui.define(["sap/m/MessageBox"
     "use strict";
 
     return {
-        urlBase: "/api",
+        _urlBase: "/api",
         async retornaModeloEstadoEnum() {
-            try {
-                const rotaEnum = "/EstadoEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Estados:\n";
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
-            }
+            const rotaEnum = "/EstadoEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloHabilitadoEnum() {
-            try {
-                const rotaEnum = "/HabilitadoEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Habilitado:\n";
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
-            }
+            const rotaEnum = "/HabilitadoEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloNaturezaJuridicaEnum() {
-            try {
-                const rotaEnum = "/NaturezaJuridicaEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Natureza Juridica:\n";
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
-            }
+            const rotaEnum = "/NaturezaJuridicaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
         async retornaModeloOrganizacaoAcademicaEnum() {
-            try {
-                const rotaEnum = "/OrganizacaoAcademicaEnum";
-                const resposta = await fetch(this.urlBase + rotaEnum);
-                if (!resposta.ok) throw new Error(resposta.status);
-                return await resposta.json();
-            }
-            catch (erro) {
-                const mensagemDeErro = "Erro ao receber modelo Organizacao Academica:\n";
-                this._mostraMensagemDeErro(mensagemDeErro, erro);
-            }
+            const rotaEnum = "/OrganizacaoAcademicaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         },
-
-        _mostraMensagemDeErro(mensagemDeErro, erro) {
-            console.error(mensagemDeErro + erro.message);
-            MessageBox.show(erro.message, {
-                icon: MessageBox.Icon.ERROR,
-                title: mensagemDeErro,
-                actions: [MessageBox.Action.CLOSE]
-            });
+        async retornaModeloPorteEnum() {
+            const rotaEnum = "/PorteEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
+        },
+        async retornaModeloMatrizFilialEnum() {
+            const rotaEnum = "/MatrizFilialEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
+        },
+        async retornaModeloCategoriaAdministrativaEnum() {
+            const rotaEnum = "/CategoriaAdministrativaEnum";
+            const resposta = await fetch(this._urlBase + rotaEnum);
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
         }
     }
 });

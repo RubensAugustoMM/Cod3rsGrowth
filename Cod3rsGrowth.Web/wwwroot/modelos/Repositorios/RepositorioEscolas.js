@@ -1,9 +1,8 @@
 sap.ui.define(["sap/m/MessageBox"
 ], function (
-	MessageBox) {
+    MessageBox) {
     return {
         _urlBase: "api/Escolas",
-
         obterTodasEscolas: async function (parametroFiltro) {
             try {
                 const resposta = await fetch(this._urlBase + parametroFiltro);
@@ -11,14 +10,17 @@ sap.ui.define(["sap/m/MessageBox"
                 return await resposta.json();
             }
             catch (erro) {
-                const mensagemDeErro = "Erro ao receber dados de Empresas:\n";
-                console.error(mensagemDeErro + erro.message);
-                MessageBox.show(erro.message, {
-                    icon: MessageBox.Icon.ERROR,
-                    title: mensagemDeErro,
-                    actions: [MessageBox.Action.CLOSE]
-                });
+                throw erro;
             }
+        },
+        criarEscola: async function (parametros) {
+            const urlAcao = "/Criar"
+            const resposta = await fetch(this._urlBase + urlAcao, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(parametros)
+            });
+            return await resposta.json();
         }
     }
 });

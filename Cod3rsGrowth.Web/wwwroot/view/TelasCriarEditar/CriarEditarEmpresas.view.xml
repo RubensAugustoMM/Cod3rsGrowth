@@ -1,0 +1,294 @@
+<mvc:View
+    controllerName="ui5.cod3rsgrowth.controller.CriarEditarEmpresas"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <Page
+        id="criarEditarEmpresas"
+        showNavButton="true"
+        navButtonPress="aoPressionarBotaoDeNavegacao"
+        title=""
+    >
+        <content>
+            <FlexBox
+                displayInline="true"
+                fitContainer="true"
+                renderType="Bare"
+                width="auto"
+                wrap="Wrap"
+            >
+                <Panel id="painelEmpresa">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{i18n>CriarEditarEmpresas.TituloPainelEmpresa}" />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <content>
+                        <FlexBox
+                            displayInline="true"
+                            fitContainer="true"
+                            width="auto"
+                            wrap="Wrap"
+                            justifyContent="SpaceAround"
+                            alignContent="Center"
+                        >
+                            <VBox alignItems="Center">
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.RazaoSocialLabel}" />
+                                    <Input
+                                        id="razaoSocialInput"
+                                        value="{/razaoSocialEmpresaEntrada}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.NomeFantasiaLabel}" />
+                                    <Input
+                                        id="nomeFantasiaInput"
+                                        value="{/nomeFantasiaEmpresaEntrada}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.CnpjLabel}" />
+                                    <MaskInput
+                                        mask="99999999999999"
+                                        placeholder="_"
+                                        id="cnpjInput"
+                                        value="{
+                                            path: '/cnpjEmpresaEntrada',
+                                            type: 'sap.ui.model.type.Integer',
+                                            constraints: {
+                                                maxLength: 14
+                                            }
+                                        }"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.CapitalSocialLabel}" />
+                                    <Input
+                                        type="Number"
+                                        id="capitalSocialInput"
+                                        value="{/capitalSocialEmpresaEntrada}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.NaturezaJuridicaLabel}" />
+                                    <ComboBox
+                                        id="naturezaJuridicaComboBox"
+                                        width="auto"
+                                        selectedKey="{/naturezaJuridicaSelecionada}"
+                                        items="{
+                                            path: 'naturezaJuridica>/NaturezaJuridica',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
+                                    >
+                                        <c:Item
+                                            key="{naturezaJuridica>Codigo}"
+                                            text="{naturezaJuridica>Valor}"
+                                        />
+                                    </ComboBox>
+                                </VBox>
+                            </VBox>
+                            <VBox alignItems="Center">
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.PorteLabel}" />
+                                    <ComboBox
+                                        id="porteComboBox"
+                                        width="auto"
+                                        selectedKey="{/porteSelecionado}"
+                                        items="{
+                                            path: 'porte>/Porte',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
+                                    >
+                                        <c:Item
+                                            key="{porte>Codigo}"
+                                            text="{porte>Valor}"
+                                        />
+                                    </ComboBox>
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.MatrizFilialLabel}" />
+                                    <ComboBox
+                                        id="matrizFilalComboBox"
+                                        width="auto"
+                                        selectedKey="{/matrizFilialSelecionado}"
+                                        items="{
+                                            path: 'matrizFilial>/MatrizFilial',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
+                                    >
+                                        <c:Item
+                                            key="{matrizFilial>Codigo}"
+                                            text="{matrizFilial>Valor}"
+                                        />
+                                    </ComboBox>
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CriarEditarEmpresas.SituacaoCadastralLabel}" />
+                                    <ComboBox
+                                        id="situacaoCadastralComboBox"
+                                        width="auto"
+                                        selectedKey="{/situacaoCadastralSelecionado}"
+                                        items="{
+                                            path: 'habilitado>/Habilitado',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
+                                    >
+                                        <c:Item
+                                            key="{habilitado>Codigo}"
+                                            text="{habilitado>Valor}"
+                                        />
+                                    </ComboBox>
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18>CriarEditarEmpresas.dataAbertura}" labelFor="dataAberturaDatePicker"/>
+                                    <DatePicker
+                                        id="dataAberturaDatePicker"
+                                        value="{
+                                            path: '/dataAberturaSelecionada',
+                                            type: 'sap.ui.model.type.Date',
+                                            formatOptions: {
+                                                source: {
+                                                    pattern: 'yyyy-MM-ddTHH:mm:ss'
+                                                }
+                                            }
+                                        }"
+                                        width="auto"
+                                    />
+                                </VBox>
+                            </VBox>
+                        </FlexBox>
+                    </content>
+                </Panel>
+                <Panel id="painelEndereco">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{i18n>TituloPainelEndereco}" />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <content>
+                        <FlexBox
+                            displayInline="true"
+                            fitContainer="true"
+                            width="auto"
+                            wrap="Wrap"
+                            justifyContent="SpaceAround"
+                            alignContent="Center"
+                        >
+                            <VBox alignItems="Center">
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>CepLabel}" />
+                                    <MaskInput
+                                    mask="99999999"
+                                        id="cepInput"
+                                        value="{
+                                            path:'/cepEmpresaEntrado',
+                                        type: 'sap.ui.model.type.Integer'}"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>EstadoLabel}" />
+                                    <ComboBox
+                                        id="estadoComboBox"
+                                        width="auto"
+                                        selectedKey="{/estadoSelecionadoEmpresa}"
+                                        items="{
+                                            path: 'estados>/Estados',
+                                            sorter: {
+                                                path: 'Valor'
+                                            }
+                                        }"
+                                    >
+                                        <c:Item
+                                            key="{estados>Codigo}"
+                                            text="{estados>Valor}"
+                                        />
+                                    </ComboBox>
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>MunicipioLabel}" />
+                                    <Input
+                                        id="municipioInput"
+                                        value="{/municipioEmpresaEntrado}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>BairroLabel}" />
+                                    <Input
+                                        id="bairroInput"
+                                        value="{/bairroEmpresaEntrado}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                            </VBox>
+                            <VBox alignItems="Center">
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>RuaLabel}" />
+                                    <Input
+                                        id="ruaInput"
+                                        value="{/ruaEmpresaEntrado}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>NumeroLabel}" />
+                                    <Input
+                                    type="Number"
+                                        id="numeroInput"
+                                        value="{/numeroEmpresaEntrado}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                                <VBox alignItems="Inherit">
+                                    <Label text="{i18n>ComplementoLabel}" />
+                                    <Input
+                                        id="complementoInput"
+                                        value="{/complementoEmpresaEntrado}"
+                                        valueLiveUpdate="true"
+                                        width="auto"
+                                    />
+                                </VBox>
+                            </VBox>
+                        </FlexBox>
+                        <VBox
+                            alignItems="End"
+                            width="100%"
+                        >
+                            <Button
+                                id="botaoSalvar"
+                                width="auto"
+                                text="{i18n>Salvar}"
+                                press=".aoPressionarSalvar"
+                            />
+                        </VBox>
+                    </content>
+                </Panel>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

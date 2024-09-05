@@ -8,6 +8,8 @@
         <SplitApp
             class="cod3rsGrowth"
             id="app"
+            busy="{/ocupado}"
+            busyIndicatorDelay="{/ocupadoRetardo}"
         >
             <masterPages>
                 <Page id="masterPages">

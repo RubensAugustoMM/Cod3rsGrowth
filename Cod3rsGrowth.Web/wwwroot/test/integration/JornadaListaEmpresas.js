@@ -1,14 +1,18 @@
 sap.ui.define([
     "sap/ui/test/opaQunit",
     "./paginas/App",
-    "./paginas/Lista"
-], function (opaQunit, App, Lista) {
+    "./paginas/Lista",
+    "./paginas/CriarEditarEmpresas"
+], function (opaQunit,
+    App,
+    Lista,
+    CriarEditarEmpresas) {
     "use strict";
 
     QUnit.module("Lista Empresas", () => {
         opaTest("A tabela Empresas deve ser carregada com 7 colunas", function (Given, When, Then) {
             Given.iInicializoMinhaAplicacao({
-                hash: "/#/Empresas"
+                hash: "/#/"
             });
 
             Then.naPaginaDeListagem.aTabelaEmpresasDevePossuir7Colunas(7);
@@ -22,8 +26,16 @@ sap.ui.define([
 
                 Then.naPaginaDeListagem
                     .oFragmentDeFiltrosEmpresasDeveSerCarregado();
+            });
 
-            Then.iTeardownMyApp();
+        opaTest("A tela de criação de empresa deve ser carregada ao clicar o botão adicionar na tela de listagem de empresas",
+            function (Given, When, Then) {
+
+                When.naPaginaDeListagem
+                    .aoClicarBotaoCriarEmpresa();
+                Then.naPaginaDeCriacaoEmpresa
+                    .aPaginaDeCriacaoDeEmpresasDeveSerCarregadaCorretamente();
+                Then.iTeardownMyAppFrame();
             });
     });
 })

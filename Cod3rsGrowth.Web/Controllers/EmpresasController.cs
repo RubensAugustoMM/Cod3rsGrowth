@@ -31,7 +31,7 @@ public class EmpresasController : ControllerBase
         return Ok(empresa);
     }
 
-    [HttpPost]
+    [HttpPost("[action]")]
     public IActionResult Criar([FromBody] Empresa empresaCriar)
     {
         _servicoEmpresa.Criar(empresaCriar);

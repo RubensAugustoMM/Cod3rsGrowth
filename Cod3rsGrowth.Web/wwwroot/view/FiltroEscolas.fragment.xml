@@ -29,12 +29,16 @@
                     headerText="{i18n>FiltroEscola.CodigoMec}"
                 >
                     <content>
-                        <Input
+                        <MaskInput
+                            mask="99999999"
                             id="filtroCodigoMec"
-                            value="{/codigoMec}"
-                            valueLiveUpdate="true"
-                            type="Number"
-                            maxLength="8"
+                            value="{
+                                path:'/codigoMec',
+                                type: 'sap.ui.model.type.String',
+                                constraints: {
+                                    maxLength: 8
+                                }
+                                }"
                             width="100%"
                         />
                     </content>
