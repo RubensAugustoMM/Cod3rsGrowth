@@ -214,7 +214,7 @@ sap.ui.define([
                         modelo.setProperty(this._nomePropriedadeTabelaItems, empresas);
                     })
                     .catch(erro => {
-                        debugger;
+            
                         const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresasRequisicao";
                         const i18n = this._retornaModeloI18n();
                         const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
@@ -437,7 +437,6 @@ sap.ui.define([
             });
         },
 		_trataErros(nomeModeloTituloErro, funcao) {
-			debugger;
 			const modelo = this.getView().getModel();
 			const nomePropriedadeOcupado = "/ocupado";
 			modelo.setProperty(nomePropriedadeOcupado, true);
@@ -446,8 +445,7 @@ sap.ui.define([
 				.catch(erro => {
 					erroPego = erro;
 				})
-				.finally(() => {
-					debugger;
+				.finally(() => {	
 					modelo.setProperty(nomePropriedadeOcupado, false)
 					if (erroPego != null) {
 						const i18n = this._retornaModeloI18n();

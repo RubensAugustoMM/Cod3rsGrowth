@@ -65,7 +65,6 @@ sap.ui.define([
             return await RepositorioEmpresas.obterTodasEmpresas(parametrosFiltro);
         },
         criarEmpresa: async function (parametros,modelo) {
-            debugger;
             const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
             const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
             const nomePropriedadeValorDataPadrao = "/valorDataPadrao";

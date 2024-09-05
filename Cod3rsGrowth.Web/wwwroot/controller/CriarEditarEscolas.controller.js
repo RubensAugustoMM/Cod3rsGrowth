@@ -85,7 +85,6 @@ sap.ui.define([
 			}
 		},
 		_mostraMensagemDeErro(mensagemDeErro, erro) {
-			debugger;
 			console.error(mensagemDeErro + erro.message);
 			MessageBox.show(erro.message, {
 				icon: MessageBox.Icon.ERROR,
@@ -104,19 +103,15 @@ sap.ui.define([
 				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			}
 			this._trataErros(i18nMensagemDeErro, async () => {
-				debugger;
 				if (this._rotaAtual == "EscolaCriar") {
 					const nomeModelo = "valoresPadrao";
 					const modelo = this.getView().getModel(nomeModelo);
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
-					let escolaCriar = this._retornaValoresEscola();
-					debugger;
+					let escolaCriar = this._retornaValoresEscola();	
 					escolaCriar.idEndereco = respostaEndereco.id;
-					let respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
-					debugger;
+					let respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)	
 					if (respostaEscola.Status != undefined ||
-						respostaEndereco.Status != undefined) {
-						debugger;
+						respostaEndereco.Status != undefined) {	
 						const status500 = 500;
 						const status400 = 400;
 						if (respostaEndereco.Status == undefined) {
@@ -134,14 +129,12 @@ sap.ui.define([
 						if (respostaEndereco.Status == status500) {
 							textoErro += respostaEndereco.Detail;
 						}
-
 						throw new Error(textoErro);
 					}
 					this.aoPressionarBotaoDeNavegacao();
 				}
 			});
 		},
-
 		aoPressionarBotaoDeNavegacao() {
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoClicarBotaoDeNavegaca";
 			this._trataErros(i18nMensagemDeErro, () => {
@@ -185,7 +178,6 @@ sap.ui.define([
 			return textoRetorno;
 		},
 		_trataErros(nomeModeloTituloErro, funcao) {
-			debugger;
 			const modelo = this.getView().getModel();
 			const nomePropriedadeOcupado = "/ocupado";
 			modelo.setProperty(nomePropriedadeOcupado, true);
@@ -194,8 +186,7 @@ sap.ui.define([
 				.catch(erro => {
 					erroPego = erro;
 				})
-				.finally(() => {
-					debugger;
+				.finally(() => {	
 					modelo.setProperty(nomePropriedadeOcupado, false)
 					if (erroPego != null) {
 						const i18n = this._retornaModeloI18n();

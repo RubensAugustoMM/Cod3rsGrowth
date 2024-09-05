@@ -60,7 +60,7 @@ sap.ui.define([
 			});
 		},
 		_retornaValoresEmpresa() {
-			debugger;
+			
 			const modelo = this.getView().getModel();
 			return {
 				razaoSocial: modelo.getProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA),
@@ -77,7 +77,7 @@ sap.ui.define([
 			}
 		},
 		_retornaValoresEndereco() {
-			debugger;
+			
 			const modelo = this.getView().getModel();
 			return {
 				numero: String(modelo.getProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA)),
@@ -89,8 +89,7 @@ sap.ui.define([
 				estado: modelo.getProperty(NOME_PROPRIEDADE_ESTADO_EMPRESA)
 			}
 		},
-		aoPressionarSalvar: async function () {
-			debugger;
+		aoPressionarSalvar: async function () {	
 			let respostaEndereco;
 			let textoErro = "";
 			let i18nMensagemDeErro;
@@ -101,19 +100,15 @@ sap.ui.define([
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
 			this._trataErros(i18nMensagemDeErro, async () => {
-				if (this._rotaAtual == "EmpresaCriar") {
-					debugger;
+				if (this._rotaAtual == "EmpresaCriar") {	
 					const nomeModelo = "valoresPadrao";
 					const modelo = this.getView().getModel(nomeModelo);
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
-					let empresaCriar = this._retornaValoresEmpresa();
-					debugger;
+					let empresaCriar = this._retornaValoresEmpresa();	
 					empresaCriar.idEndereco = respostaEndereco.id;
-					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);
-					debugger;
+					let respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);	
 					if (respostaEmpresa.Status != undefined ||
-						respostaEndereco.Status != undefined) {
-						debugger;
+						respostaEndereco.Status != undefined) {	
 						const status500 = 500;
 						const status400 = 400;
 						if (respostaEndereco.Status == undefined) {
@@ -171,8 +166,7 @@ sap.ui.define([
 				}
 			})
 		},
-		_mostraMensagemDeErro(mensagemDeErro, erro) {
-			debugger;
+		_mostraMensagemDeErro(mensagemDeErro, erro) {	
 			console.error(mensagemDeErro + erro.message);
 			MessageBox.show(erro.message, {
 				icon: MessageBox.Icon.ERROR,
@@ -191,8 +185,7 @@ sap.ui.define([
 			}));
 			return textoRetorno;
 		},
-		_trataErros(nomeModeloTituloErro, funcao) {
-			debugger;
+		_trataErros(nomeModeloTituloErro, funcao) {	
 			const modelo = this.getView().getModel();
 			const nomePropriedadeOcupado = "/ocupado";
 			modelo.setProperty(nomePropriedadeOcupado, true);
@@ -201,8 +194,7 @@ sap.ui.define([
 				.catch(erro => {
 					erroPego = erro;
 				})
-				.finally(() => {
-					debugger;
+				.finally(() => {	
 					modelo.setProperty(nomePropriedadeOcupado, false)
 					if (erroPego != null) {
 						const i18n = this._retornaModeloI18n();

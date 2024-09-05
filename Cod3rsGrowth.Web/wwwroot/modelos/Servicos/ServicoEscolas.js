@@ -50,7 +50,6 @@ sap.ui.define([
             return await RepositorioEscolas.obterTodasEscolas(parametrosFiltro);
         },
         criarEscola: async function (parametros, modelo) {
-            debugger;
             const valorHabilitado = 1;
             const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
             const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
