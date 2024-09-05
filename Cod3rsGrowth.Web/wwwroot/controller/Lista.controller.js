@@ -429,7 +429,6 @@ sap.ui.define([
             }
         },
         _mostraMensagemDeErro(mensagemDeErro, erro) {
-            console.error(mensagemDeErro + erro);
             MessageBox.show(erro, {
                 icon: MessageBox.Icon.ERROR,
                 title: mensagemDeErro,
