@@ -77,7 +77,7 @@ sap.ui.define([
 				const nomeArgumentosCaminhoEscola = "arguments";
 				this._populaTelaComValoresEscolaEditar(
 					oEvent.getParameter(nomeArgumentosCaminhoEscola).caminhoEscola);
-				const i18TituloEscolaEditar = "CriarEditarEmpresas.TituloEditar";
+				const i18TituloEscolaEditar = "CriarEditarEscolas.TituloEditar";
 				const i18n = this._retornaModeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18TituloEscolaEditar));
 			});
