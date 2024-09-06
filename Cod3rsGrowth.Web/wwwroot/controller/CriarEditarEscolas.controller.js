@@ -190,7 +190,6 @@ sap.ui.define([
 						respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
 					}
 					else {
-						debugger;
 					respostaEndereco = this._retornaValoresEndereco();
 					respostaEndereco.id = this._idEnderecoAtualizar;
 						respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);

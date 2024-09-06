@@ -53,8 +53,7 @@ sap.ui.define([
 					dataAtual.getMonth(),
 					dataAtual.getDay()));
 		},
-		_aoCoincidirComRotaEmpresaEditar(oEvent) {
-			debugger;
+		_aoCoincidirComRotaEmpresaEditar(oEvent) {	
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
@@ -94,8 +93,7 @@ sap.ui.define([
 				capitalSocial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA))
 			}
 		},
-		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {
-			
+		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {	
 			this._idEmpresaAtualizar = idEmpresaAtualizar;
 			const modelo = this.getView().getModel();
 			const empresaEditar = await ServicoEmpresas.
@@ -140,7 +138,6 @@ sap.ui.define([
 				enderecoEmpresaEditar.estado);
 		},
 		_retornaValoresEndereco() {
-
 			const modelo = this.getView().getModel();
 			return {
 				numero: String(modelo.getProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA)),
@@ -177,7 +174,7 @@ sap.ui.define([
 					respostaEndereco.id = this._idEnderecoAtualizar;
 					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
 					let empresaEditar = this._retornaValoresEmpresa();
-					debugger;	
+						
 					empresaEditar.id = this._idEmpresaAtualizar;
 					empresaEditar.idEndereco = respostaEndereco.id;
 					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresaEditar);

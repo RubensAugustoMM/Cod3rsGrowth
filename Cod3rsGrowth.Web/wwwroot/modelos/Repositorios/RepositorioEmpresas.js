@@ -23,7 +23,6 @@ sap.ui.define([
             return await resposta.json();
         },
         editarEmpresa: async function (parametros) {
-            debugger;
             const urlAcao = "/Atualizar"
             const resposta = await fetch(this._urlBase + urlAcao, {
                 method: "PUT",
