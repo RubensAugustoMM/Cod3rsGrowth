@@ -5,8 +5,8 @@ sap.ui.define([
 ], function (opaQunit, App, CriarEditarEscolas) {
     "use strict";
 
-    QUnit.module("Criar Escola", () => {
-        opaTest("A tela de criação de Escolas deve ser carregada",
+    QUnit.module("Editar Escola", () => {
+        opaTest("A tela de Edição de Escolas deve ser carregada",
             function (Given, When, Then) {
                 Given.iInicializoMinhaAplicacao({
                     hash: "/#/Escolas/Criar"
@@ -26,7 +26,7 @@ sap.ui.define([
                     .oPainelEnderecoDeveSerCarregadoCorretamente();
             }
         );
-        opaTest("Ao Clicar no botão voltar carregar página de listagem de Escolass",
+        opaTest("Ao Clicar no botão voltar carregar página de listagem de Escolas",
             function (Given, When, Then) {
                 When.naPaginaDeCriacaoEdicaoEscola
                     .aoClicarNoBotaoVoltar();

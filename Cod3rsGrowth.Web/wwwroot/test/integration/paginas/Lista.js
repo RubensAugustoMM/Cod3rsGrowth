@@ -1,10 +1,12 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/matchers/AggregationLengthEquals",
-    "sap/ui/test/actions/Press"
+    "sap/ui/test/actions/Press",
+    "sap/ui/test/matchers/PropertyStrictEquals"
 ], function (Opa5,
-    AggregationLengthEquals,
-    Press) {
+	AggregationLengthEquals,
+	Press,
+	PropertyStrictEquals) {
     "use strict";
 
     let viewName = ".Lista";
@@ -12,7 +14,7 @@ sap.ui.define([
     Opa5.createPageObjects({
         naPaginaDeListagem: {
             actions: {
-                aoClicarBotaoCriarEmpresa: function (){
+                aoClicarBotaoCriarEmpresa: function () {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Button",
@@ -21,13 +23,25 @@ sap.ui.define([
                         errorMessage: "Não foi possível encontrar o botão criar empresa."
                     });
                 },
-                aoClicarBotaoCriarEscola: function (){
+                aoClicarBotaoCriarEscola: function () {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Button",
                         id: "botaoCriar",
                         actions: new Press(),
                         errorMessage: "Não foi possível encontrar o botão criar escola."
+                    });
+                },
+                aoClicarBotaoEditarEscola: function () {
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Button",
+                        matchers: new PropertyStrictEquals({
+                            name: "icon",
+                            value: "sap-icon://edit"
+                        }),
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão escola."
                     });
                 },
                 aoClicarNoPainelFiltros: function () {
