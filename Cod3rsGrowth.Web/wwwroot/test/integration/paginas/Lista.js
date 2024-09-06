@@ -23,6 +23,18 @@ sap.ui.define([
                         errorMessage: "Não foi possível encontrar o botão criar empresa."
                     });
                 },
+                aoClicarBotaoEditarEmpresa: function () {
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Button",
+                        matchers: new PropertyStrictEquals({
+                            name: "icon",
+                            value: "sap-icon://edit"
+                        }),
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão Editar empresa."
+                    });
+                },
                 aoClicarBotaoCriarEscola: function () {
                     return this.waitFor({
                         viewName: viewName,
@@ -41,7 +53,7 @@ sap.ui.define([
                             value: "sap-icon://edit"
                         }),
                         actions: new Press(),
-                        errorMessage: "Não foi possível encontrar o botão escola."
+                        errorMessage: "Não foi possível encontrar o botão Editar escola."
                     });
                 },
                 aoClicarNoPainelFiltros: function () {

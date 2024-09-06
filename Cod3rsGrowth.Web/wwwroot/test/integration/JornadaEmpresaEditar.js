@@ -5,8 +5,8 @@ sap.ui.define([
 ], function (opaQunit, App, CriarEditarEmpresas) {
     "use strict";
 
-    QUnit.module("Criar Empresa", () => {
-        opaTest("A tela de criação de empresa deve ser carregada",
+    QUnit.module("Editar Empresa", () => {
+        opaTest("A tela de Edição de Empresas deve ser carregada",
             function (Given, When, Then) {
                 Given.iInicializoMinhaAplicacao({
                     hash: "/#/Empresas/Criar"
@@ -26,7 +26,7 @@ sap.ui.define([
                     .oPainelEnderecoDeveSerCarregadoCorretamente();
             }
         );
-        opaTest("Ao Clicar no botão voltar carregar página de listagem de empresas",
+        opaTest("Ao Clicar no botão voltar carregar página de listagem de Empresas",
             function (Given, When, Then) {
                 When.naPaginaDeCriacaoEdicaoEmpresa
                     .aoClicarNoBotaoVoltar();
