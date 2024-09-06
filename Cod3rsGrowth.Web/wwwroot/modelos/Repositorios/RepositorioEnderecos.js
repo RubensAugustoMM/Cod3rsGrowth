@@ -13,7 +13,7 @@ sap.ui.define([
             if (!resposta.ok) throw new Error(resposta.status);
             return await resposta.json();
         },
-        criarEndereco: async function (parametros) {
+        editarEndereco: async function (parametros) {
             const urlAcao = "/Atualizar";
             const resposta = await fetch(this._urlBase + urlAcao, {
                 method: "PUT",

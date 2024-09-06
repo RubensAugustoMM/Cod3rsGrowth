@@ -36,6 +36,7 @@ sap.ui.define([
 	const NOME_ROTA_EMPRESA_EDITAR = "EmpresaEditar";
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEmpresas", {
 		_idEmpresaAtualizar: 0,
+		_idEnderecoAtualizar: 0,
 		_rotaAtual: "",
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEmpresas: "criarEditarEmpresas",
@@ -53,6 +54,7 @@ sap.ui.define([
 					dataAtual.getDay()));
 		},
 		_aoCoincidirComRotaEmpresaEditar(oEvent) {
+			debugger;
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
@@ -76,20 +78,20 @@ sap.ui.define([
 			});
 		},
 		_retornaValoresEmpresa() {
-
 			const modelo = this.getView().getModel();
+			let valorHabilitado = 1;
 			return {
 				razaoSocial: modelo.getProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA),
 				nomeFantasia: modelo.getProperty(NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA),
 				cnpj: String(modelo.getProperty(NOME_PROPRIEDADE_CNPJ_EMPRESA)),
-				situacaoCadastral: modelo.getProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA),
+				situacaoCadastral:
+					parseInt(modelo.getProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA)) == valorHabilitado,
 				dataSituacaoCadastral: new Date(),
 				dataAbertura: modelo.getProperty(NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA),
-				naturezaJuridica: modelo.getProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA),
-				porte: modelo.getProperty(NOME_PROPRIEDADE_PORTE_EMPRESA),
-				matrizFilial: modelo.getProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA),
-				capitalSocial: modelo.getProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA),
-				idEndereco: 0
+				naturezaJuridica: parseInt(modelo.getProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA)),
+				porte: parseInt(modelo.getProperty(NOME_PROPRIEDADE_PORTE_EMPRESA)),
+				matrizFilial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA)),
+				capitalSocial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA))
 			}
 		},
 		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {
@@ -121,6 +123,7 @@ sap.ui.define([
 		_populaTelaComValoresEnderecoDaEmpresaEditar: async function (id) {
 			const modelo = this.getView().getModel();
 			const enderecoEmpresaEditar = await ServicoEnderecos.obterEnderecoPorId(id);
+			this._idEnderecoAtualizar = enderecoEmpresaEditar.id;
 			modelo.setProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA,
 				enderecoEmpresaEditar.numero);
 			modelo.setProperty(NOME_PROPRIEDADE_CEP_EMPRESA,
@@ -170,7 +173,9 @@ sap.ui.define([
 					respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);
 				}
 				else {
-					respostaEndereco = await ServicoEnderecos.editarEndereco(this._retornaValoresEndereco());
+					respostaEndereco = this._retornaValoresEndereco();
+					respostaEndereco.id = this._idEnderecoAtualizar;
+					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
 					let empresaEditar = this._retornaValoresEmpresa();
 					debugger;	
 					empresaEditar.id = this._idEmpresaAtualizar;

@@ -52,6 +52,9 @@ sap.ui.define([
         obterEscolaPorId: async function (id) {
             return await RepositorioEscolas.obterEscolaPorId(id);  
         },
+        editarEscola: async function(parametros) {
+            return await RepositorioEscolas.editarEscola(parametros);     
+        },
         criarEscola: async function (parametros, modelo) {
             const valorHabilitado = 1;
             const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";

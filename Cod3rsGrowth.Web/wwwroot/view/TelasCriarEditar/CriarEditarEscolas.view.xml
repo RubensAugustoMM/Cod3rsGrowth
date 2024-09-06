@@ -42,6 +42,7 @@
 									<Input
 										id="nomeInput"
 										value="{/nomeEscolaEntrada}"
+										valueLiveUpdate="true"
 										width="auto"
 									/>
 								</VBox>
@@ -81,6 +82,7 @@
 									<Label text="{i18n>CriarEditarEscola.Email}" />
 									<Input
 										id="emailInput"
+										valueLiveUpdate="true"
 										value="{/emailEscolaEntrada}"
 										width="auto"
 									/>

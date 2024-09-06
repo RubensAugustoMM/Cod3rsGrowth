@@ -96,10 +96,6 @@ sap.ui.define([
             return await RepositorioEmpresas.criarEmpresa(parametrosEmpresa);
         },
         editarEmpresa: async function (parametros) {
-            debugger;
-            const valorHabilitado = 1;
-            parametros.situacaoCadastral =
-                valorHabilitado == parseInt(parametros.situacaoCadastral);
             return await RepositorioEmpresas.editarEmpresa(parametros);
         }
     }
