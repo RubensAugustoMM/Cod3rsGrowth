@@ -62,7 +62,7 @@ sap.ui.define([
                 id: valorNumericoPadrao,
                 numero: parametros.numero != null && parametros.numero != valorNumericoPadrao ?
                     parseInt(parametros.numero) : -1,
-                cep: parametros.cep != null ? parametros.cep : valorStringPadrao,
+                cep: parametros.cep != null ? String(parametros.cep) : valorStringPadrao,
                 municipio: parametros.municipio != null ? parametros.municipio : valorStringPadrao,
                 bairro: parametros.bairro != null ? parametros.bairro : valorStringPadrao,
                 rua: parametros.rua != null ? parametros.rua : valorStringPadrao,

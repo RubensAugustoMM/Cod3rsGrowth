@@ -5,7 +5,8 @@ sap.ui.define([
 	"sap/viz/ui5/types/layout/Stack",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
 	"sap/ui/core/date/UI5Date",
-	"sap/m/MessageBox"
+	"sap/m/MessageBox",
+	"sap/ui/model/json/JSONModel"
 ], function (
 	Controller,
 	History,
@@ -13,7 +14,8 @@ sap.ui.define([
 	Stack,
 	ServicoEnderecos,
 	UI5Date,
-	MessageBox
+	MessageBox,
+	JSONModel
 ) {
 	"use strict";
 
@@ -34,6 +36,9 @@ sap.ui.define([
 	const NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA = "/situacaoCadastralSelecionado";
 	const NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA = "/dataAberturaSelecionada";
 	const NOME_ROTA_EMPRESA_EDITAR = "EmpresaEditar";
+	const NOME_MODELO_EMPRESA = "EmpresaCriarEditar";
+	const NOME_MODELO_ENDERECO_EMPRESA = "EnderecoEmpresaCriarEditar";
+	const NOME_MODELO_VALORES_PADRAO = "valoresPadrao";
 	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEmpresas", {
 		_idEmpresaAtualizar: 0,
 		_idEnderecoAtualizar: 0,
@@ -41,8 +46,8 @@ sap.ui.define([
 		_nomeModeloI18n: "i18n",
 		_idCriarEditarEmpresas: "criarEditarEmpresas",
 		onInit() {
-			const nomeRotaEmpresaCriar = "EmpresaCriar";
 			const roteador = this.getOwnerComponent().getRouter();
+			const nomeRotaEmpresaCriar = "EmpresaCriar";
 			roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
 			roteador.getRoute(NOME_ROTA_EMPRESA_EDITAR).attachMatched(this._aoCoincidirComRotaEmpresaEditar, this);
 			const idDataAberturaDatePicker = "dataAberturaDatePicker";
@@ -53,20 +58,50 @@ sap.ui.define([
 					dataAtual.getMonth(),
 					dataAtual.getDay()));
 		},
+		_configuraModeloDeDadosDaTela() {
+			const dadosEmpresa = {
+				razaoSocial:undefined,
+				nomeFantasia:undefined,
+				cnpj: undefined,
+				situacaoCadastral: undefined,
+				dataAbertura:undefined,
+				naturezaJuridica:undefined,
+				porte:undefined,
+				matrizFilial:undefined,
+				capitalSocial:undefined
+			};	
+			var modeloEmpresa =  new JSONModel(dadosEmpresa);
+			this.getView().setModel(modeloEmpresa, NOME_MODELO_EMPRESA);
+			const dadosEstado = {
+				cep:undefined,
+				estado:undefined,
+				municipio:undefined,
+				bairro:undefined,
+				rua:undefined,
+				numero:undefined,
+				complemento:undefined
+			}
+			var modeloEstadoEmpresa = new JSONModel(dadosEstado);
+			this.getView().setModel(modeloEstadoEmpresa, NOME_MODELO_ENDERECO_EMPRESA);
+		},
 		_aoCoincidirComRotaEmpresaEditar(oEvent) {
+			this._configuraModeloDeDadosDaTela();
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this._trataErros(i18nMensagemDeErro, () => {
+			this._trataErros(i18nMensagemDeErro,async () => {
 				const nomeArgumentosCaminhoEmpresa = "arguments";
-				this._populaTelaComValoresEmpresaEditar(
-					oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa);
+				let idEmpresa = oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa;
+				let empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
+				this._populaTelaComValoresEmpresaEditar(idEmpresa);
+				this._populaTelaComValoresEnderecoDaEmpresaEditar(empresa.idEndereco);
 				const i18TituloEmpresaEditar = "CriarEditarEmpresas.TituloEditar";
 				const i18n = this._retornaModeloI18n();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaEditar));
 			});
 		},
 		_aoCoincidirComRotaEmpresaCriar(oEvent) {
+			this._configuraModeloDeDadosDaTela();
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
@@ -76,78 +111,28 @@ sap.ui.define([
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
 			});
 		},
-		_retornaValoresEmpresa() {
-			const modelo = this.getView().getModel();
-			let valorHabilitado = 1;
-			return {
-				razaoSocial: modelo.getProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA),
-				nomeFantasia: modelo.getProperty(NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA),
-				cnpj: String(modelo.getProperty(NOME_PROPRIEDADE_CNPJ_EMPRESA)),
-				situacaoCadastral:
-					parseInt(modelo.getProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA)) == valorHabilitado,
-				dataSituacaoCadastral: new Date(),
-				dataAbertura: modelo.getProperty(NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA),
-				naturezaJuridica: parseInt(modelo.getProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA)),
-				porte: parseInt(modelo.getProperty(NOME_PROPRIEDADE_PORTE_EMPRESA)),
-				matrizFilial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA)),
-				capitalSocial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA))
-			}
+		_retornaValoresEmpresa(){
+			let valoresEscola =  this.getView().getModel(NOME_MODELO_EMPRESA).getData(); 
+			valoresEscola.situacaoCadastral = valoresEscola.situacaoCadastral == 1 ? true : false;
+			valoresEscola.dataSituacaoCadastral = new Date();
+			return valoresEscola;
 		},
 		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {
 			this._idEmpresaAtualizar = idEmpresaAtualizar;
-			const modelo = this.getView().getModel();
-			const empresaEditar = await ServicoEmpresas.
+			let empresaEditar = await ServicoEmpresas.
 				obterEmpresaPorId(idEmpresaAtualizar);
-			modelo.setProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA,
-				empresaEditar.razaoSocial);
-			modelo.setProperty(NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA,
-				empresaEditar.nomeFantasia);
-			modelo.setProperty(NOME_PROPRIEDADE_CNPJ_EMPRESA,
-				empresaEditar.cnpj);
-			modelo.setProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA,
-				empresaEditar.situacaoCadastral ? 1 : 0);
-			modelo.setProperty(NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA,
-				empresaEditar.dataAbertura);
-			modelo.setProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA,
-				empresaEditar.naturezaJuridica);
-			modelo.setProperty(NOME_PROPRIEDADE_PORTE_EMPRESA,
-				empresaEditar.porte);
-			modelo.setProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA,
-				empresaEditar.matrizFilial);
-			modelo.setProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA,
-				empresaEditar.capitalSocial);
-			await this._populaTelaComValoresEnderecoDaEmpresaEditar(empresaEditar.idEndereco);
+			empresaEditar.situacaoCadastral = empresaEditar.situacaoCadastral ? 1 : 0;
+			empresaEditar = new JSONModel(empresaEditar); 
+			this.getView().setModel(empresaEditar, NOME_MODELO_EMPRESA);
 		},
-		_populaTelaComValoresEnderecoDaEmpresaEditar: async function (id) {
-			const modelo = this.getView().getModel();
-			const enderecoEmpresaEditar = await ServicoEnderecos.obterEnderecoPorId(id);
+		_populaTelaComValoresEnderecoDaEmpresaEditar: async function (id) {;
+			let enderecoEmpresaEditar = await ServicoEnderecos.obterEnderecoPorId(id);
 			this._idEnderecoAtualizar = enderecoEmpresaEditar.id;
-			modelo.setProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA,
-				enderecoEmpresaEditar.numero);
-			modelo.setProperty(NOME_PROPRIEDADE_CEP_EMPRESA,
-				enderecoEmpresaEditar.cep);
-			modelo.setProperty(NOME_PROPRIEDADE_MUNICIPIO_EMPRESA,
-				enderecoEmpresaEditar.municipio);
-			modelo.setProperty(NOME_PROPRIEDADE_BAIRRO_EMPRESA,
-				enderecoEmpresaEditar.bairro);
-			modelo.setProperty(NOME_PROPRIEDADE_RUA_EMPRESA,
-				enderecoEmpresaEditar.rua);
-			modelo.setProperty(NOME_PROPRIEDADE_COMPLEMENTO_EMPRESA,
-				enderecoEmpresaEditar.complemento);
-			modelo.setProperty(NOME_PROPRIEDADE_ESTADO_EMPRESA,
-				enderecoEmpresaEditar.estado);
+			enderecoEmpresaEditar = new JSONModel(enderecoEmpresaEditar);
+			this.getView().setModel(enderecoEmpresaEditar, NOME_MODELO_ENDERECO_EMPRESA);
 		},
 		_retornaValoresEndereco() {
-			const modelo = this.getView().getModel();
-			return {
-				numero: String(modelo.getProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA)),
-				cep: String(modelo.getProperty(NOME_PROPRIEDADE_CEP_EMPRESA)),
-				municipio: modelo.getProperty(NOME_PROPRIEDADE_MUNICIPIO_EMPRESA),
-				bairro: modelo.getProperty(NOME_PROPRIEDADE_BAIRRO_EMPRESA),
-				rua: modelo.getProperty(NOME_PROPRIEDADE_RUA_EMPRESA),
-				complemento: modelo.getProperty(NOME_PROPRIEDADE_COMPLEMENTO_EMPRESA),
-				estado: parseInt(modelo.getProperty(NOME_PROPRIEDADE_ESTADO_EMPRESA))
-			}
+			return this.getView().getModel(NOME_MODELO_ENDERECO_EMPRESA).getData();
 		},
 		aoPressionarSalvar: async function () {
 			let textoErro = "";
@@ -159,11 +144,11 @@ sap.ui.define([
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
 			this._trataErros(i18nMensagemDeErro, async () => {
-				const nomeModelo = "valoresPadrao";
+				debugger;
 				let respostaEndereco;
 				let respostaEmpresa;
-				const modelo = this.getView().getModel(nomeModelo);
 				if (this._rotaAtual == "EmpresaCriar") {
+					const modelo = this.getView().getModel(NOME_MODELO_VALORES_PADRAO);
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
 					let empresaCriar = this._retornaValoresEmpresa();
 					empresaCriar.idEndereco = respostaEndereco.id;
@@ -181,7 +166,6 @@ sap.ui.define([
 				}
 				const status500 = 500;
 				const status400 = 400;
-				debugger;
 				if (respostaEndereco != undefined) {
 					if (respostaEndereco.status != undefined &&
 						respostaEndereco.status == status400) {
@@ -191,7 +175,7 @@ sap.ui.define([
 						respostaEndereco.Status == status500) {
 						textoErro += respostaEndereco.Detail;
 					}
-					if (!respostaEndereco.ok) {
+					if (respostaEndereco.ok != undefined && !respostaEndereco.ok) {
 						throw new Error(textoErro);
 					}
 				}
@@ -209,7 +193,7 @@ sap.ui.define([
 						respostaEndereco.Status == undefined) {
 						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
 					}
-					if (!respostaEmpresa.ok) {
+					if (respostaEndereco.ok != undefined && !respostaEmpresa.ok) {
 						throw new Error(textoErro);
 					}
 				}
@@ -224,22 +208,6 @@ sap.ui.define([
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				const modelo = this.getView().getModel();
-				modelo.setProperty(NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_PORTE_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_CNPJ_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_NUMERO_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_CEP_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_MUNICIPIO_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_BAIRRO_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_RUA_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_COMPLEMENTO_EMPRESA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_ESTADO_EMPRESA, undefined);
 				if (hashAnterior != undefined) {
 					window.history.go(-1);
 				}
