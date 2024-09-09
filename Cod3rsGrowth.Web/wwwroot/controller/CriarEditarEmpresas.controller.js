@@ -53,7 +53,7 @@ sap.ui.define([
 					dataAtual.getMonth(),
 					dataAtual.getDay()));
 		},
-		_aoCoincidirComRotaEmpresaEditar(oEvent) {	
+		_aoCoincidirComRotaEmpresaEditar(oEvent) {
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
@@ -93,7 +93,7 @@ sap.ui.define([
 				capitalSocial: parseInt(modelo.getProperty(NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA))
 			}
 		},
-		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {	
+		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {
 			this._idEmpresaAtualizar = idEmpresaAtualizar;
 			const modelo = this.getView().getModel();
 			const empresaEditar = await ServicoEmpresas.
@@ -174,32 +174,44 @@ sap.ui.define([
 					respostaEndereco.id = this._idEnderecoAtualizar;
 					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
 					let empresaEditar = this._retornaValoresEmpresa();
-						
+
 					empresaEditar.id = this._idEmpresaAtualizar;
-					empresaEditar.idEndereco = respostaEndereco.id;
+					empresaEditar.idEndereco = this._idEnderecoAtualizar;
 					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresaEditar);
 				}
-				if (respostaEmpresa.Status != undefined ||
-					respostaEndereco.Status != undefined) {
-					const status500 = 500;
-					const status400 = 400;
-					if (respostaEndereco.Status == undefined && this._rotaAtual != NOME_ROTA_EMPRESA_EDITAR) {
-						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
-					}
-					if (respostaEmpresa.Status == status400) {
-						textoErro += this._retornaTextoErro(respostaEmpresa);
-					}
-					if (respostaEmpresa.Status == status500) {
-						textoErro += respostaEmpresa.Detail;
-					}
-					if (respostaEndereco.Status == status400) {
+				const status500 = 500;
+				const status400 = 400;
+				debugger;
+				if (respostaEndereco != undefined) {
+					if (respostaEndereco.status != undefined &&
+						respostaEndereco.status == status400) {
 						textoErro += this._retornaTextoErro(respostaEndereco);
 					}
-					if (respostaEndereco.Status == status500) {
+					if (respostaEndereco.Status != undefined &&
+						respostaEndereco.Status == status500) {
 						textoErro += respostaEndereco.Detail;
 					}
-
-					throw new Error(textoErro);
+					if (!respostaEndereco.ok) {
+						throw new Error(textoErro);
+					}
+				}
+				if (respostaEmpresa != undefined) {
+					if (respostaEmpresa.status != undefined &&
+						respostaEmpresa.status == status400) {
+						textoErro += this._retornaTextoErro(respostaEmpresa);
+					}
+					if (respostaEmpresa.Status != undefined &&
+						respostaEmpresa.Status == status500) {
+						textoErro += respostaEmpresa.Detail;
+					}
+					if (this._rotaAtual == "EmpresaCriar" &&
+						respostaEndereco != undefined &&
+						respostaEndereco.Status == undefined) {
+						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
+					}
+					if (!respostaEmpresa.ok) {
+						throw new Error(textoErro);
+					}
 				}
 				this.aoPressionarBotaoDeNavegacao();
 

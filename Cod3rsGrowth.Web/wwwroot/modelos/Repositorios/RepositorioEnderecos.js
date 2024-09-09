@@ -14,13 +14,13 @@ sap.ui.define([
             return await resposta.json();
         },
         editarEndereco: async function (parametros) {
-            const urlAcao = "/Atualizar";
-            const resposta = await fetch(this._urlBase + urlAcao, {
+            const resposta = await fetch(this._urlBase, {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-            return await resposta.json();
+            if(!resposta.ok)
+                return await resposta.json();
         },
         criarEndereco: async function (parametros) {
             const urlAcao = "/Criar";

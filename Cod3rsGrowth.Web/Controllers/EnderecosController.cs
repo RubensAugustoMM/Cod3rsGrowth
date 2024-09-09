@@ -37,11 +37,11 @@ public class EnderecosController : ControllerBase
         return CreatedAtAction(nameof(ObterPorId), new { id = enderecoCriar.Id }, enderecoCriar);
     }
 
-    [HttpPut("[action]")]
-    public IActionResult Atualizar([FromBody] Endereco enderecoAtualizar)
+    [HttpPut]
+    public IActionResult Atualizar([FromBody] Endereco endereco)
     {
-        _servicoEndereco.Atualizar(enderecoAtualizar);
-        return Ok(enderecoAtualizar);
+        _servicoEndereco.Atualizar(endereco);
+        return Ok();
     }
 
     [HttpDelete("[action]/{id}")]

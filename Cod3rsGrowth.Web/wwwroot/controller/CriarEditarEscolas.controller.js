@@ -190,35 +190,49 @@ sap.ui.define([
 						respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
 					}
 					else {
-					respostaEndereco = this._retornaValoresEndereco();
-					respostaEndereco.id = this._idEnderecoAtualizar;
+						respostaEndereco = this._retornaValoresEndereco();
+						respostaEndereco.id = this._idEnderecoAtualizar;
 						respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
 						let escolaEditar = this._retornaValoresEscola();
 						escolaEditar.id = this._idEscolaAtualizar;
-						escolaEditar.idEndereco = respostaEndereco.id;
+						escolaEditar.idEndereco = this._idEnderecoAtualizar;
 						respostaEscola = await ServicoEscolas.editarEscola(escolaEditar);
 					}
-					if (respostaEscola.Status != undefined ||
-						respostaEndereco.Status != undefined) {
-						const status500 = 500;
-						const status400 = 400;
-						if (respostaEndereco.Status == undefined) {
-							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
-						}
-						if (respostaEscola.Status == status400) {
-							textoErro += this._retornaTextoErro(respostaEscola);
-						}
-						if (respostaEscola.Status == status500) {
-							textoErro += respostaEscola.Detail;
-						}
-						if (respostaEndereco.Status == status400) {
+					const status500 = 500;
+					const status400 = 400;
+					debugger;
+					if (respostaEndereco != undefined) {
+						if (respostaEndereco.status != undefined &&
+							respostaEndereco.status == status400) {
 							textoErro += this._retornaTextoErro(respostaEndereco);
 						}
-						if (respostaEndereco.Status == status500) {
+						if (respostaEndereco.Status != undefined &&
+							respostaEndereco.Status == status500) {
 							textoErro += respostaEndereco.Detail;
 						}
-						throw new Error(textoErro);
+						if (!respostaEndereco.ok) {
+							throw new Error(textoErro);
+						}
 					}
+					if (respostaEscola != undefined) {
+						if (respostaEscola != undefined &&
+							respostaEscola.status == status400) {
+							textoErro += this._retornaTextoErro(respostaEscola);
+						}
+						if (respostaEscola != undefined &&
+							respostaEscola.Status == status500) {
+							textoErro += respostaEscola.Detail;
+						}
+						if (this._rotaAtual == "EscolaCriar"&&
+							 respostaEndereco != undefined &&
+							respostaEndereco.Status == undefined) {
+							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
+						}
+						if (!respostaEscola.ok) {
+							throw new Error(textoErro);
+						}
+					}
+
 					this.aoPressionarBotaoDeNavegacao();
 				});
 			});
