@@ -56,28 +56,26 @@ sap.ui.define([
             return await RepositorioEscolas.editarEscola(parametros);     
         },
         criarEscola: async function (parametros, modelo) {
+            debugger;
             const valorHabilitado = 1;
-            const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
-            const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
-            const nomePropriedadeValorDataPadrao = "/valorDataPadrao";
-            const valorNumericoPadrao = modelo.getProperty(nomeProrpriedadeValorNumericoPadrao);
-            const valorStringPadrao = modelo.getProperty(nomePropriedadeValorStringPadrao);
-            const valorDataPadrao = modelo.getProperty(nomePropriedadeValorDataPadrao);
-            const parametrosEscola = {
-                id: valorNumericoPadrao,
-                statusAtividade: parseInt(parametros.statusAtividade ?? valorNumericoPadrao),
-                nome: parametros.nome ?? valorStringPadrao,
-                codigoMec: parametros.codigoMec ?? valorStringPadrao,
-                telefone: parametros.codigoMec ?? valorStringPadrao,
-                email: parametros.email ?? valorStringPadrao,
-                inicioAtividade: parametros.inicioAtividade ?? valorDataPadrao,
-                categoriaAdministrativa: parseInt(parametros.categoriaAdministrativa ?? valorNumericoPadrao),
-                organizacaoAcademica: parseInt(parametros.organizacaoAcademica ?? valorNumericoPadrao),
-                idEndereco: parametros.idEndereco ?? valorNumericoPadrao
-            };
-            parametrosEscola.statusAtividade =
-                valorHabilitado == parseInt(parametros.situacaoCadastral);
-            return await RepositorioEscolas.criarEscola(parametrosEscola);
+            const valoresPadrao = modelo.getData();
+            parametros.id = valoresPadrao.valorNumericoPadrao;
+            parametros.statusAtividade =
+                parseInt(parametros.statusAtividade ?? valoresPadrao.valorNumericoPadrao) == valorHabilitado;
+            parametros.nome = parametros.nome ?? valoresPadrao.valorStringPadrao;
+            parametros.codigoMec =
+                String(parametros.codigoMec ?? valoresPadrao.valorStringPadrao);
+            parametros.telefone =
+                String(parametros.telefone ?? valoresPadrao.valorStringPadrao);
+            parametros.email = parametros.email ?? valoresPadrao.valorStringPadrao;
+            parametros.inicioAtividade = parametros.inicioAtividade ?? valoresPadrao.valorDataPadrao;
+            parametros.categoriaAdministrativa =
+                parseInt(parametros.categoriaAdministrativa ?? valoresPadrao.valorStringPadrao);
+            parametros.organizacaoAcademica =
+                parseInt(parametros.organizacaoAcademica ?? valoresPadrao);
+            parametros.idEndereco = parametros.idEndereco ?? valoresPadrao.valorNumericoPadrao;
+
+            return await RepositorioEscolas.criarEscola(parametros);
         }
     }
 });

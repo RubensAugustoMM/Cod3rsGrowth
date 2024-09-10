@@ -54,22 +54,19 @@ sap.ui.define([
             return await RepositorioEnderecos.editarEndereco(parametros);
         },
         criarEndereco: async function (parametros, modelo) {
-            const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
-            const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
-            const valorNumericoPadrao = modelo.getProperty(nomeProrpriedadeValorNumericoPadrao);
-            const valorStringPadrao = modelo.getProperty(nomePropriedadeValorStringPadrao);
-            const parametrosEndereco = {
-                id: valorNumericoPadrao,
-                numero: parametros.numero != null && parametros.numero != valorNumericoPadrao ?
-                    parseInt(parametros.numero) : -1,
-                cep: parametros.cep != null ? String(parametros.cep) : valorStringPadrao,
-                municipio: parametros.municipio != null ? parametros.municipio : valorStringPadrao,
-                bairro: parametros.bairro != null ? parametros.bairro : valorStringPadrao,
-                rua: parametros.rua != null ? parametros.rua : valorStringPadrao,
-                complemento: parametros.complemento != null ? parametros.complemento : valorStringPadrao,
-                estado: parseInt(parametros.estado ?? valorNumericoPadrao)
-            }
-            return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
+            const valoresPadrao = modelo.getData();
+            parametros.id = valoresPadrao.valorNumericoPadrao;
+            parametros.numero =
+                parametros.numero != null && parametros.numero !=
+                    valoresPadrao.valorNumericoPadrao ? parseInt(parametros.numero) : -1;
+            parametros.cep =
+                String(parametros.cep ?? valoresPadrao.valorStringPadrao);
+            parametros.municipio = parametros.municipio ?? valoresPadrao.valorStringPadrao;
+            parametros.bairro = parametros.bairro ?? valoresPadrao.valorStringPadrao;
+            parametros.rua = parametros.rua ?? valoresPadrao.valorStringPadrao;
+            parametros.complemento = parametros.complemento ?? valoresPadrao.valorStringPadrao;
+            parametros.estado = parseInt(parametros.estado ?? -1); 
+            return await RepositorioEnderecos.criarEndereco(parametros);
         },
         deletarEndereco: async function (id) {
             RepositorioEnderecos.deletarEndereco(id);

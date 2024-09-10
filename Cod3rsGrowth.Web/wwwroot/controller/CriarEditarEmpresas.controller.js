@@ -19,22 +19,6 @@ sap.ui.define([
 ) {
 	"use strict";
 
-	const NOME_PROPRIEDADE_ESTADO_EMPRESA = "/estadoSelecionadoEmpresa";
-	const NOME_PROPRIEDADE_MUNICIPIO_EMPRESA = "/municipioEmpresaEntrado";
-	const NOME_PROPRIEDADE_BAIRRO_EMPRESA = "/bairroEmpresaEntrado";
-	const NOME_PROPRIEDADE_RUA_EMPRESA = "/ruaEmpresaEntrado";
-	const NOME_PROPRIEDADE_NUMERO_EMPRESA = "/numeroEmpresaEntrado";
-	const NOME_PROPRIEDADE_COMPLEMENTO_EMPRESA = "/complementoEmpresaEntrado";
-	const NOME_PROPRIEDADE_RAZAO_SOCIAL_EMPRESA = "/razaoSocialEmpresaEntrada";
-	const NOME_PROPRIEDADE_CEP_EMPRESA = "/cepEmpresaEntrado";
-	const NOME_PROPRIEDADE_NOME_FANTASIA_EMPRESA = "/nomeFantasiaEmpresaEntrada";
-	const NOME_PROPRIEDADE_CNPJ_EMPRESA = "/cnpjEmpresaEntrada";
-	const NOME_PROPRIEDADE_CAPITAL_SOCIAL_EMPRESA = "/capitalSocialEmpresaEntrada";
-	const NOME_PROPRIEDADE_NATUREZA_JURIDICA_EMPRESA = "/naturezaJuridicaSelecionada";
-	const NOME_PROPRIEDADE_PORTE_EMPRESA = "/porteSelecionado";
-	const NOME_PROPRIEDADE_MATRIZ_FILIAL_EMPRESA = "/matrizFilialSelecionado";
-	const NOME_PROPRIEDADE_SITUACAO_CADASTRAL_EMPRESA = "/situacaoCadastralSelecionado";
-	const NOME_PROPRIEDADE_DATA_ABERTURA_EMPRESA = "/dataAberturaSelecionada";
 	const NOME_ROTA_EMPRESA_EDITAR = "EmpresaEditar";
 	const NOME_MODELO_EMPRESA = "EmpresaCriarEditar";
 	const NOME_MODELO_ENDERECO_EMPRESA = "EnderecoEmpresaCriarEditar";
@@ -93,7 +77,7 @@ sap.ui.define([
 				const nomeArgumentosCaminhoEmpresa = "arguments";
 				let idEmpresa = oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa;
 				let empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
-				this._populaTelaComValoresEmpresaEditar(idEmpresa);
+				this._populaTelaComValoresEmpresaEditar(empresa);
 				this._populaTelaComValoresEnderecoDaEmpresaEditar(empresa.idEndereco);
 				const i18TituloEmpresaEditar = "CriarEditarEmpresas.TituloEditar";
 				const i18n = this._retornaModeloI18n();
@@ -112,24 +96,21 @@ sap.ui.define([
 			});
 		},
 		_retornaValoresEmpresa(){
-			let valoresEscola =  this.getView().getModel(NOME_MODELO_EMPRESA).getData(); 
-			valoresEscola.situacaoCadastral = valoresEscola.situacaoCadastral == 1 ? true : false;
-			valoresEscola.dataSituacaoCadastral = new Date();
-			return valoresEscola;
+			let valoresEmpresa =  this.getView().getModel(NOME_MODELO_EMPRESA).getData(); 
+			valoresEmpresa.situacaoCadastral = valoresEmpresa.situacaoCadastral == 1 ? true : false;
+			valoresEmpresa.dataSituacaoCadastral = new Date();
+			return valoresEmpresa;
 		},
-		_populaTelaComValoresEmpresaEditar: async function (idEmpresaAtualizar) {
-			this._idEmpresaAtualizar = idEmpresaAtualizar;
-			let empresaEditar = await ServicoEmpresas.
-				obterEmpresaPorId(idEmpresaAtualizar);
-			empresaEditar.situacaoCadastral = empresaEditar.situacaoCadastral ? 1 : 0;
-			empresaEditar = new JSONModel(empresaEditar); 
-			this.getView().setModel(empresaEditar, NOME_MODELO_EMPRESA);
+		_populaTelaComValoresEmpresaEditar: async function (empresa) {
+			empresa.situacaoCadastral = empresa.situacaoCadastral ? 1 : 0;
+			empresa = new JSONModel(empresa); 
+			this.getView().setModel(empresa, NOME_MODELO_EMPRESA);
 		},
 		_populaTelaComValoresEnderecoDaEmpresaEditar: async function (id) {;
-			let enderecoEmpresaEditar = await ServicoEnderecos.obterEnderecoPorId(id);
-			this._idEnderecoAtualizar = enderecoEmpresaEditar.id;
-			enderecoEmpresaEditar = new JSONModel(enderecoEmpresaEditar);
-			this.getView().setModel(enderecoEmpresaEditar, NOME_MODELO_ENDERECO_EMPRESA);
+			let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
+			this._idEnderecoAtualizar = id;
+			endereco = new JSONModel(endereco);
+			this.getView().setModel(endereco, NOME_MODELO_ENDERECO_EMPRESA);
 		},
 		_retornaValoresEndereco() {
 			return this.getView().getModel(NOME_MODELO_ENDERECO_EMPRESA).getData();
@@ -143,8 +124,7 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
-			this._trataErros(i18nMensagemDeErro, async () => {
-				debugger;
+			this._trataErros(i18nMensagemDeErro, async () => {	
 				let respostaEndereco;
 				let respostaEmpresa;
 				if (this._rotaAtual == "EmpresaCriar") {
@@ -159,7 +139,6 @@ sap.ui.define([
 					respostaEndereco.id = this._idEnderecoAtualizar;
 					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
 					let empresaEditar = this._retornaValoresEmpresa();
-
 					empresaEditar.id = this._idEmpresaAtualizar;
 					empresaEditar.idEndereco = this._idEnderecoAtualizar;
 					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresaEditar);
@@ -175,7 +154,9 @@ sap.ui.define([
 						respostaEndereco.Status == status500) {
 						textoErro += respostaEndereco.Detail;
 					}
-					if (respostaEndereco.ok != undefined && !respostaEndereco.ok) {
+					if (respostaEndereco.ok != undefined && !respostaEndereco.ok ||
+						respostaEndereco.status != undefined
+					) {
 						throw new Error(textoErro);
 					}
 				}
@@ -193,7 +174,9 @@ sap.ui.define([
 						respostaEndereco.Status == undefined) {
 						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
 					}
-					if (respostaEndereco.ok != undefined && !respostaEmpresa.ok) {
+					if (respostaEmpresa.Status != undefined||
+						respostaEmpresa.status != undefined
+					) {
 						throw new Error(textoErro);
 					}
 				}
