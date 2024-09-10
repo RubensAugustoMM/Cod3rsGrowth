@@ -12,7 +12,7 @@ sap.ui.define([
                 if (filtro.NumeroFiltro !== undefined) {
                     const parametroFiltroNumero = `&${chaveFiltroNumero}=`;
                     let valorNumero = filtro.NumeroFiltro;
-                    parametrosFiltro += parametroFiltroNumero += valorNumero;
+                    parametrosFiltro += parametroFiltroNumero + valorNumero;
                 }
 
                 const posicaoArrayCepFiltro = 1;
@@ -20,7 +20,7 @@ sap.ui.define([
                 if (filtro.CepFiltro !== undefined) {
                     const parametroFiltroCep = `&${chaveFiltroCep}=`;
                     let valorCep = filtro.CepFiltro;
-                    parametrosFiltro += parametroFiltroCep += valorCep;
+                    parametrosFiltro += parametroFiltroCep + valorCep;
                 }
 
                 const posicaoArrayMunicipioFiltro = 2;
@@ -28,7 +28,7 @@ sap.ui.define([
                 if (filtro.MunicipioFiltro !== undefined) {
                     const parametroFiltroMunicipio = `&${chaveFiltroMunicipio}=`;
                     let valorMunicipio = filtro.MunicipioFiltro;
-                    parametrosFiltro += parametroFiltroMunicipio += valorMunicipio;
+                    parametrosFiltro += parametroFiltroMunicipio + valorMunicipio;
                 }
 
                 const posicaoArrayBairroFiltro = 3;
@@ -36,7 +36,7 @@ sap.ui.define([
                 if (filtro.BairroFiltro !== undefined) {
                     const parametroFiltroBairro = `&${chaveFiltroBairro}=`;
                     let valorBairro = filtro.BairroFiltro;
-                    parametrosFiltro += parametroFiltroBairro += valorBairro;
+                    parametrosFiltro += parametroFiltroBairro + valorBairro;
                 }
                 const posicaoArrayEstadoFiltro = 4;
                 const chaveFiltroEstado = chavesFiltro[posicaoArrayEstadoFiltro];
@@ -47,23 +47,26 @@ sap.ui.define([
             }
             return await RepositorioEnderecos.obterTodosEnderecos(parametroFiltro);
         },
+        obterEnderecoPorId: async function (id) {
+            return await RepositorioEnderecos.obterEnderecoPorId(id);
+        },
+        editarEndereco: async function (parametros) {
+            return await RepositorioEnderecos.editarEndereco(parametros);
+        },
         criarEndereco: async function (parametros, modelo) {
-            const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
-            const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
-            const valorNumericoPadrao = modelo.getProperty(nomeProrpriedadeValorNumericoPadrao);
-            const valorStringPadrao = modelo.getProperty(nomePropriedadeValorStringPadrao);
-            const parametrosEndereco = {
-                id: valorNumericoPadrao,
-                numero: parametros.numero != null && parametros.numero != valorNumericoPadrao ?
-                    parseInt(parametros.numero) : -1,
-                cep: parametros.cep != null ? parametros.cep : valorStringPadrao,
-                municipio: parametros.municipio != null ? parametros.municipio : valorStringPadrao,
-                bairro: parametros.bairro != null ? parametros.bairro : valorStringPadrao,
-                rua: parametros.rua != null ? parametros.rua : valorStringPadrao,
-                complemento: parametros.complemento != null ? parametros.complemento : valorStringPadrao,
-                estado: parseInt(parametros.estado ?? valorNumericoPadrao)
-            }
-            return await RepositorioEnderecos.criarEndereco(parametrosEndereco);
+            const valoresPadrao = modelo.getData();
+            parametros.id = valoresPadrao.valorNumericoPadrao;
+            parametros.numero =
+                parametros.numero != null && parametros.numero !=
+                    valoresPadrao.valorNumericoPadrao ? parseInt(parametros.numero) : -1;
+            parametros.cep =
+                String(parametros.cep ?? valoresPadrao.valorStringPadrao);
+            parametros.municipio = parametros.municipio ?? valoresPadrao.valorStringPadrao;
+            parametros.bairro = parametros.bairro ?? valoresPadrao.valorStringPadrao;
+            parametros.rua = parametros.rua ?? valoresPadrao.valorStringPadrao;
+            parametros.complemento = parametros.complemento ?? valoresPadrao.valorStringPadrao;
+            parametros.estado = parseInt(parametros.estado ?? -1); 
+            return await RepositorioEnderecos.criarEndereco(parametros);
         },
         deletarEndereco: async function (id) {
             RepositorioEnderecos.deletarEndereco(id);

@@ -39,10 +39,10 @@ public class EscolasController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Escola escolaAtualizar)
+    public IActionResult Atualizar([FromBody] Escola escola)
     {
-        _servicoEscola.Atualizar(escolaAtualizar);
-        return NoContent();
+        _servicoEscola.Atualizar(escola);
+        return Ok();
     }
 
     [HttpDelete("{id}")]

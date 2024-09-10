@@ -12,7 +12,7 @@ sap.ui.define([
     let viewName = ".TelasCriarEditar.CriarEditarEmpresas";
 
     Opa5.createPageObjects({
-        naPaginaDeCriacaoEmpresa: {
+        naPaginaDeCriacaoEdicaoEmpresa: {
             actions: {
                 aoClicarNoBotaoVoltar() {
                     return this.waitFor({
@@ -28,15 +28,15 @@ sap.ui.define([
                 }
             },
             assertions: {
-                aPaginaDeCriacaoDeEmpresasDeveSerCarregadaCorretamente() {
+                aPaginaDeCriacaoEdicaoDeEmpresasDeveSerCarregadaCorretamente() {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Page",
                         id: "criarEditarEmpresas",
                         success: function () {
-                            Opa5.assert.ok(true, "A página de criação de Empresas foi carregada corretamente")
+                            Opa5.assert.ok(true, "A página de criação ou edição de Empresas foi carregada corretamente")
                         },
-                        errorMessage: "A páginade criação de empresas não foi carregada corretamente"
+                        errorMessage: "A páginade criação ou edição de empresas não foi carregada corretamente"
                     });
                 },
                 oPainelEmpresaDeveSerCarregadoCorretamente() {

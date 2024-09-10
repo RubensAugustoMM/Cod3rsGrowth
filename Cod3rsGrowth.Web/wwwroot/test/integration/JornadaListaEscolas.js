@@ -31,9 +31,19 @@ sap.ui.define([
 
                 When.naPaginaDeListagem
                     .aoClicarBotaoCriarEscola();
-                Then.naPaginaDeCriacaoEscola
-                    .aPaginaDeCriacaoDeEscolasDeveSerCarregadaCorretamente();
-                Then.iTeardownMyAppFrame();
+                Then.naPaginaDeCriacaoEdicaoEscola
+                    .aPaginaDeCriacaoEdicaoDeEscolasDeveSerCarregadaCorretamente();
+                When.naPaginaDeCriacaoEdicaoEscola
+                    .aoClicarNoBotaoVoltar();
             });
+        opaTest("A tela de Edição de escolas deve ser carregada ao clicar o botão editar na tela de listagem",
+            function (Given, When, Then) {
+                When.naPaginaDeListagem
+                    .aoClicarBotaoEditarEscola();
+                Then.naPaginaDeCriacaoEdicaoEscola
+                    .aPaginaDeCriacaoEdicaoDeEscolasDeveSerCarregadaCorretamente();
+                Then.iTeardownMyAppFrame();
+            }
+        )
     });
 })

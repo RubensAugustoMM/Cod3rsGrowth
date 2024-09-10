@@ -28,13 +28,24 @@ sap.ui.define([
                     .oFragmentDeFiltrosEmpresasDeveSerCarregado();
             });
 
+        opaTest("A tela de criação de empresas deve ser carregada ao clicar o botão adicionar na tela de listagem de Empresas",
+            function (Given, When, Then) {
+
+                When.naPaginaDeListagem
+                    .aoClicarBotaoCriarEmpresa();
+                Then.naPaginaDeCriacaoEdicaoEmpresa
+                    .aPaginaDeCriacaoEdicaoDeEmpresasDeveSerCarregadaCorretamente();
+                When.naPaginaDeCriacaoEdicaoEmpresa
+                    .aoClicarNoBotaoVoltar();
+            });
+
         opaTest("A tela de criação de empresa deve ser carregada ao clicar o botão adicionar na tela de listagem de empresas",
             function (Given, When, Then) {
 
                 When.naPaginaDeListagem
                     .aoClicarBotaoCriarEmpresa();
-                Then.naPaginaDeCriacaoEmpresa
-                    .aPaginaDeCriacaoDeEmpresasDeveSerCarregadaCorretamente();
+                Then.naPaginaDeCriacaoEdicaoEmpresa
+                    .aPaginaDeCriacaoEdicaoDeEmpresasDeveSerCarregadaCorretamente();
                 Then.iTeardownMyAppFrame();
             });
     });

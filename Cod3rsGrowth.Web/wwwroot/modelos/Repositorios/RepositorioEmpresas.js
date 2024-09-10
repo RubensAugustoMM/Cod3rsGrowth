@@ -8,6 +8,11 @@ sap.ui.define([
             if (!resposta.ok) throw new Error(resposta.message);
             return await resposta.json();
         },
+        obterEmpresaPorId: async function (id) {
+            const resposta = await fetch(this._urlBase + "/" + id); 
+            if (!resposta.ok) throw new Error(resposta.status);
+            return await resposta.json();
+        },
         criarEmpresa: async function (parametros) {
             const urlAcao = "/Criar"
             const resposta = await fetch(this._urlBase + urlAcao, {
@@ -16,6 +21,15 @@ sap.ui.define([
                 body: JSON.stringify(parametros)
             });
             return await resposta.json();
+        },
+        editarEmpresa: async function (parametros) {
+            const resposta = await fetch(this._urlBase, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(parametros)
+            });
+            if(!resposta.ok)
+                return await resposta.json();
         }
     }
 });

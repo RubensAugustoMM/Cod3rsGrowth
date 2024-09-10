@@ -12,7 +12,7 @@ sap.ui.define([
     let viewName = ".TelasCriarEditar.CriarEditarEscolas";
 
     Opa5.createPageObjects({
-        naPaginaDeCriacaoEscola: {
+        naPaginaDeCriacaoEdicaoEscola: {
             actions: {
                 aoClicarNoBotaoVoltar() {
                     return this.waitFor({
@@ -28,7 +28,7 @@ sap.ui.define([
                 }
             },
             assertions: {
-                aPaginaDeCriacaoDeEscolasDeveSerCarregadaCorretamente() {
+                aPaginaDeCriacaoEdicaoDeEscolasDeveSerCarregadaCorretamente() {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Page",

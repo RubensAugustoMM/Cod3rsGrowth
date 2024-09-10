@@ -72,19 +72,29 @@
           "target": "lista"
         },
         {
-          "pattern": "escolas",
+          "pattern": "Escolas",
           "name": "Escolas",
           "target": "lista"
         },
         {
           "pattern": "Empresas/Criar",
           "name": "EmpresaCriar",
-          "target": "empresaCriar"
+          "target": "empresaCriarEditar"
         },
         {
           "pattern": "Escolas/Criar",
           "name": "EscolaCriar",
-          "target": "escolaCriar"
+          "target": "escolaCriarEditar"
+        },
+        {
+          "pattern": "Empresas/Editar/{caminhoEmpresa}",
+          "name": "EmpresaEditar",
+          "target": "empresaCriarEditar"
+        },
+        {
+          "pattern": "Escolas/Editar/{caminhoEscola}",
+          "name": "EscolaEditar",
+          "target": "escolaCriarEditar"
         }
       ],
       "targets": {
@@ -100,14 +110,14 @@
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         },
-        "empresaCriar": {
+        "empresaCriarEditar": {
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEmpresas",
           "viewId": "CriarEditarEmpresas",
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         },
-        "escolaCriar": {
+        "escolaCriarEditar": {
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEscolas",
           "viewId": "CriarEditarEscolas",

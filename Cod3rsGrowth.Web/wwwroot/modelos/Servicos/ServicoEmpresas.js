@@ -64,7 +64,10 @@ sap.ui.define([
             }
             return await RepositorioEmpresas.obterTodasEmpresas(parametrosFiltro);
         },
-        criarEmpresa: async function (parametros,modelo) {
+        obterEmpresaPorId: async function (id) {
+            return await RepositorioEmpresas.obterEmpresaPorId(id);
+        },
+        criarEmpresa: async function (parametros, modelo) {
             const nomeProrpriedadeValorNumericoPadrao = "/valorNumericoPadrao";
             const nomePropriedadeValorStringPadrao = "/valorStringPadrao";
             const nomePropriedadeValorDataPadrao = "/valorDataPadrao";
@@ -75,7 +78,7 @@ sap.ui.define([
                 id: valorNumericoPadrao,
                 razaoSocial: parametros.razaoSocial != null ? parametros.razaoSocial : valorStringPadrao,
                 nomeFantasia: parametros.nomeFantasia != null ? parametros.nomeFantasia : valorStringPadrao,
-                cnpj: parametros.cnpj != null ? parametros.cnpj : valorStringPadrao,
+                cnpj: parametros.cnpj != null ? String(parametros.cnpj) : valorStringPadrao,
                 situacaoCadastral: parseInt(parametros.situacaoCadastral ?? valorNumericoPadrao),
                 dataSituacaoCadastral: parametros.dataSituacaoCadastral != null ? parametros.dataSituacaoCadastral : valorStringPadrao,
                 idade: parametros.dataAbertura != null ?
@@ -91,6 +94,9 @@ sap.ui.define([
             parametrosEmpresa.situacaoCadastral =
                 valorHabilitado == parseInt(parametros.situacaoCadastral);
             return await RepositorioEmpresas.criarEmpresa(parametrosEmpresa);
+        },
+        editarEmpresa: async function (parametros) {
+            return await RepositorioEmpresas.editarEmpresa(parametros);
         }
     }
 });

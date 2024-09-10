@@ -18,7 +18,7 @@
                     <content>
                         <Input
                             id="filtroNomeEscola"
-                            value="{/nomeEscola}"
+                            value="{FiltroEscola>/NomeFiltro}"
                             valueLiveUpdate="true"
                             width="100%"
                         />
@@ -33,7 +33,7 @@
                             mask="99999999"
                             id="filtroCodigoMec"
                             value="{
-                                path:'/codigoMec',
+                                path:'FiltroEscola>/CodigoMecFiltro',
                                 type: 'sap.ui.model.type.String',
                                 constraints: {
                                     maxLength: 8
@@ -52,7 +52,7 @@
                         <ComboBox
                             id="filtroStatusAtividade"
                             width="100%"
-                            selectedKey="{/statusAtividadeSelecionada}"
+                            selectedKey="{FiltroEscola>/StatusAtividadeFiltro}"
                             items="{path:'habilitado>/Habilitado',
                             sorter: {path: 'Valor'}}"
                         >
@@ -71,7 +71,7 @@
                         <ComboBox
                             id="filtroOrganizacaoAcademica"
                             width="100%"
-                            selectedKey="{/organizacaoAcademicaSelecionada}"
+                            selectedKey="{FiltroEscola>/OrganizacaoAcademicaFiltro}"
                             items="{ path: 'organizacaoAcademica>/OrganizacaoAcademica',
                                 sorter: {path:'Valor'}}"
                         >
@@ -90,7 +90,7 @@
                         <ComboBox
                             id="filtroEstado"
                             width="100%"
-                            selectedKey="{/estadoSelecionado}"
+                            selectedKey="{FiltroEscola>/EstadoFiltro}"
                             items="{path: 'estados>/Estados',
                         sorter: {path:'Valor'}}"
                         >

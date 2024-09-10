@@ -30,7 +30,7 @@
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns />
-                <ColumnListItem />
+                <ColumnListItem type="DetailAndActive"/>
             </Table>
         </content>
     </Page>

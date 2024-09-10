@@ -18,7 +18,7 @@
                     <content>
                         <Input
                             id="filtroNomeEmpresa"
-                            value="{/nomeEmpresa}"
+                            value="{FiltroEmpresa>/RazaoSocialFiltro}"
                             valueLiveUpdate="true"
                             width="100%"
                         />
@@ -31,7 +31,7 @@
                     <content>
                         <Input
                             id="filtroCnpj"
-                            value="{/cnpjEmpresa}"
+                            value="{FiltroEmpresa>/CnpjFiltro}"
                             valueLiveUpdate="true"
                             type="Number"
                             maxLength="14"
@@ -46,7 +46,7 @@
                     <content>
                         <Input
                             id="filtroCapitalSocial"
-                            value="{/capitalSocialEmpresa}"
+                            value="{FiltroEmpresa>/CapitalSocialFiltro}"
                             type="Number"
                             valueLiveUpdate="true"
                             width="100%"
@@ -62,7 +62,7 @@
                         <ComboBox
                             id="filtroSituacaoCadastral"
                             width="100%"
-                            selectedKey="{/situacaoCadastralSelecionada}"
+                            selectedKey="{FiltroEmpresa>/SituacaoCadastralFiltro}"
                             items="{path:'habilitado>/Habilitado',
                             sorter: {path: 'Valor'}}"
                         >
@@ -81,7 +81,7 @@
                         <DatePicker
                             id="filtroDataAbertura"
                             value="{
-                                path: '/dataAbertura',
+                                path: 'FiltroEmpresa>/DataAberturaFiltro',
                             type: 'sap.ui.model.type.Date',
                         formatOptions: {
                             source: {
@@ -101,7 +101,7 @@
                         <ComboBox
                             id="filtroNaturezaJuridica"
                             width="100%"
-                            selectedKey="{/naturezaJuridicaSelecionada}"
+                            selectedKey="{FiltroEmpresa>/NaturezaJuridicaFiltro}"
                             items="{ path: 'naturezaJuridica>/NaturezaJuridica',
                                 sorter: {path:'Valor'}}"
                         >
@@ -120,7 +120,7 @@
                         <ComboBox
                             id="filtroEstado"
                             width="100%"
-                            selectedKey="{/estadoSelecionado}"
+                            selectedKey="{FiltroEmpresa>/EstadoFiltro}"
                             items="{path: 'estados>/Estados',
                         sorter: {path:'Valor'}}"
                         >

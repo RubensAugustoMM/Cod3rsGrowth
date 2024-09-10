@@ -38,10 +38,10 @@ public class EnderecosController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Endereco enderecoAtualizar)
+    public IActionResult Atualizar([FromBody] Endereco endereco)
     {
-        _servicoEndereco.Atualizar(enderecoAtualizar);
-        return NoContent();
+        _servicoEndereco.Atualizar(endereco);
+        return Ok();
     }
 
     [HttpDelete("[action]/{id}")]
