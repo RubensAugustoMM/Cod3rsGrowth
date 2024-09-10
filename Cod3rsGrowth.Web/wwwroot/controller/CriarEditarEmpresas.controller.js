@@ -54,7 +54,7 @@ sap.ui.define([
 				matrizFilial:undefined,
 				capitalSocial:undefined
 			};	
-			var modeloEmpresa =  new JSONModel(dadosEmpresa);
+			let modeloEmpresa =  new JSONModel(dadosEmpresa);
 			this.getView().setModel(modeloEmpresa, NOME_MODELO_EMPRESA);
 			const dadosEstado = {
 				cep:undefined,
@@ -65,7 +65,7 @@ sap.ui.define([
 				numero:undefined,
 				complemento:undefined
 			}
-			var modeloEstadoEmpresa = new JSONModel(dadosEstado);
+			let modeloEstadoEmpresa = new JSONModel(dadosEstado);
 			this.getView().setModel(modeloEstadoEmpresa, NOME_MODELO_ENDERECO_EMPRESA);
 		},
 		_aoCoincidirComRotaEmpresaEditar(oEvent) {
@@ -115,7 +115,7 @@ sap.ui.define([
 		_retornaValoresEndereco() {
 			return this.getView().getModel(NOME_MODELO_ENDERECO_EMPRESA).getData();
 		},
-		aoPressionarSalvar: async function () {
+		aoPressionarSallet: async function () {
 			let textoErro = "";
 			let i18nMensagemDeErro;
 			if (this._rotaAtual == "EmpresaCriar") {
