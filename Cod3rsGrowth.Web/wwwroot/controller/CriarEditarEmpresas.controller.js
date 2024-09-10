@@ -107,9 +107,8 @@ sap.ui.define([
 			this._idEnderecoAtualizar = id;
 			this._modeloEnderecoEmpresa(new JSONModel(endereco));
 		},
-		_retornaValoresEndereco() {
-			
-			return this._modeloEnderecoEmpresa(undefined).getData();
+		_retornaValoresEndereco() {	
+			return this._modeloEnderecoEmpresa().getData();
 		},
 		aoPressionarSalvar: async function () {
 			let textoErro = "";
@@ -121,7 +120,6 @@ sap.ui.define([
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
 			this.trataErros(i18nMensagemDeErro, async () => {	
-				debugger;
 				let respostaEndereco;
 				let respostaEmpresa;
 				if (this._rotaAtual == "EmpresaCriar") {

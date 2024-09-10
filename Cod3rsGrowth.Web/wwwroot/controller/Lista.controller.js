@@ -176,7 +176,7 @@ sap.ui.define([
             this._modeloFiltroEmpresa(new JSONModel(dadosFiltroEmpresa));
         },
         _retornaFiltroEmpresas() {
-            return this._modeloFiltroEmpresa(undefined).getData();
+            return this._modeloFiltroEmpresa().getData();
         },
         _configuraFiltroEscola() {
             let dadosFiltroEscola = {
@@ -190,7 +190,7 @@ sap.ui.define([
         },
 
         _retornaFiltroEscolas() {
-            return this._modeloFiltroEscola(undefined).getData();
+            return this._modeloFiltroEscola().getData();
         },
 
         _populaTabelaEmpresaComDados(filtro) {

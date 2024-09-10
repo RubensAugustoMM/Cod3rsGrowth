@@ -102,7 +102,7 @@ sap.ui.define([
 			this._modeloEnderecoEscola(new JSONModel(endereco));
 		},
 		_retornaValoresEndereco() {
-			return this._modeloEnderecoEscola(undefined).getData();
+			return this._modeloEnderecoEscola().getData();
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
