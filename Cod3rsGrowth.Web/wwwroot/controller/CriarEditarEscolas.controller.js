@@ -17,21 +17,6 @@ sap.ui.define([
 ) {
 	"use strict";
 
-	const NOME_PROPRIEDADA_NOME = "/nomeEscolaEntrada";
-	const NOME_PROPRIEDADE_CODIGO_MEC = "/codigoMecEscolaEntrada";
-	const NOME_PROPRIEDADE_TELEFONE = "/telefoneEscolaEntrada";
-	const NOME_PROPRIEDADE_EMAIL = "/emailEscolaEntrada";
-	const NOME_PROPRIEDADE_CATEGORIA_ADMINISTRATIVA = "/categoriaAdministrativaSelecionada";
-	const NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA = "/organizacaoAcademicaSelecionada";
-	const NOME_PROPRIEDADE_STATUS_ATIVIDADE = "/statusAtividadeSelecionada";
-	const NOME_PROPRIEDADE_INICIO_ATIVIDADE_SELECIONADA = "/dataInicioAtividadeSelecionada";
-	const NOME_PROPRIEDADE_CEP_ESCOLA = "/cepEscolaEntrado";
-	const NOME_PROPRIEDADE_ESTADO_ESCOLA = "/estadoSelecionadoEscola";
-	const NOME_PROPRIEDADE_MUNICIPIO_ESCOLA = "/municipioEscolaEntrado";
-	const NOME_PROPRIEDADE_BAIRRO_ESCOLA = "/bairroEscolaEntrado";
-	const NOME_PROPRIEDADE_RUA_ESCOLA = "/ruaEscolaEntrado";
-	const NOME_PROPRIEDADE_NUMERO_ESCOLA = "/numeroEscolaEntrado";
-	const NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA = "/complementoEscolaEntrado";
 	const NOME_ROTA_ESCOLA_EDITAR = "EscolaEditar";
 	const NOME_MODELO_ENDERECO_ESCOLA = "EnderecoEscolaCriarEditar";
 	const NOME_MODELO_ESCOLA = "EscolaCriarEditar";
@@ -67,6 +52,7 @@ sap.ui.define([
 			});
 		},
 		_configuraModeloDeDadosDaTela() {
+			debugger;
 			const dadosEscola = {
 				statusAtividade: undefined,
 				nome: undefined,
@@ -218,22 +204,6 @@ sap.ui.define([
 			this._trataErros(i18nMensagemDeErro, () => {
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
-				const modelo = this.getView().getModel();
-				modelo.setProperty(NOME_PROPRIEDADE_CODIGO_MEC, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_TELEFONE, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_EMAIL, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_CATEGORIA_ADMINISTRATIVA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADA_NOME, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_ORGANIZACAO_ACADEMICA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_STATUS_ATIVIDADE, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_INICIO_ATIVIDADE_SELECIONADA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_CEP_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_ESTADO_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_BAIRRO_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_MUNICIPIO_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_RUA_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_NUMERO_ESCOLA, undefined);
-				modelo.setProperty(NOME_PROPRIEDADE_COMPLEMENTO_ESCOLA, undefined);
 				if (hashAnterior != undefined) {
 					window.history.go(-1);
 				}
