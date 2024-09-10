@@ -1,31 +1,27 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/date/UI5Date",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
 	"ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
 	"sap/ui/core/routing/History",
 	"sap/m/MessageBox",
-	"sap/ui/model/json/JSONModel"
+	"sap/ui/model/json/JSONModel",
+	"ui5/cod3rsgrowth/controller/ControllerBase"
 ], function (
-	Controller,
 	UI5Date,
 	ServicoEscolas,
 	ServicoEnderecos,
 	History,
 	MessageBox,
-	JSONModel
+	JSONModel,
+	ControllerBase
 ) {
 	"use strict";
 
 	const NOME_ROTA_ESCOLA_EDITAR = "EscolaEditar";
-	const NOME_MODELO_ENDERECO_ESCOLA = "EnderecoEscolaCriarEditar";
-	const NOME_MODELO_ESCOLA = "EscolaCriarEditar";
-	const NOME_MODELO_VALORES_PADRAO = "valoresPadrao";
-	return Controller.extend("ui5.cod3rsgrowth.controller.CriarEditarEscolas", {
+	return ControllerBase.extend("ui5.cod3rsgrowth.controller.CriarEditarEscolas", {
 		_idEscolaAtualizar: 0,
 		_idEnderecoAtualizar: 0,
 		_rotaAtual: "",
-		_nomeModeloI18n: "i18n",
 		_idCriarEditarEscolas: "criarEditarEscolas",
 		onInit() {
 			const nomeRotaEscolaCirar = "EscolaCriar";
@@ -45,9 +41,9 @@ sap.ui.define([
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoCoincidirRotas";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this._trataErros(i18nMensagemDeErro, () => {
+			this.trataErros(i18nMensagemDeErro, () => {
 				const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
-				let i18n = this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+				let i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
 			});
 		},
@@ -63,8 +59,7 @@ sap.ui.define([
 				categoriaAdministrativa: undefined,
 				organizacaoAcademica: undefined
 			}
-			var modeloEscola = new JSONModel(dadosEscola);
-			this.getView().setModel(modeloEscola, NOME_MODELO_ESCOLA);
+			this._modeloEscola(new JSONModel(dadosEscola))
 			const dadosEstado = {
 				cep:undefined,
 				estado:undefined,
@@ -74,50 +69,40 @@ sap.ui.define([
 				numero:undefined,
 				complemento:undefined
 			}
-			var modeloEstadoEscola = new JSONModel(dadosEstado);
-			this.getView().setModel(modeloEstadoEscola, NOME_MODELO_ENDERECO_ESCOLA);
+				this._modeloEnderecoEscola(new JSONModel(dadosEstado));
 		},
 		_aoCoincidirComRotaEscolaEditar: async function (oEvent) {
 			const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this._trataErros(i18nMensagemDeErro, async () => {
+			this.trataErros(i18nMensagemDeErro, async () => {
 				const nomeArgumentosCaminhoEscola = "arguments";
 				let idEscola = oEvent.getParameter(nomeArgumentosCaminhoEscola).caminhoEscola;
 				let escola = await ServicoEscolas.obterEscolaPorId(idEscola);
 				this._populaTelaComValoresEscolaEditar(escola);
 				this._populaTelaComValoresEnderecoDaEscolaEditar(escola.idEndereco);
 				const i18TituloEscolaEditar = "CriarEditarEscolas.TituloEditar";
-				const i18n = this._retornaModeloI18n();
+				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18TituloEscolaEditar));
 			});
 		},
 		_retornaValoresEscola() {
-			let valoresEscola = this.getView().getModel(NOME_MODELO_ESCOLA).getData();
+			let valoresEscola = this._modeloEscola(undefined).getData();
 			valoresEscola.statusAtividade = valoresEscola.statusAtividade == 1 ? true : false;
 			return valoresEscola;
 		},
 		_populaTelaComValoresEscolaEditar: async function (escola) {
 			escola.statusAtividade = escola.statusAtividade ? 1 : 0;
 			this._idEscolaAtualizar = escola.id;
-			escola = new JSONModel(escola);
-			this.getView().setModel(escola, NOME_MODELO_ESCOLA);
+			this._modeloEscola(new JSONModel(escola));
 		},
 		_populaTelaComValoresEnderecoDaEscolaEditar: async function (id) {
 			let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
 			this._idEnderecoAtualizar = id;
-			endereco = new JSONModel(endereco);
-			this.getView().setModel(endereco, NOME_MODELO_ENDERECO_ESCOLA);
+			this._modeloEnderecoEscola(new JSONModel(endereco));
 		},
 		_retornaValoresEndereco() {
-			return this.getView().getModel(NOME_MODELO_ENDERECO_ESCOLA).getData();
-		},
-		_mostraMensagemDeErro(mensagemDeErro, erro) {
-			MessageBox.show(erro.message, {
-				icon: MessageBox.Icon.ERROR,
-				title: mensagemDeErro,
-				actions: [MessageBox.Action.CLOSE]
-			});
+			return this._modeloEnderecoEscola(undefined).getData();
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
@@ -129,7 +114,7 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			}
-			this._trataErros(i18nMensagemDeErro, async () => {
+			this.trataErros(i18nMensagemDeErro, async () => {
 				let respostaEndereco;
 				let respostaEscola;
 				let textoErro = "";
@@ -140,8 +125,8 @@ sap.ui.define([
 				else {
 					i18nMensagemDeErro = "CriarEditarEscolas.ErroAoTentarEditarEscolas";
 				}
-				this._trataErros(i18nMensagemDeErro, async () => {
-					const modelo = this.getView().getModel(NOME_MODELO_VALORES_PADRAO);
+				this.trataErros(i18nMensagemDeErro, async () => {
+					const modelo = this.modeloValoresPadrao(undefined);
 					if (this._rotaAtual == "EscolaCriar") {
 						respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
 						let escolaCriar = this._retornaValoresEscola();
@@ -162,7 +147,7 @@ sap.ui.define([
 					if (respostaEndereco != undefined) {
 						if (respostaEndereco.status != undefined &&
 							respostaEndereco.status == status400) {
-							textoErro += this._retornaTextoErro(respostaEndereco);
+							textoErro += this.retornaTextoErro(respostaEndereco);
 						}
 						if (respostaEndereco.Status != undefined &&
 							respostaEndereco.Status == status500) {
@@ -177,14 +162,15 @@ sap.ui.define([
 					if (respostaEscola != undefined) {
 						if (respostaEscola != undefined &&
 							respostaEscola.status == status400) {
-							textoErro += this._retornaTextoErro(respostaEscola);
+							textoErro += this.retornaTextoErro(respostaEscola);
 						}
 						if (respostaEscola != undefined &&
 							respostaEscola.Status == status500) {
 							textoErro += respostaEscola.Detail;
 						}
 						if (this._rotaAtual == "EscolaCriar"&&
-							 respostaEndereco != undefined &&
+							respostaEscola.ok == undefined &&
+							respostaEndereco != undefined &&
 							respostaEndereco.Status == undefined) {
 							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
 						}
@@ -201,7 +187,7 @@ sap.ui.define([
 		},
 		aoPressionarBotaoDeNavegacao() {
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoClicarBotaoDeNavegaca";
-			this._trataErros(i18nMensagemDeErro, () => {
+			this.trataErros(i18nMensagemDeErro, () => {
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				if (hashAnterior != undefined) {
@@ -214,37 +200,13 @@ sap.ui.define([
 				}
 			})
 		},
-		_retornaTextoErro(resposta) {
-			let textoRetorno = "";
-			const chavesErro = Object.keys(resposta.errors);
-			chavesErro.forEach((erro => {
-				textoRetorno += `${erro}:\n`;
-				resposta.errors[erro].forEach((erro => {
-					textoRetorno += erro + "\n";
-				}));
-			}));
-			return textoRetorno;
+		_modeloEscola: function (modelo) {
+			const nomeModelo = "EscolaCriarEditar";
+			return this.modelo(nomeModelo, modelo);
 		},
-		_trataErros(nomeModeloTituloErro, funcao) {
-			const modelo = this.getView().getModel();
-			const nomePropriedadeOcupado = "/ocupado";
-			modelo.setProperty(nomePropriedadeOcupado, true);
-			let erroPego;
-			return Promise.resolve(funcao())
-				.catch(erro => {
-					erroPego = erro;
-				})
-				.finally(() => {
-					modelo.setProperty(nomePropriedadeOcupado, false)
-					if (erroPego != null) {
-						const i18n = this._retornaModeloI18n();
-						const TituloErro = i18n.getText(nomeModeloTituloErro);
-						this._mostraMensagemDeErro(TituloErro, erroPego);
-					}
-				});
-		},
-		_retornaModeloI18n() {
-			return this.getOwnerComponent().getModel(this._nomeModeloI18n).getResourceBundle();
+		_modeloEnderecoEscola: function (modelo) {
+			const nomeModelo= "EnderecoEscolaCriarEditar";
+			return this.modelo(nomeModelo, modelo);
 		}
 	});
 });

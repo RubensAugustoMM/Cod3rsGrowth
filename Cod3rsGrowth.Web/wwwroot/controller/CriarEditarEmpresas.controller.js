@@ -68,7 +68,7 @@ sap.ui.define([
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this._trataErros(i18nMensagemDeErro,async () => {
+			this.trataErros(i18nMensagemDeErro,async () => {
 				const nomeArgumentosCaminhoEmpresa = "arguments";
 				let idEmpresa = oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa;
 				let empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
@@ -84,7 +84,7 @@ sap.ui.define([
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this._trataErros(i18nMensagemDeErro, () => {
+			this.trataErros(i18nMensagemDeErro, () => {
 				const i18TituloEmpresaCriar = "CriarEditarEmpresas.TituloCriar";
 				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
@@ -120,12 +120,12 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
-			this._trataErros(i18nMensagemDeErro, async () => {	
+			this.trataErros(i18nMensagemDeErro, async () => {	
 				debugger;
 				let respostaEndereco;
 				let respostaEmpresa;
 				if (this._rotaAtual == "EmpresaCriar") {
-					const modelo = this._modeloValoresPadrao(undefined);
+					const modelo = this.modeloValoresPadrao(undefined);
 					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
 					let empresaCriar = this._retornaValoresEmpresa();
 					empresaCriar.idEndereco = respostaEndereco.id;
@@ -145,7 +145,7 @@ sap.ui.define([
 				if (respostaEndereco != undefined) {
 					if (respostaEndereco.status != undefined &&
 						respostaEndereco.status == status400) {
-						textoErro += this._retornaTextoErro(respostaEndereco);
+						textoErro += this.retornaTextoErro(respostaEndereco);
 					}
 					if (respostaEndereco.Status != undefined &&
 						respostaEndereco.Status == status500) {
@@ -160,7 +160,7 @@ sap.ui.define([
 				if (respostaEmpresa != undefined) {
 					if (respostaEmpresa.status != undefined &&
 						respostaEmpresa.status == status400) {
-						textoErro += this._retornaTextoErro(respostaEmpresa);
+						textoErro += this.retornaTextoErro(respostaEmpresa);
 					}
 					if (respostaEmpresa.Status != undefined &&
 						respostaEmpresa.Status == status500) {
@@ -185,7 +185,7 @@ sap.ui.define([
 
 		aoPressionarBotaoDeNavegacao() {
 			let i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoClicarBotaoNavegacao";
-			this._trataErros(i18nMensagemDeErro, () => {
+			this.trataErros(i18nMensagemDeErro, () => {
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				if (hashAnterior != undefined) {
@@ -204,10 +204,6 @@ sap.ui.define([
 		},
 		_modeloEmpresa: function(modelo) {
 			const nomeModelo = "EmpresaCriarEditar";	
-			return this.modelo(nomeModelo, modelo);
-		},
-		_modeloValoresPadrao: function(modelo) {
-			const nomeModelo = "valoresPadrao";	
 			return this.modelo(nomeModelo, modelo);
 		}
 	});
