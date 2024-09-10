@@ -1,0 +1,97 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="ui5.cod3rsgrowth.controller.EscolaDetalhes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+<Page id="idPaginaDetalhes"
+    title="{i18n>EscolaDetalhes.TituloPaginaDetalhesEscola}">
+    <layout:VerticalLayout width="100%">
+        <Panel id="painelEscola"
+        width="100%">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="{i18n>EscolaDetalhes.TituloPainelEscola}" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelNome}" />
+                    <Label text='{EscolaDetalhes>/nome}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelCodigoMec}" />
+                    <Label text='{EscolaDetalhes>/codigoMec}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelTelefone}" />
+                    <Label text='{EscolaDetalhes>/telefone}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelEmail}" />
+                    <Label text='{EscolaDetalhes>/email}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelInicioAtividade}" />
+                    <Label text='{EscolaDetalhes>/inicioAtividade}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelCategoriaAdministrativa}" />
+                    <Label text="{
+                        path: 'EscolaDetalhes>/categoriaAdministrativa',
+                        formatter: '.formatador.textoCategoriaAdministrativa'
+                    }" />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelOrganizacaoAcademica}" />
+                    <Label text="{
+                        path:'EscolaDetalhes>/organizacaoAcademica',
+                        formatter: '.formatador.textoOrganizacaoAcademica'
+                        }" />
+                </VBox>
+            </content>
+        </Panel>
+        <Panel id="painelEndereco"
+        width="100%">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="{i18n>EscolaDetalhes.TituloPainelEndereco}" />
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelNumero}" />
+                    <Label text='{EnderecoEscolaDetalhes>/numero}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelCep}" />
+                    <Label text='{EnderecoEscolaDetalhes>/cep}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelMunicipio}" />
+                    <Label text='{EnderecoEscolaDetalhes>/municipio}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelBairro}" />
+                    <Label text='{EnderecoEscolaDetalhes>/bairro}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelComplemento}" />
+                    <Label text='{EnderecoEscolaDetalhes>/complemento}' />
+                </VBox>
+                <VBox>
+                    <Label text="{i18n>EscolaDetalhes.LabelEstado}" />
+                    <Label text="{
+                        path: 'EnderecoEscolaDetalhes>/estado',
+                        formatter: '.formatador.textoEstado'
+                    }" />
+                </VBox>
+            </content>
+        </Panel>
+    </layout:VerticalLayout>
+</Page>
+</mvc:View>

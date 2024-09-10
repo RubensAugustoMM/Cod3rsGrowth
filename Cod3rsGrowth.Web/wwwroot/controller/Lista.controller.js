@@ -265,7 +265,7 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (naturezaJuridica) {
-                                            return this._formatador.textoNaturezaJuridica(naturezaJuridica, view);
+                                            return this._formatador.textoNaturezaJuridica(naturezaJuridica);
                                         }.bind(this)
                                     }
                                 });
@@ -276,7 +276,7 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (situacaoCadastral) {
-                                            return this._formatador.textoSituacaoCadastral(situacaoCadastral, view);
+                                            return this._formatador.textoSituacaoCadastral(situacaoCadastral);
                                         }.bind(this)
                                     }
                                 });
@@ -359,6 +359,7 @@ sap.ui.define([
                     path: this._nomePropriedadeTabelaItems,
                     template: new sap.m.ColumnListItem({
                         detailPress: (oEvent) => this._aoPressionarBotaoEditarEscola(oEvent),
+                        press: (oEvent) => this._aoPressionarSobreItemEscola(oEvent),
                         type: "DetailAndActive",
                         cells: Object.keys(camposEscolas).map(campo => {
                             if (campo === "estado") {
@@ -377,7 +378,7 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (organizacaoAcademica) {
-                                            return this._formatador.textoOrganizacaoAcademica(organizacaoAcademica, view);
+                                            return this._formatador.textoOrganizacaoAcademica(organizacaoAcademica);
                                         }.bind(this)
                                     }
                                 });
@@ -389,7 +390,7 @@ sap.ui.define([
                                     text: {
                                         path: campo,
                                         formatter: function (statusAtividade) {
-                                            return this._formatador.textoSituacaoCadastral(statusAtividade, view);
+                                            return this._formatador.textoSituacaoCadastral(statusAtividade);
                                         }.bind(this)
                                     }
                                 });
@@ -431,6 +432,7 @@ sap.ui.define([
                 });
             });
         },
+
         _aoPressionarBotaoEditarEscola(oEvent) {
             const escolaEditar = oEvent.getSource()
                 .getBindingContext().getObject();
@@ -450,6 +452,18 @@ sap.ui.define([
         _modeloFiltroEscola: function (modelo) {
             const nomeModelo = "FiltroEscola";
             return this.modelo(nomeModelo, modelo);
-        }
+        },
+        _aoPressionarSobreItemEscola(oEvent) {
+            const escolaDetalhes = oEvent.getSource()
+                .getBindingContext().getObject();
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoEditarEscola";
+                this.trataErros(i18nMensagemDeErro, () => {
+                    const nomeRotaEditarEscola = "EscolaDetalhes";
+                    const roteador = this.getOwnerComponent().getRouter();
+                    roteador.navTo(nomeRotaEditarEscola, {
+                        caminhoEscola: window.encodeURIComponent(escolaDetalhes.id)
+                    });
+                });
+        },
     });
 });
