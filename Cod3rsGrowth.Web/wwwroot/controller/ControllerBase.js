@@ -74,7 +74,6 @@ sap.ui.define([
             return this.getOwnerComponent().getModel(nomeModelo);
         },
         _modeloOrganizacaoAcademica: function () {
-            debugger;
             const nomeModelo = "organizacaoAcademica";
             return this.getOwnerComponent().getModel(nomeModelo);
         },
@@ -99,7 +98,6 @@ sap.ui.define([
             return this._filtraEnum(modelo.CategoriaAdministrativa, codigo).Valor;
         },
         textoHabilitado: function (codigo) {
-            debugger;
             const modelo = this._modeloHabilitado().getData();
             if (codigo)
                 codigo = 1;
@@ -108,27 +106,22 @@ sap.ui.define([
             return this._filtraEnum(modelo.Habilitado, codigo).Valor;
         },
         textoNaturezaJuridica: function (codigo) {
-            debugger;
             const modelo = this._modeloNaturezaJuridica().getData();
             return this._filtraEnum(modelo.NaturezaJuridica, codigo).Valor;
         },
         textoOrganizacaoAcademica: function (codigo) {
-            debugger;
             const modelo = this._modeloOrganizacaoAcademica().getData();
             return this._filtraEnum(modelo.OrganizacaoAcademica, codigo).Valor;
         },
         textoPorte: function (codigo) {
-            debugger;
             const modelo = this._modeloPorte().getData();
             return this._filtraEnum(modelo.Porte, codigo).Valor;
         },
         textoMatrizFilial: function (codigo) {
-            debugger;
             const modelo = this._modeloMatrizFilial().getData();
             return this._filtraEnum(modelo.MatrizFilial, codigo).Valor;
         },
         _filtraEnum: function (array, codigo) {
-            debugger;
             let item = array.filter((items) => {
                 return items.Codigo == codigo;
             });

@@ -245,8 +245,8 @@ sap.ui.define([
                     template: new sap.m.ColumnListItem({
                         type: "DetailAndActive",
                         detailPress: (oEvent) => this._aoPressionarBotaoEditarEmpresa(oEvent),
+                        press: (oEvent) => this._aoPressionarSobreItemEmpresa(oEvent),
                         cells: Object.keys(camposEmpresas).map(campo => {
-
                             if (campo === arrayChavesCamposEmpresas[posicaoArrayEstado]) {
                                 return new sap.m.Text({
                                     text: {
@@ -444,14 +444,26 @@ sap.ui.define([
         _aoPressionarSobreItemEscola(oEvent) {
             const escolaDetalhes = oEvent.getSource()
                 .getBindingContext().getObject();
-                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoEditarEscola";
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEscola";
                 this.trataErros(i18nMensagemDeErro, () => {
-                    const nomeRotaEditarEscola = "EscolaDetalhes";
+                    const nomeRotaDetalhesEscola = "EscolaDetalhes";
                     const roteador = this.getOwnerComponent().getRouter();
-                    roteador.navTo(nomeRotaEditarEscola, {
+                    roteador.navTo(nomeRotaDetalhesEscola, {
                         caminhoEscola: window.encodeURIComponent(escolaDetalhes.id)
                     });
                 });
         },
+        _aoPressionarSobreItemEmpresa(oEvent) {
+            const escolaDetalhes = oEvent.getSource()
+                .getBindingContext().getObject();
+                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEmpresa";
+                this.trataErros(i18nMensagemDeErro, () => {
+                    const nomeRotaDtalhesEmpresa = "EmpresaDetalhes";
+                    const roteador = this.getOwnerComponent().getRouter();
+                    roteador.navTo(nomeRotaDtalhesEmpresa, {
+                        caminhoEmpresa: window.encodeURIComponent(escolaDetalhes.id)
+                    });
+                });
+        }
     });
 });

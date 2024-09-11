@@ -29,7 +29,6 @@ sap.ui.define([
                 const idEscola =
                     oEvent.getParameter(nomeArgumentosCamingoEscola).caminhoEscola;
                 const escola = await ServicoEscolas.obterEscolaPorId(idEscola);
-                debugger;
                 this._populaTelaComValoresDaEscola(escola);
                 this._populaTelaComValoresDoEnderecoEscola(escola.idEndereco);
             });
@@ -47,7 +46,6 @@ sap.ui.define([
             this._modeloEscola(new JSONModel(escola));
         },
         _populaTelaComValoresDoEnderecoEscola: async function (id) {
-            debugger;
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
                 this.textoEstado(endereco.estado);

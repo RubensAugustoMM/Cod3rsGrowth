@@ -1,0 +1,108 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="ui5.cod3rsgrowth.controller.EmpresaDetalhes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <Page
+        id="idPaginaDetalhes"
+        showNavButton="true"
+        navButtonPress="aoPressionarBotaoDeNavegacao"
+        title="Detalhes: {EmpresaDetalhes>/razaoSocial}"
+    >
+        <layout:VerticalLayout width="100%">
+            <Panel
+                id="painelEmpresa"
+                width="100%"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>EmpresaDetalhes.TituloPainelEmpresa}" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelRazaoSocial}" />
+                        <Label text="{EmpresaDetalhes>/razaoSocial}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelNomeFantasia}" />
+                        <Label text="{EmpresaDetalhes>/nomeFantasia}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelCnpj}" />
+                        <Label text="{EmpresaDetalhes>/cnpj}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelCapitalSocial}" />
+                        <Label text="{EmpresaDetalhes>/capitalSocial}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelSituacaoCadastral}" />
+                        <Label text="{EmpresaDetalhes>/situacaoCadastral}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelDataSituacaoCadastral}" />
+                        <Label text="{EmpresaDetalhes>/dataSituacaoCadastral}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelIdade}" />
+                        <Label text="{EmpresaDetalhes>/idade}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelDataAbertura}" />
+                        <Label text="{EmpresaDetalhes>/dataAbertura}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelNaturezaJuridica}" />
+                        <Label text="{EmpresaDetalhes>/naturezaJuridica}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelPorte}" />
+                        <Label text="{EmpresaDetalhes>/porte}" />
+                    </VBox>
+                </content>
+            </Panel>
+            <Panel
+                id="painelEndereco"
+                width="100%"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>EmpresaDetalhes.TituloPainelEndereco}" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <content>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelNumero}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/numero}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelCep}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/cep}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelMunicipio}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/municipio}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelBairro}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/bairro}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelComplemento}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/complemento}" />
+                    </VBox>
+                    <VBox>
+                        <Label text="{i18n>EmpresaDetalhes.LabelEstado}" />
+                        <Label text="{EnderecoEmpresaDetalhes>/estado}" />
+                    </VBox>
+                </content>
+            </Panel>
+        </layout:VerticalLayout>
+    </Page>
+</mvc:View>

@@ -48,7 +48,6 @@ sap.ui.define([
 			});
 		},
 		_configuraModeloDeDadosDaTela() {
-			debugger;
 			const dadosEscola = {
 				statusAtividade: undefined,
 				nome: undefined,
