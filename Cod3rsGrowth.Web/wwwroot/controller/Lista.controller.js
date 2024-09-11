@@ -1,5 +1,4 @@
 sap.ui.define([
-    "ui5/cod3rsgrowth/modelos/Formatador",
     "sap/ui/core/Fragment",
     "sap/ui/core/format/NumberFormat",
     "sap/ca/ui/model/format/DateFormat",
@@ -8,7 +7,6 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "ui5/cod3rsgrowth/controller/ControllerBase"
 ], (
-    Formatador,
     Fragment,
     NumberFormat,
     DateFormat,
@@ -20,8 +18,6 @@ sap.ui.define([
     "use strict";
 
     return ControllerBase.extend("ui5.cod3rsgrowth.controller.Lista", {
-
-        _formatador: Formatador,
         _sIdLista: "lista",
         _idTabela: "tabela",
         _idPainelFiltro: "painelFiltros",
@@ -255,7 +251,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: this._formatador.textoEstado
+                                        formatter:(codigo) => this.textoEstado(codigo)
                                     }
                                 });
                             }
@@ -264,9 +260,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (naturezaJuridica) {
-                                            return this._formatador.textoNaturezaJuridica(naturezaJuridica);
-                                        }.bind(this)
+                                        formatter:(codigo) => this.textoNaturezaJuridica(codigo)
                                     }
                                 });
                             }
@@ -275,9 +269,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (situacaoCadastral) {
-                                            return this._formatador.textoSituacaoCadastral(situacaoCadastral);
-                                        }.bind(this)
+                                        formatter:(codigo) => this.textoHabilitado(codigo)
                                     }
                                 });
                             }
@@ -286,10 +278,10 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (capitalSocial) {
+                                        formatter: (capitalSocial) => {
                                             let formatadorFloat = NumberFormat.getFloatInstance(this._opcoesFormatadorDecimais);
                                             return formatadorFloat.format(capitalSocial);
-                                        }.bind(this)
+                                        }
                                     }
                                 })
                             }
@@ -298,7 +290,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (dataAbertura) {
+                                        formatter: (dataAbertura) => {
                                             let formatadorData = DateFormat.getDateInstance(this._opcoesFormatadorData);
                                             return formatadorData.format(dataAbertura);
                                         }
@@ -366,7 +358,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: this._formatador.textoEstado
+                                        formatter:(codigo) => this.textoEstado(codigo)
                                     }
                                 });
                             }
@@ -377,9 +369,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (organizacaoAcademica) {
-                                            return this._formatador.textoOrganizacaoAcademica(organizacaoAcademica);
-                                        }.bind(this)
+                                        formatter:(codigo)=> this.textoOrganizacaoAcademica(codigo)
                                     }
                                 });
                             }
@@ -389,9 +379,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: function (statusAtividade) {
-                                            return this._formatador.textoSituacaoCadastral(statusAtividade);
-                                        }.bind(this)
+                                        formatter: (codigo) => this.textoHabilitado(codigo)
                                     }
                                 });
                             }

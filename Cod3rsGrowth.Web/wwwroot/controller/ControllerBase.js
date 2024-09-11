@@ -3,7 +3,7 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], function (
     Controller,
-	MessageBox
+    MessageBox
 ) {
     "use strict";
 
@@ -56,9 +56,83 @@ sap.ui.define([
                     }
                 });
         },
-		modeloValoresPadrao: function(modelo) {
-			const nomeModelo = "valoresPadrao";	
-			return this.modelo(nomeModelo, modelo);
-		}
+        modeloValoresPadrao: function (modelo) {
+            const nomeModelo = "valoresPadrao";
+            return this.modelo(nomeModelo, modelo);
+        },
+        textoCategoriaAdministrativa: function (codigo) {
+            const modelo = this._modeloCategoriaAdministrativa().getData();
+            return modelo.findIndex(
+                categoriaAdministrativa => categoriaAdministrativa.Codigo == codigo).Valor;
+        },
+        _modeloEstados: function () {
+            const nomeModelo = "estados";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloHabilitado: function () {
+            const nomeModelo = "habilitado";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloNaturezaJuridica: function () {
+            const nomeModelo = "naturezaJuridica";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloOrganizacaoAcademica: function () {
+            debugger;
+            const nomeModelo = "organizacaoAcademica";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloPorte: function () {
+            const nomeModelo = "porte";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloMatrizFilial: function () {
+            const nomeModelo = "matrizFilial";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        _modeloCategoriaAdministrativa: function () {
+            const nomeModelo = "categoriaAdministrativa";
+            return this.getOwnerComponent().getModel(nomeModelo);
+        },
+        textoEstado: function (codigo) {
+            const modelo = this._modeloEstados().getData();
+            return this._filtraEnum(modelo.Estados, codigo).Valor;
+        },
+        textoHabilitado: function (codigo) {
+            debugger;
+            const modelo = this._modeloHabilitado().getData();
+            if (codigo)
+                codigo = 1;
+            else
+                codigo = 0;
+            return this._filtraEnum(modelo.Habilitado, codigo).Valor;
+        },
+        textoNaturezaJuridica: function (codigo) {
+            debugger;
+            const modelo = this._modeloNaturezaJuridica().getData();
+            return this._filtraEnum(modelo.NaturezaJuridica, codigo).Valor;
+        },
+        textoOrganizacaoAcademica: function (codigo) {
+            debugger;
+            const modelo = this._modeloOrganizacaoAcademica().getData();
+            return this._filtraEnum(modelo.OrganizacaoAcademica, codigo).Valor;
+        },
+        textoPorte: function (codigo) {
+            debugger;
+            const modelo = this._modeloPorte().getData();
+            return this._filtraEnum(modelo.Porte, codigo).Valor;
+        },
+        textoMatrizFilial: function (codigo) {
+            debugger;
+            const modelo = this._modeloMatrizFilial().getData();
+            return this._filtraEnum(modelo.MatrizFilial, codigo).Valor;
+        },
+        _filtraEnum: function (array, codigo) {
+            debugger;
+            let item = array.filter((items) => {
+                return items.Codigo == codigo;
+            });
+            return item[0];
+        }
     });
 });
