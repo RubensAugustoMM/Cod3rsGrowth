@@ -1,44 +1,72 @@
 sap.ui.define([
+    "sap/ui/core/routing/History",
     "ui5/cod3rsgrowth/controller/ControllerBase",
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
     "sap/ui/model/json/JSONModel",
-    "ui5/cod3rsgrowth/modelos/Formatador"
-], function(
+    "sap/ui/core/format/DateFormat"
+], function (
+    History,
 	ControllerBase,
 	ServicoEscolas,
 	ServicoEnderecos,
 	JSONModel,
-	Formatador
+	DateFormat,
 ) {
-	"use strict";
+    "use strict";
 
-	return ControllerBase.extend("ui5.cod3rsgrowth.controller.EscolaDetalhes", {
-        formatador: Formatador,
+    return ControllerBase.extend("ui5.cod3rsgrowth.controller.EscolaDetalhes", {
         onInit() {
-            formatador.modeloI18n= this.modeloI18n();
             const nomeRotaEscola = "EscolaDetalhes";
-            const roteador = this.getOwnerComponent().getRouter(); 
+            const roteador = this.getOwnerComponent().getRouter();
             roteador.getRoute(nomeRotaEscola).attachMatched(this._aoCoincidirRotaDetalhesEscola, this);
         },
-        _aoCoincidirRotaDetalhesEscola: function(oEvent) {
+        _aoCoincidirRotaDetalhesEscola: function (oEvent) {
             const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRota";
             const parametroNomeRota = "name";
             const nomeArgumentosCamingoEscola = "arguments";
-            this.trataErros(i18nMensagemDeErro,async () => {
+            this.trataErros(i18nMensagemDeErro, async () => {
                 const idEscola =
                     oEvent.getParameter(nomeArgumentosCamingoEscola).caminhoEscola;
                 const escola = await ServicoEscolas.obterEscolaPorId(idEscola);
+                debugger;
                 this._populaTelaComValoresDaEscola(escola);
-                this._populaTelaComValoresDoEnderecoEscola(escola.idEndereco); 
+                this._populaTelaComValoresDoEnderecoEscola(escola.idEndereco);
             });
         },
-        _populaTelaComValoresDaEscola: async function(escola) {
-            this._modeloEscola(new JSONModel(escola)); 
+        _populaTelaComValoresDaEscola: async function (escola) {
+            escola.organizacaoAcademica =
+                this.textoOrganizacaoAcademica(escola.organizacaoAcademica);
+            escola.categoriaAdministrativa =
+                this.textoCategoriaAdministrativa(escola.categoriaAdministrativa);
+            let formatadorData = DateFormat.getDateInstance({
+                pattern: "dd/mm/yyyy"
+            });
+            escola.inicioAtividade =
+                formatadorData.format(new Date(escola.inicioAtividade));
+            this._modeloEscola(new JSONModel(escola));
         },
-        _populaTelaComValoresDoEnderecoEscola: async function(id) {
+        _populaTelaComValoresDoEnderecoEscola: async function (id) {
+            debugger;
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
+            endereco.estado =
+                this.textoEstado(endereco.estado);
             this._modeloEndereco(new JSONModel(endereco));
+        },
+        aoPressionarBotaoDeNavegacao() {
+            let i18nMensagemDeErro = "TelaEscolaDetalhes.ErroAoClicarBotaoNavegacao";
+            this.trataErros(i18nMensagemDeErro, () => {
+                const historico = History.getInstance();
+                const hashAnterior = historico.getPreviousHash();
+                if (hashAnterior != undefined) {
+                    window.history.go(-1);
+                }
+                else {
+                    const roteador = this.getOwnerComponent().getRouter();
+                    const nomeRotaEmpresas = "Escolas";
+                    roteador.navTo(nomeRotaEmpresas, {}, {}, true);
+                }
+            })
         },
         _modeloEscola(modelo) {
             const nomeModelo = "EscolaDetalhes";

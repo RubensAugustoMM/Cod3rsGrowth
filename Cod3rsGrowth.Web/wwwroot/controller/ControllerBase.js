@@ -56,14 +56,10 @@ sap.ui.define([
                     }
                 });
         },
+
         modeloValoresPadrao: function (modelo) {
             const nomeModelo = "valoresPadrao";
             return this.modelo(nomeModelo, modelo);
-        },
-        textoCategoriaAdministrativa: function (codigo) {
-            const modelo = this._modeloCategoriaAdministrativa().getData();
-            return modelo.findIndex(
-                categoriaAdministrativa => categoriaAdministrativa.Codigo == codigo).Valor;
         },
         _modeloEstados: function () {
             const nomeModelo = "estados";
@@ -97,6 +93,10 @@ sap.ui.define([
         textoEstado: function (codigo) {
             const modelo = this._modeloEstados().getData();
             return this._filtraEnum(modelo.Estados, codigo).Valor;
+        },
+        textoCategoriaAdministrativa: function (codigo) {
+            const modelo = this._modeloCategoriaAdministrativa().getData();
+            return this._filtraEnum(modelo.CategoriaAdministrativa, codigo).Valor;
         },
         textoHabilitado: function (codigo) {
             debugger;
