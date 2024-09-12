@@ -37,18 +37,30 @@ sap.ui.define([
 					dataAtual.getDay()));
 		},
 		_aoCoincidirComRotaEscolaCriar(oEvent) {
-			this._configuraModeloDeDadosDaTela();
+			this._configurarModeloEscolaDaTela();
+			this._configuraModeloEnderecoDaTela();
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoCoincidirRotas";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this.trataErros(i18nMensagemDeErro, () => {
+			this.tratarErros(i18nMensagemDeErro, () => {
 				const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
 				let i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
 			});
 		},
-		_configuraModeloDeDadosDaTela() {
-			debugger;
+		_configuraModeloEnderecoDaTela() {
+			const dadosEstado = {
+				cep: undefined,
+				estado: undefined,
+				municipio: undefined,
+				bairro: undefined,
+				rua: undefined,
+				numero: undefined,
+				complemento: undefined
+			}
+			this.modeloEndereco(new JSONModel(dadosEstado));
+		},
+		_configurarModeloEscolaDaTela() {
 			const dadosEscola = {
 				statusAtividade: undefined,
 				nome: undefined,
@@ -59,50 +71,42 @@ sap.ui.define([
 				categoriaAdministrativa: undefined,
 				organizacaoAcademica: undefined
 			}
-			this._modeloEscola(new JSONModel(dadosEscola))
-			const dadosEstado = {
-				cep:undefined,
-				estado:undefined,
-				municipio:undefined,
-				bairro:undefined,
-				rua:undefined,
-				numero:undefined,
-				complemento:undefined
-			}
-				this._modeloEnderecoEscola(new JSONModel(dadosEstado));
+			this.modeloEscola(new JSONModel(dadosEscola))
 		},
 		_aoCoincidirComRotaEscolaEditar: async function (oEvent) {
 			const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this.trataErros(i18nMensagemDeErro, async () => {
+			this.tratarErros(i18nMensagemDeErro, async () => {
 				const nomeArgumentosCaminhoEscola = "arguments";
 				let idEscola = oEvent.getParameter(nomeArgumentosCaminhoEscola).caminhoEscola;
 				let escola = await ServicoEscolas.obterEscolaPorId(idEscola);
-				this._populaTelaComValoresEscolaEditar(escola);
-				this._populaTelaComValoresEnderecoDaEscolaEditar(escola.idEndereco);
+				this._popularTelaComValoresDaEscolaEditar(escola);
+				this._popularTelaComValoresDoEnderecoDaEscolaEditar(escola.idEndereco);
 				const i18TituloEscolaEditar = "CriarEditarEscolas.TituloEditar";
 				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18TituloEscolaEditar));
 			});
 		},
-		_retornaValoresEscola() {
-			let valoresEscola = this._modeloEscola(undefined).getData();
-			valoresEscola.statusAtividade = valoresEscola.statusAtividade == 1 ? true : false;
+		_obterValoresEscolaDaTela() {
+			debugger;
+			let valoresEscola = this.modeloEscola(undefined).getData();
+			const valorHabilitado = 1;
+			valoresEscola.statusAtividade = valoresEscola.statusAtividade == valorHabilitado ? true : false;
 			return valoresEscola;
 		},
-		_populaTelaComValoresEscolaEditar: async function (escola) {
+		_popularTelaComValoresDaEscolaEditar: async function (escola) {
 			escola.statusAtividade = escola.statusAtividade ? 1 : 0;
 			this._idEscolaAtualizar = escola.id;
-			this._modeloEscola(new JSONModel(escola));
+			this.modeloEscola(new JSONModel(escola));
 		},
-		_populaTelaComValoresEnderecoDaEscolaEditar: async function (id) {
+		_popularTelaComValoresDoEnderecoDaEscolaEditar: async function (id) {
 			let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
 			this._idEnderecoAtualizar = id;
-			this._modeloEnderecoEscola(new JSONModel(endereco));
+			this.modeloEndereco(new JSONModel(endereco));
 		},
-		_retornaValoresEndereco() {
-			return this._modeloEnderecoEscola().getData();
+		_obterValoresEnderecoDaTela() {
+			return this.modeloEndereco().getData();
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
@@ -114,7 +118,7 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			}
-			this.trataErros(i18nMensagemDeErro, async () => {
+			this.tratarErros(i18nMensagemDeErro, async () => {
 				let respostaEndereco;
 				let respostaEscola;
 				let textoErro = "";
@@ -125,19 +129,19 @@ sap.ui.define([
 				else {
 					i18nMensagemDeErro = "CriarEditarEscolas.ErroAoTentarEditarEscolas";
 				}
-				this.trataErros(i18nMensagemDeErro, async () => {
+				this.tratarErros(i18nMensagemDeErro, async () => {
 					const modelo = this.modeloValoresPadrao(undefined);
 					if (this._rotaAtual == "EscolaCriar") {
-						respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
-						let escolaCriar = this._retornaValoresEscola();
+						respostaEndereco = await ServicoEnderecos.criarEndereco(this._obterValoresEnderecoDaTela(), modelo);
+						let escolaCriar = this._obterValoresEscolaDaTela();
 						escolaCriar.idEndereco = respostaEndereco.id;
 						respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
 					}
 					else {
-						respostaEndereco = this._retornaValoresEndereco();
+						respostaEndereco = this._obterValoresEnderecoDaTela();
 						respostaEndereco.id = this._idEnderecoAtualizar;
 						respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
-						let escolaEditar = this._retornaValoresEscola();
+						let escolaEditar = this._obterValoresEscolaDaTela();
 						escolaEditar.id = this._idEscolaAtualizar;
 						escolaEditar.idEndereco = this._idEnderecoAtualizar;
 						respostaEscola = await ServicoEscolas.editarEscola(escolaEditar);
@@ -147,7 +151,7 @@ sap.ui.define([
 					if (respostaEndereco != undefined) {
 						if (respostaEndereco.status != undefined &&
 							respostaEndereco.status == status400) {
-							textoErro += this.retornaTextoErro(respostaEndereco);
+							textoErro += this.formatarMensagemDeErro(respostaEndereco);
 						}
 						if (respostaEndereco.Status != undefined &&
 							respostaEndereco.Status == status500) {
@@ -162,19 +166,19 @@ sap.ui.define([
 					if (respostaEscola != undefined) {
 						if (respostaEscola != undefined &&
 							respostaEscola.status == status400) {
-							textoErro += this.retornaTextoErro(respostaEscola);
+							textoErro += this.formatarMensagemDeErro(respostaEscola);
 						}
 						if (respostaEscola != undefined &&
 							respostaEscola.Status == status500) {
 							textoErro += respostaEscola.Detail;
 						}
-						if (this._rotaAtual == "EscolaCriar"&&
+						if (this._rotaAtual == "EscolaCriar" &&
 							respostaEscola.ok == undefined &&
 							respostaEndereco != undefined &&
 							respostaEndereco.Status == undefined) {
 							ServicoEnderecos.deletarEndereco(respostaEndereco.id);
 						}
-						if (respostaEscola.Status != undefined||
+						if (respostaEscola.Status != undefined ||
 							respostaEscola.status != undefined
 						) {
 							throw new Error(textoErro);
@@ -187,7 +191,7 @@ sap.ui.define([
 		},
 		aoPressionarBotaoDeNavegacao() {
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoClicarBotaoDeNavegaca";
-			this.trataErros(i18nMensagemDeErro, () => {
+			this.tratarErros(i18nMensagemDeErro, () => {
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				if (hashAnterior != undefined) {
@@ -199,14 +203,6 @@ sap.ui.define([
 					roteador.navTo(nomeRotaEscolas, {}, {}, true);
 				}
 			})
-		},
-		_modeloEscola: function (modelo) {
-			const nomeModelo = "EscolaCriarEditar";
-			return this.modelo(nomeModelo, modelo);
-		},
-		_modeloEnderecoEscola: function (modelo) {
-			const nomeModelo= "EnderecoEscolaCriarEditar";
-			return this.modelo(nomeModelo, modelo);
 		}
 	});
 });

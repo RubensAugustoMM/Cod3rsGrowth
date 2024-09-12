@@ -41,7 +41,7 @@
                                     <Label text="{i18n>CriarEditarEmpresas.RazaoSocialLabel}" />
                                     <Input
                                         id="razaoSocialInput"
-                                        value="{EmpresaCriarEditar>/razaoSocial}"
+                                        value="{empresa>/razaoSocial}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -50,7 +50,7 @@
                                     <Label text="{i18n>CriarEditarEmpresas.NomeFantasiaLabel}" />
                                     <Input
                                         id="nomeFantasiaInput"
-                                        value="{EmpresaCriarEditar>/nomeFantasia}"
+                                        value="{empresa>/nomeFantasia}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -62,7 +62,7 @@
                                         placeholder="_"
                                         id="cnpjInput"
                                         value="{
-                                            path: 'EmpresaCriarEditar>/cnpj',
+                                            path: 'empresa>/cnpj',
                                             type: 'sap.ui.model.type.Integer',
                                             constraints: {
                                                 maxLength: 14
@@ -76,7 +76,7 @@
                                     <Input
                                         type="Number"
                                         id="capitalSocialInput"
-                                        value="{EmpresaCriarEditar>/capitalSocial}"
+                                        value="{empresa>/capitalSocial}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -86,7 +86,7 @@
                                     <ComboBox
                                         id="naturezaJuridicaComboBox"
                                         width="auto"
-                                        selectedKey="{EmpresaCriarEditar>/naturezaJuridica}"
+                                        selectedKey="{empresa>/naturezaJuridica}"
                                         items="{
                                             path: 'naturezaJuridica>/NaturezaJuridica',
                                             sorter: {
@@ -107,7 +107,7 @@
                                     <ComboBox
                                         id="porteComboBox"
                                         width="auto"
-                                        selectedKey="{EmpresaCriarEditar>/porte}"
+                                        selectedKey="{empresa>/porte}"
                                         items="{
                                             path: 'porte>/Porte',
                                             sorter: {
@@ -126,7 +126,7 @@
                                     <ComboBox
                                         id="matrizFilalComboBox"
                                         width="auto"
-                                        selectedKey="{EmpresaCriarEditar>/matrizFilial}"
+                                        selectedKey="{empresa>/matrizFilial}"
                                         items="{
                                             path: 'matrizFilial>/MatrizFilial',
                                             sorter: {
@@ -145,7 +145,7 @@
                                     <ComboBox
                                         id="situacaoCadastralComboBox"
                                         width="auto"
-                                        selectedKey="{EmpresaCriarEditar>/situacaoCadastral}"
+                                        selectedKey="{empresa>/situacaoCadastral}"
                                         items="{
                                             path: 'habilitado>/Habilitado',
                                             sorter: {
@@ -164,7 +164,7 @@
                                     <DatePicker
                                         id="dataAberturaDatePicker"
                                         value="{
-                                            path: 'EmpresaCriarEditar>/dataAbertura',
+                                            path: 'empresa>/dataAbertura',
                                             type: 'sap.ui.model.type.Date',
                                             formatOptions: {
                                                 source: {
@@ -201,7 +201,7 @@
                                     mask="99999999"
                                         id="cepInput"
                                         value="{
-                                            path:'EnderecoEmpresaCriarEditar>/cep',
+                                            path:'endereco>/cep',
                                         type: 'sap.ui.model.type.Integer'}"
                                         width="auto"
                                     />
@@ -211,7 +211,7 @@
                                     <ComboBox
                                         id="estadoComboBox"
                                         width="auto"
-                                        selectedKey="{EnderecoEmpresaCriarEditar>/estado}"
+                                        selectedKey="{endereco>/estado}"
                                         items="{
                                             path: 'estados>/Estados',
                                             sorter: {
@@ -229,7 +229,7 @@
                                     <Label text="{i18n>MunicipioLabel}" />
                                     <Input
                                         id="municipioInput"
-                                        value="{EnderecoEmpresaCriarEditar>/municipio}"
+                                        value="{endereco>/municipio}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -238,7 +238,7 @@
                                     <Label text="{i18n>BairroLabel}" />
                                     <Input
                                         id="bairroInput"
-                                        value="{EnderecoEmpresaCriarEditar>/bairro}"
+                                        value="{endereco>/bairro}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -249,7 +249,7 @@
                                     <Label text="{i18n>RuaLabel}" />
                                     <Input
                                         id="ruaInput"
-                                        value="{EnderecoEmpresaCriarEditar>/rua}"
+                                        value="{endereco>/rua}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -259,7 +259,7 @@
                                     <Input
                                     type="Number"
                                         id="numeroInput"
-                                        value="{EnderecoEmpresaCriarEditar>/numero}"
+                                        value="{endereco>/numero}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />
@@ -268,7 +268,7 @@
                                     <Label text="{i18n>ComplementoLabel}" />
                                     <Input
                                         id="complementoInput"
-                                        value="{EnderecoEmpresaCriarEditar>/complemento}"
+                                        value="{endereco>/complemento}"
                                         valueLiveUpdate="true"
                                         width="auto"
                                     />

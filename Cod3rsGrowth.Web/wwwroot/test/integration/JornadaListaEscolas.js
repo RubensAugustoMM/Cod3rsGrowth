@@ -2,8 +2,13 @@ sap.ui.define([
     "sap/ui/test/opaQunit",
     "./paginas/App",
     "./paginas/Lista",
-    "./paginas/CriarEditarEscolas"
-], function (opaQunit, App, Lista) {
+    "./paginas/CriarEditarEscolas",
+    "./paginas/DetalhesEscola"
+], function (opaQunit,
+	App,
+	Lista,
+	CriarEditarEscolas,
+	DetalhesEscola) {
     "use strict";
 
     QUnit.module("Lista Escolas", () => {
@@ -36,6 +41,15 @@ sap.ui.define([
                 When.naPaginaDeCriacaoEdicaoEscola
                     .aoClicarNoBotaoVoltar();
             });
+        opaTest("A tela de Detalhes de escolas deve ser carregada ao clicar sobre uma escola da tela de listagem",
+            function (Given, When, Then) {
+                When.naPaginaDeListagem
+                    .aoClicarSobreUmaEscola();
+                Then.naPaginaDeDetalhesEscola
+                    .aPaginaDeDetalhesEscolaDeveSerCarregadaCorretamente();
+                When.naPaginaDeDetalhesEscola
+                    .aoClicarNoBotaoVoltar();
+            })
         opaTest("A tela de Edição de escolas deve ser carregada ao clicar o botão editar na tela de listagem",
             function (Given, When, Then) {
                 When.naPaginaDeListagem
@@ -43,7 +57,6 @@ sap.ui.define([
                 Then.naPaginaDeCriacaoEdicaoEscola
                     .aPaginaDeCriacaoEdicaoDeEscolasDeveSerCarregadaCorretamente();
                 Then.iTeardownMyAppFrame();
-            }
-        )
+            });
     });
 })

@@ -39,6 +39,7 @@ sap.ui.define([
 					dataAtual.getDay()));
 		},
 		_configuraModeloDeDadosDaTela() {
+			debugger;
 			const dadosEmpresa = {
 				razaoSocial:undefined,
 				nomeFantasia:undefined,
@@ -51,7 +52,7 @@ sap.ui.define([
 				capitalSocial:undefined
 			};	
 			
-			this._modeloEmpresa(new JSONModel(dadosEmpresa));
+			this.modeloEmpresa(new JSONModel(dadosEmpresa));
 			const dadosEstado = {
 				cep:undefined,
 				estado:undefined,
@@ -61,19 +62,18 @@ sap.ui.define([
 				numero:undefined,
 				complemento:undefined
 			}
-			this._modeloEnderecoEmpresa(new JSONModel(dadosEstado));
+			this.modeloEndereco(new JSONModel(dadosEstado));
 		},
 		_aoCoincidirComRotaEmpresaEditar(oEvent) {
-			this._configuraModeloDeDadosDaTela();
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaEditar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this.trataErros(i18nMensagemDeErro,async () => {
+			this.tratarErros(i18nMensagemDeErro,async () => {
 				const nomeArgumentosCaminhoEmpresa = "arguments";
 				let idEmpresa = oEvent.getParameter(nomeArgumentosCaminhoEmpresa).caminhoEmpresa;
 				let empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
-				this._populaTelaComValoresEmpresaEditar(empresa);
-				this._populaTelaComValoresEnderecoDaEmpresaEditar(empresa.idEndereco);
+				this._popularTelaComValoresEmpresaEditar(empresa);
+				this._popularTelaComValoresEnderecoDaEmpresaEditar(empresa.idEndereco);
 				const i18TituloEmpresaEditar = "CriarEditarEmpresas.TituloEditar";
 				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaEditar));
@@ -84,31 +84,32 @@ sap.ui.define([
 			const i18nMensagemDeErro = "CriarEditarEmpresas.ErroCoincidirRotaCriar";
 			const parametroNomeRota = "name";
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
-			this.trataErros(i18nMensagemDeErro, () => {
+			this.tratarErros(i18nMensagemDeErro, () => {
 				const i18TituloEmpresaCriar = "CriarEditarEmpresas.TituloCriar";
 				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEmpresas).setTitle(i18n.getText(i18TituloEmpresaCriar));
 			});
 		},
-		_retornaValoresEmpresa(){
-			
-			let valoresEmpresa =  this._modeloEmpresa(undefined).getData(); 
-			valoresEmpresa.situacaoCadastral = valoresEmpresa.situacaoCadastral == 1 ? true : false;
+		_obterValoresEmpresaDaTela(){
+			let valoresEmpresa =  this.modeloEmpresa().getData(); 
+			const valorHabilitado = 1;
+			valoresEmpresa.situacaoCadastral =
+				valoresEmpresa.situacaoCadastral == valorHabilitado ? true : false;
 			valoresEmpresa.dataSituacaoCadastral = new Date();
 			return valoresEmpresa;
 		},
-		_populaTelaComValoresEmpresaEditar: async function (empresa) {
+		_popularTelaComValoresEmpresaEditar: async function (empresa) {
 			empresa.situacaoCadastral = empresa.situacaoCadastral ? 1 : 0;
 			this._idEmpresaAtualizar = empresa.id;
-			this._modeloEmpresa(new JSONModel(empresa));
+			this.modeloEmpresa(new JSONModel(empresa));
 		},
-		_populaTelaComValoresEnderecoDaEmpresaEditar: async function (id) {;
+		_popularTelaComValoresEnderecoDaEmpresaEditar: async function (id) {;
 			let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
 			this._idEnderecoAtualizar = id;
-			this._modeloEnderecoEmpresa(new JSONModel(endereco));
+			this.modeloEndereco(new JSONModel(endereco));
 		},
-		_retornaValoresEndereco() {	
-			return this._modeloEnderecoEmpresa().getData();
+		_obterValoresEnderecoDaTela() {	
+			return this.modeloEndereco().getData();
 		},
 		aoPressionarSalvar: async function () {
 			let textoErro = "";
@@ -119,21 +120,21 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
-			this.trataErros(i18nMensagemDeErro, async () => {	
+			this.tratarErros(i18nMensagemDeErro, async () => {	
 				let respostaEndereco;
 				let respostaEmpresa;
 				if (this._rotaAtual == "EmpresaCriar") {
-					const modelo = this.modeloValoresPadrao(undefined);
-					respostaEndereco = await ServicoEnderecos.criarEndereco(this._retornaValoresEndereco(), modelo);
-					let empresaCriar = this._retornaValoresEmpresa();
+					const modelo = this.modeloValoresPadrao();
+					respostaEndereco = await ServicoEnderecos.criarEndereco(this._obterValoresEnderecoDaTela(), modelo);
+					let empresaCriar = this._obterValoresEmpresaDaTela();
 					empresaCriar.idEndereco = respostaEndereco.id;
 					respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);
 				}
 				else {
-					respostaEndereco = this._retornaValoresEndereco();
+					respostaEndereco = this._obterValoresEnderecoDaTela();
 					respostaEndereco.id = this._idEnderecoAtualizar;
 					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
-					let empresaEditar = this._retornaValoresEmpresa();
+					let empresaEditar = this._obterValoresEmpresaDaTela();
 					empresaEditar.id = this._idEmpresaAtualizar;
 					empresaEditar.idEndereco = this._idEnderecoAtualizar;
 					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresaEditar);
@@ -143,7 +144,7 @@ sap.ui.define([
 				if (respostaEndereco != undefined) {
 					if (respostaEndereco.status != undefined &&
 						respostaEndereco.status == status400) {
-						textoErro += this.retornaTextoErro(respostaEndereco);
+						textoErro += this.formatarMensagemDeErro(respostaEndereco);
 					}
 					if (respostaEndereco.Status != undefined &&
 						respostaEndereco.Status == status500) {
@@ -158,7 +159,7 @@ sap.ui.define([
 				if (respostaEmpresa != undefined) {
 					if (respostaEmpresa.status != undefined &&
 						respostaEmpresa.status == status400) {
-						textoErro += this.retornaTextoErro(respostaEmpresa);
+						textoErro += this.formatarMensagemDeErro(respostaEmpresa);
 					}
 					if (respostaEmpresa.Status != undefined &&
 						respostaEmpresa.Status == status500) {
@@ -183,7 +184,7 @@ sap.ui.define([
 
 		aoPressionarBotaoDeNavegacao() {
 			let i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoClicarBotaoNavegacao";
-			this.trataErros(i18nMensagemDeErro, () => {
+			this.tratarErros(i18nMensagemDeErro, () => {
 				const historico = History.getInstance();
 				const hashAnterior = historico.getPreviousHash();
 				if (hashAnterior != undefined) {
@@ -195,14 +196,6 @@ sap.ui.define([
 					roteador.navTo(nomeRotaEmpresas, {}, {}, true);
 				}
 			})
-		},	
-		_modeloEnderecoEmpresa: function(modelo) {
-			const nomeModelo = "EnderecoEmpresaCriarEditar";
-			return this.modelo(nomeModelo, modelo);
-		},
-		_modeloEmpresa: function(modelo) {
-			const nomeModelo = "EmpresaCriarEditar";	
-			return this.modelo(nomeModelo, modelo);
 		}
 	});
 });

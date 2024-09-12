@@ -95,6 +95,16 @@
           "pattern": "Escolas/Editar/{caminhoEscola}",
           "name": "EscolaEditar",
           "target": "escolaCriarEditar"
+        },
+        {
+          "pattern": "Empresas/{caminhoEmpresa}",
+          "name": "EmpresaDetalhes",
+          "target": "empresaDetalhes"
+        },
+        {
+          "pattern": "Escolas/{caminhoEscola}",
+          "name": "EscolaDetalhes",
+          "target": "escolaDetalhes"
         }
       ],
       "targets": {
@@ -121,6 +131,20 @@
           "viewPath": "ui5.cod3rsgrowth.view.TelasCriarEditar",
           "viewName": "CriarEditarEscolas",
           "viewId": "CriarEditarEscolas",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
+        },
+        "escolaDetalhes": {
+          "viewPath": "ui5.cod3rsgrowth.view.TelasDetalhes",
+          "viewName": "EscolaDetalhes",
+          "viewId": "EscolaDetalhes",
+          "viewLevel": 1,
+          "controlAggregation": "detailPages"
+        },
+        "empresaDetalhes": {
+          "viewPath": "ui5.cod3rsgrowth.view.TelasDetalhes",
+          "viewName": "EmpresaDetalhes",
+          "viewId": "EmpresaDetalhes",
           "viewLevel": 1,
           "controlAggregation": "detailPages"
         }

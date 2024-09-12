@@ -14,6 +14,22 @@ sap.ui.define([
     Opa5.createPageObjects({
         naPaginaDeListagem: {
             actions: {
+                aoClicarSobreUmaEmpresa: function () {
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.ColumnListItem",
+                        actions: new Press(),
+                        errorMessage: "não foi possível encontrar uma empresa para clicar na tabela"
+                    })  
+                },
+                aoClicarSobreUmaEscola: function () {
+                     return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.ColumnListItem",
+                        actions: new Press(),
+                        errorMessage: "não foi possível encontrar uma escola para clicar na tabela"
+                    })     
+                },
                 aoClicarBotaoCriarEmpresa: function () {
                     return this.waitFor({
                         viewName: viewName,
