@@ -1,17 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/routing/History",
     "ui5/cod3rsgrowth/controller/ControllerBase",
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEscolas",
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/format/DateFormat"
 ], function (
-    History,
-	ControllerBase,
-	ServicoEscolas,
-	ServicoEnderecos,
-	JSONModel,
-	DateFormat,
+    ControllerBase,
+    ServicoEscolas,
+    ServicoEnderecos,
+    JSONModel,
+    DateFormat,
 ) {
     "use strict";
 
@@ -54,16 +52,9 @@ sap.ui.define([
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEscolaDetalhes.ErroAoClicarBotaoNavegacao";
             this.trataErros(i18nMensagemDeErro, () => {
-                const historico = History.getInstance();
-                const hashAnterior = historico.getPreviousHash();
-                if (hashAnterior != undefined) {
-                    window.history.go(-1);
-                }
-                else {
-                    const roteador = this.getOwnerComponent().getRouter();
-                    const nomeRotaEmpresas = "Escolas";
-                    roteador.navTo(nomeRotaEmpresas, {}, {}, true);
-                }
+                const roteador = this.getOwnerComponent().getRouter();
+                const nomeRotaEmpresas = "Escolas";
+                roteador.navTo(nomeRotaEmpresas, {}, {}, true);
             })
         },
         _modeloEscola(modelo) {

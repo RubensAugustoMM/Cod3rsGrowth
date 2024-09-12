@@ -3,7 +3,7 @@ sap.ui.define([
     "./paginas/App",
     "./paginas/DetalhesEmpresa",
     "./paginas/Lista"
-], function (opaQunit, App, CriarEditarEmpresas, Lista) {
+], function (opaQunit, App, DetalhesEmpresa, Lista) {
     "use strict";
 
     QUnit.module("Detalhes Empresa", () => {

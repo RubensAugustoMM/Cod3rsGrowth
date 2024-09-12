@@ -9,7 +9,7 @@
     busyIndicatorDelay="0"
 >
     <Page
-        id="idPaginaDetalhes"
+        id="idPaginaDetalhesEscola"
         showNavButton="true"
         navButtonPress="aoPressionarBotaoDeNavegacao"
         title="Detalhes: {EscolaDetalhes>/nome}"

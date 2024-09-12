@@ -8,7 +8,8 @@ sap.ui.define([
     "./JornadaEscolaCriar",
     "./JornadaEscolaEditar",
     "./JornadaEmpresaEditar",
-    "./JornadaDetalhesEmpresa"
+    "./JornadaDetalhesEmpresa",
+    "./JornadaDetalhesEscola"
 ], function (Opa5,
 	Startup,
 	JornadaApp,
@@ -18,7 +19,8 @@ sap.ui.define([
 	JornadaEscolaCriar,
 	JornadaEscolaEditar,
 	JornadaEmpresaEditar,
-	JornadaDetalhesEmpresa
+    JornadaDetalhesEmpresa,
+    JornadaDetalhesEscola
 ) {
     "use strict";
 
