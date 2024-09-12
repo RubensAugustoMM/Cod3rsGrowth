@@ -9,7 +9,7 @@
     busyIndicatorDelay="0"
 >
     <Page
-        id="idPaginaDetalhes"
+        id="idPaginaDetalhesEmpresa"
         showNavButton="true"
         navButtonPress="aoPressionarBotaoDeNavegacao"
         title="Detalhes: {EmpresaDetalhes>/razaoSocial}"

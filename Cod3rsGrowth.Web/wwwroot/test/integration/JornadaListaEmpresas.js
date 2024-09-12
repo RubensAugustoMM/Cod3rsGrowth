@@ -2,11 +2,13 @@ sap.ui.define([
     "sap/ui/test/opaQunit",
     "./paginas/App",
     "./paginas/Lista",
-    "./paginas/CriarEditarEmpresas"
+    "./paginas/CriarEditarEmpresas",
+    "./paginas/DetalhesEmpresa"
 ], function (opaQunit,
-    App,
-    Lista,
-    CriarEditarEmpresas) {
+	App,
+	Lista,
+	CriarEditarEmpresas,
+	DetalhesEmpresa) {
     "use strict";
 
     QUnit.module("Lista Empresas", () => {
@@ -46,7 +48,20 @@ sap.ui.define([
                     .aoClicarBotaoCriarEmpresa();
                 Then.naPaginaDeCriacaoEdicaoEmpresa
                     .aPaginaDeCriacaoEdicaoDeEmpresasDeveSerCarregadaCorretamente();
-                Then.iTeardownMyAppFrame();
+                When.naPaginaDeCriacaoEdicaoEmpresa
+                    .aoClicarNoBotaoVoltar();
             });
+
+        opaTest("A tela de detalhes deve ser carregada ao clicar em um item da tabela",
+            function (Given, When, Then) {
+
+                When.naPaginaDeListagem
+                    .aoClicarSobreUmaEmpresa();
+                Then.naPaginaDeDetalhesEmpresa
+                    .aPaginaDeDetalhesEmpresaDeveSerCarregadaCorretamente();
+                Then.iTeardownMyAppFrame();
+
+            }
+        );
     });
 })

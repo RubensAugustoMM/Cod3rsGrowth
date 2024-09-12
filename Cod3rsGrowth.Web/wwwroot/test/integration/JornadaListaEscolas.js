@@ -43,7 +43,6 @@ sap.ui.define([
                 Then.naPaginaDeCriacaoEdicaoEscola
                     .aPaginaDeCriacaoEdicaoDeEscolasDeveSerCarregadaCorretamente();
                 Then.iTeardownMyAppFrame();
-            }
-        )
+            });
     });
 })
