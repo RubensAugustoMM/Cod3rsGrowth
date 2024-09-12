@@ -20,14 +20,12 @@ sap.ui.define([], function () {
             });
             return await resposta.json();
         },
-        editarEscola: async function (parametros) {
-            const resposta = await fetch(this._urlBase, {
-                method: "PUT",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(parametros)
+        deletarEscola: async function (id) {
+            const urlAcao = "/Deletar/" + id;
+            const resposta = await fetch(this._urlBase + urlAcao, {
+                method: 'DELETE'
             });
-            if(!resposta.ok)
-                return await resposta.json();
+            return await resposta.json();
         }
     }
 });

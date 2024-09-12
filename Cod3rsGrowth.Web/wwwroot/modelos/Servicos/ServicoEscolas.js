@@ -76,6 +76,9 @@ sap.ui.define([
             parametros.idEndereco = parametros.idEndereco ?? valoresPadrao.valorNumericoPadrao;
 
             return await RepositorioEscolas.criarEscola(parametros);
+        },
+        deletarEscola: async function (id) {
+            return await RepositorioEscolas.deletarEscola(id);
         }
     }
 });

@@ -45,7 +45,7 @@ public class EscolasController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("[action]/{id}")]
     public IActionResult Deletar(int id)
     {
         _servicoEscola.Deletar(id);

@@ -30,6 +30,13 @@ sap.ui.define([
             });
             if(!resposta.ok)
                 return await resposta.json();
+        },
+        deletarEmpresa: async function (id) {
+            const urlAcao = "/Deletar/" + id;
+            const resposta = await fetch(this._urlBase + urlAcao, {
+                method: 'DELETE'
+            });
+            return await resposta.json();
         }
     }
 });
