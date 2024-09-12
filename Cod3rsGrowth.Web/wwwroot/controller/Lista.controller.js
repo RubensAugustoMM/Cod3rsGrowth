@@ -251,7 +251,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.textoEstado(codigo)
+                                        formatter:(codigo) => this.obterTextoDoEstado(codigo)
                                     }
                                 });
                             }
@@ -260,7 +260,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.textoNaturezaJuridica(codigo)
+                                        formatter:(codigo) => this.obterTextoDaNaturezaJuridica(codigo)
                                     }
                                 });
                             }
@@ -269,7 +269,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.textoHabilitado(codigo)
+                                        formatter:(codigo) => this.obterTextoDoHabilitado(codigo)
                                     }
                                 });
                             }
@@ -358,7 +358,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.textoEstado(codigo)
+                                        formatter:(codigo) => this.obterTextoDoEstado(codigo)
                                     }
                                 });
                             }
@@ -369,7 +369,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo)=> this.textoOrganizacaoAcademica(codigo)
+                                        formatter:(codigo)=> this.obterTextoDaOrganizacaoAcademica(codigo)
                                     }
                                 });
                             }
@@ -379,7 +379,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter: (codigo) => this.textoHabilitado(codigo)
+                                        formatter: (codigo) => this.obterTextoDoHabilitado(codigo)
                                     }
                                 });
                             }

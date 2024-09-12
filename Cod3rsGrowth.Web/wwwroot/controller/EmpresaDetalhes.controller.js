@@ -32,13 +32,13 @@ sap.ui.define([
         },
         _populaTelaComValoresDaEmpresa: async function (empresa) {
             empresa.naturezaJuridica =
-                this.textoNaturezaJuridica(empresa.naturezaJuridica);
+                this.obterTextoDaNaturezaJuridica(empresa.naturezaJuridica);
             empresa.situacaoCadastral =
-                this.textoHabilitado(empresa.situacaoCadastral);
+                this.obterTextoDoHabilitado(empresa.situacaoCadastral);
             empresa.matrizFilial =
-                this.textoMatrizFilial(empresa.matrizFilial);
+                this.obterTextoDaMatrizFilial(empresa.matrizFilial);
             empresa.porte =
-                this.textoPorte(empresa.porte);
+                this.obterTextoDoPorte(empresa.porte);
             let formatadorData = DateFormat.getDateInstance({
                 pattern: "dd/mm/yyyy"
             });
@@ -51,7 +51,7 @@ sap.ui.define([
         _populaTelaComValoresDoEnderecoEmpresa: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
-                this.textoEstado(endereco.estado);
+                this.obterTextoDoEstado(endereco.estado);
             this._modeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
@@ -63,11 +63,11 @@ sap.ui.define([
             })
         },
         _modeloEmpresa(modelo) {
-            const nomeModelo = "EmpresaDetalhes";
+            const nomeModelo = "empresa";
             return this.modelo(nomeModelo, modelo);
         },
         _modeloEndereco(modelo) {
-            const nomeModelo = "EnderecoEmpresaDetalhes";
+            const nomeModelo = "endereco";
             return this.modelo(nomeModelo, modelo);
         }
     });

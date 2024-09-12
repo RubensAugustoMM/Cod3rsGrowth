@@ -12,7 +12,7 @@
         id="idPaginaDetalhesEmpresa"
         showNavButton="true"
         navButtonPress="aoPressionarBotaoDeNavegacao"
-        title="Detalhes: {EmpresaDetalhes>/razaoSocial}"
+        title="Detalhes: {empresa>/razaoSocial}"
     >
         <layout:VerticalLayout width="100%">
             <Panel
@@ -27,43 +27,43 @@
                 <content>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelRazaoSocial}" />
-                        <Label text="{EmpresaDetalhes>/razaoSocial}" />
+                        <Label text="{empresa>/razaoSocial}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelNomeFantasia}" />
-                        <Label text="{EmpresaDetalhes>/nomeFantasia}" />
+                        <Label text="{empresa>/nomeFantasia}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelCnpj}" />
-                        <Label text="{EmpresaDetalhes>/cnpj}" />
+                        <Label text="{empresa>/cnpj}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelCapitalSocial}" />
-                        <Label text="{EmpresaDetalhes>/capitalSocial}" />
+                        <Label text="{empresa>/capitalSocial}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelSituacaoCadastral}" />
-                        <Label text="{EmpresaDetalhes>/situacaoCadastral}" />
+                        <Label text="{empresa>/situacaoCadastral}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelDataSituacaoCadastral}" />
-                        <Label text="{EmpresaDetalhes>/dataSituacaoCadastral}" />
+                        <Label text="{empresa>/dataSituacaoCadastral}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelIdade}" />
-                        <Label text="{EmpresaDetalhes>/idade}" />
+                        <Label text="{empresa>/idade}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelDataAbertura}" />
-                        <Label text="{EmpresaDetalhes>/dataAbertura}" />
+                        <Label text="{empresa>/dataAbertura}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelNaturezaJuridica}" />
-                        <Label text="{EmpresaDetalhes>/naturezaJuridica}" />
+                        <Label text="{empresa>/naturezaJuridica}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelPorte}" />
-                        <Label text="{EmpresaDetalhes>/porte}" />
+                        <Label text="{empresa>/porte}" />
                     </VBox>
                 </content>
             </Panel>
@@ -79,27 +79,27 @@
                 <content>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelNumero}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/numero}" />
+                        <Label text="{endereco>/numero}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelCep}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/cep}" />
+                        <Label text="{endereco>/cep}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelMunicipio}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/municipio}" />
+                        <Label text="{endereco>/municipio}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelBairro}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/bairro}" />
+                        <Label text="{endereco>/bairro}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelComplemento}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/complemento}" />
+                        <Label text="{endereco>/complemento}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EmpresaDetalhes.LabelEstado}" />
-                        <Label text="{EnderecoEmpresaDetalhes>/estado}" />
+                        <Label text="{endereco>/estado}" />
                     </VBox>
                 </content>
             </Panel>

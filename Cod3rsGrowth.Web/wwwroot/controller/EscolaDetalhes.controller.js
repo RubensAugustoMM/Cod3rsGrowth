@@ -21,7 +21,6 @@ sap.ui.define([
         },
         _aoCoincidirRotaDetalhesEscola: function (oEvent) {
             const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRota";
-            const parametroNomeRota = "name";
             const nomeArgumentosCamingoEscola = "arguments";
             this.trataErros(i18nMensagemDeErro, async () => {
                 const idEscola =
@@ -33,9 +32,9 @@ sap.ui.define([
         },
         _populaTelaComValoresDaEscola: async function (escola) {
             escola.organizacaoAcademica =
-                this.textoOrganizacaoAcademica(escola.organizacaoAcademica);
+                this.obterTextoDaOrganizacaoAcademica(escola.organizacaoAcademica);
             escola.categoriaAdministrativa =
-                this.textoCategoriaAdministrativa(escola.categoriaAdministrativa);
+                this.obterTextoDaCategoriaAdministrativa(escola.categoriaAdministrativa);
             let formatadorData = DateFormat.getDateInstance({
                 pattern: "dd/mm/yyyy"
             });
@@ -46,23 +45,23 @@ sap.ui.define([
         _populaTelaComValoresDoEnderecoEscola: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
-                this.textoEstado(endereco.estado);
+                this.obterTextoDoEstado(endereco.estado);
             this._modeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEscolaDetalhes.ErroAoClicarBotaoNavegacao";
             this.trataErros(i18nMensagemDeErro, () => {
                 const roteador = this.getOwnerComponent().getRouter();
-                const nomeRotaEmpresas = "Escolas";
-                roteador.navTo(nomeRotaEmpresas, {}, {}, true);
+                const nomeRotaDeEscolas = "Escolas";
+                roteador.navTo(nomeRotaDeEscolas, {}, {}, true);
             })
         },
         _modeloEscola(modelo) {
-            const nomeModelo = "EscolaDetalhes";
+            const nomeModelo = "escola";
             return this.modelo(nomeModelo, modelo);
         },
         _modeloEndereco(modelo) {
-            const nomeModelo = "EnderecoEscolaDetalhes";
+            const nomeModelo = "endereco";
             return this.modelo(nomeModelo, modelo);
         }
     });

@@ -89,35 +89,41 @@ sap.ui.define([
             const nomeModelo = "categoriaAdministrativa";
             return this.getOwnerComponent().getModel(nomeModelo);
         },
-        textoEstado: function (codigo) {
+        obterTextoDoEstado: function (codigo) {
             const modelo = this._modeloEstados().getData();
             return this._filtraEnum(modelo.Estados, codigo).Valor;
         },
-        textoCategoriaAdministrativa: function (codigo) {
+        obterTextoDaCategoriaAdministrativa: function (codigo) {
             const modelo = this._modeloCategoriaAdministrativa().getData();
             return this._filtraEnum(modelo.CategoriaAdministrativa, codigo).Valor;
         },
-        textoHabilitado: function (codigo) {
+        obterTextoDoHabilitado: function (codigo) {
             const modelo = this._modeloHabilitado().getData();
             if (codigo)
-                codigo = 1;
+            {
+                const habilitado = 1;
+                codigo = habilitado;
+            }
             else
-                codigo = 0;
+            {
+                const desabilitado = 0;                
+                codigo = desabilitado;
+            }
             return this._filtraEnum(modelo.Habilitado, codigo).Valor;
         },
-        textoNaturezaJuridica: function (codigo) {
+        obterTextoDaNaturezaJuridica: function (codigo) {
             const modelo = this._modeloNaturezaJuridica().getData();
             return this._filtraEnum(modelo.NaturezaJuridica, codigo).Valor;
         },
-        textoOrganizacaoAcademica: function (codigo) {
+        obterTextoDaOrganizacaoAcademica: function (codigo) {
             const modelo = this._modeloOrganizacaoAcademica().getData();
             return this._filtraEnum(modelo.OrganizacaoAcademica, codigo).Valor;
         },
-        textoPorte: function (codigo) {
+        obterTextoDoPorte: function (codigo) {
             const modelo = this._modeloPorte().getData();
             return this._filtraEnum(modelo.Porte, codigo).Valor;
         },
-        textoMatrizFilial: function (codigo) {
+        obterTextoDaMatrizFilial: function (codigo) {
             const modelo = this._modeloMatrizFilial().getData();
             return this._filtraEnum(modelo.MatrizFilial, codigo).Valor;
         },

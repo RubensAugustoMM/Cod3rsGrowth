@@ -97,12 +97,12 @@
           "target": "escolaCriarEditar"
         },
         {
-          "pattern": "Empresas/Detalhes/{caminhoEmpresa}",
+          "pattern": "Empresas/{caminhoEmpresa}",
           "name": "EmpresaDetalhes",
           "target": "empresaDetalhes"
         },
         {
-          "pattern": "Escolas/Detalhes/{caminhoEscola}",
+          "pattern": "Escolas/{caminhoEscola}",
           "name": "EscolaDetalhes",
           "target": "escolaDetalhes"
         }

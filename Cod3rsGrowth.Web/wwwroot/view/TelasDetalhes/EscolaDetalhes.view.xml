@@ -12,7 +12,7 @@
         id="idPaginaDetalhesEscola"
         showNavButton="true"
         navButtonPress="aoPressionarBotaoDeNavegacao"
-        title="Detalhes: {EscolaDetalhes>/nome}"
+        title="Detalhes: {escola>/nome}"
     >
         <layout:VerticalLayout width="100%">
             <Panel
@@ -27,31 +27,31 @@
                 <content>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelNome}" />
-                        <Label text="{EscolaDetalhes>/nome}" />
+                        <Label text="{escola>/nome}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelCodigoMec}" />
-                        <Label text="{EscolaDetalhes>/codigoMec}" />
+                        <Label text="{escola>/codigoMec}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelTelefone}" />
-                        <Label text="{EscolaDetalhes>/telefone}" />
+                        <Label text="{escola>/telefone}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelEmail}" />
-                        <Label text="{EscolaDetalhes>/email}" />
+                        <Label text="{escola>/email}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelInicioAtividade}" />
-                        <Label text="{EscolaDetalhes>/inicioAtividade}" />
+                        <Label text="{escola>/inicioAtividade}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelCategoriaAdministrativa}" />
-                        <Label text="{EscolaDetalhes>/categoriaAdministrativa}" />
+                        <Label text="{escola>/categoriaAdministrativa}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelOrganizacaoAcademica}" />
-                        <Label text="{EscolaDetalhes>/organizacaoAcademica}" />
+                        <Label text="{escola>/organizacaoAcademica}" />
                     </VBox>
                 </content>
             </Panel>
@@ -67,27 +67,27 @@
                 <content>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelNumero}" />
-                        <Label text="{EnderecoEscolaDetalhes>/numero}" />
+                        <Label text="{endereco>/numero}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelCep}" />
-                        <Label text="{EnderecoEscolaDetalhes>/cep}" />
+                        <Label text="{endereco>/cep}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelMunicipio}" />
-                        <Label text="{EnderecoEscolaDetalhes>/municipio}" />
+                        <Label text="{endereco>/municipio}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelBairro}" />
-                        <Label text="{EnderecoEscolaDetalhes>/bairro}" />
+                        <Label text="{endereco>/bairro}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelComplemento}" />
-                        <Label text="{EnderecoEscolaDetalhes>/complemento}" />
+                        <Label text="{endereco>/complemento}" />
                     </VBox>
                     <VBox>
                         <Label text="{i18n>EscolaDetalhes.LabelEstado}" />
-                        <Label text="{EnderecoEscolaDetalhes>/estado}" />
+                        <Label text="{endereco>/estado}" />
                     </VBox>
                 </content>
             </Panel>
