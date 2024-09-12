@@ -47,9 +47,9 @@ sap.ui.define([
             this._rotaAtual = oEvent.getParameter("name");
             const i18nTituloEmpresas = "Lista.TituloEmpresas";
             const i18nMensagemDeErro = "Lista.ErroRotaEmpresas";
-            let i18n = this.obterModeloI18n();
+            let i18n = this.modeloI18n();
             this.tratarErros(i18nMensagemDeErro, () => {
-                let modelo = this.obterModeloPadrao();
+                let modelo = this.modeloPadrao();
                 this.byId(this._sIdLista).setTitle(i18n.getText(i18nTituloEmpresas))
                 modelo.setProperty(this._nomePropriedadePainelExpandido, false);
 
@@ -66,9 +66,9 @@ sap.ui.define([
             this._rotaAtual = oEvent.getParameter("name");
             const i18nTituloEscolas = "Lista.TituloEsocolas";
             const i18nMensagemDeErro = "Lista.ErroRotaEscolas";
-            let i18n = this.obterModeloI18n();
+            let i18n = this.modeloI18n();
             this.tratarErros(i18nMensagemDeErro, () => {
-                let modelo = this.obterModeloPadrao();
+                let modelo = this.modeloPadrao();
                 this.byId(this._sIdLista).setTitle(i18n.getText(i18nTituloEscolas));
                 modelo.setProperty(this._nomePropriedadePainelExpandido, false);
 
@@ -169,10 +169,10 @@ sap.ui.define([
                 NaturezaJuridicaFiltro: undefined,
                 EstadoFiltro: undefined
             }
-            this._obterModeloFiltroEmpresa(new JSONModel(dadosFiltroEmpresa));
+            this._modeloFiltroEmpresa(new JSONModel(dadosFiltroEmpresa));
         },
         _obterValoresDoFiltroEmpresasDaTela() {
-            return this._obterModeloFiltroEmpresa().getData();
+            return this._modeloFiltroEmpresa().getData();
         },
         _configurarModeloDoFiltroEscola() {
             let dadosFiltroEscola = {
@@ -182,18 +182,18 @@ sap.ui.define([
                 OrganizacaoAcademicaFiltro: undefined,
                 EstadoFiltro: undefined
             };
-            this._obterModeloFiltroEscola(new JSONModel(dadosFiltroEscola));
+            this._modeloFiltroEscola(new JSONModel(dadosFiltroEscola));
         },
 
         _obterValoresDoFiltroEscolasDaTela() {
-            return this._obterModeloFiltroEscola().getData();
+            return this._modeloFiltroEscola().getData();
         },
 
         _popularTabelaEmpresasComDados(filtro) {
             const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresas";
             this.tratarErros(i18nMensagemDeErro, () => {
                 const tabela = this.byId(this._idTabela);
-                const modelo = this.obterModeloPadrao();
+                const modelo = this.modeloPadrao();
                 tabela.removeAllColumns();
 
                 ServicoEmpresas.obterTodasEmpresas(filtro)
@@ -202,7 +202,7 @@ sap.ui.define([
                     })
                     .catch(erro => {
                         const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEmpresasRequisicao";
-                        const i18n = this.obterModeloI18n();
+                        const i18n = this.modeloI18n();
                         const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                         this.mostraMensagemDeErro(mensagemDeErro, erro);
                     });
@@ -251,7 +251,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.obterTextoDoEstado(codigo)
+                                        formatter: (codigo) => this.obterTextoDoEstado(codigo)
                                     }
                                 });
                             }
@@ -260,7 +260,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.obterTextoDaNaturezaJuridica(codigo)
+                                        formatter: (codigo) => this.obterTextoDaNaturezaJuridica(codigo)
                                     }
                                 });
                             }
@@ -269,7 +269,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.obterTextoDoHabilitado(codigo)
+                                        formatter: (codigo) => this.obterTextoDoHabilitado(codigo)
                                     }
                                 });
                             }
@@ -308,7 +308,7 @@ sap.ui.define([
             const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEscolas";
             this.tratarErros(i18nMensagemDeErro, () => {
                 const tabela = this.byId(this._idTabela);
-                const modelo = this.obterModeloPadrao();
+                const modelo = this.modeloPadrao();
 
                 tabela.removeAllColumns();
 
@@ -318,7 +318,7 @@ sap.ui.define([
                     })
                     .catch(erro => {
                         const i18nMensagemDeErro = "Lista.ErroPopulaTabelaEscolasRequisicao";
-                        const i18n = this.obterModeloI18n();
+                        const i18n = this.modeloI18n();
                         const mensagemDeErro = i18n.getText(i18nMensagemDeErro);
                         this.mostraMensagemDeErro(mensagemDeErro, erro);
                     });
@@ -358,7 +358,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo) => this.obterTextoDoEstado(codigo)
+                                        formatter: (codigo) => this.obterTextoDoEstado(codigo)
                                     }
                                 });
                             }
@@ -369,7 +369,7 @@ sap.ui.define([
                                 return new sap.m.Text({
                                     text: {
                                         path: campo,
-                                        formatter:(codigo)=> this.obterTextoDaOrganizacaoAcademica(codigo)
+                                        formatter: (codigo) => this.obterTextoDaOrganizacaoAcademica(codigo)
                                     }
                                 });
                             }
@@ -433,37 +433,37 @@ sap.ui.define([
                 });
             });
         },
-        _obterModeloFiltroEmpresa: function (modelo) {
+        _modeloFiltroEmpresa: function (modelo) {
             const nomeModelo = "FiltroEmpresa";
-            return this.obterModelo(nomeModelo, modelo);
+            return this.modelo(nomeModelo, modelo);
         },
-        _obterModeloFiltroEscola: function (modelo) {
+        _modeloFiltroEscola: function (modelo) {
             const nomeModelo = "FiltroEscola";
-            return this.obterModelo(nomeModelo, modelo);
+            return this.modelo(nomeModelo, modelo);
         },
         _aoPressionarSobreItemEscola(oEvent) {
             const escolaDetalhes = oEvent.getSource()
                 .getBindingContext().getObject();
-                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEscola";
-                this.tratarErros(i18nMensagemDeErro, () => {
-                    const nomeRotaDetalhesEscola = "EscolaDetalhes";
-                    const roteador = this.getOwnerComponent().getRouter();
-                    roteador.navTo(nomeRotaDetalhesEscola, {
-                        caminhoEscola: window.encodeURIComponent(escolaDetalhes.id)
-                    });
+            const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEscola";
+            this.tratarErros(i18nMensagemDeErro, () => {
+                const nomeRotaDetalhesEscola = "EscolaDetalhes";
+                const roteador = this.getOwnerComponent().getRouter();
+                roteador.navTo(nomeRotaDetalhesEscola, {
+                    caminhoEscola: window.encodeURIComponent(escolaDetalhes.id)
                 });
+            });
         },
         _aoPressionarSobreItemEmpresa(oEvent) {
             const escolaDetalhes = oEvent.getSource()
                 .getBindingContext().getObject();
-                const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEmpresa";
-                this.tratarErros(i18nMensagemDeErro, () => {
-                    const nomeRotaDtalhesEmpresa = "EmpresaDetalhes";
-                    const roteador = this.getOwnerComponent().getRouter();
-                    roteador.navTo(nomeRotaDtalhesEmpresa, {
-                        caminhoEmpresa: window.encodeURIComponent(escolaDetalhes.id)
-                    });
+            const i18nMensagemDeErro = "Lista.ErroPressionaBotaoVisualizarEmpresa";
+            this.tratarErros(i18nMensagemDeErro, () => {
+                const nomeRotaDtalhesEmpresa = "EmpresaDetalhes";
+                const roteador = this.getOwnerComponent().getRouter();
+                roteador.navTo(nomeRotaDtalhesEmpresa, {
+                    caminhoEmpresa: window.encodeURIComponent(escolaDetalhes.id)
                 });
+            });
         }
     });
 });

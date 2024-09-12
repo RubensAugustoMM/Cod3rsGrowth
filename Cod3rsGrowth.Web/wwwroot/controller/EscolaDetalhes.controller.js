@@ -27,7 +27,7 @@ sap.ui.define([
                     oEvent.getParameter(nomeArgumentosCamingoEscola).caminhoEscola;
                 const escola = await ServicoEscolas.obterEscolaPorId(idEscola);
                 this._popularTelaComValoresDaEscola(escola);
-                this._populaTelaComValoresDoEnderecoEscola(escola.idEndereco);
+                this._popularTelaComValoresDoEndereco(escola.idEndereco);
             });
         },
         _popularTelaComValoresDaEscola: async function (escola) {
@@ -40,13 +40,13 @@ sap.ui.define([
             });
             escola.inicioAtividade =
                 formatadorData.format(new Date(escola.inicioAtividade));
-            this._obterModeloEscola(new JSONModel(escola));
+            this.modeloEscola(new JSONModel(escola));
         },
         _popularTelaComValoresDoEndereco: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
                 this.obterTextoDoEstado(endereco.estado);
-            this._obterModeloEndereco(new JSONModel(endereco));
+            this.modeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEscolaDetalhes.ErroAoClicarBotaoNavegacao";
@@ -55,14 +55,6 @@ sap.ui.define([
                 const nomeRotaDeEscolas = "Escolas";
                 roteador.navTo(nomeRotaDeEscolas, {}, {}, true);
             })
-        },
-        _obterModeloEscola(modelo) {
-            const nomeModelo = "escola";
-            return this.obterModelo(nomeModelo, modelo);
-        },
-        _obterModeloEndereco(modelo) {
-            const nomeModelo = "endereco";
-            return this.obterModelo(nomeModelo, modelo);
         }
     });
 });

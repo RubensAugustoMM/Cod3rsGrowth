@@ -44,7 +44,7 @@ sap.ui.define([
 			this._rotaAtual = oEvent.getParameter(parametroNomeRota);
 			this.tratarErros(i18nMensagemDeErro, () => {
 				const i18nTituloEscolaCriar = "CriarEditarEscola.TituloCriar";
-				let i18n = this.obterModeloI18n();
+				let i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18nTituloEscolaCriar));
 			});
 		},
@@ -58,7 +58,7 @@ sap.ui.define([
 				numero: undefined,
 				complemento: undefined
 			}
-			this._obterModeloEndereco(new JSONModel(dadosEstado));
+			this.modeloEndereco(new JSONModel(dadosEstado));
 		},
 		_configurarModeloEscolaDaTela() {
 			const dadosEscola = {
@@ -71,7 +71,7 @@ sap.ui.define([
 				categoriaAdministrativa: undefined,
 				organizacaoAcademica: undefined
 			}
-			this._obterModeloEscola(new JSONModel(dadosEscola))
+			this.modeloEscola(new JSONModel(dadosEscola))
 		},
 		_aoCoincidirComRotaEscolaEditar: async function (oEvent) {
 			const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRotaEditar";
@@ -84,12 +84,13 @@ sap.ui.define([
 				this._popularTelaComValoresDaEscolaEditar(escola);
 				this._popularTelaComValoresDoEnderecoDaEscolaEditar(escola.idEndereco);
 				const i18TituloEscolaEditar = "CriarEditarEscolas.TituloEditar";
-				const i18n = this.obterModeloI18n();
+				const i18n = this.modeloI18n();
 				this.byId(this._idCriarEditarEscolas).setTitle(i18n.getText(i18TituloEscolaEditar));
 			});
 		},
 		_obterValoresEscolaDaTela() {
-			let valoresEscola = this._obterModeloEscola(undefined).getData();
+			debugger;
+			let valoresEscola = this.modeloEscola(undefined).getData();
 			const valorHabilitado = 1;
 			valoresEscola.statusAtividade = valoresEscola.statusAtividade == valorHabilitado ? true : false;
 			return valoresEscola;
@@ -97,15 +98,15 @@ sap.ui.define([
 		_popularTelaComValoresDaEscolaEditar: async function (escola) {
 			escola.statusAtividade = escola.statusAtividade ? 1 : 0;
 			this._idEscolaAtualizar = escola.id;
-			this._obterModeloEscola(new JSONModel(escola));
+			this.modeloEscola(new JSONModel(escola));
 		},
 		_popularTelaComValoresDoEnderecoDaEscolaEditar: async function (id) {
 			let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
 			this._idEnderecoAtualizar = id;
-			this._obterModeloEndereco(new JSONModel(endereco));
+			this.modeloEndereco(new JSONModel(endereco));
 		},
 		_obterValoresEnderecoDaTela() {
-			return this._obterModeloEndereco().getData();
+			return this.modeloEndereco().getData();
 		},
 		aoPressionarSalvar: async function () {
 			let respostaEndereco;
@@ -129,7 +130,7 @@ sap.ui.define([
 					i18nMensagemDeErro = "CriarEditarEscolas.ErroAoTentarEditarEscolas";
 				}
 				this.tratarErros(i18nMensagemDeErro, async () => {
-					const modelo = this.obterModeloValoresPadrao(undefined);
+					const modelo = this.modeloValoresPadrao(undefined);
 					if (this._rotaAtual == "EscolaCriar") {
 						respostaEndereco = await ServicoEnderecos.criarEndereco(this._obterValoresEnderecoDaTela(), modelo);
 						let escolaCriar = this._obterValoresEscolaDaTela();
@@ -202,14 +203,6 @@ sap.ui.define([
 					roteador.navTo(nomeRotaEscolas, {}, {}, true);
 				}
 			})
-		},
-		_obterModeloEscola: function (modelo) {
-			const nomeModelo = "EscolaCriarEditar";
-			return this.obterModelo(nomeModelo, modelo);
-		},
-		_obterModeloEndereco: function (modelo) {
-			const nomeModelo = "EnderecoEscolaCriarEditar";
-			return this.obterModelo(nomeModelo, modelo);
 		}
 	});
 });

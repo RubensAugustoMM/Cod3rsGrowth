@@ -46,13 +46,13 @@ sap.ui.define([
                 formatadorData.format(new Date(empresa.dataAbertura));
             empresa.dataSituacaoCadastral =
                 formatadorData.format(new Date(empresa.dataSituacaoCadastral));
-            this._obterModeloEmpresa(new JSONModel(empresa));
+            this.modeloEmpresa(new JSONModel(empresa));
         },
         _popularTelaComValoresDoEnderecoEmpresa: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
                 this.obterTextoDoEstado(endereco.estado);
-            this._obterModeloEndereco(new JSONModel(endereco));
+            this.modeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEmpresasDetalhes.ErroAoClicarBotaoNavegacao";
@@ -61,14 +61,6 @@ sap.ui.define([
                 const nomeRotaEmpresas = "Empresas";
                 roteador.navTo(nomeRotaEmpresas, {}, {}, true);
             })
-        },
-        _obterModeloEmpresa(modelo) {
-            const nomeModelo = "empresa";
-            return this.obterModelo(nomeModelo, modelo);
-        },
-        _obterModeloEndereco(modelo) {
-            const nomeModelo = "endereco";
-            return this.obterModelo(nomeModelo, modelo);
         }
     });
 });

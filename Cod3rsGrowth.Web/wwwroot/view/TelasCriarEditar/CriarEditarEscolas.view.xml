@@ -41,7 +41,7 @@
 									<Label text="{i18n>CriarEditarEscolas.Nome}" />
 									<Input
 										id="nomeInput"
-										value="{EscolaCriarEditar>/nome}"
+										value="{escola>/nome}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -53,7 +53,7 @@
                                         placeholder="_"
                                         id="codigoMecInput"
                                         value="{
-                                            path: 'EscolaCriarEditar>/codigoMec',
+                                            path: 'escola>/codigoMec',
                                             type: 'sap.ui.model.type.Integer',
                                             constraints: {
                                                 maxLength: 8
@@ -69,7 +69,7 @@
                                         placeholder="_"
                                         id="telefoneInput"
                                         value="{
-                                            path: 'EscolaCriarEditar>/telefone',
+                                            path: 'escola>/telefone',
                                             type: 'sap.ui.model.type.Integer',
                                             constraints: {
                                                 maxLength: 9
@@ -83,7 +83,7 @@
 									<Input
 										id="emailInput"
 										valueLiveUpdate="true"
-										value="{EscolaCriarEditar>/email}"
+										value="{escola>/email}"
 										width="auto"
 									/>
 								</VBox>
@@ -94,7 +94,7 @@
 									<ComboBox
 										id="categoriaAdministrativaComboBox"
 										width="auto"
-										selectedKey="{EscolaCriarEditar>/categoriaAdministrativa}"
+										selectedKey="{escola>/categoriaAdministrativa}"
 										items="{
 											path: 'categoriaAdministrativa>/CategoriaAdministrativa',
 											sorter: {
@@ -113,7 +113,7 @@
 									<ComboBox
 										id="organizacaoAcademicaComboBox"
 										width="auto"
-										selectedKey="{EscolaCriarEditar>/organizacaoAcademica}"
+										selectedKey="{escola>/organizacaoAcademica}"
 										items="{
 											path: 'organizacaoAcademica>/OrganizacaoAcademica',
 											sorter: {
@@ -132,7 +132,7 @@
 									<ComboBox
 										id="statusAtividadeComboBox"
 										width="auto"
-										selectedKey="{EscolaCriarEditar>/statusAtividade}"
+										selectedKey="{escola>/statusAtividade}"
 										items="{
 											path: 'habilitado>/Habilitado',
 											sorter: {
@@ -151,7 +151,7 @@
 									<DatePicker
 										id="dataInicioAtividade"
 										value="{
-											path: 'EscolaCriarEditar>/inicioAtividade',
+											path: 'escola>/inicioAtividade',
 											type: 'sap.ui.model.type.Date',
 											formatOptions: {
 												source: {
@@ -190,7 +190,7 @@
                                         placeholder="_"
                                         id="cepInput"
                                         value="{
-                                            path: 'EnderecoEscolaCriarEditar>/cep',
+                                            path: 'endereco>/cep',
                                             type: 'sap.ui.model.type.Integer',
                                             constraints: {
                                                 maxLength: 8
@@ -204,7 +204,7 @@
 									<ComboBox
 										id="estadoComboBox"
 										width="auto"
-										selectedKey="{EnderecoEscolaCriarEditar>/estado}"
+										selectedKey="{endereco>/estado}"
 										items="{
 											path: 'estados>/Estados',
 											sorter: {
@@ -222,7 +222,7 @@
 									<Label text="{i18n>MunicipioLabel}" />
 									<Input
 										id="municipioInput"
-										value="{EnderecoEscolaCriarEditar>/municipio}"
+										value="{endereco>/municipio}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -231,7 +231,7 @@
 									<Label text="{i18n>BairroLabel}" />
 									<Input
 										id="bairroInput"
-										value="{EnderecoEscolaCriarEditar>/bairro}"
+										value="{endereco>/bairro}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -242,7 +242,7 @@
 									<Label text="{i18n>RuaLabel}" />
 									<Input
 										id="ruaInput"
-										value="{EnderecoEscolaCriarEditar>/rua}"
+										value="{endereco>/rua}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -252,7 +252,7 @@
 									<Input
 										type="Number"
 										id="numeroInput"
-										value="{EnderecoEscolaCriarEditar>/numero}"
+										value="{endereco>/numero}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
@@ -261,7 +261,7 @@
 									<Label text="{i18n>ComplementoLabel}" />
 									<Input
 										id="complementoInput"
-										value="{EnderecoEscolaCriarEditar>/complemento}"
+										value="{endereco>/complemento}"
 										valueLiveUpdate="true"
 										width="auto"
 									/>
