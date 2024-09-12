@@ -22,15 +22,15 @@ sap.ui.define([
         _aoCoincidirRotaDetalhesEscola: function (oEvent) {
             const i18nMensagemDeErro = "CriarEditarEmpresa.ErroCoincidirRota";
             const nomeArgumentosCamingoEmpresa = "arguments";
-            this.trataErros(i18nMensagemDeErro, async () => {
+            this.tratarErros(i18nMensagemDeErro, async () => {
                 const idEmpresa =
                     oEvent.getParameter(nomeArgumentosCamingoEmpresa).caminhoEmpresa;
                 const empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
-                this._populaTelaComValoresDaEmpresa(empresa);
-                this._populaTelaComValoresDoEnderecoEmpresa(empresa.idEndereco);
+                this._popularTelaComValoresDaEmpresa(empresa);
+                this._popularTelaComValoresDoEnderecoEmpresa(empresa.idEndereco);
             });
         },
-        _populaTelaComValoresDaEmpresa: async function (empresa) {
+        _popularTelaComValoresDaEmpresa: async function (empresa) {
             empresa.naturezaJuridica =
                 this.obterTextoDaNaturezaJuridica(empresa.naturezaJuridica);
             empresa.situacaoCadastral =
@@ -46,29 +46,29 @@ sap.ui.define([
                 formatadorData.format(new Date(empresa.dataAbertura));
             empresa.dataSituacaoCadastral =
                 formatadorData.format(new Date(empresa.dataSituacaoCadastral));
-            this._modeloEmpresa(new JSONModel(empresa));
+            this._obterModeloEmpresa(new JSONModel(empresa));
         },
-        _populaTelaComValoresDoEnderecoEmpresa: async function (id) {
+        _popularTelaComValoresDoEnderecoEmpresa: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
                 this.obterTextoDoEstado(endereco.estado);
-            this._modeloEndereco(new JSONModel(endereco));
+            this._obterModeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEmpresasDetalhes.ErroAoClicarBotaoNavegacao";
-            this.trataErros(i18nMensagemDeErro, () => {
+            this.tratarErros(i18nMensagemDeErro, () => {
                 const roteador = this.getOwnerComponent().getRouter();
                 const nomeRotaEmpresas = "Empresas";
                 roteador.navTo(nomeRotaEmpresas, {}, {}, true);
             })
         },
-        _modeloEmpresa(modelo) {
+        _obterModeloEmpresa(modelo) {
             const nomeModelo = "empresa";
-            return this.modelo(nomeModelo, modelo);
+            return this.obterModelo(nomeModelo, modelo);
         },
-        _modeloEndereco(modelo) {
+        _obterModeloEndereco(modelo) {
             const nomeModelo = "endereco";
-            return this.modelo(nomeModelo, modelo);
+            return this.obterModelo(nomeModelo, modelo);
         }
     });
 });

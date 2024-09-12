@@ -22,15 +22,15 @@ sap.ui.define([
         _aoCoincidirRotaDetalhesEscola: function (oEvent) {
             const i18nMensagemDeErro = "CriarEditarEscolas.ErroCoincidirRota";
             const nomeArgumentosCamingoEscola = "arguments";
-            this.trataErros(i18nMensagemDeErro, async () => {
+            this.tratarErros(i18nMensagemDeErro, async () => {
                 const idEscola =
                     oEvent.getParameter(nomeArgumentosCamingoEscola).caminhoEscola;
                 const escola = await ServicoEscolas.obterEscolaPorId(idEscola);
-                this._populaTelaComValoresDaEscola(escola);
+                this._popularTelaComValoresDaEscola(escola);
                 this._populaTelaComValoresDoEnderecoEscola(escola.idEndereco);
             });
         },
-        _populaTelaComValoresDaEscola: async function (escola) {
+        _popularTelaComValoresDaEscola: async function (escola) {
             escola.organizacaoAcademica =
                 this.obterTextoDaOrganizacaoAcademica(escola.organizacaoAcademica);
             escola.categoriaAdministrativa =
@@ -40,29 +40,29 @@ sap.ui.define([
             });
             escola.inicioAtividade =
                 formatadorData.format(new Date(escola.inicioAtividade));
-            this._modeloEscola(new JSONModel(escola));
+            this._obterModeloEscola(new JSONModel(escola));
         },
-        _populaTelaComValoresDoEnderecoEscola: async function (id) {
+        _popularTelaComValoresDoEndereco: async function (id) {
             let endereco = await ServicoEnderecos.obterEnderecoPorId(id);
             endereco.estado =
                 this.obterTextoDoEstado(endereco.estado);
-            this._modeloEndereco(new JSONModel(endereco));
+            this._obterModeloEndereco(new JSONModel(endereco));
         },
         aoPressionarBotaoDeNavegacao() {
             let i18nMensagemDeErro = "TelaEscolaDetalhes.ErroAoClicarBotaoNavegacao";
-            this.trataErros(i18nMensagemDeErro, () => {
+            this.tratarErros(i18nMensagemDeErro, () => {
                 const roteador = this.getOwnerComponent().getRouter();
                 const nomeRotaDeEscolas = "Escolas";
                 roteador.navTo(nomeRotaDeEscolas, {}, {}, true);
             })
         },
-        _modeloEscola(modelo) {
+        _obterModeloEscola(modelo) {
             const nomeModelo = "escola";
-            return this.modelo(nomeModelo, modelo);
+            return this.obterModelo(nomeModelo, modelo);
         },
-        _modeloEndereco(modelo) {
+        _obterModeloEndereco(modelo) {
             const nomeModelo = "endereco";
-            return this.modelo(nomeModelo, modelo);
+            return this.obterModelo(nomeModelo, modelo);
         }
     });
 });
