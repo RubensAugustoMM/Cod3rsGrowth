@@ -104,7 +104,7 @@
                 </content>
             </Panel>
             <VBox alignItems="Center" >
-                <Button text="{i18n>/Deletar}"
+                <Button text="{i18n>Deletar}"
                     width="120%"
                     press=".aoPressionarDeletar"/>
             </VBox>

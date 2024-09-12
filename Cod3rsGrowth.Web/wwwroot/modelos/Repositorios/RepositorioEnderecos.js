@@ -6,7 +6,6 @@ sap.ui.define([
         obterTodosEnderecos: async function (parametroFiltro) {
             const resposta = await fetch(this._urlBase + parametroFiltro);
             if (!resposta.ok) throw new Error(resposta.status);
-            if (resposta.body != undefined)
                 return await resposta.json();
         },
         obterEnderecoPorId: async function (id) {
@@ -31,7 +30,6 @@ sap.ui.define([
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-            if (resposta.body != undefined)
                 return await resposta.json();
         },
         deletarEndereco: async function (id) {

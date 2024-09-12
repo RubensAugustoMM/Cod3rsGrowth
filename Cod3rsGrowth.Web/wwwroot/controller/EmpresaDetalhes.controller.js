@@ -4,16 +4,12 @@ sap.ui.define([
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/format/DateFormat",
-    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEmpresas",
-    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEnderecos"
 ], function (
     ControllerBase,
     ServicoEmpresas,
     ServicoEnderecos,
     JSONModel,
     DateFormat,
-    RepositorioEmpresas,
-    RepositorioEnderecos,
 ) {
     "use strict";
 
@@ -73,11 +69,11 @@ sap.ui.define([
         aoPressionarDeletar() {
             let i18nMensagemDeErro = "TelaEmpresasDetalhes.ErroAoClicarBotaoDeletar";
             this.tratarErros(i18nMensagemDeErro, async () => {
-                let resposta = await RepositorioEmpresas.deletarEmpresa(this._idEmpresa);
+                let resposta = await ServicoEmpresas.deletarEmpresa(this._idEmpresa);
                 if (resposta != undefined) {
                     throw new Error(resposta.Detail);
                 }
-                resposta = await RepositorioEnderecos.deletarEndereco(this._idEndereco);
+                resposta = await ServicoEnderecos.deletarEndereco(this._idEndereco);
                 if (resposta != undefined) {
                     throw new Error(resposta.Detail);
                 }
