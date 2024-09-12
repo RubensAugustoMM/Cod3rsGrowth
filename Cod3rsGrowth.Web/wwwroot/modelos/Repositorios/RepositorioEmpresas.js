@@ -6,12 +6,12 @@ sap.ui.define([
         obterTodasEmpresas: async function (parametroFiltro) {
             const resposta = await fetch(this._urlBase + parametroFiltro);
             if (!resposta.ok) throw new Error(resposta.message);
-            return await resposta.json();
+            return resposta.json();
         },
         obterEmpresaPorId: async function (id) {
-            const resposta = await fetch(this._urlBase + "/" + id); 
-            if (!resposta.ok) throw new Error(resposta.status);
-            return await resposta.json();
+            const resposta = await fetch(this._urlBase + "/" + id);
+            if (!resposta.ok) throw new Error(resposta.message);
+            return resposta.json();
         },
         criarEmpresa: async function (parametros) {
             const urlAcao = "/Criar"
@@ -20,7 +20,7 @@ sap.ui.define([
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-            return await resposta.json();
+            return resposta.json();
         },
         editarEmpresa: async function (parametros) {
             const resposta = await fetch(this._urlBase, {
@@ -28,15 +28,17 @@ sap.ui.define([
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-            if(!resposta.ok)
-                return await resposta.json();
+            if (!resposta.ok)
+                return resposta.json();
         },
         deletarEmpresa: async function (id) {
             const urlAcao = "/Deletar/" + id;
             const resposta = await fetch(this._urlBase + urlAcao, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
             });
-            return await resposta.json();
+            if (!resposta.ok)
+                return resposta.json();
         }
     }
 });

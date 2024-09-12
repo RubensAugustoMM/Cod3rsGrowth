@@ -3,17 +3,23 @@ sap.ui.define([
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEmpresas",
     "ui5/cod3rsgrowth/modelos/Servicos/ServicoEnderecos",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/format/DateFormat"
+    "sap/ui/core/format/DateFormat",
+    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEmpresas",
+    "ui5/cod3rsgrowth/modelos/Repositorios/RepositorioEnderecos"
 ], function (
     ControllerBase,
     ServicoEmpresas,
     ServicoEnderecos,
     JSONModel,
     DateFormat,
+    RepositorioEmpresas,
+    RepositorioEnderecos,
 ) {
     "use strict";
 
     return ControllerBase.extend("ui5.cod3rsgrowth.controller.EmpresaDetalhes", {
+        _idEmpresa: 0,
+        _idEndereco: 0,
         onInit() {
             const nomeRotaEscola = "EmpresaDetalhes";
             const roteador = this.getOwnerComponent().getRouter();
@@ -26,6 +32,8 @@ sap.ui.define([
                 const idEmpresa =
                     oEvent.getParameter(nomeArgumentosCamingoEmpresa).caminhoEmpresa;
                 const empresa = await ServicoEmpresas.obterEmpresaPorId(idEmpresa);
+                this._idEmpresa = idEmpresa;
+                this._idEndereco = empresa.idEndereco;
                 this._popularTelaComValoresDaEmpresa(empresa);
                 this._popularTelaComValoresDoEnderecoEmpresa(empresa.idEndereco);
             });
@@ -60,7 +68,21 @@ sap.ui.define([
                 const roteador = this.getOwnerComponent().getRouter();
                 const nomeRotaEmpresas = "Empresas";
                 roteador.navTo(nomeRotaEmpresas, {}, {}, true);
-            })
+            });
+        },
+        aoPressionarDeletar() {
+            let i18nMensagemDeErro = "TelaEmpresasDetalhes.ErroAoClicarBotaoDeletar";
+            this.tratarErros(i18nMensagemDeErro, async () => {
+                let resposta = await RepositorioEmpresas.deletarEmpresa(this._idEmpresa);
+                if (resposta != undefined) {
+                    throw new Error(resposta.Detail);
+                }
+                resposta = await RepositorioEnderecos.deletarEndereco(this._idEndereco);
+                if (resposta != undefined) {
+                    throw new Error(resposta.Detail);
+                }
+                this.aoPressionarBotaoDeNavegacao();
+            });
         }
     });
 });

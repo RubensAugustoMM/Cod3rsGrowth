@@ -48,6 +48,6 @@ public class EnderecosController : ControllerBase
     public IActionResult Deletar(int id)
     {
         _servicoEndereco.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }
