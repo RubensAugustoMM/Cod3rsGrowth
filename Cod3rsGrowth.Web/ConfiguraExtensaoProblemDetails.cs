@@ -55,7 +55,7 @@ public static class ConfiguraExtensaoProblemDeitals
                                 detalhes += erro.ErrorMessage + "\n";
                             }
 
-                            detalhesProblema.Detail = detalhes;
+                            detalhesProblema.Detail = excecaoValidacao.Message + detalhes;
                             break;
                         case SqlException excecaoSql:
                             arquivador.LogError($"Erro Inesperado: {recursoTratadorDeExcecoes.Error}");

@@ -7,11 +7,11 @@ namespace Cod3rsGrowth.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EnderecoController : ControllerBase
+public class EnderecosController : ControllerBase
 {
     private readonly ServicoEndereco _servicoEndereco;
 
-    public EnderecoController(ServicoEndereco servicoEndereco)
+    public EnderecosController(ServicoEndereco servicoEndereco)
     {
         _servicoEndereco = servicoEndereco;
     }
@@ -31,23 +31,23 @@ public class EnderecoController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Criar([FromBody] Endereco enderecoCriar)
+    public IActionResult Criar([FromBody] Endereco endereco)
     {
-        _servicoEndereco.Criar(enderecoCriar);
-        return CreatedAtAction(nameof(ObterPorId), new { id = enderecoCriar.Id }, enderecoCriar);
+        _servicoEndereco.Criar(endereco);
+        return CreatedAtAction(nameof(ObterPorId), new { id = endereco.Id }, endereco);
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Endereco enderecoAtualizar)
+    public IActionResult Atualizar([FromBody] Endereco endereco)
     {
-        _servicoEndereco.Atualizar(enderecoAtualizar);
-        return NoContent();
+        _servicoEndereco.Atualizar(endereco);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public IActionResult Deletar(int id)
     {
         _servicoEndereco.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }

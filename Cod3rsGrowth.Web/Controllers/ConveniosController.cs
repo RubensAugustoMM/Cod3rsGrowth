@@ -32,16 +32,16 @@ public class ConveniosController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Criar([FromBody] Convenio convenioCriar)
+    public IActionResult Criar([FromBody] Convenio convenio)
     {
-        _servicoConvenio.Criar(convenioCriar);
-        return CreatedAtAction(nameof(ObterPorId), new { id = convenioCriar.Id }, convenioCriar);
+        _servicoConvenio.Criar(convenio);
+        return CreatedAtAction(nameof(ObterPorId), new { id = convenio.Id }, convenio);
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Convenio convenioAtualizar)
+    public IActionResult Atualizar([FromBody] Convenio convenio)
     {
-        _servicoConvenio.Atualizar(convenioAtualizar);
+        _servicoConvenio.Atualizar(convenio);
         return NoContent();
     }
 

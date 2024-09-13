@@ -8,7 +8,7 @@ public class EmpresaEnderecoOtd
     public string RazaoSocial { get; set; }
     public string NomeFantasia { get; set; }
     public string Cnpj { get; set; }
-    public bool SitucaoCadastral { get; set; }
+    public bool SituacaoCadastral { get; set; }
     public DateTime DataSituacaoCadastral { get; set; } = new();
     public int Idade { get; set; }
     public DateTime DataAbertura { get; set; } = new();
