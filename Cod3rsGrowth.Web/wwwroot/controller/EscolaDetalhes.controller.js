@@ -14,6 +14,8 @@ sap.ui.define([
     "use strict";
 
     return ControllerBase.extend("ui5.cod3rsgrowth.controller.EscolaDetalhes", {
+        _idEscola: 0,
+        _idEndereco: 0,
         onInit() {
             const nomeRotaEscola = "EscolaDetalhes";
             const roteador = this.getOwnerComponent().getRouter();
@@ -26,6 +28,8 @@ sap.ui.define([
                 const idEscola =
                     oEvent.getParameter(nomeArgumentosCamingoEscola).caminhoEscola;
                 const escola = await ServicoEscolas.obterEscolaPorId(idEscola);
+                this._idEscola = idEscola;
+                this._idEndereco = escola.idEndereco;
                 this._popularTelaComValoresDaEscola(escola);
                 this._popularTelaComValoresDoEndereco(escola.idEndereco);
             });
@@ -55,6 +59,16 @@ sap.ui.define([
                 const nomeRotaDeEscolas = "Escolas";
                 roteador.navTo(nomeRotaDeEscolas, {}, {}, true);
             })
+        },
+        aoPressionarDeletar() {
+            let i18nMensagemDeErro = "TelaEscolasDetalhes.ErroAoClicarBotaoDeletar";
+            this.tratarErros(i18nMensagemDeErro, async () => {
+                let resposta = await ServicoEscolas.deletarEscola(this._idEscola);
+                if (resposta != undefined) {
+                    throw new Error(resposta.Detail);
+                }
+                this.aoPressionarBotaoDeNavegacao();
+            });
         }
     });
 });

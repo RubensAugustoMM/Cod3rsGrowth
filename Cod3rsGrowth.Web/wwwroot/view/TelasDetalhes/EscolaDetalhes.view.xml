@@ -91,6 +91,12 @@
                     </VBox>
                 </content>
             </Panel>
+            <VBox alignItems="Center" >
+                <Button id="idBotaoDeletar"
+                text="{i18n>Deletar}"
+                    width="120%"
+                    press=".aoPressionarDeletar"/>
+            </VBox>
         </layout:VerticalLayout>
     </Page>
 </mvc:View>

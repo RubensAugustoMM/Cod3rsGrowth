@@ -56,7 +56,6 @@ sap.ui.define([
             return await RepositorioEscolas.editarEscola(parametros);     
         },
         criarEscola: async function (parametros, modelo) {
-            debugger;
             const valorHabilitado = 1;
             const valoresPadrao = modelo.getData();
             parametros.id = valoresPadrao.valorNumericoPadrao;
@@ -76,6 +75,9 @@ sap.ui.define([
             parametros.idEndereco = parametros.idEndereco ?? valoresPadrao.valorNumericoPadrao;
 
             return await RepositorioEscolas.criarEscola(parametros);
+        },
+        deletarEscola: async function (id) {
+            return await RepositorioEscolas.deletarEscola(id);
         }
     }
 });

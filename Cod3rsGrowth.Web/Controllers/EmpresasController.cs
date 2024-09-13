@@ -49,6 +49,6 @@ public class EmpresasController : ControllerBase
     public IActionResult Deletar(int id)
     {
         _servicoEmpresa.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }

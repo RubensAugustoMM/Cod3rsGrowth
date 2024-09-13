@@ -97,6 +97,9 @@ sap.ui.define([
         },
         editarEmpresa: async function (parametros) {
             return await RepositorioEmpresas.editarEmpresa(parametros);
+        },
+        deletarEmpresa: async function(id) {
+            return await RepositorioEmpresas.deletarEmpresa(id); 
         }
     }
 });

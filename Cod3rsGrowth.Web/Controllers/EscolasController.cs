@@ -49,6 +49,6 @@ public class EscolasController : ControllerBase
     public IActionResult Deletar(int id)
     {
         _servicoEscola.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }
