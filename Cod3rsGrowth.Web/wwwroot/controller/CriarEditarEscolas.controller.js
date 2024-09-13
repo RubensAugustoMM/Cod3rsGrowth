@@ -106,82 +106,6 @@ sap.ui.define([
 		_obterValoresEnderecoDaTela() {
 			return this.modeloEndereco().getData();
 		},
-		/*
-		aoPressionarSalvar: async function () {
-			let respostaEndereco;
-			let textoErro = "";
-			let i18nMensagemDeErro;
-			if (this._rotaAtual == "EscolaCriar") {
-				i18nMensagemDeErro = "CriarEditarEscola.ErroAoTentarCriarEscola";
-			}
-			else {
-				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
-			}
-			this.tratarErros(i18nMensagemDeErro, async () => {
-				let respostaEndereco;
-				let respostaEscola;
-				let textoErro = "";
-				let i18nMensagemDeErro;
-				const modelo = this.modeloValoresPadrao(undefined);
-				let valoresEndereco = this._obterValoresEnderecoDaTela();
-				let valoresEscola = this._obterValoresEscolaDaTela();
-				if (this._rotaAtual == "EscolaCriar") {
-					respostaEndereco = await ServicoEnderecos.criarEndereco(this._obterValoresEnderecoDaTela(), modelo);
-					escolaCriar.idEndereco = respostaEndereco.id;
-					respostaEscola = await ServicoEscolas.criarEscola(escolaCriar, modelo)
-				}
-				else {
-					respostaEndereco = this._obterValoresEnderecoDaTela();
-					respostaEndereco.id = this._idEnderecoAtualizar;
-					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
-					let escolaEditar = this._obterValoresEscolaDaTela();
-					escolaEditar.id = this._idEscolaAtualizar;
-					escolaEditar.idEndereco = this._idEnderecoAtualizar;
-					respostaEscola = await ServicoEscolas.editarEscola(escolaEditar);
-				}
-				const status500 = 500;
-				const status400 = 400;
-				if (respostaEndereco != undefined) {
-					if (respostaEndereco.status != undefined &&
-						respostaEndereco.status == status400) {
-						textoErro += this.formatarMensagemDeErro(respostaEndereco);
-					}
-					if (respostaEndereco.Status != undefined &&
-						respostaEndereco.Status == status500) {
-						textoErro += respostaEndereco.Detail;
-					}
-					if (respostaEndereco.ok != undefined && !respostaEndereco.ok ||
-						respostaEndereco.status != undefined
-					) {
-						throw new Error(textoErro);
-					}
-				}
-				if (respostaEscola != undefined) {
-					if (respostaEscola != undefined &&
-						respostaEscola.status == status400) {
-						textoErro += this.formatarMensagemDeErro(respostaEscola);
-					}
-					if (respostaEscola != undefined &&
-						respostaEscola.Status == status500) {
-						textoErro += respostaEscola.Detail;
-					}
-					if (this._rotaAtual == "EscolaCriar" &&
-						respostaEscola.ok == undefined &&
-						respostaEndereco != undefined &&
-						respostaEndereco.Status == undefined) {
-						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
-					}
-					if (respostaEscola.Status != undefined ||
-						respostaEscola.status != undefined
-					) {
-						throw new Error(textoErro);
-					}
-				}
-
-				this.aoPressionarBotaoDeNavegacao();
-			});
-		},
-		*/
 		aoPressionarSalvar: async function () {
 			let i18nMensagemDeErro;
 			if (this._rotaAtual == NOME_ROTA_ESCOLA_CRIAR) {
@@ -190,10 +114,8 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			}
-			i18nMensagemDeErro = "CriarEditarEscola.ErroTentarEditarEscola";
 			this.tratarErros(i18nMensagemDeErro, async () => {
 				const modeloValoresPadrao = this.modeloValoresPadrao();
-				const valorNumericoPadrao = modeloValoresPadrao.getData().valorNumericoPadrao;
 
 				let endereco = this._obterValoresEnderecoDaTela();
 				endereco.id = this._idEnderecoAtualizar;
@@ -205,14 +127,15 @@ sap.ui.define([
 				else {
 					respostaEndereco = await ServicoEnderecos.criarEndereco(endereco, modeloValoresPadrao);
 				}
-				
+
 				let escola = this._obterValoresEscolaDaTela();
 				escola.id = this._idEscolaAtualizar;
-				escola.idEndereco = respostaEndereco.id ?? valorNumericoPadrao;
 				if (this._rotaAtual == NOME_ROTA_ESCOLA_EDITAR) {
+					escola.idEndereco = this._idEnderecoAtualizar;
 					respostaEscola = await ServicoEscolas.editarEscola(escola);
 				}
 				else {
+					escola.idEndereco = respostaEndereco.id;
 					respostaEscola = ServicoEscolas.criarEscola(escola, modeloValoresPadrao);
 				}
 
@@ -254,7 +177,6 @@ sap.ui.define([
 				}
 			}
 		},
-
 		aoPressionarBotaoDeNavegacao() {
 			const i18nMensagemDeErro = "CriarEditarEscola.ErroAoClicarBotaoDeNavegaca";
 			this.tratarErros(i18nMensagemDeErro, () => {

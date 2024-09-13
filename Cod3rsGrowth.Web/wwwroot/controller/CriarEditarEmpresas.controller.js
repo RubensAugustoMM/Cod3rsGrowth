@@ -20,6 +20,7 @@ sap.ui.define([
 	"use strict";
 
 	const NOME_ROTA_EMPRESA_EDITAR = "EmpresaEditar";
+			const NOME_ROTA_EMPRESA_CRIAR = "EmpresaCriar";
 	return ControllerBase.extend("ui5.cod3rsgrowth.controller.CriarEditarEmpresas", {
 		_idEmpresaAtualizar: 0,
 		_idEnderecoAtualizar: 0,
@@ -27,8 +28,7 @@ sap.ui.define([
 		_idCriarEditarEmpresas: "criarEditarEmpresas",
 		onInit() {
 			const roteador = this.getOwnerComponent().getRouter();
-			const nomeRotaEmpresaCriar = "EmpresaCriar";
-			roteador.getRoute(nomeRotaEmpresaCriar).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
+			roteador.getRoute(NOME_ROTA_EMPRESA_CRIAR).attachMatched(this._aoCoincidirComRotaEmpresaCriar, this);
 			roteador.getRoute(NOME_ROTA_EMPRESA_EDITAR).attachMatched(this._aoCoincidirComRotaEmpresaEditar, this);
 			const idDataAberturaDatePicker = "dataAberturaDatePicker";
 			let dataAtual = new Date();
@@ -111,76 +111,76 @@ sap.ui.define([
 			return this.modeloEndereco().getData();
 		},
 		aoPressionarSalvar: async function () {
-			let textoErro = "";
 			let i18nMensagemDeErro;
-			if (this._rotaAtual == "EmpresaCriar") {
-				i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoTentarCriarEmpresa";
+			if (this._rotaAtual == NOME_ROTA_EMPRESA_CRIAR) {
+				i18nMensagemDeErro = "CriarEditarEmpresa.ErroAoTentarCriarEmpresa";
 			}
 			else {
-				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
+				i18nMensagemDeErro = "CriarEditarEmpresa.ErroTentarEditarEmpresa";
 			}
 			this.tratarErros(i18nMensagemDeErro, async () => {
+				const modeloValoresPadrao = this.modeloValoresPadrao();
+				
+				let endereco = this._obterValoresEnderecoDaTela();
+				endereco.id = this._idEnderecoAtualizar;
 				let respostaEndereco;
 				let respostaEmpresa;
-				if (this._rotaAtual == "EmpresaCriar") {
-					const modelo = this.modeloValoresPadrao();
-					respostaEndereco = await ServicoEnderecos.criarEndereco(this._obterValoresEnderecoDaTela(), modelo);
-					let empresaCriar = this._obterValoresEmpresaDaTela();
-					empresaCriar.idEndereco = respostaEndereco.id;
-					respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresaCriar, modelo);
+				if (this._rotaAtual == NOME_ROTA_EMPRESA_EDITAR) {
+					respostaEndereco = await ServicoEnderecos.editarEndereco(endereco);
 				}
 				else {
-					respostaEndereco = this._obterValoresEnderecoDaTela();
-					respostaEndereco.id = this._idEnderecoAtualizar;
-					respostaEndereco = await ServicoEnderecos.editarEndereco(respostaEndereco);
-					let empresaEditar = this._obterValoresEmpresaDaTela();
-					empresaEditar.id = this._idEmpresaAtualizar;
-					empresaEditar.idEndereco = this._idEnderecoAtualizar;
-					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresaEditar);
+					respostaEndereco = await ServicoEnderecos.criarEndereco(endereco, modeloValoresPadrao);
 				}
-				const status500 = 500;
-				const status400 = 400;
-				if (respostaEndereco != undefined) {
-					if (respostaEndereco.status != undefined &&
-						respostaEndereco.status == status400) {
-						textoErro += this.formatarMensagemDeErro(respostaEndereco);
-					}
-					if (respostaEndereco.Status != undefined &&
-						respostaEndereco.Status == status500) {
-						textoErro += respostaEndereco.Detail;
-					}
-					if (respostaEndereco.ok != undefined && !respostaEndereco.ok ||
-						respostaEndereco.status != undefined
-					) {
-						throw new Error(textoErro);
-					}
+
+				let empresa = this._obterValoresEmpresaDaTela();
+				empresa.id = this._idEmpresaAtualizar;
+				if (this._rotaAtual == NOME_ROTA_EMPRESA_EDITAR) {
+					empresa.idEndereco = this._idEnderecoAtualizar;
+					respostaEmpresa = await ServicoEmpresas.editarEmpresa(empresa);
 				}
+				else {
+					empresa.idEndereco = respostaEndereco.id;
+					respostaEmpresa = await ServicoEmpresas.criarEmpresa(empresa, modeloValoresPadrao);
+				}
+
+				this._analisarRespostaDoFetch(respostaEndereco, respostaEmpresa);
+				this.aoPressionarBotaoDeNavegacao();
+			});
+		},
+		_analisarRespostaDoFetch(respostaEndereco, respostaEmpresa) {
+			let textoErro = "";
+			const status500 = 500;
+			const status400 = 400;
+			if (respostaEndereco != undefined) {
+				if (respostaEndereco.status != undefined &&
+					respostaEndereco.status == status400
+				) {
+					textoErro += this.formatarMensagemDeErro(respostaEndereco);
+				}
+				if (respostaEndereco.Status != undefined &&
+					respostaEndereco.Status == status500) {
+					textoErro += respostaEndereco.Detail;
+				}
+
 				if (respostaEmpresa != undefined) {
+					if (this._rotaAtual == NOME_ROTA_EMPRESA_CRIAR &&
+						textoErro != "") {
+						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
+					}
 					if (respostaEmpresa.status != undefined &&
 						respostaEmpresa.status == status400) {
 						textoErro += this.formatarMensagemDeErro(respostaEmpresa);
 					}
-					if (respostaEmpresa.Status != undefined &&
+					if (respostaEndereco.Statis != undefined &&
 						respostaEmpresa.Status == status500) {
 						textoErro += respostaEmpresa.Detail;
 					}
-					if (this._rotaAtual == "EmpresaCriar" &&
-						respostaEmpresa.id == undefined &&
-						respostaEndereco != undefined &&
-						respostaEndereco.Status == undefined) {
-						ServicoEnderecos.deletarEndereco(respostaEndereco.id);
-					}
-					if (respostaEmpresa.Status != undefined||
-						respostaEmpresa.status != undefined
-					) {
-						throw new Error(textoErro);
-					}
 				}
-				this.aoPressionarBotaoDeNavegacao();
-
-			});
+				if (textoErro != "") {
+					throw new Error(textoErro);
+				}
+			}
 		},
-
 		aoPressionarBotaoDeNavegacao() {
 			let i18nMensagemDeErro = "CriarEditarEmpresas.ErroAoClicarBotaoNavegacao";
 			this.tratarErros(i18nMensagemDeErro, () => {
