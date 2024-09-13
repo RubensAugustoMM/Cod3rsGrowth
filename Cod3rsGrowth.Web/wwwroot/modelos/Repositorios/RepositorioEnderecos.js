@@ -32,8 +32,7 @@ sap.ui.define([
             return await resposta.json();
         },
         deletarEndereco: async function (id) {
-            const urlAcao = "/Deletar/" + id;
-            const resposta = await fetch(this._urlBase + urlAcao, {
+            const resposta = await fetch(this._urlBase + "/" + id, {
                 method: 'DELETE'
             });
             if (!resposta.ok)

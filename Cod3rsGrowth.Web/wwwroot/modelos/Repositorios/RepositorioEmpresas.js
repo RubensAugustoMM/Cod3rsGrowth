@@ -32,8 +32,7 @@ sap.ui.define([
                 return resposta.json();
         },
         deletarEmpresa: async function (id) {
-            const urlAcao = "/Deletar/" + id;
-            const resposta = await fetch(this._urlBase + urlAcao, {
+            const resposta = await fetch(this._urlBase + "/" + id, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
             });

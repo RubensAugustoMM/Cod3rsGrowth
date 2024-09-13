@@ -30,8 +30,7 @@ sap.ui.define([], function () {
             return resposta.json();
         },
         deletarEscola: async function (id) {
-            const urlAcao = "/Deletar/" + id;
-            const resposta = await fetch(this._urlBase + urlAcao, {
+            const resposta = await fetch(this._urlBase + "/" + id, {
                 method: 'DELETE'
             });
             if (!resposta.ok)
