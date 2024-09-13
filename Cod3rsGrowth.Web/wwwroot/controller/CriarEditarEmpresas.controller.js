@@ -39,7 +39,6 @@ sap.ui.define([
 					dataAtual.getDay()));
 		},
 		_configuraModeloDeDadosDaTela() {
-			debugger;
 			const dadosEmpresa = {
 				razaoSocial:undefined,
 				nomeFantasia:undefined,

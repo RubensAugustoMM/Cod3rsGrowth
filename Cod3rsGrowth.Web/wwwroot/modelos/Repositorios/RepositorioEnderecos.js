@@ -11,7 +11,6 @@ sap.ui.define([
         obterEnderecoPorId: async function (id) {
             const resposta = await fetch(this._urlBase + "/" + id);
             if (!resposta.ok) throw new Error(resposta.status);
-            if (resposta.body != undefined)
                 return await resposta.json();
         },
         editarEndereco: async function (parametros) {
@@ -20,7 +19,7 @@ sap.ui.define([
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-            if (resposta.body != undefined)
+            if (!resposta.ok)
                 return await resposta.json();
         },
         criarEndereco: async function (parametros) {
@@ -30,7 +29,7 @@ sap.ui.define([
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)
             });
-                return await resposta.json();
+            return await resposta.json();
         },
         deletarEndereco: async function (id) {
             const urlAcao = "/Deletar/" + id;

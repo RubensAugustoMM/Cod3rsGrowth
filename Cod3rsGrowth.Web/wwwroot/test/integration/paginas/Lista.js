@@ -2,11 +2,15 @@ sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/matchers/AggregationLengthEquals",
     "sap/ui/test/actions/Press",
-    "sap/ui/test/matchers/PropertyStrictEquals"
+    "sap/ui/test/matchers/PropertyStrictEquals",
+    "sap/ui/test/matchers/Properties",
+    "sap/ui/test/matchers/Descendant"
 ], function (Opa5,
 	AggregationLengthEquals,
 	Press,
-	PropertyStrictEquals) {
+	PropertyStrictEquals,
+	Properties,
+	Descendant,) {
     "use strict";
 
     let viewName = ".Lista";
@@ -83,6 +87,24 @@ sap.ui.define([
                         },
                         errorMessage: "Não foi possivel encontrar o painel de filtros"
                     });
+                },
+                aoClciarEmEmpresaTesteDeletar: function () {
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Text", 
+                        matchers: new Properties({
+                            text: "TesteDeletar"
+                        }),
+                        success: function (texto) {
+                            return this.waitFor({
+                                controlType: "sap.m.ColumnListItem",
+                                matchers: new Descendant(texto[0]),
+                                actions: new Press(),
+                                errorMessage: "Não foi possível encontrar a empresa TesteDeletar"
+                            });
+                        },
+                        errorMessage: "não foi possível encontrar nome de empresa TesteDeletar"
+                    })
                 }
             },
             assertions: {

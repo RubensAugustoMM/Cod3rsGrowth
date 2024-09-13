@@ -89,7 +89,6 @@ sap.ui.define([
 			});
 		},
 		_obterValoresEscolaDaTela() {
-			debugger;
 			let valoresEscola = this.modeloEscola(undefined).getData();
 			const valorHabilitado = 1;
 			valoresEscola.statusAtividade = valoresEscola.statusAtividade == valorHabilitado ? true : false;

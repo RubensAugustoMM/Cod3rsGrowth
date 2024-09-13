@@ -35,8 +35,18 @@ sap.ui.define([
                     .aoClicarNoBotaoVoltar();
                 Then.naPaginaDeListagem
                     .aPaginaDeListagemDeEmpresasFoiCarregadaCorretamente();
-                Then.iTeardownMyAppFrame();
             }
         );
+        opaTest("Ao clicar botão deletar a empresa deve ser deletada e voltar para a tela de litagem",
+            function (Given, When, Then) {
+                When.naPaginaDeListagem
+                    .aoClciarEmEmpresaTesteDeletar();
+                When.naPaginaDeDetalhesEmpresa
+                    .aoClicarNoBotaoDeletar();
+                Then.naPaginaDeListagem
+                    .aPaginaDeListagemDeEmpresasFoiCarregadaCorretamente();
+                Then.iTeardownMyAppFrame();
+            }
+        )
     });
 })

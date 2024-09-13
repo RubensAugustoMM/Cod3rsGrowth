@@ -105,6 +105,7 @@
             </Panel>
             <VBox alignItems="Center" >
                 <Button text="{i18n>Deletar}"
+                    id="idBotaoDeletar"
                     width="120%"
                     press=".aoPressionarDeletar"/>
             </VBox>
