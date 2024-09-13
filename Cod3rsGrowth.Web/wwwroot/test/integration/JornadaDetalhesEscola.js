@@ -35,8 +35,18 @@ sap.ui.define([
                     .aoClicarNoBotaoVoltar();
                 Then.naPaginaDeListagem
                     .aPaginaDeListagemDeEscolasFoiCarregadaCorretamente();
-                Then.iTeardownMyAppFrame();
             }
         );
+        opaTest("Ao clicar botão deletar a escola deve ser deletada e voltar para a tela de litagem",
+            function (Given, When, Then) {
+                When.naPaginaDeListagem
+                    .aoCliciarEmEmpresaOuEscolaTesteDeletar();
+                When.naPaginaDeDetalhesEscola
+                    .aoClicarNoBotaoDeletar();
+                Then.naPaginaDeListagem
+                    .aPaginaDeListagemDeEscolasFoiCarregadaCorretamente();
+                Then.iTeardownMyAppFrame();
+            }
+        )
     });
 })

@@ -88,7 +88,7 @@ sap.ui.define([
                         errorMessage: "Não foi possivel encontrar o painel de filtros"
                     });
                 },
-                aoClciarEmEmpresaTesteDeletar: function () {
+                aoCliciarEmEmpresaOuEscolaTesteDeletar: function () {
                     return this.waitFor({
                         viewName: viewName,
                         controlType: "sap.m.Text", 

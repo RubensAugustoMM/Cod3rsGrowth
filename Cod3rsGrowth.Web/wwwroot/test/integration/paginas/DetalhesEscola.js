@@ -24,6 +24,15 @@ sap.ui.define([
                         actions: new Press(),
                         errorMessage: "Não foi possível encontrar o botão de voltar"
                     });
+                },
+                aoClicarNoBotaoDeletar: function () {
+                    return this.waitFor({
+                        viewName: viewName,
+                        controlType: "sap.m.Button",
+                        id: "idBotaoDeletar",
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão de deleção"
+                    })
                 }
             },
             assertions: {

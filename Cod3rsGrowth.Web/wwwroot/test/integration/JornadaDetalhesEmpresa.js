@@ -40,7 +40,7 @@ sap.ui.define([
         opaTest("Ao clicar botão deletar a empresa deve ser deletada e voltar para a tela de litagem",
             function (Given, When, Then) {
                 When.naPaginaDeListagem
-                    .aoClciarEmEmpresaTesteDeletar();
+                    .aoCliciarEmEmpresaOuEscolaTesteDeletar();
                 When.naPaginaDeDetalhesEmpresa
                     .aoClicarNoBotaoDeletar();
                 Then.naPaginaDeListagem
