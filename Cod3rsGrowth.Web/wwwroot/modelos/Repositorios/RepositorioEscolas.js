@@ -21,8 +21,7 @@ sap.ui.define([], function () {
             return await resposta.json();
         },
         criarEscola: async function (parametros) {
-            const urlAcao = "/Criar"
-            const resposta = await fetch(this._urlBase + urlAcao, {
+            const resposta = await fetch(this._urlBase, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(parametros)

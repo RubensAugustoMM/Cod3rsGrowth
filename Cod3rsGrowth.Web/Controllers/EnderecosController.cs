@@ -30,7 +30,7 @@ public class EnderecosController : ControllerBase
         return Ok(endereco);
     }
 
-    [HttpPost("[action]")]
+    [HttpPost]
     public IActionResult Criar([FromBody] Endereco enderecoCriar)
     {
         _servicoEndereco.Criar(enderecoCriar);
