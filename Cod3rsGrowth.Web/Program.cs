@@ -7,12 +7,15 @@ using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB;
 using Cod3rsGrowth.Web;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string StringConexao = ConfiguracoesStringConexao.RetornaStringConexao();
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDirectoryBrowser();
 
 builder.Services.AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
         options
@@ -35,6 +38,7 @@ builder.Services.AddLinqToDBContext<ContextoAplicacao>((provider, options) =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,6 +50,23 @@ if (app.Environment.IsDevelopment())
 
 app.UsarTratadorDeExcecoesProblemDetails(app.Services.GetRequiredService<ILoggerFactory>());
 app.UseHttpsRedirection();
+
+var provedor = new FileExtensionContentTypeProvider();
+provedor.Mappings[".properties"] = "text/plain";
+app.UseFileServer(new FileServerOptions
+{
+    EnableDirectoryBrowsing = true
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    RedirectToAppendTrailingSlash = true,
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
+
 app.UseAuthorization();
 app.MapControllers();
 

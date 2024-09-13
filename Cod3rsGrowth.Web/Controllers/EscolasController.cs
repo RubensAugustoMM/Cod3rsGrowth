@@ -32,23 +32,23 @@ public class EscolasController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Criar([FromBody] Escola escolaCriar)
+    public IActionResult Criar([FromBody] Escola escola)
     {
-        _servicoEscola.Criar(escolaCriar);
-        return CreatedAtAction(nameof(ObterPorId), new { id = escolaCriar.Id }, escolaCriar);
+        _servicoEscola.Criar(escola);
+        return CreatedAtAction(nameof(ObterPorId), new { id = escola.Id }, escola);
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Escola escolaAtualizar)
+    public IActionResult Atualizar([FromBody] Escola escola)
     {
-        _servicoEscola.Atualizar(escolaAtualizar);
-        return NoContent();
+        _servicoEscola.Atualizar(escola);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public IActionResult Deletar(int id)
     {
         _servicoEscola.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }

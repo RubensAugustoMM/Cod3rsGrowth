@@ -32,23 +32,23 @@ public class EmpresasController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Criar([FromBody] Empresa empresaCriar)
+    public IActionResult Criar([FromBody] Empresa empresa)
     {
-        _servicoEmpresa.Criar(empresaCriar);
-        return CreatedAtAction(nameof(ObterPorId), new { id = empresaCriar.Id }, empresaCriar);
+        _servicoEmpresa.Criar(empresa);
+        return CreatedAtAction(nameof(ObterPorId), new { id = empresa.Id }, empresa);
     }
 
     [HttpPut]
-    public IActionResult Atualizar([FromBody] Empresa empresaAtualizar)
+    public IActionResult Atualizar([FromBody] Empresa empresa)
     {
-        _servicoEmpresa.Atualizar(empresaAtualizar);
-        return NoContent();
+        _servicoEmpresa.Atualizar(empresa);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
     public IActionResult Deletar(int id)
     {
         _servicoEmpresa.Deletar(id);
-        return NoContent();
+        return Ok();
     }
 }

@@ -3,8 +3,8 @@
 namespace Cod3rsGrowth.Dominio.Enums;
 public enum HabilitadoEnums
 {
-    [Description("Habilitado")]
-    Habilitado,
     [Description("Desabilitado")]
-    Desabilitado
+    Desabilitado,
+    [Description("Habilitado")]
+    Habilitado
 }

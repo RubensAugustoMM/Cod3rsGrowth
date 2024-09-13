@@ -3,10 +3,10 @@
 namespace Cod3rsGrowth.Dominio.Enums;
 public enum CategoriaAdministrativaEnums
 { 
-    [Description("Adiministração Municipal")]
+    [Description("Administração Municipal")]
     Municipal, 
-    [Description("Adiministração Federal")] 
+    [Description("Administração Federal")] 
     Federal, 
-    [Description("Adiministração Estadual")] 
+    [Description("Administração Estadual")] 
     Estadual
 }
