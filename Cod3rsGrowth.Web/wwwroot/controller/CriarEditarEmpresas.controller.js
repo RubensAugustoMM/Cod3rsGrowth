@@ -119,7 +119,7 @@ sap.ui.define([
 			else {
 				i18nMensagemDeErro = "CriarEditarEmpresas.ErroTentarEditarEmpresa";
 			}
-			this.tratarErros(i18nMensagemDeErro, async () => {	
+			this.tratarErros(i18nMensagemDeErro, async () => {
 				let respostaEndereco;
 				let respostaEmpresa;
 				if (this._rotaAtual == "EmpresaCriar") {

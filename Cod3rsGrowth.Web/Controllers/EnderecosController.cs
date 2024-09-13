@@ -31,10 +31,10 @@ public class EnderecosController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Criar([FromBody] Endereco enderecoCriar)
+    public IActionResult Criar([FromBody] Endereco endereco)
     {
-        _servicoEndereco.Criar(enderecoCriar);
-        return CreatedAtAction(nameof(ObterPorId), new { id = enderecoCriar.Id }, enderecoCriar);
+        _servicoEndereco.Criar(endereco);
+        return CreatedAtAction(nameof(ObterPorId), new { id = endereco.Id }, endereco);
     }
 
     [HttpPut]
